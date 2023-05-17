@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 IMDb Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2015-02-11 21:14+0100\n"
 "Last-Translator: daTa deVil <http://opena.tv>\n"
 "Language-Team: openATV\n"
@@ -20,228 +20,290 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
-msgid " as "
-msgstr " als "
-
-msgid "* = Restart Required"
-msgstr "* = Neustart erforderlich"
-
+#: plugin.py:359
 msgid "Ambiguous results"
 msgstr "Kein eindeutiger Treffer"
 
-msgid "Cancel"
-msgstr "Abbrechen"
-
-msgid "Cast: "
-msgstr "Darsteller: "
-
-msgid "Channel Selection"
-msgstr "Kanalliste"
-
-msgid "Content:"
-msgstr "Inhalt:"
-
-msgid "Could't get event name"
+#: plugin.py:639
+#, fuzzy
+msgid "Couldn't get event name"
 msgstr "Konnte Sendungstitel nicht feststellen"
 
+#: plugin.py:364 plugin.py:779
 msgid "Details"
 msgstr "Details"
 
-#, python-format
-msgid "Downloading Movie Poster: %s..."
+#: plugin.py:920 plugin.py:1135
+#, fuzzy
+msgid "Downloading Movie Poster..."
 msgstr "Lade Filmplakat herunter: %s..."
 
+#: plugin.py:715
+msgid "E"
+msgstr ""
+
+#: setup.xml
 msgid "Enable this to be able to access IMDb search setup from within the plugin browser."
 msgstr "Diese Option erlaubt es Ihnen, die IMDb-Einstellungen in den Erweiterungen anzuzeigen."
 
+#: setup.xml
 msgid "Enable this to be able to access IMDb searches from within the movie list."
 msgstr "Diese Option erlaubt es Ihnen, die IMDb-Suche in der Filmliste anzuzeigen."
 
+#: setup.xml
 msgid "Enable this to be able to access IMDb searches from within the plugin browser."
 msgstr "Diese Option erlaubt es Ihnen, die IMDb-Suche in den Erweiterungen anzuzeigen."
 
+#: plugin.py:451
 msgid "Enter search"
 msgstr "Suchen"
 
+#: plugin.py:569
 msgid "Enter text to search for"
 msgstr "Bitte Suchtext eingeben"
 
+#: plugin.py:255
 msgid "Exit"
 msgstr "Beenden"
 
+#: plugin.py:277 plugin.py:281
 msgid "Exit IMDb search"
 msgstr "Beende IMDb-Details"
 
+#: plugin.py:1093 plugin.py:1097
 msgid "Extra Info"
 msgstr "Zusatzinfos"
 
-msgid "Genre:"
+#: plugin.py:744
+msgid "IMDB Exception"
 msgstr ""
 
+#: plugin.py:780 plugin.py:1110 plugin.py:1144
 msgid "IMDb Details parsed"
 msgstr "Filminformationen eingelesen"
 
+#: plugin.py:642
 msgid "IMDb Download completed"
 msgstr "Download von IMDb abgeschlossen"
 
+#: plugin.py:737
 msgid "IMDb Download failed"
 msgstr "Download von IMDb fehlgeschlagen"
 
+#: plugin.py:472
 msgid "IMDb Menu"
 msgstr "IMDb Menü"
 
+#: plugin.py:1178
 msgid "IMDb Plugin"
 msgstr "IMDb Plugin"
 
+#: plugin.py:752
 msgid "IMDb Re-Download completed"
 msgstr "Erneuten Download ausgeführt"
 
-#, fuzzy
-msgid "IMDb Save - Download completed"
-msgstr "Erneuten Download ausgeführt"
-
+#: plugin.py:1184 setup.xml
 msgid "IMDb Setup"
 msgstr "IMDb-Einstellungen"
 
-msgid "IMDb can not get Movie Information to write to .jpg and .txt files!"
-msgstr ""
-
+#: plugin.py:502
 msgid "IMDb can not get Movie Information to write to .txt file!"
 msgstr ""
 
+#: plugin.py:734
 msgid "IMDb query failed!"
 msgstr "Anfrage an IMDb fehlgeschlagen!"
 
+#: plugin.py:490
+#, fuzzy
+msgid "IMDb save completed"
+msgstr "Download von IMDb abgeschlossen"
+
+#: plugin.py:1236 plugin.py:1258 plugin.py:1259 plugin.py:1269
 msgid "IMDb search"
 msgstr "IMDb-Suche"
 
+#: plugin.py:1247
 msgid "IMDb setup"
 msgstr "IMDb-Einstellungen"
 
-msgid "Lookup"
-msgstr "Suchen"
+#: plugin.py:628
+#, python-format
+msgid "Ignoring invalid imdbId: %s"
+msgstr ""
 
+#: setup.xml
+#, fuzzy
+msgid "Include episodes in the results. Takes effect after the next search of IMDb for a show name."
+msgstr "Zeige im Titel, wenn verfügbar, Episoden- und Jahresinformationen mit an. Wird erst mit der nächsten Suche wirksam."
+
+#: plugin.py:621
+#, python-format
+msgid "Local file does not exist: %s"
+msgstr ""
+
+#: plugin.py:288
 msgid "Menu"
 msgstr "Menü"
 
+#: plugin.py:731
 msgid "No IMDb match."
 msgstr "Keine passenden Einträge gefunden."
 
+#: plugin.py:732
 msgid "No IMDb match:"
 msgstr "Keine passenden Einträge gefunden:"
 
+#: plugin.py:911
 msgid "No cast list found in the database."
 msgstr "Keine Darstellerliste in der Datenbank gefunden."
 
+#: plugin.py:763
 msgid "No details found."
 msgstr "Keine Details gefunden."
 
-msgid "OK"
-msgstr ""
-
+#: plugin.py:298
 msgid "Page down"
 msgstr "Eintrag runter"
 
+#: plugin.py:299
 msgid "Page up"
 msgstr "Eintrag rauf"
 
+#: plugin.py:465
 msgid "Play Trailer"
 msgstr "Trailer abspielen"
 
+#: plugin.py:360
 msgid "Please select the matching entry"
 msgstr "Bitte passenden Eintrag auswählen"
 
-msgid "Plot Outline"
-msgstr ""
-
-msgid "Production Countries:"
-msgstr "Produktionsländer:"
-
+#: plugin.py:632
 #, fuzzy, python-format
 msgid "Query IMDb: %s"
 msgstr "Frage bei IMDb an: %s..."
 
+#: plugin.py:387
 #, python-format
 msgid "Re-Query IMDb: %s..."
 msgstr "Frage erneut bei IMDb an: %s..."
 
-msgid "Release Date:"
-msgstr "Erscheinungsdatum:"
+#: plugin.py:708
+msgid "S"
+msgstr ""
 
-msgid "Runtime:"
-msgstr "Laufzeit:"
-
+#: plugin.py:458
 msgid "Save current Details as .html for offline use"
 msgstr "aktuelle Details als .html speichern für lokalen Gebrauch"
 
+#: plugin.py:459
 msgid "Save current Details as .txt"
 msgstr "aktuelle Details als .txt speichern für lokalen Gebrauch"
 
+#: plugin.py:460
 msgid "Save current Poster and Details as .txt"
 msgstr "aktuelles Poster und die Details als .txt Datei speichern"
 
+#: plugin.py:466
 msgid "Search Trailer"
 msgstr "suche Trailer"
 
+#: plugin.py:1237 plugin.py:1270
 msgid "Search for details from the Internet Movie Database"
 msgstr "Suche in der Internet Movie Database nach Filminfos"
 
-msgid "Select from EPG"
-msgstr "Aus EPG wählen"
-
+#: plugin.py:1248
 msgid "Settings for Internet Movie Database searches"
 msgstr "Einstellungen für die Suche in der Internet Movie Database"
 
+#: plugin.py:452
 msgid "Setup"
 msgstr "Einstellungen"
 
+#: plugin.py:293
+msgid "Show a bigger poster"
+msgstr ""
+
+#: setup.xml
 msgid "Show episode and year information for cast when available. Takes effect after the next fetch of show details."
 msgstr "Zeige im Titel, wenn verfügbar, Episoden- und Jahresinformationen mit an. Wird erst mit der nächsten Suche wirksam."
 
+#: setup.xml
 msgid "Show episode and year information in cast list"
 msgstr "Zeige Episoden- und Jahresinformationen in der Ergebnisliste"
 
-msgid "Show full movie or series name in title menu"
+#: setup.xml
+#, fuzzy
+msgid "Show episodes in title menu"
 msgstr "Zeige den vollen Film- oder Seriennamen in der Ergebnisliste"
 
+#: setup.xml
+#, fuzzy
+msgid "Show extra information in title menu"
+msgstr "Zeige Episoden- und Jahresinformationen in der Ergebnisliste"
+
+#: setup.xml
 msgid "Show in movie list"
 msgstr "Zeige Suche in der Filmliste"
 
+#: plugin.py:282
 msgid "Show list of matched movies an series"
 msgstr "Zeige Liste der gefundenen Filme und Serien"
 
+#: plugin.py:276 plugin.py:283 plugin.py:289
 msgid "Show movie and series basic details"
 msgstr "Zeige Film- und Serien-Details"
 
+#: plugin.py:284
 msgid "Show movie and series extra details"
 msgstr "Zeige Film- und Serien-Zusatzinfos"
 
+#: plugin.py:294
+#, fuzzy
+msgid "Show movie and series synopsis"
+msgstr "Zeige Film- und Serien-Details"
+
+#: setup.xml
 msgid "Show search in plugin browser"
 msgstr "Zeige Suche im Plugin Browser"
 
+#: setup.xml
 msgid "Show setup in plugin browser"
 msgstr "Zeige Einstellungen im Plugin Browser"
 
-msgid "Show the whole IMDb title information for a movie or series, including, for example, alternative names and whether it's a series. Takes effect after the next search of IMDb for a show name."
-msgstr "Zeige im Titel die gesamten IMDb-Info´s für einen Film oder eine Serie, einschließlich z.B. alternativer Namen und ob es sich um eine Serie handelt. Wird erst mit der nächsten Suche wirksam."
+#: setup.xml
+#, fuzzy
+msgid "Show the type of the title and top cast. Takes effect after the next search of IMDb for a show name."
+msgstr "Zeige im Titel, wenn verfügbar, Episoden- und Jahresinformationen mit an. Wird erst mit der nächsten Suche wirksam."
 
+#: plugin.py:541
+msgid "Synopsis"
+msgstr ""
+
+#: plugin.py:239
 msgid "The Internet Movie Database"
 msgstr "Die Internet Movie Database"
 
+#: setup.xml
 msgid "This option allows you add words/phrases for IMDb to ignore when searching. Please separate the words/phrases with commas."
 msgstr "Diese Option erlaubt es Ihnen, Wörter/Sätze bei der Suche mit IMDb zu ignorieren. Bitte die Wörter mit einem Komma trennen."
 
+#: plugin.py:363
 msgid "Title Menu"
 msgstr "Titelauswahl"
 
-msgid "Unknown category"
-msgstr ""
-
-msgid "User Rating"
-msgstr "Nutzer-Bewertung"
-
+#: setup.xml
 msgid "Words / phrases to ignore "
 msgstr "Wörter / Sätze ignorieren "
 
+#: plugin.py:739
+msgid "connection error"
+msgstr ""
+
+#: plugin.py:883
 msgid "no user rating yet"
 msgstr "noch keine Nutzerwertung"
+
+#: plugin.py:741
+msgid "timeout"
+msgstr ""

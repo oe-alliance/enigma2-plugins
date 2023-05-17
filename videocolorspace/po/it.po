@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - videocolorspace\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2012-10-25 14:41+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -20,20 +20,26 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/videocolorspace\n"
 
+#: plugin.py:47
 msgid "A/V-Color space settings"
 msgstr "Conf. spazio dei colori A/V"
 
+#: VideoColorSpace.py:86
 msgid "Cancel"
 msgstr "Annull."
 
+#: plugin.py:53 plugin.py:54 VideoColorSpace.py:92
 msgid "Color space setup"
 msgstr "Configurazione spadio dei colori"
 
+#: VideoColorSpace.py:77
 msgid "Mode:"
 msgstr "Modalità:"
 
+#: VideoColorSpace.py:87
 msgid "OK"
 msgstr "Ok"
 
+#: plugin.py:53 plugin.py:54
 msgid "Setup color space for video"
 msgstr "Conf. spazio dei colori per il video"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 EmailClient Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2010-01-03 06:54+0100\n"
 "Last-Translator: WeeGull <weegull@hotmail.com>\n"
 "Language-Team: de <de@li.org>\n"
@@ -16,28 +16,41 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: plugin.py:144
 #, python-format
 msgid "%(name)s (%(user)s@%(server)s)"
 msgstr ""
 
+#: setup.xml
+#, fuzzy
+msgid "Account Setup"
+msgstr "Kontolista"
+
+#: plugin.py:993
 msgid "Accounts list"
 msgstr "Kontolista"
 
+#: plugin.py:411
 msgid "Attachments"
 msgstr "Bifogade"
 
+#: plugin.py:407
 msgid "Bodys"
 msgstr "Textkropp"
 
+#: plugin.py:355
 msgid "Date"
 msgstr "Datum"
 
+#: plugin.py:1156
 msgid "Email Client"
 msgstr "Epost Klient"
 
+#: setup.xml
 msgid "Email setup"
 msgstr "Epost installation"
 
+#: plugin.py:190
 #, python-format
 msgid ""
 "EmailClient for %(account)s:\n"
@@ -48,15 +61,19 @@ msgstr ""
 "\n"
 "%(error)s"
 
+#: plugin.py:353
 msgid "From"
 msgstr "Från"
 
+#: EmailConfig.py:118 setup.xml
 msgid "IMAP Port"
 msgstr "IMAP Port"
 
+#: EmailConfig.py:117 setup.xml
 msgid "IMAP Server"
 msgstr "IMAP Server"
 
+#: plugin.py:586
 #, python-format
 msgid ""
 "New mail arrived for account %s:\n"
@@ -65,13 +82,16 @@ msgstr ""
 "Nytt epost inkommet för kontot %s:\n"
 "\n"
 
+#: plugin.py:1056
 #, python-format
 msgid "Really delete account %s?"
 msgstr "Verkligen ta bort kontot %s?"
 
+#: plugin.py:356
 msgid "Subject"
 msgstr "Ämne"
 
+#: plugin.py:858
 #, python-format
 msgid ""
 "[EmailAccount] %(name)s: _cbCapabilities:\n"
@@ -81,52 +101,69 @@ msgid ""
 "####################################################################################################\n"
 msgstr ""
 
+#: plugin.py:1016
 #, python-format
 msgid "account %s is not connected"
 msgstr "kontot %s är inte anslutet"
 
+#: EmailConfig.py:116 setup.xml
 msgid "account name"
 msgstr "kontonamn"
 
+#: plugin.py:135 plugin.py:202 plugin.py:242 plugin.py:393 plugin.py:396
+#: plugin.py:402
 msgid "account not connected"
 msgstr "kontot ej anslutet"
 
+#: plugin.py:973
 msgid "add"
 msgstr "lägg till"
 
+#: EmailConfig.py:89
 msgid "cancel"
 msgstr "Avbryt"
 
+#: plugin.py:744
 msgid "cannot access inbox"
 msgstr "ingen åtkomst till INBOX"
 
+#: plugin.py:821
 msgid "cannot get headers of new messages"
 msgstr "kan inte erhålla brevhuvuden på nya meddelanden"
 
+#: plugin.py:751
 msgid "cannot get list of new messages"
 msgstr "kan inte erhålla lista över nya meddelanden"
 
+#: plugin.py:840
 msgid "connection failed - retrying"
 msgstr "anslutning misslyckades - försöker igen"
 
+#: setup.xml
 msgid "debug"
 msgstr "debug"
 
+#: plugin.py:364
 msgid "delete"
 msgstr "Ta bort"
 
+#: setup.xml
 msgid "display connection errors"
 msgstr "visa anslutningsfel"
 
+#: setup.xml
 msgid "display timeout (seconds)"
 msgstr "visa timeout (i Sekunder)"
 
+#: plugin.py:974
 msgid "edit"
 msgstr "ändra"
 
+#: EmailConfig.py:47 EmailConfig.py:132
 msgid "empty values - retry"
 msgstr "inget angivet - försök igen"
 
+#: plugin.py:917
 #, python-format
 msgid ""
 "error logging %(who)s in:\n"
@@ -135,97 +172,128 @@ msgstr ""
 "fel vid inloggning med %(who)s:\n"
 "%(failure)s"
 
+#: plugin.py:816
 msgid "failed to load message"
 msgstr "misslyckades med att ladda meddelandet"
 
+#: plugin.py:238
 msgid "getting message ..."
 msgstr "laddar ner meddelanden..."
 
+#: plugin.py:231
 #, python-format
 msgid "have %d messages"
 msgstr "har %d meddelanden"
 
+#: plugin.py:233
 msgid "have no messages"
 msgstr "inga meddelanden"
 
+#: plugin.py:213
 msgid "headers loaded, now parsing ..."
 msgstr "Brevhuvuden laddade, bearbetar nu..."
 
+#: plugin.py:1102
 #, python-format
 msgid "importing configurations from %s"
 msgstr "importera inställningar från %s"
 
+#: plugin.py:360
 msgid "leave unread"
 msgstr "lämna oläst"
 
+#: EmailConfig.py:123 setup.xml
 msgid "list all mailboxes"
 msgstr "lista alla epostlådor"
 
+#: plugin.py:197
 msgid "loading headers ..."
 msgstr "laddar brevhuvuden..."
 
+#: EmailConfig.py:121 setup.xml
 msgid "mail check interval (minutes)"
 msgstr "kontroll intervall (i Minuter)"
 
+#: EmailConfig.py:122 setup.xml
 msgid "maximum mail size to fetch"
 msgstr "maximum epost storlek att hämta"
 
+#: plugin.py:807
 msgid "message too large"
 msgstr "meddelande för stort"
 
+#: plugin.py:1022 plugin.py:1059
 msgid "no account selected"
 msgstr "inget konto valt"
 
+#: plugin.py:355 plugin.py:609
 msgid "no date"
 msgstr "inget datum"
 
+#: plugin.py:434
 msgid "no filename"
 msgstr "inget filnamn"
 
+#: plugin.py:353
 msgid "no from"
 msgstr "ingen avsändare"
 
+#: plugin.py:204
 msgid "no mailbox?!?!"
 msgstr "ingen epostlåda?!?!"
 
+#: plugin.py:599
 msgid "no sender"
 msgstr "ingen skickare"
 
+#: plugin.py:356 plugin.py:602
 msgid "no subject"
 msgstr "inget ämne"
 
+#: EmailConfig.py:90
 msgid "ok"
 msgstr "OK"
 
+#: plugin.py:245
 msgid "parsing message ..."
 msgstr "bearbetar epost..."
 
+#: EmailConfig.py:120 setup.xml
 msgid "password"
 msgstr "lösenord"
 
+#: plugin.py:387
 msgid "really delete mail?"
 msgstr "verkligen ta bort epost?"
 
+#: plugin.py:385
 msgid "really undelete mail?"
 msgstr "verkligen återskapa epost?"
 
+#: plugin.py:972
 msgid "remove"
 msgstr "ta bort"
 
+#: plugin.py:436
 msgid "select Attachment"
 msgstr "välj bifogad"
 
+#: plugin.py:420
 msgid "select Body"
 msgstr "välj textkropp"
 
+#: setup.xml
 msgid "show deleted entries"
 msgstr "visa borttagna epost"
 
+#: plugin.py:362
 msgid "undelete"
 msgstr "återskapa"
 
+#: EmailConfig.py:119 setup.xml
 msgid "user name"
 msgstr "användarnamn"
 
+#: plugin.py:1156
 msgid "view Emails via IMAP4"
 msgstr "läs epost med hjälp av IMAP4"

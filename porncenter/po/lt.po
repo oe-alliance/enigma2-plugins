@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PornCenter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
@@ -16,48 +16,63 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SearchPath-0: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src\n"
 
+#: plugin.py:64
 msgid "Adult streaming plugins for dm800/dm8000"
 msgstr "dm800/dm8000 transliacijų suaugusiems įskiepiai"
 
+#: plugin.py:268
 msgid "Buffer device:"
 msgstr "Talpyklos įrenginys:"
 
+#: plugin.py:269
 msgid "Buffer file handling:"
 msgstr "Talpyklos failo palaikymas:"
 
+#: plugin.py:267
 msgid "Buffer:"
 msgstr "Talpykla:"
 
+#: plugin.py:413
 msgid "Delete this movie?"
 msgstr "Pašalinti šį filmą?"
 
+#: plugin.py:266
 msgid "Description:"
 msgstr "Aprašymas:"
 
+#: plugin.py:132
 #, python-format
 msgid "Downloading movie: %s"
 msgstr "Parsisiunčiamas filmas: %s"
 
+#: plugin.py:400
 msgid "Error while getting video url!"
 msgstr "Prisijungimo prie internetinio adreso klaida!"
 
+#: plugin.py:265
 msgid "Name:"
 msgstr "Pavadinimas:"
 
+#: plugin.py:63 plugin.py:120 plugin.py:184 plugin.py:203 plugin.py:250
 msgid "Porn Center"
 msgstr "Porno centras"
 
+#: plugin.py:207
 msgid "Select"
 msgstr "Pasirinkti"
 
+#: plugin.py:172
 msgid "Stop playing this movie?"
 msgstr "Sustabdyti šį filmą?"
 
+#: plugin.py:67
 msgid "ask me"
 msgstr "klausti"
 
+#: plugin.py:67
 msgid "delete"
 msgstr "šalinti"
 
+#: plugin.py:67
 msgid "keep on device"
 msgstr "saugoti įrenginyje"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2012-05-29 18:07+0100\n"
 "Last-Translator: \n"
 "Language-Team: none\n"
@@ -18,6 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Bookmarks: -1,-1,-1,706,-1,-1,-1,-1,-1,-1\n"
 
+#: MountEdit.py:262
 msgid ""
 "A mount entry with this name already exists!\n"
 "Update existing entry and continue?\n"
@@ -25,9 +26,11 @@ msgstr ""
 "Egy hálózati meghajtó már csatlakoztatva van ezen a néven!\n"
 "Frissítsük annak adatait ezekkel?\n"
 
+#: MountEdit.py:168
 msgid "Active"
 msgstr "Aktív"
 
+#: MountView.py:63
 msgid ""
 "Active/\n"
 "Inactive"
@@ -35,12 +38,15 @@ msgstr ""
 "Aktív/\n"
 "Inaktív"
 
+#: MountManager.py:79
 msgid "Add a new NFS or CIFS mount point to your Dreambox."
 msgstr "Egy új hálózati megosztás csatolása."
 
+#: MountManager.py:79
 msgid "Add new network mount point"
 msgstr "Új hálózati csatlakozási pont hozzáadása"
 
+#: MountEdit.py:264
 msgid ""
 "Are you sure you want to save this network mount?\n"
 "\n"
@@ -48,102 +54,140 @@ msgstr ""
 "Biztos benne, hogy menteni kívánja ezt a hálózati csatlakozást?\n"
 "\n"
 
+#: plugin.py:50
 msgid "Attempt to mount shares again"
 msgstr "Újracsatlakoztatás megkísérlése"
 
+#: plugin.py:53
 msgid "Attempt to recover lost mounts (in background)"
 msgstr "Elveszett megosztások újracsatlakoztatása (háttérben)"
 
+#: NetworkBrowser.py:184
 msgid "Browse network neighbourhood"
 msgstr "Hálózat tallózása"
 
+#: MountEdit.py:114
 msgid "CIFS share"
 msgstr "CIFS megosztás"
 
+#: MountEdit.py:84 NetworkBrowser.py:607
 msgid "Cancel"
 msgstr "Mégse"
 
+#: MountManager.py:82
 msgid "Change hostname"
 msgstr "Gépnév megváltoztatása"
 
+#: MountManager.py:82
 msgid "Change the hostname of your Dreambox."
 msgstr "A készülék hálózati gépnevének megváltoztatása."
 
+#: MountManager.py:57 MountView.py:65 NetworkBrowser.py:120 UserDialog.py:101
+#: UserManager.py:52
 msgid "Close"
 msgstr "Bezár"
 
+#: UserManager.py:54
 msgid "Delete"
 msgstr "Törlés"
 
+#: MountView.py:66
 msgid "Delete mount"
 msgstr "Hálózati csatlakozás törlése"
 
+#: MountView.py:93
 msgid "Dir:"
 msgstr "Mappa: "
 
+#: NetworkBrowser.py:499 NetworkBrowser.py:501 NetworkBrowser.py:514
 msgid "Do you want to enter a username and password for this host?\n"
 msgstr "Szükséges-e felhasználónév és jelszó megadása?\n"
 
+#: NetworkBrowser.py:635
 msgid "Enter IP to scan..."
 msgstr "Adja meg a lekeresendő IP-címet"
 
+#: MountManager.py:114
 msgid "Enter new hostname for your Dreambox"
 msgstr "Adja meg a készülék új hosztnevét"
 
+#: MountEdit.py:210
 msgid "Enter options:"
 msgstr "Opciók:"
 
+#: MountEdit.py:214 UserDialog.py:151
 msgid "Enter password:"
 msgstr "Jelszó:"
 
+#: MountEdit.py:208
 msgid "Enter share directory:"
 msgstr "Megosztott mappa:"
 
+#: MountEdit.py:206
 msgid "Enter share name:"
 msgstr "Megosztás neve:"
 
+#: UserDialog.py:104
 msgid "Enter user and password for host: "
 msgstr "Adja meg a felhasználónevet és a jelszavat a géphez: "
 
+#: MountEdit.py:212 UserDialog.py:149
 msgid "Enter username:"
 msgstr "Felhasználónév"
 
+#: NetworkBrowser.py:123
 msgid "Expert"
 msgstr "Haladó"
 
+#: MountManager.py:138
 msgid "Finished restarting your network"
 msgstr "A hálózati kapcsolat újraindítása befejeződött"
 
+#: MountEdit.py:176
+msgid "Host name"
+msgstr ""
+
+#: NetworkBrowser.py:623
 msgid "IP Address"
 msgstr "IP cím"
 
+#: MountView.py:92
 msgid "IP:"
 msgstr "IP:"
 
+#: MountEdit.py:170
 msgid "Local share name"
 msgstr "Helyi hálózati megosztás neve"
 
+#: plugin.py:49
 msgid "Manage network shares"
 msgstr "Hálózati megosztások kezelése"
 
+#: plugin.py:49
 msgid "Manage your network shares..."
 msgstr "Hálózati megosztások kezelése..."
 
+#: plugin.py:50 plugin.py:52
 msgid "Mount again"
 msgstr "Újracsatlakoztatás"
 
+#: MountView.py:62
 msgid "Mount informations"
 msgstr "Csatlakozási információk"
 
+#: MountEdit.py:187
 msgid "Mount options"
 msgstr "Csatlakozás opciói"
 
+#: MountEdit.py:172
 msgid "Mount type"
 msgstr "Csatlakozás típusa"
 
+#: MountManager.py:67 plugin.py:49
 msgid "MountManager"
 msgstr "Megosztás-kezelő"
 
+#: MountView.py:61
 msgid ""
 "Mounted/\n"
 "Unmounted"
@@ -151,113 +195,150 @@ msgstr ""
 "Csatlakoztatva/\n"
 "Lebontva"
 
+#: MountManager.py:80
 msgid "Mountpoints management"
 msgstr "Hálózati megosztások csatlakoztatása"
 
+#: MountEdit.py:87
 msgid "Mounts editor"
 msgstr "Megosztás-kezelő"
 
+#: NetworkBrowser.py:121
 msgid "Mounts management"
 msgstr "Megosztások kezelése"
 
+#: MountEdit.py:114
 msgid "NFS share"
 msgstr "NFS megosztás"
 
+#: plugin.py:48
 msgid "NetworkBrowser"
 msgstr "Hálózat tallózó"
 
+#: NetworkBrowser.py:226
 msgid "No network devices found!"
 msgstr "Nincs elérhető hálózati interfész!"
 
+#: MountEdit.py:192 UserDialog.py:140
 msgid "Password"
 msgstr "Jelszó"
 
+#: MountEdit.py:323
 msgid "Please wait for activation of your network mount..."
 msgstr "Kérem, várjon, ameddig a hálózati csatlakoztatás létrejön..."
 
+#: MountView.py:133
 msgid "Please wait while removing your network mount..."
 msgstr "Kérem, várjon, ameddig a hálózati csatlakoztatás eltávolításra kerül..."
 
+#: MountEdit.py:285
 msgid "Please wait while updating your network mount..."
 msgstr "Kérem, várjon, míg a a hálózati csatlakozás frissül..."
 
+#: MountManager.py:125
 msgid "Please wait while your network is restarting..."
 msgstr "Kérem, várjon, ameddig a hálózati konfiguráció újraindul..."
 
+#: MountEdit.py:83
 msgid "Press OK to activate the settings."
 msgstr "Az OK gombbal aktiválhatja a beállításokat."
 
+#: NetworkBrowser.py:471
 msgid "Press OK to collapse this host"
 msgstr "Az OK gombbal elrejtheti a részleteket"
 
+#: UserManager.py:53
 msgid "Press OK to edit selected settings."
 msgstr "Nyomja le az OK gombot a beállítások szerkesztéséhez"
 
+#: MountView.py:64
 msgid "Press OK to edit the settings."
 msgstr "nyomja le az OK gombot a beállítások módosításához."
 
+#: NetworkBrowser.py:473
 msgid "Press OK to expand this host"
 msgstr "Az OK gombbal megjelenítheti a részleteket"
 
+#: NetworkBrowser.py:467
 msgid "Press OK to mount this share!"
 msgstr "Nyomja le az OK gombot a megosztáshoz való csatlakozáshoz!"
 
+#: NetworkBrowser.py:124
 msgid "Press OK to mount!"
 msgstr "Nyomja le az OK gombot a csatlakozáshoz!"
 
+#: UserDialog.py:100
 msgid "Press OK to save settings."
 msgstr "Nyomja le az OK gombot a beállítások mentéséhez."
 
+#: MountManager.py:58
 msgid "Press OK to select."
 msgstr "Nyomja le az OK gombot a kiválasztáshoz."
 
+#: NetworkBrowser.py:122
 msgid "Rescan"
 msgstr "Újrakeresés"
 
+#: NetworkBrowser.py:608
 msgid "Scan NFS share"
 msgstr "NFS megosztások keresése"
 
+#: NetworkBrowser.py:609
 msgid "Scan range"
 msgstr "Keresési tartomány"
 
+#: plugin.py:48
 msgid "Search for network shares"
 msgstr "Hálózati megosztások keresése"
 
+#: plugin.py:48
 msgid "Search for network shares..."
 msgstr "Hálózati megosztások keresése..."
 
+#: NetworkBrowser.py:219
 msgid "Searching your network. Please wait..."
 msgstr "Hálózatkeresés... Kérem, várjon..."
 
+#: MountEdit.py:174
 msgid "Server IP"
 msgstr "Szerver IP"
 
+#: MountEdit.py:178
 msgid "Server share"
 msgstr "Szerver megosztas"
 
+#: MountManager.py:81
 msgid "User management"
 msgstr "Felhasználó-kezelés"
 
+#: UserManager.py:62
 msgid "Usermanager"
 msgstr "Felhasználó-kezelő"
 
+#: MountEdit.py:190 UserDialog.py:138
 msgid "Username"
 msgstr "Felhasználónév"
 
+#: MountManager.py:80
 msgid "View, edit or delete mountpoints on your Dreambox."
 msgstr "Csatlakoztatott hálózati megosztások megtekintése, szerkesztése vagy törlése."
 
+#: MountManager.py:81
 msgid "View, edit or delete usernames and passwords for your network."
 msgstr "Hálózati felhasználónevek és jelszavak megtekintése, szerkesztése vagy törlése."
 
+#: MountEdit.py:336
 msgid "Your network mount has been activated."
 msgstr "A hálózati csatlakozás most már aktív."
 
+#: MountView.py:148
 msgid "Your network mount has been removed."
 msgstr "A hálózati csatlakozás el lett távolítva."
 
+#: MountEdit.py:297
 msgid "Your network mount has been updated."
 msgstr "A hálózati csatlakozás frissítve lett."
 
+#: MountEdit.py:180
 msgid "use as HDD replacement"
 msgstr "Használat merevlemez helyett"

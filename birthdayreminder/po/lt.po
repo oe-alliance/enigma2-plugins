@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2023-03-30 11:49+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: \n"
@@ -18,108 +18,126 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 "X-Generator: Poedit 3.2.2\n"
 
+#: BirthdayTimer.py:34
 #, python-format
 msgid "%s will turn %s in %s!"
 msgstr "%s įjungs %s po %s!"
 
+#: plugin.py:42
 msgid "1 day"
 msgstr "1 dieną"
 
+#: plugin.py:42
 msgid "1 week"
 msgstr "1 savaitę"
 
+#: plugin.py:42
 msgid "3 days"
 msgstr "3 dienas"
 
-msgid "Accept changes"
-msgstr "Priimti pakeitimus"
-
+#: BirthdayReminder.py:189
 msgid "Add"
 msgstr "Pridėti"
 
+#: BirthdayReminder.py:172
 msgid "Add a birthday"
 msgstr "Pridėti gimtadienį"
 
+#: BirthdayReminder.py:512
 msgid "Add birthday"
 msgstr "Pridėti gimtadienį"
 
+#: BirthdayReminder.py:196 plugin.py:49
 msgid "Age"
 msgstr "Amžius"
 
+#: BirthdayReminder.py:195
 msgid "Birthday"
 msgstr "Gimtadienis"
 
+#: BirthdayReminder.py:156
 msgid "Birthday Reminder"
 msgstr "Gimtadienių priminimas"
 
+#: BirthdayReminder.py:535 setup.xml
 msgid "Birthday Reminder Settings"
 msgstr "Gimtadienių priminimo nustatymai"
 
+#: BirthdayTimer.py:222
 #, python-format
 msgid "Birthday Reminder received %s birthdays from %s."
 msgstr "Gimtadienių priminimo parsiųsti %s gimtadieniai iš %s."
 
+#: setup.xml
 msgid "Birthday filename:"
 msgstr "Gimtadienių failo pavadinimas:"
 
+#: BirthdayReminder.py:536
 msgid "Birthdays"
 msgstr "Gimtadieniai"
 
+#: BirthdayReminder.py:464
 msgid "CSV import successful!"
 msgstr "CSV importas pavyko!"
 
+#: BirthdayReminder.py:422
 #, python-format
 msgid "Can't find CSV file %s!"
 msgstr "Surasti CSV failo %s nepavyko!"
 
+#: BirthdayReminder.py:449
 #, python-format
 msgid "Can't import CSV data from file %s."
 msgstr "Importuoti CSV duomenų iš failo %s negalima."
 
+#: BirthdayReminder.py:416
 #, python-format
 msgid "Can't write CSV file %s."
 msgstr "Įrašyti CSV failo %s nepavyko."
 
-msgid "Cancel"
-msgstr "Atšaukti"
-
-msgid "Change path"
-msgstr "Keisti kelią"
-
-msgid "Choose the filename:"
-msgstr "Pasirinkite failo pavadinimą:"
-
+#: setup.xml
 msgid "Date format:"
 msgstr "Datos formatas:"
 
+#: setup.xml
 msgid "Day:"
 msgstr "Diena:"
 
+#: plugin.py:42
 msgid "Disabled"
 msgstr "Išjungta"
 
+#: BirthdayReminder.py:245
 msgid "Distribute birthdays to other Dreamboxes"
 msgstr "Platinti gimtadienius į kitus aparatus"
 
+#: BirthdayReminder.py:230
 #, python-format
 msgid "Do you really want to delete the entry for %s?"
 msgstr "Ar tikrai norite trinti įrašą %s?"
 
+#: BirthdayReminder.py:240
 msgid "Edit"
 msgstr "Redaguoti"
 
+#: setup.xml
+#, fuzzy
+msgid "Edit Birthday Settings"
+msgstr "Redaguoti gimtadienius"
+
+#: BirthdayReminder.py:512
 msgid "Edit birthday"
 msgstr "Redaguoti gimtadienį"
 
+#: BirthdayReminder.py:538
 msgid "Edit birthdays"
 msgstr "Redaguoti gimtadienius"
 
+#: BirthdayReminder.py:179
 msgid "Edit the selected entry"
 msgstr "Redaguoti pasirinktą įrašą"
 
-msgid "Enter the name of the person:"
-msgstr "Įveskite asmens vardą ir pavardę:"
-
+#: BirthdayReminder.py:47 BirthdayReminder.py:77 BirthdayReminder.py:430
 #, python-format
 msgid ""
 "Error reading file %s.\n"
@@ -130,6 +148,7 @@ msgstr ""
 "\n"
 "Klaida: %s, %s"
 
+#: BirthdayReminder.py:61 BirthdayReminder.py:98
 #, python-format
 msgid ""
 "Error writing file %s.\n"
@@ -140,78 +159,96 @@ msgstr ""
 "\n"
 "Klaida: %s, %s"
 
+#: BirthdayReminder.py:167
 msgid "Exit the plugin"
 msgstr "Užverti įskiepį"
 
+#: BirthdayReminder.py:245
 msgid "Export CSV file"
 msgstr "Eksportuoti CSV failą"
 
+#: BirthdayReminder.py:192
 msgid "Extras"
 msgstr "Priedai"
 
+#: plugin.py:74 plugin.py:77
 msgid "Helps to remind of birthdays"
 msgstr "Padeda prisiminti apie gimtadienius"
 
+#: BirthdayReminder.py:245
 msgid "Import CSV file"
 msgstr "Importuoti CSV failą"
 
-msgid "Invalid Location"
-msgstr "Neteisinga vieta"
-
+#: BirthdayReminder.py:523
 msgid "Invalid date!"
 msgstr "Neleistina data!"
 
+#: setup.xml
 msgid "Month:"
 msgstr "Mėnuo:"
 
+#: BirthdayReminder.py:194 plugin.py:47
 msgid "Name"
 msgstr "Vardas"
 
+#: setup.xml
 msgid "Name:"
 msgstr "Vardas:"
 
+#: setup.xml
 msgid "Networking port (default: 7374):"
 msgstr "Tinklo prievadas (numatytasis: 7374):"
 
+#: plugin.py:48
 msgid "Next birthday"
 msgstr "Kitas gimtadienis"
 
+#: setup.xml
 msgid "Notification time:"
 msgstr "Pranešimo laikas:"
 
-msgid "OK"
-msgstr "Gerai"
-
+#: BirthdayReminder.py:173
 msgid "Open the extras menu"
 msgstr "Atidaryti priedų meniu"
 
+#: setup.xml
 msgid "Path to birthday file:"
 msgstr "Kelias į gimtadienių failą:"
 
+#: setup.xml
 msgid "Remind before birthday:"
 msgstr "Priminti prieš gimtadienį:"
 
+#: BirthdayReminder.py:241
 msgid "Remove"
 msgstr "Pašalinti"
 
+#: BirthdayReminder.py:180
 msgid "Remove the selected entry"
 msgstr "Pašalinti pasirinktą įrašą"
 
-msgid "Save"
-msgstr "Išsaugoti"
+#: BirthdayReminder.py:579
+#, fuzzy
+msgid "Select a path for the birthday file"
+msgstr "Kelias į gimtadienių failą:"
 
+#: setup.xml
 msgid "Show plugin in extensions menu:"
 msgstr "Rodyti tarp plėtinių meniu:"
 
+#: setup.xml
 msgid "Sort birthdays by:"
 msgstr "Rūšiuoti gimtadienius pagal:"
 
+#: BirthdayReminder.py:185
 msgid "Sorting next"
 msgstr "Kitas rūšiavimas"
 
+#: BirthdayReminder.py:186
 msgid "Sorting previous"
 msgstr "Ankstesnis rūšiavimas"
 
+#: BirthdayTimer.py:44
 #, python-format
 msgid ""
 "Today is %s's birthday!\n"
@@ -222,15 +259,15 @@ msgstr ""
 "\n"
 "Gimė %s ir dabar yra %s metų amžiaus."
 
-msgid "VirtualKeyBoard"
-msgstr "VirtualKeyBoard"
-
+#: BirthdayReminder.py:246
 msgid "What do you want to do?"
 msgstr "Ką norite daryti?"
 
+#: BirthdayReminder.py:414
 #, python-format
 msgid "Wrote CSV file %s."
 msgstr "Įrašytas CSV failas %s."
 
+#: setup.xml
 msgid "Year:"
 msgstr "Metai:"

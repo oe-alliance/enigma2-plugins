@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# $PACKAGEDESCRIPION
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the VirtualZap package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: VirtualZap 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,49 +17,64 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: plugin.py:735
 msgid "Cancel"
 msgstr ""
 
+#: plugin.py:131
 msgid "Could not open Picture in Picture"
 msgstr ""
 
+#: plugin.py:755
 msgid ""
 "GUI needs a restart to apply the new settings.\n"
 "Do you want to Restart the GUI now?"
 msgstr ""
 
+#: plugin.py:736
 msgid "OK"
 msgstr ""
 
+#: plugin.py:743
 msgid "Remember last service"
 msgstr ""
 
+#: plugin.py:756
 msgid "Restart GUI now?"
 msgstr ""
 
+#: plugin.py:741
 msgid "Show PiP in Infobar"
 msgstr ""
 
+#: plugin.py:742
 msgid "Start standard PiP after x secs (0 = disabled)"
 msgstr ""
 
+#: plugin.py:738
 msgid "Usage"
 msgstr ""
 
+#: plugin.py:740
 msgid "Use PiP"
 msgstr ""
 
+#: plugin.py:146
 msgid "Virtual (PiP) Zap"
 msgstr ""
 
+#: plugin.py:144
 msgid "Virtual Zap Setup"
 msgstr ""
 
+#: plugin.py:62
 msgid "as plugin in extended bar"
 msgstr ""
 
+#: plugin.py:62
 msgid "with exit button"
 msgstr ""
 
+#: plugin.py:62
 msgid "with long OK press"
 msgstr ""

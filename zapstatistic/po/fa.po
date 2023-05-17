@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zap statistic Persian Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:02+0000\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: mehdi <mehdi_ar_yekta@yahoo.com>\n"
 "Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
@@ -15,65 +15,86 @@ msgstr ""
 "X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
 "X-Poedit-SearchPath-0: /home/aliabdul/dream/ltteam/trunk/additions/plugins/zapstatistic/src\n"
 
+#: plugin.py:618
 msgid "Close plugin"
 msgstr "بستن پلاگین"
 
+#: plugin.py:464
 msgid "Delete"
 msgstr "حذف کردن "
 
+#: plugin.py:604
 msgid "Delete all entries"
 msgstr "حذف همه ورودی ها"
 
+#: plugin.py:602
 msgid "Delete entry"
 msgstr "حذف ورودی ها"
 
+#: plugin.py:467
 msgid "Durations"
 msgstr "مدت زمان"
 
+#: plugin.py:600
 msgid "Play entry"
 msgstr "نمایش ورودی ها"
 
+#: plugin.py:620
 msgid "Please choose a function..."
 msgstr "لطفا یک کارکرد را انتخاب کنید "
 
+#: plugin.py:616
 msgid "Show combined duration window"
 msgstr "نمایش پتجره طول زمان ترکیب شده"
 
+#: plugin.py:614
 msgid "Show duration window"
 msgstr "نمایش پتجره مدت زمان"
 
+#: plugin.py:653
 msgid "Shows the watched services with some statistic"
 msgstr "نمایش سرویس های دیده شده با برخی از اطلاعات آماری"
 
+#: plugin.py:486
 msgid "Sort (date+)"
 msgstr "مرتب سازی تاریخ با استفاده از + "
 
+#: plugin.py:490 plugin.py:577
 msgid "Sort (date-)"
 msgstr "مرتب سازی تاریخ با استفاده از - "
 
+#: plugin.py:252 plugin.py:355
 msgid "Sort (duration+)"
 msgstr "مرتب سازی مدت با استفاده از +"
 
+#: plugin.py:253 plugin.py:356
 msgid "Sort (duration-)"
 msgstr "مرتب سازی مدت با استفاده از _"
 
+#: plugin.py:250 plugin.py:353 plugin.py:485
 msgid "Sort (name+)"
 msgstr "مرتب سازی نام با استفاده از +"
 
+#: plugin.py:251 plugin.py:354 plugin.py:488 plugin.py:562
 msgid "Sort (name-)"
 msgstr "مرتب سازی نام با استفاده از -"
 
+#: plugin.py:610
 msgid "Sort by date (ascending)"
 msgstr "مرتب کردن صعودی بر اساس تاریخ "
 
+#: plugin.py:612
 msgid "Sort by date (descending)"
 msgstr "مرتب کردن نزولی بر اساس تاریخ "
 
+#: plugin.py:606
 msgid "Sort by name (ascending)"
 msgstr "مرتب کردن صعودی بر اساس نام "
 
+#: plugin.py:608
 msgid "Sort by name (descending)"
 msgstr "مرتب کردن نزولی بر اساس نام "
 
+#: plugin.py:243 plugin.py:345 plugin.py:455 plugin.py:653
 msgid "Zap Statistic"
 msgstr "آمار جابجایی"

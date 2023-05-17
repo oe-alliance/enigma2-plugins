@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:24+0100\n"
 "PO-Revision-Date: 2012-03-16 13:20+0100\n"
 "Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
@@ -17,41 +17,53 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: plugin.py:51 plugin.py:129 plugin.py:133
 #, fuzzy
 msgid "Automatic Timerlist Cleanup Setup"
 msgstr "Automatic System Cleanup Setup"
 
+#: plugin.py:55
 msgid "Cancel"
 msgstr "Cancel"
 
+#: plugin.py:58
 #, fuzzy
 msgid "Cleanup timerlist-entries"
 msgstr "Delete timerlist entries"
 
+#: plugin.py:56
 msgid "OK"
 msgstr "OK"
 
+#: plugin.py:37
 #, fuzzy
 msgid "disabled"
 msgstr "cleanup disabled"
 
+#: plugin.py:37
 msgid "immediately after recording"
 msgstr "immediately after recording"
 
+#: plugin.py:37
 msgid "older than 1 day"
 msgstr "older than 1 day"
 
+#: plugin.py:37
 msgid "older than 1 week"
 msgstr "older than 1 week"
 
+#: plugin.py:37
 msgid "older than 2 weeks"
 msgstr "older than 2 weeks"
 
+#: plugin.py:37
 msgid "older than 3 days"
 msgstr "older than 3 days"
 
+#: plugin.py:37
 msgid "older than 4 weeks"
 msgstr "older than 4 weeks"
 
+#: plugin.py:37
 msgid "older than 6 weeks"
 msgstr "older than 6 weeks"

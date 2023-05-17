@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - dvdbackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -17,63 +17,83 @@ msgstr ""
 "X-Poedit-Basepath: /home/dario/Plugins/DVDBackup\n"
 "X-Poedit-SearchPath-0: /home/dario/Plugins/DVDBackup\n"
 
+#: plugin.py:269
 msgid "Abort"
 msgstr "Interrompere"
 
+#: plugin.py:343
 msgid "Backup"
 msgstr "Backup"
 
+#: plugin.py:216
 msgid "Backup of DVD finished."
 msgstr "Backup DVD terminato."
 
+#: plugin.py:464
 msgid "Backup your Video-DVD to your harddisk"
 msgstr "Eseguire backup di DVD su harddisk"
 
+#: plugin.py:155
 msgid "Could not find any file to backup!"
 msgstr "Impossibile trovare file di cui effettuare il backup!"
 
+#: plugin.py:158
 msgid "Could not read the DVD informations!"
 msgstr "Impossibile leggere le informazioni sul DVD!"
 
+#: plugin.py:355
 msgid "Create iso:"
 msgstr "Creare iso:"
 
+#: plugin.py:460 plugin.py:464
 msgid "DVD Backup"
 msgstr "DVD Backup"
 
+#: plugin.py:351
 msgid "Device:"
 msgstr "Supporto:"
 
+#: plugin.py:352
 msgid "Directory:"
 msgstr "Cartella:"
 
+#: plugin.py:216
 msgid "Duration:"
 msgstr "Durata:"
 
+#: plugin.py:216
 msgid "Eject DVD?"
 msgstr "Espellere il DVD?"
 
+#: plugin.py:164 plugin.py:194
 msgid "Error while backup of DVD!"
 msgstr "Errone in esecuzione backup DVD!"
 
+#: plugin.py:344
 msgid "Keyboard"
 msgstr "Tastiera"
 
+#: plugin.py:345
 msgid "Location"
 msgstr "Destinazione"
 
+#: plugin.py:354
 msgid "Log:"
 msgstr "Log:"
 
+#: plugin.py:57 plugin.py:421
 msgid "Name of DVD"
 msgstr "Titolo del DVD"
 
+#: plugin.py:353
 msgid "Name:"
 msgstr "Nome:"
 
+#: plugin.py:342
 msgid "Progress"
 msgstr "Avanzamento"
 
+#: plugin.py:199
 msgid ""
 "genisoimage job done.\n"
 "Delete DVD directory?"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Mosaic.nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2011-09-28 12:34+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: AndyBlac/Rob van der Does\n"
@@ -19,14 +19,18 @@ msgstr ""
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 
+#: plugin.py:199 plugin.py:308
 msgid "Channel: "
 msgstr "Kanaal : "
 
+#: plugin.py:337
 msgid "Countdown:"
 msgstr "Aftelling:"
 
+#: plugin.py:324
 msgid "Error while creating screenshot. You need grab version 0.8 or higher!"
 msgstr "Fout bij het maken van een schermafdruk. Grab versie 0.8 of hoger is nodig !"
 
+#: plugin.py:400
 msgid "Mosaic"
 msgstr "Mosaic"

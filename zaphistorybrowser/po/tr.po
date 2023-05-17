@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 ZapHistoryBrowser Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2009-09-22 13:20+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
 "Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
@@ -14,38 +14,50 @@ msgstr ""
 "X-Poedit-Country: TURKEY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#: plugin.py:217
 msgid "Clear"
 msgstr "Temizle"
 
+#: plugin.py:220
 msgid "Config"
 msgstr "Ayarlar"
 
+#: plugin.py:218
 msgid "Delete"
 msgstr "Sil"
 
+#: plugin.py:125
 msgid "Enable zap history:"
 msgstr "Zap geçmişi:"
 
+#: plugin.py:127
 msgid "Enigma1-like history:"
 msgstr ""
 
+#: plugin.py:126
 msgid "Maximum zap history entries:"
 msgstr "Tutulacak maksimum geçmiş kaydı:"
 
+#: plugin.py:219
 msgid "Zap"
 msgstr ""
 
+#: plugin.py:205 plugin.py:318
 msgid "Zap-History Browser"
 msgstr "Zap geçmişi gösterici"
 
+#: plugin.py:118
 msgid "Zap-History Configurator"
 msgstr "Zap geçmişi yapılandırıcı"
 
+#: plugin.py:49
 msgid "disabled"
 msgstr "devre dışı"
 
+#: plugin.py:49
 msgid "disabled at parental lock"
 msgstr "ebeveyn kontrolü etkinse, devre dışı"
 
+#: plugin.py:49
 msgid "enabled"
 msgstr "etkin"

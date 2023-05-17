@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Movie Tagger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2011-09-09 14:30+0100\n"
 "Last-Translator: JuSt611 <Software@Strasdas.de>\n"
 "Language-Team: JuSt611 <Software@Strasdas.de>\n"
@@ -24,21 +24,27 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
+#: plugin.py:276
 msgid "Add Tag"
 msgstr "Tag hinzufügen"
 
+#: plugin.py:269
 msgid "Add new Tag"
 msgstr "Neuen Tag hinzufügen"
 
+#: plugin.py:260
 msgid "Assigned Tags"
 msgstr "Zugeordnete Tags"
 
+#: plugin.py:174
 msgid "Can't write movietags, because no meta-file found!"
 msgstr "Keine Metadaten vorhanden, Filmtags können nicht gespeichert werden!"
 
+#: plugin.py:278
 msgid "Clear all Tags"
 msgstr "Alle Tags löschen"
 
+#: plugin.py:256
 msgid ""
 "Clear all Tags?\n"
 "\n"
@@ -50,35 +56,46 @@ msgstr ""
 "Damit werden ALLE Tags in ALLEN Aufnahmen gelöscht!\n"
 "Sind Sie sicher?"
 
+#: plugin.py:252
 msgid "Enter the new Tag"
 msgstr "Geben Sie den neuen Tag an"
 
+#: plugin.py:259
 msgid "Movie Tagger"
 msgstr "Movie Tagger"
 
+#: plugin.py:322
 msgid "Movie Tagger..."
 msgstr "Movie Tagger..."
 
+#: plugin.py:264
 msgid "Predefined Tag"
 msgstr "Vorgegebener Tag"
 
+#: plugin.py:268
 msgid "Remove Tag"
 msgstr "Tag entfernen"
 
+#: plugin.py:261
 msgid "Specified Tags"
 msgstr "Vorhandene Tags"
 
+#: plugin.py:271 plugin.py:279
 msgid "Toggle List"
 msgstr "Liste wechseln"
 
+#: plugin.py:262
 msgid "Used Tag"
 msgstr "Verwendeter Tag"
 
+#: plugin.py:263
 msgid "User-specific Tag"
 msgstr "Benutzereigener Tag"
 
+#: plugin.py:259
 msgid "Ver."
 msgstr "Ver."
 
+#: plugin.py:252
 msgid "Whitepace will be replaced by \"_\""
 msgstr "Leerstellen werden durch \"_\" ersetzt"

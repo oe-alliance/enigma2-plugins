@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Mosaic\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2009-01-09 14:30+0100\n"
 "Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
 "Language-Team: none\n"
@@ -17,14 +17,18 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: /home/aliabdul/dream/enigma2-plugins/mosaic/src\n"
 
+#: plugin.py:199 plugin.py:308
 msgid "Channel: "
 msgstr "Canal:"
 
+#: plugin.py:337
 msgid "Countdown:"
 msgstr "Cuenta atrás:"
 
+#: plugin.py:324
 msgid "Error while creating screenshot. You need grab version 0.8 or higher!"
 msgstr "Error mientras creaba el pantallazo. ¡Necesita la versión de grab 0.8 o superior!"
 
+#: plugin.py:400
 msgid "Mosaic"
 msgstr "Mosaico"

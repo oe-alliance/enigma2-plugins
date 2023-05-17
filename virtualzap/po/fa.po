@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: virtual zap Persian Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: mehdi <mehdi_ar_yekta@yahoo.com>\n"
 "Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
@@ -13,49 +13,64 @@ msgstr ""
 "X-Poedit-Language: Persian\n"
 "X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
 
+#: plugin.py:735
 msgid "Cancel"
 msgstr "لغو کردن"
 
+#: plugin.py:131
 msgid "Could not open Picture in Picture"
 msgstr ""
 
+#: plugin.py:755
 msgid ""
 "GUI needs a restart to apply the new settings.\n"
 "Do you want to Restart the GUI now?"
 msgstr ""
 
+#: plugin.py:736
 msgid "OK"
 msgstr "مورد تایید است"
 
+#: plugin.py:743
 msgid "Remember last service"
 msgstr "به یاد آوری آخرین سرویس"
 
+#: plugin.py:756
 msgid "Restart GUI now?"
 msgstr "GUI راه اندازی مجدد کردن   "
 
+#: plugin.py:741
 msgid "Show PiP in Infobar"
 msgstr "نمایش نوار اطلاعات تصویر در تصویر"
 
+#: plugin.py:742
 msgid "Start standard PiP after x secs (0 = disabled)"
 msgstr ""
 
+#: plugin.py:738
 msgid "Usage"
 msgstr "میزان مصرف"
 
+#: plugin.py:740
 msgid "Use PiP"
 msgstr "استفاده از قابلیت تصویر در تصویر"
 
+#: plugin.py:146
 msgid "Virtual (PiP) Zap"
 msgstr "جابه جایی مجازی تصویر در تصویر"
 
+#: plugin.py:144
 msgid "Virtual Zap Setup"
 msgstr "راه اندازی جابه جایی مجازی "
 
+#: plugin.py:62
 msgid "as plugin in extended bar"
 msgstr "به عنوان یک پلاگین در قسمت توسعه"
 
+#: plugin.py:62
 msgid "with exit button"
 msgstr "با استفاده از دکمه خروج"
 
+#: plugin.py:62
 msgid "with long OK press"
 msgstr "با فشردن طولانی ماندن اوکی"

@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# $PACKAGEDESCRIPION
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the AudioRestart package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: AudioRestart 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:24+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,39 +17,51 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: plugin.py:116
 msgid " "
 msgstr ""
 
+#: plugin.py:152
 msgid "Audio restart Setup"
 msgstr ""
 
+#: plugin.py:114
 msgid "Cancel"
 msgstr ""
 
+#: plugin.py:111
 #, python-format
 msgid "Plugin: %(plugin)s , Version: %(version)s"
 msgstr ""
 
+#: plugin.py:100 plugin.py:154
 msgid "Restart audio"
 msgstr ""
 
+#: plugin.py:101
 msgid "Restart audio delay (in sec)"
 msgstr ""
 
+#: plugin.py:115
 msgid "Save"
 msgstr ""
 
+#: plugin.py:152
 msgid "Setup for the AudioRestart Plugin"
 msgstr ""
 
+#: plugin.py:20
 msgid "after restart"
 msgstr ""
 
+#: plugin.py:20
 msgid "after restart/standby"
 msgstr ""
 
+#: plugin.py:20
 msgid "after standby"
 msgstr ""
 
+#: plugin.py:20
 msgid "disabled"
 msgstr ""

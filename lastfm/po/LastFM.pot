@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# $PACKAGEDESCRIPION
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the LastFM package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: LastFM 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,274 +17,364 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: plugin.py:359
 #, python-format
 msgid "%s name"
 msgstr ""
 
+#: plugin.py:167
 msgid "Album"
 msgstr ""
 
+#: plugin.py:165
 msgid "Artist"
 msgstr ""
 
+#: plugin.py:181
 msgid "Ban"
 msgstr ""
 
+#: plugin.py:208
 msgid "Ban Track, never play"
 msgstr ""
 
+#: plugin.py:157
 msgid "Banned Tracks"
 msgstr ""
 
+#: plugin.py:271
 msgid "Banned Tracks loaded"
 msgstr ""
 
+#: LastFMConfig.py:56
 msgid "Cancel"
 msgstr ""
 
+#: LastFMConfig.py:37
 msgid "Description"
 msgstr ""
 
+#: plugin.py:35
 msgid "Extensions menu"
 msgstr ""
 
+#: plugin.py:157
 msgid "Friends"
 msgstr ""
 
+#: plugin.py:283
 msgid "Friends loaded"
 msgstr ""
 
+#: plugin.py:157
 msgid "Global Tags"
 msgstr ""
 
+#: plugin.py:259
 msgid "Global Tags loaded"
 msgstr ""
 
+#: plugin.py:488
 msgid "Group of"
 msgstr ""
 
+#: LastFMConfig.py:53
 msgid "Interval for Coverart Animation"
 msgstr ""
 
+#: LastFMConfig.py:47
 msgid "Interval to refresh Metadata (seconds)"
 msgstr ""
 
+#: LastFMConfig.py:15 plugin.py:36
 msgid "Last.FM"
 msgstr ""
 
+#: LastFMConfig.py:38
 msgid "Last.FM Username"
 msgstr ""
 
+#: LastFMConfig.py:42
 msgid "LastFM Proxy port"
 msgstr ""
 
+#: plugin.py:37
 msgid "Listen to Last.FM Internet Radio"
 msgstr ""
 
+#: plugin.py:519
 msgid "Loading Friends"
 msgstr ""
 
+#: plugin.py:495
 msgid "Loading Global Tags"
 msgstr ""
 
+#: plugin.py:507 plugin.py:511
 msgid "Loading Loved Tracks"
 msgstr ""
 
+#: plugin.py:515
 msgid "Loading Neighbours"
 msgstr ""
 
+#: plugin.py:503
 msgid "Loading Recent Tracks"
 msgstr ""
 
+#: plugin.py:499
 msgid "Loading Top Tacks"
 msgstr ""
 
+#: plugin.py:180
 msgid "Love"
 msgstr ""
 
+#: plugin.py:157 plugin.py:456
 msgid "Loved Tracks"
 msgstr ""
 
+#: plugin.py:275
 msgid "Loved Tracks loaded"
 msgstr ""
 
+#: plugin.py:207
 msgid "Mark Track as loved"
 msgstr ""
 
+#: LastFMConfig.py:36
 msgid "Name (needs GUI restart)"
 msgstr ""
 
+#: plugin.py:157
 msgid "Neighbours"
 msgstr ""
 
+#: plugin.py:451
 msgid "Neighbours Tracks"
 msgstr ""
 
+#: plugin.py:279
 msgid "Neighbours loaded"
 msgstr ""
 
+#: plugin.py:201
 msgid "Next Selection"
 msgstr ""
 
+#: LastFMConfig.py:57
 msgid "OK"
 msgstr ""
 
+#: plugin.py:209
 msgid "Open"
 msgstr ""
 
+#: plugin.py:204
 msgid "Page backward Selections"
 msgstr ""
 
+#: plugin.py:203
 msgid "Page forward Selections"
 msgstr ""
 
+#: LastFMConfig.py:39
 msgid "Password"
 msgstr ""
 
+#: plugin.py:446
 msgid "Personal Recommendations"
 msgstr ""
 
+#: plugin.py:157
 msgid "Personal Stations"
 msgstr ""
 
+#: plugin.py:178 plugin.py:407
 msgid "Play"
 msgstr ""
 
+#: plugin.py:461
 msgid "Play Artist Radio..."
 msgstr ""
 
+#: plugin.py:466
 msgid "Play Group Radio..."
 msgstr ""
 
+#: plugin.py:471
 msgid "Play Tag Radio..."
 msgstr ""
 
+#: plugin.py:35
 msgid "Plugin menu"
 msgstr ""
 
+#: plugin.py:202
 msgid "Previous Selection"
 msgstr ""
 
+#: plugin.py:210
 msgid "Quit"
 msgstr ""
 
+#: plugin.py:157
 msgid "Recent Tracks"
 msgstr ""
 
+#: plugin.py:267
 msgid "Recent Tracks loaded"
 msgstr ""
 
+#: LastFMConfig.py:43
 msgid "Recommendation level"
 msgstr ""
 
+#: plugin.py:199
 msgid "Select next Tab"
 msgstr ""
 
+#: plugin.py:200
 msgid "Select prev Tab"
 msgstr ""
 
+#: LastFMConfig.py:40
 msgid "Send now playing Audio Tracks"
 msgstr ""
 
+#: LastFM.py:426
 msgid "Server returned"
 msgstr ""
 
+#: LastFMConfig.py:28 plugin.py:209
 msgid "Setup"
 msgstr ""
 
+#: LastFMConfig.py:44
 msgid "Show Coverart"
 msgstr ""
 
+#: LastFMConfig.py:51
 msgid "Show Coverart Animation in Screensaver"
 msgstr ""
 
+#: LastFMConfig.py:50
 msgid "Show Coverart in Screensaver"
 msgstr ""
 
+#: LastFMConfig.py:35
 msgid "Show in (needs GUI restart)"
 msgstr ""
 
+#: plugin.py:179
 msgid "Skip"
 msgstr ""
 
+#: plugin.py:206
 msgid "Skip current Track"
 msgstr ""
 
+#: LastFMConfig.py:52
 msgid "Speed for Coverart Animation"
 msgstr ""
 
+#: plugin.py:205
 msgid "Start/stop streaming"
 msgstr ""
 
+#: plugin.py:386
 msgid "Starting stream"
 msgstr ""
 
+#: LastFM.py:424
 msgid "Station changed"
 msgstr ""
 
+#: plugin.py:404
 msgid "Stop"
 msgstr ""
 
+#: plugin.py:384
 msgid "Stream stopped"
 msgstr ""
 
+#: plugin.py:198
 msgid "Switch to selected Station"
 msgstr ""
 
+#: LastFMConfig.py:45
 msgid "Timeout Statustext (seconds)"
 msgstr ""
 
+#: LastFMConfig.py:46
 msgid "Timeout to select a Tab (seconds)"
 msgstr ""
 
+#: plugin.py:157
 msgid "Top Tracks"
 msgstr ""
 
+#: plugin.py:263
 msgid "Top Tracks loaded"
 msgstr ""
 
+#: plugin.py:168
 msgid "Track"
 msgstr ""
 
+#: plugin.py:253
 msgid "Track banned"
 msgstr ""
 
+#: plugin.py:250
 msgid "Track loved"
 msgstr ""
 
+#: plugin.py:247
 msgid "Track skipped"
 msgstr ""
 
+#: plugin.py:483
 msgid "Tracks liked by Fans of"
 msgstr ""
 
+#: plugin.py:478
 msgid "Tracks similar to"
 msgstr ""
 
+#: LastFMConfig.py:41
 msgid "Use LastFM Proxy"
 msgstr ""
 
+#: LastFMConfig.py:48
 msgid "Use Screensaver"
 msgstr ""
 
+#: plugin.py:97 plugin.py:105 plugin.py:142 plugin.py:413
 msgid "Ver."
 msgstr ""
 
+#: LastFMConfig.py:49
 msgid "Wait before Screensaver (seconds)"
 msgstr ""
 
+#: plugin.py:231
 msgid "logging into last.FM"
 msgstr ""
 
+#: plugin.py:244
 msgid "login failed! "
 msgstr ""
 
+#: plugin.py:241
 msgid "login successful"
 msgstr ""
 
+#: plugin.py:619
 msgid "playing:"
 msgstr ""
 
+#: plugin.py:358
 #, python-format
 msgid "please enter an %s name to listen to"
 msgstr ""

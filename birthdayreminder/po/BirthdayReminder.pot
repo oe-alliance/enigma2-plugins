@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# $PACKAGEDESCRIPION
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the BirthdayReminder package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: BirthdayReminder 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-12 19:10+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,96 +17,125 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: BirthdayTimer.py:34
 #, python-format
 msgid "%s will turn %s in %s!"
 msgstr ""
 
+#: plugin.py:42
 msgid "1 day"
 msgstr ""
 
+#: plugin.py:42
 msgid "1 week"
 msgstr ""
 
+#: plugin.py:42
 msgid "3 days"
 msgstr ""
 
+#: BirthdayReminder.py:189
 msgid "Add"
 msgstr ""
 
+#: BirthdayReminder.py:172
 msgid "Add a birthday"
 msgstr ""
 
+#: BirthdayReminder.py:512
 msgid "Add birthday"
 msgstr ""
 
+#: BirthdayReminder.py:196 plugin.py:49
 msgid "Age"
 msgstr ""
 
+#: BirthdayReminder.py:195
 msgid "Birthday"
 msgstr ""
 
+#: BirthdayReminder.py:156
 msgid "Birthday Reminder"
 msgstr ""
 
+#: BirthdayReminder.py:535 setup.xml
 msgid "Birthday Reminder Settings"
 msgstr ""
 
+#: BirthdayTimer.py:222
 #, python-format
 msgid "Birthday Reminder received %s birthdays from %s."
 msgstr ""
 
+#: setup.xml
 msgid "Birthday filename:"
 msgstr ""
 
+#: BirthdayReminder.py:536
 msgid "Birthdays"
 msgstr ""
 
+#: BirthdayReminder.py:464
 msgid "CSV import successful!"
 msgstr ""
 
+#: BirthdayReminder.py:422
 #, python-format
 msgid "Can't find CSV file %s!"
 msgstr ""
 
+#: BirthdayReminder.py:449
 #, python-format
 msgid "Can't import CSV data from file %s."
 msgstr ""
 
+#: BirthdayReminder.py:416
 #, python-format
 msgid "Can't write CSV file %s."
 msgstr ""
 
+#: setup.xml
 msgid "Date format:"
 msgstr ""
 
+#: setup.xml
 msgid "Day:"
 msgstr ""
 
+#: plugin.py:42
 msgid "Disabled"
 msgstr ""
 
+#: BirthdayReminder.py:245
 msgid "Distribute birthdays to other Dreamboxes"
 msgstr ""
 
+#: BirthdayReminder.py:230
 #, python-format
 msgid "Do you really want to delete the entry for %s?"
 msgstr ""
 
+#: BirthdayReminder.py:240
 msgid "Edit"
 msgstr ""
 
+#: setup.xml
 msgid "Edit Birthday Settings"
 msgstr ""
 
+#: BirthdayReminder.py:512
 msgid "Edit birthday"
 msgstr ""
 
+#: BirthdayReminder.py:538
 msgid "Edit birthdays"
 msgstr ""
 
+#: BirthdayReminder.py:179
 msgid "Edit the selected entry"
 msgstr ""
 
+#: BirthdayReminder.py:47 BirthdayReminder.py:77 BirthdayReminder.py:430
 #, python-format
 msgid ""
 "Error reading file %s.\n"
@@ -114,6 +143,7 @@ msgid ""
 "Error: %s, %s"
 msgstr ""
 
+#: BirthdayReminder.py:61 BirthdayReminder.py:98
 #, python-format
 msgid ""
 "Error writing file %s.\n"
@@ -121,72 +151,95 @@ msgid ""
 "Error: %s, %s"
 msgstr ""
 
+#: BirthdayReminder.py:167
 msgid "Exit the plugin"
 msgstr ""
 
+#: BirthdayReminder.py:245
 msgid "Export CSV file"
 msgstr ""
 
+#: BirthdayReminder.py:192
 msgid "Extras"
 msgstr ""
 
+#: plugin.py:74 plugin.py:77
 msgid "Helps to remind of birthdays"
 msgstr ""
 
+#: BirthdayReminder.py:245
 msgid "Import CSV file"
 msgstr ""
 
+#: BirthdayReminder.py:523
 msgid "Invalid date!"
 msgstr ""
 
+#: setup.xml
 msgid "Month:"
 msgstr ""
 
+#: BirthdayReminder.py:194 plugin.py:47
 msgid "Name"
 msgstr ""
 
+#: setup.xml
 msgid "Name:"
 msgstr ""
 
+#: setup.xml
 msgid "Networking port (default: 7374):"
 msgstr ""
 
+#: plugin.py:48
 msgid "Next birthday"
 msgstr ""
 
+#: setup.xml
 msgid "Notification time:"
 msgstr ""
 
+#: BirthdayReminder.py:173
 msgid "Open the extras menu"
 msgstr ""
 
+#: setup.xml
 msgid "Path to birthday file:"
 msgstr ""
 
+#: setup.xml
 msgid "Remind before birthday:"
 msgstr ""
 
+#: BirthdayReminder.py:241
 msgid "Remove"
 msgstr ""
 
+#: BirthdayReminder.py:180
 msgid "Remove the selected entry"
 msgstr ""
 
+#: BirthdayReminder.py:579
 msgid "Select a path for the birthday file"
 msgstr ""
 
+#: setup.xml
 msgid "Show plugin in extensions menu:"
 msgstr ""
 
+#: setup.xml
 msgid "Sort birthdays by:"
 msgstr ""
 
+#: BirthdayReminder.py:185
 msgid "Sorting next"
 msgstr ""
 
+#: BirthdayReminder.py:186
 msgid "Sorting previous"
 msgstr ""
 
+#: BirthdayTimer.py:44
 #, python-format
 msgid ""
 "Today is %s's birthday!\n"
@@ -194,12 +247,15 @@ msgid ""
 "She/he was born on %s and is now %s year(s) old."
 msgstr ""
 
+#: BirthdayReminder.py:246
 msgid "What do you want to do?"
 msgstr ""
 
+#: BirthdayReminder.py:414
 #, python-format
 msgid "Wrote CSV file %s."
 msgstr ""
 
+#: setup.xml
 msgid "Year:"
 msgstr ""

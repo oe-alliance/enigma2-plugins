@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2015-10-18 10:16+0300\n"
 "Last-Translator: Hasan Kiran <Sunder67@hotmail.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -17,41 +17,53 @@ msgstr ""
 "X-Generator: Poedit 1.8.4\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+#: setup.py:89
 msgid "Add"
 msgstr "Ekle"
 
+#: setup.py:88 setup.py:344
 msgid "Back"
 msgstr "Geri"
 
+#: setup.py:217
 msgid "Cancel"
 msgstr "İptal"
 
+#: setup.py:86 setup.py:230
 msgid "City"
 msgstr "Şehir"
 
+#: setup.py:91 setup.py:219
 msgid "Delete"
 msgstr "Sil"
 
+#: setup.py:90
 msgid "Edit"
 msgstr "Düzenle"
 
+#: plugin.py:215
 #, python-format
 msgid "Feels like %s"
 msgstr "%s hissediliyor"
 
+#: plugin.py:142
 msgid "Getting weather information..."
 msgstr "Hava durumu bilgileri alınıyor..."
 
+#: plugin.py:210
 #, python-format
 msgid "Humidity: %s %%"
 msgstr "Nem: %% %s"
 
+#: setup.py:231
 msgid "Location code"
 msgstr "Konum kodu"
 
+#: setup.py:343
 msgid "MSN location search result"
 msgstr "MSN konum arama sonucu"
 
+#: plugin.py:149
 msgid ""
 "No locations defined...\n"
 "Press 'Menu' to do that."
@@ -59,49 +71,64 @@ msgstr ""
 "Konum tanımlanmadı...\n"
 "Bunu yapmak için 'Menü'ye basın."
 
+#: setup.py:218 setup.py:345
 msgid "OK"
 msgstr "TAMAM"
 
+#: plugin.py:214
 #, python-format
 msgid "Observation point: %s"
 msgstr "Gözlem noktası: %s"
 
+#: plugin.py:213
 #, python-format
 msgid "Observation time: %s"
 msgstr "Gözlem zamanı: %s"
 
+#: setup.py:260 setup.py:272
 msgid "Please enter a valid city name."
 msgstr "Geçerli bir şehir adı girin."
 
+#: setup.py:262 setup.py:275
 msgid "Please enter a valid location code for the city."
 msgstr "Şehir için geçerli bir konum kodunu girin."
 
+#: setup.py:136 setup.py:293
 msgid "Really delete this WeatherPlugin Entry?"
 msgstr "Hava durumu eklenti girişlerini gerçekten silmek istiyor musun?"
 
+#: setup.py:220
 msgid "Search Code"
 msgstr "Arama Kodu"
 
+#: plugin.py:56
 msgid "Show Weather Forecast"
 msgstr "Hava Durumunu Göster"
 
+#: setup.py:87 setup.py:232
 msgid "System"
 msgstr "Sistem"
 
+#: plugin.py:56 plugin.py:93
 msgid "Weather Plugin"
 msgstr "Hava Durumu Eklentisi"
 
+#: setup.py:205
 msgid "WeatherPlugin: Edit Entry"
 msgstr "Hava Durumu Eklentisi: Girişi Düzenle"
 
+#: setup.py:85
 msgid "WeatherPlugin: List of Entries"
 msgstr "Hava Durumu Eklentisi: Girişlerin Listesi"
 
+#: setup.py:247
 msgid "You need to enter a valid city name before you can search for the location code."
 msgstr ""
 
+#: setup.py:52
 msgid "imperial system"
 msgstr "emperyalist sistem"
 
+#: setup.py:52
 msgid "metric system"
 msgstr "metrik sistem"

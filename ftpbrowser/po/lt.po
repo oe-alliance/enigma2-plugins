@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FTPBrowser\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-10 17:12+0300\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2017-07-10 17:13+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
@@ -18,13 +18,16 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
+#: FTPBrowser.py:719
 #, python-format
 msgid "%d kb/s"
 msgstr "%d kb/s"
 
+#: plugin.py:119
 msgid "A basic FTP client"
 msgstr "Pagrindinis ftp klientas"
 
+#: FTPBrowser.py:528
 #, python-format
 msgid ""
 "A file with this name (%s) already exists locally.\n"
@@ -33,6 +36,7 @@ msgstr ""
 "Failas tokiu pavadinimu (%s) jau yra lokaliai.\n"
 "Jūs norite jį perrašyti?"
 
+#: FTPBrowser.py:558
 #, python-format
 msgid ""
 "A file with this name (%s) already exists on the remote host.\n"
@@ -41,6 +45,7 @@ msgstr ""
 "Failas tokiu pavadinimu (%s) nutolusiame aparate jau yra.\n"
 "Jūs norite jį perrašyti?"
 
+#: FTPBrowser.py:753
 msgid ""
 "A transfer is currently in progress.\n"
 "What do you want to do?"
@@ -48,112 +53,147 @@ msgstr ""
 "Šiuo metu vyksta perkėlimas.\n"
 "Ką norite daryti?"
 
+#: FTPBrowser.py:756
 msgid "Abort transfer"
 msgstr "Nutraukti perkėlimą"
 
+#: FTPServerManager.py:262
 msgid "Add"
 msgstr "Pridėti"
 
+#: FTPServerManager.py:159
 msgid "Address:"
 msgstr "Adresas:"
 
+#: FTPBrowser.py:445
 #, python-format
 msgid "Are you sure you want to delete %s?"
 msgstr "Ar tikrai norite pašalinti  %s?"
 
+#: FTPBrowser.py:757
 msgid "Cancel"
 msgstr "Atšaukti"
 
+#: FTPServerManager.py:371
 msgid "Configuration saved."
 msgstr "Konfigūracija išsaugota."
 
+#: plugin.py:107
 msgid "Connect to FTP..."
 msgstr "Jungtis prie FTP..."
 
+#: FTPBrowser.py:829
 msgid "Could not connect to ftp server!"
 msgstr "Prisijungti prie FTP serverio nepavyko!"
 
+#: FTPBrowser.py:393 FTPBrowser.py:405
 #, python-format
 msgid "Could not delete %s."
 msgstr "Pašalinti %s nepavyko."
 
+#: FTPBrowser.py:480
 msgid "Could not obtain list of files."
 msgstr "Parsiųsti failų sąrašo nepavyko."
 
+#: FTPBrowser.py:337 FTPBrowser.py:352
 #, python-format
 msgid "Could not rename %s."
 msgstr "Pervadinti %s nepavyko"
 
+#: FTPBrowser.py:194 FTPServerManager.py:261
 msgid "Delete"
 msgstr "Pašalinti"
 
+#: FTPBrowser.py:281
 msgid "Download"
 msgstr "Parsisiuntimas"
 
+#: FTPBrowser.py:683
 msgid "Download finished."
 msgstr "Parsisiuntimas baigtas."
 
+#: FTPBrowser.py:718
 #, python-format
 msgid "ETA %d:%02d min"
 msgstr "ETA %d:%02d min."
 
+#: FTPServerManager.py:263
 msgid "Edit"
 msgstr "Redaguoti"
 
+#: FTPServerManager.py:155
 msgid "Enter URI"
 msgstr "Įrašykite internetinį adresą"
 
+#: FTPServerManager.py:212
 msgid "Enter URI of FTP Server:"
 msgstr "Įrašykite FTP serverio internetinį adresą:"
 
+#: FTPBrowser.py:376
 msgid "Enter new filename:"
 msgstr "Įrašykite naują failo pavadinimą:"
 
+#: FTPBrowser.py:131 FTPBrowser.py:135
 msgid "Error"
 msgstr "Klaida"
 
+#: FTPBrowser.py:668 FTPBrowser.py:692
 msgid "Error during download."
 msgstr "Atsisiuntimo klaida."
 
+#: FTPBrowser.py:192 FTPServerManager.py:152
 msgid "Exit"
 msgstr "Užverti"
 
+#: FTPQueueManager.py:99
 msgid "FTP Queue Manager"
 msgstr "FTP eilės tvarkytuvas"
 
+#: FTPServerManager.py:149 FTPServerManager.py:176
 msgid "FTP Server Editor"
 msgstr "FTP serverio redaktorius"
 
+#: FTPServerManager.py:286
 msgid "FTP Server Manager"
 msgstr "FTP serverio tvarkytuvas"
 
+#: FTPBrowser.py:185
 msgid "Local"
 msgstr "Vietinis"
 
+#: FTPServerManager.py:158
 msgid "Name:"
 msgstr "Pavadinimas:"
 
+#: FTPServerManager.py:153
 msgid "OK"
 msgstr "Gerai"
 
+#: FTPBrowser.py:108 FTPBrowser.py:130
 msgid "Parent Directory"
 msgstr "Aukštesnysis katalogas"
 
+#: FTPServerManager.py:163
 msgid "Passive:"
 msgstr "Pasyvus:"
 
+#: FTPServerManager.py:161
 msgid "Password:"
 msgstr "Slaptažodis:"
 
+#: FTPServerManager.py:162
 msgid "Port:"
 msgstr "Prievadas:"
 
+#: FTPBrowser.py:271
 msgid "Queue Manager"
 msgstr "Eilės tvarkytuvas"
 
+#: FTPBrowser.py:473
 msgid "Queue processed."
 msgstr "Eilė sudaryta."
 
+#: FTPServerManager.py:317
 msgid ""
 "Really delete this entry?\n"
 "It cannot be recovered!"
@@ -161,41 +201,53 @@ msgstr ""
 "Tikrai pašalinti šį įrašą?\n"
 "Tai neatstatoma!"
 
+#: FTPBrowser.py:818
 msgid "Remote"
 msgstr "Nuotolinis"
 
+#: FTPBrowser.py:187 FTPBrowser.py:783 FTPBrowser.py:826
 msgid "Remote (not connected)"
 msgstr "Nuotolinis (neprisijungta)"
 
+#: FTPBrowser.py:390 FTPBrowser.py:407
 #, python-format
 msgid "Removed %s."
 msgstr "%s pašalinta."
 
+#: FTPBrowser.py:420 FTPBrowser.py:433
 msgid "Removing directories is not supported."
 msgstr "Katalogų pašalinti negalima."
 
+#: FTPBrowser.py:193
 msgid "Rename"
 msgstr "Pervadinti"
 
+#: FTPBrowser.py:334 FTPBrowser.py:354
 #, python-format
 msgid "Renamed %s to %s."
 msgstr "%s pervadinta į %s."
 
+#: FTPBrowser.py:755
 msgid "Run in Background"
 msgstr "Vykdyti fone"
 
+#: FTPServerManager.py:264
 msgid "Save"
 msgstr "Išsaugoti"
 
+#: FTPBrowser.py:208
 msgid "Select local file list"
 msgstr "Pasirinkti vietinių failų sąrašą"
 
+#: FTPBrowser.py:209
 msgid "Select remote file list"
 msgstr "Pasirinkti nutolusių failų sąrašą"
 
+#: FTPBrowser.py:270
 msgid "Server Manager"
 msgstr "Serverio tvarkytuvas"
 
+#: plugin.py:72
 msgid ""
 "There already is an active connection.\n"
 "Do you want to abort it?"
@@ -203,26 +255,34 @@ msgstr ""
 "Jau yra aktyviai jungtis.\n"
 "Ar norite jį nutraukti?"
 
+#: FTPBrowser.py:596 FTPBrowser.py:620
 msgid "There already is an active transfer."
 msgstr "Jau yra aktyvus perdavimas."
 
+#: FTPBrowser.py:195 FTPBrowser.py:277
 msgid "Upload"
 msgstr "Įkelti"
 
+#: FTPBrowser.py:659
 msgid "Upload finished."
 msgstr "Įkėlimas baigtas."
 
+#: FTPServerManager.py:160
 msgid "Username:"
 msgstr "Vartotojo vardas:"
 
+#: plugin.py:85
 msgid "Which server do you want to connect to?"
 msgstr "Prie kurio serverio norite prisijungti?"
 
+#: FTPBrowser.py:202
 msgid "close"
 msgstr "užverti"
 
+#: FTPBrowser.py:201
 msgid "enter directory/get file/put file"
 msgstr "įveskite  directory/get file/put file"
 
+#: FTPBrowser.py:203
 msgid "open menu"
 msgstr "atverti meniu"

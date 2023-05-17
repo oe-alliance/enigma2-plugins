@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AutomaticTimerlistCleanup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:24+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P.\n"
@@ -16,38 +16,50 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
+#: plugin.py:51 plugin.py:129 plugin.py:133
 msgid "Automatic Timerlist Cleanup Setup"
 msgstr "Automatinio laikmačių sąrašo valymo sąranka"
 
+#: plugin.py:55
 msgid "Cancel"
 msgstr "Atšaukti"
 
+#: plugin.py:58
 msgid "Cleanup timerlist-entries"
 msgstr "Valyti laikmačio sąrašo įrašus"
 
+#: plugin.py:56
 msgid "OK"
 msgstr "Gerai"
 
+#: plugin.py:37
 msgid "disabled"
 msgstr "išjungta"
 
+#: plugin.py:37
 msgid "immediately after recording"
 msgstr "iškart po įrašymo"
 
+#: plugin.py:37
 msgid "older than 1 day"
 msgstr "senesni, nei 1 dienos"
 
+#: plugin.py:37
 msgid "older than 1 week"
 msgstr "senesni, nei 1 savaitės"
 
+#: plugin.py:37
 msgid "older than 2 weeks"
 msgstr "senesni, nei 2 savaičių"
 
+#: plugin.py:37
 msgid "older than 3 days"
 msgstr "senesni, nei 3 dienų"
 
+#: plugin.py:37
 msgid "older than 4 weeks"
 msgstr "senesni, nei 4 savaičių"
 
+#: plugin.py:37
 msgid "older than 6 weeks"
 msgstr "senesni, nei 6 savaičių"

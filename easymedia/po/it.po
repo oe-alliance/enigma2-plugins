@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - easymedia\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:04+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -17,190 +17,279 @@ msgstr ""
 "X-Poedit-Basepath: /media/TREKSTOR/git/enigma2-plugins/easymedia\n"
 "X-Poedit-SearchPath-0: /media/TREKSTOR/git/enigma2-plugins/easymedia\n"
 
+#: plugin.py:251
 msgid " added to EasyMedia"
 msgstr " aggiunto a EasyMedia"
 
+#: plugin.py:258
 msgid " removed from EasyMedia"
 msgstr "Rimosso da EasyMedia"
 
+#: plugin.py:234
 #, python-format
 msgid "%s (%s)\n"
 msgstr "%s (%s)\n"
 
+#: plugin.py:215
 msgid "Add/remove plugin"
 msgstr "Aggiungere/Rimuovere plugin"
 
+#: plugin.py:330
 msgid "Bookmarks"
 msgstr "Segnalibri"
 
+#: plugin.py:351
 msgid "DVD Player"
 msgstr "Player DVD"
 
+#: plugin.py:183
 msgid "DVD player:"
 msgstr "Player DVD:"
 
+#: plugin.py:557
 msgid "DVDPlayer Plugin is not installed!"
 msgstr "Plugin DVDPlayer non installato!"
 
+#: plugin.py:56 plugin.py:57 plugin.py:58 plugin.py:59 plugin.py:60
+#: plugin.py:61 plugin.py:62 plugin.py:63 plugin.py:64 plugin.py:65
+#: plugin.py:66 plugin.py:67 plugin.py:68 plugin.py:69 plugin.py:70
+#: plugin.py:71
 msgid "Disabled"
 msgstr "Disabilitato"
 
+#: plugin.py:57
 msgid "DreamExplorer"
 msgstr "DreamExplorer"
 
+#: plugin.py:171
 msgid "EasyMedia settings..."
 msgstr "Configurazione EasyMedia..."
 
+#: plugin.py:58 plugin.py:59 plugin.py:60 plugin.py:61 plugin.py:62
+#: plugin.py:63 plugin.py:64 plugin.py:65 plugin.py:66 plugin.py:67
+#: plugin.py:68 plugin.py:69 plugin.py:70 plugin.py:71
 msgid "Enabled"
 msgstr "Abilitato"
 
+#: plugin.py:57
+msgid "FileCommander"
+msgstr ""
+
+#: plugin.py:57
 msgid "Filebrowser"
 msgstr "Browser file"
 
+#: plugin.py:357
 msgid "Files"
 msgstr "File"
 
+#: plugin.py:176
 msgid "Files browser:"
 msgstr "Browser file:"
 
+#: plugin.py:360
 msgid "InternetRadio"
 msgstr ""
 
+#: plugin.py:581
+#, fuzzy
+msgid "InternetRadio Plugin is not installed!"
+msgstr "Weather plugin non installato!"
+
+#: plugin.py:185
 #, fuzzy
 msgid "InternetRadio player:"
 msgstr "Player NetRadio:"
 
+#: plugin.py:378
+msgid "Kodi"
+msgstr ""
+
+#: plugin.py:630
+#, fuzzy
+msgid "Kodi is not installed!"
+msgstr "VideoDB non installato!"
+
+#: plugin.py:189
+msgid "Kodi:"
+msgstr ""
+
+#: plugin.py:56
 msgid "MediaPlayer"
 msgstr "MediaPlayer"
 
+#: plugin.py:615
 msgid "Merlin iDream is not installed!"
 msgstr "Merlin iDream non installato!"
 
+#: plugin.py:56
 msgid "MerlinMusicPlayer"
 msgstr "MerlinMusicPlayer"
 
+#: plugin.py:283 plugin.py:327
 msgid "Movies"
 msgstr "Film"
 
+#: plugin.py:342
 msgid "Music"
 msgstr "Musica"
 
+#: plugin.py:175
 msgid "Music player:"
 msgstr "Player musicale:"
 
+#: plugin.py:366
 msgid "MyTube Player"
 msgstr "Player MyTube"
 
+#: plugin.py:566
 msgid "MyTube Plugin is not installed!"
 msgstr "Plugin MyTube non installato!"
 
+#: plugin.py:375
 msgid "MyVideo"
 msgstr "MyVideo"
 
+#: plugin.py:624
 msgid "MyVideo Player is not installed!"
 msgstr "Player MyVideo non installato!"
 
+#: plugin.py:188
 msgid "MyVideo player:"
 msgstr "Player MyVideo:"
 
+#: plugin.py:539
 msgid "No File-Manager installed!"
 msgstr "Nessun file manager installato!"
 
+#: plugin.py:512
 msgid "No Music-Player installed!"
 msgstr "Nessun player musicale installato!"
 
+#: plugin.py:76
 msgid "Not easy way to start EasyMedia"
 msgstr "Via complessa per avviare EasyMedia"
 
+#: plugin.py:475
 msgid "Nothing"
 msgstr "Nulla"
 
+#: plugin.py:496
 msgid "Picture-player is not installed!"
 msgstr "PicturePlayer non installato!"
 
+#: plugin.py:179
 msgid "PicturePlayer:"
 msgstr "PicturePlayer:"
 
+#: plugin.py:339
 msgid "Pictures"
 msgstr "Immagini"
 
+#: plugin.py:348
 msgid "Radio"
 msgstr "Radio"
 
+#: plugin.py:474
 msgid "Radio-mode"
 msgstr "Modalità Radio"
 
-msgid "SHOUTcast Plugin is not installed!"
-msgstr "Plugin SHOUTcast non installato!"
+#: plugin.py:56
+msgid "SHOUTcast"
+msgstr ""
 
+#: plugin.py:487
 msgid "Select bookmark..."
 msgstr "Selezionare segnalibro..."
 
+#: plugin.py:186
 msgid "Show Merlin-iDream:"
 msgstr "Mostrare Melin-iDream:"
 
+#: plugin.py:177
 msgid "Show bookmarks:"
 msgstr "Mostrare segnalibri:"
 
+#: plugin.py:180
 msgid "Show tv/radio switch:"
 msgstr "Mostrare commutatore tv/radio:"
 
+#: plugin.py:232
 msgid "Some plugins are not available:\n"
 msgstr "Alcuni plugin non sono disponibili:\n"
 
+#: plugin.py:473
 msgid "TV-mode"
 msgstr "Modalità TV"
 
+#: plugin.py:333
 msgid "Timer"
 msgstr "Timer"
 
+#: plugin.py:178
 msgid "Timer:"
 msgstr "Timer:"
 
+#: plugin.py:57
 msgid "TuxCom"
 msgstr "TuxCom"
 
+#: plugin.py:346
 msgid "Tv/Radio"
 msgstr "Tv/Radio"
 
+#: plugin.py:369
 msgid "VLC Player"
 msgstr "Player VLC"
 
+#: plugin.py:605
 msgid "VLC Player is not installed!"
 msgstr "VLCPlayer non installato!"
 
+#: plugin.py:182
 msgid "VLC player:"
 msgstr "Player VLC:"
 
+#: plugin.py:174
 msgid "Video database:"
 msgstr "Database video:"
 
+#: plugin.py:336
 msgid "VideoDB"
 msgstr "VideoDB"
 
+#: plugin.py:639
 msgid "VideoDB is not installed!"
 msgstr "VideoDB non installato!"
 
+#: plugin.py:354
 msgid "Weather"
 msgstr "Meteo"
 
+#: plugin.py:548
 msgid "Weather Plugin is not installed!"
 msgstr "Weather plugin non installato!"
 
+#: plugin.py:184
 msgid "Weather plugin:"
 msgstr "Plugin meteo:"
 
+#: plugin.py:181
 msgid "YouTube player:"
 msgstr "Player YouTube:"
 
+#: plugin.py:372
 msgid "ZDFmediathek"
 msgstr "ZDFmediathek"
 
+#: plugin.py:596
 msgid "ZDFmediathek Plugin is not installed!"
 msgstr "Plugin ZDFmediathek non installato!"
 
+#: plugin.py:187
 msgid "ZDFmediathek player:"
 msgstr "Player ZDFmediathek:"
 
+#: plugin.py:363
 msgid "iDream"
 msgstr "iDream"

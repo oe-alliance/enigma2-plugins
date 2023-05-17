@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: automatic timer list cleanup Persian Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:24+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: mehdi <mehdi_ar_yekta@yahoo.com>\n"
 "Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
@@ -16,38 +16,50 @@ msgstr ""
 "X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
+#: plugin.py:51 plugin.py:129 plugin.py:133
 msgid "Automatic Timerlist Cleanup Setup"
 msgstr "راه اندازی پاکسازی لیست خودکار زمانی  "
 
+#: plugin.py:55
 msgid "Cancel"
 msgstr "لغو کردن"
 
+#: plugin.py:58
 msgid "Cleanup timerlist-entries"
 msgstr "پاکسازی لیست زمانی وارد شده "
 
+#: plugin.py:56
 msgid "OK"
 msgstr "مورد تایید است"
 
+#: plugin.py:37
 msgid "disabled"
 msgstr "غیر فعال شده"
 
+#: plugin.py:37
 msgid "immediately after recording"
 msgstr "بلافاصله بعد از ضبط کردن"
 
+#: plugin.py:37
 msgid "older than 1 day"
 msgstr "بیش تر از یک روز"
 
+#: plugin.py:37
 msgid "older than 1 week"
 msgstr "بیش تر از یک هفته"
 
+#: plugin.py:37
 msgid "older than 2 weeks"
 msgstr "بیش تر از 2 هفته "
 
+#: plugin.py:37
 msgid "older than 3 days"
 msgstr "بیش تر از 3 روز"
 
+#: plugin.py:37
 msgid "older than 4 weeks"
 msgstr "بیش تر از 4 هفته"
 
+#: plugin.py:37
 msgid "older than 6 weeks"
 msgstr "بیش تر از 6 هفته"

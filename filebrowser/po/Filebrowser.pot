@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# $PACKAGEDESCRIPION
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the Filebrowser package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: Filebrowser 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-16 18:40+0000\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,80 +17,106 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: plugin.py:77
 msgid "Copy"
 msgstr ""
 
+#: plugin.py:75
 msgid "Delete"
 msgstr ""
 
+#: plugin.py:21
 msgid "Filebrowser"
 msgstr ""
 
+#: setup.xml
 msgid "Filebrowser Settings"
 msgstr ""
 
+#: setup.xml
 msgid "Filesystemposition list left"
 msgstr ""
 
+#: setup.xml
 msgid "Filesystemposition list right"
 msgstr ""
 
+#: plugin.py:80
 msgid "HELP"
 msgstr ""
 
+#: plugin.py:79
 msgid "MENU"
 msgstr ""
 
+#: plugin.py:76
 msgid "Move"
 msgstr ""
 
+#: plugin.py:78
 msgid "Rename"
 msgstr ""
 
+#: setup.xml
 msgid "add Plugin to Extensionmenu"
 msgstr ""
 
+#: setup.xml
 msgid "add Plugin to Mainmenu"
 msgstr ""
 
+#: plugin.py:140
 msgid "copy file"
 msgstr ""
 
+#: plugin.py:148
 msgid "copying file ..."
 msgstr ""
 
+#: plugin.py:157
 msgid "delete file"
 msgstr ""
 
+#: plugin.py:164
 msgid "deleting file ..."
 msgstr ""
 
+#: plugin.py:98
 msgid "filebrowser buttons"
 msgstr ""
 
+#: plugin.py:22
 msgid "manage local Files"
 msgstr ""
 
+#: plugin.py:174
 msgid "move file"
 msgstr ""
 
+#: plugin.py:182
 msgid "moving file ..."
 msgstr ""
 
+#: plugin.py:140 plugin.py:157 plugin.py:174
 msgid "no"
 msgstr ""
 
+#: plugin.py:229
 msgid "no Viewer installed for this mimetype!"
 msgstr ""
 
+#: plugin.py:191
 msgid "rename file"
 msgstr ""
 
+#: plugin.py:197
 msgid "renaming file ..."
 msgstr ""
 
+#: setup.xml
 msgid "save Filesystemposition on exit"
 msgstr ""
 
+#: plugin.py:140 plugin.py:157 plugin.py:174
 msgid "yes"
 msgstr ""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Mosaic.fy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2009-01-06 17:44+0100\n"
 "Last-Translator: gerrit <gerrit@nedlinux.nl>\n"
 "Language-Team: gerrit <fy@li.org>\n"
@@ -17,14 +17,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 
+#: plugin.py:199 plugin.py:308
 msgid "Channel: "
 msgstr "Kanaal: "
 
+#: plugin.py:337
 msgid "Countdown:"
 msgstr "Telt ôf:"
 
+#: plugin.py:324
 msgid "Error while creating screenshot. You need grab version 0.8 or higher!"
 msgstr "Flater by it meitsjen fan in skermôfdruk. Grab ferzje 0.8 of heecher is nedich !"
 
+#: plugin.py:400
 msgid "Mosaic"
 msgstr "Mosaic"

@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# $PACKAGEDESCRIPION
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the FanControl2 package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: FanControl2 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,321 +17,419 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: plugin.py:530 plugin.py:532 plugin.py:536
 #, python-format
 msgid "%s   %02d C"
 msgstr ""
 
+#: plugin.py:114
 msgid "."
 msgstr ""
 
+#: plugin.py:167 plugin.py:176 plugin.py:185
 msgid "3Pin"
 msgstr ""
 
+#: plugin.py:167 plugin.py:176 plugin.py:185
 msgid "4Pin"
 msgstr ""
 
+#: plugin.py:167 plugin.py:176 plugin.py:185
 msgid "4Pin (PID)"
 msgstr ""
 
+#: plugin.py:572
 msgid "Action in case of Fan failure"
 msgstr ""
 
+#: plugin.py:584
 msgid "Auto-Delete Data older than (Days)"
 msgstr ""
 
+#: FC2webSite.py:232
 #, python-format
 msgid "Auto-Delete older %s Days"
 msgstr ""
 
+#: plugin.py:194
 msgid "Box Shutdown"
 msgstr ""
 
+#: plugin.py:1324
 msgid "Box has no fancontrol hardware -> FC2 deactivated"
 msgstr ""
 
+#: plugin.py:573
 msgid "Box shutdown at Temperature (C)"
 msgstr ""
 
+#: plugin.py:718
 msgid "Cancel"
 msgstr ""
 
+#: plugin.py:720
 msgid "Check"
 msgstr ""
 
+#: plugin.py:601
 msgid "Choose path"
 msgstr ""
 
+#: plugin.py:167 plugin.py:176 plugin.py:185
 msgid "Control disabled"
 msgstr ""
 
+#: plugin.py:539 plugin.py:796
 #, python-format
 msgid "Current rpm  %4d"
 msgstr ""
 
+#: plugin.py:761
 #, python-format
 msgid "Current value: %s"
 msgstr ""
 
+#: FC2webSite.py:185 FC2webSite.py:221
 msgid "Delete"
 msgstr ""
 
+#: FC2webSite.py:189
 msgid "Delete older 48h"
 msgstr ""
 
+#: FC2webSite.py:178 FC2webSite.py:214
 #, python-format
 msgid "Disk free : %d MByte"
 msgstr ""
 
+#: FC2webSite.py:181 FC2webSite.py:217
 msgid "Download"
 msgstr ""
 
+#: plugin.py:580
 msgid "Enable Console Logging"
 msgstr ""
 
+#: plugin.py:583
 msgid "Enable Data Logging"
 msgstr ""
 
+#: plugin.py:585
 msgid "Enable Event Logging"
 msgstr ""
 
+#: plugin.py:586
 msgid "Enable Thread use"
 msgstr ""
 
+#: plugin.py:711
 msgid "End temperature C"
 msgstr ""
 
+#: plugin.py:418
 msgid "Extended Control Range"
 msgstr ""
 
+#: plugin.py:1346 plugin.py:1350 plugin.py:1352
 msgid "Fan Control"
 msgstr ""
 
+#: plugin.py:1341 plugin.py:1346 plugin.py:1348 plugin.py:1350
 msgid "Fan Control 2"
 msgstr ""
 
+#: plugin.py:1352
 msgid "Fan Control 2 - Monitor"
 msgstr ""
 
+#: plugin.py:1102
 msgid "Fan is not working!"
 msgstr ""
 
+#: plugin.py:707
 msgid "Fan off in Idle Mode"
 msgstr ""
 
+#: plugin.py:706
 msgid "Fan type"
 msgstr ""
 
+#: plugin.py:1037
 msgid "FanControl2 emergency, Box Shutdown now?"
 msgstr ""
 
+#: FC2webSite.py:192 FC2webSite.py:229
 #, python-format
 msgid "File %s does not exists"
 msgstr ""
 
+#: FC2webSite.py:174 FC2webSite.py:176 FC2webSite.py:210 FC2webSite.py:212
 #, python-format
 msgid "Filesize : %d %sByte"
 msgstr ""
 
+#: plugin.py:635
 msgid ""
 "GUI needs a restart to apply the changes.\n"
 "Do you want to Restart the GUI now?"
 msgstr ""
 
+#: plugin.py:721
 msgid "Help"
 msgstr ""
 
+#: plugin.py:833
 msgid "Information"
 msgstr ""
 
+#: plugin.py:713
 msgid "Initial PWM"
 msgstr ""
 
+#: plugin.py:712
 msgid "Initial Voltage"
 msgstr ""
 
+#: plugin.py:582
 msgid "Logging path"
 msgstr ""
 
+#: FC2webSite.py:231
 #, python-format
 msgid "Logging-Path: %s"
 msgstr ""
 
+#: plugin.py:416
 #, python-format
 msgid "Max Fan %d rpm at PWM=255 (%s)"
 msgstr ""
 
+#: plugin.py:438
 #, python-format
 msgid "Max Fan %d rpm at PWM=255 and VLT=255 (%s)"
 msgstr ""
 
+#: plugin.py:454
 #, python-format
 msgid "Max Fan %d rpm at VLT=255 (%s)"
 msgstr ""
 
+#: plugin.py:404
 #, python-format
 msgid "Min Fan Start %d rpm at PWM=%d"
 msgstr ""
 
+#: plugin.py:446
 #, python-format
 msgid "Min Fan Start %d rpm at VLT=%d"
 msgstr ""
 
+#: plugin.py:428
 #, python-format
 msgid "Min Fan Start %d rpm at VLT=%d and PWM=0"
 msgstr ""
 
+#: plugin.py:410
 #, python-format
 msgid "Min Fan Stop %d rpm at PWM=%d (%s)"
 msgstr ""
 
+#: plugin.py:449
 #, python-format
 msgid "Min Fan Stop %d rpm at VLT=%d (%s)"
 msgstr ""
 
+#: plugin.py:431
 #, python-format
 msgid "Min Fan Stop %d rpm at VLT=%d and PWM=0 (%s)"
 msgstr ""
 
+#: plugin.py:581
 msgid "Number of WebIF-Log-Entries"
 msgstr ""
 
+#: plugin.py:811
 #, python-format
 msgid "PID Ctl Err %03.2f %%"
 msgstr ""
 
+#: plugin.py:798
 #, python-format
 msgid "PWM  %03d"
 msgstr ""
 
+#: plugin.py:636
 msgid "Restart GUI now?"
 msgstr ""
 
+#: plugin.py:719
 msgid "Save"
 msgstr ""
 
+#: FC2webSite.py:63
 msgid "Sensors"
 msgstr ""
 
+#: plugin.py:577
 msgid "Show Fan Speed as"
 msgstr ""
 
+#: plugin.py:579
 msgid "Show Monitor in Extension-Menu"
 msgstr ""
 
+#: plugin.py:578
 msgid "Show Plugin in Extension-Menu"
 msgstr ""
 
+#: FC2webSite.py:55
 msgid "Speed"
 msgstr ""
 
+#: plugin.py:710
 msgid "Static temp C"
 msgstr ""
 
+#: plugin.py:795
 #, python-format
 msgid "Target rpm  %4d"
 msgstr ""
 
+#: FC2webSite.py:54
 msgid "Temperature"
 msgstr ""
 
+#: plugin.py:794
 #, python-format
 msgid "Temperature C  %4.1f"
 msgstr ""
 
+#: FC2webSite.py:56
 msgid "Voltage"
 msgstr ""
 
+#: plugin.py:797
 #, python-format
 msgid "Voltage  %03d"
 msgstr ""
 
+#: FC2webSite.py:160 FC2webSite.py:196
 msgid "active"
 msgstr ""
 
+#: plugin.py:204
 msgid "auto"
 msgstr ""
 
+#: globals.py:36
 msgid "below Tunerslot 4"
 msgstr ""
 
+#: plugin.py:1245
 #, python-format
 msgid "currentRPM:%d targetRPM:%d Temp:%4.1f"
 msgstr ""
 
+#: plugin.py:167 plugin.py:176 plugin.py:185
 msgid "disabled"
 msgstr ""
 
+#: plugin.py:194
 msgid "display Info"
 msgstr ""
 
+#: plugin.py:194
 msgid "do nothing"
 msgstr ""
 
+#: plugin.py:574
 msgid "increases overheating protection to (C)"
 msgstr ""
 
+#: globals.py:41
 msgid "left near Card-Slot"
 msgstr ""
 
+#: globals.py:40
 msgid "left near Front-CI"
 msgstr ""
 
+#: globals.py:39
 msgid "left of the Battery"
 msgstr ""
 
+#: plugin.py:709
 msgid "max Speed rpm"
 msgstr ""
 
+#: plugin.py:708
 msgid "min Speed rpm"
 msgstr ""
 
+#: globals.py:37
 msgid "near XILINX Spartan"
 msgstr ""
 
+#: plugin.py:204
 msgid "never"
 msgstr ""
 
+#: plugin.py:168 plugin.py:177 plugin.py:186 plugin.py:200 plugin.py:204
 msgid "no"
 msgstr ""
 
+#: FC2webSite.py:166 FC2webSite.py:202
 msgid "not active"
 msgstr ""
 
+#: globals.py:42
 msgid "over Security Card"
 msgstr ""
 
+#: plugin.py:457
 msgid "please set fan type (3Pin or 4Pin)"
 msgstr ""
 
+#: plugin.py:366
 msgid "please wait (until 3min)..."
 msgstr ""
 
+#: plugin.py:538
 msgid "press Info for HDD-Temp"
 msgstr ""
 
+#: plugin.py:575
 msgid "read HDD-Temperature in HDD-Standby-Mode"
 msgstr ""
 
+#: plugin.py:833
 msgid "readme.txt"
 msgstr ""
 
+#: plugin.py:1348
 msgid "setup Fancontol inStandby mode"
 msgstr ""
 
+#: FC2webSite.py:163 FC2webSite.py:199
 msgid "turn off"
 msgstr ""
 
+#: FC2webSite.py:169 FC2webSite.py:205
 msgid "turn on"
 msgstr ""
 
+#: globals.py:43
 msgid "under the Fan"
 msgstr ""
 
+#: globals.py:38
 msgid "under the WLAN"
 msgstr ""
 
+#: plugin.py:168 plugin.py:177 plugin.py:186 plugin.py:204
 msgid "yes"
 msgstr ""
 
+#: plugin.py:168 plugin.py:177 plugin.py:186
 msgid "yes, Except for Recording or HDD"
 msgstr ""

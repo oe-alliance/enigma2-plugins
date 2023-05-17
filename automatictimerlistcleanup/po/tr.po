@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:24+0100\n"
 "PO-Revision-Date: 2015-10-17 15:02+0300\n"
 "Last-Translator: Hasan Kiran <Sunder67@hotmail.com>\n"
 "Language-Team: Turkish <Sunder67@hotmail.com>\n"
@@ -17,38 +17,50 @@ msgstr ""
 "X-Generator: Poedit 1.8.4\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
+#: plugin.py:51 plugin.py:129 plugin.py:133
 msgid "Automatic Timerlist Cleanup Setup"
 msgstr "Otomatik Timerlist Temizleme Kurulumu"
 
+#: plugin.py:55
 msgid "Cancel"
 msgstr "İptal"
 
+#: plugin.py:58
 msgid "Cleanup timerlist-entries"
 msgstr "Timerlist-girdileri temizleme"
 
+#: plugin.py:56
 msgid "OK"
 msgstr "Tamam"
 
+#: plugin.py:37
 msgid "disabled"
 msgstr "devre dışı"
 
+#: plugin.py:37
 msgid "immediately after recording"
 msgstr "kayıttan hemen sonra"
 
+#: plugin.py:37
 msgid "older than 1 day"
 msgstr "1 günden daha eski"
 
+#: plugin.py:37
 msgid "older than 1 week"
 msgstr "1 haftadan daha eski"
 
+#: plugin.py:37
 msgid "older than 2 weeks"
 msgstr "2 haftadan daha eski"
 
+#: plugin.py:37
 msgid "older than 3 days"
 msgstr "3 günden daha eski"
 
+#: plugin.py:37
 msgid "older than 4 weeks"
 msgstr "4 haftadan daha eski"
 
+#: plugin.py:37
 msgid "older than 6 weeks"
 msgstr "6 haftadan daha eski"

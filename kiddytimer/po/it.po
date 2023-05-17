@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - kiddytimer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -17,24 +17,32 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: /home/dario/Plugins/kiddytimer\n"
 
+#: KTmain.py:50 KTpositioner.py:21 KTpositioner.py:23 KTsetup.py:154
+#: KTsetup.py:156 KTsetup.py:158
 msgid "01:00"
 msgstr "01:00"
 
+#: KTmain.py:46 KTmain.py:48
 msgid "??:??"
 msgstr "??:??"
 
+#: plugin.py:61
 msgid "Allows to controls your kids' daily TV usage"
 msgstr "Utilizzo giornaliero della TV da parte dei bambini"
 
+#: KTsetup.py:80
 msgid "Cancel"
 msgstr "Annullare"
 
+#: MovableScreen.py:34
 msgid "Center screen at the lower border"
 msgstr "Centrare la finestra sul bordo inferiore"
 
+#: MovableScreen.py:28
 msgid "Center screen at the upper border"
 msgstr "Centrare la finestra sul bordo superiore"
 
+#: KTmain.py:236
 msgid ""
 "Cheat attempt detected. \n"
 "Box has not been shudown correctly. \n"
@@ -44,161 +52,213 @@ msgstr ""
 "Il box non è stato spento correttamente.\n"
 "Il tempo residuo è stato azzerato..."
 
+#: plugin.py:17
 msgid "Clock"
 msgstr "Orologio"
 
+#: KTmain.py:395
 msgid "Decrease remaining time"
 msgstr "Diminuire il tempo residuo"
 
+#: KTmain.py:401
 msgid "Disable KiddyTimer"
 msgstr "Disabilitare KiddyTimer"
 
+#: MovableScreen.py:20 MovableScreen.py:25
 msgid "Discard changes and close screen"
 msgstr "Annullare le modifiche e chiudere la finestra"
 
+#: KTmain.py:249
 msgid "Do you want to start the kiddytimer- plugin now."
 msgstr "Avviare il plugin kiddytimer ora?"
 
+#: KTsetup.py:57
 msgid "Don't monitor TV started after"
 msgstr "Non monitorare la TV accesa dopo le "
 
+#: KTsetup.py:56
 msgid "Don't monitor TV started before"
 msgstr "Non monitorare la TV accesa prima delle "
 
+#: KTmain.py:403
 msgid "Enable KiddyTimer"
 msgstr "Abilitare KiddyTimer"
 
+#: KTmain.py:400 KTmain.py:404
 msgid "Enable KiddyTimer for x minutes"
 msgstr "Abilitare KiddyTimer per x minuti"
 
+#: KTsetup.py:54
 msgid "Enabled"
 msgstr "Abilitato"
 
+#: KTmain.py:259
 msgid "Enter pin code"
 msgstr "Inserire il codice PIN"
 
+#: KTglob.py:14
 msgid "Friday"
 msgstr "Venerdì"
 
+#: KTmain.py:394
 msgid "Increase remaining time"
 msgstr "Aumentare il tempo residuo"
 
+#: KTmain.py:421
 msgid "Invalid selection"
 msgstr "Selezione non valida"
 
+#: plugin.py:60 plugin.py:61
 msgid "KiddyTimer"
 msgstr "KiddyTimer"
 
+#: KTsetup.py:77
 #, python-format
 msgid "Last day started: %s"
 msgstr "Ultimo avvio: %s"
 
+#: KTglob.py:10
 msgid "Monday"
 msgstr "Lunedì"
 
+#: KTsetup.py:83
 msgid "Move clock"
 msgstr "Spost. orologio"
 
+#: MovableScreen.py:24
 msgid "Move screen down"
 msgstr "Spostare la finestra giù"
 
+#: MovableScreen.py:31
 msgid "Move screen to the center of your TV"
 msgstr "Spostare la finestra al centro dello schermo"
 
+#: MovableScreen.py:21
 msgid "Move screen to the left"
 msgstr "Spostare la finestra a sx"
 
+#: MovableScreen.py:33
 msgid "Move screen to the lower left corner"
 msgstr "Spostare la finestra nell'angolo in basso a sx"
 
+#: MovableScreen.py:35
 msgid "Move screen to the lower right corner"
 msgstr "Spostare la finestra nell'angolo in basso a dx"
 
+#: MovableScreen.py:30
 msgid "Move screen to the middle of the left border"
 msgstr "Spostare la finestra al centro del bordo sx"
 
+#: MovableScreen.py:32
 msgid "Move screen to the middle of the right border"
 msgstr "Spostare la finestra al centro del bordo dx"
 
+#: MovableScreen.py:22
 msgid "Move screen to the right"
 msgstr "Spostare la finestra a dx"
 
+#: MovableScreen.py:27
 msgid "Move screen to the upper left corner"
 msgstr "Spostare la finestra nell'angolo in alto a sx"
 
+#: MovableScreen.py:29
 msgid "Move screen to the upper right corner"
 msgstr "Spostare la finestra nell'angolo in alto a dx"
 
+#: MovableScreen.py:23
 msgid "Move screen up"
 msgstr "Spostare la finestra sù"
 
+#: KTsetup.py:55
 msgid "PIN"
 msgstr "PIN"
 
+#: KTmain.py:259
 msgid "Please enter the correct pin code"
 msgstr "Inserire correttamente il codice PIN"
 
+#: KTmain.py:405
 msgid "Please select your KiddyTimer- option"
 msgstr "Selezionare l'opzione KiddyTimer"
 
+#: KTsetup.py:75
 #, python-format
 msgid "Plugin: %(plugin)s , Version: %(version)s"
 msgstr "Plugin: %(plugin)s , Versione: %(version)s"
 
+#: KTsetup.py:76 KTsetup.py:122
 #, python-format
 msgid "Remaining time: %s"
 msgstr "Tempo residuo: %s"
 
+#: KTsetup.py:82
 msgid "Reset clock"
 msgstr "Reset orologio"
 
+#: MovableScreen.py:36
 msgid "Reset saved position"
 msgstr "Reset della posizione salvata"
 
+#: KTmain.py:397
 msgid "Reset todays remaining time"
 msgstr "Reset del tempo residuo odierno"
 
+#: KTglob.py:15
 msgid "Saturday"
 msgstr "Sabato"
 
+#: KTsetup.py:81
 msgid "Save"
 msgstr "Salvare"
 
+#: MovableScreen.py:19 MovableScreen.py:26
 msgid "Save values and close screen"
 msgstr "Salvare le modifiche e chiudere la finestra"
 
+#: KTmain.py:396
 msgid "Set remaining time"
 msgstr "Regolare il tempo residuo"
 
+#: plugin.py:17
 msgid "Smiley"
 msgstr "Smiley"
 
+#: KTmain.py:399
 msgid "Start KiddyTimer"
 msgstr "Avviare KiddyTimer"
 
+#: KTmain.py:393
 msgid "Stop KiddyTimer (this session only)"
 msgstr "Arrestare KiddyTimer (solo per questa sessione)"
 
+#: KTsetup.py:58
 msgid "Style of timer"
 msgstr "Stile timer"
 
+#: KTglob.py:9
 msgid "Sunday"
 msgstr "Domenica"
 
+#: KTsetup.py:100
 msgid "The pin code you entered is wrong."
 msgstr "E' stato inserito un codice PIN errato!"
 
+#: KTglob.py:13
 msgid "Thursday"
 msgstr "Giovedì"
 
+#: KTsetup.py:59
 msgid "Timeout for activation dialog"
 msgstr "Timeout di attivazione finestra di dialogo"
 
+#: KTglob.py:11
 msgid "Tuesday"
 msgstr "Martedì"
 
+#: KTglob.py:12
 msgid "Wednesday"
 msgstr "Mercoledì"
 
+#: plugin.py:17
 msgid "no Image"
 msgstr ""

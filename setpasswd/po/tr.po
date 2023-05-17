@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 SetPasswd Plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2009-06-05 00:42+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
 "Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
@@ -15,33 +15,43 @@ msgstr ""
 "X-Poedit-Country: TURKEY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#: plugin.py:56
 msgid "Cancel"
 msgstr "Vazgeç"
 
+#: plugin.py:29
 msgid "Change Root Password"
 msgstr "Root parolasını değiştir"
 
+#: plugin.py:144
 #, fuzzy
 msgid "Change or reset the root password of your Receiver"
 msgstr "Receiver'ınızın root parolasını değiştirin/sıfırlayın"
 
+#: plugin.py:78
 msgid "Enter new Password"
 msgstr "Yeni parolayı girin"
 
+#: plugin.py:120
 msgid "Enter your password here:"
 msgstr "Parolanızı buraya girin:"
 
+#: plugin.py:57
 msgid "Set Password"
 msgstr "Parolayı ata"
 
+#: plugin.py:93
 msgid "Sucessfully changed password for root user to: "
 msgstr "Root kullanıcısının parolası başarıyla değişti : "
 
+#: plugin.py:96
 msgid "Unable to change/reset password for root user"
 msgstr "Root parola değişikliği/sıfırlama mümkün değil"
 
+#: plugin.py:58
 msgid "new Random"
 msgstr "Rastgele"
 
+#: plugin.py:59
 msgid "virt. Keyboard"
 msgstr "Sanal klavye"

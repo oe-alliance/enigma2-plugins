@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - werbezapper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-11 13:30+0000\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2012-03-14 12:16+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
@@ -18,34 +18,44 @@ msgstr ""
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 
+#: plugin.py:56
 msgid "Automatically zaps back to current service after given Time"
 msgstr "Zapt automatisch terug naar de huidige zender na bepaalde tijd"
 
+#: WerbeZapper.py:114
 msgid "Custom"
 msgstr "Aangepast"
 
+#: WerbeZapper.py:184
 msgid "How many minutes to wait until zapping back?"
 msgstr "Hoeveel minuten wachten om terug te zappen?"
 
+#: WerbeZapper.py:53
 #, python-format
 msgid "Monitoring: %s (%d:%02d Min)"
 msgstr "Controleer: %s (%d:%02d Min)"
 
+#: WerbeZapper.py:153
 msgid "Rezap"
 msgstr "Zap opnieuw"
 
+#: plugin.py:63
 msgid "Start / Stop monitoring instantly"
 msgstr "Start/Stop controleren onmiddellijk"
 
+#: WerbeZapper.py:135
 msgid "Start monitoring"
 msgstr "Start controleren"
 
+#: WerbeZapper.py:133
 msgid "Stop monitoring"
 msgstr "Stop controleren"
 
+#: WerbeZapper.py:145
 msgid "Stop timer"
 msgstr "Stop timer"
 
+#: WerbeZapper.py:282
 #, python-format
 msgid ""
 "WerbeZapper\n"
@@ -56,6 +66,7 @@ msgstr ""
 "Controleren eindigt\n"
 "%s"
 
+#: WerbeZapper.py:254
 #, python-format
 msgid ""
 "WerbeZapper\n"
@@ -66,6 +77,7 @@ msgstr ""
 "Controleren gestart\n"
 "%s"
 
+#: WerbeZapper.py:265
 msgid ""
 "WerbeZapper\n"
 "Monitoring started unlimited\n"
@@ -75,22 +87,29 @@ msgstr ""
 "Ongelimiteerd controleren gestart\n"
 "Moet handmatig geactiveerd worden"
 
+#: WerbeZapper.py:108
 msgid "When to Zap back?"
 msgstr "Wanneer terug zappen?"
 
+#: WerbeZapper.py:369
 msgid "Zapping back"
 msgstr "Terug zappen"
 
+#: WerbeZapper.py:334
 #, python-format
 msgid "Zapping back in %d Minute(s)"
 msgstr "Zapt terug in %d Minuut(en)"
 
+#: WerbeZapper.py:58
 #, python-format
 msgid "Zapping back in %d:%02d Min"
 msgstr "Zapt terug in %d:%02d Min"
 
+#: WerbeZapper.py:115
 msgid "minute"
 msgstr "minuut"
 
+#: WerbeZapper.py:116 WerbeZapper.py:117 WerbeZapper.py:118 WerbeZapper.py:119
+#: WerbeZapper.py:120 WerbeZapper.py:121 WerbeZapper.py:122 WerbeZapper.py:123
 msgid "minutes"
 msgstr "minuten"

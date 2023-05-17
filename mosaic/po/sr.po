@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 plugin - Mosaic\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2009-09-27 18:06+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -16,14 +16,18 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: /home/aliabdul/dream/enigma2-plugins/mosaic/src\n"
 
+#: plugin.py:199 plugin.py:308
 msgid "Channel: "
 msgstr "Kanal:  "
 
+#: plugin.py:337
 msgid "Countdown:"
 msgstr "Odbrojavanje:"
 
+#: plugin.py:324
 msgid "Error while creating screenshot. You need grab version 0.8 or higher!"
 msgstr "Greška kod kreiranja snimka ekrana. Treba vam grab verzija 0.8 ili viša!"
 
+#: plugin.py:400
 msgid "Mosaic"
 msgstr "Mozaik"

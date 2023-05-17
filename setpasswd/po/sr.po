@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins setpasswd\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2009-09-27 18:12+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -19,33 +19,43 @@ msgstr ""
 "X-Poedit-Country: SERBIA\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#: plugin.py:56
 msgid "Cancel"
 msgstr "Otkaži"
 
+#: plugin.py:29
 msgid "Change Root Password"
 msgstr "Promeni baznu lozinku"
 
+#: plugin.py:144
 #, fuzzy
 msgid "Change or reset the root password of your Receiver"
 msgstr "Promeni ili resetuj baznu lozinku svog drimboksa"
 
+#: plugin.py:78
 msgid "Enter new Password"
 msgstr "Unesi novu lozinku"
 
+#: plugin.py:120
 msgid "Enter your password here:"
 msgstr "Unesi svoju lozinku ovde:"
 
+#: plugin.py:57
 msgid "Set Password"
 msgstr "Postavi lozinku"
 
+#: plugin.py:93
 msgid "Sucessfully changed password for root user to: "
 msgstr "Uspešno promenjena lozinka za baznog korisnika u: "
 
+#: plugin.py:96
 msgid "Unable to change/reset password for root user"
 msgstr "Nemoguće promeniti/resetovati lozinku za baznog korisnika"
 
+#: plugin.py:58
 msgid "new Random"
 msgstr "Novi slučajni"
 
+#: plugin.py:59
 msgid "virt. Keyboard"
 msgstr "virt. tastatura"

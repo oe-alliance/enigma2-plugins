@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EasyMedia\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:04+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2011-01-11 09:41+0100\n"
 "Last-Translator: jerry00@quick.cz\n"
 "Language-Team: czech\n"
@@ -11,193 +11,282 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: plugin.py:251
 msgid " added to EasyMedia"
 msgstr " přidán do EasyMedia"
 
+#: plugin.py:258
 msgid " removed from EasyMedia"
 msgstr " odstraněn z EasyMedia"
 
+#: plugin.py:234
 #, python-format
 msgid "%s (%s)\n"
 msgstr ""
 
+#: plugin.py:215
 msgid "Add/remove plugin"
 msgstr "Plugin přidat/odebrat"
 
+#: plugin.py:330
 msgid "Bookmarks"
 msgstr "Záložky"
 
+#: plugin.py:351
 msgid "DVD Player"
 msgstr "DVD přehrávač"
 
+#: plugin.py:183
 msgid "DVD player:"
 msgstr "DVD přehrávač:"
 
+#: plugin.py:557
 msgid "DVDPlayer Plugin is not installed!"
 msgstr "Není nainstalován DVD přehrávač!"
 
+#: plugin.py:56 plugin.py:57 plugin.py:58 plugin.py:59 plugin.py:60
+#: plugin.py:61 plugin.py:62 plugin.py:63 plugin.py:64 plugin.py:65
+#: plugin.py:66 plugin.py:67 plugin.py:68 plugin.py:69 plugin.py:70
+#: plugin.py:71
 #, fuzzy
 msgid "Disabled"
 msgstr "Povoleno"
 
+#: plugin.py:57
 msgid "DreamExplorer"
 msgstr "DreamExplorer"
 
+#: plugin.py:171
 msgid "EasyMedia settings..."
 msgstr "Nastavení EasyMedia..."
 
+#: plugin.py:58 plugin.py:59 plugin.py:60 plugin.py:61 plugin.py:62
+#: plugin.py:63 plugin.py:64 plugin.py:65 plugin.py:66 plugin.py:67
+#: plugin.py:68 plugin.py:69 plugin.py:70 plugin.py:71
 msgid "Enabled"
 msgstr "Povoleno"
 
+#: plugin.py:57
+msgid "FileCommander"
+msgstr ""
+
+#: plugin.py:57
 msgid "Filebrowser"
 msgstr "Prohlížeč dat"
 
+#: plugin.py:357
 msgid "Files"
 msgstr "Soubory"
 
+#: plugin.py:176
 msgid "Files browser:"
 msgstr "Prohlížeč dat:"
 
+#: plugin.py:360
 msgid "InternetRadio"
 msgstr ""
 
+#: plugin.py:581
+#, fuzzy
+msgid "InternetRadio Plugin is not installed!"
+msgstr "Není nainstalován plugin počasí!"
+
+#: plugin.py:185
 #, fuzzy
 msgid "InternetRadio player:"
 msgstr "Internet Radio-přehrávač:"
 
+#: plugin.py:378
+msgid "Kodi"
+msgstr ""
+
+#: plugin.py:630
+#, fuzzy
+msgid "Kodi is not installed!"
+msgstr "VideoDB není nainstalována!"
+
+#: plugin.py:189
+msgid "Kodi:"
+msgstr ""
+
+#: plugin.py:56
 #, fuzzy
 msgid "MediaPlayer"
 msgstr "MyTube přehrávač"
 
+#: plugin.py:615
 msgid "Merlin iDream is not installed!"
 msgstr "Merlin iDream není nainstalován!"
 
+#: plugin.py:56
 msgid "MerlinMusicPlayer"
 msgstr "MerlinMusicPlayer"
 
+#: plugin.py:283 plugin.py:327
 msgid "Movies"
 msgstr "Filmy"
 
+#: plugin.py:342
 msgid "Music"
 msgstr "Hudba"
 
+#: plugin.py:175
 msgid "Music player:"
 msgstr "Hudba:"
 
+#: plugin.py:366
 msgid "MyTube Player"
 msgstr "MyTube přehrávač"
 
+#: plugin.py:566
 msgid "MyTube Plugin is not installed!"
 msgstr "Není nainstalován přehrávač MyTube!"
 
+#: plugin.py:375
 msgid "MyVideo"
 msgstr "MyVideo"
 
+#: plugin.py:624
 msgid "MyVideo Player is not installed!"
 msgstr "MyVideo přehrávač není nainstalován!"
 
+#: plugin.py:188
 msgid "MyVideo player:"
 msgstr "MyVideo přehrávač:"
 
+#: plugin.py:539
 msgid "No File-Manager installed!"
 msgstr "Není nainstalován správce souborů!"
 
+#: plugin.py:512
 msgid "No Music-Player installed!"
 msgstr "Není nainstalován přehrávač hudby!"
 
+#: plugin.py:76
 msgid "Not easy way to start EasyMedia"
 msgstr "Není snadnější způsob, jak spustit média"
 
+#: plugin.py:475
 msgid "Nothing"
 msgstr "Není"
 
+#: plugin.py:496
 msgid "Picture-player is not installed!"
 msgstr "Není nainstalován prohlížeč obrázků!"
 
+#: plugin.py:179
 msgid "PicturePlayer:"
 msgstr "Promítání"
 
+#: plugin.py:339
 msgid "Pictures"
 msgstr "Obrázky"
 
+#: plugin.py:348
 #, fuzzy
 msgid "Radio"
 msgstr "TV/Radio"
 
+#: plugin.py:474
 msgid "Radio-mode"
 msgstr "Režim Rádio"
 
-msgid "SHOUTcast Plugin is not installed!"
-msgstr "SHOUTcast Plugin není nainstalován!"
+#: plugin.py:56
+msgid "SHOUTcast"
+msgstr ""
 
+#: plugin.py:487
 msgid "Select bookmark..."
 msgstr "Vybrat záložku..."
 
+#: plugin.py:186
 msgid "Show Merlin-iDream:"
 msgstr "Zobrazit Merlin iDream:"
 
+#: plugin.py:177
 msgid "Show bookmarks:"
 msgstr "Zobrazit záložky:"
 
+#: plugin.py:180
 msgid "Show tv/radio switch:"
 msgstr "Přepínač Tv/Radio:"
 
+#: plugin.py:232
 msgid "Some plugins are not available:\n"
 msgstr ""
 
+#: plugin.py:473
 msgid "TV-mode"
 msgstr "Režim TV"
 
+#: plugin.py:333
 msgid "Timer"
 msgstr ""
 
+#: plugin.py:178
 msgid "Timer:"
 msgstr ""
 
+#: plugin.py:57
 msgid "TuxCom"
 msgstr ""
 
+#: plugin.py:346
 msgid "Tv/Radio"
 msgstr "TV/Radio"
 
+#: plugin.py:369
 msgid "VLC Player"
 msgstr "VLC přehrávač"
 
+#: plugin.py:605
 msgid "VLC Player is not installed!"
 msgstr "VLC přehrávač není nainstalován!"
 
+#: plugin.py:182
 msgid "VLC player:"
 msgstr "VLC přehrávač:"
 
+#: plugin.py:174
 msgid "Video database:"
 msgstr "Video databáze"
 
+#: plugin.py:336
 msgid "VideoDB"
 msgstr "Video-DB"
 
+#: plugin.py:639
 msgid "VideoDB is not installed!"
 msgstr "VideoDB není nainstalována!"
 
+#: plugin.py:354
 msgid "Weather"
 msgstr "Počasí"
 
+#: plugin.py:548
 msgid "Weather Plugin is not installed!"
 msgstr "Není nainstalován plugin počasí!"
 
+#: plugin.py:184
 msgid "Weather plugin:"
 msgstr "Plugin počasí:"
 
+#: plugin.py:181
 msgid "YouTube player:"
 msgstr "Přehrávač YouTube:"
 
+#: plugin.py:372
 msgid "ZDFmediathek"
 msgstr "ZDFmediathek"
 
+#: plugin.py:596
 msgid "ZDFmediathek Plugin is not installed!"
 msgstr "ZDFmediathek Plugin není nainstalován!"
 
+#: plugin.py:187
 msgid "ZDFmediathek player:"
 msgstr "ZDFmediathek přehrávač:"
 
+#: plugin.py:363
 msgid "iDream"
 msgstr "iDream"

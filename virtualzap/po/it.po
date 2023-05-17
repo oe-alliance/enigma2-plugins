@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - virtualzap\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-27 18:11+0100\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -17,12 +17,15 @@ msgstr ""
 "X-Poedit-Basepath: /home/dario/Plugins/virtualzap\n"
 "X-Poedit-SearchPath-0: /home/dario/Plugins/virtualzap\n"
 
+#: plugin.py:735
 msgid "Cancel"
 msgstr "Annull."
 
+#: plugin.py:131
 msgid "Could not open Picture in Picture"
 msgstr "Impossibile attivare PiP"
 
+#: plugin.py:755
 msgid ""
 "GUI needs a restart to apply the new settings.\n"
 "Do you want to Restart the GUI now?"
@@ -30,38 +33,50 @@ msgstr ""
 "L'attivazione della nuova configurazione richiede\n"
 "il riavvio di enigma2. Riavviare ora?"
 
+#: plugin.py:736
 msgid "OK"
 msgstr "Ok"
 
+#: plugin.py:743
 msgid "Remember last service"
 msgstr "Memorizzare l'ultimo canale"
 
+#: plugin.py:756
 msgid "Restart GUI now?"
 msgstr "Riavviare la GUI ora?"
 
+#: plugin.py:741
 msgid "Show PiP in Infobar"
 msgstr "Mostrare PiP su barra informazioni"
 
+#: plugin.py:742
 msgid "Start standard PiP after x secs (0 = disabled)"
 msgstr "Avviare PiP standard dopo x sec. (0 = disabilitato)"
 
+#: plugin.py:738
 msgid "Usage"
 msgstr "Uso"
 
+#: plugin.py:740
 msgid "Use PiP"
 msgstr "Usare PiP"
 
+#: plugin.py:146
 msgid "Virtual (PiP) Zap"
 msgstr "Virtual (PiP) Zap"
 
+#: plugin.py:144
 msgid "Virtual Zap Setup"
 msgstr "Configurazione Virtual Zap"
 
+#: plugin.py:62
 msgid "as plugin in extended bar"
 msgstr "come plugin tra le estensioni"
 
+#: plugin.py:62
 msgid "with exit button"
 msgstr "con il tasto exit"
 
+#: plugin.py:62
 msgid "with long OK press"
 msgstr "con pressione lunga tasto Ok"

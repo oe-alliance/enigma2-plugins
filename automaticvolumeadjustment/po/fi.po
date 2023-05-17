@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-05 14:40+0000\n"
+"POT-Creation-Date: 2023-05-17 21:24+0100\n"
 "PO-Revision-Date: 2014-12-19 17:13+0100\n"
 "Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
 "Language-Team: Samzan\n"
@@ -20,71 +20,99 @@ msgstr ""
 "X-Poedit-Language: Finnish\n"
 "X-Poedit-Country: FINLAND\n"
 
+#: AutomaticVolumeAdjustmentSetup.py:143
 msgid "Add"
 msgstr "Lisää"
 
+#: AutomaticVolumeAdjustmentSetup.py:142 AutomaticVolumeAdjustmentSetup.py:279
 msgid "Adjustment value"
 msgstr "Säätöarvo"
 
+#: plugin.py:62 plugin.py:66
 msgid "Automatic Volume Adjustment"
 msgstr "Automaattinen äänenvoimakkuus"
 
+#: AutomaticVolumeAdjustmentSetup.py:58
 msgid "Automatic Volume Adjustment - Config"
 msgstr "Automaattinen äänenvoimakkuus - asetukset"
 
+#: AutomaticVolumeAdjustmentSetup.py:256
 msgid "Automatic Volume Adjustment - Entry Config"
 msgstr "Automaattinen äänenvoimakkuus - asetuksiin"
 
+#: AutomaticVolumeAdjustmentSetup.py:140
 msgid "Automatic Volume Adjustment - Service Config"
 msgstr "Automaattinen äänenvoimakkuus - palveluasetukset"
 
+#: AutomaticVolumeAdjustmentConfig.py:76
 msgid "Automatic volume adjust"
 msgstr "Automaattinen äänenvoimakkuus"
 
+#: AutomaticVolumeAdjustmentSetup.py:66 AutomaticVolumeAdjustmentSetup.py:264
 msgid "Cancel"
 msgstr "Peruuta"
 
+#: AutomaticVolumeAdjustmentSetup.py:287
 msgid "Channel Selection"
 msgstr "Kanavavalinta"
 
+#: AutomaticVolumeAdjustmentSetup.py:84
 msgid "Default volume adjustment value for AC3/DTS"
 msgstr "Äänenvoimakkuuden oletusarvo AC3/DTS:lle"
 
+#: AutomaticVolumeAdjustmentSetup.py:146
 msgid "Delete"
 msgstr "Poista"
 
+#: AutomaticVolumeAdjustmentSetup.py:193
 msgid "Do you really want to delete this entry?"
 msgstr "Haluatko todella poistaa tämän arvon"
 
+#: AutomaticVolumeAdjustmentSetup.py:145
 msgid "Edit"
 msgstr "Muokkaa"
 
+#: AutomaticVolumeAdjustmentSetup.py:77
 msgid "Enable"
 msgstr "Salli"
 
+#: AutomaticVolumeAdjustmentSetup.py:85
 msgid "Max. volume for mpeg audio"
 msgstr "Max äänenvoimakkuus mpeg äänelle"
 
+#: AutomaticVolumeAdjustmentSetup.py:81
 msgid "Modus"
 msgstr "Tila"
 
+#: AutomaticVolumeAdjustmentSetup.py:67 AutomaticVolumeAdjustmentSetup.py:144
+#: AutomaticVolumeAdjustmentSetup.py:265
 msgid "OK"
 msgstr "OK"
 
+#: AutomaticVolumeAdjustmentSetup.py:86
+msgid "Only AC3/DTS(HD)"
+msgstr ""
+
+#: AutomaticVolumeAdjustmentConfig.py:96
 msgid "Press OK to select a service"
 msgstr "Paina OK valitaksesi palvelun"
 
+#: AutomaticVolumeAdjustmentConfig.py:76
 msgid "Remember service volume value"
 msgstr "Muista palvelun äänenvoimakkuus"
 
+#: AutomaticVolumeAdjustmentSetup.py:141 AutomaticVolumeAdjustmentSetup.py:277
 msgid "Servicename"
 msgstr "Palvelunnimi"
 
+#: AutomaticVolumeAdjustmentSetup.py:87
 msgid "Services"
 msgstr "Palvelut"
 
+#: AutomaticVolumeAdjustmentSetup.py:88
 msgid "Show volumebar when volume-value was changed"
 msgstr "Näytä äänenvoimakkuuspalkki muutoksessa"
 
+#: AutomaticVolumeAdjustmentSetup.py:307
 msgid "You must select a valid service!"
 msgstr "Sinun on valittava oikea palvelu"

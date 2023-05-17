@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# $PACKAGEDESCRIPION
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the eParted package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: eParted 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,76 +17,99 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: eparted.py:325
 msgid "End"
 msgstr ""
 
+#: eparted.py:107
 #, python-format
 msgid "Error command '%s'"
 msgstr ""
 
+#: eparted.py:323
 msgid "Nr"
 msgstr ""
 
+#: eparted.py:608
 msgid "Please Wait"
 msgstr ""
 
+#: eparted.py:326
 msgid "Size"
 msgstr ""
 
+#: eparted.py:324 eparted.py:534
 msgid "Start"
 msgstr ""
 
+#: eparted.py:327
 msgid "Type"
 msgstr ""
 
+#: eparted.py:340
 msgid "add"
 msgstr ""
 
+#: eparted.py:202
 msgid "add partition"
 msgstr ""
 
+#: eparted.py:230
 msgid "cancel"
 msgstr ""
 
+#: eparted.py:442
 #, python-format
 msgid "create partition %s"
 msgstr ""
 
+#: plugin.py:13
 msgid "creating and manipulating partition tables"
 msgstr ""
 
+#: eparted.py:345
 msgid "delete"
 msgstr ""
 
+#: eparted.py:467
 #, python-format
 msgid "delete partition %s"
 msgstr ""
 
+#: plugin.py:13
 msgid "eParted"
 msgstr ""
 
+#: eparted.py:499 eparted.py:532
 msgid "execute"
 msgstr ""
 
+#: eparted.py:227
 msgid "filesystem:"
 msgstr ""
 
+#: eparted.py:350
 msgid "free"
 msgstr ""
 
+#: eparted.py:458
 #, python-format
 msgid "make filesystem '%s' on partition %s (%d %s)"
 msgstr ""
 
+#: eparted.py:231
 msgid "ok"
 msgstr ""
 
+#: eparted.py:183
 msgid "partition(s)"
 msgstr ""
 
+#: eparted.py:594 eparted.py:600
 msgid "quit"
 msgstr ""
 
+#: eparted.py:226
 #, python-format
 msgid "size in %s (max %d %s):"
 msgstr ""

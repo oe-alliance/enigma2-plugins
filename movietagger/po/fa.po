@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: movie tagger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2012-08-27 01:05+0330\n"
 "Last-Translator: Persian Prince <persianprince@persianpros.org>\n"
 "Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
@@ -22,21 +22,27 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
+#: plugin.py:276
 msgid "Add Tag"
 msgstr "افزودن برچسب"
 
+#: plugin.py:269
 msgid "Add new Tag"
 msgstr "افزودن برچسب جدید"
 
+#: plugin.py:260
 msgid "Assigned Tags"
 msgstr "برچسب اختصاص داد ه شد"
 
+#: plugin.py:174
 msgid "Can't write movietags, because no meta-file found!"
 msgstr "ناتوان در برچسب زدن به فیلم ها به دلیل نبود هیچ متا فیلمی"
 
+#: plugin.py:278
 msgid "Clear all Tags"
 msgstr "حذف همه برچسب ها"
 
+#: plugin.py:256
 msgid ""
 "Clear all Tags?\n"
 "\n"
@@ -44,35 +50,46 @@ msgid ""
 "Are you sure?"
 msgstr ""
 
+#: plugin.py:252
 msgid "Enter the new Tag"
 msgstr "افزودن یک برچسب جدید "
 
+#: plugin.py:259
 msgid "Movie Tagger"
 msgstr "برچسب زننده فیلم"
 
+#: plugin.py:322
 msgid "Movie Tagger..."
 msgstr "در حال برچسب زنی بروی فیلم ..."
 
+#: plugin.py:264
 msgid "Predefined Tag"
 msgstr "برچسب از پیش تعریف شده"
 
+#: plugin.py:268
 msgid "Remove Tag"
 msgstr "حذف برچسب"
 
+#: plugin.py:261
 msgid "Specified Tags"
 msgstr "برچسب مشخص شد"
 
+#: plugin.py:271 plugin.py:279
 msgid "Toggle List"
 msgstr "لیست تغییر حالت"
 
+#: plugin.py:262
 msgid "Used Tag"
 msgstr "برچسب استفاده شده"
 
+#: plugin.py:263
 msgid "User-specific Tag"
 msgstr "برچسب کاربر مشخص"
 
+#: plugin.py:259
 msgid "Ver."
 msgstr "ورژن."
 
+#: plugin.py:252
 msgid "Whitepace will be replaced by \"_\""
 msgstr ""

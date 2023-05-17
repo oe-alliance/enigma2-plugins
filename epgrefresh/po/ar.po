@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 EPGRefresh Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-17 15:22+0200\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2020-03-07 10:13+0300\n"
 "Last-Translator: mosad - مساعد الجعيد <abo-mishal@hotmail.com>\n"
 "Language-Team: mosad - مساعد الجعيد\n"
@@ -16,71 +16,94 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
+#: EPGRefresh.py:568
 #, python-format
 msgid "%d more services"
 msgstr "% d قنوات أكثر"
 
+#: EPGRefreshConfiguration.py:186
 msgid "After a successful refresh the AutoTimer will automatically search for new matches if this is enabled. The options 'Ask*' has only affect on a manually refresh. If EPG-Refresh was called in background the default-Answer will be executed!"
 msgstr "بعد التحديث الناجح سوف يعمل تلقائياً المؤقت التلقائي والبحث عن تطابقات جديدة إذا تم تمكين هذا. الخيارات 'اسأل *' قد يؤثر على التحديث يدوياً. إذا تم استدعاء تحديث لدليل البرامج الإلكترونية-تحديث في الخلفية سينفذ الإجابة الافتراضية!"
 
+#: EPGRefreshConfiguration.py:164
 msgid "An automated refresh will start after this time of day, but before the time specified in next setting."
 msgstr "سوف يبدء التحديث الآلي بعد هذا الوقت من اليوم، ولكن قبل الوقت المحدد في الإعدادات القادمة."
 
+#: EPGRefreshConfiguration.py:165
 msgid "An automated refresh will start before this time of day, but after the time specified in previous setting."
 msgstr "سوف يبدء التحديث الآلي قبل هذا الوقت من اليوم، ولكن بعد الوقت المحدد في الإعدادات السابقة."
 
+#: plugin.py:56
 msgid "Ask default No"
 msgstr "اسأل الافتراضي لا"
 
+#: plugin.py:55
 msgid "Ask default Yes"
 msgstr "اسأل الافتراضي نعم"
 
+#: EPGRefresh.py:425
 #, python-format
 msgid "AutoTimer failed with error %s"
 msgstr "فشل التوقيت التلقائي مع الخطأ %s"
 
+#: plugin.py:267 plugin.py:271 plugin.py:342
 msgid "Automatically refresh EPG"
 msgstr "التحديث التلقائي لدليل البرامج اليومي"
 
+#: plugin.py:44 plugin.py:54
 msgid "Background only"
 msgstr "الخلفية فقط"
 
+#: EPGRefreshChannelEditor.py:73
 msgid "Bouquets"
 msgstr "الباقات"
 
+#: EPGRefreshChannelEditor.py:82 EPGRefreshConfiguration.py:47
+#: EPGRefreshConfiguration.py:64 EPGRefreshConfiguration.py:112
 msgid "Cancel"
 msgstr "إلغاء"
 
+#: EPGRefreshChannelEditor.py:72
 msgid "Channels"
 msgstr "قنوات"
 
+#: EPGRefreshConfiguration.py:144
 msgid "Close and forget changes"
 msgstr "أغلق وتجاهل التغيرات"
 
+#: EPGRefreshConfiguration.py:145
 msgid "Close and save changes"
 msgstr "أغلق وأحفظ التغيرات"
 
+#: EPGRefreshConfiguration.py:166
 msgid "Delay if not in standby (minutes)"
 msgstr "تأخير إن لم يكن في وضع الاستعداد (دقائق)"
 
+#: EPGRefreshChannelEditor.py:84
 msgid "Delete"
 msgstr "حذف"
 
+#: EPGRefreshConfiguration.py:169
 msgid "Display more Options"
 msgstr "عرض المزيد من الخيارات"
 
+#: EPGRefreshConfiguration.py:163
 msgid "Duration to stay on service (seconds)"
 msgstr "مدة البقاء في القناة (بالثواني)"
 
+#: EPGRefreshConfiguration.py:164
 msgid "EPG refresh auto-start earliest (hh:mm)"
 msgstr "تحديث دليل البرامج الإلكترونية تلقائيا - تشغيل مبكر (ساعات: دقائق)"
 
+#: EPGRefreshConfiguration.py:165
 msgid "EPG refresh auto-start latest (hh:mm)"
 msgstr "تحديث دليل البرامج الإلكترونية تلقائيا - تشغيل أخر (ساعات: دقائق)"
 
+#: EPGRefresh.py:448 PipAdapter.py:84
 msgid "EPG refresh finished."
 msgstr "تم الانتهاء من تحديث دليل البرامج الإلكترونية."
 
+#: EPGRefresh.py:384
 msgid ""
 "EPG refresh finished.\n"
 "Should AutoTimer be search for new matches?"
@@ -88,228 +111,300 @@ msgstr ""
 "تم الانتهاء من تحديث دليل البرامج الإلكتروني.\n"
 "هل يجب البحث عن المؤقتات التلقائية المتطابقة الجديدة؟"
 
+#: PipAdapter.py:34 RecordAdapter.py:32
 msgid "EPG refresh started in background."
 msgstr "تشغيل تحديث دليل البرامج الإلكترونية في الخلفية."
 
+#: MainPictureAdapter.py:23
 msgid "EPG refresh starts scanning channels."
 msgstr "تحديث دليل البرامج الإلكترونية يبدأ بالبحث في القنوات."
 
+#: plugin.py:270
 #, fuzzy
 msgid "EPG-Refresh_Pending Services"
 msgstr "قنوات تحديث دليل البرامج الإلكترونية"
 
+#: plugin.py:268
 #, fuzzy
 msgid "EPG-Refresh_Refresh now"
 msgstr "قنوات تحديث دليل البرامج الإلكترونية"
 
+#: plugin.py:267
 #, fuzzy
 msgid "EPG-Refresh_SetUp"
 msgstr "قنوات تحديث دليل البرامج الإلكترونية"
 
+#: plugin.py:269
 #, fuzzy
 msgid "EPG-Refresh_Stop Refresh"
 msgstr "قنوات تحديث دليل البرامج الإلكترونية"
 
+#: plugin.py:115
 msgid "EPGREFRESH_NOTIFICATION_DOMAIN"
 msgstr "تحديث دليل البرامج الإلكترونية_تنبيهات_نطاق"
 
+#: plugin.py:271 plugin.py:311 plugin.py:341
 #, fuzzy
 msgid "EPGRefresh"
 msgstr "إضافة إلى تحديث دليل البرامج الإلكترونية"
 
+#: EPGRefreshConfiguration.py:95 EPGRefreshConfiguration.py:201
 msgid "EPGRefresh Configuration"
 msgstr "إعدادات تحديث دليل البرامج الإلكترونية"
 
+#: EPGRefreshConfiguration.py:49
 msgid "EPGRefresh Configuration Help"
 msgstr "المساعدة في إعدادات تحديث دليل البرامج الإلكترونية"
 
+#: EPGRefreshConfiguration.py:66
 msgid "EPGRefresh Functions"
 msgstr "وظائف تحديث دليل البرامج الإلكترونية"
 
+#: EPGRefreshChannelEditor.py:62
 msgid "EPGRefresh Services"
 msgstr "قنوات تحديث دليل البرامج الإلكترونية"
 
+#: EPGRefreshConfiguration.py:115 EPGRefreshConfiguration.py:123
 msgid "Edit Services"
 msgstr "تحرير"
 
+#: EPGRefreshChannelEditor.py:103
 msgid "Edit Services to refresh"
 msgstr "تعديل تحديث القنوات"
 
+#: EPGRefreshChannelEditor.py:123
 msgid "Editing"
 msgstr "التحرير"
 
+#: EPGRefreshConfiguration.py:180
 msgid "Enable this item to flush all EPG data before starting a new EPG refresh cycle"
 msgstr ""
 
+#: EPGRefreshConfiguration.py:174
 msgid "Enable this to be able to access the EPGRefresh configuration from within the extension menu."
 msgstr "تمكين هذا ليكون قادر على الوصول إلى إعدادات تحديث دليل البرامج الإلكترونية من خلال قائمة الملحقات."
 
+#: EPGRefreshConfiguration.py:173
 msgid "Enable this to be able to access the EPGRefresh configuration from within the plugin menu."
 msgstr "تمكين هذا لتكون قادر على الوصول إلى إعدادات تحديث دليل البرامج الإلكتروني من داخل القائمة البرنامج المساعد."
 
+#: EPGRefreshConfiguration.py:175
 msgid "Enable this to be able to start the EPGRefresh from within the extension menu."
 msgstr "تمكين هذا ليكون قادر على تشغيل تحديث دليل البرامج الإلكترونية من خلال قائمة الملحقات."
 
+#: EPGRefreshConfiguration.py:185
 msgid "Extend the list of services to refresh by those your AutoTimers use?"
 msgstr "توسيع قائمة القنوات لتحديث باستخدام المؤقتات التلقائية الخاص بك؟"
 
+#: plugin.py:66
 msgid "Fake recording"
 msgstr "تسجيل وهمي"
 
+#: EPGRefreshConfiguration.py:180
 msgid "Flush EPG before refresh"
 msgstr ""
 
+#: EPGRefresh.py:569
 msgid "Following Services have to be scanned:"
 msgstr "القنوات التالية يجب أن يتم فحصها:"
 
+#: EPGRefreshConfiguration.py:178
 msgid "Force scan even if receiver is in use."
 msgstr "التركيز على البحث حتى لو كان الرسيفر مشغولا."
 
+#: plugin.py:45
 msgid "Foreground also"
 msgstr "المقدمة أيضا"
 
+#: EPGRefreshConfiguration.py:114
 msgid "Functions"
 msgstr "الوظائف"
 
+#: EPGRefreshConfiguration.py:45
 msgid "General Help"
 msgstr "مساعدة عامّة"
 
+#: EPGRefreshConfiguration.py:166
 msgid "If the receiver currently isn't in standby, this is the duration which EPGRefresh will wait before retry."
 msgstr "إذا لم يكن جهاز الاستقبال في وضع الاستعداد حاليًا، فهذه هي المدة التي سينتظرها تحديث دليل البرامج الإلكترونية قبل إعادة المحاولة."
 
+#: EPGRefreshConfiguration.py:177
 msgid "If this is enabled, the plugin will wake up the receiver from standby if possible. Otherwise it needs to be switched on already."
 msgstr "إذا تم تمكين هذا البلج إنز سوف تستيقظ المتلقي من وضع الاستعداد إذا كان ذلك ممكناً. إلا أنها تحتاج إلى أن تحول الفعل."
 
+#: EPGRefreshConfiguration.py:168
 msgid "If you want to refresh the EPG in background, you can choose the method which best suits your needs here, e.g. hidden, fake reocrding or regular Picture in Picture."
 msgstr ""
 "إذا كنت ترغب في تحديث دليل البرامج الإلكترونية في الخلفية ، يمكنك اختيار الطريقة التي تناسب احتياجاتك \n"
 "هنا ، على سبيل المثال مخفية ، وهمية التسجيل أو تشغيل قناة داخل قناة."
 
+#: EPGRefreshConfiguration.py:185
 msgid "Inherit Services from AutoTimer"
 msgstr "القنوات من المؤقت التلقائي"
 
+#: EPGRefreshConfiguration.py:46
 msgid "Key Help"
 msgstr "مفتاح المساعدة"
 
+#: EPGRefreshConfiguration.py:338
 #, python-format
 msgid "Last refresh was %s"
 msgstr "آخر تحديث كان %s"
 
+#: plugin.py:61
 msgid "Main Picture"
 msgstr "الصورة الرئيسية"
 
+#: EPGRefreshConfiguration.py:134
 msgid "Move page down"
 msgstr "نقل الصفحة لأسفل"
 
+#: EPGRefreshConfiguration.py:133
 msgid "Move page up"
 msgstr "نقل الصفحة لأعلى"
 
+#: EPGRefreshChannelEditor.py:85
 msgid "New"
 msgstr "جديد"
 
+#: plugin.py:53
 msgid "No"
 msgstr "لا"
 
+#: EPGRefreshChannelEditor.py:83 EPGRefreshConfiguration.py:113
 msgid "OK"
 msgstr "موافق"
 
+#: EPGRefreshConfiguration.py:61
 msgid "Pending Services"
 msgstr "القنوات المعلقة"
 
+#: PipAdapter.py:84
 msgid "PiP available now."
 msgstr "خاصية صورة داخل صورة متوفرة الأن."
 
+#: plugin.py:63
 msgid "Picture in Picture"
 msgstr "صورة داخل صورة"
 
+#: plugin.py:64
 msgid "Picture in Picture (hidden)"
 msgstr "قناة داخل داخل (مخفي)"
 
+#: PipAdapter.py:34
 msgid "Please don't use PiP meanwhile!"
 msgstr "من فضلك لا تستخدم خاصية صورة داخل صورة في الوقت نفسه!"
 
+#: EPGRefreshConfiguration.py:354
 msgid "Really close without saving settings?"
 msgstr "هل تريد الإغلاق بدون حفظ الإعدادات؟"
 
+#: EPGRefreshConfiguration.py:161
 msgid "Refresh EPG automatically"
 msgstr "تحديث دليل البرامج الإلكترونية تلقائياً"
 
+#: EPGRefreshConfiguration.py:168
 msgid "Refresh EPG using"
 msgstr "تحديث دليل البرامج الإلكترونية قيد الإستخدام"
 
+#: EPGRefreshConfiguration.py:63
 msgid "Refresh now"
 msgstr "التحديث الآن"
 
+#: EPGRefreshChannelEditor.py:132 EPGRefreshChannelEditor.py:180
 #, fuzzy
 msgid "Refresh using"
 msgstr "محدث"
 
+#: EPGRefreshConfiguration.py:186
 msgid "Run AutoTimer after refresh"
 msgstr "تشغيل المؤقت التلقائي بعد التحديث"
 
+#: EPGRefreshChannelEditor.py:173
 msgid "Select bouquet to refresh"
 msgstr "حدد باقة للتحديث"
 
+#: EPGRefreshChannelEditor.py:167
 msgid "Select channel to refresh"
 msgstr "حدد قناة التحديث"
 
+#: EPGRefreshConfiguration.py:172
 msgid "Should protected services be skipped if refresh was started in interactive-mode?"
 msgstr "هل ينبغي تخطي القنوات المحمية إذا بدأ التحديث في وضع تفاعلي؟"
 
+#: EPGRefreshConfiguration.py:175
 msgid "Show 'EPGRefresh Start now' in extension menu."
 msgstr "عرض 'تشغيل تحديث دليل البرامج الإلكتروني الأن' في قائمة الإضافات."
 
+#: EPGRefreshConfiguration.py:169
 msgid "Show Advanced Options"
 msgstr "عرض الخيارات المتقدمة"
 
+#: EPGRefreshConfiguration.py:174
 msgid "Show Setup in extension menu"
 msgstr "عرض الضبط في قائمة الملحقات"
 
+#: EPGRefreshConfiguration.py:173
 msgid "Show Setup in plugins"
 msgstr "عرض الضبط في الإضافات"
 
+#: EPGRefreshConfiguration.py:128
 msgid "Show last EPGRefresh - Time"
 msgstr "عرض أخر تحديث لدليل البرامج الإلكترونية-الوقت"
 
+#: EPGRefreshConfiguration.py:122
 msgid "Show more Functions"
 msgstr "عرض المزيد من المهام"
 
+#: EPGRefreshConfiguration.py:176
 msgid "Show popup when refresh starts and ends."
 msgstr "إظهار النافذة المنبثقة عند بدء التحديث وانتهاءه."
 
+#: plugin.py:270
 msgid "Show the pending Services for refresh"
 msgstr "عرض أخر تحديث للقنوات معلق"
 
+#: EPGRefreshConfiguration.py:179
 msgid "Shutdown after EPG refresh."
 msgstr "إيقاف التشغيل بعد تحديث دليل البرامج الإلكتروني."
 
+#: EPGRefreshConfiguration.py:172
 msgid "Skip protected Services"
 msgstr "تخطي حماية القنوات"
 
+#: plugin.py:268
 msgid "Start EPGrefresh immediately"
 msgstr "التشغيل الفوري لتحديث دليل البرامج الإلكترونية"
 
+#: plugin.py:269
 msgid "Stop Running EPG-refresh"
 msgstr "إيقاف تشغيل تحديث دليل البرامج الإلكترونية"
 
+#: EPGRefreshConfiguration.py:60
 msgid "Stop running refresh"
 msgstr "إيقاف تشغيل التحديث"
 
+#: EPGRefresh.py:291
 msgid "There is still a refresh running. The Operation isn't allowed at this moment."
 msgstr "لا يزال هناك تحديثات قيد التشغيل. العملية غير مسموح بها في هذه اللحظة."
 
+#: EPGRefreshConfiguration.py:163
 msgid "This is the duration each service/channel will stay active during a refresh."
 msgstr "هذه هي مدة كل خدمة/القناة ستبقى نشطة أثناء التحديث."
 
+#: EPGRefreshConfiguration.py:176
 msgid "This setting controls whether or not an informational message will be shown at start and completion of refresh."
 msgstr "يتحكم في إعداد ما إذا كان سيظهر رسالة معلوماتية في البدء والانتهاء من التحديث."
 
+#: EPGRefreshConfiguration.py:178
 msgid "This setting controls whether or not the refresh will be initiated even though the receiver is active (either not in standby or currently recording)."
 msgstr "يتحكم في إعداد في ما إذا كان سيتم بدء التحديث أم لا على الرغم من أن جهاز الاستقبال نشط (إما في وضع الاستعداد أو في وضع التسجيل حاليا)."
 
+#: EPGRefreshConfiguration.py:179
 msgid "This setting controls whether the receiver should be set to standby after refresh is completed."
 msgstr "يتحكم في إعداد ما إذا كان يجب تعيين المتلقي إلى وضع الاستعداد بعد اكتمال التحديث."
 
+#: plugin.py:226
 msgid ""
 "To apply your Changes the GUI has to be restarted.\n"
 "Do you want to restart the GUI now?"
@@ -317,20 +412,26 @@ msgstr ""
 "لتطبيق التغييرات الخاصة بك يجب إعادة تشغيل واجهة المستخدم الرسومية.\n"
 "هل تريد إعادة تشغيل واجهة المستخدم الرسومية الآن؟"
 
+#: EPGRefreshConfiguration.py:161
 msgid "Unless this is enabled, EPGRefresh won't automatically run but needs to be explicitly started by the yellow button in this menu."
 msgstr "ما لم يتم تمكين ذلك، لن يتم تشغيل تحديث دليل البرامج الإلكتروني تلقائيًا ولكن يجب أن يتم تشغيله بشكل صريح بواسطة الزر الأصفر في هذه القائمة."
 
+#: EPGRefreshConfiguration.py:201
 msgid "Version"
 msgstr "الإصدار"
 
+#: EPGRefreshConfiguration.py:177
 msgid "Wake up from standby for EPG refresh."
 msgstr "عند تشغيل الجهاز سيبدء تحديث دليل البرامج الإلكتروني."
 
+#: plugin.py:52
 msgid "Yes"
 msgstr "نعم"
 
+#: plugin.py:335
 msgid "add to EPGRefresh"
 msgstr "إضافة إلى تحديث دليل البرامج الإلكترونية"
 
+#: EPGRefreshConfiguration.py:334
 msgid "never"
 msgstr "أبدا"

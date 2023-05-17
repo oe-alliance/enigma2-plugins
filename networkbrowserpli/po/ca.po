@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2008-05-08 01:20+0100\n"
 "Last-Translator: JR <openspateam@gmail.com>\n"
 "Language-Team: none\n"
@@ -20,6 +20,7 @@ msgstr ""
 "X-Poedit-Country: Catalunya\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
 
+#: MountEdit.py:262
 msgid ""
 "A mount entry with this name already exists!\n"
 "Update existing entry and continue?\n"
@@ -27,9 +28,11 @@ msgstr ""
 "Ja existeix un punt de muntatge amb aquest nom.\n"
 "Actualitzar l'existent i continuar?\n"
 
+#: MountEdit.py:168
 msgid "Active"
 msgstr "Actiu"
 
+#: MountView.py:63
 msgid ""
 "Active/\n"
 "Inactive"
@@ -37,12 +40,15 @@ msgstr ""
 "Actiu/\n"
 "Inactiu"
 
+#: MountManager.py:79
 msgid "Add a new NFS or CIFS mount point to your Dreambox."
 msgstr "Afegir un nou punt de muntatge NFS o CIFS al teu receptor."
 
+#: MountManager.py:79
 msgid "Add new network mount point"
 msgstr "Afegir un nou punt de muntatge de red"
 
+#: MountEdit.py:264
 msgid ""
 "Are you sure you want to save this network mount?\n"
 "\n"
@@ -50,102 +56,140 @@ msgstr ""
 "Estàs segur que vols guardar el muntatge de red?\n"
 "\n"
 
+#: plugin.py:50
 msgid "Attempt to mount shares again"
 msgstr "Intentar muntar de nou el recursos"
 
+#: plugin.py:53
 msgid "Attempt to recover lost mounts (in background)"
 msgstr "Intentar recuperar muntatges perduts (en segon pla)"
 
+#: NetworkBrowser.py:184
 msgid "Browse network neighbourhood"
 msgstr "Explorar red local"
 
+#: MountEdit.py:114
 msgid "CIFS share"
 msgstr "CIFS"
 
+#: MountEdit.py:84 NetworkBrowser.py:607
 msgid "Cancel"
 msgstr "Cancel·lar"
 
+#: MountManager.py:82
 msgid "Change hostname"
 msgstr "Canviar nom de host"
 
+#: MountManager.py:82
 msgid "Change the hostname of your Dreambox."
 msgstr "Canviar nom de host del teu receptor"
 
+#: MountManager.py:57 MountView.py:65 NetworkBrowser.py:120 UserDialog.py:101
+#: UserManager.py:52
 msgid "Close"
 msgstr "Tancar"
 
+#: UserManager.py:54
 msgid "Delete"
 msgstr "Borrar"
 
+#: MountView.py:66
 msgid "Delete mount"
 msgstr "Borrar muntatge"
 
+#: MountView.py:93
 msgid "Dir:"
 msgstr "Dir:"
 
+#: NetworkBrowser.py:499 NetworkBrowser.py:501 NetworkBrowser.py:514
 msgid "Do you want to enter a username and password for this host?\n"
 msgstr "Vols introduir nom d'usuari y contrasenya per aquest host?\n"
 
+#: NetworkBrowser.py:635
 msgid "Enter IP to scan..."
 msgstr "Introduir IP a buscar..."
 
+#: MountManager.py:114
 msgid "Enter new hostname for your Dreambox"
 msgstr "Introduir nou nom de host per al teu receptor"
 
+#: MountEdit.py:210
 msgid "Enter options:"
 msgstr "Introduir opcions:"
 
+#: MountEdit.py:214 UserDialog.py:151
 msgid "Enter password:"
 msgstr "Introduir contrasenya:"
 
+#: MountEdit.py:208
 msgid "Enter share directory:"
 msgstr "Introduir directori compartit:"
 
+#: MountEdit.py:206
 msgid "Enter share name:"
 msgstr "Introduir nom del recurs compartit:"
 
+#: UserDialog.py:104
 msgid "Enter user and password for host: "
 msgstr "Introduir usuari i contrasenya per al host: "
 
+#: MountEdit.py:212 UserDialog.py:149
 msgid "Enter username:"
 msgstr "Introduir nom d'usuari:"
 
+#: NetworkBrowser.py:123
 msgid "Expert"
 msgstr "Expert"
 
+#: MountManager.py:138
 msgid "Finished restarting your network"
 msgstr "Reinici de red finalitzat"
 
+#: MountEdit.py:176
+msgid "Host name"
+msgstr ""
+
+#: NetworkBrowser.py:623
 msgid "IP Address"
 msgstr "Direcció IP"
 
+#: MountView.py:92
 msgid "IP:"
 msgstr "IP:"
 
+#: MountEdit.py:170
 msgid "Local share name"
 msgstr "Nom de recurs local"
 
+#: plugin.py:49
 msgid "Manage network shares"
 msgstr "Administrar els recursos de red"
 
+#: plugin.py:49
 msgid "Manage your network shares..."
 msgstr "Administrar els recursos de red..."
 
+#: plugin.py:50 plugin.py:52
 msgid "Mount again"
 msgstr "Muntar de nou"
 
+#: MountView.py:62
 msgid "Mount informations"
 msgstr "Informació de muntatge"
 
+#: MountEdit.py:187
 msgid "Mount options"
 msgstr "Opcions de muntatge"
 
+#: MountEdit.py:172
 msgid "Mount type"
 msgstr "Tipus de muntatge"
 
+#: MountManager.py:67 plugin.py:49
 msgid "MountManager"
 msgstr "Administrador de muntatges"
 
+#: MountView.py:61
 msgid ""
 "Mounted/\n"
 "Unmounted"
@@ -153,113 +197,150 @@ msgstr ""
 "Muntat/\n"
 "Desmuntat"
 
+#: MountManager.py:80
 msgid "Mountpoints management"
 msgstr "Administració de punts de muntatge"
 
+#: MountEdit.py:87
 msgid "Mounts editor"
 msgstr "Editor de muntatges"
 
+#: NetworkBrowser.py:121
 msgid "Mounts management"
 msgstr "Administració de muntatges"
 
+#: MountEdit.py:114
 msgid "NFS share"
 msgstr "NFS"
 
+#: plugin.py:48
 msgid "NetworkBrowser"
 msgstr "Explorador de red"
 
+#: NetworkBrowser.py:226
 msgid "No network devices found!"
 msgstr "Cap dispositiu de red trobat!"
 
+#: MountEdit.py:192 UserDialog.py:140
 msgid "Password"
 msgstr "Contrasenya"
 
+#: MountEdit.py:323
 msgid "Please wait for activation of your network mount..."
 msgstr "Per favor, espera mentre s'activa el teu muntatge de red..."
 
+#: MountView.py:133
 msgid "Please wait while removing your network mount..."
 msgstr "Per favor, espera mentre s'elimina el teu muntatge de red..."
 
+#: MountEdit.py:285
 msgid "Please wait while updating your network mount..."
 msgstr "Per favor, espera mentre s'actualitza el teu muntatge de red..."
 
+#: MountManager.py:125
 msgid "Please wait while your network is restarting..."
 msgstr "Per favor, espera mentre es reinicia la red..."
 
+#: MountEdit.py:83
 msgid "Press OK to activate the settings."
 msgstr "Prem OK per activar la configuració"
 
+#: NetworkBrowser.py:471
 msgid "Press OK to collapse this host"
 msgstr "Prem OK per contraure aquest host"
 
+#: UserManager.py:53
 msgid "Press OK to edit selected settings."
 msgstr "Prem OK per a editar la configuració seleccionada."
 
+#: MountView.py:64
 msgid "Press OK to edit the settings."
 msgstr "Prem OK per a editar la configuració."
 
+#: NetworkBrowser.py:473
 msgid "Press OK to expand this host"
 msgstr "Prem OK per a expandir aquest host."
 
+#: NetworkBrowser.py:467
 msgid "Press OK to mount this share!"
 msgstr "Prem OK per a muntar aquest recurs compartit!"
 
+#: NetworkBrowser.py:124
 msgid "Press OK to mount!"
 msgstr "Prem OK per a muntar!"
 
+#: UserDialog.py:100
 msgid "Press OK to save settings."
 msgstr "Prem OK per a guardar la configuració."
 
+#: MountManager.py:58
 msgid "Press OK to select."
 msgstr "Prem OK per a seleccionar."
 
+#: NetworkBrowser.py:122
 msgid "Rescan"
 msgstr "Tornar a buscar"
 
+#: NetworkBrowser.py:608
 msgid "Scan NFS share"
 msgstr "Buscar muntatge NFS"
 
+#: NetworkBrowser.py:609
 msgid "Scan range"
 msgstr "Rang de recerca"
 
+#: plugin.py:48
 msgid "Search for network shares"
 msgstr "Buscar recursos de red compartits"
 
+#: plugin.py:48
 msgid "Search for network shares..."
 msgstr "Buscar recursos de red compartits..."
 
+#: NetworkBrowser.py:219
 msgid "Searching your network. Please wait..."
 msgstr "Buscant en la teva red. Per favor, espera..."
 
+#: MountEdit.py:174
 msgid "Server IP"
 msgstr "IP servidor"
 
+#: MountEdit.py:178
 msgid "Server share"
 msgstr "Servidor compartit"
 
+#: MountManager.py:81
 msgid "User management"
 msgstr "Administració d'usuari"
 
+#: UserManager.py:62
 msgid "Usermanager"
 msgstr "Administrador d'usuari"
 
+#: MountEdit.py:190 UserDialog.py:138
 msgid "Username"
 msgstr "Nom d'usuari"
 
+#: MountManager.py:80
 msgid "View, edit or delete mountpoints on your Dreambox."
 msgstr "Veure, editar o eliminar punts de muntatge del teu receptor."
 
+#: MountManager.py:81
 msgid "View, edit or delete usernames and passwords for your network."
 msgstr "Veure, editar o eliminar usuaris i contrasenyes de la teva red."
 
+#: MountEdit.py:336
 msgid "Your network mount has been activated."
 msgstr "El teu muntatge de red s'ha activat."
 
+#: MountView.py:148
 msgid "Your network mount has been removed."
 msgstr "El teu muntatge de red s'ha eliminat."
 
+#: MountEdit.py:297
 msgid "Your network mount has been updated."
 msgstr "El teu muntatge de red s'ha actualitzat."
 
+#: MountEdit.py:180
 msgid "use as HDD replacement"
 msgstr "utilitzar com reemplaçament del HDD"

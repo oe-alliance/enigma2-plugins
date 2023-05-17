@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eParted 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2012-11-08 22:19+0100\n"
 "Last-Translator: cepheus <cepheus@i-have-a-dreambox.com>\n"
 "Language-Team: mechatron\n"
@@ -14,76 +14,99 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
+#: eparted.py:325
 msgid "End"
 msgstr "Fin"
 
+#: eparted.py:107
 #, python-format
 msgid "Error command '%s'"
 msgstr "Erreur commande '%s'"
 
+#: eparted.py:323
 msgid "Nr"
 msgstr ""
 
+#: eparted.py:608
 msgid "Please Wait"
 msgstr "Attendez s'il vous plaît"
 
+#: eparted.py:326
 msgid "Size"
 msgstr "Taille"
 
+#: eparted.py:324 eparted.py:534
 msgid "Start"
 msgstr "Début"
 
+#: eparted.py:327
 msgid "Type"
 msgstr ""
 
+#: eparted.py:340
 msgid "add"
 msgstr "Ajouter"
 
+#: eparted.py:202
 msgid "add partition"
 msgstr "Ajout partition"
 
+#: eparted.py:230
 msgid "cancel"
 msgstr "Annuler"
 
+#: eparted.py:442
 #, python-format
 msgid "create partition %s"
 msgstr "Création partition %s"
 
+#: plugin.py:13
 msgid "creating and manipulating partition tables"
 msgstr "Création et modification des tables de partitions"
 
+#: eparted.py:345
 msgid "delete"
 msgstr "Effacer"
 
+#: eparted.py:467
 #, python-format
 msgid "delete partition %s"
 msgstr "Supprimer partition %s"
 
+#: plugin.py:13
 msgid "eParted"
 msgstr ""
 
+#: eparted.py:499 eparted.py:532
 msgid "execute"
 msgstr "Exécuter"
 
+#: eparted.py:227
 msgid "filesystem:"
 msgstr "Système de fichiers:"
 
+#: eparted.py:350
 msgid "free"
 msgstr "libre"
 
+#: eparted.py:458
 #, python-format
 msgid "make filesystem '%s' on partition %s (%d %s)"
 msgstr "Création système de fichiers '%s' sur partition %s (%d%s)"
 
+#: eparted.py:231
 msgid "ok"
 msgstr "OK"
 
+#: eparted.py:183
 msgid "partition(s)"
 msgstr ""
 
+#: eparted.py:594 eparted.py:600
 msgid "quit"
 msgstr "Quitter"
 
+#: eparted.py:226
 #, python-format
 msgid "size in %s (max %d %s):"
 msgstr "Taille en %s (max %d %s):"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YTTrailer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: JuSt611 <Software@Strasdas.de>\n"
 "Language-Team: Dr.Best <dr.best@dreambox-tools.info>\n"
@@ -16,38 +16,50 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
+#: plugin.py:52
 msgid "1080p"
 msgstr "1080p"
 
+#: plugin.py:52
 msgid "720p"
 msgstr "720p"
 
+#: plugin.py:452
 msgid "Best resolution"
 msgstr "Beste Auflösung"
 
+#: plugin.py:446
 msgid "Cancel"
 msgstr "Abbruch"
 
+#: plugin.py:454
 msgid "Close Player with exit-key"
 msgstr "Player mit Exit-Taste beenden"
 
+#: plugin.py:451
 msgid "Extended search filter"
 msgstr "Erweiterter Suchfilter"
 
+#: plugin.py:453
 msgid "Max. results in list-mode"
 msgstr "Max. Ergebnisse im List-Modus"
 
+#: plugin.py:52
 msgid "No HD streaming"
 msgstr "Kein HD streaming"
 
+#: plugin.py:447
 msgid "Save"
 msgstr "Speichern"
 
+#: plugin.py:450
 msgid "Show Setup in Extensions menu"
 msgstr "Setup im Erweiterungs-Menü zeigen"
 
+#: plugin.py:99 plugin.py:101
 msgid "YouTube-Trailer Setup"
 msgstr "YouTube-Trailer Setup"
 
+#: plugin.py:400 plugin.py:406
 msgid "leave movie player..."
 msgstr "Filmwiedergabe beenden..."

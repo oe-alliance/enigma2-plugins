@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - movielistpreview\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -17,39 +17,51 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: /home/dario/Plugins/MovielistPreview\n"
 
+#: plugin.py:437
 #, python-format
 msgid "%s - creating preview for movie %s"
 msgstr "%s - creazione anteprima per %s in corso "
 
+#: plugin.py:494
 msgid "Activate Movielist Preview"
 msgstr "Attivare Movielist Preview"
 
+#: plugin.py:496
 msgid "Autocreate of missing previews"
 msgstr "Creare automaticamente anteprime mancanti"
 
+#: plugin.py:467
 msgid "Autocreate of previews aborted due user!"
 msgstr "Creazione automatica anteprime interrotta dall'utente!"
 
+#: plugin.py:497
 msgid "Change Movielist Preview position"
 msgstr "Cambiare posizione a Movielist Preview"
 
+#: plugin.py:424
 msgid "Could not find any movie!"
 msgstr "Impossibile trovare registrazioni!"
 
+#: plugin.py:495
 msgid "Create preview"
 msgstr "Creare anteprima"
 
+#: plugin.py:492
 msgid "Deactivate Movielist Preview"
 msgstr "Disattivare Movielist Preview"
 
+#: plugin.py:446
 msgid "Everything done ;)"
 msgstr "Tutto fatto ;-)"
 
+#: plugin.py:151 plugin.py:318 plugin.py:374 plugin.py:479 plugin.py:601
 msgid "Movielist Preview"
 msgstr "Movielist Preview"
 
+#: plugin.py:156
 msgid "OK"
 msgstr "Ok"
 
+#: plugin.py:360
 msgid "Preview created."
 msgstr "Anteprima creata."

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: StartUpService\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2011-10-14 16:33+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: Rob van der Does\n"
@@ -13,23 +13,30 @@ msgstr ""
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 
+#: plugin.py:164
 msgid "If you see this message, please switch to the service you want to mark as startservice and try again."
 msgstr "Als u dit bericht ziet gaat u naar het kanaal dat u wilt kiezen bij het opstarten en probeert u het opnieuw"
 
+#: plugin.py:126
 msgid "reset startup service"
 msgstr "Kanaal niet meer kiezen bij het opstarten"
 
+#: plugin.py:137
 msgid "reset startup service for booting..."
 msgstr "Kanaal niet meer kiezen na het booten..."
 
+#: plugin.py:138
 msgid "reset startup service for leaving standby mode..."
 msgstr "Kanaal niet meer kiezen bij na standby..."
 
+#: plugin.py:125
 msgid "set as startup service"
 msgstr "Kanaal kiezen bij opstarten"
 
+#: plugin.py:132
 msgid "set as startup service after booting..."
 msgstr "Kanaal kiezen na booten..."
 
+#: plugin.py:133
 msgid "set as startup service after leaving standby mode..."
 msgstr "Kanaal kiezen bij uit standby komen"

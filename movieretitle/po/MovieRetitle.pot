@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# $PACKAGEDESCRIPION
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the MovieRetitle package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: MovieRetitle 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,50 +17,64 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: plugin.py:52
 msgid "Cancel"
 msgstr ""
 
+#: plugin.py:97
 msgid "Choose target folder"
 msgstr ""
 
+#: plugin.py:73
 msgid "Description"
 msgstr ""
 
+#: plugin.py:294
 #, python-format
 msgid "Failed to move the movie %s to %s in the background"
 msgstr ""
 
+#: plugin.py:71
 msgid "Filename"
 msgstr ""
 
+#: plugin.py:69
 msgid "Location"
 msgstr ""
 
+#: plugin.py:82
 msgid "Name and Description Input"
 msgstr ""
 
+#: plugin.py:51
 msgid "OK"
 msgstr ""
 
+#: plugin.py:301
 #, python-format
 msgid "Successfully moved the movie %s"
 msgstr ""
 
+#: plugin.py:136
 #, python-format
 msgid ""
 "Target file %s.ts already exist.\n"
 "Do you want to replace it?"
 msgstr ""
 
+#: plugin.py:253
 #, python-format
 msgid "The movie is moved in the background from %s to %s."
 msgstr ""
 
+#: plugin.py:140
 msgid "The target directory is not found. The file is not renamed."
 msgstr ""
 
+#: plugin.py:72
 msgid "Title"
 msgstr ""
 
+#: plugin.py:25
 msgid "change name..."
 msgstr ""

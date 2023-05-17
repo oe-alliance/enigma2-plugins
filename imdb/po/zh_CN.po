@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 IMDb Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-27 03:51+0200\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2021-07-20 23:07+0800\n"
 "Last-Translator: 孤独之剑 <haotzyy1970@yahoo.com>\n"
 "Language-Team: 孤独之剑 <haotzyy1970@yahoo.com>\n"
@@ -15,217 +15,290 @@ msgstr ""
 "X-Generator: Poedit 1.7.3\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
-msgid " as "
-msgstr " 作为 "
-
-msgid "* = Restart Required"
-msgstr "* = 需要重新启动"
-
+#: plugin.py:359
 msgid "Ambiguous results"
 msgstr "模糊结果"
 
-msgid "Cancel"
-msgstr "取消"
-
-msgid "Cast: "
-msgstr "演员: "
-
-msgid "Channel Selection"
-msgstr "频道选择"
-
-msgid "Content:"
-msgstr "内容:"
-
-msgid "Could't get event name"
+#: plugin.py:639
+#, fuzzy
+msgid "Couldn't get event name"
 msgstr "无法获取事件名称 "
 
+#: plugin.py:364 plugin.py:779
 msgid "Details"
 msgstr "详情 "
 
-msgid "Downloading Movie Poster: %s..."
+#: plugin.py:920 plugin.py:1135
+#, fuzzy
+msgid "Downloading Movie Poster..."
 msgstr "下载电影海报: %s..."
 
-msgid ""
-"Enable this to be able to access IMDb search setup from within the plugin "
-"browser."
+#: plugin.py:715
+msgid "E"
+msgstr ""
+
+#: setup.xml
+msgid "Enable this to be able to access IMDb search setup from within the plugin browser."
 msgstr "使其能够在插件浏览器中访问IMDB搜索设置."
 
-msgid ""
-"Enable this to be able to access IMDb searches from within the movie list."
+#: setup.xml
+msgid "Enable this to be able to access IMDb searches from within the movie list."
 msgstr "使其能够从电影列表中访问IMDB搜索."
 
-msgid ""
-"Enable this to be able to access IMDb searches from within the plugin "
-"browser."
+#: setup.xml
+msgid "Enable this to be able to access IMDb searches from within the plugin browser."
 msgstr "使其能够在插件浏览器中访问IMDB搜索."
 
+#: plugin.py:451
 msgid "Enter search"
 msgstr "输入搜索"
 
+#: plugin.py:569
 msgid "Enter text to search for"
 msgstr "输入要搜索的文本"
 
+#: plugin.py:255
 msgid "Exit"
 msgstr "退出"
 
+#: plugin.py:277 plugin.py:281
 msgid "Exit IMDb search"
 msgstr "退出IMDB搜索 "
 
+#: plugin.py:1093 plugin.py:1097
 msgid "Extra Info"
 msgstr "附加信息 "
 
+#: plugin.py:744
+msgid "IMDB Exception"
+msgstr ""
+
+#: plugin.py:780 plugin.py:1110 plugin.py:1144
 msgid "IMDb Details parsed"
 msgstr "IMDB细节解析"
 
+#: plugin.py:642
 msgid "IMDb Download completed"
 msgstr "下载完成"
 
+#: plugin.py:737
 msgid "IMDb Download failed"
 msgstr "IMDB下载失败"
 
+#: plugin.py:472
 msgid "IMDb Menu"
 msgstr "IMDB菜单"
 
+#: plugin.py:1178
 msgid "IMDb Plugin"
 msgstr "IMDB插件"
 
+#: plugin.py:752
 msgid "IMDb Re-Download completed"
 msgstr "IMDB重新下载完成"
 
+#: plugin.py:1184 setup.xml
 msgid "IMDb Setup"
 msgstr "IMDB设置"
 
+#: plugin.py:502
+msgid "IMDb can not get Movie Information to write to .txt file!"
+msgstr ""
+
+#: plugin.py:734
 msgid "IMDb query failed!"
 msgstr "IMDB查询失败!"
 
+#: plugin.py:490
+#, fuzzy
+msgid "IMDb save completed"
+msgstr "下载完成"
+
+#: plugin.py:1236 plugin.py:1258 plugin.py:1259 plugin.py:1269
 msgid "IMDb search"
 msgstr "IMDB搜索"
 
+#: plugin.py:1247
 msgid "IMDb setup"
 msgstr "IMDB设置"
 
-msgid "Internet Movie Database Details Plugin"
-msgstr "互联网电影数据库细节插件"
+#: plugin.py:628
+#, python-format
+msgid "Ignoring invalid imdbId: %s"
+msgstr ""
 
-msgid "Lookup"
-msgstr "查找"
+#: setup.xml
+#, fuzzy
+msgid "Include episodes in the results. Takes effect after the next search of IMDb for a show name."
+msgstr "可用时显示节目和年报信息.在下一次获取显示细节之后生效."
 
+#: plugin.py:621
+#, python-format
+msgid "Local file does not exist: %s"
+msgstr ""
+
+#: plugin.py:288
 msgid "Menu"
 msgstr "菜单"
 
+#: plugin.py:731
 msgid "No IMDb match."
 msgstr "没有IMDB匹配."
 
+#: plugin.py:732
 msgid "No IMDb match:"
 msgstr "没有IMDB匹配:"
 
+#: plugin.py:911
 msgid "No cast list found in the database."
 msgstr "数据库中未找到CAST列表."
 
+#: plugin.py:763
 msgid "No details found."
 msgstr "没有找到详细信息."
 
+#: plugin.py:298
 msgid "Page down"
 msgstr "下页"
 
+#: plugin.py:299
 msgid "Page up"
 msgstr "上页 "
 
+#: plugin.py:465
 msgid "Play Trailer"
 msgstr "游戏预告片"
 
+#: plugin.py:360
 msgid "Please select the matching entry"
 msgstr "请选择匹配的条目"
 
-msgid "Production Countries:"
-msgstr "发布国家:"
+#: plugin.py:632
+#, fuzzy, python-format
+msgid "Query IMDb: %s"
+msgstr "重新查询IMDB: %s..."
 
+#: plugin.py:387
+#, python-format
 msgid "Re-Query IMDb: %s..."
 msgstr "重新查询IMDB: %s..."
 
-msgid "Release Date:"
-msgstr "发布日期:"
+#: plugin.py:708
+msgid "S"
+msgstr ""
 
-msgid "Runtime:"
-msgstr "运行时间:"
-
+#: plugin.py:458
 msgid "Save current Details as .html for offline use"
 msgstr "将当前细节保存为.html用于脱机使用"
 
+#: plugin.py:459
 msgid "Save current Details as .txt"
 msgstr "保存当前的细节.txt "
 
+#: plugin.py:460
 msgid "Save current Poster and Details as .txt"
 msgstr "保存当前的海报和细节.txt "
 
+#: plugin.py:466
 msgid "Search Trailer"
 msgstr "搜索预告片"
 
+#: plugin.py:1237 plugin.py:1270
 msgid "Search for details from the Internet Movie Database"
 msgstr "从互联网电影数据库中搜索细节"
 
-msgid "Select from EPG"
-msgstr "从EPG中选择 "
-
+#: plugin.py:1248
 msgid "Settings for Internet Movie Database searches"
 msgstr "Internet电影数据库检索设置 "
 
+#: plugin.py:452
 msgid "Setup"
 msgstr "设置"
 
-msgid ""
-"Show episode and year information for cast when available. Takes effect "
-"after the next fetch of show details."
+#: plugin.py:293
+msgid "Show a bigger poster"
+msgstr ""
+
+#: setup.xml
+msgid "Show episode and year information for cast when available. Takes effect after the next fetch of show details."
 msgstr "可用时显示节目和年报信息.在下一次获取显示细节之后生效."
 
+#: setup.xml
 msgid "Show episode and year information in cast list"
 msgstr "在列表中显示事件和年份信息"
 
-msgid "Show full movie or series name in title menu"
+#: setup.xml
+#, fuzzy
+msgid "Show episodes in title menu"
 msgstr "在标题菜单中显示完整的电影或系列名称"
 
+#: setup.xml
+#, fuzzy
+msgid "Show extra information in title menu"
+msgstr "在列表中显示事件和年份信息"
+
+#: setup.xml
 msgid "Show in movie list"
 msgstr "在电影列表中显示"
 
+#: plugin.py:282
 msgid "Show list of matched movies an series"
 msgstr "显示匹配的电影系列 "
 
+#: plugin.py:276 plugin.py:283 plugin.py:289
 msgid "Show movie and series basic details"
 msgstr "显示电影和系列基本细节 "
 
+#: plugin.py:284
 msgid "Show movie and series extra details"
 msgstr "显示电影和系列额外细节"
 
+#: plugin.py:294
+#, fuzzy
+msgid "Show movie and series synopsis"
+msgstr "显示电影和系列基本细节 "
+
+#: setup.xml
 msgid "Show search in plugin browser"
 msgstr "在插件浏览器中显示搜索"
 
+#: setup.xml
 msgid "Show setup in plugin browser"
 msgstr "显示在浏览器安装插件"
 
-msgid ""
-"Show the whole IMDb title information for a movie or series, including, for "
-"example, alternative names and whether it's a series. Takes effect after the "
-"next search of IMDb for a show name."
-msgstr ""
-"显示整个IMDB标题信息的电影或系列,包括,例如,替代名称,它是否是一系列.在下一次搜"
-"索IMDB以显示名称之后生效."
+#: setup.xml
+#, fuzzy
+msgid "Show the type of the title and top cast. Takes effect after the next search of IMDb for a show name."
+msgstr "可用时显示节目和年报信息.在下一次获取显示细节之后生效."
 
+#: plugin.py:541
+msgid "Synopsis"
+msgstr ""
+
+#: plugin.py:239
 msgid "The Internet Movie Database"
 msgstr "互联网电影数据库 "
 
-msgid ""
-"This option allows you add words/phrases for IMDb to ignore when searching. "
-"Please separate the words/phrases with commas."
+#: setup.xml
+msgid "This option allows you add words/phrases for IMDb to ignore when searching. Please separate the words/phrases with commas."
 msgstr "此选项允许您添加IMDB在搜索时忽略的单词/短语.请用逗号分隔单词/短语."
 
+#: plugin.py:363
 msgid "Title Menu"
 msgstr "标题菜单 "
 
-msgid "User Rating"
-msgstr "用户评级 "
-
+#: setup.xml
 msgid "Words / phrases to ignore "
 msgstr "忽略单词/句子"
 
+#: plugin.py:739
+msgid "connection error"
+msgstr ""
+
+#: plugin.py:883
 msgid "no user rating yet"
 msgstr "还没有用户评级 "
+
+#: plugin.py:741
+msgid "timeout"
+msgstr ""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2015-10-24 11:05+0300\n"
 "Last-Translator: Hasan Kiran <Sunder67@hotmail.com>\n"
 "Language-Team: \n"
@@ -18,38 +18,50 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 1.8.4\n"
 
+#: plugin.py:52
 msgid "1080p"
 msgstr ""
 
+#: plugin.py:52
 msgid "720p"
 msgstr ""
 
+#: plugin.py:452
 msgid "Best resolution"
 msgstr "En iyi çözünürlük"
 
+#: plugin.py:446
 msgid "Cancel"
 msgstr "İptal"
 
+#: plugin.py:454
 msgid "Close Player with exit-key"
 msgstr ""
 
+#: plugin.py:451
 msgid "Extended search filter"
 msgstr "Genişletilmiş arama filtresi"
 
+#: plugin.py:453
 msgid "Max. results in list-mode"
 msgstr "Liste kipinde azami sonuç"
 
+#: plugin.py:52
 msgid "No HD streaming"
 msgstr ""
 
+#: plugin.py:447
 msgid "Save"
 msgstr "Kaydet"
 
+#: plugin.py:450
 msgid "Show Setup in Extensions menu"
 msgstr ""
 
+#: plugin.py:99 plugin.py:101
 msgid "YouTube-Trailer Setup"
 msgstr ""
 
+#: plugin.py:400 plugin.py:406
 msgid "leave movie player..."
 msgstr ""

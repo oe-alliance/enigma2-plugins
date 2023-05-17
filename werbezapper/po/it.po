@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - werbezapper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:29+0100\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2012-05-06 23:05+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -19,34 +19,44 @@ msgstr ""
 "X-Poedit-Basepath: .../enigma2-plugins/werbezapper\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/werbezapper\n"
 
+#: plugin.py:56
 msgid "Automatically zaps back to current service after given Time"
 msgstr "Tornare automaticamente al canale corrente dopo intervallo prefissato "
 
+#: WerbeZapper.py:114
 msgid "Custom"
 msgstr "Personalizzato"
 
+#: WerbeZapper.py:184
 msgid "How many minutes to wait until zapping back?"
 msgstr "Quanti minuti attendere prima dello Zap indietro?"
 
+#: WerbeZapper.py:53
 #, python-format
 msgid "Monitoring: %s (%d:%02d Min)"
 msgstr "Monitor in corso: %s (%d:%02d Min)"
 
+#: WerbeZapper.py:153
 msgid "Rezap"
 msgstr "Rizap"
 
+#: plugin.py:63
 msgid "Start / Stop monitoring instantly"
 msgstr "Avviare/Arrestare il monitor immediatamente"
 
+#: WerbeZapper.py:135
 msgid "Start monitoring"
 msgstr "Avviare monitor"
 
+#: WerbeZapper.py:133
 msgid "Stop monitoring"
 msgstr "Arrestare monitor"
 
+#: WerbeZapper.py:145
 msgid "Stop timer"
 msgstr "Arrestare timer"
 
+#: WerbeZapper.py:282
 #, python-format
 msgid ""
 "WerbeZapper\n"
@@ -57,6 +67,7 @@ msgstr ""
 "Termine monitor\n"
 "%s"
 
+#: WerbeZapper.py:254
 #, python-format
 msgid ""
 "WerbeZapper\n"
@@ -67,6 +78,7 @@ msgstr ""
 "Inizio monitor\n"
 "%s"
 
+#: WerbeZapper.py:265
 msgid ""
 "WerbeZapper\n"
 "Monitoring started unlimited\n"
@@ -76,22 +88,29 @@ msgstr ""
 "Avviato monitor illimitato\n"
 "Disattivazione manuale"
 
+#: WerbeZapper.py:108
 msgid "When to Zap back?"
 msgstr "Quando eseguire lo Zap?"
 
+#: WerbeZapper.py:369
 msgid "Zapping back"
 msgstr "Ritorno..."
 
+#: WerbeZapper.py:334
 #, python-format
 msgid "Zapping back in %d Minute(s)"
 msgstr "Zap indietro tra minuti: %d"
 
+#: WerbeZapper.py:58
 #, python-format
 msgid "Zapping back in %d:%02d Min"
 msgstr "Ritorno tra %d:%02d min"
 
+#: WerbeZapper.py:115
 msgid "minute"
 msgstr "Minuto"
 
+#: WerbeZapper.py:116 WerbeZapper.py:117 WerbeZapper.py:118 WerbeZapper.py:119
+#: WerbeZapper.py:120 WerbeZapper.py:121 WerbeZapper.py:122 WerbeZapper.py:123
 msgid "minutes"
 msgstr "Minuti"

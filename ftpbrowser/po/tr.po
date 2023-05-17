@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 FTP Browser plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2009-09-23 20:11+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
 "Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
@@ -14,13 +14,16 @@ msgstr ""
 "X-Poedit-Country: TURKEY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#: FTPBrowser.py:719
 #, python-format
 msgid "%d kb/s"
 msgstr "%d kb/s"
 
+#: plugin.py:119
 msgid "A basic FTP client"
 msgstr "FTP istemci"
 
+#: FTPBrowser.py:528
 #, python-format
 msgid ""
 "A file with this name (%s) already exists locally.\n"
@@ -29,6 +32,7 @@ msgstr ""
 "Yerelde, %s isminde bir dosya zaten mevcut.\n"
 "Üzerine yazılmasını ister misiniz?"
 
+#: FTPBrowser.py:558
 #, python-format
 msgid ""
 "A file with this name (%s) already exists on the remote host.\n"
@@ -37,6 +41,7 @@ msgstr ""
 "Uzak sunucuda, %s isminde bir dosya zaten mevcut.\n"
 "Üzerine yazılmasını ister misiniz?"
 
+#: FTPBrowser.py:753
 msgid ""
 "A transfer is currently in progress.\n"
 "What do you want to do?"
@@ -44,112 +49,147 @@ msgstr ""
 "Devam eden bir aktarım işlemi mevcut.\n"
 "Ne yapmak istiyorsunuz?"
 
+#: FTPBrowser.py:756
 msgid "Abort transfer"
 msgstr "Aktarımı iptal et"
 
+#: FTPServerManager.py:262
 msgid "Add"
 msgstr "Ekle"
 
+#: FTPServerManager.py:159
 msgid "Address:"
 msgstr "Adres:"
 
+#: FTPBrowser.py:445
 #, python-format
 msgid "Are you sure you want to delete %s?"
 msgstr "%s dosyasını silmek istediğinizden emin misiniz?"
 
+#: FTPBrowser.py:757
 msgid "Cancel"
 msgstr "Vazgeç"
 
+#: FTPServerManager.py:371
 msgid "Configuration saved."
 msgstr "Yapılandırma kaydedildi."
 
+#: plugin.py:107
 msgid "Connect to FTP..."
 msgstr "FTP sunucuya bağlanılıyor..."
 
+#: FTPBrowser.py:829
 msgid "Could not connect to ftp server!"
 msgstr "Ftp sunucuya bağlanılamıyor!"
 
+#: FTPBrowser.py:393 FTPBrowser.py:405
 #, python-format
 msgid "Could not delete %s."
 msgstr "%s silinemiyor."
 
+#: FTPBrowser.py:480
 msgid "Could not obtain list of files."
 msgstr "Dosya listesi alınamıyor."
 
+#: FTPBrowser.py:337 FTPBrowser.py:352
 #, python-format
 msgid "Could not rename %s."
 msgstr "%s dosyasının adı değiştirilemiyor."
 
+#: FTPBrowser.py:194 FTPServerManager.py:261
 msgid "Delete"
 msgstr "Sil"
 
+#: FTPBrowser.py:281
 msgid "Download"
 msgstr "İndir"
 
+#: FTPBrowser.py:683
 msgid "Download finished."
 msgstr "İndirme tamamlandı."
 
+#: FTPBrowser.py:718
 #, python-format
 msgid "ETA %d:%02d min"
 msgstr "TBS %d:%02d dk."
 
+#: FTPServerManager.py:263
 msgid "Edit"
 msgstr "Düzenle"
 
+#: FTPServerManager.py:155
 msgid "Enter URI"
 msgstr "URI Girin"
 
+#: FTPServerManager.py:212
 msgid "Enter URI of FTP Server:"
 msgstr "FTP sunucu için URI bilgisini girin:"
 
+#: FTPBrowser.py:376
 msgid "Enter new filename:"
 msgstr "Yeni dosya adını girin:"
 
+#: FTPBrowser.py:131 FTPBrowser.py:135
 msgid "Error"
 msgstr "Hata"
 
+#: FTPBrowser.py:668 FTPBrowser.py:692
 msgid "Error during download."
 msgstr "İndirilirken hata oluştu."
 
+#: FTPBrowser.py:192 FTPServerManager.py:152
 msgid "Exit"
 msgstr "Çıkış"
 
+#: FTPQueueManager.py:99
 msgid "FTP Queue Manager"
 msgstr "FTP kuyruk yöneticisi"
 
+#: FTPServerManager.py:149 FTPServerManager.py:176
 msgid "FTP Server Editor"
 msgstr "FTP sunucu düzenleyici"
 
+#: FTPServerManager.py:286
 msgid "FTP Server Manager"
 msgstr "FTP sunucu yöneticisi"
 
+#: FTPBrowser.py:185
 msgid "Local"
 msgstr "Yerel"
 
+#: FTPServerManager.py:158
 msgid "Name:"
 msgstr "Adı:"
 
+#: FTPServerManager.py:153
 msgid "OK"
 msgstr "Tamam"
 
+#: FTPBrowser.py:108 FTPBrowser.py:130
 msgid "Parent Directory"
 msgstr "Kök Klasör"
 
+#: FTPServerManager.py:163
 msgid "Passive:"
 msgstr ""
 
+#: FTPServerManager.py:161
 msgid "Password:"
 msgstr "Parola:"
 
+#: FTPServerManager.py:162
 msgid "Port:"
 msgstr "Port:"
 
+#: FTPBrowser.py:271
 msgid "Queue Manager"
 msgstr "Kuyruk yöneticisi"
 
+#: FTPBrowser.py:473
 msgid "Queue processed."
 msgstr "Kuyruk işleme alındı."
 
+#: FTPServerManager.py:317
 msgid ""
 "Really delete this entry?\n"
 "It cannot be recovered!"
@@ -157,41 +197,53 @@ msgstr ""
 "Bu kaydı silmek istiyor musunuz?\n"
 "Geri kurtarılamayabilir!"
 
+#: FTPBrowser.py:818
 msgid "Remote"
 msgstr "Uzak"
 
+#: FTPBrowser.py:187 FTPBrowser.py:783 FTPBrowser.py:826
 msgid "Remote (not connected)"
 msgstr "Uzak (bağlı değil)"
 
+#: FTPBrowser.py:390 FTPBrowser.py:407
 #, python-format
 msgid "Removed %s."
 msgstr "%s kaldırıldı."
 
+#: FTPBrowser.py:420 FTPBrowser.py:433
 msgid "Removing directories is not supported."
 msgstr "Klasör kaldırma özelliği desteklenmiyor."
 
+#: FTPBrowser.py:193
 msgid "Rename"
 msgstr "Ad değiştir "
 
+#: FTPBrowser.py:334 FTPBrowser.py:354
 #, python-format
 msgid "Renamed %s to %s."
 msgstr "%s dosyasının adı %s olarak değiştirildi."
 
+#: FTPBrowser.py:755
 msgid "Run in Background"
 msgstr "Arkaplanda çalış"
 
+#: FTPServerManager.py:264
 msgid "Save"
 msgstr "Kaydet"
 
+#: FTPBrowser.py:208
 msgid "Select local file list"
 msgstr "Yerel için dosya listesini seç"
 
+#: FTPBrowser.py:209
 msgid "Select remote file list"
 msgstr "Uzak için dosya listesini seç"
 
+#: FTPBrowser.py:270
 msgid "Server Manager"
 msgstr "Sunucu yöneticisi"
 
+#: plugin.py:72
 msgid ""
 "There already is an active connection.\n"
 "Do you want to abort it?"
@@ -199,26 +251,34 @@ msgstr ""
 "Etkin bir bağlantınız var.\n"
 "Kesmek istiyor musunuz?"
 
+#: FTPBrowser.py:596 FTPBrowser.py:620
 msgid "There already is an active transfer."
 msgstr "Aktarım işlemi devam ediyor."
 
+#: FTPBrowser.py:195 FTPBrowser.py:277
 msgid "Upload"
 msgstr "Yükle"
 
+#: FTPBrowser.py:659
 msgid "Upload finished."
 msgstr "Yükleme tamamlandı."
 
+#: FTPServerManager.py:160
 msgid "Username:"
 msgstr "Kullanıcı adı:"
 
+#: plugin.py:85
 msgid "Which server do you want to connect to?"
 msgstr "Hangi sunucuya bağlanmak istiyor sunuz?"
 
+#: FTPBrowser.py:202
 msgid "close"
 msgstr "Kapat"
 
+#: FTPBrowser.py:201
 msgid "enter directory/get file/put file"
 msgstr "Klasör içine gir/dosyayı getir/dosyayı gönder"
 
+#: FTPBrowser.py:203
 msgid "open menu"
 msgstr "Menü'yü aç"

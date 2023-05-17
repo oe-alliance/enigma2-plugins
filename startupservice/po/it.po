@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 plugin - startupservice\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -17,23 +17,30 @@ msgstr ""
 "X-Poedit-Basepath: .../enigma2-plugins/startupservice\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/startupservice\n"
 
+#: plugin.py:164
 msgid "If you see this message, please switch to the service you want to mark as startservice and try again."
 msgstr "Se viene visualizzato questo messaggio, posizionarsi sul canale da utilizzare come canale di avvio e riprovare."
 
+#: plugin.py:126
 msgid "reset startup service"
 msgstr "Reset del canale di avvio"
 
+#: plugin.py:137
 msgid "reset startup service for booting..."
 msgstr "Reset del canale da sintonizzare all'avvio..."
 
+#: plugin.py:138
 msgid "reset startup service for leaving standby mode..."
 msgstr "Reset del canale da sintonizzare in uscita dallo standby..."
 
+#: plugin.py:125
 msgid "set as startup service"
 msgstr "Configurare come canale di avvio"
 
+#: plugin.py:132
 msgid "set as startup service after booting..."
 msgstr "Configurare come canale da sintonizzare all'avvio..."
 
+#: plugin.py:133
 msgid "set as startup service after leaving standby mode..."
 msgstr "Configurare come canale da sintonizzare in uscita dallo standby..."

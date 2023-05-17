@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# $PACKAGEDESCRIPION
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the ZapStatistic package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: ZapStatistic 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,65 +17,86 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: plugin.py:618
 msgid "Close plugin"
 msgstr ""
 
+#: plugin.py:464
 msgid "Delete"
 msgstr ""
 
+#: plugin.py:604
 msgid "Delete all entries"
 msgstr ""
 
+#: plugin.py:602
 msgid "Delete entry"
 msgstr ""
 
+#: plugin.py:467
 msgid "Durations"
 msgstr ""
 
+#: plugin.py:600
 msgid "Play entry"
 msgstr ""
 
+#: plugin.py:620
 msgid "Please choose a function..."
 msgstr ""
 
+#: plugin.py:616
 msgid "Show combined duration window"
 msgstr ""
 
+#: plugin.py:614
 msgid "Show duration window"
 msgstr ""
 
+#: plugin.py:653
 msgid "Shows the watched services with some statistic"
 msgstr ""
 
+#: plugin.py:486
 msgid "Sort (date+)"
 msgstr ""
 
+#: plugin.py:490 plugin.py:577
 msgid "Sort (date-)"
 msgstr ""
 
+#: plugin.py:252 plugin.py:355
 msgid "Sort (duration+)"
 msgstr ""
 
+#: plugin.py:253 plugin.py:356
 msgid "Sort (duration-)"
 msgstr ""
 
+#: plugin.py:250 plugin.py:353 plugin.py:485
 msgid "Sort (name+)"
 msgstr ""
 
+#: plugin.py:251 plugin.py:354 plugin.py:488 plugin.py:562
 msgid "Sort (name-)"
 msgstr ""
 
+#: plugin.py:610
 msgid "Sort by date (ascending)"
 msgstr ""
 
+#: plugin.py:612
 msgid "Sort by date (descending)"
 msgstr ""
 
+#: plugin.py:606
 msgid "Sort by name (ascending)"
 msgstr ""
 
+#: plugin.py:608
 msgid "Sort by name (descending)"
 msgstr ""
 
+#: plugin.py:243 plugin.py:345 plugin.py:455 plugin.py:653
 msgid "Zap Statistic"
 msgstr ""

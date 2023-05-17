@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mosaic v1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-27 18:11+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2018-04-20 06:46+0200\n"
 "Last-Translator: Alec <alex1vagyok@gmail.com>\n"
 "Language-Team: alec <alex1vagyok@gmail.com>\n"
@@ -18,14 +18,18 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.6\n"
 
+#: plugin.py:199 plugin.py:308
 msgid "Channel: "
 msgstr "Csatorna: "
 
+#: plugin.py:337
 msgid "Countdown:"
 msgstr "Visszaszámlálás:"
 
+#: plugin.py:324
 msgid "Error while creating screenshot. You need grab version 0.8 or higher!"
 msgstr "Hiba történt a képernyőkép készítése során. Szükséged van a grab 0.8 vagy az újabb verziójára!"
 
+#: plugin.py:400
 msgid "Mosaic"
 msgstr "Mosaic"

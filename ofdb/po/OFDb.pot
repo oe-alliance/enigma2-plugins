@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# $PACKAGEDESCRIPION
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the OFDb package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: OFDb 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-14 08:00+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,78 +17,102 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: plugin.py:203
 msgid "Ambiguous results"
 msgstr ""
 
+#: plugin.py:376
 #, python-format
 msgid "Cast: %s"
 msgstr ""
 
+#: plugin.py:47
 msgid "Channel Selection"
 msgstr ""
 
+#: plugin.py:293
 msgid "Could't get Eventname"
 msgstr ""
 
+#: plugin.py:208 plugin.py:336
 msgid "Details"
 msgstr ""
 
+#: plugin.py:384
 #, python-format
 msgid "Downloading Movie Poster: %s..."
 msgstr ""
 
+#: plugin.py:134
 msgid "Exit"
 msgstr ""
 
+#: plugin.py:67
 msgid "Lookup"
 msgstr ""
 
+#: plugin.py:320 plugin.py:321
 msgid "No OFDb match."
 msgstr ""
 
+#: plugin.py:378
 msgid "No cast list found in the database."
 msgstr ""
 
+#: plugin.py:334
 msgid "No details found."
 msgstr ""
 
+#: plugin.py:337 plugin.py:406
 msgid "OFDb Details parsed"
 msgstr ""
 
+#: plugin.py:301
 msgid "OFDb Download completed"
 msgstr ""
 
+#: plugin.py:297
 msgid "OFDb Download failed"
 msgstr ""
 
+#: plugin.py:433
 msgid "OFDb Plugin"
 msgstr ""
 
+#: plugin.py:326
 msgid "OFDb Re-Download completed"
 msgstr ""
 
+#: plugin.py:323
 msgid "OFDb query failed!"
 msgstr ""
 
+#: plugin.py:204
 msgid "Please select the matching entry"
 msgstr ""
 
+#: plugin.py:283
 #, python-format
 msgid "Query OFDb: %s..."
 msgstr ""
 
+#: plugin.py:453 plugin.py:458 plugin.py:464
 msgid "Query details from the Online-Filmdatenbank"
 msgstr ""
 
+#: plugin.py:218
 #, python-format
 msgid "Re-Query OFDb: %s..."
 msgstr ""
 
+#: plugin.py:125
 msgid "The Online-Filmdatenbank"
 msgstr ""
 
+#: plugin.py:207
 msgid "Title Menu"
 msgstr ""
 
+#: plugin.py:358
 msgid "no user rating yet"
 msgstr ""

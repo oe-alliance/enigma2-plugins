@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2-plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2009-09-23 23:40+0200\n"
 "Last-Translator: jerry00 <jerry00@quick.cz>\n"
 "Language-Team: none\n"
@@ -12,13 +12,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: FTPBrowser.py:719
 #, python-format
 msgid "%d kb/s"
 msgstr "%d kbs"
 
+#: plugin.py:119
 msgid "A basic FTP client"
 msgstr "Základní FTP klient"
 
+#: FTPBrowser.py:528
 #, python-format
 msgid ""
 "A file with this name (%s) already exists locally.\n"
@@ -27,6 +30,7 @@ msgstr ""
 "Soubor s názvem (%s) již lokálně existuje.\n"
 "Chcete ho přepsat?"
 
+#: FTPBrowser.py:558
 #, python-format
 msgid ""
 "A file with this name (%s) already exists on the remote host.\n"
@@ -35,6 +39,7 @@ msgstr ""
 "Soubor s názvem (%s) již vzdáleně existuje.\n"
 "Chcete ho přepsat?"
 
+#: FTPBrowser.py:753
 msgid ""
 "A transfer is currently in progress.\n"
 "What do you want to do?"
@@ -42,152 +47,199 @@ msgstr ""
 "Právě probíhá přenos.\n"
 "Co chcete udělat?"
 
+#: FTPBrowser.py:756
 msgid "Abort transfer"
 msgstr "Přerušit přenos"
 
+#: FTPServerManager.py:262
 msgid "Add"
 msgstr "Přidat"
 
+#: FTPServerManager.py:159
 msgid "Address:"
 msgstr "Adresa:"
 
+#: FTPBrowser.py:445
 #, python-format
 msgid "Are you sure you want to delete %s?"
 msgstr "Opravdu chcete %s smazat?"
 
+#: FTPBrowser.py:757
 msgid "Cancel"
 msgstr "Zrušit"
 
+#: FTPServerManager.py:371
 msgid "Configuration saved."
 msgstr "Konfigurace uložena"
 
+#: plugin.py:107
 msgid "Connect to FTP..."
 msgstr "Připojení k FTP..."
 
+#: FTPBrowser.py:829
 msgid "Could not connect to ftp server!"
 msgstr "S FTP serverem se nelze spojit!"
 
+#: FTPBrowser.py:393 FTPBrowser.py:405
 #, python-format
 msgid "Could not delete %s."
 msgstr ""
 
+#: FTPBrowser.py:480
 msgid "Could not obtain list of files."
 msgstr "Nelze smazat %s."
 
+#: FTPBrowser.py:337 FTPBrowser.py:352
 #, python-format
 msgid "Could not rename %s."
 msgstr "Nelze přejmenovat %s."
 
+#: FTPBrowser.py:194 FTPServerManager.py:261
 msgid "Delete"
 msgstr "Smazat"
 
+#: FTPBrowser.py:281
 msgid "Download"
 msgstr "Stáhnout"
 
+#: FTPBrowser.py:683
 msgid "Download finished."
 msgstr "Stažení dokončeno."
 
+#: FTPBrowser.py:718
 #, python-format
 msgid "ETA %d:%02d min"
 msgstr ""
 
+#: FTPServerManager.py:263
 msgid "Edit"
 msgstr "Upravit"
 
+#: FTPServerManager.py:155
 msgid "Enter URI"
 msgstr "Vložte URL"
 
+#: FTPServerManager.py:212
 msgid "Enter URI of FTP Server:"
 msgstr "Vložte URL FTP serveru:"
 
+#: FTPBrowser.py:376
 msgid "Enter new filename:"
 msgstr "Vložte nový název:"
 
+#: FTPBrowser.py:131 FTPBrowser.py:135
 msgid "Error"
 msgstr "Chyba"
 
+#: FTPBrowser.py:668 FTPBrowser.py:692
 msgid "Error during download."
 msgstr "Chyba během stahování"
 
+#: FTPBrowser.py:192 FTPServerManager.py:152
 msgid "Exit"
 msgstr "Konec"
 
+#: FTPQueueManager.py:99
 msgid "FTP Queue Manager"
 msgstr "Správce fronty FTP"
 
+#: FTPServerManager.py:149 FTPServerManager.py:176
 msgid "FTP Server Editor"
 msgstr "Editor FTP serveru"
 
+#: FTPServerManager.py:286
 msgid "FTP Server Manager"
 msgstr "Správce FTP serveru"
 
+#: FTPBrowser.py:185
 msgid "Local"
 msgstr "Místní"
 
+#: FTPServerManager.py:158
 msgid "Name:"
 msgstr "Název:"
 
+#: FTPServerManager.py:153
 msgid "OK"
 msgstr ""
 
+#: FTPBrowser.py:108 FTPBrowser.py:130
 msgid "Parent Directory"
 msgstr "Roď. složka"
 
+#: FTPServerManager.py:163
 msgid "Passive:"
 msgstr ""
 
+#: FTPServerManager.py:161
 msgid "Password:"
 msgstr "Heslo:"
 
+#: FTPServerManager.py:162
 msgid "Port:"
 msgstr ""
 
+#: FTPBrowser.py:271
 msgid "Queue Manager"
 msgstr "Správce fronty"
 
+#: FTPBrowser.py:473
 msgid "Queue processed."
 msgstr "Fronta dokončena."
 
+#: FTPServerManager.py:317
 msgid ""
 "Really delete this entry?\n"
 "It cannot be recovered!"
 msgstr "A nelze to vrátit!"
 
+#: FTPBrowser.py:818
 msgid "Remote"
 msgstr "Vzdálené"
 
+#: FTPBrowser.py:187 FTPBrowser.py:783 FTPBrowser.py:826
 msgid "Remote (not connected)"
 msgstr "Vzdálené (nepřipojeno)"
 
+#: FTPBrowser.py:390 FTPBrowser.py:407
 #, python-format
 msgid "Removed %s."
 msgstr "Odebráno %s."
 
+#: FTPBrowser.py:420 FTPBrowser.py:433
 msgid "Removing directories is not supported."
 msgstr "Odstranění adresářů není podporováno."
 
+#: FTPBrowser.py:193
 msgid "Rename"
 msgstr "Přejmenovat"
 
+#: FTPBrowser.py:334 FTPBrowser.py:354
 #, python-format
 msgid "Renamed %s to %s."
 msgstr "Přejmenováno %s na %s."
 
+#: FTPBrowser.py:755
 msgid "Run in Background"
 msgstr "Spustit na pozadí"
 
+#: FTPServerManager.py:264
 msgid "Save"
 msgstr "Uložit"
 
+#: FTPBrowser.py:208
 msgid "Select local file list"
 msgstr "Vyberte seznam lokálních"
 
+#: FTPBrowser.py:209
 msgid "Select remote file list"
 msgstr "Vyberte seznam vzdálených"
 
+#: FTPBrowser.py:270
 msgid "Server Manager"
 msgstr "Správce serveru"
 
+#: plugin.py:72
 msgid ""
 "There already is an active connection.\n"
 "Do you want to abort it?"
@@ -195,26 +247,34 @@ msgstr ""
 "Nějaké spojení je již aktivní.\n"
 "Chcete ho přerušit?"
 
+#: FTPBrowser.py:596 FTPBrowser.py:620
 msgid "There already is an active transfer."
 msgstr "Nějaký přenos je již aktivní."
 
+#: FTPBrowser.py:195 FTPBrowser.py:277
 msgid "Upload"
 msgstr "Odeslat"
 
+#: FTPBrowser.py:659
 msgid "Upload finished."
 msgstr "Odeslání dokončeno."
 
+#: FTPServerManager.py:160
 msgid "Username:"
 msgstr "Uživatel:"
 
+#: plugin.py:85
 msgid "Which server do you want to connect to?"
 msgstr "Který server chcete připojit?"
 
+#: FTPBrowser.py:202
 msgid "close"
 msgstr "zavřít"
 
+#: FTPBrowser.py:201
 msgid "enter directory/get file/put file"
 msgstr "vložit adresář/načíst soubor/vložit soubor"
 
+#: FTPBrowser.py:203
 msgid "open menu"
 msgstr "otevřít menu"

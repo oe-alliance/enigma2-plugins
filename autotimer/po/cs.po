@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 AutoTimer Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:24+0100\n"
 "PO-Revision-Date: 2012-05-16 10:42+0100\n"
 "Last-Translator: jerry <jerry00@quick.cz>\n"
 "Language-Team: jerry\n"
@@ -13,19 +13,24 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: D:\\Dreambox\\Plugins\\enigma2-plugins\\autotimer\\src\n"
 
+#: AutoTimerList.py:186
 msgid "  Any time"
 msgstr ""
 
+#: AutoTimerEditor.py:605 AutoTimerEditor.py:606
 msgid " (if services are enabled, bouquets are ignored.)."
 msgstr ""
 
+#: AutoTimerOverview.py:137
 msgid " - Version: "
 msgstr ""
 
+#: AutoTimerSettings.py:93
 #, python-format
 msgid " - Version: %s"
 msgstr ""
 
+#: AutoTimer.py:818
 #, python-format
 msgid ""
 "%d conflict(s) encountered when trying to add new timers:\n"
@@ -34,319 +39,385 @@ msgstr ""
 "%d konflikt(ů) nalezeno při přidání nového časovače:\n"
 "%s"
 
+#: AutoTimer.py:825
 #, python-format
 msgid ""
 "%d conflict(s) solved with similar timer(s):\n"
 "%s"
 msgstr ""
 
+#: AutoTimerEditor.py:247 AutoTimerEditor.py:248
 msgid "%d.%B %Y"
 msgstr "%d.%B %Y"
 
+#: AutoTimer.py:818 AutoTimer.py:825
 #, python-format
 msgid "%s: %s at %s"
 msgstr "%s: %s v %s"
 
-#
-msgid "Abort this Wizard."
-msgstr "Ukončit průvodce."
-
+#: AutoTimerEditor.py:699
 msgid "Activate VPS"
 msgstr ""
 
+#: AutoTimerOverview.py:93
 msgid "Add"
 msgstr "Přidat"
 
+#: AutoTimerEditor.py:520
 #, fuzzy
 msgid "Add filters"
 msgstr "Nový filtr"
 
+#: AutoTimerOverview.py:121
 msgid "Add new AutoTimer"
 msgstr "Přidat vybraný AutoČasovač"
 
+#: AutoTimerEditor.py:537
 #, fuzzy
 msgid "Add services"
 msgstr "+ stanici"
 
 #
+#: AutoTimerSettings.py:53 setup.xml
 msgid "Add similar timer on conflict"
 msgstr "Přidat podobný časovač při konfliktu"
 
+#: AutoTimerSettings.py:54 setup.xml
 msgid "Add timer as disabled on conflict"
 msgstr "Přidat časovač při konfliktu jako zakázaný"
 
+#: AutoTimerEditor.py:665 AutoTimerImporter.py:206
 msgid "After event"
 msgstr "Po události"
 
+#: AutoTimerList.py:163
 #, fuzzy
 msgid "All channels"
 msgstr "Kanály"
 
+#: __init__.py:64
 msgid "All non-repeating timers"
 msgstr "Všechny neopakující se časovače"
 
+#: AutoTimerSettings.py:48 setup.xml
 msgid "Allow double timer for different services"
 msgstr ""
 
+#: AutoTimerSettings.py:65 setup.xml
 msgid "Always write config"
 msgstr ""
 
+#: AutoTimerEditor.py:683
 msgid "Amount of recordings left"
 msgstr ""
 
+#: AutoTimerEditor.py:582
+msgid "Any Day filter refers to the day of the timespan start, even if the timespan crosses midnight."
+msgstr ""
+
+#: AutoTimerEditor.py:334
 msgid "Any service/recording"
 msgstr "Veškeré stanice/záznam"
 
+#: plugin.py:240
 #, fuzzy
 msgid "Auto Timer"
 msgstr "Přidat AutoČasovač"
 
+#: plugin.py:228
 msgid "Auto Timers"
 msgstr ""
 
+#: AutoTimer.py:318
 msgid "AutoTimer"
 msgstr ""
 
+#: AutoTimerOverview.py:283
 #, fuzzy
 msgid "AutoTimer Context Menu"
 msgstr "Otevřít pod nabídku"
 
+#: AutoTimerEditor.py:462
 msgid "AutoTimer Editor"
 msgstr "Editor Auto Časovače"
 
-msgid "AutoTimer FAQ"
-msgstr ""
-
+#: AutoTimerEditor.py:1122
 msgid "AutoTimer Filters"
 msgstr "Filtr AutoČasovače"
 
-msgid "AutoTimer Help"
-msgstr ""
-
+#: AutoTimerEditor.py:1344
 msgid "AutoTimer Services"
 msgstr "AutoČasovač stanice"
 
+#: AutoTimerSettings.py:93
 msgid "AutoTimer Settings"
 msgstr "AutoČasovač Nastavení"
 
+#: AutoTimerOverview.py:137
 msgid "AutoTimer overview"
 msgstr "Přehled AutoČasovačů"
 
+#: AutoTimerResource.py:218 AutoTimerResource.py:487
 msgid "AutoTimer was added successfully"
 msgstr "AutoČasovač byl přidán"
 
+#: AutoTimerResource.py:489 AutoTimerResource.py:532
 msgid "AutoTimer was changed successfully"
 msgstr "AutoČasovač byl změněn"
 
+#: AutoTimerResource.py:205
 msgid "AutoTimer was removed"
 msgstr "AutoČasovač byl odstraněn "
 
+#: plugin.py:242
 msgid "AutoTimers"
 msgstr ""
 
+#: AutoTimerResource.py:229
 #, fuzzy
 msgid "AutoTimers were changed successfully."
 msgstr "AutoČasovač byl změněn"
 
+#: setup.xml
 #, fuzzy
 msgid "Autotimer Settings"
 msgstr "AutoČasovač Nastavení"
 
+#: AutoTimerEditor.py:674
 msgid "Begin of \"after event\" timespan"
 msgstr ""
 
+#: AutoTimerEditor.py:637 AutoTimerWizard.py:110
 msgid "Begin of timespan"
 msgstr "Začátek časového úseku"
 
+#: AutoTimerEditor.py:1355
 msgid "Bouquets"
 msgstr "Přehledy"
 
+#: AutoTimerEditor.py:584
 msgid "By enabling this events will not be matched if they don't occur on certain dates."
 msgstr "Povolením tohoto nebudou události odpovídat, jestliže se nevyskytují v určitých datových termínech."
 
 #
+#: AutoTimerSettings.py:58 setup.xml
 msgid "By enabling this you will be notified about similar timers added during automated polling. There is no intelligence involved, so it might bother you about the same conflict over and over."
 msgstr "Zapnuto: dostanete při automatickém dotazování informace o podobných časovačích. Pracuje se bez logiky,tak může ten samý konflikt obtěžovat stále dokola"
 
+#: AutoTimerSettings.py:57 setup.xml
 msgid "By enabling this you will be notified about timer conflicts found during automated polling. There is no intelligence involved, so it might bother you about the same conflict over and over."
 msgstr "Při zapnutí budete při automatickém dotazování dostávat informáce o konfliktech časovače. Nepoužívá se zde žádná logika, takže Vás pak může ten samý konflikt obtěžovat stále dokola."
 
+#: AutoTimerEditor.py:486 AutoTimerEditor.py:1147 AutoTimerEditor.py:1364
+#: AutoTimerImporter.py:48 AutoTimerImporter.py:142 AutoTimerPreview.py:92
 msgid "Cancel"
 msgstr "Zrušit"
 
+#: AutoTimerEditor.py:587
 msgid "Change default recording offset?"
 msgstr "Změnit výchozí posun nahrávání?"
 
+#: AutoTimerEditor.py:96
 msgid "Channel Selection"
 msgstr "Seznam stanic"
 
+#: AutoTimerEditor.py:1354
 msgid "Channels"
 msgstr "Kanály"
 
+#: AutoTimerEditor.py:689
 msgid "Check for uniqueness in"
 msgstr ""
 
+#: AutoTimerSettings.py:64 setup.xml
 msgid "Check the event id (eit) and remove the timer if there is no corresponding EPG event. Due to compatibility issues with SerienRecorder and IPRec, only timer created by AutoTimer are affected."
 msgstr ""
 
+#: AutoTimerEditor.py:393
 msgid "Choose target folder"
 msgstr "Vyberte cílovou složku"
 
+#: __init__.py:70
 msgid "Classic"
 msgstr "Klasicky"
 
+#: AutoTimerOverview.py:270
 #, fuzzy
 msgid "Clone selected timer"
 msgstr "Odebrat vybraný AutoČasovač"
 
 #
+#: AutoTimerOverview.py:90
 msgid "Close"
 msgstr "Zavřít"
 
+#: AutoTimerOverview.py:106
 msgid "Close and forget changes"
 msgstr "Zavřít beze změn"
 
+#: AutoTimerOverview.py:119
 msgid "Close and save changes"
 msgstr "Zavřít a uložit změny"
 
-msgid "Congratulations"
-msgstr ""
-
+#: AutoTimerEditor.py:701
 msgid "Control recording completely by service"
 msgstr ""
 
+#: AutoTimerResource.py:186
 msgid "Couldn't load config file!"
 msgstr ""
 
-#
-msgid "Create a new AutoTimer."
-msgstr "Vytvořit nový AutoČasovač."
-
+#: AutoTimerOverview.py:271
 msgid "Create a new timer using the classic editor"
 msgstr "Vytvořit nový časovač pomocí klasického editoru"
 
+#: AutoTimerOverview.py:272
 msgid "Create a new timer using the wizard"
 msgstr "Vytvořit nový časovač pomocí průvodce"
 
+#: AutoTimerEditor.py:326
 #, python-format
 msgid "Custom (%s)"
 msgstr "Vlastní (%s)"
 
+#: AutoTimerEditor.py:694
 msgid "Custom location"
 msgstr "Vlastní umístění"
 
+#: AutoTimerEditor.py:650
 msgid "Custom offset"
 msgstr "Vlastní posun"
 
+#: AutoTimerEditor.py:600
 msgid "Defines where to search for duplicates (only title, short description or even extended description)"
 msgstr ""
 
+#: AutoTimerEditor.py:1149 AutoTimerEditor.py:1366 AutoTimerOverview.py:92
 msgid "Delete"
 msgstr "Smazat"
 
+#: AutoTimerEditor.py:617 AutoTimerWizard.py:118
 msgid "Description"
 msgstr "Popis"
 
+#: AutoTimerEditor.py:622
 msgid "EPG encoding"
 msgstr "Kódování EPG"
 
+#: AutoTimerEditor.py:514
 msgid "Edit AutoTimer"
 msgstr "Upravit Auto Časovač"
 
+#: AutoTimerEditor.py:1172
 msgid "Edit AutoTimer filters"
 msgstr "Upravit filtr AutoČasovače"
 
+#: AutoTimerEditor.py:1385
 msgid "Edit AutoTimer services"
 msgstr "Upravit AutoČasovač stanice"
 
 #. TRANSLATORS: description of AutoTimer in PluginBrowser
+#: plugin.py:215 plugin.py:217 plugin.py:228
 msgid "Edit Timers and scan for new Events"
 msgstr "Upravit časovače a vyhledat nové události"
 
+#: AutoTimerEditor.py:518
 #, fuzzy
 msgid "Edit filters"
 msgstr "upravit filty"
 
+#: AutoTimerOverview.py:269
 msgid "Edit new timer defaults"
 msgstr "Upravit předvolby nových časovačů"
 
+#: AutoTimerOverview.py:105
 msgid "Edit selected AutoTimer"
 msgstr "Upravit AutoČasovač"
 
+#: AutoTimerEditor.py:535
 #, fuzzy
 msgid "Edit services"
 msgstr "upravit stanici"
 
+#: AutoTimerEditor.py:1407
 msgid "Editing"
 msgstr "Editace"
 
+#: AutoTimerSettings.py:59 setup.xml
 msgid "Editor for new AutoTimers"
 msgstr "Editot nových AutoČasovačů"
 
+#: AutoTimerEditor.py:1214
 msgid "Enable Filtering"
 msgstr "Zapnout filtrování"
 
+#: AutoTimerEditor.py:1406
 msgid "Enable Service Restriction"
 msgstr "Zapnout omezení stanice"
 
+#: AutoTimerSettings.py:50 setup.xml
 msgid "Enable this to be able to access the AutoTimer Overview from within the extension menu."
 msgstr "Povolení umožní přidat přehled AutoČasovače  do menu Modrého tlačítka."
 
 #
+#: AutoTimerSettings.py:49 setup.xml
 msgid "Enable this to be able to access the AutoTimer Overview from within the plugin browser."
 msgstr "Povolení umožní přidat přehled AutoČasovače do Prohlížeče pluginů."
 
+#: AutoTimerEditor.py:616 AutoTimerImporter.py:154 AutoTimerWizard.py:117
 msgid "Enabled"
 msgstr "Povoleno"
 
+#: AutoTimerEditor.py:574
 msgid "Encoding the channel uses for it's EPG data. You only need to change this if you're searching for special characters like the german umlauts."
 msgstr "Kódování, které kanál používá pro EPG data. Potřebujete nastavit zpravidla jen tehdy, hledáte-li speciální znaky, jako jsou např. přehlásky."
 
+#: AutoTimerEditor.py:675
 msgid "End of \"after event\" timespan"
 msgstr ""
 
+#: AutoTimerEditor.py:638 AutoTimerWizard.py:111
 msgid "End of timespan"
 msgstr "Konec časového úseku"
 
+#: AutoTimerEditor.py:788
 #, fuzzy
 msgid "Enter or edit description"
 msgstr "v krátkém popisu"
 
+#: AutoTimerEditor.py:795
 msgid "Enter or edit match title"
 msgstr ""
 
+#: AutoTimerList.py:222
 msgid "Everyday"
 msgstr ""
 
+#: AutoTimerImporter.py:170
 msgid "Exact match"
 msgstr "Přesná shoda"
 
+#: AutoTimerEditor.py:1228 AutoTimerEditor.py:1245 AutoTimerEditor.py:1270
 msgid "Exclude"
 msgstr "Provést"
 
+#: AutoTimerEditor.py:669
 msgid "Execute \"after event\" during timespan"
 msgstr ""
 
+#: AutoTimerSettings.py:109
 msgid "Exit"
 msgstr ""
 
-msgid "FAQ"
-msgstr ""
-
+#: AutoTimerEditor.py:1216
 msgid "Filter"
 msgstr "Filtr"
 
-#
-msgid ""
-"Filters are another powerful tool when matching events. An AutoTimer can be restricted to certain Weekdays or only match an event with a text inside eg it's Description.\n"
-"Press BLUE to add a new restriction and YELLOW to remove the selected one."
-msgstr ""
-"Filtry jsou další silné nástroje na zjišťování odpovídajících událostí.AutoČasovač lze omezit na určité dny v týdnu nebo na události, kterémají určitý text v Popisu.\n"
-"MODRÉ tlačítko přidá nové omezení,ŽLUTÉ odstraní zvolené."
-
+#: AutoTimerEditor.py:585
 msgid "First day to match events. No event that begins before this date will be matched."
 msgstr "První den odpovídající události. Událost začínající před tímto datem nevyhoví."
 
+#: AutoTimer.py:832 AutoTimerResource.py:58
 #, python-format
 msgid ""
 "Found a total of %d matching Events.\n"
@@ -358,663 +429,726 @@ msgid ""
 msgstr ""
 
 #
+#: AutoTimerOverview.py:278
 msgid "Frequently asked questions"
 msgstr "Často kladené otázky"
 
-msgid "Frequently asked questions about the AutoTimer"
-msgstr ""
-
+#: AutoTimerList.py:212
 #, fuzzy
 msgid "Fri"
 msgstr "Pátek"
 
+#: AutoTimerEditor.py:57
 msgid "Friday"
 msgstr "Pátek"
 
-msgid "Generic setup"
-msgstr ""
-
+#: AutoTimerSettings.py:52 setup.xml
 msgid "Guess existing timer based on begin/end"
 msgstr "Určit existující časovač podle začátku a konce"
 
+#: AutoTimerOverview.py:277
 msgid "Help"
 msgstr ""
 
+#: AutoTimerSettings.py:48 setup.xml
 msgid "Here you can specify whether simultaneous timers of the same program can be created. This allows simultaneous recording of a program with different resolutions. (e.g. SD service and HD service)"
 msgstr ""
 
+#: __init__.py:47
 msgid "Hour"
 msgstr ""
 
+#: AutoTimerSettings.py:63 setup.xml
 msgid "If 0, the popup will remain open."
 msgstr ""
 
 #
+#: AutoTimerSettings.py:53 setup.xml
 msgid "If a timer conflict occurs, AutoTimer will search outside the timespan for a similar event and add it."
 msgstr "Pokud nastane konflikt časovače, AutoČasovač vyhledá mimo interval podobnou událost a přidá ji."
 
+#: AutoTimerSettings.py:62 setup.xml
 msgid "If enabled, the polling will be skipped if EPGRefresh is currently running."
 msgstr ""
 
+#: AutoTimerSettings.py:61 setup.xml
 msgid "If enabled, the polling will be skipped if a recording is in progress."
 msgstr ""
 
+#: __init__.py:88
 msgid "If specified bouquets"
 msgstr ""
 
+#: __init__.py:87
 #, fuzzy
 msgid "If specified services"
 msgstr "upravit stanici"
 
+#: __init__.py:89
 msgid "If specified services or bouquets"
 msgstr ""
 
+#: AutoTimerSettings.py:38
 #, fuzzy
 msgid "If this is disabled AutoTimer will NOT automatically look for events matching your AutoTimers but only when you leave the GUI with the green button."
 msgstr "Pokud je povoleno, AutoTimer NEBUDE hledat události odpovídající Vašim AutoTimerům automaticky, ale pouze po ukončení GUI stlačením ZELENÉHO tlačítka."
 
+#: AutoTimerSettings.py:52 setup.xml
 #, fuzzy, python-format
 msgid "If this is enabled an existing timer will also be considered recording an event if it records at least 80% of the it."
 msgstr "Při zapnutí této funkce se bude existující časovač považovat za nahrávající, jestliže nahraje aspoň 80%% programu."
 
+#: AutoTimerSettings.py:56 setup.xml
 msgid "If this is selected, the name of the respective AutoTimer will be added as a tag to timers created by this plugin."
 msgstr ""
 
+#: AutoTimerSettings.py:55
 msgid "If this is selected, the tag \"AutoTimer\" will be given to timers created by this plugin."
 msgstr ""
 
+#: setup.xml
 msgid "If this is selected, the tag 'AutoTimer' will be given to timers created by this plugin."
 msgstr ""
 
+#: AutoTimerImporter.py:253
 msgid "Import AutoTimer"
 msgstr "Import AutoČasovače"
 
+#: AutoTimerOverview.py:266
 msgid "Import existing Timer"
 msgstr "Import existujícího časovače"
 
+#: AutoTimerOverview.py:267 __init__.py:69
 msgid "Import from EPG"
 msgstr "Import z EPG"
 
+#: AutoTimerEditor.py:1233 AutoTimerEditor.py:1250 AutoTimerEditor.py:1271
 msgid "Include"
 msgstr "Zahrnout"
 
+#: AutoTimerSettings.py:55
 msgid "Include \"AutoTimer\" in tags"
 msgstr ""
 
+#: setup.xml
 #, fuzzy
 msgid "Include 'AutoTimer' in tags"
 msgstr "AutoČasovač Nastavení"
 
+#: AutoTimerSettings.py:56 setup.xml
 msgid "Include AutoTimer name in tags"
 msgstr ""
 
-#
-msgid ""
-"It's possible to restrict an AutoTimer to certain Services or Bouquets or to deny specific ones.\n"
-"An Event will only match this AutoTimer if it's on a specific and not denied Service (inside a Bouquet).\n"
-"Press BLUE to add a new restriction and YELLOW to remove the selected one."
-msgstr ""
-"AutoTimer je možné omezit na určité programy, přehledy, nebo některé zakázat.\n"
-"Událost bude odpovídat AutoČasovači jen tehdy,jde-li o konkrétní program a není-li zakázán (v rámci přehledu).\n"
-"MODRÉ tlačítko přidá nové omezení, ŽLUTÉ tlačítko odstraní zvolené."
-
+#: AutoTimerEditor.py:604
 msgid "Label Timers with season, episode and title, according to the SeriesPlugin settings."
 msgstr ""
 
+#: AutoTimerEditor.py:704
 msgid "Label series"
 msgstr ""
 
+#: AutoTimerEditor.py:586
 msgid "Last day to match events. Events have to begin before this date to be matched."
 msgstr "Poslední den odpovídající události. Událost musí začínat před tímto datem, jinak nevyhoví."
 
+#: AutoTimerImporter.py:224
 msgid "Location"
 msgstr "Umístění"
 
+#: AutoTimerEditor.py:594
 msgid "Lower bound of timespan."
 msgstr "Dolní mez časového úseku."
 
+#: AutoTimerEditor.py:581
 msgid "Lower bound of timespan. Nothing before this time will be matched. Offsets are not taken into account!"
 msgstr "Dolní mez časového úseku. Nic před tímto časem nebude odpovídat. Posuny nejsou brány v úvahu!"
 
+#: AutoTimerImporter.py:181
 #, python-format
 msgid "Match Timespan: %02d:%02d - %02d:%02d"
 msgstr "Hledat v období: %02d:%02d - %02d:%02d"
 
+#: AutoTimerEditor.py:618 AutoTimerWizard.py:119
 msgid "Match title"
 msgstr "Finde in Titel"
 
+#: AutoTimerImporter.py:163
 #, python-format
 msgid "Match title: %s"
 msgstr "Hledat titul: %s"
 
+#: AutoTimerEditor.py:663
 msgid "Maximum duration (in m)"
 msgstr "Maximální délka (v min)"
 
+#: AutoTimerEditor.py:591
 msgid "Maximum event duration to match. If an event is longer than this amount of time (without offset) it won't be matched."
 msgstr ""
 
+#: AutoTimerOverview.py:213
 #, fuzzy, python-format
 msgid ""
 "Message\n"
 "Do you really want to delete %s?"
 msgstr "Opravdu chcete smazat %s?"
 
+#: __init__.py:48
 msgid "Minute"
 msgstr ""
 
+#: AutoTimerSettings.py:51 setup.xml
 msgid "Modify existing timers"
 msgstr "Upravit existující časovače"
 
+#: AutoTimerList.py:208
 #, fuzzy
 msgid "Mon"
 msgstr "Pondělí"
 
+#: AutoTimerEditor.py:53
 msgid "Monday"
 msgstr "Pondělí"
 
+#: AutoTimerEditor.py:324
 msgid "Monthly"
 msgstr "Měsíčně"
 
+#: AutoTimerEditor.py:324
 msgid "Never"
 msgstr "Nikdy"
 
+#: AutoTimerEditor.py:1150 AutoTimerEditor.py:1367
 msgid "New"
 msgstr "Nový"
 
+#: AutoTimerEditor.py:331 AutoTimerOverview.py:216 __init__.py:86
 msgid "No"
 msgstr "Ne"
 
-#
-msgid "No, remove them."
-msgstr "Ne, smazat."
-
+#: AutoTimerEditor.py:365 AutoTimerEditor.py:401 __init__.py:62
 msgid "None"
 msgstr "Žádná"
 
+#: AutoTimerEditor.py:647
 msgid "Not after"
 msgstr "Ne po"
 
+#: AutoTimerEditor.py:646
 msgid "Not before"
 msgstr "Ne před"
 
+#: AutoTimerEditor.py:597
 msgid "Number of scheduled recordings left."
 msgstr "Počet zbývajících naplánovaných nahrávek."
 
+#: AutoTimerEditor.py:487 AutoTimerEditor.py:1365 AutoTimerImporter.py:49
+#: AutoTimerImporter.py:143
 msgid "OK"
 msgstr "OK"
 
+#: AutoTimerEditor.py:656
 msgid "Offset after recording (in m)"
 msgstr "Posun po záznamu (v min)"
 
+#: AutoTimerEditor.py:655
 msgid "Offset before recording (in m)"
 msgstr "Posun před záznamem (v min)"
 
+#: AutoTimerEditor.py:333
 msgid "On any service"
 msgstr "Na každé stanici"
 
+#: AutoTimerEditor.py:332
 msgid "On same service"
 msgstr "Na stejné stanici"
 
+#: __init__.py:63
 msgid "Only AutoTimers created during this session"
 msgstr "Pouze AutoČasovače založené v této akci"
 
+#: AutoTimerSettings.py:47 setup.xml
 msgid "Only add timer for next x days"
 msgstr "Časovač přidat pouze na dalších x dní"
 
+#: AutoTimerEditor.py:631 AutoTimerWizard.py:104
 msgid "Only match during timespan"
 msgstr "Jen odpovídající časovému úseku"
 
+#: AutoTimerImporter.py:197
 #, python-format
 msgid "Only on Service: %s"
 msgstr "Jen na stanici: %s"
 
+#: AutoTimerImporter.py:188
 #, python-format
 msgid "Only on Weekday: %s"
 msgstr ""
 
 #
+#: AutoTimerSettings.py:39 setup.xml
 msgid "Only poll while in standby"
 msgstr "Zjišťovat jen ve Standby"
 
+#: AutoTimerOverview.py:112
 msgid "Open Context Menu"
 msgstr "Otevřít pod nabídku"
 
+#: AutoTimerImporter.py:353
 msgid "Please provide a Text to match"
 msgstr "Zadejte hledaný text"
 
+#: AutoTimerSettings.py:44
 #, fuzzy, python-format
 msgid "Poll Interval (in %s)"
 msgstr "Interval zjišťování (v hodinách)"
 
 #
+#: setup.xml
 msgid "Poll Interval (in mins)"
 msgstr "Interval zjišťování (v min)"
 
+#: AutoTimerSettings.py:38 setup.xml
 msgid "Poll automatically"
 msgstr "Zjišťovat automaticky"
 
+#: AutoTimerSettings.py:43
 msgid "Poll unit"
 msgstr ""
 
+#: AutoTimerSettings.py:43
 msgid "Poll unit selects whether the poll interval should be interpreted in hours or minutes."
 msgstr ""
 
+#: AutoTimerSettings.py:63 setup.xml
 msgid "Popup timeout in seconds"
 msgstr ""
 
+#: AutoTimerEditor.py:592
 msgid "Power state to change to after recordings. Select \"standard\" to not change the default behavior of enigma2 or values changed by yourself."
 msgstr "Změní stav napájení po ukončení záznamu. Zvolte \"standard \", když nechcete měnit výchozí chování Enigma2 nebo si nastavte hodnotu sami."
 
+#: AutoTimerOverview.py:265
 msgid "Preview"
 msgstr "Náhled"
 
+#: AutoTimerPreview.py:109
 msgid "Preview AutoTimer"
 msgstr "Přehled AutoČasovače"
 
-msgid "Question: I found a problem with the AutoTimer, can you fix it?/nAnswer: First try the AutoTimer version in a recent (experimental) Image to see if the problem was fixed. Then read the Help again and the upcoming FAQs to make sure that this is actually a problem and not expected behavior./nIf you still think there is something wrong with the AutoTimer, please visit http://www.dream-multimedia-tv.de/board and post your problem there./n/nQ: The plugin only adds timers when leaving the configuration, not automatically. What can I do?/nA: From the Overview press MENU and enter the 'Setup'. In this screen enable 'Poll automatically' and you should be good to go."
-msgstr ""
-
-msgid "Question: My AutoTimer for 'News' does not record the 'Late News'./nAnswer: Check 'Search type' and 'Search strictness' for the given AutoTimer./n/nQ: The show I'm trying to record contains umlauts in its title. AutoTimer does not find it./nA: Check the 'EPG encoding' for the given AutoTimer. For german stations 'UTF-8' should be selected./n/nQ: I seem to be unable to record two subsequent events. There is only a single timer created that spans (part of) both events./nA: From the Overview press MENU and enter the 'Setup'. In this screen disable 'Guess existing timer based on begin/end'."
-msgstr ""
-
-msgid "Question: You keep talking about help being provided for each parameter. I'm unable to read it (in part or in full)./nAnswer: Try using the default skin and if it works ask the creator of your regular skin. If it still does not work your image might not provide the actual default skin so contact the creator of your image."
-msgstr ""
-
+#: AutoTimerEditor.py:807 AutoTimerEditor.py:1304 AutoTimerEditor.py:1478
+#: AutoTimerImporter.py:259 AutoTimerOverview.py:250 AutoTimerSettings.py:172
 msgid "Really close without saving settings?"
 msgstr "Opravdu zavřít bez uložení změn?"
 
+#: AutoTimerEditor.py:678
 msgid "Record a maximum of x times"
 msgstr "Nahrát maximálně x krát"
 
+#: AutoTimerEditor.py:1416 AutoTimerEditor.py:1470
 msgid "Record on"
 msgstr "Záznam na"
 
+#: AutoTimerSettings.py:64 setup.xml
 msgid "Remove not existing events"
 msgstr ""
 
+#: AutoTimerOverview.py:120
 msgid "Remove selected AutoTimer"
 msgstr "Odebrat vybraný AutoČasovač"
 
+#: AutoTimerEditor.py:686
 msgid "Require description to be unique"
 msgstr "Vyžadovat unikátní popis"
 
+#: AutoTimerEditor.py:684
 msgid "Reset count"
 msgstr "Reset počitadla"
 
+#: AutoTimerEditor.py:593
 msgid "Restrict \"after event\" to a certain timespan?"
 msgstr "Omezit \"po skončení\" na určitý časový úsek?"
 
+#: AutoTimerEditor.py:606
 msgid ""
 "Restrict autotimer to bouquets.\n"
 "Use the blue key to edit the bouquet filter."
 msgstr ""
 
+#: AutoTimerEditor.py:607
 msgid ""
 "Restrict autotimer to specific days.\n"
 "Use the yellow key to edit the day filter."
 msgstr ""
 
+#: AutoTimerEditor.py:605
 msgid ""
 "Restrict autotimer to specific services, channels.\n"
 "Use the blue key to edit the service filter."
 msgstr ""
 
+#: AutoTimerEditor.py:714
 msgid "Restrict to days"
 msgstr ""
 
+#: AutoTimerEditor.py:641
 msgid "Restrict to events on certain dates"
 msgstr "Omezit události na určité datum"
 
+#: AutoTimerEditor.py:713
 msgid "Restrict to specific bouquets"
 msgstr ""
 
+#: AutoTimerEditor.py:712
 msgid "Restrict to specific services"
 msgstr ""
 
+#: AutoTimerList.py:213
 msgid "Sat"
 msgstr ""
 
+#: AutoTimerEditor.py:58
 msgid "Saturday"
 msgstr "Sobota"
 
+#: AutoTimerEditor.py:1148 AutoTimerOverview.py:91 AutoTimerSettings.py:110
 msgid "Save"
 msgstr "Uložit"
 
+#: AutoTimerEditor.py:624
 msgid "Search strictness"
 msgstr "Přesnost hledání"
 
+#: AutoTimerEditor.py:623
 msgid "Search type"
 msgstr "Typ hledání"
 
+#: AutoTimerEditor.py:575
 msgid "Select \"exact match\" to enforce \"Match title\" to match exactly, \"partial match\" if you only want to search for a part of the event title or \"description match\" if you only want to search for a part of the event description."
 msgstr ""
 
+#: AutoTimerImporter.py:63
 msgid "Select a timer to import"
 msgstr "Vyberte časovač pro import"
 
+#: AutoTimerEditor.py:1454
 msgid "Select bouquet to record on"
 msgstr "Zvolte přehled pro nahrávání"
 
+#: AutoTimerEditor.py:1448
 msgid "Select channel to record on"
 msgstr "Zvolte kanál pro nahrávání"
 
+#: AutoTimerEditor.py:602
 msgid "Select the location to save the recording to."
 msgstr "Nastavení umístění pro ukládání nahrávek."
 
+#: AutoTimerEditor.py:1268
 msgid "Select type of Filter"
 msgstr "Vyberte typ filtru"
 
+#: AutoTimerEditor.py:576
 msgid "Select whether or not you want to enforce case correctness."
 msgstr "Vyberte, zda chcete nebo nechcete použít rozlišování velkých a malých písmen."
 
+#: AutoTimerEditor.py:628
 msgid "Set End Time"
 msgstr ""
 
+#: AutoTimerEditor.py:578
 msgid "Set an end time for the timer. If you do, the timespan of the event might be blocked for recordings."
 msgstr ""
 
+#: AutoTimerEditor.py:659
 msgid "Set maximum duration"
 msgstr "Nastavit maximální délku trvání"
 
+#: AutoTimerEditor.py:571
 msgid "Set this NO to disable this AutoTimer."
 msgstr "Nastavte na NE k deaktivaci Auto Časovače."
 
+#: AutoTimerEditor.py:577
 msgid "Set timer type: zap, simple record, zap+record (always zap to service before start record)."
 msgstr ""
 
+#: AutoTimerOverview.py:268
 msgid "Setup"
 msgstr "Nastavit"
 
+#: AutoTimerEditor.py:580
 msgid "Should this AutoTimer be restricted to a timespan?"
 msgstr "Měl by být tento AutoTimer omezen časovým úsekem?"
 
+#: AutoTimerEditor.py:590
 msgid "Should this AutoTimer only match up to a certain event duration?"
 msgstr "Měl by AutoČasovač odpovídat trvání určité události?"
 
+#: AutoTimerEditor.py:601
 msgid "Should timers created by this AutoTimer be recorded to a custom location?"
 msgstr "Měly by být časovače vytvořené AutoČasovačem zaznamenávány do vlastního umístění?"
 
+#: AutoTimerSettings.py:50 setup.xml
 msgid "Show in extension menu"
 msgstr "Zobrazit pod Modrým tlačítkem"
 
 #
+#: AutoTimerSettings.py:49 setup.xml
 msgid "Show in plugin browser"
 msgstr "Zobrazit v Prohlížeči pluginů"
 
+#: AutoTimerSettings.py:57 setup.xml
 msgid "Show notification on conflicts"
 msgstr "Zobrazovat oznámení při konfliktech"
 
 #
+#: AutoTimerSettings.py:58 setup.xml
 msgid "Show notification on similars"
 msgstr "Zobrazovat oznámení při podobných"
 
+#: AutoTimerSettings.py:62 setup.xml
 msgid "Skip poll during epg refresh"
 msgstr ""
 
+#: AutoTimerSettings.py:61 setup.xml
 msgid "Skip poll during records"
 msgstr ""
 
+#: AutoTimerPreview.py:115
 msgid "Sort AutoTimer"
 msgstr "Třídit AutoČasovače"
 
+#: AutoTimerPreview.py:113
 msgid "Sort Time"
 msgstr "Dle času"
 
+#: AutoTimerSettings.py:42 setup.xml
 msgid "Startup delay (in min)"
 msgstr ""
 
+#: AutoTimerSettings.py:42
 msgid "Startup delay is the number of minutes before polling after a reboot, so as to not delay enigma2 startup time."
 msgstr ""
 
+#: AutoTimerList.py:214
 #, fuzzy
 msgid "Sun"
 msgstr "Neděle"
 
+#: AutoTimerEditor.py:59
 msgid "Sunday"
 msgstr "Neděle"
 
+#: AutoTimerSettings.py:60
 msgid "Support \"Fast Scan\"?"
 msgstr "Podporovat Fast Scan ?"
 
+#: setup.xml
 #, fuzzy
 msgid "Support 'Fast Scan'?"
 msgstr "Podporovat Fast Scan ?"
 
+#: AutoTimerEditor.py:696 AutoTimerImporter.py:233
 msgid "Tags"
 msgstr "Tagy"
 
+#: AutoTimerEditor.py:603
 msgid "Tags the Timer/Recording will have."
 msgstr "Tagy, které bude mít časovač/záznam."
 
-#
-msgid ""
-"Thank you for using the wizard. Your new AutoTimer has been added to the List.\n"
-"Please press OK to continue."
-msgstr "Děkujeme Vám za použití průvodce. Nový AutoČasovač byl přidán do seznamu. Stiskněte OK pro pokračování."
-
-msgid "The 'Overview'"
-msgstr ""
-
-msgid "The AutoTimer overview is the standard entry point to this plugin./n/nIf AutoTimers are configured you can choose them from a list to change them (OK button on your remote) or remove them (YELLOW button on your remote)./nNew Timers can be added by pressing the BLUE button and the control menu can be opened using the MENU button./n/nWhen leaving the plugin using the GREEN button it will search the EPG for matching events ONCE. To configure a regular search interval of the plugin to search for events open the control menu and enter the plugin setup."
-msgstr ""
-
-#
-msgid ""
-"The Timer will not be added to the List.\n"
-"Please press OK to close this Wizard."
-msgstr ""
-"Časovač nebude přidán do seznamu.\n"
-"Stiskněte OK pro ukončení tohoto průvodce."
-
-#
-msgid "The Timespan of an AutoTimer is the first 'advanced' attribute. If a timespan is specified an event will only match this AutoTimer if it lies inside of this timespan."
-msgstr "Časový úsek Autotimeru je první 'pokročilý' parametr.Jestliže je časový úsek specifikován, pak událost vyhoví AutoČasovače pouze tehdy,leží-li v tomto úseku."
-
+#: AutoTimer.py:166
 msgid "The autotimer file (/etc/enigma2/autotimer.xml) is corrupt. A new and empty config was created. A backup of the config can be found here (/etc/enigma2/autotimer.xml_old) "
 msgstr ""
 
-msgid "The control menu hides less frequently used options of the plugin, including the configuration and default settings for new AutoTimers./n/nWhile you can just open the menu and take a look for yourself, let's go through the available options:/n - Help:/n   What you are looking at right now/n - Preview:/n   Simulate EPG search, helps finding errors in your setup./n - Import existing Timer:/n   Create a new AutoTimer based on an existing regular timer./n - Import from EPG:/n   Create an AutoTimer based on an EPG event./n - Setup:/n   Generic configuration of the plugin./n - Edit new timer defaults:/n   Configure default values for new AutoTimers./n - Create a new timer using the wizard/classic editor:/n   Use the non-default editor to create a new AutoTimer."
-msgstr ""
-
+#: AutoTimerEditor.py:598
 msgid "The counter can automatically be reset to the limit at certain intervals."
 msgstr "Počítadlo může být automaticky resetováno na limit po určitých intervalech."
 
+#: AutoTimerSettings.py:59 setup.xml
 msgid "The editor to be used for new AutoTimers. This can either be the Wizard or the classic editor."
 msgstr "Editor použitý pro nové AutoČasovače. Může to být Průvodce nebo klasický editor."
 
+#: AutoTimerEditor.py:824
 msgid "The match attribute is mandatory."
 msgstr "Parametr 'Hledat v názvu' je povinný."
 
-msgid "This FAQ is supposed to help everyone unwilling to help themselves by reading all the provided help available, and those who did not find a solution to their problems within the provided documentation./n/nTo make these hints a little easier to read, they are split up on multiple pages. You can go to the next page using the BLUE button on your remote control and back using the YELLOW one. Pressing the RED button or EXIT will close the FAQ."
-msgstr ""
-
+#: AutoTimerEditor.py:608
 msgid ""
 "This allows you to apply other filters.\n"
 "Use the yellow key to edit other filters."
 msgstr ""
 
-msgid "This help screen is supposed to give you a quick look at everything the AutoTimer has to offer./nYou can abort it at any time by pressing the RED or EXIT button on your remote control or bring it up at a later point by selecting it from the control menu using the MENU button from the regular entry point of the plugin (more on that later)./n/n/nBut you really should consider to take the few minutes it takes to read these help pages."
-msgstr ""
-
+#: AutoTimerEditor.py:572
 msgid "This is a name you can give the AutoTimer. It will be shown in the Overview and the Preview."
 msgstr "Pojmenování AutoTimeru, které bude zobrazováno v Náhledu a Přehledu."
 
-msgid "This is mostly a matter of taste./nThe Wizard provides you with a reduced set of options and presents them in smaller sets at a time. It is mostly aimed at users not very experienced with this plugin or the 'expert' level features of enigma2./n/nYou can check out the 'classic' editor by opening an existing timer from the overview and if you prefer this view over the wizard you can change the default editor in the setup dialog."
-msgstr ""
-
+#: AutoTimerSettings.py:44
 #, fuzzy, python-format
 msgid "This is the delay in %s that the AutoTimer will wait after doing a search before searching the EPG again."
 msgstr "Toto je zpoždění v hodinách, po které bude AutoTimer po hledání čekat na další prohledání EPG."
 
 #
+#: setup.xml
 msgid "This is the delay in minutes that the AutoTimer will wait after a search to search the EPG again."
 msgstr "Toto je zpoždění v minutách, po které bude AutoTimer po hledání čekat na další prohledání EPG."
 
 #
+#: setup.xml
 #, fuzzy
 msgid "This is the delay in minutes that the AutoTimer will wait on initial launch to not delay enigma2 startup time."
 msgstr "Toto je zpoždění v minutách, po které bude AutoTimer po hledání čekat na další prohledání EPG."
 
+#: AutoTimerEditor.py:573
 msgid "This is what will be looked for in event titles. Note that looking for e.g. german umlauts can be tricky as you have to know the encoding the channel uses."
 msgstr "Tento výraz bude hledán v názvech událostí. Uvědomte si, že pro hledání např. přehlásek musíte znát, jaké kódování kanál používá."
 
-msgid "This screen should be pretty straight-forward. If the option name does not give its meaning away there should be an explanation for each of them when you select them. If there is no visible explanation this is most likely a skin issue and please try if the default skin fixes the issue./n/nA lot of effort has been put in making the parameters as easy to understand as possible, so give reading them a try ;-)."
-msgstr ""
-
+#: AutoTimerSettings.py:51 setup.xml
 msgid "This setting controls the behavior when a timer matches a found event."
 msgstr "Určuje chování v případě, že časovač odpovídá nalezené události."
 
+#: AutoTimerSettings.py:54 setup.xml
 msgid "This toggles the behavior on timer conflicts. If an AutoTimer matches an event that conflicts with an existing timer it will not ignore this event but add it disabled."
 msgstr "Určuje chování při konfliktech časovače. Jestliže se AutoTimer shoduje s událostí, která koliduje s existujícím časovačem, nebude ji ignorovat, ale přidá ji jako zakázaný časovač."
 
+#: AutoTimerList.py:211
 #, fuzzy
 msgid "Thur"
 msgstr "Čtvrtek"
 
+#: AutoTimerEditor.py:56
 msgid "Thursday"
 msgstr "Čtvrtek"
 
+#: AutoTimerEditor.py:589
 msgid "Time in minutes to append to recording."
 msgstr "Čas v minutách přidaný k záznamu."
 
+#: AutoTimerEditor.py:588
 msgid "Time in minutes to prepend to recording."
 msgstr "Čas v minutách přidaný před záznam."
 
+#: AutoTimerEditor.py:625 AutoTimerImporter.py:215 AutoTimerWizard.py:120
 msgid "Timer type"
 msgstr "Typ časovače"
 
+#: AutoTimerEditor.py:341
 msgid "Title"
 msgstr ""
 
+#: AutoTimerEditor.py:342
 msgid "Title and Short description"
 msgstr ""
 
+#: AutoTimerEditor.py:343
 msgid "Title and all descriptions"
 msgstr ""
 
+#: AutoTimerList.py:209
 #, fuzzy
 msgid "Tue"
 msgstr "Úterý"
 
+#: AutoTimerEditor.py:54
 msgid "Tuesday"
 msgstr "Úterý"
 
+#: setup.xml
 msgid "Unless this is enabled AutoTimer will NOT automatically look for events matching your AutoTimers but only when you leave the GUI with the green button."
 msgstr "Pokud je povoleno, AutoTimer NEBUDE hledat události odpovídající Vašim AutoTimerům automaticky, ale pouze po ukončení GUI stlačením ZELENÉHO tlačítka."
 
+#: AutoTimerEditor.py:595
 msgid "Upper bound of timespan."
 msgstr "Horní mez časového úseku."
 
+#: AutoTimerEditor.py:583
 msgid "Upper bound of timespan. Nothing after this time will be matched. Offsets are not taken into account!"
 msgstr "Horní mez časového úseku. Nic po tomto času nebude odpovídat. Posuny nejsou brány v úvahu!"
 
+#: AutoTimerEditor.py:692
 msgid "Use a custom location"
 msgstr "Použít vlastní umístění"
 
+#: AutoTimerEditor.py:630
 msgid "Use automatic selection of alternates."
 msgstr ""
 
+#: AutoTimerEditor.py:715
 #, fuzzy
 msgid "Use other filters"
 msgstr "upravit filty"
 
+#: AutoTimerList.py:210
 #, fuzzy
 msgid "Wed"
 msgstr "Všední den"
 
+#: AutoTimerEditor.py:55
 msgid "Wednesday"
 msgstr "Středa"
 
+#: AutoTimerEditor.py:61 AutoTimerList.py:216
 msgid "Weekday"
 msgstr "Všední den"
 
+#: AutoTimerEditor.py:60 AutoTimerList.py:215
 msgid "Weekend"
 msgstr "Víkend"
 
+#: AutoTimerEditor.py:324
 msgid "Weekly (Monday)"
 msgstr "Týdně (Pondělí)"
 
+#: AutoTimerEditor.py:324
 msgid "Weekly (Sunday)"
 msgstr "Týdně (Neděle)"
 
-msgid "Welcome to the AutoTimer-Plugin"
-msgstr ""
-
-#
-msgid ""
-"Welcome.\n"
-"\n"
-"This Wizard will help you to create a new AutoTimer by providing descriptions for common settings."
-msgstr ""
-"Vítáme Vás.\n"
-"\n"
-"Tento průvodce pomůže založit nový AutoČasovač poskytnutím popisu pro společné nastavení."
-
-msgid "What is this 'control menu' you keep talking about?"
-msgstr ""
-
+#: AutoTimerSettings.py:60
 msgid "When supporting \"Fast Scan\" the service type is ignored. You don't need to enable this unless your Image supports \"Fast Scan\" and you are using it."
 msgstr "Při podpoře Fast Scan se ignoruje typ programu. Tuto funkci nemusíte zapínat, jestliže máte a používáte image s podporou Fast Scan."
 
+#: setup.xml
 #, fuzzy
 msgid "When supporting 'Fast Scan' the service type is ignored. You dont need to enable this unless your Image supports 'Fast Scan' and you are using it."
 msgstr "Při podpoře Fast Scan se ignoruje typ programu. Tuto funkci nemusíte zapínat, jestliže máte a používáte image s podporou Fast Scan."
 
 #
+#: AutoTimerSettings.py:39 setup.xml
 msgid "When this is enabled AutoTimer will ONLY check for new events whilst in standby."
 msgstr "Jestliže je toto povoleno, AutoČasovač vyhledá JEN nové události během Stanby."
 
+#: AutoTimerEditor.py:599
 msgid "When this option is enabled the AutoTimer won't match events where another timer with the same description already exists in the timer list."
 msgstr "Jestliže je tato volba povolena, AutoTimer nebude porovnávat události, jestliže již existuje v seznamu časovače jiný časovač se stejným popisem."
 
+#: AutoTimerEditor.py:579
 #, fuzzy
 msgid "With this option enabled the channel to record will be selected automaticliy using your list of alternates."
 msgstr "Pomocí této volby může být kanál pro záznam změněn na alternativní program."
 
 #
+#: AutoTimerEditor.py:596
 msgid "With this option you can restrict the AutoTimer to a certain amount of scheduled recordings. Set this to 0 to disable this functionality."
 msgstr "Pomocí této volby můžete omezit AutoTimer určitý počet nahrávek. Nastavte 0 pro vypnutí této funkce. "
 
+#: __init__.py:71
 msgid "Wizard"
 msgstr "Průvodce"
 
-msgid "Wizard or Classic Editor?"
-msgstr ""
-
+#: AutoTimerSettings.py:65 setup.xml
 msgid "Write the config file after every change which the user quits by saving."
 msgstr ""
 
-#
-msgid "Yes"
-msgstr "Ano"
-
+#: AutoTimerOverview.py:214
 msgid "Yes, and delete all timers generated by this autotimer"
 msgstr ""
 
+#: AutoTimerOverview.py:215
 msgid "Yes, but keep timers generated by this autotimer"
 msgstr ""
 
-#
-msgid "Yes, keep them."
-msgstr "Ano,zachovat ho."
-
+#: AutoTimerSettings.py:47 setup.xml
 msgid "You can control for how many days in the future timers are added. Set this to 0 to disable this feature."
 msgstr "Můžete nastavit, po kolik dnů v budoucnu jsou časovače přidávány. Nastavení 0 zakáže tuto vlastnost."
 
-#
-msgid ""
-"You can set the basic properties of an AutoTimer here.\n"
-"While 'Name' is just a human-readable name displayed in the Overview, 'Match in title' is what is looked for in the EPG."
-msgstr ""
-"Zde můžete nastavit základní vlastnosti pro AutoČasovač.\n"
-" Zatímco 'Popis' představuje jméno zobrazované v Přehledu, 'Hledat v názvu' je výraz, který se vyhledává v EPG."
-
-#
-msgid ""
-"You did not provide a valid 'Match in title' Attribute for your new AutoTimer.\n"
-"As this is a mandatory Attribute you cannot continue without doing so."
-msgstr "Nezadali jste platný výraz 'Hledat v názvu' pro nový AutoČasovač. Bez zadání tohoto parametru nemůžete dál pokračovat."
-
+#: AutoTimerEditor.py:833 AutoTimerImporter.py:274
 #, python-format
 msgid ""
 "You entered \"%s\" as Text to match.\n"
@@ -1023,27 +1157,7 @@ msgstr ""
 "Vložený \"%s\" jako Text ke shodě.\n"
 "Mohu odebrat mezery na konci?"
 
-msgid "You now know almost everything there is to know about the AutoTimer-Plugin./n/nAs a final hint I can't stress how important it is to take a look at the help texts that are shown in the setup dialogs as they cover the most frequently asked questions. Surprisingly even after the hints were added ;-)."
-msgstr ""
-
-#
-msgid ""
-"You successfully configured a new AutoTimer. Do you want to add it to the list?\n"
-"\n"
-"You can go back a step by pressing EXIT on your remote."
-msgstr ""
-"Úspěšně jste nakonfigurovali nový AutoČasovač. Chcete ho přidat do seznamu?\n"
-" \n"
-"Stisknutím EXIT na DO se můžete vrátit o krok zpět."
-
-#
-msgid ""
-"Your 'Match in title' Attribute ends with a Whitespace.\n"
-"Please confirm if this was intentional, if not they will be removed."
-msgstr ""
-"Váš výraz 'Hledat v názvu' končí mezerou.\n"
-"Podvrďte, zda to byl záměr, jinak bude mezera odstraněna."
-
+#: plugin.py:125
 #, python-format
 msgid ""
 "Your config file is not well-formed:\n"
@@ -1052,110 +1166,147 @@ msgstr ""
 "Váš konfigurační soubor nemá správný formát:\n"
 "%s"
 
+#: AutoTimerList.py:160
 msgid "[B]  "
 msgstr ""
 
+#: AutoTimerList.py:157
 msgid "[S]  "
 msgstr ""
 
 #. TRANSLATORS: AutoTimer title in MovieList (automatically opens importer, I consider this no further interaction)
+#: plugin.py:225
 msgid "add AutoTimer"
 msgstr "Přidat AutoČasovač"
 
 #. TRANSLATORS: AutoTimer title in EventInfo dialog (requires the user to select an event to base the AutoTimer on)
+#: plugin.py:227
 msgid "add AutoTimer..."
 msgstr "Přidat AutoČasovač..."
 
+#: AutoTimerEditor.py:280 AutoTimerImporter.py:31
 msgid "auto"
 msgstr "automaticky"
 
+#: AutoTimerResource.py:267
 msgid "autotimers need a match attribute"
 msgstr "AutoČasovače vyžadují zadat atribut"
 
+#: AutoTimerEditor.py:200
 msgid "case-insensitive search"
 msgstr "nerozlišovat malá/velká písmena"
 
+#: AutoTimerEditor.py:200
 msgid "case-sensitive search"
 msgstr "rozlišovat malá/velká písmena"
 
+#: AutoTimerResource.py:608
 msgid "config changed."
 msgstr "config byl změněn"
 
+#: AutoTimerEditor.py:199
 msgid "description match"
 msgstr "shodný popis"
 
+#: AutoTimerImporter.py:154
 msgid "disable"
 msgstr "vypnout"
 
+#: AutoTimerEditor.py:524 AutoTimerEditor.py:528 AutoTimerEditor.py:541
+#: AutoTimerEditor.py:545
 #, fuzzy
 msgid "disabled"
 msgstr "vypnout"
 
+#: AutoTimerEditor.py:277 AutoTimerImporter.py:28
 msgid "do nothing"
 msgstr "nic"
 
+#: AutoTimerImporter.py:154
 msgid "enable"
 msgstr "povolit"
 
+#: AutoTimerEditor.py:522 AutoTimerEditor.py:526 AutoTimerEditor.py:539
+#: AutoTimerEditor.py:543
 #, fuzzy
 msgid "enabled"
 msgstr "povolit"
 
+#: AutoTimerEditor.py:199
 msgid "exact match"
 msgstr "přesná shoda"
 
+#: AutoTimerEditor.py:279 AutoTimerImporter.py:29
 msgid "go to deep standby"
 msgstr "vypnout"
 
+#: AutoTimerEditor.py:278 AutoTimerImporter.py:30
 msgid "go to standby"
 msgstr "do Standby"
 
+#: AutoTimerSettings.py:36
 msgid "hours"
 msgstr ""
 
+#: AutoTimerEditor.py:1128
 msgid "in Description"
 msgstr "v popisu"
 
+#: AutoTimerEditor.py:1127
 msgid "in Shortdescription"
 msgstr "v krátkém popisu"
 
+#: AutoTimerEditor.py:1126
 msgid "in Title"
 msgstr "v názvu"
 
+#: AutoTimerPreview.py:86
 msgid "mins"
 msgstr "min"
 
+#: AutoTimerSettings.py:36
 msgid "minutes"
 msgstr ""
 
+#: AutoTimerResource.py:207
 msgid "missing parameter \"id\""
 msgstr "ztracaný parametr: \"Id\""
 
+#: AutoTimerEditor.py:1129
 msgid "on Weekday"
 msgstr "den v týdnu"
 
+#: AutoTimerEditor.py:199
 msgid "partial match"
 msgstr "dílčí shoda"
 
+#: AutoTimerEditor.py:207 AutoTimerEditor.py:209 AutoTimerImporter.py:215
 msgid "record"
 msgstr "záznam"
 
+#: AutoTimerEditor.py:277
 msgid "standard"
 msgstr "standardní"
 
+#: AutoTimerEditor.py:199
 msgid "title starts with"
 msgstr ""
 
+#: AutoTimerResource.py:261 AutoTimerResource.py:516
 #, python-format
 msgid "unable to find timer with id %i"
 msgstr "nelze nalézt časovač s id %i"
 
+#: AutoTimerEditor.py:375 AutoTimerEditor.py:376 AutoTimerEditor.py:377
+#: AutoTimerEditor.py:378
 msgid "unknown"
 msgstr ""
 
+#: AutoTimerEditor.py:207 AutoTimerEditor.py:209 AutoTimerImporter.py:215
 msgid "zap"
 msgstr "přepnout"
 
+#: AutoTimerEditor.py:207
 #, fuzzy
 msgid "zap and record"
 msgstr "záznam"

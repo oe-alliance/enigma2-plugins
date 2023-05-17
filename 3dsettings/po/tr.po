@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:24+0100\n"
 "PO-Revision-Date: 2015-10-18 10:29+0300\n"
 "Last-Translator: Hasan Kiran <Sunder67@hotmail.com>\n"
 "Language-Team: Turkish <Sunder67@hotmail.com>\n"
@@ -17,59 +17,78 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 1.8.4\n"
 
+#: plugin.py:214 plugin.py:217
 msgid "2D mode"
 msgstr "2B kipi"
 
+#: plugin.py:273 plugin.py:289
 msgid "3D settings"
 msgstr "3B ayarlar"
 
+#: plugin.py:287
 msgid "3D: 2D menu"
 msgstr "3B: 2B menü"
 
+#: plugin.py:283
 msgid "3D: Enable side by side menu"
 msgstr ""
 
+#: plugin.py:285
 msgid "3D: Enable top/bottom menu"
 msgstr ""
 
+#: plugin.py:287
 msgid "3D: disable 3D menu"
 msgstr "3B: 3B menüsünü devre dışı"
 
+#: plugin.py:187
 msgid "Cancel"
 msgstr "İptal"
 
+#: plugin.py:289
 msgid "Change 3D settings"
 msgstr "3B ayarlarını değiştir"
 
+#: plugin.py:188
 msgid "OK"
 msgstr "Tamam"
 
+#: plugin.py:229
 msgid "Offset"
 msgstr "Yerleşim"
 
+#: plugin.py:222
 msgid "Show side by side option in extension menu"
 msgstr ""
 
+#: plugin.py:223
 msgid "Show top/bottom option in extension menu"
 msgstr ""
 
+#: plugin.py:211
 msgid "Side by side"
 msgstr "Yan yana"
 
+#: plugin.py:224
 msgid "Switch OSD automatically"
 msgstr ""
 
+#: plugin.py:212
 msgid "Top/Bottom"
 msgstr ""
 
+#: plugin.py:226
 msgid "Turn off display"
 msgstr ""
 
+#: plugin.py:85
 msgid "off"
 msgstr "kapalı"
 
+#: plugin.py:85
 msgid "on with side by side"
 msgstr ""
 
+#: plugin.py:85
 msgid "on with top/bottom"
 msgstr ""

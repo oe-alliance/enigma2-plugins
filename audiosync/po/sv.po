@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AudioSync\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
+"POT-Creation-Date: 2023-05-17 21:24+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: WeeGull <weegull@hotmail.com>\n"
 "Language-Team: \n"
@@ -14,162 +14,212 @@ msgstr ""
 "X-Poedit-Language: German\n"
 "X-Poedit-SearchPath-0: ..\\src\n"
 
+#: AC3main.py:65 AC3main.py:147 AC3main.py:234 AC3main.py:238 AC3main.py:239
 #, python-format
 msgid "%i ms"
 msgstr "%i mS"
 
+#: plugin.py:66
 msgid "Audio Sync"
 msgstr "Ljud Synk"
 
+#: AC3setup.py:32 plugin.py:37 plugin.py:42 plugin.py:47 plugin.py:65
 msgid "Audio Sync Setup"
 msgstr "Audio Sync Inställning"
 
+#: AC3main.py:73 AC3setup.py:58
 msgid "Cancel"
 msgstr "Avbryt"
 
+#: MovableScreen.py:37
 msgid "Center screen at the lower border"
 msgstr "Centrera fönstret till nedre kanten"
 
+#: MovableScreen.py:31
 msgid "Center screen at the upper border"
 msgstr "Centrera fönstret till övre kanten"
 
+#: AC3main.py:83 AC3main.py:84
 msgid "Change active delay"
 msgstr "Ändra aktiverad fördröjning"
 
+#: AC3main.py:68
 msgid "Channel audio:"
 msgstr "Kanal ljud:"
 
+#: AC3main.py:86
 msgid "Decrease delay"
 msgstr "Minska fördröjning"
 
+#: AC3main.py:90 AC3main.py:92 AC3main.py:94
 #, python-format
 msgid "Decrease delay by %i ms (can be set)"
 msgstr "Minska fördröjning med %i mS (kan sättas)"
 
+#: AC3main.py:82 AC3main.py:87
 msgid "Discard changes and close plugin"
 msgstr "Spara inte ändringarna och stäng plugin"
 
+#: MovableScreen.py:23 MovableScreen.py:28
 msgid "Discard changes and close screen"
 msgstr "Spara inte ändringarna och stäng fönstret"
 
+#: AC3main.py:61
 msgid "Global delay"
 msgstr "Global fördröjning"
 
+#: AC3main.py:85
 msgid "Increase delay"
 msgstr "Öka fördröjning"
 
+#: AC3main.py:91 AC3main.py:93 AC3main.py:95
 #, python-format
 msgid "Increase delay by %i ms (can be set)"
 msgstr "Öka fördröjning med %i mS (kan sättas)"
 
+#: AC3main.py:219 AC3main.py:274
 msgid "Invalid selection"
 msgstr "Ogiltigt val"
 
+#: AC3main.py:272
 #, python-format
 msgid "Key %(Key)s successfully set to %(delay)i ms"
 msgstr "Knapp %(Key)s sattes till %(delay)i mS"
 
+#: AC3main.py:255
 #, python-format
 msgid "Key %(key)s (current value: %(value)i ms)"
 msgstr "Knapp %(key)s (nuvarande värde: %(value)i mS)"
 
+#: AC3main.py:212
 msgid "Menu"
 msgstr "Meny"
 
+#: AC3main.py:209
 msgid "Move plugin screen"
 msgstr "Flytta pluginfönstret"
 
+#: MovableScreen.py:27
 msgid "Move screen down"
 msgstr "Flytta fönstret nedåt"
 
+#: MovableScreen.py:34
 msgid "Move screen to the center of your TV"
 msgstr "Flytta fönstret till mitten av din TV"
 
+#: MovableScreen.py:24
 msgid "Move screen to the left"
 msgstr "Flytta fönstret till vänster"
 
+#: MovableScreen.py:36
 msgid "Move screen to the lower left corner"
 msgstr "Flytta fönstret till nedre vänstra hörnet"
 
+#: MovableScreen.py:38
 msgid "Move screen to the lower right corner"
 msgstr "Flytta fönstret till nedre högra hörnet"
 
+#: MovableScreen.py:33
 msgid "Move screen to the middle of the left border"
 msgstr "Flytta fönstret till mitten av vänster kant"
 
+#: MovableScreen.py:35
 msgid "Move screen to the middle of the right border"
 msgstr "Flytta fönstret till mitten av höger kant"
 
+#: MovableScreen.py:25
 msgid "Move screen to the right"
 msgstr "Flytta fönstret till höger"
 
+#: MovableScreen.py:30
 msgid "Move screen to the upper left corner"
 msgstr "Flytta fönstret till övre vänstra hörnet"
 
+#: MovableScreen.py:32
 msgid "Move screen to the upper right corner"
 msgstr "Flytta fönstret till övre högra hörnet"
 
+#: MovableScreen.py:26
 msgid "Move screen up"
 msgstr "Flytta fönstret uppåt"
 
+#: AC3main.py:74 AC3setup.py:59
 msgid "OK"
 msgstr "OK"
 
+#: AC3main.py:80
 msgid "Open plugin menu"
 msgstr "Öppna plugin meny"
 
+#: AC3setup.py:42
 msgid "Outer Bound (+/-)"
 msgstr "Gränsvärde (+/-)"
 
+#: AC3setup.py:38
 #, python-format
 msgid "Plugin: %(plugin)s , Version: %(version)s"
 msgstr "Plugin: %(plugin)s , Version: %(version)s"
 
+#: MovableScreen.py:39
 msgid "Reset saved position"
 msgstr "Återställ sparad position"
 
+#: AC3main.py:89
 msgid "Save current delay to key"
 msgstr "Spara nuvarande fördröjning till knapp"
 
+#: AC3main.py:75
 msgid "Save to key"
 msgstr "Spara till knapp"
 
+#: AC3main.py:81 AC3main.py:88
 msgid "Save values and close plugin"
 msgstr "Spara inställningar och stäng plugin"
 
+#: MovableScreen.py:22 MovableScreen.py:29
 msgid "Save values and close screen"
 msgstr "Spara inställningar och stäng fönster"
 
+#: AC3main.py:249
 #, python-format
 msgid "Select the key you want to set to %i ms"
 msgstr "Välj knapp som du vill sätta till %i mS"
 
+#: AC3main.py:60
 msgid "Service delay"
 msgstr "Kanal fördröjning"
 
+#: AC3main.py:96 AC3main.py:97 AC3main.py:98 AC3main.py:99
 #, python-format
 msgid "Set delay to %i ms (can be set)"
 msgstr "Ange fördröjning till %i mS (kan sättas)"
 
+#: AC3main.py:260
 msgid "Setting key canceled"
 msgstr "Inställning knapp avbruten"
 
+#: plugin.py:65
 msgid "Setup for the Audio Sync Plugin"
 msgstr "Inställning för Audio Sync Plugin"
 
+#: AC3setup.py:43
 msgid "Step in ms for arrow keys"
 msgstr "Steg i mS för pilknapparna"
 
+#: AC3setup.py:48 AC3setup.py:49 AC3setup.py:50
 #, python-format
 msgid "Step in ms for key %i"
 msgstr "Steg i mS för knapp %i"
 
+#: AC3setup.py:45 AC3setup.py:46 AC3setup.py:47
 #, python-format
 msgid "Step in ms for keys '%s'"
 msgstr "Steg i mS för knappar '%s'"
 
+#: AC3setup.py:44
 msgid "Wait time in ms before activation:"
 msgstr "Väntetid i mS före aktivering:"
 
+#: plugin.py:66
 msgid "sets the Audio Delay (LipSync)"
 msgstr "sätter ljudfrödröjning (LipSync)"

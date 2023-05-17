@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: StartUpService\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Dr.Best <dr.best@dreambox-tools.info>\n"
 "Language-Team: \n"
@@ -14,23 +14,30 @@ msgstr ""
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
+#: plugin.py:164
 msgid "If you see this message, please switch to the service you want to mark as startservice and try again."
 msgstr "Wenn diese Nachricht erscheint bitte auf den Kanal schalten, welcher als Startservice gesetzt werden soll, und dann nochmal versuchen."
 
+#: plugin.py:126
 msgid "reset startup service"
 msgstr "Startservice zurücksetzen"
 
+#: plugin.py:137
 msgid "reset startup service for booting..."
 msgstr "Startservice nach dem Booten zurücksetzen..."
 
+#: plugin.py:138
 msgid "reset startup service for leaving standby mode..."
 msgstr "Startservice beim Verlassen des Standby-Modus zurücksetzen..."
 
+#: plugin.py:125
 msgid "set as startup service"
 msgstr "Als Startservice setzen"
 
+#: plugin.py:132
 msgid "set as startup service after booting..."
 msgstr "Als Startservice nach dem Booten setzen..."
 
+#: plugin.py:133
 msgid "set as startup service after leaving standby mode..."
 msgstr "Als Startservice beim Verlassen des Standby-Modus setzen..."

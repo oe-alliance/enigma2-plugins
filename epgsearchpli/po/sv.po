@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 EPGSearch Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2014-11-22 20:47+0100\n"
 "Last-Translator: Magnus Nilsson <mag_nilsson@hotmail.com>\n"
 "Language-Team: none\n"
@@ -17,226 +17,297 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
+#: EPGSearch.py:335
 #, python-format
 msgid " (%d min)"
 msgstr ""
 
+#: EPGSearch.py:341
 #, python-format
 msgid " (%s%d min)"
 msgstr ""
 
+#: EPGSearchSetup.py:47
 msgid "Add \"Search event in EPG\" to channel menu"
 msgstr ""
 
+#: EPGSearchSetup.py:46
 msgid "Add \"Search event in EPG\" to event menu"
 msgstr ""
 
+#: EPGSearchSetup.py:41
 msgid "Add \"Search\" Button to EPG"
 msgstr "Lägg \"Sök\" knappen till EPG"
 
+#: EPGSearch.py:589
 msgid "Add timer"
 msgstr "Lägg till timer"
 
+#: EPGSearchSetup.py:47
 msgid "Adds \"Search event in EPG\" item into the channel selection context menu (needs restart GUI)"
 msgstr ""
 
+#: EPGSearchSetup.py:46
 msgid "Adds \"Search event in EPG\" item into the event menu (needs restart GUI)"
 msgstr ""
 
+#: EPGSearch.py:1079 EPGSearchSetup.py:71
 msgid "Cancel"
 msgstr "Avbryt"
 
+#: EPGSearch.py:1118
 msgid "Channel Selection"
 msgstr "Kanalval"
 
+#: EPGSearch.py:620 EPGSearch.py:730 plugin.py:52
 msgid "Choice list"
 msgstr ""
 
+#: plugin.py:44
 msgid "Choice list EPGSearch"
 msgstr ""
 
+#: EPGSearch.py:742
 msgid "Choice list RED Button"
 msgstr ""
 
+#: EPGSearchSetup.py:44
 msgid "Choosing an encoding. \"UTF-8\" to search for EPG cyrillic."
 msgstr ""
 
+#: EPGSearch.py:823
 #, fuzzy
 msgid "Clear history"
 msgstr "Ingen historik"
 
+#: EPGSearch.py:872
 #, python-format
 msgid "Could not read AutoTimer timer list: %s"
 msgstr "Kunde inte läsa timerlistan för AutoTimer: %s"
 
+#: EPGSearchSetup.py:50
 msgid "Display name service as in bouquets"
 msgstr ""
 
+#: EPGSearch.py:641
 msgid "EPG Search"
 msgstr "EPG sökning"
 
+#: plugin.py:143
 #, fuzzy
 msgid "EPGSearch"
 msgstr "EPG sökning"
 
+#: EPGSearchSetup.py:34 EPGSearchSetup.py:89
 msgid "EPGSearch Setup"
 msgstr "Inställningar för EPG Sökning"
 
+#: EPGSearchSetup.py:44
 #, fuzzy
 msgid "Encoding Search to EPG"
 msgstr "Lägg \"Sök\" knappen till EPG"
 
+#: EPGSearch.py:796
 msgid "Enter text to search for"
 msgstr "Skriv in text att söka efter"
 
+#: EPGSearch.py:815
 msgid "Export selected as AutoTimer"
 msgstr "Exportera vald som AutoTimer"
 
+#: EPGSearch.py:574
 msgid "History"
 msgstr "Historik"
 
+#: EPGSearchSetup.py:40
 msgid "How many entries to keep in the search history at most. 0 disables history entirely!"
 msgstr "Hur många poster som skall vara i sökhistoriken som mest. 0 inaktiverar historia helt!"
 
+#: EPGSearchSetup.py:50
 msgid "If 'Search only bouquets' is enabled, show service name as in bouquets for renamed services."
 msgstr ""
 
+#: EPGSearchSetup.py:49
 msgid "If this setting is enabled, searching EPG in only services in user bouquets."
 msgstr ""
 
+#: EPGSearchSetup.py:41
 msgid "If this setting is enabled, the plugin adds a \"Search\" Button to the regular EPG."
 msgstr "Om denna inställning är aktiverad, kommer pluginet att lägga till \"sök\" knapp till den vanliga EPG:n."
 
+#: EPGSearchSetup.py:43
 #, fuzzy
 msgid "If this setting is enabled, the plugin adds picons."
 msgstr "Om denna inställning är aktiverad, kommer pluginet att lägga till \"sök\" knapp till den vanliga EPG:n."
 
+#: EPGSearch.py:813
 msgid "Import from AutoTimer"
 msgstr "Importera från AutoTimer"
 
+#: EPGSearch.py:802
 msgid "Import from EPG"
 msgstr "Importera från EPG"
 
+#: EPGSearch.py:801
 msgid "Import from Timer"
 msgstr "Importera från timer"
 
+#: EPGSearchSetup.py:40
 msgid "Length of History"
 msgstr "Längd på historik"
 
+#: EPGSearch.py:950
 msgid "List of history is cleared !"
 msgstr ""
 
+#: EPGSearch.py:624 EPGSearch.py:738
 msgid "Lookup in TMBD"
 msgstr ""
 
+#: EPGSearch.py:573
 msgid "New Search"
 msgstr "Ny sökning"
 
+#: EPGSearch.py:968
 #, fuzzy
 msgid "No history !"
 msgstr "Ingen historik"
 
+#: EPGSearch.py:1080 EPGSearchSetup.py:70
 msgid "OK"
 msgstr "OK"
 
+#: EPGSearch.py:820
 msgid "Open selected in IMDb"
 msgstr ""
 
+#: EPGSearch.py:739
 msgid "Partnerbox Entries"
 msgstr ""
 
+#: EPGSearch.py:814
 msgid "Save search as AutoTimer"
 msgstr "Spara sökning som AutoTimer"
 
+#: plugin.py:40 plugin.py:50
 msgid "Search"
 msgstr "Sök"
 
+#: plugin.py:144
 msgid "Search EPG by title event"
 msgstr ""
 
+#: plugin.py:164 plugin.py:166
 #, fuzzy
 msgid "Search event in EPG"
 msgstr "Sök EPG"
 
+#: EPGSearch.py:818
 msgid "Search for TMDb info"
 msgstr ""
 
+#: EPGSearchSetup.py:49
 msgid "Search only bouquets"
 msgstr ""
 
+#: EPGSearchSetup.py:48
 msgid "Search strictness"
 msgstr ""
 
+#: EPGSearchSetup.py:45
 #, fuzzy
 msgid "Search type"
 msgstr "Sök"
 
+#: EPGSearchSetup.py:51
 msgid "Search type for filter"
 msgstr ""
 
+#: EPGSearch.py:1094
 msgid "Select a timer to search"
 msgstr "Välj en timer för sökning"
 
+#: EPGSearch.py:741 plugin.py:43
 msgid "Select action:"
 msgstr ""
 
+#: plugin.py:41
 msgid "Select channel"
 msgstr ""
 
+#: EPGSearch.py:883 EPGSearch.py:962
 msgid "Select text to search for"
 msgstr "Välj text att söka efter"
 
+#: EPGSearchSetup.py:51
 msgid "Select type for filter search. Press button P +/- for show/hide filter in description after search."
 msgstr ""
 
+#: EPGSearchSetup.py:45
 msgid "Select type for search, \"partial match\" for the most extensive search."
 msgstr ""
 
+#: EPGSearchSetup.py:42
 msgid "Select type: 'Search and Select channel' or 'Search'."
 msgstr ""
 
+#: EPGSearchSetup.py:48
 msgid "Select whether or not you want to enforce case correctness."
 msgstr ""
 
+#: EPGSearch.py:825
 msgid "Setup"
 msgstr "Inställning"
 
+#: EPGSearch.py:824
 msgid "Timers list"
 msgstr ""
 
+#: EPGSearchSetup.py:42
 msgid "Type blue Button"
 msgstr ""
 
+#: EPGSearchSetup.py:43
 msgid "Use Picons"
 msgstr ""
 
+#: EPGSearch.py:810
 msgid "Zap to selected service"
 msgstr ""
 
+#: __init__.py:38
 msgid "case-insensitive search"
 msgstr ""
 
+#: __init__.py:38
 msgid "case-sensitive search"
 msgstr ""
 
+#: __init__.py:31
 msgid "choice (Search and standard)"
 msgstr ""
 
+#: __init__.py:37 __init__.py:39
 msgid "exact match"
 msgstr ""
 
+#: __init__.py:31
 #, fuzzy
 msgid "only Search"
 msgstr "Sök"
 
+#: __init__.py:37 __init__.py:39
 msgid "partial match"
 msgstr ""
 
+#: plugin.py:157
 msgid "search EPG"
 msgstr "Sök EPG"
 
+#: plugin.py:151
 msgid "search EPG..."
 msgstr "Sök EPG..."
 
+#: __init__.py:39
 msgid "title starts with"
 msgstr ""

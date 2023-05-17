@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SetPasswd\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2017-07-11 08:28+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
@@ -13,33 +13,43 @@ msgstr ""
 "X-Generator: Poedit 2.0.2\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
+#: plugin.py:56
 msgid "Cancel"
 msgstr "Atšaukti"
 
+#: plugin.py:29
 msgid "Change Root Password"
 msgstr "Pakeisti 'root' slaptažodį"
 
+#: plugin.py:144
 #, fuzzy
 msgid "Change or reset the root password of your Receiver"
 msgstr "Pakeisti, aba atšaukti 'root' vartotojo slaptažodį"
 
+#: plugin.py:78
 msgid "Enter new Password"
 msgstr "Įrašykite naują slaptažodį"
 
+#: plugin.py:120
 msgid "Enter your password here:"
 msgstr "Čai įrašykite slaptažodį:"
 
+#: plugin.py:57
 msgid "Set Password"
 msgstr "Nustatyti slaptažodį"
 
+#: plugin.py:93
 msgid "Sucessfully changed password for root user to: "
 msgstr "'root' vartotojo slabtažodis pakeistas į: "
 
+#: plugin.py:96
 msgid "Unable to change/reset password for root user"
 msgstr "Pakeisti/atkurti 'root' slaptažodžio nepavyko"
 
+#: plugin.py:58
 msgid "new Random"
 msgstr "Naujas atsitiktinis"
 
+#: plugin.py:59
 msgid "virt. Keyboard"
 msgstr "Virtuali klaviatūra"

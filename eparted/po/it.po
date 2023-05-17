@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - eParted\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2014-02-28 19:15+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -16,76 +16,99 @@ msgstr ""
 "X-Poedit-Basepath: .../enigma2-plugins/eparted\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/eparted\n"
 
+#: eparted.py:325
 msgid "End"
 msgstr "Fine"
 
+#: eparted.py:107
 #, python-format
 msgid "Error command '%s'"
 msgstr "Errore in esecuzione comando \"%s\""
 
+#: eparted.py:323
 msgid "Nr"
 msgstr "Numero"
 
+#: eparted.py:608
 msgid "Please Wait"
 msgstr "Attendere"
 
+#: eparted.py:326
 msgid "Size"
 msgstr "Dimensioni"
 
+#: eparted.py:324 eparted.py:534
 msgid "Start"
 msgstr "Inizio"
 
+#: eparted.py:327
 msgid "Type"
 msgstr "Tipo"
 
+#: eparted.py:340
 msgid "add"
 msgstr "Aggiungere"
 
+#: eparted.py:202
 msgid "add partition"
 msgstr "Aggiungere partizione"
 
+#: eparted.py:230
 msgid "cancel"
 msgstr "Annullare"
 
+#: eparted.py:442
 #, python-format
 msgid "create partition %s"
 msgstr "Creare partizione %s "
 
+#: plugin.py:13
 msgid "creating and manipulating partition tables"
 msgstr "Creare e modificare la tabella partizioni"
 
+#: eparted.py:345
 msgid "delete"
 msgstr "Rimuovere"
 
+#: eparted.py:467
 #, python-format
 msgid "delete partition %s"
 msgstr "Rimuovere la partizione %s "
 
+#: plugin.py:13
 msgid "eParted"
 msgstr "eParted"
 
+#: eparted.py:499 eparted.py:532
 msgid "execute"
 msgstr "Eseguire"
 
+#: eparted.py:227
 msgid "filesystem:"
 msgstr "Filesystem:"
 
+#: eparted.py:350
 msgid "free"
 msgstr "Libero"
 
+#: eparted.py:458
 #, python-format
 msgid "make filesystem '%s' on partition %s (%d %s)"
 msgstr "Creare un filesystem \"%s\" nella partizione %s  (%d %s)"
 
+#: eparted.py:231
 msgid "ok"
 msgstr "Ok"
 
+#: eparted.py:183
 msgid "partition(s)"
 msgstr "Partizioni"
 
+#: eparted.py:594 eparted.py:600
 msgid "quit"
 msgstr "Chiudere"
 
+#: eparted.py:226
 #, python-format
 msgid "size in %s (max %d %s):"
 msgstr "Capacità in %s (max %d %s):"

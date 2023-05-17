@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tag editor\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2012-07-25 22:22+0330\n"
 "Last-Translator: mehdi <mehdi_ar_yekta@yahoo.com>\n"
 "Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
@@ -18,26 +18,33 @@ msgstr ""
 "X-Poedit-Language: Persian\n"
 "X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
 
+#: plugin.py:248
 msgid "Add new tag..."
 msgstr "افزودن یک برچسپ جدید"
 
+#: plugin.py:36
 msgid "Cancel"
 msgstr "لغو کردن"
 
+#: plugin.py:252
 msgid "Delete all tags..."
 msgstr "حذف کردن همه برچسپ ها"
 
+#: plugin.py:250
 msgid "Delete this tag..."
 msgstr "حذف این برچسب"
 
+#: plugin.py:251
 msgid "Delete unused tags"
 msgstr "حذف برچسب های بی مصرف"
 
+#: plugin.py:234
 msgid ""
 "Do you really want to delete all tags everywhere?\n"
 "(Note that 'Cancel' will not undo this!)"
 msgstr ""
 
+#: plugin.py:217
 #, python-format
 msgid ""
 "Do you really want to delete tag \"%s\" everywhere?\n"
@@ -45,28 +52,36 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: This is the title of the TagEditor main screen
+#: plugin.py:68
 msgid "Edit Tags"
 msgstr ""
 
+#: plugin.py:39
 msgid "Load"
 msgstr "بارگذاری کردن"
 
+#: plugin.py:38
 msgid "New"
 msgstr "جدید"
 
+#: plugin.py:37
 msgid "OK"
 msgstr "مورد تایید است"
 
+#: plugin.py:74
 msgid "Please enter the new tag"
 msgstr "لطفا برچسب جدید را وارد نمایید "
 
+#: plugin.py:249
 msgid "Rename this tag..."
 msgstr "تغییر نام دادن برچسب... در حال"
 
+#: plugin.py:197
 #, python-format
 msgid "Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo this!)"
 msgstr ""
 
 #. TRANSLATORS: this is the string used in the movie context menu for TagEditor
+#: plugin.py:348
 msgid "edit tags"
 msgstr ""

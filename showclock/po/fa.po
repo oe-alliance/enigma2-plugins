@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: show clock Persian Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Persian Prince <persianprince@persianpros.org>\n"
 "Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
@@ -14,21 +14,27 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
+#: plugin.py:145
 msgid "Cancel"
 msgstr "لغو کردن"
 
+#: plugin.py:120
 msgid "Clock show timeout"
 msgstr "نمایش مدت زمان ساعت"
 
+#: plugin.py:126
 msgid "Description"
 msgstr "توضیحات"
 
+#: plugin.py:77
 msgid "Extensions menu"
 msgstr "منوی افزوده ها"
 
+#: plugin.py:147
 msgid "Help"
 msgstr "راهنمایی"
 
+#: plugin.py:208
 msgid ""
 "Modify the settings to match your preferences. To change the clock position, select \"Move clock\" and relocate using the direction keys. Press OK to store current position and return to the setup menu or EXIT to cancel the moving.\n"
 "\n"
@@ -37,47 +43,61 @@ msgid ""
 "If GP3 is installed, weekday shows up in selected language, otherwise always in english."
 msgstr ""
 
+#: plugin.py:148
 msgid "Move clock"
 msgstr "تنظیم ساعت"
 
+#: plugin.py:124
 msgid "Name"
 msgstr "نام"
 
+#: plugin.py:146
 msgid "OK"
 msgstr "اوکی"
 
+#: plugin.py:217
 msgid ""
 "Please use direction keys to move the clock.\n"
 "\n"
 "Press OK to store current position and return to the setup menu or EXIT to cancel the moving."
 msgstr ""
 
+#: plugin.py:77
 msgid "Plugin menu"
 msgstr "منوی پلاگین"
 
+#: plugin.py:76
 msgid "Push \"Exit\" long to show/hide clock"
 msgstr ""
 
+#: plugin.py:115 plugin.py:170
 msgid "Show Clock Setup"
 msgstr "نمایش تنظیم ساعت"
 
+#: plugin.py:75
 msgid "Show Clock setup"
 msgstr "نمایش تنظیم ساعت"
 
+#: plugin.py:122
 msgid "Show in"
 msgstr "نمایش در"
 
+#: plugin.py:121
 msgid "Specify how long (seconds) the clock shall be shown before it disappears. Set to \"0\" to show clock until hidden manually."
 msgstr ""
 
+#: plugin.py:127
 msgid "Specify plugin description to be used in menu (needs GUI restart)."
 msgstr "از یک توضیحات مشخص برای پلاگین در منو باید استفاده شود و بعدش ریستارت کنید"
 
+#: plugin.py:125
 msgid "Specify plugin name to be used in menu (needs GUI restart)."
 msgstr "از یک نام مشخص برای پلاگین در منو باید استفاده شود و بعدش ریستارت کنید"
 
+#: plugin.py:123
 msgid "Specify whether plugin shall show up in plugin menu or extensions menu (needs GUI restart)"
 msgstr ""
 
+#: plugin.py:170 plugin.py:402 plugin.py:410
 msgid "Ver."
 msgstr "ورژن."

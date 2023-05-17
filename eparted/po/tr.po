@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eParted(POT)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2015-10-23 23:49+0300\n"
 "Last-Translator: Hasan Kiran <Sunder67@hotmail.com>\n"
 "Language-Team: Turkish <sunder67@hotmail.com>\n"
@@ -18,76 +18,99 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
+#: eparted.py:325
 msgid "End"
 msgstr "Son"
 
+#: eparted.py:107
 #, python-format
 msgid "Error command '%s'"
 msgstr "'%s' komut hatası"
 
+#: eparted.py:323
 msgid "Nr"
 msgstr ""
 
+#: eparted.py:608
 msgid "Please Wait"
 msgstr "Lütfen Bekleyin"
 
+#: eparted.py:326
 msgid "Size"
 msgstr "Boyut"
 
+#: eparted.py:324 eparted.py:534
 msgid "Start"
 msgstr "Başlat"
 
+#: eparted.py:327
 msgid "Type"
 msgstr "Türü"
 
+#: eparted.py:340
 msgid "add"
 msgstr "ekle"
 
+#: eparted.py:202
 msgid "add partition"
 msgstr "bölüm ekle"
 
+#: eparted.py:230
 msgid "cancel"
 msgstr "iptal"
 
+#: eparted.py:442
 #, python-format
 msgid "create partition %s"
 msgstr " %s bölüm oluştur"
 
+#: plugin.py:13
 msgid "creating and manipulating partition tables"
 msgstr "bölüm tabloları oluşturma ve manipülasyonu"
 
+#: eparted.py:345
 msgid "delete"
 msgstr "sil"
 
+#: eparted.py:467
 #, python-format
 msgid "delete partition %s"
 msgstr "%s bölüm sil"
 
+#: plugin.py:13
 msgid "eParted"
 msgstr "eParted"
 
+#: eparted.py:499 eparted.py:532
 msgid "execute"
 msgstr "çalıştır"
 
+#: eparted.py:227
 msgid "filesystem:"
 msgstr "dosya sistemi:"
 
+#: eparted.py:350
 msgid "free"
 msgstr "boş"
 
+#: eparted.py:458
 #, python-format
 msgid "make filesystem '%s' on partition %s (%d %s)"
 msgstr "%s bölümünü  '%s' dosya sistemi yap (%d %s)"
 
+#: eparted.py:231
 msgid "ok"
 msgstr "tamam"
 
+#: eparted.py:183
 msgid "partition(s)"
 msgstr "bölüm(ler)"
 
+#: eparted.py:594 eparted.py:600
 msgid "quit"
 msgstr "çık"
 
+#: eparted.py:226
 #, python-format
 msgid "size in %s (max %d %s):"
 msgstr "boyutunda %s (azami %d %s):"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2012-12-03 15:01+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -17,21 +17,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: plugin.py:248
 msgid "Add new tag..."
 msgstr "Add new tag..."
 
+#: plugin.py:36
 msgid "Cancel"
 msgstr "Cancel"
 
+#: plugin.py:252
 msgid "Delete all tags..."
 msgstr "Delete all tags..."
 
+#: plugin.py:250
 msgid "Delete this tag..."
 msgstr "Delete this tag..."
 
+#: plugin.py:251
 msgid "Delete unused tags"
 msgstr "Delete unused tags"
 
+#: plugin.py:234
 msgid ""
 "Do you really want to delete all tags everywhere?\n"
 "(Note that 'Cancel' will not undo this!)"
@@ -39,6 +45,7 @@ msgstr ""
 "Do you really want to delete all tags everywhere?\n"
 "(Note that 'Cancel' will not undo this!)"
 
+#: plugin.py:217
 #, python-format
 msgid ""
 "Do you really want to delete tag \"%s\" everywhere?\n"
@@ -48,28 +55,36 @@ msgstr ""
 "(Note that 'Cancel' will not undo this!)"
 
 #. TRANSLATORS: This is the title of the TagEditor main screen
+#: plugin.py:68
 msgid "Edit Tags"
 msgstr "Edit Tags"
 
+#: plugin.py:39
 msgid "Load"
 msgstr "Load"
 
+#: plugin.py:38
 msgid "New"
 msgstr "New"
 
+#: plugin.py:37
 msgid "OK"
 msgstr "OK"
 
+#: plugin.py:74
 msgid "Please enter the new tag"
 msgstr "Please enter the new tag"
 
+#: plugin.py:249
 msgid "Rename this tag..."
 msgstr "Rename this tag..."
 
+#: plugin.py:197
 #, python-format
 msgid "Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo this!)"
 msgstr "Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo this!)"
 
 #. TRANSLATORS: this is the string used in the movie context menu for TagEditor
+#: plugin.py:348
 msgid "edit tags"
 msgstr "edit tags"

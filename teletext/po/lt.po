@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - teletext\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2017-07-11 11:13+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P.\n"
@@ -17,237 +17,316 @@ msgstr ""
 "X-Generator: Poedit 2.0.2\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/teletext\n"
 
+#: plugin.py:1710 plugin.py:1719 plugin.py:1746
 msgid "<empty>"
 msgstr "< tuščia >"
 
+#: plugin.py:1722
 msgid "Add"
 msgstr "Pridėti"
 
+#: plugin.py:69
 msgid "Arabic"
 msgstr "Arabų"
 
+#: plugin.py:1344
 msgid "Background caching"
 msgstr "Į podėlį kelti fone"
 
+#: plugin.py:1333
 msgid "Brightness"
 msgstr "Šviesumas"
 
+#: plugin.py:1131 plugin.py:1278
 msgid "Cancel"
 msgstr "Atšaukti"
 
+#: plugin.py:69
 msgid "Central and Southeast Europe"
 msgstr "Vidurio ir Pietryčių Europa"
 
+#: plugin.py:1687
 msgid "Clear all"
 msgstr "Išvalyti viską"
 
+#: plugin.py:1334
 msgid "Contrast"
 msgstr "Kontrastas"
 
+#: plugin.py:69
 msgid "Cyrillic"
 msgstr "Kirilica"
 
+#: plugin.py:1345
 msgid "Debug"
 msgstr "Derinti"
 
+#: plugin.py:1279
 msgid "Default"
 msgstr "Numatyta"
 
+#: plugin.py:1724
 msgid "Delete"
 msgstr "Ištrinti"
 
+#: plugin.py:1781
 msgid "Delete all favorites?"
 msgstr "Trinti visus mėgstamiausius?"
 
+#: plugin.py:1770
 msgid "Delete favorite?"
 msgstr "Trinti šį mėgstamiausią?"
 
+#: plugin.py:70
 msgid "Disabled"
 msgstr "Išjungtas"
 
+#: plugin.py:1433
 msgid "Discard changes?"
 msgstr "Atšaukti pakeitimus?"
 
+#: plugin.py:1339
 msgid "Display edges"
 msgstr "Ekrano kraštai"
 
+#: plugin.py:78
 msgid "Display first and last row."
 msgstr "Rodyti pirmą ir paskutinę eilutes."
 
+#: plugin.py:69
 msgid "Eastern Europe"
 msgstr "Rytų Europa"
 
+#: plugin.py:1726
 msgid "Edit"
 msgstr "Redaguoti"
 
+#: plugin.py:1753
 #, python-format
 msgid "Enter text for page %s"
 msgstr "Įrašykite tekstą puslapiui %s"
 
+#: plugin.py:72 plugin.py:73
 msgid "Enter values (left, top, right, bottom) or press TEXT to move and resize the teletext graphically."
 msgstr "Įrašykite reikšmes (kairė, viršus, dešinė, apačia) arba spauskite 'TEXT', kad perkelti ir keisti teletekstą grafiškai."
 
+#: plugin.py:69
 msgid "Hebrew / Arabic"
 msgstr "Hebrajų / Arabų"
 
+#: plugin.py:83
 msgid "If caching is disabled, each teletext page will searched when you entered its number."
 msgstr "Jei kėlimas į podėlį išjungtas, bus ieškoma kiekviename teleteksto, kurio numerį nurodysite, puslapyje."
 
+#: plugin.py:1870
 msgid "No teletext available."
 msgstr "Nėra prieinamo teleteksto."
 
+#: plugin.py:1132 plugin.py:1153 plugin.py:1280
 msgid "OK"
 msgstr "Gerai"
 
+#: plugin.py:1338 plugin.py:1343
 msgid "Position and size"
 msgstr "Padėtis ir dydis"
 
+#: plugin.py:79
 msgid "Print debug messages to /tmp/dbttcp.log."
 msgstr "Spausdinti derinimo pranešimus į /tmp/dbttcp.log."
 
+#: plugin.py:1337
 msgid "Region"
 msgstr "Regionas"
 
+#: plugin.py:1331
 msgid "Scale filter"
 msgstr "Mastelio keitimo filtras"
 
+#: plugin.py:1332
 msgid "Scale filter zoom"
 msgstr "Filtras didinant"
 
+#: plugin.py:1725
 msgid "Select"
 msgstr "Pasirinkti"
 
+#: plugin.py:75
 msgid "Select brightness."
 msgstr "Pasirinkite ryškumą."
 
+#: plugin.py:76
 msgid "Select contrast."
 msgstr "Pasirinkite kontrastą."
 
+#: plugin.py:74
 msgid "Select splitting mode."
 msgstr "Pasirinkite perskirto ekrano režimą palyginimui."
 
+#: plugin.py:1113
 msgid "Select teletext"
 msgstr "Pasirinkite teletekstą"
 
+#: plugin.py:80
 msgid "Select teletext version to use."
 msgstr "Pasirinkite teleteksto versiją."
 
+#: plugin.py:77
 msgid "Select transparency."
 msgstr "Pasirinkite skaidrumą."
 
+#: plugin.py:82
 msgid "Select your favourite scale filter."
 msgstr "Pasirinkite mėgstamiausią mastelio keitimo filtrą."
 
+#: plugin.py:81
 msgid "Select your region to use the proper font."
 msgstr "Pasirinkite regioną, kad matytumėte teisingą šriftą."
 
+#: plugin.py:1340
 msgid "Splitting mode"
 msgstr "Perskirto ekrano režimas"
 
+#: plugin.py:1653 plugin.py:1822
 msgid "TeleText favorites"
 msgstr "Mėgstamiausi teletekstai"
 
+#: plugin.py:1255 plugin.py:1477
 msgid "TeleText settings"
 msgstr "Teleteksto nustatymai"
 
+#: plugin.py:1336
 msgid "Text level"
 msgstr "Teksto lygis"
 
+#: plugin.py:1335
 msgid "Transparency"
 msgstr "Skaidrumas"
 
+#: plugin.py:69
 msgid "Turkish / Greek"
 msgstr "Turkų / Graikų"
 
+#: plugin.py:69
 msgid "Western Europe and Turkey"
 msgstr "Vakarų Europa ir Turkija"
 
+#: plugin.py:69
 msgid "Western and Central Europe"
 msgstr "Vakarų ir Vidurio Europa"
 
+#: plugin.py:70
 msgid "anisotropic"
 msgstr "anizotropinio"
 
+#: plugin.py:70
 msgid "bilinear"
 msgstr "dviejų linijų"
 
+#: plugin.py:234
 msgid "blue teletext link"
 msgstr "mėlyna teleteksto nuoroda"
 
+#: plugin.py:206 plugin.py:207 plugin.py:208 plugin.py:209 plugin.py:210
+#: plugin.py:211 plugin.py:212 plugin.py:213
 msgid "enter page number"
 msgstr "Įrašykite puslapio numerį"
 
+#: plugin.py:214
 msgid "enter page number / page 100"
 msgstr "Įrašykite puslapio numerį / puslapio 100"
 
+#: plugin.py:216
 msgid "enter page number / rezap"
 msgstr "Įrašykite puslapio numerį / perjungti"
 
+#: plugin.py:218 plugin.py:237
 msgid "exit"
 msgstr "užverti"
 
+#: plugin.py:222
 msgid "favorites / decrease height"
 msgstr "mėgstamiausi / sumažinti aukštį"
 
+#: plugin.py:232
 msgid "green teletext link"
 msgstr "žalia teleteksto nuoroda"
 
+#: plugin.py:217
 msgid "next channel / channel list"
 msgstr "sekantis kanalas / kanalų sąrašas"
 
+#: plugin.py:225
 msgid "next page / catch page / move"
 msgstr "sekantis puslapis / fiksuoti puslapį / perkelti"
 
+#: plugin.py:228
 msgid "next sub page / move"
 msgstr "sekantis subpuslapis / perkelti"
 
+#: plugin.py:67
 msgid "picture and teletext"
 msgstr "vaizdas ir teletekstas"
 
+#: plugin.py:215
 msgid "prev channel / channel list"
 msgstr "kanalo peržiūra / kanalų sąrašas"
 
+#: plugin.py:229
 msgid "prev page / catch page / move"
 msgstr "ankstesnis puslapis / fiksuoti puslapį / perkelti"
 
+#: plugin.py:226
 msgid "prev sub page / move"
 msgstr "ankstesnis subpuslapis / perkelti"
 
+#: plugin.py:231
 msgid "red teletext link"
 msgstr "raudona teleteksto nuoroda"
 
+#: plugin.py:70
 msgid "sharp"
 msgstr "ryškus"
 
+#: plugin.py:70
 msgid "sharper"
 msgstr "ryškesnis"
 
+#: plugin.py:235
 msgid "split screen"
 msgstr "perskirtas ekranas"
 
+#: plugin.py:227
 msgid "start page catching / select page"
 msgstr "kelti puslapį į podėlį / pasirinkti puslapį"
 
+#: plugin.py:67
 msgid "teletext and picture"
 msgstr "teletekstas ir vaizdas"
 
+#: plugin.py:67
 msgid "teletext in picture"
 msgstr "teletekstas vaizde"
 
+#: plugin.py:224
 msgid "teletext settings"
 msgstr "Teleteksto nustatymai"
 
+#: plugin.py:230
 msgid "toggle flof/top"
 msgstr "perjungti apačią / viršų"
 
+#: plugin.py:223
 msgid "toggle info"
 msgstr "perjungti informaciją"
 
+#: plugin.py:236
 msgid "toggle transparency"
 msgstr "Perjungti skaidrumą"
 
+#: plugin.py:233
 msgid "yellow teletext link"
 msgstr "geltona teleteksto nuoroda"
 
+#: plugin.py:221
 msgid "zoom / increase height"
 msgstr "priartinti / padidinti aukštį"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 plugin - eurotictv\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2012-02-29 22:38+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -20,33 +20,43 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: .../eurotictv\n"
 
+#: plugin.py:61
 msgid "Exit"
 msgstr "Uscire"
 
+#: plugin.py:64
 msgid "Fullscreen"
 msgstr "A tutto schermo"
 
+#: plugin.py:26
 msgid "LIVE"
 msgstr "DAL VIVO"
 
+#: plugin.py:26
 msgid "No Connection"
 msgstr "Nessuna connessione"
 
+#: plugin.py:62
 msgid "Play"
 msgstr "Play"
 
+#: plugin.py:147
 #, python-format
 msgid "Streaming error: %s"
 msgstr "Errore streaming: %s"
 
+#: plugin.py:212
 msgid "Watch eUroticTV via HTTP Live Streaming"
 msgstr "Guardare eUroticTV via Live Streaming HTTP"
 
+#: plugin.py:26
 msgid "connecting..."
 msgstr "Connessione in corso"
 
+#: plugin.py:26
 msgid "disconnected"
 msgstr "Disconnesso"
 
+#: plugin.py:26
 msgid "pause"
 msgstr "Pausa"

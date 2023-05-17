@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - setpasswd\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@118como.org>\n"
@@ -17,33 +17,43 @@ msgstr ""
 "X-Poedit-Basepath: /home/dario/Plugins/setpasswd\n"
 "X-Poedit-SearchPath-0: /home/dario/Plugins/setpasswd\n"
 
+#: plugin.py:56
 msgid "Cancel"
 msgstr "Annull."
 
+#: plugin.py:29
 msgid "Change Root Password"
 msgstr "Cambiare la password di root"
 
+#: plugin.py:144
 #, fuzzy
 msgid "Change or reset the root password of your Receiver"
 msgstr "Cambiare o annullare la password del Receiver"
 
+#: plugin.py:78
 msgid "Enter new Password"
 msgstr "Inserire la nuova password"
 
+#: plugin.py:120
 msgid "Enter your password here:"
 msgstr "Inserire qui la nuova password:"
 
+#: plugin.py:57
 msgid "Set Password"
 msgstr "Confermare"
 
+#: plugin.py:93
 msgid "Sucessfully changed password for root user to: "
 msgstr "Password utente root modificata correttamente in: "
 
+#: plugin.py:96
 msgid "Unable to change/reset password for root user"
 msgstr "Impossibile cambiare/annullare la password per l'utente root!"
 
+#: plugin.py:58
 msgid "new Random"
 msgstr "Nuova casuale"
 
+#: plugin.py:59
 msgid "virt. Keyboard"
 msgstr "Tastiera virt."

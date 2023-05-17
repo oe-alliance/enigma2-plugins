@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# $PACKAGEDESCRIPION
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the YTTrailer package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: YTTrailer 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,38 +17,50 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: plugin.py:52
 msgid "1080p"
 msgstr ""
 
+#: plugin.py:52
 msgid "720p"
 msgstr ""
 
+#: plugin.py:452
 msgid "Best resolution"
 msgstr ""
 
+#: plugin.py:446
 msgid "Cancel"
 msgstr ""
 
+#: plugin.py:454
 msgid "Close Player with exit-key"
 msgstr ""
 
+#: plugin.py:451
 msgid "Extended search filter"
 msgstr ""
 
+#: plugin.py:453
 msgid "Max. results in list-mode"
 msgstr ""
 
+#: plugin.py:52
 msgid "No HD streaming"
 msgstr ""
 
+#: plugin.py:447
 msgid "Save"
 msgstr ""
 
+#: plugin.py:450
 msgid "Show Setup in Extensions menu"
 msgstr ""
 
+#: plugin.py:99 plugin.py:101
 msgid "YouTube-Trailer Setup"
 msgstr ""
 
+#: plugin.py:400 plugin.py:406
 msgid "leave movie player..."
 msgstr ""

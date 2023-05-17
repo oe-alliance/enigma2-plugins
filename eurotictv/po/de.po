@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eUroticTV\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2011-11-22 13:17+0100\n"
 "Last-Translator: Andreas Frisch <fraxinas@openembedded.org>\n"
 "Language-Team: \n"
@@ -16,33 +16,43 @@ msgstr ""
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#: plugin.py:61
 msgid "Exit"
 msgstr ""
 
+#: plugin.py:64
 msgid "Fullscreen"
 msgstr "Vollbild"
 
+#: plugin.py:26
 msgid "LIVE"
 msgstr ""
 
+#: plugin.py:26
 msgid "No Connection"
 msgstr ""
 
+#: plugin.py:62
 msgid "Play"
 msgstr ""
 
+#: plugin.py:147
 #, python-format
 msgid "Streaming error: %s"
 msgstr ""
 
+#: plugin.py:212
 msgid "Watch eUroticTV via HTTP Live Streaming"
 msgstr "Genießen Sie eUroticTV mittels HTTP Live Streaming"
 
+#: plugin.py:26
 msgid "connecting..."
 msgstr "verbinden..."
 
+#: plugin.py:26
 msgid "disconnected"
 msgstr ""
 
+#: plugin.py:26
 msgid "pause"
 msgstr ""

@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# $PACKAGEDESCRIPION
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the EPGSearch package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: EPGSearch 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,218 +17,289 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: EPGSearch.py:335
 #, python-format
 msgid " (%d min)"
 msgstr ""
 
+#: EPGSearch.py:341
 #, python-format
 msgid " (%s%d min)"
 msgstr ""
 
+#: EPGSearchSetup.py:47
 msgid "Add \"Search event in EPG\" to channel menu"
 msgstr ""
 
+#: EPGSearchSetup.py:46
 msgid "Add \"Search event in EPG\" to event menu"
 msgstr ""
 
+#: EPGSearchSetup.py:41
 msgid "Add \"Search\" Button to EPG"
 msgstr ""
 
+#: EPGSearch.py:589
 msgid "Add timer"
 msgstr ""
 
+#: EPGSearchSetup.py:47
 msgid "Adds \"Search event in EPG\" item into the channel selection context menu (needs restart GUI)"
 msgstr ""
 
+#: EPGSearchSetup.py:46
 msgid "Adds \"Search event in EPG\" item into the event menu (needs restart GUI)"
 msgstr ""
 
+#: EPGSearch.py:1079 EPGSearchSetup.py:71
 msgid "Cancel"
 msgstr ""
 
+#: EPGSearch.py:1118
 msgid "Channel Selection"
 msgstr ""
 
+#: EPGSearch.py:620 EPGSearch.py:730 plugin.py:52
 msgid "Choice list"
 msgstr ""
 
+#: plugin.py:44
 msgid "Choice list EPGSearch"
 msgstr ""
 
+#: EPGSearch.py:742
 msgid "Choice list RED Button"
 msgstr ""
 
+#: EPGSearchSetup.py:44
 msgid "Choosing an encoding. \"UTF-8\" to search for EPG cyrillic."
 msgstr ""
 
+#: EPGSearch.py:823
 msgid "Clear history"
 msgstr ""
 
+#: EPGSearch.py:872
 #, python-format
 msgid "Could not read AutoTimer timer list: %s"
 msgstr ""
 
+#: EPGSearchSetup.py:50
 msgid "Display name service as in bouquets"
 msgstr ""
 
+#: EPGSearch.py:641
 msgid "EPG Search"
 msgstr ""
 
+#: plugin.py:143
 msgid "EPGSearch"
 msgstr ""
 
+#: EPGSearchSetup.py:34 EPGSearchSetup.py:89
 msgid "EPGSearch Setup"
 msgstr ""
 
+#: EPGSearchSetup.py:44
 msgid "Encoding Search to EPG"
 msgstr ""
 
+#: EPGSearch.py:796
 msgid "Enter text to search for"
 msgstr ""
 
+#: EPGSearch.py:815
 msgid "Export selected as AutoTimer"
 msgstr ""
 
+#: EPGSearch.py:574
 msgid "History"
 msgstr ""
 
+#: EPGSearchSetup.py:40
 msgid "How many entries to keep in the search history at most. 0 disables history entirely!"
 msgstr ""
 
+#: EPGSearchSetup.py:50
 msgid "If 'Search only bouquets' is enabled, show service name as in bouquets for renamed services."
 msgstr ""
 
+#: EPGSearchSetup.py:49
 msgid "If this setting is enabled, searching EPG in only services in user bouquets."
 msgstr ""
 
+#: EPGSearchSetup.py:41
 msgid "If this setting is enabled, the plugin adds a \"Search\" Button to the regular EPG."
 msgstr ""
 
+#: EPGSearchSetup.py:43
 msgid "If this setting is enabled, the plugin adds picons."
 msgstr ""
 
+#: EPGSearch.py:813
 msgid "Import from AutoTimer"
 msgstr ""
 
+#: EPGSearch.py:802
 msgid "Import from EPG"
 msgstr ""
 
+#: EPGSearch.py:801
 msgid "Import from Timer"
 msgstr ""
 
+#: EPGSearchSetup.py:40
 msgid "Length of History"
 msgstr ""
 
+#: EPGSearch.py:950
 msgid "List of history is cleared !"
 msgstr ""
 
+#: EPGSearch.py:624 EPGSearch.py:738
 msgid "Lookup in TMBD"
 msgstr ""
 
+#: EPGSearch.py:573
 msgid "New Search"
 msgstr ""
 
+#: EPGSearch.py:968
 msgid "No history !"
 msgstr ""
 
+#: EPGSearch.py:1080 EPGSearchSetup.py:70
 msgid "OK"
 msgstr ""
 
+#: EPGSearch.py:820
 msgid "Open selected in IMDb"
 msgstr ""
 
+#: EPGSearch.py:739
 msgid "Partnerbox Entries"
 msgstr ""
 
+#: EPGSearch.py:814
 msgid "Save search as AutoTimer"
 msgstr ""
 
+#: plugin.py:40 plugin.py:50
 msgid "Search"
 msgstr ""
 
+#: plugin.py:144
 msgid "Search EPG by title event"
 msgstr ""
 
+#: plugin.py:164 plugin.py:166
 msgid "Search event in EPG"
 msgstr ""
 
+#: EPGSearch.py:818
 msgid "Search for TMDb info"
 msgstr ""
 
+#: EPGSearchSetup.py:49
 msgid "Search only bouquets"
 msgstr ""
 
+#: EPGSearchSetup.py:48
 msgid "Search strictness"
 msgstr ""
 
+#: EPGSearchSetup.py:45
 msgid "Search type"
 msgstr ""
 
+#: EPGSearchSetup.py:51
 msgid "Search type for filter"
 msgstr ""
 
+#: EPGSearch.py:1094
 msgid "Select a timer to search"
 msgstr ""
 
+#: EPGSearch.py:741 plugin.py:43
 msgid "Select action:"
 msgstr ""
 
+#: plugin.py:41
 msgid "Select channel"
 msgstr ""
 
+#: EPGSearch.py:883 EPGSearch.py:962
 msgid "Select text to search for"
 msgstr ""
 
+#: EPGSearchSetup.py:51
 msgid "Select type for filter search. Press button P +/- for show/hide filter in description after search."
 msgstr ""
 
+#: EPGSearchSetup.py:45
 msgid "Select type for search, \"partial match\" for the most extensive search."
 msgstr ""
 
+#: EPGSearchSetup.py:42
 msgid "Select type: 'Search and Select channel' or 'Search'."
 msgstr ""
 
+#: EPGSearchSetup.py:48
 msgid "Select whether or not you want to enforce case correctness."
 msgstr ""
 
+#: EPGSearch.py:825
 msgid "Setup"
 msgstr ""
 
+#: EPGSearch.py:824
 msgid "Timers list"
 msgstr ""
 
+#: EPGSearchSetup.py:42
 msgid "Type blue Button"
 msgstr ""
 
+#: EPGSearchSetup.py:43
 msgid "Use Picons"
 msgstr ""
 
+#: EPGSearch.py:810
 msgid "Zap to selected service"
 msgstr ""
 
+#: __init__.py:38
 msgid "case-insensitive search"
 msgstr ""
 
+#: __init__.py:38
 msgid "case-sensitive search"
 msgstr ""
 
+#: __init__.py:31
 msgid "choice (Search and standard)"
 msgstr ""
 
+#: __init__.py:37 __init__.py:39
 msgid "exact match"
 msgstr ""
 
+#: __init__.py:31
 msgid "only Search"
 msgstr ""
 
+#: __init__.py:37 __init__.py:39
 msgid "partial match"
 msgstr ""
 
+#: plugin.py:157
 msgid "search EPG"
 msgstr ""
 
+#: plugin.py:151
 msgid "search EPG..."
 msgstr ""
 
+#: __init__.py:39
 msgid "title starts with"
 msgstr ""

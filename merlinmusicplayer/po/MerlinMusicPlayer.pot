@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# $PACKAGEDESCRIPION
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the MerlinMusicPlayer package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: MerlinMusicPlayer 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-14 08:00+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,147 +17,184 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: plugin.py:236
 #, python-format
 msgid ""
 "%d files added to database!\n"
 "Press OK to close."
 msgstr ""
 
+#: plugin.py:217
 #, python-format
 msgid ""
 "%s\n"
 " added to database"
 msgstr ""
 
+#: plugin.py:221 plugin.py:225
 #, python-format
 msgid ""
 "%s\n"
 " already exists in database!"
 msgstr ""
 
+#: plugin.py:2440 plugin.py:3146
 #, python-format
 msgid ""
 "%s\n"
 "appended to songlist"
 msgstr ""
 
+#: plugin.py:2450 plugin.py:3157
 #, python-format
 msgid ""
 "%s\n"
 "inserted and will be played as next song"
 msgstr ""
 
+#: plugin.py:1563
 #, python-format
 msgid "%s (%s)"
 msgstr ""
 
+#: plugin.py:2826
 msgid "Activate screensaver"
 msgstr ""
 
+#: plugin.py:1749 plugin.py:1763
 msgid "Add all songs from selected album to a playlist"
 msgstr ""
 
+#: plugin.py:1751 plugin.py:1761
 msgid "Add all songs from selected artist to a playlist"
 msgstr ""
 
+#: plugin.py:1765
 msgid "Add all songs from selected genre to a playlist"
 msgstr ""
 
+#: plugin.py:251
 msgid "Add music files to iDream database"
 msgstr ""
 
+#: plugin.py:1747
 msgid "Add selected song to a playlist"
 msgstr ""
 
+#: plugin.py:2247
 #, python-format
 msgid "Album (%s) -> Song List"
 msgstr ""
 
+#: plugin.py:2275
 #, python-format
 msgid "Albums (%d)"
 msgstr ""
 
+#: plugin.py:2344
 msgid "Albums List"
 msgstr ""
 
+#: plugin.py:2095
 msgid "All Artists"
 msgstr ""
 
+#: plugin.py:2161
 msgid "All Songs"
 msgstr ""
 
+#: plugin.py:1754
 msgid "Append file to current playing songlist"
 msgstr ""
 
+#: plugin.py:3109
 msgid "Append file to current songlist"
 msgstr ""
 
+#: plugin.py:2331
 #, python-format
 msgid "Artist (%s) -> Album List"
 msgstr ""
 
+#: plugin.py:2221
 #, python-format
 msgid "Artist (%s) -> Song List"
 msgstr ""
 
+#: plugin.py:2271
 #, python-format
 msgid "Artists (%d)"
 msgstr ""
 
+#: plugin.py:2295
 msgid "Artists List"
 msgstr ""
 
+#: plugin.py:263 plugin.py:2721 plugin.py:2814
 msgid "Cancel"
 msgstr ""
 
+#: plugin.py:1753 plugin.py:3108
 msgid "Clear current songlist and play selected entry"
 msgstr ""
 
+#: plugin.py:264
 msgid "Close"
 msgstr ""
 
+#: plugin.py:1739 plugin.py:3104
 msgid "Configuration"
 msgstr ""
 
-msgid "Create iDream DB"
-msgstr ""
-
+#: plugin.py:1742
 msgid "Create new playlist"
 msgstr ""
 
+#: plugin.py:1759
 msgid "Delete selected playlist"
 msgstr ""
 
+#: plugin.py:1745
 msgid "Delete song from current playlist"
 msgstr ""
 
+#: plugin.py:1752
 msgid "Delete song from database"
 msgstr ""
 
+#: plugin.py:1806
 msgid "Do you really want to add all songs from that album to a playlist?"
 msgstr ""
 
+#: plugin.py:1796
 msgid "Do you really want to add all songs from that artist to a playlist?"
 msgstr ""
 
+#: plugin.py:1786
 msgid "Do you really want to add all songs from that genre to a playlist?"
 msgstr ""
 
+#: plugin.py:1839
 msgid "Do you really want to delete that song from the database?"
 msgstr ""
 
+#: plugin.py:1828
 msgid "Do you really want to delete that song the current playlist?"
 msgstr ""
 
+#: plugin.py:1816
 msgid "Do you really want to delete the current playlist?"
 msgstr ""
 
+#: plugin.py:1869
 msgid "Enter name for playlist"
 msgstr ""
 
+#: plugin.py:1886
 msgid "Enter search text"
 msgstr ""
 
+#: plugin.py:238
 msgid ""
 "Error!\n"
 "Can not open database!\n"
@@ -165,214 +202,237 @@ msgid ""
 "Press OK to close."
 msgstr ""
 
+#: plugin.py:2829
 msgid "Filebrowser startup path"
 msgstr ""
 
+#: plugin.py:3187
 #, python-format
 msgid "Filelist: %s"
 msgstr ""
 
+#: plugin.py:2078
 #, python-format
 msgid "Genre (%s) -> Song List"
 msgstr ""
 
+#: plugin.py:2044
 msgid "Genre List"
 msgstr ""
 
+#: plugin.py:2283
 #, python-format
 msgid "Genres (%d)"
 msgstr ""
 
+#: plugin.py:1756
 msgid "Insert file to current playing songlist and play next"
 msgstr ""
 
+#: plugin.py:3111
 msgid "Insert file to current songlist and play next"
 msgstr ""
 
+#: plugin.py:2756 plugin.py:3186
 msgid "Invalid Location"
 msgstr ""
 
+#: plugin.py:1469
 msgid "Lyrics"
 msgstr ""
 
-msgid "MERLIN  MUSIC  PLAYER"
-msgstr ""
-
-msgid "MMP  Path Select"
-msgstr ""
-
-msgid "MMP  Setup"
-msgstr ""
-
+#: plugin.py:2087
 msgid "Main Menu"
 msgstr ""
 
+#: plugin.py:3251 plugin.py:3263 plugin.py:3267 plugin.py:3268
 msgid "Merlin Music Player"
 msgstr ""
 
+#: plugin.py:1473
 msgid "Merlin Music Player Lyrics"
 msgstr ""
 
+#: plugin.py:2810
 msgid "Merlin Music Player Setup"
 msgstr ""
 
+#: plugin.py:1582
 msgid "Merlin Music Player Songlist"
 msgstr ""
 
+#: plugin.py:595
 msgid "Merlin Music Player TV"
 msgstr ""
 
+#: plugin.py:3263 plugin.py:3267 plugin.py:3268
 msgid "Merlin music player"
 msgstr ""
 
-msgid "MerlinMusicPlayerScreenSaver"
-msgstr ""
-
-msgid "MerlinMusicPlayerTV"
-msgstr ""
-
-msgid "Music Player Lyrics"
-msgstr ""
-
-msgid "MusicPlayer"
-msgstr ""
-
+#: plugin.py:1554
 msgid "No lyrics found"
 msgstr ""
 
+#: plugin.py:3060 plugin.py:3096
 msgid "No music files found!"
 msgstr ""
 
+#: plugin.py:2722 plugin.py:2815
 msgid "OK"
 msgstr ""
 
+#: plugin.py:2091
 msgid "Play"
 msgstr ""
 
+#: plugin.py:2817
 msgid "Play last used songlist after starting"
 msgstr ""
 
+#: plugin.py:2031
 #, python-format
 msgid "Playlist (%s) -> Song List"
 msgstr ""
 
+#: plugin.py:1997
 msgid "Playlists"
 msgstr ""
 
+#: plugin.py:2267
 #, python-format
 msgid "Playlists (%d)"
 msgstr ""
 
+#: plugin.py:234
 msgid ""
 "Process aborted.\n"
 " 0 files added to database!\n"
 "Press OK to close."
 msgstr ""
 
+#: plugin.py:3262 plugin.py:3265 plugin.py:3269
 msgid "Receiver Music Database"
 msgstr ""
 
+#: plugin.py:2828
 msgid "Remember last path of filebrowser"
 msgstr ""
 
+#: plugin.py:1427
 msgid "Repeat is not available yet with cue-files!"
 msgstr ""
 
-msgid "Save"
-msgstr ""
-
+#: plugin.py:1740
 msgid "Scan path for music files and add them to database"
 msgstr ""
 
+#: plugin.py:1739
 msgid "Search in iDream database"
 msgstr ""
 
+#: plugin.py:1899
 #, python-format
 msgid "Search results for \"%s\" in all albums"
 msgstr ""
 
+#: plugin.py:1896
 #, python-format
 msgid "Search results for \"%s\" in all artists"
 msgstr ""
 
+#: plugin.py:1893
 #, python-format
 msgid "Search results for \"%s\" in all titles"
 msgstr ""
 
+#: plugin.py:1902
 #, python-format
 msgid "Search results for \"%s\" in title, artist or album"
 msgstr ""
 
-msgid "Select Path"
-msgstr ""
-
+#: plugin.py:2705
 msgid "Select path"
 msgstr ""
 
+#: plugin.py:2099
 msgid "Show Album"
 msgstr ""
 
+#: plugin.py:2832
 msgid "Show Merlin Music Player in extensions menu"
 msgstr ""
 
+#: plugin.py:2834
 msgid "Show Merlin Music Player in main menu"
 msgstr ""
 
+#: plugin.py:2831
 msgid "Show iDream in extensions menu"
 msgstr ""
 
+#: plugin.py:2833
 msgid "Show iDream in main menu"
 msgstr ""
 
+#: plugin.py:1415
 msgid "Shuffle is not available yet with cue-files!"
 msgstr ""
 
-msgid "Songlist"
-msgstr ""
-
+#: plugin.py:2279
 #, python-format
 msgid "Songs (%d)"
 msgstr ""
 
+#: plugin.py:1735 plugin.py:1855
 msgid ""
 "There are no playlists defined.\n"
 "Do you want to create a new playlist?"
 msgstr ""
 
+#: plugin.py:1275
 #, python-format
 msgid "This Receiver can't decode %s streams!"
 msgstr ""
 
+#: plugin.py:370
 #, python-format
 msgid "Track %s"
 msgstr ""
 
-msgid "WWW.DREAMBOX-TOOLS.INFO"
-msgstr ""
-
+#: plugin.py:2827
 msgid "Wait for screensaver (in min)"
 msgstr ""
 
+#: plugin.py:2003 plugin.py:2025 plugin.py:2050 plugin.py:2072 plugin.py:2167
+#: plugin.py:2192 plugin.py:2215 plugin.py:2241 plugin.py:2301 plugin.py:2321
+#: plugin.py:2350
 msgid "[back]"
 msgstr ""
 
+#: plugin.py:3257 plugin.py:3262 plugin.py:3265 plugin.py:3269
 msgid "iDream"
 msgstr ""
 
+#: plugin.py:1686 plugin.py:2258
 msgid "iDream Main Menu"
 msgstr ""
 
+#: plugin.py:2819
 msgid "iDream database path"
 msgstr ""
 
+#: plugin.py:1880
 msgid "search for album"
 msgstr ""
 
+#: plugin.py:1879
 msgid "search for artist"
 msgstr ""
 
+#: plugin.py:1878
 msgid "search for title"
 msgstr ""
 
+#: plugin.py:1881
 msgid "search in all of them"
 msgstr ""

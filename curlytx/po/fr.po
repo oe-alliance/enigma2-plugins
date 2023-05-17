@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2014-10-29 13:12+0100\n"
 "Last-Translator: OEA\n"
 "Language-Team: french\n"
@@ -18,81 +18,107 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 1.6.10\n"
 
+#: CurlyTxSettings.py:92
 msgid "Add new page"
 msgstr "Ajouter une nouvelle page"
 
+#: CurlyTxSettings.py:51 CurlyTxSettings.py:210
 msgid "Cancel"
 msgstr "Annuler"
 
+#: CurlyTx.py:105 CurlyTx.py:108
 msgid "Close window"
 msgstr "Fermer fenêtre"
 
+#: CurlyTxSettings.py:70
 msgid "Default page"
 msgstr "Page par défaut"
 
+#: CurlyTxSettings.py:54
 msgid "Delete"
 msgstr "Effacer"
 
+#: CurlyTxSettings.py:95
 msgid "Delete selected page"
 msgstr "Effacer page sélectionnée"
 
+#: CurlyTxSettings.py:80
 msgid "Dismiss all setting changes"
 msgstr "Annuler tous les changements de paramètres"
 
+#: CurlyTxSettings.py:86
 msgid "Edit selected page"
 msgstr "Éditer la page sélectionnée"
 
+#: CurlyTx.py:199
 msgid "Error fetching URL:"
 msgstr "Erreur en retrouvant URL:"
 
+#: CurlyTxSettings.py:175
 msgid "Error loading page feed:"
 msgstr "Erreur en chargeant la page source:"
 
+#: CurlyTxSettings.py:224
 msgid "Font size"
 msgstr "Taille Police"
 
+#: CurlyTx.py:204
 msgid "Go and add a page in the settings"
 msgstr "Aller et ajouter une page dans les paramètres"
 
+#: CurlyTx.py:212
 msgid "HTTP response headers for"
 msgstr "Réponse de l'entête HTTP pour"
 
+#: CurlyTx.py:170
 msgid "Invalid page"
 msgstr "Page non valide"
 
+#: CurlyTxSettings.py:89
 msgid "Load pages from feed"
 msgstr "Chargement des pages depuis la source"
 
+#: CurlyTx.py:185
 msgid "Loading ..."
 msgstr "Chargement..."
 
+#: CurlyTxSettings.py:73
 msgid "Menu title"
 msgstr "Menu titre"
 
+#: CurlyTxSettings.py:53
 msgid "New"
 msgstr "Nouveau"
 
+#: CurlyTx.py:56 CurlyTx.py:126
 msgid "Next"
 msgstr "Suivant"
 
+#: CurlyTxSettings.py:145
 msgid "No page feed URL defined"
 msgstr "Pas d'URL de page source définie"
 
+#: CurlyTxSettings.py:52 CurlyTxSettings.py:211
 msgid "OK"
 msgstr "OK"
 
+#: CurlyTxSettings.py:222
 msgid "Page URL"
 msgstr "Page URL"
 
+#: CurlyTxSettings.py:74
 msgid "Page feed URL"
 msgstr "Page source URL"
 
+#: CurlyTxSettings.py:66
 msgid "Page:"
 msgstr "Page:"
 
+#: CurlyTx.py:55 CurlyTx.py:125
 msgid "Prev"
 msgstr "Prév"
 
+#: CurlyTxSettings.py:112
 msgid ""
 "Really delete this page?\n"
 "It cannot be recovered!"
@@ -100,47 +126,62 @@ msgstr ""
 "Voulez-vous vraiment effacer cette page?\n"
 "Elle ne sera pas récupérable!"
 
+#: CurlyTx.py:54 CurlyTx.py:120 CurlyTx.py:124
 msgid "Reload"
 msgstr "Recharger"
 
+#: CurlyTx.py:96
 msgid "Reload current page URL"
 msgstr "Recharger l'URL de la page courante"
 
+#: CurlyTxSettings.py:83
 msgid "Save settings and close screen"
 msgstr "Sauvegarder les paramètres et fermer la fenêtre"
 
+#: CurlyTx.py:87
 msgid "Scroll page contents down"
 msgstr "Faire défiler la page vers le bas"
 
+#: CurlyTx.py:84
 msgid "Scroll page contents up"
 msgstr "Faire défiler la page vers le haut"
 
+#: CurlyTx.py:53 CurlyTxSettings.py:40
 msgid "Settings"
 msgstr "Paramètres"
 
+#: CurlyTx.py:90
 msgid "Show HTTP response headers"
 msgstr "Afficher la réponse de l'entête HTTP"
 
+#: CurlyTxSettings.py:72
 msgid "Show in extensions menu"
 msgstr "Afficher dans le menu extensions"
 
+#: CurlyTxSettings.py:71
 msgid "Show in main menu"
 msgstr "Afficher dans le menu principal"
 
+#: CurlyTx.py:93
 msgid "Show program settings"
 msgstr "Afficher les paramètres du programme"
 
+#: CurlyTx.py:111
 msgid "Show this help screen"
 msgstr "Afficher cet écran d'aide"
 
+#: CurlyTx.py:99
 msgid "Switch to next configured page URL"
 msgstr "Passer à la page URL configurée suivante"
 
+#: CurlyTx.py:102
 msgid "Switch to previous configured page URL"
 msgstr "Passer à la page URL configurée précédente"
 
+#: CurlyTxSettings.py:223
 msgid "Title"
 msgstr "Titre"
 
+#: plugin.py:38 plugin.py:45
 msgid "View remote text files"
 msgstr "Afficher les fichiers textes distant"

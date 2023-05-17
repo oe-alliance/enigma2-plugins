@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2012-03-16 16:30+0100\n"
 "Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
@@ -17,48 +17,63 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: plugin.py:64
 msgid "Adult streaming plugins for dm800/dm8000"
 msgstr "Adult streaming plugins for dm800/dm8000"
 
+#: plugin.py:268
 msgid "Buffer device:"
 msgstr "Buffer device:"
 
+#: plugin.py:269
 msgid "Buffer file handling:"
 msgstr "Buffer file handling:"
 
+#: plugin.py:267
 msgid "Buffer:"
 msgstr "Buffer:"
 
+#: plugin.py:413
 msgid "Delete this movie?"
 msgstr "Delete this movie?"
 
+#: plugin.py:266
 msgid "Description:"
 msgstr "Description:"
 
+#: plugin.py:132
 #, python-format
 msgid "Downloading movie: %s"
 msgstr "Downloading movie: %s"
 
+#: plugin.py:400
 msgid "Error while getting video url!"
 msgstr "Error while getting video url!"
 
+#: plugin.py:265
 msgid "Name:"
 msgstr "Name:"
 
+#: plugin.py:63 plugin.py:120 plugin.py:184 plugin.py:203 plugin.py:250
 msgid "Porn Center"
 msgstr "Porn Centre"
 
+#: plugin.py:207
 msgid "Select"
 msgstr "Select"
 
+#: plugin.py:172
 msgid "Stop playing this movie?"
 msgstr "Stop playing this movie?"
 
+#: plugin.py:67
 msgid "ask me"
 msgstr "ask me"
 
+#: plugin.py:67
 msgid "delete"
 msgstr "delete"
 
+#: plugin.py:67
 msgid "keep on device"
 msgstr "keep on device"

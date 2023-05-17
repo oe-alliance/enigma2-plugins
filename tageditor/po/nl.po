@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TagEditor\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2011-10-12 10:57+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: Rob van der Does\n"
@@ -19,21 +19,27 @@ msgstr ""
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#: plugin.py:248
 msgid "Add new tag..."
 msgstr "Nieuwe tag toevoegen..."
 
+#: plugin.py:36
 msgid "Cancel"
 msgstr "Annuleren"
 
+#: plugin.py:252
 msgid "Delete all tags..."
 msgstr "Verwijder alle tags..."
 
+#: plugin.py:250
 msgid "Delete this tag..."
 msgstr "Verwijder deze tag..."
 
+#: plugin.py:251
 msgid "Delete unused tags"
 msgstr "Verwijder niet gebruikte tags"
 
+#: plugin.py:234
 msgid ""
 "Do you really want to delete all tags everywhere?\n"
 "(Note that 'Cancel' will not undo this!)"
@@ -41,6 +47,7 @@ msgstr ""
 "Wilt u overal alle tags verwijderen?\n"
 "(Merk op dat 'Annulleer' dit niet ongedaan kan maken!)"
 
+#: plugin.py:217
 #, python-format
 msgid ""
 "Do you really want to delete tag \"%s\" everywhere?\n"
@@ -50,28 +57,36 @@ msgstr ""
 "(Merk op dat 'Annulleer' dit niet ongedaan kan maken!)"
 
 #. TRANSLATORS: This is the title of the TagEditor main screen
+#: plugin.py:68
 msgid "Edit Tags"
 msgstr "Tags bewerken"
 
+#: plugin.py:39
 msgid "Load"
 msgstr "Laad"
 
+#: plugin.py:38
 msgid "New"
 msgstr "Nieuw"
 
+#: plugin.py:37
 msgid "OK"
 msgstr "OK"
 
+#: plugin.py:74
 msgid "Please enter the new tag"
 msgstr "Geef de nieuwe tag in"
 
+#: plugin.py:249
 msgid "Rename this tag..."
 msgstr "Hernoem deze tag..."
 
+#: plugin.py:197
 #, python-format
 msgid "Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo this!)"
 msgstr "Vervang tag \"%s\" overal met:   (Merk op dat 'Annulleer' dit niet ongedaan kan maken!)"
 
 #. TRANSLATORS: this is the string used in the movie context menu for TagEditor
+#: plugin.py:348
 msgid "edit tags"
 msgstr "Bewerk tags"

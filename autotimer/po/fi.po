@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:04+0430\n"
+"POT-Creation-Date: 2023-05-17 21:24+0100\n"
 "PO-Revision-Date: 2022-06-21 17:22+0300\n"
 "Last-Translator: Orlandox\n"
 "Language-Team: AndyBlac/TimoJ/Kojo_/Orlandox\n"
@@ -13,18 +13,25 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
+#: AutoTimerList.py:186
 msgid "  Any time"
 msgstr " Kaikki ajat"
 
+#: AutoTimerEditor.py:605 AutoTimerEditor.py:606
 msgid " (if services are enabled, bouquets are ignored.)."
 msgstr " (jos palvelut ovat päällä, kanavia ei oteta huomioon)."
 
+#: AutoTimerOverview.py:137
 msgid " - Version: "
 msgstr " - Versio: "
 
+#: AutoTimerSettings.py:93
+#, python-format
 msgid " - Version: %s"
 msgstr " - Versio: %s"
 
+#: AutoTimer.py:818
+#, python-format
 msgid ""
 "%d conflict(s) encountered when trying to add new timers:\n"
 "%s"
@@ -32,6 +39,8 @@ msgstr ""
 "%d ristiriita(a) uusien ajastuksien lisäyksessä:\n"
 "%s"
 
+#: AutoTimer.py:825
+#, python-format
 msgid ""
 "%d conflict(s) solved with similar timer(s):\n"
 "%s"
@@ -39,294 +48,364 @@ msgstr ""
 "%d ristiriita(a) ratkaistu samankaltaisilla ajastuksilla:\n"
 "%s"
 
+#: AutoTimerEditor.py:247 AutoTimerEditor.py:248
 msgid "%d.%B %Y"
 msgstr "%d.%m.%Y"
 
+#: AutoTimer.py:818 AutoTimer.py:825
+#, python-format
 msgid "%s: %s at %s"
 msgstr "%s: %s at %s"
 
-msgid "Abort this Wizard."
-msgstr "Keskeytä toiminto."
-
+#: AutoTimerEditor.py:699
 msgid "Activate VPS"
 msgstr "Aktivoi VPS"
 
+#: AutoTimerOverview.py:93
 msgid "Add"
 msgstr "Lisää"
 
+#: AutoTimerEditor.py:520
 msgid "Add filters"
 msgstr "Lisää suodattimia"
 
+#: AutoTimerOverview.py:121
 msgid "Add new AutoTimer"
 msgstr "Lisää uusi automaattiajastus"
 
+#: AutoTimerEditor.py:537
 msgid "Add services"
 msgstr "Lisää kanavia"
 
+#: AutoTimerSettings.py:53 setup.xml
 msgid "Add similar timer on conflict"
 msgstr "Lisää ristiriitatapauksessa samankaltaisia ajastuksia"
 
+#: AutoTimerSettings.py:54 setup.xml
 msgid "Add timer as disabled on conflict"
 msgstr "Ristiriitatapauksessa lisää ei käytössä oleva ajastus"
 
+#: AutoTimerEditor.py:665 AutoTimerImporter.py:206
 msgid "After event"
 msgstr "Ajastuksen jälkeen"
 
+#: AutoTimerList.py:163
 msgid "All channels"
 msgstr "Kaikki kanavat"
 
+#: __init__.py:64
 msgid "All non-repeating timers"
 msgstr "Kaikki kerta-ajastukset"
 
+#: AutoTimerSettings.py:48 setup.xml
 msgid "Allow double timer for different services"
 msgstr "Salli kaksoisajastus eri kanaville"
 
+#: AutoTimerSettings.py:65 setup.xml
 msgid "Always write config"
 msgstr "Kirjoita asetuksiin aina"
 
+#: AutoTimerEditor.py:683
 msgid "Amount of recordings left"
 msgstr "Tallennuksia jäljellä"
 
+#: AutoTimerEditor.py:582
+msgid "Any Day filter refers to the day of the timespan start, even if the timespan crosses midnight."
+msgstr ""
+
+#: AutoTimerEditor.py:334
 msgid "Any service/recording"
 msgstr "Mikä tahansa kanava/tallenne"
 
+#: plugin.py:240
 msgid "Auto Timer"
 msgstr "Auto Timer"
 
+#: plugin.py:228
 msgid "Auto Timers"
 msgstr "Automaattiajastus"
 
+#: AutoTimer.py:318
 msgid "AutoTimer"
 msgstr "Automaattiajastus"
 
+#: AutoTimerOverview.py:283
 msgid "AutoTimer Context Menu"
 msgstr "Automaattiajastus valikko"
 
+#: AutoTimerEditor.py:462
 msgid "AutoTimer Editor"
 msgstr "Automaattiajastuksien muokkaus"
 
-msgid "AutoTimer FAQ"
-msgstr "Automaattiajastuksen FAQ"
-
+#: AutoTimerEditor.py:1122
 msgid "AutoTimer Filters"
 msgstr "Automaattiajastuksien suodattimet"
 
-msgid "AutoTimer Help"
-msgstr "Automaattiajastuksen ohjeet"
-
+#: AutoTimerEditor.py:1344
 msgid "AutoTimer Services"
 msgstr "Automaattiajastuksien kanavat"
 
+#: AutoTimerSettings.py:93
 msgid "AutoTimer Settings"
 msgstr "Automaattiajastuksen Asetukset"
 
+#: AutoTimerOverview.py:137
 msgid "AutoTimer overview"
 msgstr "Automaattiajastus yleiskatsaus"
 
+#: AutoTimerResource.py:218 AutoTimerResource.py:487
 msgid "AutoTimer was added successfully"
 msgstr "Automaattiajastuksen lisäys onnistui"
 
+#: AutoTimerResource.py:489 AutoTimerResource.py:532
 msgid "AutoTimer was changed successfully"
 msgstr "Automaattiajastuksen muutos onnistui"
 
+#: AutoTimerResource.py:205
 msgid "AutoTimer was removed"
 msgstr "Automaattiajastus poistettu"
 
+#: plugin.py:242
 msgid "AutoTimers"
 msgstr "Automaattiajastukset"
 
+#: AutoTimerResource.py:229
 msgid "AutoTimers were changed successfully."
 msgstr "Automaattiajastuksien muutos onnistui."
 
+#: setup.xml
 msgid "Autotimer Settings"
 msgstr "Automaattiajastuksen Asetukset"
 
+#: AutoTimerEditor.py:674
 msgid "Begin of \"after event\" timespan"
 msgstr "\"Ohjelman jälkeisen \" aikajakson alku"
 
+#: AutoTimerEditor.py:637 AutoTimerWizard.py:110
 msgid "Begin of timespan"
 msgstr "Aikajakson alku"
 
+#: AutoTimerEditor.py:1355
 msgid "Bouquets"
 msgstr "Suosikkilistat"
 
+#: AutoTimerEditor.py:584
 msgid "By enabling this events will not be matched if they don't occur on certain dates."
 msgstr "Tällä valinnalla voit estää hakutulokset joita ei esitetä tiettyinä päivinä."
 
+#: AutoTimerSettings.py:58 setup.xml
 msgid "By enabling this you will be notified about similar timers added during automated polling. There is no intelligence involved, so it might bother you about the same conflict over and over."
 msgstr "Valitsemalla tämän saat automaattihaun aikana ilmoituksen samankaltaisista ajastuksista. Toiminnossa ei ole älyä, joten se saattaa ilmoittaa toistuvasti samoista päällekkäisyyksistä."
 
+#: AutoTimerSettings.py:57 setup.xml
 msgid "By enabling this you will be notified about timer conflicts found during automated polling. There is no intelligence involved, so it might bother you about the same conflict over and over."
 msgstr "Valitsemalla tämän saat automaattihaun aikana ilmoituksen päällekkäisistä ajastuksista. Toiminnossa ei ole älyä, joten se saattaa ilmoittaa toistuvasti samoista päällekkäisyyksistä."
 
+#: AutoTimerEditor.py:486 AutoTimerEditor.py:1147 AutoTimerEditor.py:1364
+#: AutoTimerImporter.py:48 AutoTimerImporter.py:142 AutoTimerPreview.py:92
 msgid "Cancel"
 msgstr "Peruuta"
 
+#: AutoTimerEditor.py:587
 msgid "Change default recording offset?"
 msgstr "Muuta tallennuksen oletuslisäaikaa?"
 
+#: AutoTimerEditor.py:96
 msgid "Channel Selection"
 msgstr "Kanavien valinta"
 
+#: AutoTimerEditor.py:1354
 msgid "Channels"
 msgstr "Kanavat"
 
+#: AutoTimerEditor.py:689
 msgid "Check for uniqueness in"
 msgstr "Tarkista ainutlaatuisuus"
 
+#: AutoTimerSettings.py:64 setup.xml
 msgid "Check the event id (eit) and remove the timer if there is no corresponding EPG event. Due to compatibility issues with SerienRecorder and IPRec, only timer created by AutoTimer are affected."
-msgstr ""
-"Tarkista tapahtuma-id (eit) ja poista ajastus jos EPG:stä ei löydy samaa tapahtumaa. Yhteensopivuusongelmien takia SerienRecorder ja IPRec kanssa, vain Automaattiajastuksen tekemät ajastukset "
-"huolitaan."
+msgstr "Tarkista tapahtuma-id (eit) ja poista ajastus jos EPG:stä ei löydy samaa tapahtumaa. Yhteensopivuusongelmien takia SerienRecorder ja IPRec kanssa, vain Automaattiajastuksen tekemät ajastukset huolitaan."
 
+#: AutoTimerEditor.py:393
 msgid "Choose target folder"
 msgstr "Valitse kohdehakemisto"
 
+#: __init__.py:70
 msgid "Classic"
 msgstr "Klassinen"
 
+#: AutoTimerOverview.py:270
 msgid "Clone selected timer"
 msgstr "Kloonaa valittu ajastus"
 
+#: AutoTimerOverview.py:90
 msgid "Close"
 msgstr "Sulje"
 
+#: AutoTimerOverview.py:106
 msgid "Close and forget changes"
 msgstr "Sulje, älä tallenna muutoksia"
 
+#: AutoTimerOverview.py:119
 msgid "Close and save changes"
 msgstr "Sulje ja tallenna muutokset"
 
-msgid "Congratulations"
-msgstr "Onnittelut"
-
+#: AutoTimerEditor.py:701
 msgid "Control recording completely by service"
 msgstr "Täydellinen tallennuksien hallinta taustapalvelun avulla"
 
+#: AutoTimerResource.py:186
 msgid "Couldn't load config file!"
 msgstr "Asetuksia ei voitu ladata!"
 
-msgid "Create a new AutoTimer."
-msgstr "Luo uusi automaattiajastus."
-
+#: AutoTimerOverview.py:271
 msgid "Create a new timer using the classic editor"
 msgstr "Luo uusi ajastus klassisen editorin avulla"
 
+#: AutoTimerOverview.py:272
 msgid "Create a new timer using the wizard"
 msgstr "Luo uusi ajastus avustustoiminnon avulla"
 
+#: AutoTimerEditor.py:326
+#, python-format
 msgid "Custom (%s)"
 msgstr "Muokattu (%s)"
 
+#: AutoTimerEditor.py:694
 msgid "Custom location"
 msgstr "Muokattu hakemisto"
 
+#: AutoTimerEditor.py:650
 msgid "Custom offset"
 msgstr "Muokattu lisäaika"
 
+#: AutoTimerEditor.py:600
 msgid "Defines where to search for duplicates (only title, short description or even extended description)"
 msgstr "Määrittää mistä etsitään duplikaatteja (vain ohjelmanimestä, lyhyestä kuvauksesta vai myös pitkästä kuvauksesta)"
 
+#: AutoTimerEditor.py:1149 AutoTimerEditor.py:1366 AutoTimerOverview.py:92
 msgid "Delete"
 msgstr "Poista"
 
+#: AutoTimerEditor.py:617 AutoTimerWizard.py:118
 msgid "Description"
 msgstr "Kuvaus"
 
+#: AutoTimerEditor.py:622
 msgid "EPG encoding"
 msgstr "EPG:n enkoodaus"
 
+#: AutoTimerEditor.py:514
 msgid "Edit AutoTimer"
 msgstr "Muokkaa automaattiajastusta"
 
+#: AutoTimerEditor.py:1172
 msgid "Edit AutoTimer filters"
 msgstr "Muokkaa automaattiajastuksen suodattimia"
 
+#: AutoTimerEditor.py:1385
 msgid "Edit AutoTimer services"
 msgstr "Muokkaa automaattiajastuksen kanavia"
 
+#. TRANSLATORS: description of AutoTimer in PluginBrowser
+#: plugin.py:215 plugin.py:217 plugin.py:228
 msgid "Edit Timers and scan for new Events"
 msgstr "Muokkaa ajastuksia ja etsi uusia ohjelmia"
 
+#: AutoTimerEditor.py:518
 msgid "Edit filters"
 msgstr "Muokkaa suodattimia"
 
+#: AutoTimerOverview.py:269
 msgid "Edit new timer defaults"
 msgstr "Muokkaa uusien ajastuksien oletusarvoja"
 
+#: AutoTimerOverview.py:105
 msgid "Edit selected AutoTimer"
 msgstr "Muokkaa valittua automaattiajastusta"
 
+#: AutoTimerEditor.py:535
 msgid "Edit services"
 msgstr "Muokkaa kanavia"
 
+#: AutoTimerEditor.py:1407
 msgid "Editing"
 msgstr "Muokkaus"
 
+#: AutoTimerSettings.py:59 setup.xml
 msgid "Editor for new AutoTimers"
 msgstr "Automaattiajastuksien muokkaus"
 
+#: AutoTimerEditor.py:1214
 msgid "Enable Filtering"
 msgstr "Ota suodatus käyttöön"
 
+#: AutoTimerEditor.py:1406
 msgid "Enable Service Restriction"
 msgstr "Ota kanavien rajoitus käyttöön"
 
+#: AutoTimerSettings.py:50 setup.xml
 msgid "Enable this to be able to access the AutoTimer Overview from within the extension menu."
 msgstr "Ota tämä käyttöön jos haluat automaattiajastuksen yleisnäkymän laajennusvalikkoon."
 
+#: AutoTimerSettings.py:49 setup.xml
 msgid "Enable this to be able to access the AutoTimer Overview from within the plugin browser."
 msgstr "Ota tämä käyttöön jos haluat automaattiajastuksen yleisnäkymän lisäosavalikkoon."
 
+#: AutoTimerEditor.py:616 AutoTimerImporter.py:154 AutoTimerWizard.py:117
 msgid "Enabled"
 msgstr "Käytössä"
 
+#: AutoTimerEditor.py:574
 msgid "Encoding the channel uses for it's EPG data. You only need to change this if you're searching for special characters like the german umlauts."
 msgstr "Kanavan käyttämä EPG-koodaus. Sinun tarvitsee muuttaa tätä vain jos etsit erikoismerkkejä."
 
+#: AutoTimerEditor.py:675
 msgid "End of \"after event\" timespan"
 msgstr "\"Ohjelman\" jälkeisen aikajakson loppu"
 
+#: AutoTimerEditor.py:638 AutoTimerWizard.py:111
 msgid "End of timespan"
 msgstr "Aikajakson loppu"
 
+#: AutoTimerEditor.py:788
 msgid "Enter or edit description"
 msgstr "Syötä, tai muokkaa kuvausta"
 
+#: AutoTimerEditor.py:795
 msgid "Enter or edit match title"
 msgstr "Syötä, tai muokkaa osuman ohjelmanimeä"
 
+#: AutoTimerList.py:222
 msgid "Everyday"
 msgstr "Joka päivä"
 
+#: AutoTimerImporter.py:170
 msgid "Exact match"
 msgstr "Täysin sama"
 
+#: AutoTimerEditor.py:1228 AutoTimerEditor.py:1245 AutoTimerEditor.py:1270
 msgid "Exclude"
 msgstr "Älä käytä"
 
+#: AutoTimerEditor.py:669
 msgid "Execute \"after event\" during timespan"
 msgstr "Suorita \"ohjelman jälkeen\" aikajakson aikana"
 
+#: AutoTimerSettings.py:109
 msgid "Exit"
 msgstr "Poistu"
 
-msgid "FAQ"
-msgstr "FAQ"
-
+#: AutoTimerEditor.py:1216
 msgid "Filter"
 msgstr "Suodatin"
 
-msgid ""
-"Filters are another powerful tool when matching events. An AutoTimer can be restricted to certain Weekdays or only match an event with a text inside eg it's Description.\n"
-"Press BLUE to add a new restriction and YELLOW to remove the selected one."
-msgstr ""
-"Suodattimet ovat tehokkaita työkaluja ohjelmien haussa. Automaattiajastus voidaan rajoittaa tiettyihin viikonpäiviin tai ohjelmiin joissa on esim. tietty kuvausteksti.\n"
-"Lisää uusi rajoitus painamalla sinistä ja poista valittu painamalla keltaista näppäintä."
-
+#: AutoTimerEditor.py:585
 msgid "First day to match events. No event that begins before this date will be matched."
 msgstr "Ensimmäinen automaattihaun päivä. Tätä aikaisempia ohjelmia ei haeta."
 
+#: AutoTimer.py:832 AutoTimerResource.py:58
+#, python-format
 msgid ""
 "Found a total of %d matching Events.\n"
 "%d Timer were added and\n"
@@ -342,129 +421,160 @@ msgstr ""
 "%d muuttumatonta,\n"
 "%d samankaltaista lisättiin."
 
+#: AutoTimerOverview.py:278
 msgid "Frequently asked questions"
 msgstr "Usein kysyttyjä kysymyksiä"
 
-msgid "Frequently asked questions about the AutoTimer"
-msgstr "Automaattiajastuksen usein kysytyt kysymykset"
-
+#: AutoTimerList.py:212
 msgid "Fri"
 msgstr "Pe"
 
+#: AutoTimerEditor.py:57
 msgid "Friday"
 msgstr "Perjantai"
 
-msgid "Generic setup"
-msgstr "Yleiset asetukset"
-
+#: AutoTimerSettings.py:52 setup.xml
 msgid "Guess existing timer based on begin/end"
 msgstr "Arvaa olemassa oleva ajastus alku/loppuajan perusteella"
 
+#: AutoTimerOverview.py:277
 msgid "Help"
 msgstr "Ohje"
 
+#: AutoTimerSettings.py:48 setup.xml
 msgid "Here you can specify whether simultaneous timers of the same program can be created. This allows simultaneous recording of a program with different resolutions. (e.g. SD service and HD service)"
 msgstr "Tässä voit asettaa miten saman ohjelman samanaikainen ajastus luodaan. Tämä mahdollistaa samanaikaisen tallennuksen eri resoluutioilla esim. SD- ja HD-kanavilta."
 
+#: __init__.py:47
 msgid "Hour"
 msgstr "Tunti"
 
+#: AutoTimerSettings.py:63 setup.xml
 msgid "If 0, the popup will remain open."
 msgstr "Jos 0, popup jää näkyviin."
 
+#: AutoTimerSettings.py:53 setup.xml
 msgid "If a timer conflict occurs, AutoTimer will search outside the timespan for a similar event and add it."
 msgstr "Jos havaitaaan ajastusristiriita, automaattiajastus etsii aikajakson ulkopuolelta samankaltaista ohjelmaa ja lisää sen."
 
+#: AutoTimerSettings.py:62 setup.xml
 msgid "If enabled, the polling will be skipped if EPGRefresh is currently running."
 msgstr "Jos päällä, hakua ei tehdä jos EPGRefresh on ajossa."
 
+#: AutoTimerSettings.py:61 setup.xml
 msgid "If enabled, the polling will be skipped if a recording is in progress."
 msgstr "Jos päällä, haku ei ole käytössä tallennuksien aikana."
 
+#: __init__.py:88
 msgid "If specified bouquets"
 msgstr "Aseta suosikkilistoille"
 
+#: __init__.py:87
 msgid "If specified services"
 msgstr "Aseta kanaville"
 
+#: __init__.py:89
 msgid "If specified services or bouquets"
 msgstr "Rajoita valittuihin kanaviin tai suosikkilistoihin"
 
+#: AutoTimerSettings.py:38
 msgid "If this is disabled AutoTimer will NOT automatically look for events matching your AutoTimers but only when you leave the GUI with the green button."
 msgstr "Jos tämä on pois päältä, Automaattiajastus EI hae asetettuja ajastuksia automaattisesti, mutta tekee sen, jos poistut käyttöliittymästä painamalla vihreää nappia."
 
+#: AutoTimerSettings.py:52 setup.xml
+#, python-format
 msgid "If this is enabled an existing timer will also be considered recording an event if it records at least 80% of the it."
 msgstr "Jos tämä valinta on käytössä, olemassa oleva ajastus tulkitaan tallenteeksi jos tallennus kestää vähintään 80% ohjelman kokonaisajasta."
 
+#: AutoTimerSettings.py:56 setup.xml
 msgid "If this is selected, the name of the respective AutoTimer will be added as a tag to timers created by this plugin."
 msgstr "Jos valittu, vastaavan Automaattiajastuksen nimi lisätään avainsanaksi tämän lisäosan luomiin ajastuksiin."
 
+#: AutoTimerSettings.py:55
 msgid "If this is selected, the tag \"AutoTimer\" will be given to timers created by this plugin."
 msgstr "Jos tämä on valittu,  \"Automaattiajastus\" lisätään avainsanaksi tämän lisäosan luomiin ajastuksiin."
 
+#: setup.xml
+#, fuzzy
+msgid "If this is selected, the tag 'AutoTimer' will be given to timers created by this plugin."
+msgstr "Jos tämä on valittu,  \"Automaattiajastus\" lisätään avainsanaksi tämän lisäosan luomiin ajastuksiin."
+
+#: AutoTimerImporter.py:253
 msgid "Import AutoTimer"
 msgstr "Tuo automaattiajastus"
 
+#: AutoTimerOverview.py:266
 msgid "Import existing Timer"
 msgstr "Tuo olemassa oleva ajastus"
 
+#: AutoTimerOverview.py:267 __init__.py:69
 msgid "Import from EPG"
 msgstr "Tuo ohjelmaoppaasta"
 
+#: AutoTimerEditor.py:1233 AutoTimerEditor.py:1250 AutoTimerEditor.py:1271
 msgid "Include"
 msgstr "Sisällytä"
 
+#: AutoTimerSettings.py:55
 msgid "Include \"AutoTimer\" in tags"
 msgstr "Sisällytä \"Automaattiajastus\" tageihin"
 
+#: setup.xml
 msgid "Include 'AutoTimer' in tags"
 msgstr "Sisällytä 'Automaattiajastus' tageihin"
 
+#: AutoTimerSettings.py:56 setup.xml
 msgid "Include AutoTimer name in tags"
 msgstr "Sisällytä Automaattiajastuksen nimi tageihin"
 
-msgid ""
-"It's possible to restrict an AutoTimer to certain Services or Bouquets or to deny specific ones.\n"
-"An Event will only match this AutoTimer if it's on a specific and not denied Service (inside a Bouquet).\n"
-"Press BLUE to add a new restriction and YELLOW to remove the selected one."
-msgstr ""
-"Voit rajoittaa automaattiajastuksen vain tiettyihin kanaviin tai suosikkilistoihin tai voit estää ne siltä.\n"
-"Ohjelma täsmää tähän automaattiajastukseen vain jos se määritellyllä kanavalla (eikä ole estetyllä suosikkilistalla).\n"
-"Lisää uusi rajoitus painamalla sinistä ja poista valittu painamalla keltaista näppäintä."
-
+#: AutoTimerEditor.py:604
 msgid "Label Timers with season, episode and title, according to the SeriesPlugin settings."
 msgstr "Nimeää ajastukset kauden, jakson ja ohjelmanimen mukaan, riippuen SeriesPlugin lisäosan asetuksista."
 
+#: AutoTimerEditor.py:704
 msgid "Label series"
 msgstr "Nimeä sarjat"
 
+#: AutoTimerEditor.py:586
 msgid "Last day to match events. Events have to begin before this date to be matched."
 msgstr "Viimeinen automaattiajastuksen päivä. Tämän jälkeisiä ohjelmia ei haeta."
 
+#: AutoTimerImporter.py:224
 msgid "Location"
 msgstr "Hakemisto"
 
+#: AutoTimerEditor.py:594
 msgid "Lower bound of timespan."
 msgstr "Aikajakson alaraja."
 
+#: AutoTimerEditor.py:581
 msgid "Lower bound of timespan. Nothing before this time will be matched. Offsets are not taken into account!"
 msgstr "Aikajakson alaraja. Mitään ennen tätä ei etsitä. Lisäaikoja ei oteta huomioon!"
 
+#: AutoTimerImporter.py:181
+#, python-format
 msgid "Match Timespan: %02d:%02d - %02d:%02d"
 msgstr "Haun aikajakso: %02d:%02d - %02d:%02d"
 
+#: AutoTimerEditor.py:618 AutoTimerWizard.py:119
 msgid "Match title"
 msgstr "Hae ohjelmanimi"
 
+#: AutoTimerImporter.py:163
+#, python-format
 msgid "Match title: %s"
 msgstr "Hae ohjelmanimi: %s"
 
+#: AutoTimerEditor.py:663
 msgid "Maximum duration (in m)"
 msgstr "Suurin kesto (minuuttia)"
 
+#: AutoTimerEditor.py:591
 msgid "Maximum event duration to match. If an event is longer than this amount of time (without offset) it won't be matched."
 msgstr "Haussa käytettävä maksimi ohjelman kesto. Jos ohjelma on pidempi kuin määritetty kesto (ilman lisäaikaa) ohittaa haku sen."
 
+#: AutoTimerOverview.py:213
+#, python-format
 msgid ""
 "Message\n"
 "Do you really want to delete %s?"
@@ -472,158 +582,180 @@ msgstr ""
 "Varoitus\n"
 "Haluatko varmasti poistaa %s?"
 
+#: __init__.py:48
 msgid "Minute"
 msgstr "Minuutti"
 
+#: AutoTimerSettings.py:51 setup.xml
 msgid "Modify existing timers"
 msgstr "Muokkaa olemassa olevia ajastuksia"
 
+#: AutoTimerList.py:208
 msgid "Mon"
 msgstr "Ma"
 
+#: AutoTimerEditor.py:53
 msgid "Monday"
 msgstr "Maanantai"
 
+#: AutoTimerEditor.py:324
 msgid "Monthly"
 msgstr "Kuukausittain"
 
+#: AutoTimerEditor.py:324
 msgid "Never"
 msgstr "Ei koskaan"
 
+#: AutoTimerEditor.py:1150 AutoTimerEditor.py:1367
 msgid "New"
 msgstr "Uusi"
 
+#: AutoTimerEditor.py:331 AutoTimerOverview.py:216 __init__.py:86
 msgid "No"
 msgstr "Ei"
 
-msgid "No, remove them."
-msgstr "Ei, poista ne."
-
+#: AutoTimerEditor.py:365 AutoTimerEditor.py:401 __init__.py:62
 msgid "None"
 msgstr "Ei mitään"
 
+#: AutoTimerEditor.py:647
 msgid "Not after"
 msgstr "Ei jälkeen"
 
+#: AutoTimerEditor.py:646
 msgid "Not before"
 msgstr "Ei ennen"
 
+#: AutoTimerEditor.py:597
 msgid "Number of scheduled recordings left."
 msgstr "Ajastettuja tallennuksia jäljellä."
 
+#: AutoTimerEditor.py:487 AutoTimerEditor.py:1365 AutoTimerImporter.py:49
+#: AutoTimerImporter.py:143
 msgid "OK"
 msgstr "OK"
 
+#: AutoTimerEditor.py:656
 msgid "Offset after recording (in m)"
 msgstr "Lisäaika tallennuksen jälkeen (min.)"
 
+#: AutoTimerEditor.py:655
 msgid "Offset before recording (in m)"
 msgstr "Lisäaika ennen tallennusta (min.)"
 
+#: AutoTimerEditor.py:333
 msgid "On any service"
 msgstr "Millä tahansa kanavalla"
 
+#: AutoTimerEditor.py:332
 msgid "On same service"
 msgstr "Samalla kanavalla"
 
+#: __init__.py:63
 msgid "Only AutoTimers created during this session"
 msgstr "Vain tällä kertaa luodut automaattiajastukset"
 
+#: AutoTimerSettings.py:47 setup.xml
 msgid "Only add timer for next x days"
 msgstr "Lisää ajastuksia vain seuraaville x-määrälle päiviä"
 
+#: AutoTimerEditor.py:631 AutoTimerWizard.py:104
 msgid "Only match during timespan"
 msgstr "Hae vain aikajaksolta"
 
+#: AutoTimerImporter.py:197
+#, python-format
 msgid "Only on Service: %s"
 msgstr "Vain kanavalta: %s"
 
+#: AutoTimerImporter.py:188
+#, python-format
 msgid "Only on Weekday: %s"
 msgstr "Vain viikonpäivänä: %s"
 
+#: AutoTimerSettings.py:39 setup.xml
 msgid "Only poll while in standby"
 msgstr "Hae vain valmiustilassa"
 
+#: AutoTimerOverview.py:112
 msgid "Open Context Menu"
 msgstr "Avaa valikko"
 
+#: AutoTimerImporter.py:353
 msgid "Please provide a Text to match"
 msgstr "Syötä haettava teksti"
 
+#: AutoTimerSettings.py:44
+#, python-format
 msgid "Poll Interval (in %s)"
 msgstr "Haun aikaväli (%s)"
 
+#: setup.xml
 msgid "Poll Interval (in mins)"
 msgstr "Hakuväli (minuutteja)"
 
+#: AutoTimerSettings.py:38 setup.xml
 msgid "Poll automatically"
 msgstr "Hae automaattisesti"
 
+#: AutoTimerSettings.py:43
 msgid "Poll unit"
 msgstr "Haun yksikkö"
 
+#: AutoTimerSettings.py:43
 msgid "Poll unit selects whether the poll interval should be interpreted in hours or minutes."
 msgstr "Hakuyksikkö määrittää haetaanko tunneissa vai minuuteissa."
 
+#: AutoTimerSettings.py:63 setup.xml
 msgid "Popup timeout in seconds"
 msgstr "Popupin viive sekunteissa"
 
+#: AutoTimerEditor.py:592
 msgid "Power state to change to after recordings. Select \"standard\" to not change the default behavior of enigma2 or values changed by yourself."
 msgstr "Tallennuksen jälkeinen tila. Valitse \"vakio\" jos et halua muuttaa Enigma2:n oletustoimintaa tai arvoa jonka olet itse määrittänyt."
 
+#: AutoTimerOverview.py:265
 msgid "Preview"
 msgstr "Esikatselu"
 
+#: AutoTimerPreview.py:109
 msgid "Preview AutoTimer"
 msgstr "Esikatsele automaattiajastusta"
 
-msgid ""
-"Question: I found a problem with the AutoTimer, can you fix it?/nAnswer: First try the AutoTimer version in a recent (experimental) Image to see if the problem was fixed. Then read the Help again "
-"and the upcoming FAQs to make sure that this is actually a problem and not expected behavior./nIf you still think there is something wrong with the AutoTimer, please visit http://www.dream-"
-"multimedia-tv.de/board and post your problem there./n/nQ: The plugin only adds timers when leaving the configuration, not automatically. What can I do?/nA: From the Overview press MENU and enter the "
-"'Setup'. In this screen enable 'Poll automatically' and you should be good to go."
-msgstr "HUOM!! Tämä suomennos löytyy tiedostosta MPHelp.po HUOM!!"
-
-msgid ""
-"Question: My AutoTimer for 'News' does not record the 'Late News'./nAnswer: Check 'Search type' and 'Search strictness' for the given AutoTimer./n/nQ: The show I'm trying to record contains umlauts "
-"in its title. AutoTimer does not find it./nA: Check the 'EPG encoding' for the given AutoTimer. For german stations 'UTF-8' should be selected./n/nQ: I seem to be unable to record two subsequent "
-"events. There is only a single timer created that spans (part of) both events./nA: From the Overview press MENU and enter the 'Setup'. In this screen disable 'Guess existing timer based on begin/"
-"end'."
-msgstr ""
-"Kysyttyä: Olen laittanut automaattiajastuksen ajastamaan hakusanalla 'uutiset', mutta se ei tallenna ohjelmaa 'myöhäisuutiset'./n Vastaus: Tarkasta 'Haun tyyppi' ja 'Haun tarkkuus' valitun "
-"tallennuksen asetuksista./n/nKysyttyä: Ajastetun ohjelman nimi sisältää erikoismerkkejä. Automaattiajastus ei löydä ohjelmia./nVastaus: Tarkasta asetus 'EPG:n enkoodaus'. Valittavissa on muutama "
-"vaihtoehto./n/nKysyttyä: En pysty ajastamaan kahta perättäistä samannimistä ohjelmaa. On vain yksi ajastus joka tallentaa molemmista ohjelmista vain osan./nVastaus: Laita automaattiajastuksen "
-"asetuksista pois päältä seuraava valinta 'Arvaa olemassa oleva ajastus alku/loppuajan perusteella'."
-
-msgid ""
-"Question: You keep talking about help being provided for each parameter. I'm unable to read it (in part or in full)./nAnswer: Try using the default skin and if it works ask the creator of your "
-"regular skin. If it still does not work your image might not provide the actual default skin so contact the creator of your image."
-msgstr "HUOM!! Tämä suomennos löytyy tiedostosta MPHelp.po HUOM!!"
-
+#: AutoTimerEditor.py:807 AutoTimerEditor.py:1304 AutoTimerEditor.py:1478
+#: AutoTimerImporter.py:259 AutoTimerOverview.py:250 AutoTimerSettings.py:172
 msgid "Really close without saving settings?"
 msgstr "Haluatko poistua tallentamatta asetuksia?"
 
+#: AutoTimerEditor.py:678
 msgid "Record a maximum of x times"
 msgstr "Tallenna enintään x kertaa"
 
+#: AutoTimerEditor.py:1416 AutoTimerEditor.py:1470
 msgid "Record on"
 msgstr "Tallenna"
 
+#: AutoTimerSettings.py:64 setup.xml
 msgid "Remove not existing events"
 msgstr "Poista olemattomat ajastukset"
 
+#: AutoTimerOverview.py:120
 msgid "Remove selected AutoTimer"
 msgstr "Poista valittu automaattiajastus"
 
+#: AutoTimerEditor.py:686
 msgid "Require description to be unique"
 msgstr "Vaadi yksilöllinen kuvaus"
 
+#: AutoTimerEditor.py:684
 msgid "Reset count"
 msgstr "Nollaa laskuri"
 
+#: AutoTimerEditor.py:593
 msgid "Restrict \"after event\" to a certain timespan?"
 msgstr "Rajoita \"ohjelman jälkeen\" toiminto tiettyyn aikajaksoon?"
 
+#: AutoTimerEditor.py:606
 msgid ""
 "Restrict autotimer to bouquets.\n"
 "Use the blue key to edit the bouquet filter."
@@ -631,6 +763,7 @@ msgstr ""
 "Rajoita automaattiajastus tiettyihin kanavalistoihin.\n"
 "Käytä sinistä nappia muokataksesi kanavalistasuodatinta."
 
+#: AutoTimerEditor.py:607
 msgid ""
 "Restrict autotimer to specific days.\n"
 "Use the yellow key to edit the day filter."
@@ -638,6 +771,7 @@ msgstr ""
 "Rajoita automaattiajastus tietyille päiville.\n"
 "Käytä keltaista nappia muokataksesi päiväsuodatinta."
 
+#: AutoTimerEditor.py:605
 msgid ""
 "Restrict autotimer to specific services, channels.\n"
 "Use the blue key to edit the service filter."
@@ -645,184 +779,187 @@ msgstr ""
 "Rajoita automaattiajastus tietyille palveluille, kanaville.\n"
 "Käytä sinistä nappia muokataksesi palvelua."
 
+#: AutoTimerEditor.py:714
 msgid "Restrict to days"
 msgstr "Rajoita päiviin"
 
+#: AutoTimerEditor.py:641
 msgid "Restrict to events on certain dates"
 msgstr "Rajoita haku tiettyjen päivien ohjelmiin"
 
+#: AutoTimerEditor.py:713
 msgid "Restrict to specific bouquets"
 msgstr "Rajoita tiettyihin kanaviin"
 
+#: AutoTimerEditor.py:712
 msgid "Restrict to specific services"
 msgstr "Rajoita tiettyihin palveluihin"
 
+#: AutoTimerList.py:213
 msgid "Sat"
 msgstr "La"
 
+#: AutoTimerEditor.py:58
 msgid "Saturday"
 msgstr "Lauantai"
 
+#: AutoTimerEditor.py:1148 AutoTimerOverview.py:91 AutoTimerSettings.py:110
 msgid "Save"
 msgstr "Tallenna"
 
+#: AutoTimerEditor.py:624
 msgid "Search strictness"
 msgstr "Haun tarkkuus"
 
+#: AutoTimerEditor.py:623
 msgid "Search type"
 msgstr "Haun tyyppi"
 
-msgid ""
-"Select \"exact match\" to enforce \"Match title\" to match exactly, \"partial match\" if you only want to search for a part of the event title or \"description match\" if you only want to search for "
-"a part of the event description."
-msgstr ""
-"Valitset \"täysin sama\" pakottaaksesi \"Hae ohjelmanimi\" hakemaan juuri sitä nimeä, \"osittainen vastaavuus\" jos haluat hakea vain osaa osaa ohjelman nimestä tai \"kuvaus\" jos haluat hakea osaa "
-"ohjelman kuvaustekstistä."
+#: AutoTimerEditor.py:575
+msgid "Select \"exact match\" to enforce \"Match title\" to match exactly, \"partial match\" if you only want to search for a part of the event title or \"description match\" if you only want to search for a part of the event description."
+msgstr "Valitset \"täysin sama\" pakottaaksesi \"Hae ohjelmanimi\" hakemaan juuri sitä nimeä, \"osittainen vastaavuus\" jos haluat hakea vain osaa osaa ohjelman nimestä tai \"kuvaus\" jos haluat hakea osaa ohjelman kuvaustekstistä."
 
+#: AutoTimerImporter.py:63
 msgid "Select a timer to import"
 msgstr "Valitse tuotava ajastus"
 
+#: AutoTimerEditor.py:1454
 msgid "Select bouquet to record on"
 msgstr "Valitse tallennettava suosikkilista"
 
+#: AutoTimerEditor.py:1448
 msgid "Select channel to record on"
 msgstr "Valitse tallennettava kanava"
 
+#: AutoTimerEditor.py:602
 msgid "Select the location to save the recording to."
 msgstr "Valitse tallennushakemisto."
 
+#: AutoTimerEditor.py:1268
 msgid "Select type of Filter"
 msgstr "Valitse suodattimen tyyppi"
 
+#: AutoTimerEditor.py:576
 msgid "Select whether or not you want to enforce case correctness."
 msgstr "Valitse erotellaanko isot ja pienet kirjaimet."
 
+#: AutoTimerEditor.py:628
 msgid "Set End Time"
 msgstr "Aseta loppumisaika"
 
+#: AutoTimerEditor.py:578
 msgid "Set an end time for the timer. If you do, the timespan of the event might be blocked for recordings."
 msgstr "Aseta ajastimen lopetusaika. Jos syötät ajan, ohjelman aikajakso voi olla estetty tekemään tallennuksia."
 
+#: AutoTimerEditor.py:659
 msgid "Set maximum duration"
 msgstr "Aseta maksimikesto"
 
+#: AutoTimerEditor.py:571
 msgid "Set this NO to disable this AutoTimer."
 msgstr "Poista tämä automaattiajastus käytöstä laittamalla arvoksi Ei."
 
+#: AutoTimerEditor.py:577
 msgid "Set timer type: zap, simple record, zap+record (always zap to service before start record)."
 msgstr "Aseta ajastuksen tyyppi: kanavanvaihto, tavallinen tallennus, kanavanvaihto+tallennus (tee aina kanavanvaihto oikealle kanavalle ennen tallennuksen alkua)."
 
+#: AutoTimerOverview.py:268
 msgid "Setup"
 msgstr "Asetukset"
 
+#: AutoTimerEditor.py:580
 msgid "Should this AutoTimer be restricted to a timespan?"
 msgstr "Rajoitetaanko tämä automaattiajastus aikajaksoon?"
 
+#: AutoTimerEditor.py:590
 msgid "Should this AutoTimer only match up to a certain event duration?"
 msgstr "Hakeeko tämä automaattiajastus vain tietyn pituisia ohjelmia?"
 
+#: AutoTimerEditor.py:601
 msgid "Should timers created by this AutoTimer be recorded to a custom location?"
 msgstr "Tallennetaanko tämän automaattiajastuksen luomat ajastukset eri hakemistoon?"
 
+#: AutoTimerSettings.py:50 setup.xml
 msgid "Show in extension menu"
 msgstr "Näytä laajennusvalikossa"
 
+#: AutoTimerSettings.py:49 setup.xml
 msgid "Show in plugin browser"
 msgstr "Näytä lisäosavalikossa"
 
+#: AutoTimerSettings.py:57 setup.xml
 msgid "Show notification on conflicts"
 msgstr "Näytä ilmoitus ristiriidoista"
 
+#: AutoTimerSettings.py:58 setup.xml
 msgid "Show notification on similars"
 msgstr "Näytä ilmoitus samankaltaisista"
 
+#: AutoTimerSettings.py:62 setup.xml
 msgid "Skip poll during epg refresh"
 msgstr "Ohita haku epg:n virkistyksen aikana"
 
+#: AutoTimerSettings.py:61 setup.xml
 msgid "Skip poll during records"
 msgstr "Älä hae tallennuksien aikana"
 
+#: AutoTimerPreview.py:115
 msgid "Sort AutoTimer"
 msgstr "Järjestä aut.ajastukset"
 
+#: AutoTimerPreview.py:113
 msgid "Sort Time"
 msgstr "Aikajärj."
 
+#: AutoTimerSettings.py:42 setup.xml
 msgid "Startup delay (in min)"
 msgstr "Käynnistysviive (minuuttia)"
 
+#: AutoTimerSettings.py:42
 msgid "Startup delay is the number of minutes before polling after a reboot, so as to not delay enigma2 startup time."
 msgstr "Käynnistysviive on minuutteja ennen hakua, ettei se hidasta Enigma2:sen käynnistymistä."
 
+#: AutoTimerList.py:214
 msgid "Sun"
 msgstr "Su"
 
+#: AutoTimerEditor.py:59
 msgid "Sunday"
 msgstr "Sunnuntai"
 
+#: AutoTimerSettings.py:60
 msgid "Support \"Fast Scan\"?"
 msgstr "Tue \"Nopeaa hakua\"?"
 
+#: setup.xml
 msgid "Support 'Fast Scan'?"
 msgstr "Tuetaanko 'Nopeaa hakua'?"
 
+#: AutoTimerEditor.py:696 AutoTimerImporter.py:233
 msgid "Tags"
 msgstr "Avainsanat"
 
+#: AutoTimerEditor.py:603
 msgid "Tags the Timer/Recording will have."
 msgstr "Ajastuksen/tallenteen avainsanat."
 
-msgid ""
-"Thank you for using the wizard. Your new AutoTimer has been added to the List.\n"
-"Please press OK to continue."
-msgstr ""
-"Uusi automaattiajastus on lisätty.\n"
-"Jatka painamalla OK."
-
-msgid "The 'Overview'"
-msgstr "Työnäkymä"
-
-msgid ""
-"The AutoTimer overview is the standard entry point to this plugin./n/nIf AutoTimers are configured you can choose them from a list to change them (OK button on your remote) or remove them (YELLOW "
-"button on your remote)./nNew Timers can be added by pressing the BLUE button and the control menu can be opened using the MENU button./n/nWhen leaving the plugin using the GREEN button it will "
-"search the EPG for matching events ONCE. To configure a regular search interval of the plugin to search for events open the control menu and enter the plugin setup."
-msgstr "HUOM!! Tämä suomennos löytyy tiedostosta MPHelp.po HUOM!!"
-
-msgid ""
-"The Timer will not be added to the List.\n"
-"Please press OK to close this Wizard."
-msgstr ""
-"Ajastusta ei lisätä luetteloon.\n"
-"Sulje avustaja painamalla OK."
-
-msgid "The Timespan of an AutoTimer is the first 'advanced' attribute. If a timespan is specified an event will only match this AutoTimer if it lies inside of this timespan."
-msgstr "Automaattiajastuksen aikajakso on ensimmäinen 'laajempi' hakutieto. Jos aikajakso on määritetty, ohjelma haetaan tällä automaattiajastuksella vain jos se on aikajakson sisällä."
-
+#: AutoTimer.py:166
 msgid "The autotimer file (/etc/enigma2/autotimer.xml) is corrupt. A new and empty config was created. A backup of the config can be found here (/etc/enigma2/autotimer.xml_old) "
 msgstr "Autotimerin tiedosto (/etc/enigma2/autotimer.xml) on korruptoitunut. Uusi tyhjä tiedosto on luotu. Varmuuskopio tiedostosta löytyy täältä: (/etc/enigma2/autotimer.xml_old) "
 
-msgid ""
-"The control menu hides less frequently used options of the plugin, including the configuration and default settings for new AutoTimers./n/nWhile you can just open the menu and take a look for "
-"yourself, let's go through the available options:/n - Help:/n   What you are looking at right now/n - Preview:/n   Simulate EPG search, helps finding errors in your setup./n - Import existing Timer:/"
-"n   Create a new AutoTimer based on an existing regular timer./n - Import from EPG:/n   Create an AutoTimer based on an EPG event./n - Setup:/n   Generic configuration of the plugin./n - Edit new "
-"timer defaults:/n   Configure default values for new AutoTimers./n - Create a new timer using the wizard/classic editor:/n   Use the non-default editor to create a new AutoTimer."
-msgstr "HUOM!! Tämä suomennos löytyy tiedostosta MPHelp.po HUOM!!"
-
+#: AutoTimerEditor.py:598
 msgid "The counter can automatically be reset to the limit at certain intervals."
 msgstr "Laskuri voidaan nollata raja-arvoon tietyin väliajoin."
 
+#: AutoTimerSettings.py:59 setup.xml
 msgid "The editor to be used for new AutoTimers. This can either be the Wizard or the classic editor."
 msgstr "Automaattiajastuksien muokkaus. Tämä voi olla avustettu tai klassinen muokkaustila."
 
+#: AutoTimerEditor.py:824
 msgid "The match attribute is mandatory."
 msgstr "Vastaavuuden hakutieto on pakollinen."
 
-msgid ""
-"This FAQ is supposed to help everyone unwilling to help themselves by reading all the provided help available, and those who did not find a solution to their problems within the provided "
-"documentation./n/nTo make these hints a little easier to read, they are split up on multiple pages. You can go to the next page using the BLUE button on your remote control and back using the YELLOW "
-"one. Pressing the RED button or EXIT will close the FAQ."
-msgstr "HUOM!! Tämä suomennos löytyy tiedostosta MPHelp.po HUOM!!"
-
+#: AutoTimerEditor.py:608
 msgid ""
 "This allows you to apply other filters.\n"
 "Use the yellow key to edit other filters."
@@ -830,172 +967,173 @@ msgstr ""
 "Tästä voit syöttää toisen filtterin.\n"
 "Käytä keltaista nappia muokkaaksesi toista filtteriä."
 
-msgid ""
-"This help screen is supposed to give you a quick look at everything the AutoTimer has to offer./nYou can abort it at any time by pressing the RED or EXIT button on your remote control or bring it up "
-"at a later point by selecting it from the control menu using the MENU button from the regular entry point of the plugin (more on that later)./n/n/nBut you really should consider to take the few "
-"minutes it takes to read these help pages."
-msgstr "HUOM!! Tämä suomennos löytyy tiedostosta MPHelp.po HUOM!!"
-
+#: AutoTimerEditor.py:572
 msgid "This is a name you can give the AutoTimer. It will be shown in the Overview and the Preview."
 msgstr "Voit antaa nimen automaattiajastukselle. Se näkyy yleisnäkymässä ja esikatselussa."
 
-msgid ""
-"This is mostly a matter of taste./nThe Wizard provides you with a reduced set of options and presents them in smaller sets at a time. It is mostly aimed at users not very experienced with this "
-"plugin or the 'expert' level features of enigma2./n/nYou can check out the 'classic' editor by opening an existing timer from the overview and if you prefer this view over the wizard you can change "
-"the default editor in the setup dialog."
-msgstr "HUOM!! Tämä suomennos löytyy tiedostosta MPHelp.po HUOM!!"
-
+#: AutoTimerSettings.py:44
+#, python-format
 msgid "This is the delay in %s that the AutoTimer will wait after doing a search before searching the EPG again."
 msgstr "Tämä on viive %s kun Autotimer odottaa ennen seuraavaa EPG-hakua."
 
+#: setup.xml
+#, fuzzy
+msgid "This is the delay in minutes that the AutoTimer will wait after a search to search the EPG again."
+msgstr "Tämä on viive %s kun Autotimer odottaa ennen seuraavaa EPG-hakua."
+
+#: setup.xml
+#, fuzzy
+msgid "This is the delay in minutes that the AutoTimer will wait on initial launch to not delay enigma2 startup time."
+msgstr "Tämä on viive %s kun Autotimer odottaa ennen seuraavaa EPG-hakua."
+
+#: AutoTimerEditor.py:573
 msgid "This is what will be looked for in event titles. Note that looking for e.g. german umlauts can be tricky as you have to know the encoding the channel uses."
 msgstr "Tätä etsitään ohjelmien nimistä. Huomaa, että ääkkösten haku voi olla hankalaa koska sinun pitää tietää kanavan käyttämä merkkikoodaus."
 
-msgid ""
-"This screen should be pretty straight-forward. If the option name does not give its meaning away there should be an explanation for each of them when you select them. If there is no visible "
-"explanation this is most likely a skin issue and please try if the default skin fixes the issue./n/nA lot of effort has been put in making the parameters as easy to understand as possible, so give "
-"reading them a try ;-)."
-msgstr "HUOM!! Tämä suomennos löytyy tiedostosta MPHelp.po HUOM!!"
-
+#: AutoTimerSettings.py:51 setup.xml
 msgid "This setting controls the behavior when a timer matches a found event."
 msgstr "Tämä valitsee mitä tapahtuu kun ajastus täsmää löydettyyn ohjelmaan."
 
+#: AutoTimerSettings.py:54 setup.xml
 msgid "This toggles the behavior on timer conflicts. If an AutoTimer matches an event that conflicts with an existing timer it will not ignore this event but add it disabled."
-msgstr ""
-"Tämä valitsee mita tapahtuu päällekkäisissä ajastuksissa. Jos automaattiajastus löytää ohjelman, joka on päällekkäinen olemassa olevan ajastuksen kanssa, se lisää uuden ajastuksen mutta kytkee sen "
-"pois päältä."
+msgstr "Tämä valitsee mita tapahtuu päällekkäisissä ajastuksissa. Jos automaattiajastus löytää ohjelman, joka on päällekkäinen olemassa olevan ajastuksen kanssa, se lisää uuden ajastuksen mutta kytkee sen pois päältä."
 
+#: AutoTimerList.py:211
 msgid "Thur"
 msgstr "To"
 
+#: AutoTimerEditor.py:56
 msgid "Thursday"
 msgstr "Torstai"
 
+#: AutoTimerEditor.py:589
 msgid "Time in minutes to append to recording."
 msgstr "Lisäaika (minuutteina) tallennuksen loppuun."
 
+#: AutoTimerEditor.py:588
 msgid "Time in minutes to prepend to recording."
 msgstr "Lisäaika (minuutteina) tallennuksen alkuun."
 
+#: AutoTimerEditor.py:625 AutoTimerImporter.py:215 AutoTimerWizard.py:120
 msgid "Timer type"
 msgstr "Ajastuksen tyyppi"
 
+#: AutoTimerEditor.py:341
 msgid "Title"
 msgstr "Ohjelmanimi"
 
+#: AutoTimerEditor.py:342
 msgid "Title and Short description"
 msgstr "Ohjelmanimi ja lyhyt kuvaus"
 
+#: AutoTimerEditor.py:343
 msgid "Title and all descriptions"
 msgstr "Ohjelmanimi ja kaikki kuvaukset"
 
+#: AutoTimerList.py:209
 msgid "Tue"
 msgstr "Ti"
 
+#: AutoTimerEditor.py:54
 msgid "Tuesday"
 msgstr "Tiistai"
 
+#: setup.xml
+#, fuzzy
+msgid "Unless this is enabled AutoTimer will NOT automatically look for events matching your AutoTimers but only when you leave the GUI with the green button."
+msgstr "Jos tämä on pois päältä, Automaattiajastus EI hae asetettuja ajastuksia automaattisesti, mutta tekee sen, jos poistut käyttöliittymästä painamalla vihreää nappia."
+
+#: AutoTimerEditor.py:595
 msgid "Upper bound of timespan."
 msgstr "Aikajakson yläraja."
 
+#: AutoTimerEditor.py:583
 msgid "Upper bound of timespan. Nothing after this time will be matched. Offsets are not taken into account!"
 msgstr "Aikajakson yläraja. Mitään tämän jälkeistä ei haeta. Lisäaikoja ei oteta huomioon!"
 
+#: AutoTimerEditor.py:692
 msgid "Use a custom location"
 msgstr "Käytä muokattua tallennushakemistoa"
 
+#: AutoTimerEditor.py:630
 msgid "Use automatic selection of alternates."
 msgstr "Käytä automaattista vaihtoehtojen valintaa."
 
+#: AutoTimerEditor.py:715
 msgid "Use other filters"
 msgstr "Käytä muita suodattimia"
 
+#: AutoTimerList.py:210
 msgid "Wed"
 msgstr "Ke"
 
+#: AutoTimerEditor.py:55
 msgid "Wednesday"
 msgstr "Keskiviikko"
 
+#: AutoTimerEditor.py:61 AutoTimerList.py:216
 msgid "Weekday"
 msgstr "Viikonpäivä"
 
+#: AutoTimerEditor.py:60 AutoTimerList.py:215
 msgid "Weekend"
 msgstr "Viikonloppu"
 
+#: AutoTimerEditor.py:324
 msgid "Weekly (Monday)"
 msgstr "Viikoittain (maanantai)"
 
+#: AutoTimerEditor.py:324
 msgid "Weekly (Sunday)"
 msgstr "Viikoittain (sunnuntai)"
 
-msgid "Welcome to the AutoTimer-Plugin"
-msgstr "Tervetuloa automaattiajastus-lisäosaan"
-
-msgid ""
-"Welcome.\n"
-"\n"
-"This Wizard will help you to create a new AutoTimer by providing descriptions for common settings."
-msgstr ""
-"Tervetuloa.\n"
-"\n"
-"Tämä toiminto näyttää kuvaukset yleisimmistä asetuksista joiden avulla voit luoda uusia automaattiajastuksia."
-
-msgid "What is this 'control menu' you keep talking about?"
-msgstr "Mikä on tämä 'Asetusvalikko'?"
-
+#: AutoTimerSettings.py:60
 msgid "When supporting \"Fast Scan\" the service type is ignored. You don't need to enable this unless your Image supports \"Fast Scan\" and you are using it."
 msgstr "Kun \"Nopeaa hakua\" tuetaan, ei kanavan tyyppiä tarkisteta. Sinun ei tarvitse kytkeä tätä päälle, ellei käyttämäsi ohjelmisto tue \"Nopeaa hakua\" ja käytät sitä."
 
+#: setup.xml
+#, fuzzy
+msgid "When supporting 'Fast Scan' the service type is ignored. You dont need to enable this unless your Image supports 'Fast Scan' and you are using it."
+msgstr "Kun \"Nopeaa hakua\" tuetaan, ei kanavan tyyppiä tarkisteta. Sinun ei tarvitse kytkeä tätä päälle, ellei käyttämäsi ohjelmisto tue \"Nopeaa hakua\" ja käytät sitä."
+
+#: AutoTimerSettings.py:39 setup.xml
 msgid "When this is enabled AutoTimer will ONLY check for new events whilst in standby."
 msgstr "Jos tämä on päällä, automaattiajastus hakee uusia ohjelmia vain valmiustilassa."
 
+#: AutoTimerEditor.py:599
 msgid "When this option is enabled the AutoTimer won't match events where another timer with the same description already exists in the timer list."
 msgstr "Kun tämä asetus on päällä, automaattiajastus ei hae ohjelmia joille on jo olemassa ajastus samalla kuvauksella."
 
+#: AutoTimerEditor.py:579
 msgid "With this option enabled the channel to record will be selected automaticliy using your list of alternates."
 msgstr "Jos päällä, valitaan tallennettava kanava automaattisesti sinun vaihtoehtoisten kanavien luettelosta."
 
+#: AutoTimerEditor.py:596
 msgid "With this option you can restrict the AutoTimer to a certain amount of scheduled recordings. Set this to 0 to disable this functionality."
 msgstr "Tällä asetuksella voit rajoittaa automaattiajastuksen tiettyyn määrään ajastuksia. 0 arvo kytkee rajoituksen pois päältä."
 
+#: __init__.py:71
 msgid "Wizard"
 msgstr "Avustaja"
 
-msgid "Wizard or Classic Editor?"
-msgstr "Avustaja vai klassinen editori?"
-
+#: AutoTimerSettings.py:65 setup.xml
 msgid "Write the config file after every change which the user quits by saving."
 msgstr "Kirjoita asetustiedosto jokaisen muutoksen jälkeen kun tallennetaan."
 
-msgid "Yes"
-msgstr "Kyllä"
-
+#: AutoTimerOverview.py:214
 msgid "Yes, and delete all timers generated by this autotimer"
 msgstr "Kyllä, ja poista kaikki tämän automaattiajastuksen tekemät ajastukset"
 
+#: AutoTimerOverview.py:215
 msgid "Yes, but keep timers generated by this autotimer"
 msgstr "Kyllä, mutta säilytä tämän automaattiajastuksen tekemät ajastukset"
 
-msgid "Yes, keep them."
-msgstr "Kyllä, säilytä ne."
-
+#: AutoTimerSettings.py:47 setup.xml
 msgid "You can control for how many days in the future timers are added. Set this to 0 to disable this feature."
 msgstr "Voit määritellä kuinka monta päivää eteenpäin ajastukset lisätään. Asettamalla arvoksi 0 on tämä määritys pois päältä."
 
-msgid ""
-"You can set the basic properties of an AutoTimer here.\n"
-"While 'Name' is just a human-readable name displayed in the Overview, 'Match in title' is what is looked for in the EPG."
-msgstr ""
-"Tässä voit muuttaa automaattiajastuksen ominaisuuksia.\n"
-"'Nimi' on käytössä vain käyttäjän yleisnäkymässä, 'Hae ohjelmanimi' on se mitä haetaan ohjelmatiedoista."
-
-msgid ""
-"You did not provide a valid 'Match in title' Attribute for your new AutoTimer.\n"
-"As this is a mandatory Attribute you cannot continue without doing so."
-msgstr ""
-"En syöttänyt kunnollista 'Hae ohjelmanimi' hakutietoa uudelle automaattiajastukselle.\n"
-"Koska kyseinen tieto on pakollinen, et voi jatkaa ennen kuin olet tehnyt sen."
-
+#: AutoTimerEditor.py:833 AutoTimerImporter.py:274
+#, python-format
 msgid ""
 "You entered \"%s\" as Text to match.\n"
 "Do you want to remove trailing whitespaces?"
@@ -1003,27 +1141,8 @@ msgstr ""
 "Syötit \"%s\" hakutekstiksi.\n"
 "Haluatko poistaa lopussa olevat välilyönnit?"
 
-msgid ""
-"You now know almost everything there is to know about the AutoTimer-Plugin./n/nAs a final hint I can't stress how important it is to take a look at the help texts that are shown in the setup dialogs "
-"as they cover the most frequently asked questions. Surprisingly even after the hints were added ;-)."
-msgstr "HUOM!! Tämä suomennos löytyy tiedostosta MPHelp.po HUOM!!"
-
-msgid ""
-"You successfully configured a new AutoTimer. Do you want to add it to the list?\n"
-"\n"
-"You can go back a step by pressing EXIT on your remote."
-msgstr ""
-"Olet luonut uuden automaattiajastuksen. Haluatko lisätä sen listalle?.\n"
-"\n"
-"Voit palata askeleen taaksepäin exit-näppäimellä."
-
-msgid ""
-"Your 'Match in title' Attribute ends with a Whitespace.\n"
-"Please confirm if this was intentional, if not they will be removed."
-msgstr ""
-"Syöttämäsi 'Hae ohjelmanimi' hakutieto päättyy välilyöntiin.\n"
-"Vahvista, että tämä on tahallista. Muussa tapauksessa välilyönti poistetaan."
-
+#: plugin.py:125
+#, python-format
 msgid ""
 "Your config file is not well-formed:\n"
 "%s"
@@ -1031,104 +1150,144 @@ msgstr ""
 "Asetustiedosto ei ole kunnollinen:\n"
 "%s"
 
+#: AutoTimerList.py:160
 msgid "[B]  "
 msgstr "[B]  "
 
+#: AutoTimerList.py:157
 msgid "[S]  "
 msgstr "[S]  "
 
+#. TRANSLATORS: AutoTimer title in MovieList (automatically opens importer, I consider this no further interaction)
+#: plugin.py:225
 msgid "add AutoTimer"
 msgstr "Lisää automaattiajastus"
 
+#. TRANSLATORS: AutoTimer title in EventInfo dialog (requires the user to select an event to base the AutoTimer on)
+#: plugin.py:227
 msgid "add AutoTimer..."
 msgstr "Lisää automaattiajastus..."
 
+#: AutoTimerEditor.py:280 AutoTimerImporter.py:31
 msgid "auto"
 msgstr "autom."
 
+#: AutoTimerResource.py:267
 msgid "autotimers need a match attribute"
 msgstr "automaattiajastus tarvitsee vastaavuusmäärityksen"
 
+#: AutoTimerEditor.py:200
 msgid "case-insensitive search"
 msgstr "merkkikokoriippumaton haku"
 
+#: AutoTimerEditor.py:200
 msgid "case-sensitive search"
 msgstr "merkkikokoriippuvainen haku"
 
+#: AutoTimerResource.py:608
 msgid "config changed."
 msgstr "asetuksia muutettu."
 
+#: AutoTimerEditor.py:199
 msgid "description match"
 msgstr "hae kuvauksesta"
 
+#: AutoTimerImporter.py:154
 msgid "disable"
 msgstr "Pois"
 
+#: AutoTimerEditor.py:524 AutoTimerEditor.py:528 AutoTimerEditor.py:541
+#: AutoTimerEditor.py:545
 msgid "disabled"
 msgstr "Pois"
 
+#: AutoTimerEditor.py:277 AutoTimerImporter.py:28
 msgid "do nothing"
 msgstr "älä tee mitään"
 
+#: AutoTimerImporter.py:154
 msgid "enable"
 msgstr "Päällä"
 
+#: AutoTimerEditor.py:522 AutoTimerEditor.py:526 AutoTimerEditor.py:539
+#: AutoTimerEditor.py:543
 msgid "enabled"
 msgstr "Päällä"
 
+#: AutoTimerEditor.py:199
 msgid "exact match"
 msgstr "täysi vastaavuus"
 
+#: AutoTimerEditor.py:279 AutoTimerImporter.py:29
 msgid "go to deep standby"
 msgstr "siirry virransäästötilaan"
 
+#: AutoTimerEditor.py:278 AutoTimerImporter.py:30
 msgid "go to standby"
 msgstr "siirry valmiustilaan"
 
+#: AutoTimerSettings.py:36
 msgid "hours"
 msgstr "tunteja"
 
+#: AutoTimerEditor.py:1128
 msgid "in Description"
 msgstr "kuvauksessa"
 
+#: AutoTimerEditor.py:1127
 msgid "in Shortdescription"
 msgstr "lyhyessä kuvauksessa"
 
+#: AutoTimerEditor.py:1126
 msgid "in Title"
 msgstr "ohjelmanimessä"
 
+#: AutoTimerPreview.py:86
 msgid "mins"
 msgstr "mins"
 
+#: AutoTimerSettings.py:36
 msgid "minutes"
 msgstr "minuutteja"
 
+#: AutoTimerResource.py:207
 msgid "missing parameter \"id\""
 msgstr "parametri \"id\" puuttuu"
 
+#: AutoTimerEditor.py:1129
 msgid "on Weekday"
 msgstr "viikonpäivänä"
 
+#: AutoTimerEditor.py:199
 msgid "partial match"
 msgstr "osittainen vastaavuus"
 
+#: AutoTimerEditor.py:207 AutoTimerEditor.py:209 AutoTimerImporter.py:215
 msgid "record"
 msgstr "tallennus"
 
+#: AutoTimerEditor.py:277
 msgid "standard"
 msgstr "vakio"
 
+#: AutoTimerEditor.py:199
 msgid "title starts with"
 msgstr "ohjelmanimi alkaa sanalla"
 
+#: AutoTimerResource.py:261 AutoTimerResource.py:516
+#, python-format
 msgid "unable to find timer with id %i"
 msgstr "ei löydy ajastusta id %i"
 
+#: AutoTimerEditor.py:375 AutoTimerEditor.py:376 AutoTimerEditor.py:377
+#: AutoTimerEditor.py:378
 msgid "unknown"
 msgstr "tuntematon"
 
+#: AutoTimerEditor.py:207 AutoTimerEditor.py:209 AutoTimerImporter.py:215
 msgid "zap"
 msgstr "kanavanvaihto"
 
+#: AutoTimerEditor.py:207
 msgid "zap and record"
 msgstr "kanavanvaihto ja tallenna"

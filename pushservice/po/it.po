@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 plugin - pushservice\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2014-02-23 20:44+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -19,6 +19,7 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SearchPath-0: ../enigma2-plugins/pushservice\n"
 
+#: plugin.py:47
 msgid ""
 "  (C) 2012 by betonme @ IHAD \n"
 "\n"
@@ -26,12 +27,15 @@ msgstr ""
 "  (C) 2012 by betonme @ IHAD \n"
 "\n"
 
+#: plugin.py:48
 msgid "  If You like this plugin and want to support it,\n"
 msgstr "  Se questo plugin piace e si desidera supportarlo,\n"
 
+#: plugin.py:52
 msgid "  Support: "
 msgstr "Supporto: "
 
+#: plugin.py:51
 msgid ""
 "  Thanks a lot ! \n"
 "  PayPal: "
@@ -39,6 +43,7 @@ msgstr ""
 "  Mille grazie!\n"
 "  PayPal: "
 
+#: plugin.py:50
 msgid ""
 "  feel free to donate via PayPal. \n"
 "\n"
@@ -46,18 +51,27 @@ msgstr ""
 "  è possibile contribuire con PayPal.\n"
 "\n"
 
+#: plugin.py:49
 msgid "  or if just want to say ''thanks'',\n"
 msgstr "  o semplicemente si vuole ringraziare,\n"
 
+#: Controller/ActiveTimers.py:56 Controller/DeactivatedTimers.py:59
+#: Controller/RecordNotification.py:96 Controller/RecordNotification.py:106
+#: Controller/RecordSummary.py:59
 msgid "%H:%M"
 msgstr "%H:%M"
 
+#: Controller/ActiveTimers.py:55 Controller/DeactivatedTimers.py:58
+#: Controller/RecordNotification.py:95 Controller/RecordNotification.py:105
+#: Controller/RecordSummary.py:58
 msgid "%Y.%m.%d %H:%M"
 msgstr "%Y.%m.%d %H:%M"
 
+#: PushServiceBase.py:273
 msgid "%d.%m.%Y %H:%M"
 msgstr "%d.%m.%Y %H:%M"
 
+#: Controller/ActiveTimers.py:33
 #, python-format
 msgid ""
 "Active timer list:\n"
@@ -66,48 +80,63 @@ msgstr ""
 "Elenco timer attivi:\n"
 "%s"
 
+#: Controller/ActiveTimers.py:34
 msgid "ActiveTimerPushed"
 msgstr "ActiveTimerPushed"
 
+#: ConfigScreen.py:122 ConfigScreen.py:288
 msgid "Add Controller"
 msgstr "Agg. controllo"
 
+#: ConfigScreen.py:113 ConfigScreen.py:257
 msgid "Add Service"
 msgstr "Agg. servizio"
 
+#: ConfigScreen.py:216
 msgid "Add controller"
 msgstr "Agg. controllo"
 
+#: ConfigScreen.py:204
 msgid "Add service"
 msgstr "Agg. servizio"
 
+#: Controller/FreeSpace.py:48
 msgid "Allow HDD wake up"
 msgstr "Permettere attivazione HDD"
 
+#: ConfigScreen.py:111 ConfigScreen.py:120
 msgid "Back to main screen"
 msgstr "Tornare al menu principale"
 
+#: ConfigScreen.py:199
 msgid "Boot delay"
 msgstr "Ritardo avvio"
 
+#: Services/SMTP.py:36
 msgid "C 2012 by betonme @ IHAD\n"
 msgstr "C 2012 by betonme @ IHAD\n"
 
+#: ConfigScreen.py:175
 msgid "Cancel"
 msgstr "Annull."
 
+#: ConfigScreen.py:193
 msgid "Config file"
 msgstr "File di configurazione"
 
+#: ConfigScreen.py:70
 msgid "Configuration"
 msgstr "Configurazione"
 
+#: ConfigScreen.py:182
 msgid "Controllers"
 msgstr "Controlli"
 
+#: Controller/CrashLog.py:34
 msgid "Crashlog(s) are attached"
 msgstr "CrashLog allegati"
 
+#: Controller/DeactivatedTimers.py:33
 #, python-format
 msgid ""
 "Deactivated timer list:\n"
@@ -116,27 +145,35 @@ msgstr ""
 "Elenco tiler disattivati:\n"
 "%s"
 
+#: Controller/DeactivatedTimers.py:34
 msgid "DeactivatedTimerPushed"
 msgstr "Timer disattivati"
 
+#: Controller/CrashLog.py:47
 msgid "Delete crashlog(s)"
 msgstr "Rimuovere i CrashLog"
 
+#: PushServiceBase.py:228
 msgid "Don't edit this manually unless you really know what you are doing"
 msgstr "Non modificare alcun parametro se non si è certi di quello che si sta facendo!"
 
+#: Services/GNTP.py:36 Services/SMTP.py:38
 msgid "Donate {donate:s}"
 msgstr "Donare {donate:s}"
 
+#: ConfigScreen.py:192
 msgid "Dreambox name"
 msgstr "Nome Dreambox"
 
+#: ConfigScreen.py:189
 msgid "Enable PushService"
 msgstr "Abilitare PushService"
 
+#: ConfigScreen.py:97
 msgid "Exit without saving"
 msgstr "Uscire senza salvare"
 
+#: Controller/RecordSummary.py:33
 #, python-format
 msgid ""
 "Finished record list:\n"
@@ -145,167 +182,220 @@ msgstr ""
 "Elenco registrazioni terminate:\n"
 "%s"
 
+#: Controller/RecordSummary.py:34
 msgid "FinishedTimerPushed"
 msgstr "Timer terminati"
 
+#: Controller/CrashLog.py:33
 msgid "Found CrashLog(s)"
 msgstr "Rilevati CrashLog"
 
+#: Controller/ActiveTimers.py:32
 msgid "Found active timer(s)"
 msgstr "Rilevati timer attivi"
 
+#: Controller/DeactivatedTimers.py:32
 msgid "Found deactivated timer(s)"
 msgstr "Rilevati timer disattivati"
 
+#: Controller/FreeSpace.py:33
 msgid "Free disk space limit has been reached:\n"
 msgstr "Raggiunto il limite per lo spazio disponibile su HDD:\n"
 
+#: Controller/FreeSpace.py:50
 msgid "Free space limit in GB"
 msgstr "Limite spazio libero (GB)"
 
+#: Controller/FreeSpace.py:32
 msgid "Free space warning"
 msgstr "Avviso spazio disponibile"
 
+#: Services/GNTP.py:49
 msgid "Growl Host name"
 msgstr "Nome host Growl"
 
+#: Services/GNTP.py:50
 msgid "Growl Port"
 msgstr "Porta Growl"
 
+#: Controller/IPKGUpdateNotification.py:35
 msgid "IPKG Update Notification"
 msgstr "Notifiche aggiornamenti IPKG"
 
+#: ConfigScreen.py:433
 msgid "If You can see this, Your configuration is correct."
 msgstr "Se viene visualizzato questo messaggio la configurazione è corretta."
 
+#: Controller/FreeSpace.py:36
 #, python-format
 msgid "Left:  %s"
 msgstr "Disponibili:  %s"
 
+#: Controller/FreeSpace.py:35
 #, python-format
 msgid "Limit: %d GB\n"
 msgstr "Limite: %d GB\n"
 
+#: Services/SMTP.py:60
 msgid "Mail from"
 msgstr "Mittente"
 
+#: Services/SMTP.py:61
 msgid "Mail to or leave empty (From will be used)"
 msgstr "Destinatario (o lasciare vuoto - verrà usato il mittente)"
 
+#: ConfigScreen.py:202 ConfigScreen.py:214
 msgid "Main"
 msgstr "Princip."
 
+#: Controller/IPKGUpdateNotification.py:85
 msgid "No network connection available."
 msgstr "Nessuna connessione di rete disponibile."
 
+#: ConfigScreen.py:450
 msgid "Nothing to push"
 msgstr "Nulla da segnalare"
 
+#: ConfigScreen.py:425
 msgid "Nothing to test"
 msgstr "Nulla da verificare"
 
+#: ConfigScreen.py:176
 msgid "OK"
 msgstr "Ok"
 
+#: ConfigScreen.py:92
 msgid "Page down"
 msgstr "Pagina giù"
 
+#: ConfigScreen.py:91
 msgid "Page up"
 msgstr "Pagina sù"
 
+#: Services/GNTP.py:52 Services/SMTP.py:58
 msgid "Password"
 msgstr "Password"
 
+#: Controller/FreeSpace.py:34
 #, python-format
 msgid "Path:  %s\n"
 msgstr "Percorso:  %s\n"
 
+#: ConfigScreen.py:196
 msgid "Period in hours (0=disabled)"
 msgstr "Periodo in ore (0 >> disabilitare)"
 
+#: Services/SMTP.py:35
 msgid "Provided by Dreambox Plugin {name:s} {version:s} - {plugin:s}\n"
 msgstr "Fornito da Dreambox Plugin {name:s} {version:s} - {plugin:s}\n"
 
+#: ConfigScreen.py:433
 msgid "Push test"
 msgstr "Test invio"
 
+#: ConfigScreen.py:433
 msgid "PushService Config"
 msgstr "Configurazione PushService"
 
+#: ConfigFile.py:72
 msgid "PushService Exception in readXML: "
 msgstr "Eccezione in lettura XML: "
 
+#: ConfigFile.py:93
 msgid "PushService Exception in writeXML: "
 msgstr "Eccezione in scrittura XML: "
 
+#: Modules.py:65
 msgid "PushService Find module exception: "
 msgstr "Rilevata eccezione modulo: "
 
+#: Modules.py:111
 msgid "PushService Instantiate exception: "
 msgstr "Eccezione inizializzazione: "
 
+#: Modules.py:75
 msgid "PushService Load exception: "
 msgstr "Eccezione caricamento: "
 
+#: ModuleBase.py:90
 #, python-format
 msgid "PushService Module %s:\n"
 msgstr "Modulo %s:\n"
 
+#: Modules.py:116
 msgid "PushService Module is not callable"
 msgstr "Modulo non richiamabile"
 
+#: ConfigFile.py:59
 msgid "PushService No configuration file present"
 msgstr "File di configurazione assente"
 
+#: Modules.py:82
 msgid "PushService No module available: "
 msgstr "Nessun modulo disponibile: "
 
+#: Modules.py:69
 msgid "PushService No module found: "
 msgstr "Nessun modulo trovato: "
 
+#: Services/SMTP.py:91
 #, python-format
 msgid "PushService PushMail: Sending message: %s"
 msgstr "PushMail - Invio messaggio in corso: %s"
 
+#: PushServiceBase.py:341
 msgid "PushService Service push() exception"
 msgstr "Eccezione servizio PushService push()"
 
+#: ConfigScreen.py:437
 msgid "PushService Test exception:"
 msgstr "Eccezione test PushService"
 
+#: Modules.py:87
 msgid "PushService Warning attribute not available: "
 msgstr "Attenzione, attributo non disponibile: "
 
+#: Modules.py:93
 msgid "PushService Warning no class definition: "
 msgstr "Attenzione, nessuna definizione classe: "
 
+#: Modules.py:98
 msgid "PushService Warning no subclass of base: "
 msgstr "Warning, nessuna subclass di base: "
 
+#: plugin.py:101
 msgid "PushService autostart exception "
 msgstr "Eccezione avvio automatico PushService"
 
+#: PushServiceBase.py:291
 msgid "PushService controller run() exception"
 msgstr "Eccezione controllo PushService run()"
 
+#: PushServiceBase.py:283
 msgid "PushService running: "
 msgstr "PushService attivo: "
 
+#: plugin.py:86
 msgid "PushService setup exception "
 msgstr "Eccezione configurazione PushService"
 
+#: PushServiceBase.py:273
 msgid "PushService started: "
 msgstr "PushService avviato: "
 
+#: ConfigScreen.py:343
 msgid "Really close without saving settings?"
 msgstr "Uscire senza salvare la configurazione?"
 
+#: Controller/RecordNotification.py:34
 msgid "Record Notification"
 msgstr "Notifica registrazione"
 
+#: Controller/RecordSummary.py:32
 msgid "Record Summary"
 msgstr "Elenco registrazioni"
 
+#: Controller/RecordNotification.py:103
 msgid ""
 "Record finished:\n"
 "  "
@@ -313,88 +403,116 @@ msgstr ""
 "Registrazione terminata:\n"
 "  "
 
+#: Controller/RecordNotification.py:93
 msgid "Record started:\n"
 msgstr "Registrazione iniziata:\n"
 
+#: ConfigScreen.py:123
 msgid "Remove Controller"
 msgstr "Rim. controllo"
 
+#: ConfigScreen.py:114
 msgid "Remove Service"
 msgstr "Rim. servizio"
 
+#: ConfigScreen.py:217 ConfigScreen.py:273 ConfigScreen.py:304
 msgid "Remove controller"
 msgstr "Rim. controllo"
 
+#: Controller/DeactivatedTimers.py:47
 msgid "Remove deactivated timer(s)"
 msgstr "Rimuovere i timer disattivati"
 
+#: Controller/RecordSummary.py:47
 msgid "Remove finished timer(s)"
 msgstr "Rimuovere i timer conclusi"
 
+#: ConfigScreen.py:205
 msgid "Remove service"
 msgstr "Rim. servizio"
 
+#: ConfigScreen.py:197
 msgid "Run on boot"
 msgstr "Avviare al boot"
 
+#: Services/SMTP.py:52
 msgid "SMTP Port"
 msgstr "Porta SMTP"
 
+#: Services/SMTP.py:53
 msgid "SMTP SSL"
 msgstr "SSL SMTP"
 
+#: Services/SMTP.py:51
 msgid "SMTP Server"
 msgstr "Server SMTP"
 
+#: Services/SMTP.py:54
 msgid "SMTP TLS"
 msgstr "TLS SMTP"
 
+#: ConfigScreen.py:98
 msgid "Save and exit"
 msgstr "Salvare e uscire"
 
+#: Services/GNTP.py:53
 msgid "Send as sticky"
 msgstr "Inviare come sticky"
 
+#: Controller/RecordNotification.py:50
 msgid "Send notification on record end"
 msgstr "Notificare termine registrazione"
 
+#: Controller/RecordNotification.py:49
 msgid "Send notification on record start"
 msgstr "Notificare avvio registrazione"
 
+#: Services/GNTP.py:54
 msgid "Send with priority"
 msgstr "Inviare con priorità"
 
+#: PushServiceBase.py:356
 #, python-format
 msgid "Service %s returned error(s)"
 msgstr "Il servizio %s ha restituito errori"
 
+#: ConfigScreen.py:181
 msgid "Services"
 msgstr "Servizi"
 
+#: ConfigScreen.py:105
 msgid "Show Controllers"
 msgstr "Mostr. controlli"
 
+#: ConfigScreen.py:104
 msgid "Show Services"
 msgstr "Mostr. servizi"
 
+#: ModuleBase.py:91
 msgid "Skipping config option:"
 msgstr "Tralasciare opzioni di configurazione:"
 
+#: ConfigScreen.py:195
 msgid "Start time (HH:MM)"
 msgstr "Ora di avvio (HH:MM)"
 
+#: Controller/IPKGUpdateNotification.py:48
 msgid "Start update check if not done yet"
 msgstr "Avviare verifica aggiornamenti (se mai eseguita)"
 
+#: Services/SMTP.py:37
 msgid "Support {support:s}\n"
 msgstr "Supporto {support:s}\n"
 
+#: ConfigScreen.py:203 ConfigScreen.py:215
 msgid "Test"
 msgstr "Test"
 
+#: ConfigScreen.py:462
 msgid "Test failed"
 msgstr "Test fallito"
 
+#: ConfigScreen.py:460
 #, python-format
 msgid ""
 "Test failed\n"
@@ -405,6 +523,7 @@ msgstr ""
 "\n"
 "%s"
 
+#: ConfigScreen.py:457
 #, python-format
 msgid ""
 "Test failed:\n"
@@ -415,24 +534,31 @@ msgstr ""
 "\n"
 "%s"
 
+#: ConfigScreen.py:445
 msgid "Test has been finished successfully"
 msgstr "Il test è stato eseguito correttamente"
 
+#: ConfigScreen.py:121
 msgid "Test selected Controller"
 msgstr "Test controllo"
 
+#: ConfigScreen.py:112
 msgid "Test selected Service"
 msgstr "Test servizio"
 
+#: ConfigScreen.py:424
 msgid "Testing"
 msgstr "Test in corso"
 
+#: ConfigScreen.py:421
 msgid "Testing Controller"
 msgstr "Test controllo in corso"
 
+#: ConfigScreen.py:418
 msgid "Testing Service"
 msgstr "Test servizio in corso"
 
+#: ConfigScreen.py:419 ConfigScreen.py:422
 msgid ""
 "Testing...\n"
 "\n"
@@ -442,9 +568,11 @@ msgstr ""
 "\n"
 "Annullare?"
 
+#: Services/PopUp.py:55
 msgid "The PopUp will be shown after all dialogs are closed."
 msgstr "Il PopUp sarà visualizzato dopo la chiusura di tutti i messaggi."
 
+#: Controller/IPKGUpdateNotification.py:36
 #, python-format
 msgid ""
 "There are updates available:\n"
@@ -453,31 +581,40 @@ msgstr ""
 "Sono disponibili i seguenti aggiornamenti:\n"
 "%s"
 
+#: Services/GNTP.py:51 Services/PopUp.py:43 Services/SMTP.py:55
 msgid "Timeout"
 msgstr "Timeout"
 
+#: Modules.py:113
 msgid "Unexpected error: "
 msgstr "Errore imprevisto: "
 
+#: Controller/IPKGUpdateNotification.py:81
 msgid "Updatefeed not available."
 msgstr "Fedd aggiornamenti non disponibile."
 
+#: Services/SMTP.py:57
 msgid "User name"
 msgstr "Nome user"
 
+#: Controller/FreeSpace.py:49
 msgid "Where to check free space"
 msgstr "Verificare spazio libero su"
 
+#: Controller/FreeSpace.py:87
 msgid "[FreeSpace] HDD is idle: "
 msgstr "[FreeSpace] HDD non attivo: "
 
+#: plugin.py:117
 msgid "configuration"
 msgstr "Configurazione"
 
+#: PushServiceBase.py:315
 #, python-format
 msgid "controller %s returned error(s)"
 msgstr "Il controllo %s ha restituito errori"
 
+#: Services/GNTP.py:35 Services/SMTP.py:34
 msgid ""
 "{body:s}\n"
 "\n"
@@ -485,18 +622,23 @@ msgstr ""
 "{body:s}\n"
 "\n"
 
+#: Services/GNTP.py:32
 msgid "{box:s} {name:s}"
 msgstr "{box:s} {name:s}"
 
+#: Services/SMTP.py:33
 msgid "{box:s} {name:s}: {plugin:s}: {subject:s}"
 msgstr "{box:s} {name:s}: {plugin:s}: {subject:s}"
 
+#: Services/GNTP.py:34
 msgid "{box:s}: {subject:s}"
 msgstr "{box:s}: {subject:s}"
 
+#: Services/GNTP.py:33
 msgid "{name:s}"
 msgstr "{name:s}"
 
+#: Services/PopUp.py:32
 msgid ""
 "{name:s} {plugin:s}\n"
 "{subject:s}\n"

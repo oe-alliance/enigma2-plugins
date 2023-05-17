@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: NetworkBrowser\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2017-07-10 19:05+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
@@ -17,6 +17,7 @@ msgstr ""
 "X-Generator: Poedit 2.0.2\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
+#: MountEdit.py:342
 msgid ""
 "A mount entry with this name already exists!\n"
 "Update existing entry and continue?\n"
@@ -24,12 +25,15 @@ msgstr ""
 "Pajungimas tokiu pavadinimu jau yra!\n"
 "Atnaujinti esamą įrašą ir tęsti?\n"
 
+#: MountEdit.py:126
 msgid "AUTOFS (mount as needed)"
 msgstr "AUTOFS (pajungti esant reikalui)"
 
+#: MountEdit.py:231
 msgid "Active"
 msgstr "Aktyvus"
 
+#: MountView.py:65
 msgid ""
 "Active/\n"
 "Inactive"
@@ -37,18 +41,23 @@ msgstr ""
 "Aktyvus/\n"
 "Neaktyvus"
 
+#: MountManager.py:102
 msgid "Add a new NFS or CIFS mount point to your Receiver."
 msgstr "Pridėti naują NFS, arba CIFS pajungimo tašką."
 
+#: MountManager.py:102
 msgid "Add new network mount point"
 msgstr "Pridėti naują tinklo pajungimo tašką"
 
+#: plugin.py:54
 msgid "Adding schedule..."
 msgstr "Įrašoma į tvarkaraštį..."
 
+#: MountView.py:161
 msgid "Are you sure you want to remove your network mount ?"
 msgstr "Jūs tikrai norite pašalinti šį tinklo pajungimą?"
 
+#: MountEdit.py:344
 msgid ""
 "Are you sure you want to save this network mount?\n"
 "\n"
@@ -56,123 +65,164 @@ msgstr ""
 "Jūs tikrai norite išsaugoti šį tinklo pajungimą?\n"
 "\n"
 
+#: plugin.py:114
 msgid "Attempt to mount shares again"
 msgstr "Pabandyti pajungti bendrinimus iš naujo"
 
+#: plugin.py:114
 msgid "Attempt to recover lost mounts (in background)"
 msgstr "Bandyti atkurti prarastus pajungimus (fone)"
 
+#: NetworkBrowser.py:192
 msgid "Browse network neighbourhood"
 msgstr "Naršyti tinklo kaimynystę"
 
+#: MountEdit.py:132
 msgid "CIFS share"
 msgstr "CIFS bendrinimas"
 
+#: MountEdit.py:76 MountManager.py:195 NetworkBrowser.py:630
 msgid "Cancel"
 msgstr "Atšaukti"
 
+#: MountManager.py:105
 msgid "Change hostname"
 msgstr "Keisti vardą tinkle"
 
+#: MountManager.py:105
 msgid "Change the hostname of your Receiver."
 msgstr "Keisti TV imtuvo vardą tinkle."
 
+#: MountManager.py:61 MountView.py:67 NetworkBrowser.py:127 UserDialog.py:101
+#: UserManager.py:51
 msgid "Close"
 msgstr "Užverti"
 
+#: UserManager.py:53
 msgid "Delete"
 msgstr "Pašalinti"
 
+#: MountView.py:68
 msgid "Delete mount"
 msgstr "Šalinti pajungimą"
 
+#: MountView.py:122
 msgid "Dir:"
 msgstr "Kat.:"
 
+#: NetworkBrowser.py:539
 msgid "Do you want to enter a username and password for this host?"
 msgstr "Ar norite įrašyti vartotojo vardą ir slaptažodį šiam prisijungimui?"
 
+#: MountEdit.py:128
 msgid "Enigma2 (mount using enigma2)"
 msgstr "Enigma2 (pajungti, naudojant enigma2)"
 
+#: MountEdit.py:129
 msgid "Enigma2 old format (mount using linux)"
 msgstr "Seno formato Enigma2 (pajungti, naudojant Linux)"
 
+#: NetworkBrowser.py:662
 msgid "Enter IP to scan..."
 msgstr "Įrašykite IP skenavimui..."
 
+#: MountManager.py:142
 msgid "Enter new hostname for your Receiver"
 msgstr "Įveskite naują TV imtuvo vardą tinkle."
 
+#: MountEdit.py:277
 msgid "Enter options:"
 msgstr "Įrašykite pasirinkimus:"
 
+#: MountEdit.py:281 UserDialog.py:151
 msgid "Enter password:"
 msgstr "Įrašykite slaptažodį:"
 
+#: MountEdit.py:275
 msgid "Enter share directory:"
 msgstr "Įrašykite bendrinamą katalogą:"
 
+#: MountEdit.py:273
 msgid "Enter share name:"
 msgstr "Įrašykite bendrinimo vardą:"
 
+#: UserDialog.py:104
 msgid "Enter user and password for host: "
 msgstr "Įrašykite vartotoją ir slaptažodį prisijungimui: "
 
+#: MountEdit.py:279 UserDialog.py:149
 msgid "Enter username:"
 msgstr "Įrašykite vartotoją:"
 
+#: NetworkBrowser.py:130
 msgid "Expert"
 msgstr "Išplėstinis"
 
+#: MountEdit.py:127
 msgid "FSTAB (mount at boot)"
 msgstr "FSTAB (pajungti įkrovos metu)"
 
+#: MountManager.py:168
 msgid "Finished restarting your network"
 msgstr "Tinklo paleidimas iš naujo baigtas"
 
+#: NetworkBrowser.py:647
 msgid "IP Address"
 msgstr "IP adresas"
 
+#: MountView.py:121
 msgid "IP:"
 msgstr "IP:"
 
+#: MountEdit.py:233
 msgid "Local share name"
 msgstr "Bendrinimo vardas"
 
+#: plugin.py:113
 msgid "Manage network shares"
 msgstr "Valdykite tinklo bendrinimus"
 
+#: plugin.py:113
 msgid "Manage your network shares..."
 msgstr "Valdykite tinklo bendrinimus..."
 
+#: plugin.py:114
 msgid "Mount Again"
 msgstr "Pajungti iš naujo"
 
+#: MountManager.py:90 plugin.py:113
 msgid "Mount Manager"
 msgstr "Pajungimų tvarkytojas"
 
+#: MountView.py:52
 msgid "Mount Viewer"
 msgstr "Pajungimų peržiūra"
 
+#: plugin.py:114
 msgid "Mount again"
 msgstr "Pajungti iš naujo"
 
+#: MountView.py:64
 msgid "Mount informations"
 msgstr "Pajungimo informacija"
 
+#: NetworkBrowser.py:128
 msgid "Mount manager"
 msgstr "Pajungimų tvarkytojas"
 
+#: MountEdit.py:243
 msgid "Mount options"
 msgstr "Pajungimo parinktys"
 
+#: MountEdit.py:235
 msgid "Mount type"
 msgstr "Pajungimo tipas"
 
+#: MountEdit.py:229
 msgid "Mount using"
 msgstr "Pajungti, naudojant"
 
+#: MountView.py:63
 msgid ""
 "Mounted/\n"
 "Unmounted"
@@ -180,126 +230,167 @@ msgstr ""
 "Pajungta/\n"
 "Atjungta"
 
+#: plugin.py:45
 msgid "Mounting network shares..."
 msgstr "Pajungiami tinklo bendrinimai..."
 
+#: MountManager.py:103
 msgid "Mountpoints management"
 msgstr "Pajungimo taškų valdymas"
 
+#: MountEdit.py:96
 msgid "Mounts editor"
 msgstr "Pajungimų redaktorius"
 
+#: MountEdit.py:133
 msgid "NFS share"
 msgstr "NFS bendrinimas"
 
+#: plugin.py:38 plugin.py:112
 msgid "Network Browser"
 msgstr "Tinklo naršyklė"
 
+#: NetworkBrowser.py:236 NetworkBrowser.py:238
 msgid "No network devices found!"
 msgstr "Tinklo įrenginių nerasta!"
 
+#: MountEdit.py:248 UserDialog.py:140
 msgid "Password"
 msgstr "Slaptažodis"
 
+#: MountEdit.py:408
 msgid "Please wait for activation of your network mount..."
 msgstr "Palaukite, kol bus aktyvuotas jūsų tinklo pajungimas..."
 
+#: MountView.py:172
 msgid "Please wait while removing your network mount..."
 msgstr "Palaukite, kol šalinamas jūsų tinklo pajungimas..."
 
+#: MountEdit.py:370
 msgid "Please wait while updating your network mount..."
 msgstr "Palaukite, kol atnaujinamas jūsų tinklo pajungimas..."
 
+#: MountManager.py:155
 msgid "Please wait while your network is restarting..."
 msgstr "Palaukite, kol jūsų tinklas paleidžiamas iš naujo..."
 
+#: MountEdit.py:75
 msgid "Press OK to activate the settings."
 msgstr "Nustatymams aktyvuoti, spauskite 'OK'."
 
+#: NetworkBrowser.py:506 NetworkBrowser.py:507
 msgid "Press OK to collapse this host"
 msgstr "Kad panaikinti šį tinklo vadrą, spauskite 'OK'."
 
+#: UserManager.py:52
 msgid "Press OK to edit selected settings."
 msgstr "Pasirinktiems nustatymams redaguoti, spauskite 'OK'."
 
+#: MountView.py:66
 msgid "Press OK to edit the settings."
 msgstr "Nustatymams redaguoti, spauskite 'OK'."
 
+#: NetworkBrowser.py:509 NetworkBrowser.py:510
 msgid "Press OK to expand this host"
 msgstr "Kad išplėsti šį tinklo vardą, spauskite 'OK'."
 
+#: NetworkBrowser.py:496
 msgid "Press OK to mount this share!"
 msgstr "Kad pajungti šią prieigą, spauskite 'OK'!"
 
+#: NetworkBrowser.py:131
 msgid "Press OK to mount!"
 msgstr "Kad pajungti, spauskite 'OK'!"
 
+#: UserDialog.py:100
 msgid "Press OK to save settings."
 msgstr "Kad išsaugoti nustatymus, spauskite 'OK'."
 
+#: MountManager.py:62
 msgid "Press OK to select."
 msgstr "Pasirinkti, spauskite 'OK'."
 
+#: MountManager.py:215
 msgid "Re-mount network shares every (in hours)"
 msgstr "Perpajungti tinklo bendrinimus kas (val.)"
 
+#: MountManager.py:252
 msgid "Really close without saving settings?"
 msgstr "Tikrai uždaryti neišsaugant nustatymų?"
 
+#: NetworkBrowser.py:129
 msgid "Rescan"
 msgstr "Perskenuoti"
 
+#: MountEdit.py:77 MountManager.py:196
 msgid "Save"
 msgstr "Išsaugoti"
 
+#: NetworkBrowser.py:631
 msgid "Scan NFS share"
 msgstr "Skenuoti NFS bendrinimą"
 
+#: NetworkBrowser.py:632
 msgid "Scan range"
 msgstr "Skenavimo diapazonas"
 
+#: MountManager.py:213 MountManager.py:221
 msgid "Schedule MountAgain"
 msgstr "Planuoti pajungimą iš naujo"
 
+#: MountManager.py:106
 msgid "Schedule a auto remount of your network shares."
 msgstr "Suplanuokite bendrinimų tinkle auto prijungimus..."
 
+#: plugin.py:112
 msgid "Search for network shares"
 msgstr "Tinklo bendrinimų paieška"
 
+#: plugin.py:112
 msgid "Search for network shares..."
 msgstr "Tinklo bendrinimų paieška..."
 
+#: NetworkBrowser.py:227 NetworkBrowser.py:229
 msgid "Searching your network. Please wait..."
 msgstr "Vyksta paieška tinkle. Palaukite..."
 
+#: MountEdit.py:237
 msgid "Server IP"
 msgstr "Serverio IP"
 
+#: MountEdit.py:239
 msgid "Server share"
 msgstr "Serverio bendrinimas"
 
+#: MountManager.py:106 MountManager.py:187
 msgid "Setup Mount Again"
 msgstr "Pajungimo iš naujo sąranka"
 
+#: MountEdit.py:241
 msgid "Use as HDD replacement"
 msgstr "naudoti, kaip HDD pakaitalą"
 
+#: MountManager.py:104
 msgid "User management"
 msgstr "Vartotojų valdymas"
 
+#: UserManager.py:61
 msgid "Usermanager"
 msgstr "Vartotojų valdymas"
 
+#: MountEdit.py:246 UserDialog.py:138
 msgid "Username"
 msgstr "Vartotojas"
 
+#: MountManager.py:103
 msgid "View, edit or delete mountpoints on your Receiver."
 msgstr "Žiūrėkite, redaguokite, ar šalinkite pajungimo taškus."
 
+#: MountManager.py:104
 msgid "View, edit or delete usernames and passwords for your network."
 msgstr "Žiūrėkite, redaguokite, ar šalinkite savo tinklo vartotojus ir slaptažodžius."
 
+#: MountEdit.py:340
 msgid ""
 "You have changed the share name!\n"
 "Update existing entry and continue?\n"
@@ -307,17 +398,21 @@ msgstr ""
 "Jūs pakeitėte bendrinimo vardą!\n"
 "Atnaujinti esamą įrašą ir tęsti?\n"
 
+#: NetworkBrowser.py:272
 #, python-format
 msgid ""
 "Your network interface %s is not properly configured, so a network scan cannot be done.\n"
 "Please configure the interface and try again."
 msgstr ""
 
+#: MountEdit.py:421
 msgid "Your network mount has been activated."
 msgstr "Jūsų tinklo pajungimas aktyvuotas."
 
+#: MountView.py:196
 msgid "Your network mount has been removed."
 msgstr "Jūsų tinklo pajungimas pašalintas."
 
+#: MountEdit.py:382
 msgid "Your network mount has been updated."
 msgstr "Jūsų tinklo pajungimas atnaujintas."

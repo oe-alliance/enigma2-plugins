@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2017-09-16 19:47+0200\n"
 "Last-Translator: JR <openspateam@gmail.com>\n"
 "Language-Team: catalan\n"
@@ -17,6 +17,7 @@ msgstr ""
 "X-Poedit-SourceCharset: iso-8859-1\n"
 "X-Generator: Poedit 2.0.3\n"
 
+#: MountEdit.py:342
 msgid ""
 "A mount entry with this name already exists!\n"
 "Update existing entry and continue?\n"
@@ -24,12 +25,15 @@ msgstr ""
 "Un muntatge amb aquest nom ja existeix!\n"
 "Actualitzar l'entrada existent i continuar?\n"
 
+#: MountEdit.py:126
 msgid "AUTOFS (mount as needed)"
 msgstr ""
 
+#: MountEdit.py:231
 msgid "Active"
 msgstr "Actiu"
 
+#: MountView.py:65
 msgid ""
 "Active/\n"
 "Inactive"
@@ -37,18 +41,23 @@ msgstr ""
 "Actiu/\n"
 "Inactiu"
 
+#: MountManager.py:102
 msgid "Add a new NFS or CIFS mount point to your Receiver."
 msgstr "Afegir un punt de muntatge NFS o CIFS nou al teu receptor."
 
+#: MountManager.py:102
 msgid "Add new network mount point"
 msgstr "Afegir un punt de muntatge de xarxa nou"
 
+#: plugin.py:54
 msgid "Adding schedule..."
 msgstr "Afegir programació..."
 
+#: MountView.py:161
 msgid "Are you sure you want to remove your network mount ?"
 msgstr "Estàs segur d'eliminar el muntatge de xarxa?"
 
+#: MountEdit.py:344
 msgid ""
 "Are you sure you want to save this network mount?\n"
 "\n"
@@ -56,125 +65,166 @@ msgstr ""
 "Estàs segur de guardar aquest muntatge de xarxa?\n"
 "\n"
 
+#: plugin.py:114
 msgid "Attempt to mount shares again"
 msgstr "Intentar muntar els recursos de nou"
 
+#: plugin.py:114
 msgid "Attempt to recover lost mounts (in background)"
 msgstr "Intentar recuperar muntatges perduts (en segon pla)"
 
+#: NetworkBrowser.py:192
 msgid "Browse network neighbourhood"
 msgstr "Explorador de xarxa"
 
+#: MountEdit.py:132
 msgid "CIFS share"
 msgstr "CIFS"
 
+#: MountEdit.py:76 MountManager.py:195 NetworkBrowser.py:630
 msgid "Cancel"
 msgstr "Cancel·lar"
 
+#: MountManager.py:105
 msgid "Change hostname"
 msgstr "Canviar nom del host"
 
+#: MountManager.py:105
 msgid "Change the hostname of your Receiver."
 msgstr "Canviar non del host del receptor"
 
+#: MountManager.py:61 MountView.py:67 NetworkBrowser.py:127 UserDialog.py:101
+#: UserManager.py:51
 msgid "Close"
 msgstr "Tancar"
 
+#: UserManager.py:53
 msgid "Delete"
 msgstr "Eliminar"
 
+#: MountView.py:68
 msgid "Delete mount"
 msgstr "Eliminar muntatge"
 
+#: MountView.py:122
 msgid "Dir:"
 msgstr "Dir:"
 
+#: NetworkBrowser.py:539
 msgid "Do you want to enter a username and password for this host?"
 msgstr "Vols introduir un nom d'usuari i contrassenya per aquest host?"
 
+#: MountEdit.py:128
 msgid "Enigma2 (mount using enigma2)"
 msgstr "Enigma2 (muntar utilitzant enigma2)"
 
+#: MountEdit.py:129
 msgid "Enigma2 old format (mount using linux)"
 msgstr "Format antic d'Enigma2 (muntar utilitzant linux) "
 
+#: NetworkBrowser.py:662
 msgid "Enter IP to scan..."
 msgstr "Introduir IP a buscar..."
 
+#: MountManager.py:142
 msgid "Enter new hostname for your Receiver"
 msgstr "Introduir nom de host nou per al receptor"
 
+#: MountEdit.py:277
 msgid "Enter options:"
 msgstr "Introduir opcions:"
 
+#: MountEdit.py:281 UserDialog.py:151
 msgid "Enter password:"
 msgstr "Introduir contrassenya:"
 
+#: MountEdit.py:275
 msgid "Enter share directory:"
 msgstr "Introduir directori compartit:"
 
+#: MountEdit.py:273
 msgid "Enter share name:"
 msgstr "Introduir nom del recurs compartit:"
 
+#: UserDialog.py:104
 msgid "Enter user and password for host: "
 msgstr "Introduir usuari i contrassenya del host"
 
+#: MountEdit.py:279 UserDialog.py:149
 msgid "Enter username:"
 msgstr "Introduir nom d'usuari"
 
+#: NetworkBrowser.py:130
 msgid "Expert"
 msgstr ""
 
+#: MountEdit.py:127
 #, fuzzy
 msgid "FSTAB (mount at boot)"
 msgstr "FSTAB (muntar utilitzant linux)"
 
+#: MountManager.py:168
 msgid "Finished restarting your network"
 msgstr "Reinici de la xarxa finalitzat"
 
+#: NetworkBrowser.py:647
 msgid "IP Address"
 msgstr "Adreça IP"
 
+#: MountView.py:121
 msgid "IP:"
 msgstr "IP:"
 
+#: MountEdit.py:233
 msgid "Local share name"
 msgstr "Nom del muntatge local"
 
+#: plugin.py:113
 msgid "Manage network shares"
 msgstr "Administrar muntatges de xarxa"
 
+#: plugin.py:113
 msgid "Manage your network shares..."
 msgstr "Administra els teus muntatges de xarxa..."
 
+#: plugin.py:114
 msgid "Mount Again"
 msgstr "Muntar de nou"
 
+#: MountManager.py:90 plugin.py:113
 msgid "Mount Manager"
 msgstr "Administrador de muntatges"
 
+#: MountView.py:52
 msgid "Mount Viewer"
 msgstr "Visualitzador de muntatges"
 
+#: plugin.py:114
 msgid "Mount again"
 msgstr "Muntar de nou"
 
+#: MountView.py:64
 msgid "Mount informations"
 msgstr "Informació de muntatge"
 
+#: NetworkBrowser.py:128
 #, fuzzy
 msgid "Mount manager"
 msgstr "Administrador de muntatges"
 
+#: MountEdit.py:243
 msgid "Mount options"
 msgstr "Opcions de muntatge"
 
+#: MountEdit.py:235
 msgid "Mount type"
 msgstr "Tipus de muntatge"
 
+#: MountEdit.py:229
 msgid "Mount using"
 msgstr "Muntar utilitzant"
 
+#: MountView.py:63
 msgid ""
 "Mounted/\n"
 "Unmounted"
@@ -182,127 +232,168 @@ msgstr ""
 "Muntat/\n"
 "Desmuntat"
 
+#: plugin.py:45
 msgid "Mounting network shares..."
 msgstr "Muntant recursos compartits..."
 
+#: MountManager.py:103
 msgid "Mountpoints management"
 msgstr "Administrador de punts de muntatge"
 
+#: MountEdit.py:96
 msgid "Mounts editor"
 msgstr "Editor de muntatges"
 
+#: MountEdit.py:133
 msgid "NFS share"
 msgstr "NFS"
 
+#: plugin.py:38 plugin.py:112
 msgid "Network Browser"
 msgstr "Explorador de xarxa"
 
+#: NetworkBrowser.py:236 NetworkBrowser.py:238
 msgid "No network devices found!"
 msgstr "No s'ha trobat dispositius de xarxa"
 
+#: MountEdit.py:248 UserDialog.py:140
 msgid "Password"
 msgstr "Contrassenya"
 
+#: MountEdit.py:408
 #, fuzzy
 msgid "Please wait for activation of your network mount..."
 msgstr "Si us plau, espera mentre s'actualitza el muntatge..."
 
+#: MountView.py:172
 msgid "Please wait while removing your network mount..."
 msgstr "Si us plau, espera mentre s'elimina el teu muntatge..."
 
+#: MountEdit.py:370
 msgid "Please wait while updating your network mount..."
 msgstr "Si us plau, espera mentre s'actualitza el muntatge..."
 
+#: MountManager.py:155
 msgid "Please wait while your network is restarting..."
 msgstr "Si us plau, espera mentre es reinicia la xarxa..."
 
+#: MountEdit.py:75
 msgid "Press OK to activate the settings."
 msgstr "Prem OK per activar les configuracions"
 
+#: NetworkBrowser.py:506 NetworkBrowser.py:507
 msgid "Press OK to collapse this host"
 msgstr "Prem OK per a contraure aquest host"
 
+#: UserManager.py:52
 msgid "Press OK to edit selected settings."
 msgstr "Prem OK per a editar les configuracions sel·leccionades."
 
+#: MountView.py:66
 msgid "Press OK to edit the settings."
 msgstr "Prem OK per a editar les configuracions."
 
+#: NetworkBrowser.py:509 NetworkBrowser.py:510
 msgid "Press OK to expand this host"
 msgstr "Prem OK per a expandir aquest host"
 
+#: NetworkBrowser.py:496
 msgid "Press OK to mount this share!"
 msgstr "Prem OK per a muntar aquest recurs compartit!"
 
+#: NetworkBrowser.py:131
 msgid "Press OK to mount!"
 msgstr "Prem OK per a muntar!"
 
+#: UserDialog.py:100
 msgid "Press OK to save settings."
 msgstr "Prem OK per a guardar les configuracions."
 
+#: MountManager.py:62
 msgid "Press OK to select."
 msgstr "Prem OK per a sel·leccionar."
 
+#: MountManager.py:215
 msgid "Re-mount network shares every (in hours)"
 msgstr "Re-muntar els recursos compartits cada (en hores)"
 
+#: MountManager.py:252
 msgid "Really close without saving settings?"
 msgstr "Tancar realment sense guardar la configuració?"
 
+#: NetworkBrowser.py:129
 msgid "Rescan"
 msgstr "Buscar de nou"
 
+#: MountEdit.py:77 MountManager.py:196
 msgid "Save"
 msgstr "Guardar"
 
+#: NetworkBrowser.py:631
 msgid "Scan NFS share"
 msgstr "Buscar NFS"
 
+#: NetworkBrowser.py:632
 msgid "Scan range"
 msgstr "Buscar interval"
 
+#: MountManager.py:213 MountManager.py:221
 msgid "Schedule MountAgain"
 msgstr "Programar 'Muntar de nou'."
 
+#: MountManager.py:106
 msgid "Schedule a auto remount of your network shares."
 msgstr "Programa un re-muntatge automàtic del teus recursos compartits."
 
+#: plugin.py:112
 msgid "Search for network shares"
 msgstr "Buscar recursos compartits"
 
+#: plugin.py:112
 msgid "Search for network shares..."
 msgstr "Buscar recursos compartits..."
 
+#: NetworkBrowser.py:227 NetworkBrowser.py:229
 msgid "Searching your network. Please wait..."
 msgstr "Buscant a la teva xarxa. Si us plau, espera..."
 
+#: MountEdit.py:237
 msgid "Server IP"
 msgstr "IP del servidor"
 
+#: MountEdit.py:239
 msgid "Server share"
 msgstr "Recurs compartit del servidor"
 
+#: MountManager.py:106 MountManager.py:187
 msgid "Setup Mount Again"
 msgstr "Configurar Muntar de nou"
 
+#: MountEdit.py:241
 msgid "Use as HDD replacement"
 msgstr "utilitza com reemplaçament del HDD"
 
+#: MountManager.py:104
 msgid "User management"
 msgstr "Administració d'usuaris"
 
+#: UserManager.py:61
 msgid "Usermanager"
 msgstr "Administrar usuaris"
 
+#: MountEdit.py:246 UserDialog.py:138
 msgid "Username"
 msgstr "Nom d'usuari"
 
+#: MountManager.py:103
 msgid "View, edit or delete mountpoints on your Receiver."
 msgstr "Veure, editar o eliminar muntatges del teu receptor."
 
+#: MountManager.py:104
 msgid "View, edit or delete usernames and passwords for your network."
 msgstr "Veure, editar o eliminar noms d'usuari i contrassenyes de la teva xarxa."
 
+#: MountEdit.py:340
 msgid ""
 "You have changed the share name!\n"
 "Update existing entry and continue?\n"
@@ -310,17 +401,21 @@ msgstr ""
 "¡Has canviat el nom del muntatge!\n"
 "Actualitzar l'existent i continuar?\n"
 
+#: NetworkBrowser.py:272
 #, python-format
 msgid ""
 "Your network interface %s is not properly configured, so a network scan cannot be done.\n"
 "Please configure the interface and try again."
 msgstr ""
 
+#: MountEdit.py:421
 msgid "Your network mount has been activated."
 msgstr "El teu muntatge s'ha activat."
 
+#: MountView.py:196
 msgid "Your network mount has been removed."
 msgstr "El teu muntatge s'ha eliminat."
 
+#: MountEdit.py:382
 msgid "Your network mount has been updated."
 msgstr "El teu muntatge s'ha actualitzat."

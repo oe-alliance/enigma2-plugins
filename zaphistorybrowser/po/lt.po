@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ZapHistoryBrowser\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2017-07-11 17:10+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
@@ -16,38 +16,50 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SearchPath-0: /home/aliabdul/dream/enigma2/enigma2-plugins/zaphistorybrowser/src\n"
 
+#: plugin.py:217
 msgid "Clear"
 msgstr "Išvalyti"
 
+#: plugin.py:220
 msgid "Config"
 msgstr "Konfigūracija"
 
+#: plugin.py:218
 msgid "Delete"
 msgstr "Pašalinti"
 
+#: plugin.py:125
 msgid "Enable zap history:"
 msgstr "Įjungti perjungimų istoriją:"
 
+#: plugin.py:127
 msgid "Enigma1-like history:"
 msgstr "Enigma1 stiliaus istorija:"
 
+#: plugin.py:126
 msgid "Maximum zap history entries:"
 msgstr "Daugiausiai perjungimų istorijos įrašų:"
 
+#: plugin.py:219
 msgid "Zap"
 msgstr ""
 
+#: plugin.py:205 plugin.py:318
 msgid "Zap-History Browser"
 msgstr "Perjungimo istorijos naršyklė"
 
+#: plugin.py:118
 msgid "Zap-History Configurator"
 msgstr "Perjungimo istorijos konfigūratorius"
 
+#: plugin.py:49
 msgid "disabled"
 msgstr "išjungta"
 
+#: plugin.py:49
 msgid "disabled at parental lock"
 msgstr "išjungta tėvų kontrolėje"
 
+#: plugin.py:49
 msgid "enabled"
 msgstr "įjungta"

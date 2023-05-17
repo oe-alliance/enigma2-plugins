@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MovieRetitle\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2017-07-10 17:55+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. vyteniui@gmail.com\n"
@@ -18,35 +18,45 @@ msgstr ""
 "X-Generator: Poedit 2.0.2\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
+#: plugin.py:52
 msgid "Cancel"
 msgstr "Atšaukti"
 
+#: plugin.py:97
 msgid "Choose target folder"
 msgstr "Pasirinkite paskirties katalogą"
 
+#: plugin.py:73
 msgid "Description"
 msgstr "Aprašymas"
 
+#: plugin.py:294
 #, python-format
 msgid "Failed to move the movie %s to %s in the background"
 msgstr "Perkelti fone filmo %s į %s nepavyko"
 
+#: plugin.py:71
 msgid "Filename"
 msgstr "Failo pavadinimas"
 
+#: plugin.py:69
 msgid "Location"
 msgstr "Vietovė"
 
+#: plugin.py:82
 msgid "Name and Description Input"
 msgstr "Pavadinimo ir aprašymo įvestis"
 
+#: plugin.py:51
 msgid "OK"
 msgstr "Gerai"
 
+#: plugin.py:301
 #, python-format
 msgid "Successfully moved the movie %s"
 msgstr "Filmas %s sėkmingai perkeltas"
 
+#: plugin.py:136
 #, python-format
 msgid ""
 "Target file %s.ts already exist.\n"
@@ -55,15 +65,19 @@ msgstr ""
 "Failas %s.ts jau yra.\n"
 "Ar norite jį pakeisti?"
 
+#: plugin.py:253
 #, python-format
 msgid "The movie is moved in the background from %s to %s."
 msgstr "Filmas fone perkeltas iš %s į %s."
 
+#: plugin.py:140
 msgid "The target directory is not found. The file is not renamed."
 msgstr "Paskirties katalogo nerasta. Failas nepervadintas."
 
+#: plugin.py:72
 msgid "Title"
 msgstr "Antraštė"
 
+#: plugin.py:25
 msgid "change name..."
 msgstr "keisti pavadinimą..."

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zap history browser Persian Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2012-07-26 00:35+0330\n"
 "Last-Translator: mehdi <mehdi_ar_yekta@yahoo.com>\n"
 "Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
@@ -16,39 +16,51 @@ msgstr ""
 "X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
 "X-Poedit-SearchPath-0: /home/aliabdul/dream/enigma2/enigma2-plugins/zaphistorybrowser/src\n"
 
+#: plugin.py:217
 msgid "Clear"
 msgstr "شفاف"
 
+#: plugin.py:220
 msgid "Config"
 msgstr "پیکربندی"
 
+#: plugin.py:218
 msgid "Delete"
 msgstr "حذف کردن"
 
+#: plugin.py:125
 msgid "Enable zap history:"
 msgstr "فعال سازی پیشنه جابجایی"
 
+#: plugin.py:127
 #, fuzzy
 msgid "Enigma1-like history:"
 msgstr "فعال سازی پیشنه جابجایی"
 
+#: plugin.py:126
 msgid "Maximum zap history entries:"
 msgstr "بیشترین ورودی های پیشینه جابجایی"
 
+#: plugin.py:219
 msgid "Zap"
 msgstr ""
 
+#: plugin.py:205 plugin.py:318
 msgid "Zap-History Browser"
 msgstr "مرورگر پیشینه جابجایی"
 
+#: plugin.py:118
 msgid "Zap-History Configurator"
 msgstr "پیکربندی پیشینه جابجایی"
 
+#: plugin.py:49
 msgid "disabled"
 msgstr "غیر فعال شده"
 
+#: plugin.py:49
 msgid "disabled at parental lock"
 msgstr "قفل والدین غیر فعال است"
 
+#: plugin.py:49
 msgid "enabled"
 msgstr "فعال شده"

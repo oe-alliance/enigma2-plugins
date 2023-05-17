@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - ZapHistoryBrowser\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2011-10-12 11:02+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: Rob van der Does\n"
@@ -19,38 +19,50 @@ msgstr ""
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 
+#: plugin.py:217
 msgid "Clear"
 msgstr "Wissen"
 
+#: plugin.py:220
 msgid "Config"
 msgstr "Configuratie"
 
+#: plugin.py:218
 msgid "Delete"
 msgstr "Verwijderen"
 
+#: plugin.py:125
 msgid "Enable zap history:"
 msgstr "Activeer zap historiek:"
 
+#: plugin.py:127
 msgid "Enigma1-like history:"
 msgstr "Geschiedenis zoals bij Enigma1:"
 
+#: plugin.py:126
 msgid "Maximum zap history entries:"
 msgstr "Maximale zap historiek vermeldingen:"
 
+#: plugin.py:219
 msgid "Zap"
 msgstr ""
 
+#: plugin.py:205 plugin.py:318
 msgid "Zap-History Browser"
 msgstr "Zap-Historiek Browser"
 
+#: plugin.py:118
 msgid "Zap-History Configurator"
 msgstr "Zap-Historiek Configuratie"
 
+#: plugin.py:49
 msgid "disabled"
 msgstr "deactiveer"
 
+#: plugin.py:49
 msgid "disabled at parental lock"
 msgstr "deactiveer kinderslot"
 
+#: plugin.py:49
 msgid "enabled"
 msgstr "activeer"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 EmailClient plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2013-01-08 20:52+0200\n"
 "Last-Translator: Zulfikar Veyisoglu <zveyis@gmail.com>\n"
 "Language-Team: Zulfikar Veyisoglu <zveyis@gmail.com>\n"
@@ -18,28 +18,41 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
+#: plugin.py:144
 #, python-format
 msgid "%(name)s (%(user)s@%(server)s)"
 msgstr "%(name)s (%(user)s@%(server)s)"
 
+#: setup.xml
+#, fuzzy
+msgid "Account Setup"
+msgstr "Hesaplar"
+
+#: plugin.py:993
 msgid "Accounts list"
 msgstr "Hesaplar"
 
+#: plugin.py:411
 msgid "Attachments"
 msgstr "Ekler"
 
+#: plugin.py:407
 msgid "Bodys"
 msgstr "Mesaj"
 
+#: plugin.py:355
 msgid "Date"
 msgstr "Tarih"
 
+#: plugin.py:1156
 msgid "Email Client"
 msgstr "Eposta istemcisi"
 
+#: setup.xml
 msgid "Email setup"
 msgstr "Eposta ayarları"
 
+#: plugin.py:190
 #, python-format
 msgid ""
 "EmailClient for %(account)s:\n"
@@ -50,15 +63,19 @@ msgstr ""
 "\n"
 "%(error)s"
 
+#: plugin.py:353
 msgid "From"
 msgstr "Kimden"
 
+#: EmailConfig.py:118 setup.xml
 msgid "IMAP Port"
 msgstr "IMAP portu"
 
+#: EmailConfig.py:117 setup.xml
 msgid "IMAP Server"
 msgstr "IMAP sunucusu"
 
+#: plugin.py:586
 #, python-format
 msgid ""
 "New mail arrived for account %s:\n"
@@ -67,13 +84,16 @@ msgstr ""
 "%s hesabına yeni ileti geldi:\n"
 "\n"
 
+#: plugin.py:1056
 #, python-format
 msgid "Really delete account %s?"
 msgstr "%s hesabını silmek istiyor musunuz?"
 
+#: plugin.py:356
 msgid "Subject"
 msgstr "Konu"
 
+#: plugin.py:858
 #, python-format
 msgid ""
 "[EmailAccount] %(name)s: _cbCapabilities:\n"
@@ -88,52 +108,69 @@ msgstr ""
 "# cbCapabilities: %(capa)s\n"
 "####################################################################################################\n"
 
+#: plugin.py:1016
 #, python-format
 msgid "account %s is not connected"
 msgstr "%s hesabı bağlı değil"
 
+#: EmailConfig.py:116 setup.xml
 msgid "account name"
 msgstr "hesap adı"
 
+#: plugin.py:135 plugin.py:202 plugin.py:242 plugin.py:393 plugin.py:396
+#: plugin.py:402
 msgid "account not connected"
 msgstr "hesap bağlı değil"
 
+#: plugin.py:973
 msgid "add"
 msgstr "ekle"
 
+#: EmailConfig.py:89
 msgid "cancel"
 msgstr "vazgeç"
 
+#: plugin.py:744
 msgid "cannot access inbox"
 msgstr "gelen kutusuna ulaşılamıyor"
 
+#: plugin.py:821
 msgid "cannot get headers of new messages"
 msgstr "yeni mesajların başlıkları alınamıyor"
 
+#: plugin.py:751
 msgid "cannot get list of new messages"
 msgstr "yeni mesajlar alınamıyor"
 
+#: plugin.py:840
 msgid "connection failed - retrying"
 msgstr "bağlantı kurulamadı - yeniden deneniyor"
 
+#: setup.xml
 msgid "debug"
 msgstr "hata yakalama"
 
+#: plugin.py:364
 msgid "delete"
 msgstr "sil"
 
+#: setup.xml
 msgid "display connection errors"
 msgstr "bağlantı hatalarını göster"
 
+#: setup.xml
 msgid "display timeout (seconds)"
 msgstr "zaman aşımı göster (saniye)"
 
+#: plugin.py:974
 msgid "edit"
 msgstr "düzenle"
 
+#: EmailConfig.py:47 EmailConfig.py:132
 msgid "empty values - retry"
 msgstr "boş değer geçilemez - yeniden deneyin"
 
+#: plugin.py:917
 #, python-format
 msgid ""
 "error logging %(who)s in:\n"
@@ -142,97 +179,128 @@ msgstr ""
 "hata günlüğü %(who)s in:\n"
 "%(failure)s"
 
+#: plugin.py:816
 msgid "failed to load message"
 msgstr "ileti yüklenirken hata oluştu"
 
+#: plugin.py:238
 msgid "getting message ..."
 msgstr "ileti alınıyor ..."
 
+#: plugin.py:231
 #, python-format
 msgid "have %d messages"
 msgstr "%d ileti var"
 
+#: plugin.py:233
 msgid "have no messages"
 msgstr "ileti yok"
 
+#: plugin.py:213
 msgid "headers loaded, now parsing ..."
 msgstr "başlıklar alındı, şimdi ayrıştırılıyor ..."
 
+#: plugin.py:1102
 #, python-format
 msgid "importing configurations from %s"
 msgstr "ayarlar %s 'den içeri alınıyor"
 
+#: plugin.py:360
 msgid "leave unread"
 msgstr "okunmadı olarak işaretle"
 
+#: EmailConfig.py:123 setup.xml
 msgid "list all mailboxes"
 msgstr "tüm posta kutularını listele"
 
+#: plugin.py:197
 msgid "loading headers ..."
 msgstr "başlıklar yükleniyor ..."
 
+#: EmailConfig.py:121 setup.xml
 msgid "mail check interval (minutes)"
 msgstr "eposta kontrol sıklığı (dakika)"
 
+#: EmailConfig.py:122 setup.xml
 msgid "maximum mail size to fetch"
 msgstr "indirilecek maksimum eposta boyutu"
 
+#: plugin.py:807
 msgid "message too large"
 msgstr "ileti çok büyük"
 
+#: plugin.py:1022 plugin.py:1059
 msgid "no account selected"
 msgstr "hesap seçilmedi"
 
+#: plugin.py:355 plugin.py:609
 msgid "no date"
 msgstr "tarih yok"
 
+#: plugin.py:434
 msgid "no filename"
 msgstr "dosya adı yok"
 
+#: plugin.py:353
 msgid "no from"
 msgstr "kimden bilgisi yok"
 
+#: plugin.py:204
 msgid "no mailbox?!?!"
 msgstr "posta kutusu yok?!?!"
 
+#: plugin.py:599
 msgid "no sender"
 msgstr "kime bilgisi yok"
 
+#: plugin.py:356 plugin.py:602
 msgid "no subject"
 msgstr "konu yok"
 
+#: EmailConfig.py:90
 msgid "ok"
 msgstr "tamam"
 
+#: plugin.py:245
 msgid "parsing message ..."
 msgstr "mesaj ayrıştırılıyor ..."
 
+#: EmailConfig.py:120 setup.xml
 msgid "password"
 msgstr "parola"
 
+#: plugin.py:387
 msgid "really delete mail?"
 msgstr "ileti silinsin mi?"
 
+#: plugin.py:385
 msgid "really undelete mail?"
 msgstr "silinen ileti geri alınsın mı?"
 
+#: plugin.py:972
 msgid "remove"
 msgstr "kaldır"
 
+#: plugin.py:436
 msgid "select Attachment"
 msgstr "Dosya eki ekle"
 
+#: plugin.py:420
 msgid "select Body"
 msgstr "Mesajı seç"
 
+#: setup.xml
 msgid "show deleted entries"
 msgstr "silinen kayıtları göster"
 
+#: plugin.py:362
 msgid "undelete"
 msgstr "silineni geri al"
 
+#: EmailConfig.py:119 setup.xml
 msgid "user name"
 msgstr "kullanıcı adı"
 
+#: plugin.py:1156
 msgid "view Emails via IMAP4"
 msgstr "Epostaları IMAP4 üzerinden görüntüleyin"

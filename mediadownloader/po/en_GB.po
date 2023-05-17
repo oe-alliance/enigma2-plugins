@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2012-03-16 14:24+0100\n"
 "Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
@@ -17,38 +17,49 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: MediaDownloader.py:224
 #, python-format
 msgid "%d kb/s"
 msgstr "%d kb/s"
 
+#: MediaDownloader.py:157
 msgid "?? kb/s"
 msgstr "?? kb/s"
 
+#: MediaDownloader.py:254
 msgid "Do you want to try to open the downloaded file?"
 msgstr "Do you want to try to open the downloaded file?"
 
+#: plugin.py:91
 msgid "Download..."
 msgstr "Download..."
 
+#: MediaDownloader.py:154
 msgid "Downloading..."
 msgstr "Downloading..."
 
+#: MediaDownloader.py:223
 #, python-format
 msgid "ETA %d:%02d min"
 msgstr "ETA %d:%02d min"
 
+#: MediaDownloader.py:156
 msgid "ETA ??:?? h"
 msgstr "ETA ??:?? h"
 
+#: MediaDownloader.py:271
 #, python-format
 msgid "Error while downloading file %s"
 msgstr "Error while downloading file %s"
 
+#: MediaDownloader.py:237
 msgid "No suitable Viewer found!"
 msgstr "No suitable Viewer found!"
 
+#: MediaDownloader.py:181
 msgid "Where to save?"
 msgstr "Where to save?"
 
+#: plugin.py:65
 msgid "Which file do you want to download?"
 msgstr "Which file do you want to download?"

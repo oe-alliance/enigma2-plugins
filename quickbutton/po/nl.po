@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 - Quickbutton\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2011-10-12 10:51+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: Rob van der Does\n"
@@ -18,27 +18,35 @@ msgstr ""
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 
+#: plugin.py:88
 msgid "Assign plugin to long blue key pressed"
 msgstr "Wijs plugin toe aan lang ingedrukte blauwe toets"
 
+#: plugin.py:85
 msgid "Assign plugin to long green key pressed"
 msgstr "Wijs plugin toe aan lang ingedrukte groene toets"
 
+#: plugin.py:87
 msgid "Assign plugin to long red key pressed"
 msgstr "Wijs plugin toe aan lang ingedrukte rode toets"
 
+#: plugin.py:86
 msgid "Assign plugin to long yellow key pressed"
 msgstr "Wijs plugin toe aan lang ingedrukte gele toets"
 
+#: plugin.py:90
 msgid "Assign plugin to red key pressed"
 msgstr "Wijs plugin toe aan rode toets"
 
+#: plugin.py:207
 msgid "Cancel"
 msgstr "Annuleren"
 
+#: plugin.py:159
 msgid "Display 4:3 content as"
 msgstr "Toon 4:3 materiaal als"
 
+#: plugin.py:147 plugin.py:186
 #, python-format
 msgid ""
 "Error!\n"
@@ -47,68 +55,91 @@ msgstr ""
 "Fout!\n"
 "Fout boodschap: %s"
 
+#: plugin.py:165 plugin.py:239 plugin.py:288
 msgid "HbbTV Applications"
 msgstr ""
 
+#: plugin.py:155
 msgid "Just Scale"
 msgstr "Alleen schalen"
 
+#: plugin.py:141 plugin.py:234 plugin.py:280
 msgid "MediaPlayer"
 msgstr "Mediaspeler"
 
+#: plugin.py:136 plugin.py:233 plugin.py:278
 msgid "Multi EPG"
 msgstr "Multi EPG"
 
+#: plugin.py:190
 msgid "No plugin assigned!"
 msgstr "Geen toegewezen plugin!"
 
+#: plugin.py:35 plugin.py:36 plugin.py:37 plugin.py:38 plugin.py:39
+#: plugin.py:130 plugin.py:231
 msgid "Nothing"
 msgstr "Niets"
 
+#: plugin.py:208
 msgid "OK"
 msgstr "OK"
 
+#: plugin.py:259
 msgid "Overwrite HBBTV-red-button"
 msgstr ""
 
+#: plugin.py:154
 msgid "Pan&Scan"
 msgstr "Pan&Scan"
 
+#: plugin.py:153
 msgid "Pillarbox"
 msgstr "Pillarbox"
 
+#: plugin.py:148 plugin.py:235 plugin.py:282
 msgid "Plugin browser"
 msgstr "Plugin browser"
 
+#: plugin.py:188
 msgid "Plugin not found!"
 msgstr "Plugin niet gevonden!"
 
+#: plugin.py:131 plugin.py:232 plugin.py:276
 msgid "Single EPG"
 msgstr "Single EPG"
 
+#: plugin.py:161 plugin.py:237 plugin.py:286
 msgid "Timer"
 msgstr "Timer"
 
+#: plugin.py:128
 msgid "Unknown Error"
 msgstr "Onbekende fout"
 
+#: plugin.py:268
 msgid "assigned to long blue"
 msgstr "Toegewezen aan lange blauwe toetsdruk"
 
+#: plugin.py:266
 msgid "assigned to long green"
 msgstr "Toegewezen aan lange groene toetsdruk"
 
+#: plugin.py:265
 msgid "assigned to long red"
 msgstr "Toegewezen aan lange rode toetsdruk"
 
+#: plugin.py:267
 msgid "assigned to long yellow"
 msgstr "Toegewezen aan lange gele toetsdruk"
 
+#: plugin.py:271
 msgid "assigned to red"
 msgstr "Toegewezen aan rode toets"
 
+#: plugin.py:78
 msgid "setup for Quickbutton"
 msgstr "Sneltoets instellingen"
 
+#: plugin.py:152 plugin.py:236 plugin.py:284
 msgid "switch 4:3 content display"
 msgstr "Ga naar 4:3 layout"

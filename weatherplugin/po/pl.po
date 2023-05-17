@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WeatherPlugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2015-01-04 18:17+0100\n"
 "Last-Translator: Mariusz1970 <Mariusz1970@onet.eu>\n"
 "Language-Team: Björn Freise <Mariusz1970@onet.eu>\n"
@@ -16,41 +16,53 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
+#: setup.py:89
 msgid "Add"
 msgstr "Dodaj"
 
+#: setup.py:88 setup.py:344
 msgid "Back"
 msgstr "Powrót "
 
+#: setup.py:217
 msgid "Cancel"
 msgstr "Anuluj"
 
+#: setup.py:86 setup.py:230
 msgid "City"
 msgstr "Miasto"
 
+#: setup.py:91 setup.py:219
 msgid "Delete"
 msgstr "Usuń"
 
+#: setup.py:90
 msgid "Edit"
 msgstr "Edytuj"
 
+#: plugin.py:215
 #, python-format
 msgid "Feels like %s"
 msgstr "Odczuwalna Temp. %s"
 
+#: plugin.py:142
 msgid "Getting weather information..."
 msgstr "Uzyskiwane informacji o pogodzie ..."
 
+#: plugin.py:210
 #, python-format
 msgid "Humidity: %s %%"
 msgstr "Wilgotność: %s %%"
 
+#: setup.py:231
 msgid "Location code"
 msgstr "Kod lokalizacji"
 
+#: setup.py:343
 msgid "MSN location search result"
 msgstr "Kod MSN wynik wyszukiwania lokalizacji"
 
+#: plugin.py:149
 msgid ""
 "No locations defined...\n"
 "Press 'Menu' to do that."
@@ -58,49 +70,64 @@ msgstr ""
 "Brak zdefiniowanej lokalizacji ..\n"
 "Naciśnij przycisk \"Menu\", aby to zrobić."
 
+#: setup.py:218 setup.py:345
 msgid "OK"
 msgstr "OK"
 
+#: plugin.py:214
 #, python-format
 msgid "Observation point: %s"
 msgstr "Punkt obserwacji: %s"
 
+#: plugin.py:213
 #, python-format
 msgid "Observation time: %s"
 msgstr "Czas obserwacji: %s"
 
+#: setup.py:260 setup.py:272
 msgid "Please enter a valid city name."
 msgstr "Wprowadź prawidłową nazwę miasta."
 
+#: setup.py:262 setup.py:275
 msgid "Please enter a valid location code for the city."
 msgstr "Wpisz poprawny kod dla lokalizacji miasta"
 
+#: setup.py:136 setup.py:293
 msgid "Really delete this WeatherPlugin Entry?"
 msgstr "Naprawdę usunąć ten wpis?"
 
+#: setup.py:220
 msgid "Search Code"
 msgstr "Szukaj  Kodu"
 
+#: plugin.py:56
 msgid "Show Weather Forecast"
 msgstr "Pokazuję Prognozę Pogody"
 
+#: setup.py:87 setup.py:232
 msgid "System"
 msgstr "System"
 
+#: plugin.py:56 plugin.py:93
 msgid "Weather Plugin"
 msgstr "Wtyczka Pogody"
 
+#: setup.py:205
 msgid "WeatherPlugin: Edit Entry"
 msgstr "Wtyczka Pogody: Edytuj wpis"
 
+#: setup.py:85
 msgid "WeatherPlugin: List of Entries"
 msgstr "Wtyczka Pogody: Lista wpisów"
 
+#: setup.py:247
 msgid "You need to enter a valid city name before you can search for the location code."
 msgstr "Musisz wprowadzić poprawną nazwę miasta,zanim będzie można sprawdzić kodem lokalizacje"
 
+#: setup.py:52
 msgid "imperial system"
 msgstr "Stopnie Fahrenheita "
 
+#: setup.py:52
 msgid "metric system"
 msgstr "Stopnie Celsjusza"

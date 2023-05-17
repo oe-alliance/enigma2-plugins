@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - movieretitle\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2009-10-29 20:37+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -17,35 +17,45 @@ msgstr ""
 "X-Poedit-Basepath: /home/dario/Plugins/movieretitle\n"
 "X-Poedit-SearchPath-0: /home/dario/Plugins/movieretitle\n"
 
+#: plugin.py:52
 msgid "Cancel"
 msgstr "Annull."
 
+#: plugin.py:97
 msgid "Choose target folder"
 msgstr "Cartella destinazione"
 
+#: plugin.py:73
 msgid "Description"
 msgstr "Descrizione"
 
+#: plugin.py:294
 #, python-format
 msgid "Failed to move the movie %s to %s in the background"
 msgstr "Modifica di %s in %s in background fallita!"
 
+#: plugin.py:71
 msgid "Filename"
 msgstr "Nome file"
 
+#: plugin.py:69
 msgid "Location"
 msgstr "Destinazione"
 
+#: plugin.py:82
 msgid "Name and Description Input"
 msgstr "Inserimento nome e descrizione"
 
+#: plugin.py:51
 msgid "OK"
 msgstr "Ok"
 
+#: plugin.py:301
 #, python-format
 msgid "Successfully moved the movie %s"
 msgstr "Modifica di %s terminata con successo!"
 
+#: plugin.py:136
 #, python-format
 msgid ""
 "Target file %s.ts already exist.\n"
@@ -54,15 +64,19 @@ msgstr ""
 "File destinazione %s.ts esistente!\n"
 "Sovrascriverlo?"
 
+#: plugin.py:253
 #, python-format
 msgid "The movie is moved in the background from %s to %s."
 msgstr "Il video verrà spostato in background da %s a %s."
 
+#: plugin.py:140
 msgid "The target directory is not found. The file is not renamed."
 msgstr "Cartella destinazione non trovata. Il file non è stato rinominato."
 
+#: plugin.py:72
 msgid "Title"
 msgstr "Titolo"
 
+#: plugin.py:25
 msgid "change name..."
 msgstr "Rinominare"

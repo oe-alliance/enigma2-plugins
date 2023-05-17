@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:24+0100\n"
 "PO-Revision-Date: 2013-07-25 15:52+0100\n"
 "Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
 "Language-Team: AndyBlac/Rob van der Does\n"
@@ -19,62 +19,81 @@ msgstr ""
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: The Netherlands\n"
 
+#: AdvHdmiCecSetup.py:219
 msgid "Add"
 msgstr ""
 
+#: AdvHdmiCecSetup.py:146
 #, fuzzy
 msgid "Advanced HDMI-Cec Control"
 msgstr "Geavanceerde HDMI Cec instellingen"
 
+#: AdvHdmiCecSetup.py:89 AdvHdmiCecSetup.py:381 plugin.py:191
 msgid "Advanced HDMI-Cec Setup"
 msgstr "Geavanceerde HDMI Cec instellingen"
 
+#: AdvHdmiCecSetup.py:325
 msgid "At which time, HDMI-Cec should be disabled?"
 msgstr "Op welke tijd moet HDMI-Cec uitgeschakeld worden?"
 
+#: AdvHdmiCecSetup.py:50 AdvHdmiCecSetup.py:309
 msgid "Cancel"
 msgstr "Annuleer"
 
+#: AdvHdmiCecSetup.py:220
 msgid "Close"
 msgstr ""
 
+#: AdvHdmiCecSetup.py:222
 msgid "Delete"
 msgstr ""
 
+#: AdvHdmiCecSetup.py:241
 #, fuzzy
 msgid "Disable HDMI-CEC chronologically"
 msgstr "chronologisch uitschakelen"
 
+#: AdvHdmiCecSetup.py:221
 msgid "Edit"
 msgstr ""
 
+#: AdvHdmiCecSetup.py:339
 msgid "Edit HDMI-Cec-Timespan"
 msgstr ""
 
+#: plugin.py:55
 msgid "Friday"
 msgstr "vrijdag"
 
+#: AdvHdmiCecSetup.py:215
 msgid "From"
 msgstr ""
 
+#: AdvHdmiCecSetup.py:213
 msgid "From WD"
 msgstr ""
 
+#: AdvHdmiCecSetup.py:323
 msgid "From which day of the week, HDMI-Cec should be disabled?"
 msgstr "Vanaf welke dag moet HDMI-Cec uitgeschakeld worden?"
 
+#: AdvHdmiCecSetup.py:142
 msgid "Hook"
 msgstr ""
 
+#: plugin.py:51
 msgid "Monday"
 msgstr "maandag"
 
+#: AdvHdmiCecSetup.py:145
 msgid "No HDMI-Cec-Hooks are registered!"
 msgstr ""
 
+#: AdvHdmiCecSetup.py:310
 msgid "OK"
 msgstr ""
 
+#: AdvHdmiCecSetup.py:94
 #, fuzzy
 msgid ""
 "Partially disable HDMI-Cec?\n"
@@ -83,110 +102,146 @@ msgstr ""
 "HDMI-Cec gedeeltelijk uitschakelen?\n"
 "Er kan alleen voorkomen worden dat de ontvanger signalen verstuurt. Signalen die ontvangen worden door d eontvanger kunnen niet worden verhinderd."
 
+#: AdvHdmiCecSetup.py:268
 msgid "Really delete this HDMI-Cec-Timespan Entry?"
 msgstr ""
 
+#: AdvHdmiCecSetup.py:140
 msgid "Registered HDMI-Cec-Hooks:"
 msgstr ""
 
+#: plugin.py:56
 msgid "Saturday"
 msgstr "zaterdag"
 
+#: AdvHdmiCecSetup.py:51
 msgid "Save"
 msgstr "Sla op"
 
+#: AdvHdmiCecSetup.py:101
 msgid "Schould debugmessages be printed?"
 msgstr ""
 
+#: AdvHdmiCecSetup.py:96
 msgid "Should HDMI-Cec be disabled when GUI service startup?"
 msgstr "Moet HDMI Cec zijn uitgeschakeld als de GUI start?"
 
+#: AdvHdmiCecSetup.py:98
 msgid "Should HDMI-Cec be disabled when the commands are sent from the web interface?"
 msgstr "Moet HDMI Cec zijn uitgeschakeld als opdrachten via de web-interface worden verstuurd?"
 
+#: AdvHdmiCecSetup.py:100
 #, fuzzy
 msgid "Should HDMI-Cec be send on Power Off?"
 msgstr "Moet HDMI Cec op bepaalde tijden zijn uitgeschakeld?"
 
+#: AdvHdmiCecSetup.py:99
 #, fuzzy
 msgid "Should HDMI-Cec be send on Power On?"
 msgstr "Moet HDMI Cec op bepaalde tijden zijn uitgeschakeld?"
 
+#: plugin.py:57
 msgid "Sunday"
 msgstr "zondag"
 
+#: plugin.py:54
 msgid "Thursday"
 msgstr "donderdag"
 
+#: AdvHdmiCecSetup.py:52
 msgid "Timespans"
 msgstr ""
 
+#: AdvHdmiCecSetup.py:216
 msgid "To"
 msgstr ""
 
+#: AdvHdmiCecSetup.py:214
 msgid "To WD"
 msgstr ""
 
+#: AdvHdmiCecSetup.py:324
 msgid "To what day of the week, HDMI-Cec should be disabled?"
 msgstr "Tot welke dag moet HDMI Cec zijn uitgeschakeld?"
 
+#: plugin.py:52
 msgid "Tuesday"
 msgstr "dinsdag"
 
+#: AdvHdmiCecSetup.py:326
 msgid "Until the time at which, HDMI-Cec should be disabled?"
 msgstr "Tot welke tijd moet HDMI Cec zijn uitgeschakeld?"
 
+#: AdvHdmiCecSetup.py:138
 msgid "Version: "
 msgstr ""
 
+#: plugin.py:53
 msgid "Wednesday"
 msgstr "woensdag"
 
+#: AdvHdmiCecSetup.py:102
 msgid "Where should this setup be displayed?"
 msgstr "Waar moeten de instellingen getoond worden?"
 
+#: AdvHdmiCecSetup.py:96
 msgid "disable at GUI-start"
 msgstr "uitschakelen tijdens GUI-start"
 
+#: AdvHdmiCecSetup.py:98
 msgid "disable from webinterface"
 msgstr "uitschakelen van web-interface"
 
+#: AdvHdmiCecSetup.py:100
 msgid "enable Power Off"
 msgstr ""
 
+#: AdvHdmiCecSetup.py:99
 msgid "enable Power On"
 msgstr ""
 
+#: AdvHdmiCecSetup.py:101
 msgid "enable debug"
 msgstr ""
 
+#: plugin.py:113
 msgid "extensions"
 msgstr "extensies"
 
+#: AdvHdmiCecSetup.py:325
 msgid "from (HH:MI)"
 msgstr "vanaf (HH:MI)"
 
+#: AdvHdmiCecSetup.py:323
 msgid "from weekday"
 msgstr "vanaf dag"
 
+#: AdvHdmiCecSetup.py:396 AdvHdmiCecSetup.py:403 AdvHdmiCecSetup.py:411
+#: plugin.py:203 plugin.py:210 plugin.py:218
 msgid "manage when HDMI Cec is enabled"
 msgstr "managen als HDMI Cec ingeschakeld is"
 
+#: AdvHdmiCecSetup.py:94
 #, fuzzy
 msgid "partially disable HdmiCec"
 msgstr "HDNI Cec gedeeltelijk uitschakelen"
 
+#: plugin.py:112
 msgid "pluginmenue"
 msgstr "plugin menu"
 
+#: AdvHdmiCecSetup.py:102
 msgid "show in"
 msgstr "toon in"
 
+#: plugin.py:111
 msgid "systemmenue"
 msgstr "systeem menu"
 
+#: AdvHdmiCecSetup.py:326
 msgid "to (HH:MI)"
 msgstr "tot (HH:MI)"
 
+#: AdvHdmiCecSetup.py:324
 msgid "to weekday"
 msgstr "tot dag"

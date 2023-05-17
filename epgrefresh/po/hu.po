@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EPGRefresh v1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-17 15:22+0200\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2018-04-08 12:06+0200\n"
 "Last-Translator: Alec <alex1vagyok@gmail.com>\n"
 "Language-Team: alec <alex1vagyok@gmail.com>\n"
@@ -17,71 +17,94 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 "X-Generator: Poedit 2.0.6\n"
 
+#: EPGRefresh.py:568
 #, python-format
 msgid "%d more services"
 msgstr "%d több csatorna"
 
+#: EPGRefreshConfiguration.py:186
 msgid "After a successful refresh the AutoTimer will automatically search for new matches if this is enabled. The options 'Ask*' has only affect on a manually refresh. If EPG-Refresh was called in background the default-Answer will be executed!"
 msgstr "Sikeres frissítés után az AutoTimer automatikusan új találatokat keres, ha engedélyezve van. Az \"Alapértelmezett kérdés:\" opciók csak manuálisan frissítenek. Ha az EPG Műsorújság frissítés háttérben hívásra került, akkor az alapértelmezett válasz lesz végrehajtva!"
 
+#: EPGRefreshConfiguration.py:164
 msgid "An automated refresh will start after this time of day, but before the time specified in next setting."
 msgstr "Az automatizált frissítés ezen idő után kezdődik el."
 
+#: EPGRefreshConfiguration.py:165
 msgid "An automated refresh will start before this time of day, but after the time specified in previous setting."
 msgstr "Az automatizált frissítés ezen időpontig tart."
 
+#: plugin.py:56
 msgid "Ask default No"
 msgstr "Alapértelmezett kérdés: Nem"
 
+#: plugin.py:55
 msgid "Ask default Yes"
 msgstr "Alapértelmezett kérdés: Igen"
 
+#: EPGRefresh.py:425
 #, python-format
 msgid "AutoTimer failed with error %s"
 msgstr "Az AutoTimer nem sikerült a(z) %s hibával"
 
+#: plugin.py:267 plugin.py:271 plugin.py:342
 msgid "Automatically refresh EPG"
 msgstr "Az EPG Műsorújság automatikus frissítése"
 
+#: plugin.py:44 plugin.py:54
 msgid "Background only"
 msgstr "Csak a háttérben"
 
+#: EPGRefreshChannelEditor.py:73
 msgid "Bouquets"
 msgstr "Csatornacsomagok"
 
+#: EPGRefreshChannelEditor.py:82 EPGRefreshConfiguration.py:47
+#: EPGRefreshConfiguration.py:64 EPGRefreshConfiguration.py:112
 msgid "Cancel"
 msgstr "Mégse"
 
+#: EPGRefreshChannelEditor.py:72
 msgid "Channels"
 msgstr "Csatornák"
 
+#: EPGRefreshConfiguration.py:144
 msgid "Close and forget changes"
 msgstr "Bezárás és a változások elfelejtése"
 
+#: EPGRefreshConfiguration.py:145
 msgid "Close and save changes"
 msgstr "Bezárás és a változások mentése"
 
+#: EPGRefreshConfiguration.py:166
 msgid "Delay if not in standby (minutes)"
 msgstr "Késleltetés, ha nincs készenlétben (perc)"
 
+#: EPGRefreshChannelEditor.py:84
 msgid "Delete"
 msgstr "törlés"
 
+#: EPGRefreshConfiguration.py:169
 msgid "Display more Options"
 msgstr "További lehetőségek megjelenítése"
 
+#: EPGRefreshConfiguration.py:163
 msgid "Duration to stay on service (seconds)"
 msgstr "Időtartam a csatornán való tartózkodáshoz (másodperc)"
 
+#: EPGRefreshConfiguration.py:164
 msgid "EPG refresh auto-start earliest (hh:mm)"
 msgstr "EPG frissítés indítási ideje (óra:perc)"
 
+#: EPGRefreshConfiguration.py:165
 msgid "EPG refresh auto-start latest (hh:mm)"
 msgstr "EPG frissítés eddig az időpontig tart (óra:perc)"
 
+#: EPGRefresh.py:448 PipAdapter.py:84
 msgid "EPG refresh finished."
 msgstr "Műsorújság frissítése kész."
 
+#: EPGRefresh.py:384
 msgid ""
 "EPG refresh finished.\n"
 "Should AutoTimer be search for new matches?"
@@ -89,228 +112,300 @@ msgstr ""
 "Az EPG Műsorújság frissítése befejeződött.\n"
 "Szeretné, ha az AutoTimer új találatokat keresne?"
 
+#: PipAdapter.py:34 RecordAdapter.py:32
 msgid "EPG refresh started in background."
 msgstr "Az EPG frissítése a háttérben elkezdődött."
 
+#: MainPictureAdapter.py:23
 msgid "EPG refresh starts scanning channels."
 msgstr "Az EPG Műsorújság frissítés elindítja a csatornák szkennelését."
 
+#: plugin.py:270
 #, fuzzy
 msgid "EPG-Refresh_Pending Services"
 msgstr "EPG Műsorújság frissítés csatornái"
 
+#: plugin.py:268
 #, fuzzy
 msgid "EPG-Refresh_Refresh now"
 msgstr "EPG Műsorújság frissítés csatornái"
 
+#: plugin.py:267
 #, fuzzy
 msgid "EPG-Refresh_SetUp"
 msgstr "EPG Műsorújság frissítés csatornái"
 
+#: plugin.py:269
 #, fuzzy
 msgid "EPG-Refresh_Stop Refresh"
 msgstr "EPG Műsorújság frissítés csatornái"
 
+#: plugin.py:115
 msgid "EPGREFRESH_NOTIFICATION_DOMAIN"
 msgstr "EPGREFRESH"
 
+#: plugin.py:271 plugin.py:311 plugin.py:341
 #, fuzzy
 msgid "EPGRefresh"
 msgstr "adja a EPG Műsorújság frissítéséhez"
 
+#: EPGRefreshConfiguration.py:95 EPGRefreshConfiguration.py:201
 msgid "EPGRefresh Configuration"
 msgstr "EPG Műsorújság frissítés konfiguráció"
 
+#: EPGRefreshConfiguration.py:49
 msgid "EPGRefresh Configuration Help"
 msgstr "EPG Műsorújság frissítés konfiguráció Súgó"
 
+#: EPGRefreshConfiguration.py:66
 msgid "EPGRefresh Functions"
 msgstr "EPG Műsorújság frissítés funkciók"
 
+#: EPGRefreshChannelEditor.py:62
 msgid "EPGRefresh Services"
 msgstr "EPG Műsorújság frissítés csatornái"
 
+#: EPGRefreshConfiguration.py:115 EPGRefreshConfiguration.py:123
 msgid "Edit Services"
 msgstr "Csatornák szerkesztése"
 
+#: EPGRefreshChannelEditor.py:103
 msgid "Edit Services to refresh"
 msgstr "Csatornák szerkesztése a frissítéshez"
 
+#: EPGRefreshChannelEditor.py:123
 msgid "Editing"
 msgstr "Szerkesztés"
 
+#: EPGRefreshConfiguration.py:180
 msgid "Enable this item to flush all EPG data before starting a new EPG refresh cycle"
 msgstr ""
 
+#: EPGRefreshConfiguration.py:174
 msgid "Enable this to be able to access the EPGRefresh configuration from within the extension menu."
 msgstr "Engedélyezze ezt, hogy hozzáférhessen az 'Műsorújság frissítése' konfigurációhoz a Bővítmények menüben."
 
+#: EPGRefreshConfiguration.py:173
 #, fuzzy
 msgid "Enable this to be able to access the EPGRefresh configuration from within the plugin menu."
 msgstr "Engedélyezze ezt, hogy hozzáférhessen az 'Műsorújság frissítése' konfigurációhoz a Bővítmények menüben."
 
+#: EPGRefreshConfiguration.py:175
 msgid "Enable this to be able to start the EPGRefresh from within the extension menu."
 msgstr "Engedélyezze ezt, hogy el tudja indítani az EPG Műsorújság frissítést a Bővítmények menüből."
 
+#: EPGRefreshConfiguration.py:185
 msgid "Extend the list of services to refresh by those your AutoTimers use?"
 msgstr "Kiegészítse a frissítési csatornák listáját az AutoTimer használatával?"
 
+#: plugin.py:66
 msgid "Fake recording"
 msgstr "Műsorra ugrás"
 
+#: EPGRefreshConfiguration.py:180
 msgid "Flush EPG before refresh"
 msgstr ""
 
+#: EPGRefresh.py:569
 msgid "Following Services have to be scanned:"
 msgstr "A következő csatornákat kell feltérképezni:"
 
+#: EPGRefreshConfiguration.py:178
 msgid "Force scan even if receiver is in use."
 msgstr "Frissítés kikényszerítésa még akkor is, ha vevő van használatban"
 
+#: plugin.py:45
 msgid "Foreground also"
 msgstr "Előtérben is"
 
+#: EPGRefreshConfiguration.py:114
 msgid "Functions"
 msgstr "Funkciók"
 
+#: EPGRefreshConfiguration.py:45
 msgid "General Help"
 msgstr "Általános súgó"
 
+#: EPGRefreshConfiguration.py:166
 msgid "If the receiver currently isn't in standby, this is the duration which EPGRefresh will wait before retry."
 msgstr "Ha a vevőkészülék nincs készenléti állapotban, akkor a Műsorújság frissítés időtartamának várakozási ideje a megismétlése előtt."
 
+#: EPGRefreshConfiguration.py:177
 msgid "If this is enabled, the plugin will wake up the receiver from standby if possible. Otherwise it needs to be switched on already."
 msgstr "Ha ez engedélyezve van, akkor a készülék be lesz kapcsolva a készenléti módból a frissítés végrehajtásához. Ha nem, akkor a frissítés nem lesz végrehajtva."
 
+#: EPGRefreshConfiguration.py:168
 msgid "If you want to refresh the EPG in background, you can choose the method which best suits your needs here, e.g. hidden, fake reocrding or regular Picture in Picture."
 msgstr "Ha frissíteni szeretné az EPG műsorújságot a háttérben, akkor itt kiválaszthatja az Ön igényeinek leginkább megfelelő módszert."
 
+#: EPGRefreshConfiguration.py:185
 msgid "Inherit Services from AutoTimer"
 msgstr "AutoTimerből is figyelembe vegye a csatornákat"
 
+#: EPGRefreshConfiguration.py:46
 msgid "Key Help"
 msgstr "Billentyű gombok súgója"
 
+#: EPGRefreshConfiguration.py:338
 #, python-format
 msgid "Last refresh was %s"
 msgstr "Az utolsó frissítés volt %s"
 
+#: plugin.py:61
 msgid "Main Picture"
 msgstr "Főkép"
 
+#: EPGRefreshConfiguration.py:134
 msgid "Move page down"
 msgstr "Lapozás lefelé"
 
+#: EPGRefreshConfiguration.py:133
 msgid "Move page up"
 msgstr "Lapozás fel"
 
+#: EPGRefreshChannelEditor.py:85
 msgid "New"
 msgstr "Új"
 
+#: plugin.py:53
 msgid "No"
 msgstr "Nem"
 
+#: EPGRefreshChannelEditor.py:83 EPGRefreshConfiguration.py:113
 msgid "OK"
 msgstr "OK"
 
+#: EPGRefreshConfiguration.py:61
 msgid "Pending Services"
 msgstr "Függő csatornák"
 
+#: PipAdapter.py:84
 msgid "PiP available now."
 msgstr "Kép-a-Képben elérhető most."
 
+#: plugin.py:63
 msgid "Picture in Picture"
 msgstr "Kép-a-Képben"
 
+#: plugin.py:64
 msgid "Picture in Picture (hidden)"
 msgstr "Kép-a-Képben (rejtett)"
 
+#: PipAdapter.py:34
 msgid "Please don't use PiP meanwhile!"
 msgstr "Kérjük, ne használja Kép-a-Képben közben!"
 
+#: EPGRefreshConfiguration.py:354
 msgid "Really close without saving settings?"
 msgstr "Tényleg bezárja a beállítások mentése nélkül?"
 
+#: EPGRefreshConfiguration.py:161
 msgid "Refresh EPG automatically"
 msgstr "Az EPG frissítése automatikusan"
 
+#: EPGRefreshConfiguration.py:168
 msgid "Refresh EPG using"
 msgstr "Frissítse a Műsorújságot"
 
+#: EPGRefreshConfiguration.py:63
 msgid "Refresh now"
 msgstr "Frissítés most"
 
+#: EPGRefreshChannelEditor.py:132 EPGRefreshChannelEditor.py:180
 #, fuzzy
 msgid "Refresh using"
 msgstr "Frissítés"
 
+#: EPGRefreshConfiguration.py:186
 msgid "Run AutoTimer after refresh"
 msgstr "Futtassa az AutoTimer-et a frissítés után"
 
+#: EPGRefreshChannelEditor.py:173
 msgid "Select bouquet to refresh"
 msgstr "Válassza ki a csatornacsomagot a frissítéshez"
 
+#: EPGRefreshChannelEditor.py:167
 msgid "Select channel to refresh"
 msgstr "Válassza ki a csatornát a frissítéshez"
 
+#: EPGRefreshConfiguration.py:172
 msgid "Should protected services be skipped if refresh was started in interactive-mode?"
 msgstr "Szeretné kihagyni a védett csatornákat a frissítés kezdetekor interaktív módban?"
 
+#: EPGRefreshConfiguration.py:175
 msgid "Show 'EPGRefresh Start now' in extension menu."
 msgstr "Megjelenik a 'Műsorújság frissítése most' a Bővítmények menüben"
 
+#: EPGRefreshConfiguration.py:169
 msgid "Show Advanced Options"
 msgstr "A speciális opciók megjelenítése"
 
+#: EPGRefreshConfiguration.py:174
 msgid "Show Setup in extension menu"
 msgstr "A beállítások megjelenítése a Bővítmények menüben"
 
+#: EPGRefreshConfiguration.py:173
 #, fuzzy
 msgid "Show Setup in plugins"
 msgstr "A beállítások megjelenítése a Bővítmények menüben"
 
+#: EPGRefreshConfiguration.py:128
 msgid "Show last EPGRefresh - Time"
 msgstr "Az utolsó EPG Műsorújság frissítési idő megjelenítése"
 
+#: EPGRefreshConfiguration.py:122
 msgid "Show more Functions"
 msgstr "További funkciók megjelenítése"
 
+#: EPGRefreshConfiguration.py:176
 msgid "Show popup when refresh starts and ends."
 msgstr "Megjelenjen egy felugró ablak, amikor a frissítés elindul és befejeződik"
 
+#: plugin.py:270
 msgid "Show the pending Services for refresh"
 msgstr "A függőben lévő frissítési csatornák megjelenítése"
 
+#: EPGRefreshConfiguration.py:179
 msgid "Shutdown after EPG refresh."
 msgstr "Leállítás az EPG műsorújság frissítése után"
 
+#: EPGRefreshConfiguration.py:172
 msgid "Skip protected Services"
 msgstr "A védett csatornák kihagyása"
 
+#: plugin.py:268
 msgid "Start EPGrefresh immediately"
 msgstr "Indítsa el közvetlenül az EPG Műsorújság frissítés programot"
 
+#: plugin.py:269
 msgid "Stop Running EPG-refresh"
 msgstr "Állítsa le az EPG Műsorújság frissítés futtatását"
 
+#: EPGRefreshConfiguration.py:60
 msgid "Stop running refresh"
 msgstr "Hagyja abba a frissítést"
 
+#: EPGRefresh.py:291
 msgid "There is still a refresh running. The Operation isn't allowed at this moment."
 msgstr "A frissítés még folyamatban van. A művelet ebben a pillanatban nem engedélyezett."
 
+#: EPGRefreshConfiguration.py:163
 msgid "This is the duration each service/channel will stay active during a refresh."
 msgstr "Az az időtartam, amikor mindegyik csatorna aktív marad a frissítés során."
 
+#: EPGRefreshConfiguration.py:176
 msgid "This setting controls whether or not an informational message will be shown at start and completion of refresh."
 msgstr "Ez a beállítás szabályozza, hogy egy tájékoztató üzenet jelenjen-e meg a frissítés kezdetekor és befejezésekor is."
 
+#: EPGRefreshConfiguration.py:178
 msgid "This setting controls whether or not the refresh will be initiated even though the receiver is active (either not in standby or currently recording)."
 msgstr "Ez a beállítás szabályozza, hogy a frissítés akkor is megkezdődjön-e, ha a készülék aktív (nincs készenléti állapotban, vagy éppen felvétel közben van)."
 
+#: EPGRefreshConfiguration.py:179
 msgid "This setting controls whether the receiver should be set to standby after refresh is completed."
 msgstr "Ez a beállítás szabályozza, hogy a készülék készenléti állapotba kerüljön-e a frissítés befejezése után."
 
+#: plugin.py:226
 msgid ""
 "To apply your Changes the GUI has to be restarted.\n"
 "Do you want to restart the GUI now?"
@@ -318,20 +413,26 @@ msgstr ""
 "A változtatások alkalmazásához újra kell indítani a GUI-t (grafikus felhasználói felületet).\n"
 "Szeretné újraindítani a grafikus felhasználói felületet?"
 
+#: EPGRefreshConfiguration.py:161
 msgid "Unless this is enabled, EPGRefresh won't automatically run but needs to be explicitly started by the yellow button in this menu."
 msgstr "Ha ez nem engedélyezett, az 'Műsorújság frissítés' nem fog automatikusan működni. A sárga gombbal lehet a frissítést kézzel végrehajtani."
 
+#: EPGRefreshConfiguration.py:201
 msgid "Version"
 msgstr "Változat"
 
+#: EPGRefreshConfiguration.py:177
 msgid "Wake up from standby for EPG refresh."
 msgstr "Ébredjen készenléti állapotbó az EPG frissítéshez"
 
+#: plugin.py:52
 msgid "Yes"
 msgstr "Igen"
 
+#: plugin.py:335
 msgid "add to EPGRefresh"
 msgstr "adja a EPG Műsorújság frissítéséhez"
 
+#: EPGRefreshConfiguration.py:334
 msgid "never"
 msgstr "soha"

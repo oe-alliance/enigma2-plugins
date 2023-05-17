@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# $PACKAGEDESCRIPION
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the TeleText package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: TeleText 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,237 +17,316 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: plugin.py:1710 plugin.py:1719 plugin.py:1746
 msgid "<empty>"
 msgstr ""
 
+#: plugin.py:1722
 msgid "Add"
 msgstr ""
 
+#: plugin.py:69
 msgid "Arabic"
 msgstr ""
 
+#: plugin.py:1344
 msgid "Background caching"
 msgstr ""
 
+#: plugin.py:1333
 msgid "Brightness"
 msgstr ""
 
+#: plugin.py:1131 plugin.py:1278
 msgid "Cancel"
 msgstr ""
 
+#: plugin.py:69
 msgid "Central and Southeast Europe"
 msgstr ""
 
+#: plugin.py:1687
 msgid "Clear all"
 msgstr ""
 
+#: plugin.py:1334
 msgid "Contrast"
 msgstr ""
 
+#: plugin.py:69
 msgid "Cyrillic"
 msgstr ""
 
+#: plugin.py:1345
 msgid "Debug"
 msgstr ""
 
+#: plugin.py:1279
 msgid "Default"
 msgstr ""
 
+#: plugin.py:1724
 msgid "Delete"
 msgstr ""
 
+#: plugin.py:1781
 msgid "Delete all favorites?"
 msgstr ""
 
+#: plugin.py:1770
 msgid "Delete favorite?"
 msgstr ""
 
+#: plugin.py:70
 msgid "Disabled"
 msgstr ""
 
+#: plugin.py:1433
 msgid "Discard changes?"
 msgstr ""
 
+#: plugin.py:1339
 msgid "Display edges"
 msgstr ""
 
+#: plugin.py:78
 msgid "Display first and last row."
 msgstr ""
 
+#: plugin.py:69
 msgid "Eastern Europe"
 msgstr ""
 
+#: plugin.py:1726
 msgid "Edit"
 msgstr ""
 
+#: plugin.py:1753
 #, python-format
 msgid "Enter text for page %s"
 msgstr ""
 
+#: plugin.py:72 plugin.py:73
 msgid "Enter values (left, top, right, bottom) or press TEXT to move and resize the teletext graphically."
 msgstr ""
 
+#: plugin.py:69
 msgid "Hebrew / Arabic"
 msgstr ""
 
+#: plugin.py:83
 msgid "If caching is disabled, each teletext page will searched when you entered its number."
 msgstr ""
 
+#: plugin.py:1870
 msgid "No teletext available."
 msgstr ""
 
+#: plugin.py:1132 plugin.py:1153 plugin.py:1280
 msgid "OK"
 msgstr ""
 
+#: plugin.py:1338 plugin.py:1343
 msgid "Position and size"
 msgstr ""
 
+#: plugin.py:79
 msgid "Print debug messages to /tmp/dbttcp.log."
 msgstr ""
 
+#: plugin.py:1337
 msgid "Region"
 msgstr ""
 
+#: plugin.py:1331
 msgid "Scale filter"
 msgstr ""
 
+#: plugin.py:1332
 msgid "Scale filter zoom"
 msgstr ""
 
+#: plugin.py:1725
 msgid "Select"
 msgstr ""
 
+#: plugin.py:75
 msgid "Select brightness."
 msgstr ""
 
+#: plugin.py:76
 msgid "Select contrast."
 msgstr ""
 
+#: plugin.py:74
 msgid "Select splitting mode."
 msgstr ""
 
+#: plugin.py:1113
 msgid "Select teletext"
 msgstr ""
 
+#: plugin.py:80
 msgid "Select teletext version to use."
 msgstr ""
 
+#: plugin.py:77
 msgid "Select transparency."
 msgstr ""
 
+#: plugin.py:82
 msgid "Select your favourite scale filter."
 msgstr ""
 
+#: plugin.py:81
 msgid "Select your region to use the proper font."
 msgstr ""
 
+#: plugin.py:1340
 msgid "Splitting mode"
 msgstr ""
 
+#: plugin.py:1653 plugin.py:1822
 msgid "TeleText favorites"
 msgstr ""
 
+#: plugin.py:1255 plugin.py:1477
 msgid "TeleText settings"
 msgstr ""
 
+#: plugin.py:1336
 msgid "Text level"
 msgstr ""
 
+#: plugin.py:1335
 msgid "Transparency"
 msgstr ""
 
+#: plugin.py:69
 msgid "Turkish / Greek"
 msgstr ""
 
+#: plugin.py:69
 msgid "Western Europe and Turkey"
 msgstr ""
 
+#: plugin.py:69
 msgid "Western and Central Europe"
 msgstr ""
 
+#: plugin.py:70
 msgid "anisotropic"
 msgstr ""
 
+#: plugin.py:70
 msgid "bilinear"
 msgstr ""
 
+#: plugin.py:234
 msgid "blue teletext link"
 msgstr ""
 
+#: plugin.py:206 plugin.py:207 plugin.py:208 plugin.py:209 plugin.py:210
+#: plugin.py:211 plugin.py:212 plugin.py:213
 msgid "enter page number"
 msgstr ""
 
+#: plugin.py:214
 msgid "enter page number / page 100"
 msgstr ""
 
+#: plugin.py:216
 msgid "enter page number / rezap"
 msgstr ""
 
+#: plugin.py:218 plugin.py:237
 msgid "exit"
 msgstr ""
 
+#: plugin.py:222
 msgid "favorites / decrease height"
 msgstr ""
 
+#: plugin.py:232
 msgid "green teletext link"
 msgstr ""
 
+#: plugin.py:217
 msgid "next channel / channel list"
 msgstr ""
 
+#: plugin.py:225
 msgid "next page / catch page / move"
 msgstr ""
 
+#: plugin.py:228
 msgid "next sub page / move"
 msgstr ""
 
+#: plugin.py:67
 msgid "picture and teletext"
 msgstr ""
 
+#: plugin.py:215
 msgid "prev channel / channel list"
 msgstr ""
 
+#: plugin.py:229
 msgid "prev page / catch page / move"
 msgstr ""
 
+#: plugin.py:226
 msgid "prev sub page / move"
 msgstr ""
 
+#: plugin.py:231
 msgid "red teletext link"
 msgstr ""
 
+#: plugin.py:70
 msgid "sharp"
 msgstr ""
 
+#: plugin.py:70
 msgid "sharper"
 msgstr ""
 
+#: plugin.py:235
 msgid "split screen"
 msgstr ""
 
+#: plugin.py:227
 msgid "start page catching / select page"
 msgstr ""
 
+#: plugin.py:67
 msgid "teletext and picture"
 msgstr ""
 
+#: plugin.py:67
 msgid "teletext in picture"
 msgstr ""
 
+#: plugin.py:224
 msgid "teletext settings"
 msgstr ""
 
+#: plugin.py:230
 msgid "toggle flof/top"
 msgstr ""
 
+#: plugin.py:223
 msgid "toggle info"
 msgstr ""
 
+#: plugin.py:236
 msgid "toggle transparency"
 msgstr ""
 
+#: plugin.py:233
 msgid "yellow teletext link"
 msgstr ""
 
+#: plugin.py:221
 msgid "zoom / increase height"
 msgstr ""

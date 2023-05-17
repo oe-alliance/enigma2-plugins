@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - ncidclient\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -18,31 +18,40 @@ msgstr ""
 "X-Poedit-SearchPath-0: \n"
 
 #. TRANSLATORS: this is a window title.
+#: plugin.py:622
 msgid "Add entry to phonebook"
 msgstr "Aggiungere voce in rubrica"
 
+#: plugin.py:762
 msgid "Areacode to add to calls without one (if necessary)"
 msgstr "Pref. locale per le chiamate che ne sono prive (se necessario)"
 
+#: plugin.py:48
 msgid "Austria"
 msgstr "Austria"
 
+#: plugin.py:786
 msgid "Automatically add new Caller to PhoneBook"
 msgstr "Aggiungere automaticamente i nuovi chiamanti alla rubrica"
 
+#: plugin.py:754
 msgid "Call monitoring"
 msgstr "Monitoraggio chiamate"
 
 #. TRANSLATORS: keep it short, this is a button
+#: plugin.py:597 plugin.py:721
 msgid "Cancel"
 msgstr "Annull."
 
+#: plugin.py:94
 msgid "Compact Flash"
 msgstr "Compact Flash"
 
+#: plugin.py:1076
 msgid "Connected to NCID Server"
 msgstr "Connesso al server NCID"
 
+#: plugin.py:1094
 #, python-format
 msgid ""
 "Connecting to NCID Server failed\n"
@@ -53,9 +62,11 @@ msgstr ""
 "(%s)\n"
 "Nuovo tentativo in corso..."
 
+#: plugin.py:1071
 msgid "Connecting to NCID Server..."
 msgstr "Connessione al server NCID in corso..."
 
+#: plugin.py:1086
 #, python-format
 msgid ""
 "Connection to NCID Server lost\n"
@@ -66,16 +77,20 @@ msgstr ""
 "(%s)\n"
 "Nuovo tentativo in corso..."
 
+#: plugin.py:766
 msgid "Country"
 msgstr "Nazione"
 
 #. TRANSLATORS: keep it short, this is a button
+#: plugin.py:462
 msgid "Delete"
 msgstr "Cancell."
 
+#: plugin.py:1149
 msgid "Display Fon calls on screen"
 msgstr "Mostrare le chiamate telef. sulla TV"
 
+#: plugin.py:542
 #, python-format
 msgid ""
 "Do you really want to delete entry for\n"
@@ -91,24 +106,31 @@ msgstr ""
 "%(name)s?"
 
 #. TRANSLATORS: keep it short, this is a button
+#: plugin.py:466
 msgid "Edit"
 msgstr "Mod."
 
+#: plugin.py:664
 msgid "Enter Search Terms"
 msgstr "Inserire criteri di ricerca"
 
+#: plugin.py:630
 msgid "Entry incomplete."
 msgstr "Voce incompleta."
 
+#: plugin.py:93
 msgid "Flash"
 msgstr "Flash"
 
+#: plugin.py:45
 msgid "France"
 msgstr "Francia"
 
+#: plugin.py:43
 msgid "Germany"
 msgstr "Germania"
 
+#: plugin.py:902
 #, python-format
 msgid ""
 "Incoming Call on %s from\n"
@@ -123,106 +145,139 @@ msgstr ""
 "%s\n"
 "---------------------------------------------"
 
+#: plugin.py:46
 msgid "Italy"
 msgstr "Italia"
 
+#: plugin.py:852
 msgid "Last 10 calls:\n"
 msgstr "Ultime 10 chiamate:\n"
 
+#: plugin.py:100
 msgid "Media directory"
 msgstr "Directory media"
 
 #. TRANSLATORS: this is a window title.
+#: plugin.py:742
 msgid "NCID Client - Setup"
 msgstr "NCID Client - Configurazione"
 
+#: plugin.py:756
 msgid "NCID server (Name or IP)"
 msgstr "Server NCID (Nome o IP)"
 
+#: plugin.py:757
 msgid "NCID server listening port (1-65535)"
 msgstr "Porta server NCID (1-65535)"
 
+#: plugin.py:614
 msgid "Name"
 msgstr "Nome"
 
+#: plugin.py:106
 msgid "Network mount"
 msgstr "Mount di rete"
 
 #. TRANSLATORS: keep it short, this is a button
+#: plugin.py:464
 msgid "New"
 msgstr "Nuovo"
 
+#: plugin.py:546 plugin.py:563 plugin.py:655
 msgid "No entry selected"
 msgstr "Nessuna voce selezionata"
 
+#: plugin.py:821
 msgid "No phonebook"
 msgstr "Nessuna rubrica"
 
+#: plugin.py:615
 msgid "Number"
 msgstr "Numero"
 
 #. TRANSLATORS: keep it short, this is a button
+#: plugin.py:599 plugin.py:723
 msgid "OK"
 msgstr "Ok"
 
+#: plugin.py:784
 msgid "PhoneBook Location"
 msgstr "Collocazione rubrica"
 
 #. TRANSLATORS: this is a window title.
+#: plugin.py:488
 msgid "Phonebook"
 msgstr "Rubrica"
 
+#: plugin.py:819
 msgid "Plugin not active"
 msgstr "Plugin non attivo"
 
+#: plugin.py:764
 msgid "Reverse Lookup Caller ID (select country below)"
 msgstr "Identificativo chiamante (selezionare La Nazione!)"
 
 #. TRANSLATORS: keep it short, this is a button
+#: plugin.py:468
 msgid "Search"
 msgstr "Ricerca"
 
+#: plugin.py:664
 msgid "Search phonebook"
 msgstr "Ricerca su rubrica"
 
+#: plugin.py:759
 msgid "Show after Standby"
 msgstr "Mostrare chiamate dopo lo standby"
 
+#: plugin.py:789
 msgid "Show connection information popups"
 msgstr "Mostrare popup con info connessione"
 
+#: plugin.py:788
 msgid "Strip Leading 0"
 msgstr "Sopprimere \"0\" iniziali"
 
+#: plugin.py:47
 msgid "Switzerland"
 msgstr "Svizzera"
 
+#: plugin.py:44
 msgid "The Netherlands"
 msgstr "Olanda"
 
+#: plugin.py:763
 msgid "Timeout for Call Notifications (seconds)"
 msgstr "Ritardo notifica chiamate (secondi)"
 
+#: plugin.py:860 plugin.py:863 plugin.py:969 plugin.py:1024
 msgid "UNKNOWN"
 msgstr "Sconosciuto"
 
+#: plugin.py:95
 msgid "USB Device"
 msgstr "Dispositivo USB"
 
+#: plugin.py:768
 msgid "Use internal PhoneBook"
 msgstr "Usare rubrica interna"
 
+#: plugin.py:849
 msgid "no calls"
 msgstr "Nessuna"
 
+#: plugin.py:1036
 msgid "number suppressed"
 msgstr "Numero mascherato"
 
+#: plugin.py:116
 msgid "show as list"
 msgstr "Come elenco"
 
+#: plugin.py:116
 msgid "show each call"
 msgstr "Tutte"
 
+#: plugin.py:116
 msgid "show nothing"
 msgstr "Nulla"

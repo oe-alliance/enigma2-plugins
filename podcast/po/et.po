@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2012-08-25 13:09+0300\n"
 "Last-Translator: rimas\n"
 "Language-Team: rimas\n"
@@ -17,64 +17,86 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: plugin.py:594
 msgid "Buffer device:"
 msgstr "Puhvri asukoht:"
 
+#: plugin.py:595
 msgid "Buffer file handling:"
 msgstr "Puhverfaili käsitlemine:"
 
+#: plugin.py:593
 msgid "Buffer:"
 msgstr "Puhver:"
 
+#: plugin.py:270
 msgid "Delete this movie?"
 msgstr "Kustutad filmi?"
 
+#: plugin.py:184
 #, python-format
 msgid "Downloading movie: %s"
 msgstr "Filmi allalaadimine: %s"
 
+#: plugin.py:312
 msgid "Error getting movies"
 msgstr "Viga filmide hankimisel"
 
+#: plugin.py:657
 msgid "Feedly OPML"
 msgstr ""
 
+#: plugin.py:644
 msgid "Help"
 msgstr ""
 
+#: plugin.py:320
 msgid "Length"
 msgstr "Kestus"
 
+#: plugin.py:476
 #, fuzzy
 msgid "No Feedly configuration"
 msgstr "seadistus"
 
+#: plugin.py:83 plugin.py:172 plugin.py:224 plugin.py:329 plugin.py:360
+#: plugin.py:390 plugin.py:459 plugin.py:521 plugin.py:577 plugin.py:638
+#: plugin.py:682
 msgid "Podcast"
 msgstr ""
 
+#: plugin.py:582
 msgid "Save"
 msgstr "Salvesta"
 
+#: plugin.py:526
 msgid "Select"
 msgstr "Vali"
 
+#: plugin.py:71
 msgid "Stop playing this movie?"
 msgstr "Lõpetada filmi esitus"
 
+#: plugin.py:320
 msgid "Type"
 msgstr "Tüüp"
 
+#: plugin.py:96
 msgid "ask me"
 msgstr "küsi"
 
+#: plugin.py:651
 msgid "configuration"
 msgstr "seadistus"
 
+#: plugin.py:96
 msgid "delete"
 msgstr "kustuta"
 
+#: plugin.py:650 plugin.py:655
 msgid "from xml"
 msgstr "xml failist"
 
+#: plugin.py:96
 msgid "keep on device"
 msgstr "säilita andmekandjal"

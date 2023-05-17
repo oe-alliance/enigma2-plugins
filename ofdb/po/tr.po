@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 OFDb plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2009-09-22 13:18+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
 "Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
@@ -14,77 +14,102 @@ msgstr ""
 "X-Poedit-Country: TURKEY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#: plugin.py:203
 msgid "Ambiguous results"
 msgstr "Muhtemel eşleşen başlıklar"
 
-msgid "Cast: "
+#: plugin.py:376
+#, fuzzy, python-format
+msgid "Cast: %s"
 msgstr "Oyuncular: "
 
+#: plugin.py:47
 msgid "Channel Selection"
 msgstr "Kanal Seçimi"
 
+#: plugin.py:293
 msgid "Could't get Eventname"
 msgstr "Program adı alınamıyor"
 
+#: plugin.py:208 plugin.py:336
 msgid "Details"
 msgstr "Detaylar"
 
+#: plugin.py:384
 #, python-format
 msgid "Downloading Movie Poster: %s..."
 msgstr "%s posteri indiriliyor."
 
+#: plugin.py:134
 msgid "Exit"
 msgstr "Çıkış"
 
+#: plugin.py:67
 msgid "Lookup"
 msgstr "Sorgula"
 
+#: plugin.py:320 plugin.py:321
 msgid "No OFDb match."
 msgstr "OFDb eşleşmesi bulunamadı."
 
+#: plugin.py:378
 msgid "No cast list found in the database."
 msgstr "Oyuncu listesi veritabanında bulunamadı."
 
+#: plugin.py:334
 msgid "No details found."
 msgstr "Detay bilgisi bulunamadı."
 
+#: plugin.py:337 plugin.py:406
 msgid "OFDb Details parsed"
 msgstr "OFDb detayları ayrıştırıldı"
 
+#: plugin.py:301
 msgid "OFDb Download completed"
 msgstr "OFDb indirmesi tamamlandı"
 
+#: plugin.py:297
 msgid "OFDb Download failed"
 msgstr "OFDb indirmesi tamamlanamadı!"
 
+#: plugin.py:433
 msgid "OFDb Plugin"
 msgstr "OFDb Eklentisi"
 
+#: plugin.py:326
 msgid "OFDb Re-Download completed"
 msgstr "IMDb yeniden indirme tamamlandı"
 
+#: plugin.py:323
 msgid "OFDb query failed!"
 msgstr "OFDb sorgusunda hata oluştu."
 
+#: plugin.py:204
 msgid "Please select the matching entry"
 msgstr "Lütfen aradığınız başlığı seçin"
 
+#: plugin.py:283
 #, python-format
 msgid "Query OFDb: %s..."
 msgstr "%s OFDb'den sorgulanıyor"
 
+#: plugin.py:453 plugin.py:458 plugin.py:464
 msgid "Query details from the Online-Filmdatenbank"
 msgstr "Film detaylarını ofdb.de'den sorgulayın"
 
+#: plugin.py:218
 #, python-format
 msgid "Re-Query OFDb: %s..."
 msgstr "%s OFDb'de yeniden sorgulanıyor..."
 
+#: plugin.py:125
 msgid "The Online-Filmdatenbank"
 msgstr "Çevrimiçi Film Veritabanı (ofdb.de)"
 
+#: plugin.py:207
 msgid "Title Menu"
 msgstr "Filmler"
 
+#: plugin.py:358
 msgid "no user rating yet"
 msgstr "puan verilmemiş"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 Plugin - RS Downloader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-27 18:11+0100\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2009-09-27 18:11+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -16,109 +16,143 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: /home/aliabdul/dream/e2-plugins/enigma2-plugins/rsdownloader/src\n"
 
+#: plugin.py:1421
 msgid "Abort all downloads"
 msgstr ""
 
+#: plugin.py:1311 plugin.py:1394
 msgid "Add"
 msgstr "Dodaj"
 
+#: plugin.py:1418
 msgid "Add downloads from txt files"
 msgstr "Dodaj preuzimanja iz txt datoteka"
 
+#: plugin.py:1419
 msgid "Add files from container"
 msgstr "Dodaj datoteke iz sanduka"
 
+#: plugin.py:946
 #, python-format
 msgid "Added %s to the download-list."
 msgstr "Dodato %s u listu preuzimanja."
 
+#: plugin.py:859
 msgid "Allow downloading on friday:"
 msgstr "Dopusti preuzimanje u petak:"
 
+#: plugin.py:855
 msgid "Allow downloading on monday:"
 msgstr "Dopusti preuzimanje u ponedeljak:"
 
+#: plugin.py:860
 msgid "Allow downloading on saturday:"
 msgstr "Dopusti preuzimanje u subotu:"
 
+#: plugin.py:861
 msgid "Allow downloading on sunday:"
 msgstr "Dopusti preuzimanje u nedelju:"
 
+#: plugin.py:858
 msgid "Allow downloading on thursday:"
 msgstr "Dopusti preuzimanje u četvrtak:"
 
+#: plugin.py:856
 msgid "Allow downloading on tuesday:"
 msgstr "Dopusti preuzimanje u utorak:"
 
+#: plugin.py:857
 msgid "Allow downloading on wednesday:"
 msgstr "Dopusti preuzimanje u sredu:"
 
+#: plugin.py:300 plugin.py:331 plugin.py:363 plugin.py:417 plugin.py:451
 msgid "Checking"
 msgstr "Proveravam"
 
+#: plugin.py:868
 msgid "Choose reconnect script:"
 msgstr ""
 
+#: plugin.py:1423
 msgid "Clear finished downloads"
 msgstr "Obriši završena preuzimanja"
 
+#: plugin.py:1430
 msgid "Close plugin"
 msgstr "Zatvori dodatak"
 
+#: plugin.py:1395
 msgid "Config"
 msgstr "Konfig."
 
+#: plugin.py:1310 plugin.py:1392
 msgid "Delete"
 msgstr "Obriši"
 
+#: plugin.py:1478
 #, python-format
 msgid "Delete %s?"
 msgstr "Obriši %s?"
 
+#: plugin.py:1416
 msgid "Delete download"
 msgstr "Obriši preuzimanje"
 
+#: plugin.py:1420
 msgid "Delete failed downloads"
 msgstr "Obriši neuspela preuzimanja"
 
+#: plugin.py:1425
 msgid "Delete log"
 msgstr "Obriši zapis"
 
+#: plugin.py:863
 msgid "Don't download after:"
 msgstr "Ne preuzimati posle:"
 
+#: plugin.py:862
 msgid "Don't download before:"
 msgstr "Ne preuzimati pre:"
 
+#: plugin.py:870
 msgid "Don't reconnect after:"
 msgstr ""
 
+#: plugin.py:869
 msgid "Don't reconnect before:"
 msgstr ""
 
+#: plugin.py:1574
 msgid "Download files from rapidshare"
 msgstr "Pruzmi datoteke sa rapidšera"
 
+#: plugin.py:845
 msgid "Download in the background:"
 msgstr "Preuzmi u pozadini:"
 
+#: plugin.py:355 plugin.py:366 plugin.py:389 plugin.py:395 plugin.py:763
 msgid "Downloading"
 msgstr "Preuzimam"
 
+#: plugin.py:853
 msgid "Downloads directory:"
 msgstr "Direktorijum preuzimanja:"
 
+#: plugin.py:1282
 msgid "Enter unrar password:"
 msgstr ""
 
+#: plugin.py:948
 #, python-format
 msgid "Error while adding %s to the download-list!"
 msgstr "Greška kod dodavanja %s u listu preuzimanja!"
 
+#: plugin.py:1550
 #, python-format
 msgid "Error while decrypting %s!"
 msgstr ""
 
+#: plugin.py:1002
 #, python-format
 msgid ""
 "Error while searching http://rapidshare-search-engine.com!\n"
@@ -129,6 +163,7 @@ msgstr ""
 "\n"
 "Greška: %s"
 
+#: plugin.py:958
 msgid ""
 "Error while searching http://rapidshare-search-engine.com!\n"
 "\n"
@@ -138,114 +173,152 @@ msgstr ""
 "\n"
 "Greška:Ništa nije nađeno,žao mi je."
 
+#: plugin.py:424 plugin.py:436 plugin.py:572 plugin.py:753 plugin.py:778
 msgid "Failed"
 msgstr "Neuspelo"
 
+#: plugin.py:430 plugin.py:572 plugin.py:678 plugin.py:745 plugin.py:1475
 msgid "Finished"
 msgstr "Završeno"
 
+#: plugin.py:854
 msgid "Ignore download times:"
 msgstr "Ignoriši vremena preuzimanja:"
 
+#: plugin.py:1429
 msgid "Install unrar"
 msgstr ""
 
+#: plugin.py:1462
 msgid "Installing unrar..."
 msgstr ""
 
+#: plugin.py:852
 msgid "Lists directory:"
 msgstr "Direktorijum listi:"
 
+#: plugin.py:1013
 msgid "Loading next page... please wait!"
 msgstr "Učitavam narednu stranu...molim sačekajte!"
 
+#: plugin.py:1007
 msgid "Loading previous page... please wait!"
 msgstr "Učitavam prethodnu stranu...molim sačekajte!"
 
+#: plugin.py:872
 msgid "Mark files < 1 MB as failed:"
 msgstr ""
 
+#: plugin.py:864
 msgid "Maximal downloads:"
 msgstr "Maksimalna pruzimanja:"
 
+#: plugin.py:1396
 msgid "Menu"
 msgstr "Meni"
 
+#: plugin.py:68
 msgid "No reconnect"
 msgstr ""
 
+#: plugin.py:959
 msgid "Nothing found, sorry."
 msgstr "Ništa nije nađeno,žao mi je."
 
+#: plugin.py:1427
 msgid "Open unrar Manager"
 msgstr ""
 
+#: plugin.py:975
 #, python-format
 msgid "Page %d / %d. Push < > to switch the page..."
 msgstr "Strana %d / %d. Pritisni < > da promeniš stranu..."
 
+#: plugin.py:849
 msgid "Password (netload.in):"
 msgstr ""
 
+#: plugin.py:851
 msgid "Password (uploaded.to):"
 msgstr ""
 
+#: plugin.py:847
 msgid "Password:"
 msgstr "Lozinka:"
 
+#: plugin.py:1431
 msgid "Please choose a function..."
 msgstr "Molim izaberite svrhu..."
 
+#: plugin.py:801 plugin.py:1574
 msgid "RS Downloader"
 msgstr "RS Preuzimač"
 
+#: plugin.py:867
 msgid "Reconnect type:"
 msgstr ""
 
+#: plugin.py:871
 msgid "Restart failed after 10 minutes:"
 msgstr "Restart nije uspeo posle 10 minuta:"
 
+#: plugin.py:1422
 msgid "Restart failed downloads"
 msgstr "Restartuj neuspela preuzimanja"
 
+#: plugin.py:842
 msgid "Save"
 msgstr "Sačuvaj"
 
+#: plugin.py:68
 msgid "Script"
 msgstr ""
 
+#: plugin.py:1393
 msgid "Search"
 msgstr "Traži"
 
+#: plugin.py:1487
 msgid "Search http://rapidshare-search-engine.com for:"
 msgstr "Pretraži http://rapidshare-search-engine.com za:"
 
+#: plugin.py:1424
 msgid "Show log"
 msgstr "Prikaži zapis"
 
+#: plugin.py:865
 msgid "Take x downloads to list:"
 msgstr "Uzmi x preuzimanja u listu:"
 
+#: plugin.py:1337
 msgid "Unrar is already working!"
 msgstr ""
 
+#: plugin.py:1417
 msgid "Use search engine"
 msgstr "Koristi mašinu za traženje"
 
+#: plugin.py:848
 msgid "Username (netload.in):"
 msgstr ""
 
+#: plugin.py:850
 msgid "Username (uploaded.to):"
 msgstr ""
 
+#: plugin.py:846
 msgid "Username:"
 msgstr "Korisničko ime:"
 
+#: plugin.py:253 plugin.py:320 plugin.py:344 plugin.py:403 plugin.py:438
+#: plugin.py:588 plugin.py:609 plugin.py:769 plugin.py:783
 msgid "Waiting"
 msgstr "Čekam"
 
+#: plugin.py:866
 msgid "Write log:"
 msgstr "Napiši zapis:"
 
+#: plugin.py:68
 msgid "fritz.Box"
 msgstr ""

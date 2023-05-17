@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# $PACKAGEDESCRIPION
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the NcidClient package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: NcidClient 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,31 +18,40 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. TRANSLATORS: this is a window title.
+#: plugin.py:622
 msgid "Add entry to phonebook"
 msgstr ""
 
+#: plugin.py:762
 msgid "Areacode to add to calls without one (if necessary)"
 msgstr ""
 
+#: plugin.py:48
 msgid "Austria"
 msgstr ""
 
+#: plugin.py:786
 msgid "Automatically add new Caller to PhoneBook"
 msgstr ""
 
+#: plugin.py:754
 msgid "Call monitoring"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
+#: plugin.py:597 plugin.py:721
 msgid "Cancel"
 msgstr ""
 
+#: plugin.py:94
 msgid "Compact Flash"
 msgstr ""
 
+#: plugin.py:1076
 msgid "Connected to NCID Server"
 msgstr ""
 
+#: plugin.py:1094
 #, python-format
 msgid ""
 "Connecting to NCID Server failed\n"
@@ -50,9 +59,11 @@ msgid ""
 "retrying..."
 msgstr ""
 
+#: plugin.py:1071
 msgid "Connecting to NCID Server..."
 msgstr ""
 
+#: plugin.py:1086
 #, python-format
 msgid ""
 "Connection to NCID Server lost\n"
@@ -60,16 +71,20 @@ msgid ""
 "retrying..."
 msgstr ""
 
+#: plugin.py:766
 msgid "Country"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
+#: plugin.py:462
 msgid "Delete"
 msgstr ""
 
+#: plugin.py:1149
 msgid "Display Fon calls on screen"
 msgstr ""
 
+#: plugin.py:542
 #, python-format
 msgid ""
 "Do you really want to delete entry for\n"
@@ -80,24 +95,31 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
+#: plugin.py:466
 msgid "Edit"
 msgstr ""
 
+#: plugin.py:664
 msgid "Enter Search Terms"
 msgstr ""
 
+#: plugin.py:630
 msgid "Entry incomplete."
 msgstr ""
 
+#: plugin.py:93
 msgid "Flash"
 msgstr ""
 
+#: plugin.py:45
 msgid "France"
 msgstr ""
 
+#: plugin.py:43
 msgid "Germany"
 msgstr ""
 
+#: plugin.py:902
 #, python-format
 msgid ""
 "Incoming Call on %s from\n"
@@ -107,106 +129,139 @@ msgid ""
 "---------------------------------------------"
 msgstr ""
 
+#: plugin.py:46
 msgid "Italy"
 msgstr ""
 
+#: plugin.py:852
 msgid "Last 10 calls:\n"
 msgstr ""
 
+#: plugin.py:100
 msgid "Media directory"
 msgstr ""
 
 #. TRANSLATORS: this is a window title.
+#: plugin.py:742
 msgid "NCID Client - Setup"
 msgstr ""
 
+#: plugin.py:756
 msgid "NCID server (Name or IP)"
 msgstr ""
 
+#: plugin.py:757
 msgid "NCID server listening port (1-65535)"
 msgstr ""
 
+#: plugin.py:614
 msgid "Name"
 msgstr ""
 
+#: plugin.py:106
 msgid "Network mount"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
+#: plugin.py:464
 msgid "New"
 msgstr ""
 
+#: plugin.py:546 plugin.py:563 plugin.py:655
 msgid "No entry selected"
 msgstr ""
 
+#: plugin.py:821
 msgid "No phonebook"
 msgstr ""
 
+#: plugin.py:615
 msgid "Number"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
+#: plugin.py:599 plugin.py:723
 msgid "OK"
 msgstr ""
 
+#: plugin.py:784
 msgid "PhoneBook Location"
 msgstr ""
 
 #. TRANSLATORS: this is a window title.
+#: plugin.py:488
 msgid "Phonebook"
 msgstr ""
 
+#: plugin.py:819
 msgid "Plugin not active"
 msgstr ""
 
+#: plugin.py:764
 msgid "Reverse Lookup Caller ID (select country below)"
 msgstr ""
 
 #. TRANSLATORS: keep it short, this is a button
+#: plugin.py:468
 msgid "Search"
 msgstr ""
 
+#: plugin.py:664
 msgid "Search phonebook"
 msgstr ""
 
+#: plugin.py:759
 msgid "Show after Standby"
 msgstr ""
 
+#: plugin.py:789
 msgid "Show connection information popups"
 msgstr ""
 
+#: plugin.py:788
 msgid "Strip Leading 0"
 msgstr ""
 
+#: plugin.py:47
 msgid "Switzerland"
 msgstr ""
 
+#: plugin.py:44
 msgid "The Netherlands"
 msgstr ""
 
+#: plugin.py:763
 msgid "Timeout for Call Notifications (seconds)"
 msgstr ""
 
+#: plugin.py:860 plugin.py:863 plugin.py:969 plugin.py:1024
 msgid "UNKNOWN"
 msgstr ""
 
+#: plugin.py:95
 msgid "USB Device"
 msgstr ""
 
+#: plugin.py:768
 msgid "Use internal PhoneBook"
 msgstr ""
 
+#: plugin.py:849
 msgid "no calls"
 msgstr ""
 
+#: plugin.py:1036
 msgid "number suppressed"
 msgstr ""
 
+#: plugin.py:116
 msgid "show as list"
 msgstr ""
 
+#: plugin.py:116
 msgid "show each call"
 msgstr ""
 
+#: plugin.py:116
 msgid "show nothing"
 msgstr ""

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eParted(POT)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2017-07-10 15:15+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
@@ -17,76 +17,99 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
+#: eparted.py:325
 msgid "End"
 msgstr "Pabaiga"
 
+#: eparted.py:107
 #, python-format
 msgid "Error command '%s'"
 msgstr "Klaida komandoje '%s'"
 
+#: eparted.py:323
 msgid "Nr"
 msgstr "Nr."
 
+#: eparted.py:608
 msgid "Please Wait"
 msgstr "Palaukite"
 
+#: eparted.py:326
 msgid "Size"
 msgstr "Dydis"
 
+#: eparted.py:324 eparted.py:534
 msgid "Start"
 msgstr "Pradėti"
 
+#: eparted.py:327
 msgid "Type"
 msgstr "Tipas"
 
+#: eparted.py:340
 msgid "add"
 msgstr "pridėti"
 
+#: eparted.py:202
 msgid "add partition"
 msgstr "pridėti skaidinį"
 
+#: eparted.py:230
 msgid "cancel"
 msgstr "atšaukti"
 
+#: eparted.py:442
 #, python-format
 msgid "create partition %s"
 msgstr "sukurti skaidinį %s"
 
+#: plugin.py:13
 msgid "creating and manipulating partition tables"
 msgstr "kurti ir manipuliuoti skaidinių lenteles"
 
+#: eparted.py:345
 msgid "delete"
 msgstr "šalinti"
 
+#: eparted.py:467
 #, python-format
 msgid "delete partition %s"
 msgstr "šalinti skaidinį %s"
 
+#: plugin.py:13
 msgid "eParted"
 msgstr "eParted"
 
+#: eparted.py:499 eparted.py:532
 msgid "execute"
 msgstr "vykdyti"
 
+#: eparted.py:227
 msgid "filesystem:"
 msgstr "failų sistema :"
 
+#: eparted.py:350
 msgid "free"
 msgstr "laisva"
 
+#: eparted.py:458
 #, python-format
 msgid "make filesystem '%s' on partition %s (%d %s)"
 msgstr "sukurti failų sistemą '%s' skaidinyje %s (%d %s)"
 
+#: eparted.py:231
 msgid "ok"
 msgstr "gerai"
 
+#: eparted.py:183
 msgid "partition(s)"
 msgstr "skaidinys(iai)"
 
+#: eparted.py:594 eparted.py:600
 msgid "quit"
 msgstr "baigti"
 
+#: eparted.py:226
 #, python-format
 msgid "size in %s (max %d %s):"
 msgstr "Dydis %s (maks. %d %s):"

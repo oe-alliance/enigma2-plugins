@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EPGRefresh\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-17 15:22+0200\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2017-07-10 15:43+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
@@ -18,71 +18,94 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
+#: EPGRefresh.py:568
 #, python-format
 msgid "%d more services"
 msgstr "dar %d kanalų."
 
+#: EPGRefreshConfiguration.py:186
 msgid "After a successful refresh the AutoTimer will automatically search for new matches if this is enabled. The options 'Ask*' has only affect on a manually refresh. If EPG-Refresh was called in background the default-Answer will be executed!"
 msgstr "Jei čia įjungta, po sėkmingo atnaujinimo, autolaikmatis automatiškai ieškos naujų atitikimų. Funkcijos 'klausti*' įtakos tik rankinio atnaujinimo atveju. Jei EPG atnaujinimas vyko fone, bus vykdomas numatytasis atsakymas!"
 
+#: EPGRefreshConfiguration.py:164
 msgid "An automated refresh will start after this time of day, but before the time specified in next setting."
 msgstr "Autoatnaujinimas prasidės po šio dienos laiko, bet iki laiko, nurodyto sekančiame nustatyme."
 
+#: EPGRefreshConfiguration.py:165
 msgid "An automated refresh will start before this time of day, but after the time specified in previous setting."
 msgstr "Autoatnaujinimas prasidės iki šio laiko, bet po laiko, nurodyto ankstesniame nustatyme."
 
+#: plugin.py:56
 msgid "Ask default No"
 msgstr "Klausti, numatytasis 'ne'"
 
+#: plugin.py:55
 msgid "Ask default Yes"
 msgstr "Klausti, numatytasis 'taip'"
 
+#: EPGRefresh.py:425
 #, python-format
 msgid "AutoTimer failed with error %s"
 msgstr "Autolaikmatis atsakė, klaida %s"
 
+#: plugin.py:267 plugin.py:271 plugin.py:342
 msgid "Automatically refresh EPG"
 msgstr "Automatiškai atnaujinti EPG"
 
+#: plugin.py:44 plugin.py:54
 msgid "Background only"
 msgstr "Tik fone"
 
+#: EPGRefreshChannelEditor.py:73
 msgid "Bouquets"
 msgstr "Bukietai"
 
+#: EPGRefreshChannelEditor.py:82 EPGRefreshConfiguration.py:47
+#: EPGRefreshConfiguration.py:64 EPGRefreshConfiguration.py:112
 msgid "Cancel"
 msgstr "Atšaukti"
 
+#: EPGRefreshChannelEditor.py:72
 msgid "Channels"
 msgstr "Kanalai"
 
+#: EPGRefreshConfiguration.py:144
 msgid "Close and forget changes"
 msgstr "Uždaryti ir atmesti pakeitimus"
 
+#: EPGRefreshConfiguration.py:145
 msgid "Close and save changes"
 msgstr "Uždaryti, išsaugant pakeitimus"
 
+#: EPGRefreshConfiguration.py:166
 msgid "Delay if not in standby (minutes)"
 msgstr "Delsa, jei ne budėjimo būsenoje (min.)"
 
+#: EPGRefreshChannelEditor.py:84
 msgid "Delete"
 msgstr "šalinti"
 
+#: EPGRefreshConfiguration.py:169
 msgid "Display more Options"
 msgstr "Rodyti daugiau parinkčių"
 
+#: EPGRefreshConfiguration.py:163
 msgid "Duration to stay on service (seconds)"
 msgstr "Veikimo užlaikymo trukmė (sek.)"
 
+#: EPGRefreshConfiguration.py:164
 msgid "EPG refresh auto-start earliest (hh:mm)"
 msgstr "Ankstyviausias EPG atnaujinimo autopaleidimas (hh:mm)"
 
+#: EPGRefreshConfiguration.py:165
 msgid "EPG refresh auto-start latest (hh:mm)"
 msgstr "Vėliausias EPG atnaujinimo autopaleidimas (hh:mm)"
 
+#: EPGRefresh.py:448 PipAdapter.py:84
 msgid "EPG refresh finished."
 msgstr "EPG atnaujinimas baigtas."
 
+#: EPGRefresh.py:384
 msgid ""
 "EPG refresh finished.\n"
 "Should AutoTimer be search for new matches?"
@@ -90,228 +113,300 @@ msgstr ""
 "EPG atnaujinimas baigtas.\n"
 "Ar autolaikmačiui ieškoti naujų atitikimų?"
 
+#: PipAdapter.py:34 RecordAdapter.py:32
 msgid "EPG refresh started in background."
 msgstr "EPG atnaujinimas pradėtas fone."
 
+#: MainPictureAdapter.py:23
 msgid "EPG refresh starts scanning channels."
 msgstr "EPG atnaujinimas pradeda skenuoti kanalus."
 
+#: plugin.py:270
 #, fuzzy
 msgid "EPG-Refresh_Pending Services"
 msgstr "EPG atnaujinimo kanalai"
 
+#: plugin.py:268
 #, fuzzy
 msgid "EPG-Refresh_Refresh now"
 msgstr "EPG atnaujinimo kanalai"
 
+#: plugin.py:267
 #, fuzzy
 msgid "EPG-Refresh_SetUp"
 msgstr "EPG atnaujinimo kanalai"
 
+#: plugin.py:269
 #, fuzzy
 msgid "EPG-Refresh_Stop Refresh"
 msgstr "EPG atnaujinimo kanalai"
 
+#: plugin.py:115
 msgid "EPGREFRESH_NOTIFICATION_DOMAIN"
 msgstr "EPG ATNAUJINIMO PRANEŠIMO DOMENAS"
 
+#: plugin.py:271 plugin.py:311 plugin.py:341
 #, fuzzy
 msgid "EPGRefresh"
 msgstr "įtraukti į EPG atnaujinimą"
 
+#: EPGRefreshConfiguration.py:95 EPGRefreshConfiguration.py:201
 msgid "EPGRefresh Configuration"
 msgstr "EPG atnaujinimo konfigūravimas"
 
+#: EPGRefreshConfiguration.py:49
 msgid "EPGRefresh Configuration Help"
 msgstr "EPG atnaujinimo konfigūravimo pagalba"
 
+#: EPGRefreshConfiguration.py:66
 msgid "EPGRefresh Functions"
 msgstr "EPG atnaujinimo funkcijos"
 
+#: EPGRefreshChannelEditor.py:62
 msgid "EPGRefresh Services"
 msgstr "EPG atnaujinimo kanalai"
 
+#: EPGRefreshConfiguration.py:115 EPGRefreshConfiguration.py:123
 msgid "Edit Services"
 msgstr "Redaguoti kanalus"
 
+#: EPGRefreshChannelEditor.py:103
 msgid "Edit Services to refresh"
 msgstr "Redaguoti atnaujintinus kanalus"
 
+#: EPGRefreshChannelEditor.py:123
 msgid "Editing"
 msgstr "Redagavimas"
 
+#: EPGRefreshConfiguration.py:180
 msgid "Enable this item to flush all EPG data before starting a new EPG refresh cycle"
 msgstr ""
 
+#: EPGRefreshConfiguration.py:174
 msgid "Enable this to be able to access the EPGRefresh configuration from within the extension menu."
 msgstr "Kai čia įjungta, turėsite prieigą prie EPG atnaujinimo konfigūravimo iš plėtinių naršyklės."
 
+#: EPGRefreshConfiguration.py:173
 #, fuzzy
 msgid "Enable this to be able to access the EPGRefresh configuration from within the plugin menu."
 msgstr "Kai čia įjungta, turėsite prieigą prie EPG atnaujinimo konfigūravimo iš plėtinių naršyklės."
 
+#: EPGRefreshConfiguration.py:175
 msgid "Enable this to be able to start the EPGRefresh from within the extension menu."
 msgstr "Kai čia įjungta, turėsite galimybę pradėti EPG atnaujinimą iš plėtinių lango."
 
+#: EPGRefreshConfiguration.py:185
 msgid "Extend the list of services to refresh by those your AutoTimers use?"
 msgstr "Ar išplėsti atnaujintinų kanalų sąrašą naudojamais autolaikmačio?"
 
+#: plugin.py:66
 msgid "Fake recording"
 msgstr "Netikras įrašymas"
 
+#: EPGRefreshConfiguration.py:180
 msgid "Flush EPG before refresh"
 msgstr ""
 
+#: EPGRefresh.py:569
 msgid "Following Services have to be scanned:"
 msgstr "Šie kanalai, turi būti patikrinti:"
 
+#: EPGRefreshConfiguration.py:178
 msgid "Force scan even if receiver is in use."
 msgstr "Paleisti skenavimą, net jei imtuvas užimtas"
 
+#: plugin.py:45
 msgid "Foreground also"
 msgstr "Ir pirmąjame plane"
 
+#: EPGRefreshConfiguration.py:114
 msgid "Functions"
 msgstr "Funkcijos"
 
+#: EPGRefreshConfiguration.py:45
 msgid "General Help"
 msgstr "Bendroji pagalba"
 
+#: EPGRefreshConfiguration.py:166
 msgid "If the receiver currently isn't in standby, this is the duration which EPGRefresh will wait before retry."
 msgstr "Jei imtuvas dabar ne budėjimo būsenoje, tai yra trukmė, kiek EPG atnaujinimas lauks prieš kartojimą."
 
+#: EPGRefreshConfiguration.py:177
 msgid "If this is enabled, the plugin will wake up the receiver from standby if possible. Otherwise it needs to be switched on already."
 msgstr "Kai čia įjungta, įskiepis prižadins imtuvą, jei įmanoma, iš išjungtos būsenos. Kitaip, jis turi būti įjungtas iš anksto."
 
+#: EPGRefreshConfiguration.py:168
 msgid "If you want to refresh the EPG in background, you can choose the method which best suits your needs here, e.g. hidden, fake reocrding or regular Picture in Picture."
 msgstr "Jei norite atnaujinti EPG fone, čia galite pasirinkti geriausiai jūsų poreikius atitinkantį metodą, t.y. slaptą, netikrą įrašymą, ar įprastą vaizdą vaizde."
 
+#: EPGRefreshConfiguration.py:185
 msgid "Inherit Services from AutoTimer"
 msgstr "Perimti kanalus iš autolaikmačio"
 
+#: EPGRefreshConfiguration.py:46
 msgid "Key Help"
 msgstr "Mygtukų pagalba"
 
+#: EPGRefreshConfiguration.py:338
 #, python-format
 msgid "Last refresh was %s"
 msgstr "Paskutinis atnaujinimas buvo %s"
 
+#: plugin.py:61
 msgid "Main Picture"
 msgstr "Pagrindinis vaizdas"
 
+#: EPGRefreshConfiguration.py:134
 msgid "Move page down"
 msgstr "Puslapiu žemyn"
 
+#: EPGRefreshConfiguration.py:133
 msgid "Move page up"
 msgstr "Puslapiu aukštyn"
 
+#: EPGRefreshChannelEditor.py:85
 msgid "New"
 msgstr "Naujas"
 
+#: plugin.py:53
 msgid "No"
 msgstr "ne"
 
+#: EPGRefreshChannelEditor.py:83 EPGRefreshConfiguration.py:113
 msgid "OK"
 msgstr "Gerai"
 
+#: EPGRefreshConfiguration.py:61
 msgid "Pending Services"
 msgstr "Laukia kanalai"
 
+#: PipAdapter.py:84
 msgid "PiP available now."
 msgstr "PiP dabar galimas."
 
+#: plugin.py:63
 msgid "Picture in Picture"
 msgstr "Vaizdas vaizde (PIP)"
 
+#: plugin.py:64
 msgid "Picture in Picture (hidden)"
 msgstr "Vaizdas vaizde (paslėptas)"
 
+#: PipAdapter.py:34
 msgid "Please don't use PiP meanwhile!"
 msgstr "Kol kas nenaudokite PiP!"
 
+#: EPGRefreshConfiguration.py:354
 msgid "Really close without saving settings?"
 msgstr "Tikrai uždaryti neišsaugant nustatymų?"
 
+#: EPGRefreshConfiguration.py:161
 msgid "Refresh EPG automatically"
 msgstr "EPG atnaujinti automatiškai"
 
+#: EPGRefreshConfiguration.py:168
 msgid "Refresh EPG using"
 msgstr "Atnaujinti EPG, naudojant"
 
+#: EPGRefreshConfiguration.py:63
 msgid "Refresh now"
 msgstr "Atnaujinti dabar"
 
+#: EPGRefreshChannelEditor.py:132 EPGRefreshChannelEditor.py:180
 #, fuzzy
 msgid "Refresh using"
 msgstr "Atnaujinama"
 
+#: EPGRefreshConfiguration.py:186
 msgid "Run AutoTimer after refresh"
 msgstr "Paleisti autolaikmatį po atnaujinimo"
 
+#: EPGRefreshChannelEditor.py:173
 msgid "Select bouquet to refresh"
 msgstr "Pasirinkite bukietą atnaujinimui"
 
+#: EPGRefreshChannelEditor.py:167
 msgid "Select channel to refresh"
 msgstr "Pasirinkite kanalą atnaujinimui"
 
+#: EPGRefreshConfiguration.py:172
 msgid "Should protected services be skipped if refresh was started in interactive-mode?"
 msgstr "Ar praleisti apsaugotus kanalus, jei atnaujinimas vyksta interaktyviame režime?"
 
+#: EPGRefreshConfiguration.py:175
 msgid "Show 'EPGRefresh Start now' in extension menu."
 msgstr "Rodyti 'EPG atnaujinti dabar' plėtinių naršyklėje"
 
+#: EPGRefreshConfiguration.py:169
 msgid "Show Advanced Options"
 msgstr "Rodyti išplėstines parinktis"
 
+#: EPGRefreshConfiguration.py:174
 msgid "Show Setup in extension menu"
 msgstr "Rodyti plėtinių naršyklėje"
 
+#: EPGRefreshConfiguration.py:173
 #, fuzzy
 msgid "Show Setup in plugins"
 msgstr "Rodyti plėtinių naršyklėje"
 
+#: EPGRefreshConfiguration.py:128
 msgid "Show last EPGRefresh - Time"
 msgstr "Rodyti paskutinį EPG atnaujinimo laiką"
 
+#: EPGRefreshConfiguration.py:122
 msgid "Show more Functions"
 msgstr "Rodyti daugiau funkcijų"
 
+#: EPGRefreshConfiguration.py:176
 msgid "Show popup when refresh starts and ends."
 msgstr "Rodyti iškylantį pranešimą, kai atnaujinimas prasideda ir baigiasi"
 
+#: plugin.py:270
 msgid "Show the pending Services for refresh"
 msgstr "Rodyti atnaujintinus kanalus"
 
+#: EPGRefreshConfiguration.py:179
 msgid "Shutdown after EPG refresh."
 msgstr "Po EPG atnaujinimo, išjungti"
 
+#: EPGRefreshConfiguration.py:172
 msgid "Skip protected Services"
 msgstr "Praleisti apsaugotus kanalus"
 
+#: plugin.py:268
 msgid "Start EPGrefresh immediately"
 msgstr "Atnaujinti EPG dabar pat"
 
+#: plugin.py:269
 msgid "Stop Running EPG-refresh"
 msgstr "Nutraukti EPG atnaujinimą"
 
+#: EPGRefreshConfiguration.py:60
 msgid "Stop running refresh"
 msgstr "Nutraukti atnaujinimą"
 
+#: EPGRefresh.py:291
 msgid "There is still a refresh running. The Operation isn't allowed at this moment."
 msgstr "Veiksmas šiuo metu negalimas - vis dar vyksta atnaujinimas."
 
+#: EPGRefreshConfiguration.py:163
 msgid "This is the duration each service/channel will stay active during a refresh."
 msgstr "Tai trukmė, kiek kiekviena paslauga, kanalas atnaujinimo metu išliks aktyvūs."
 
+#: EPGRefreshConfiguration.py:176
 msgid "This setting controls whether or not an informational message will be shown at start and completion of refresh."
 msgstr "Šis parametras nustato, ar bus rodomi informaciniai pranešimai atnaujinimo pradžioje ir pabaigoje."
 
+#: EPGRefreshConfiguration.py:178
 msgid "This setting controls whether or not the refresh will be initiated even though the receiver is active (either not in standby or currently recording)."
 msgstr "Šis parametras nustato, bus pradedamas naujinimas, ar ne, netgi jei imtuvas veikia (arba ne budėjimo, ar įrašymo būsenoje)."
 
+#: EPGRefreshConfiguration.py:179
 msgid "This setting controls whether the receiver should be set to standby after refresh is completed."
 msgstr "Šis parametras nustato, ar po atnaujinimo pabaigos imtuvas bus pervestas į budėjimo režimą."
 
+#: plugin.py:226
 msgid ""
 "To apply your Changes the GUI has to be restarted.\n"
 "Do you want to restart the GUI now?"
@@ -319,20 +414,26 @@ msgstr ""
 "Pakeitimams įsigalioti, grafinę aplinką reikia\n"
 "paleisti iš naujo. Paleisti iš naujo dabar?"
 
+#: EPGRefreshConfiguration.py:161
 msgid "Unless this is enabled, EPGRefresh won't automatically run but needs to be explicitly started by the yellow button in this menu."
 msgstr "Kol čia neįjungta, EPG atnaujinimas nepasileis automatiškai, bet turi būti paleistas tiesiogiai, paspaudus 'GELTONĄ' šio meniu mygtuką."
 
+#: EPGRefreshConfiguration.py:201
 msgid "Version"
 msgstr "Versija"
 
+#: EPGRefreshConfiguration.py:177
 msgid "Wake up from standby for EPG refresh."
 msgstr "Prižadinti EPG atnaujinimui"
 
+#: plugin.py:52
 msgid "Yes"
 msgstr "taip"
 
+#: plugin.py:335
 msgid "add to EPGRefresh"
 msgstr "įtraukti į EPG atnaujinimą"
 
+#: EPGRefreshConfiguration.py:334
 msgid "never"
 msgstr "niekada"

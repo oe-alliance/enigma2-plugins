@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.0.0 SerienFilm\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2017-07-11 08:17+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
@@ -13,19 +13,24 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 2.0.2\n"
 
+#: MovieSelection.py:264
 msgid "All"
 msgstr "Visi"
 
+#: SerienFilm.py:65
 msgid "Cancel"
 msgstr "Atšaukti"
 
+#: MovieSelection.py:194
 msgid "Delete failed!"
 msgstr "Pašalinti nepavyko!"
 
+#: MovieSelection.py:479
 #, python-format
 msgid "Directory %s nonexistent."
 msgstr "Katalogo %s nėra."
 
+#: MovieSelection.py:166
 #, python-format
 msgid ""
 "Do you really want to delete %s\n"
@@ -34,77 +39,102 @@ msgstr ""
 "Jūs tikrai norite pašalinti %s\n"
 "%s?"
 
+#: SerienFilm.py:65
 msgid "Edit"
 msgstr "Redaguoti"
 
+#: SerienFilm.py:59
 msgid "Exit"
 msgstr "Uždaryti"
 
+#: MovieSelection.py:522
 msgid "No tags are set on these movies."
 msgstr "Jokios žymos šiems filmams nenustatytos."
 
+#: MovieSelection.py:519
 msgid "Please select tag to filter..."
 msgstr "Pasirinkite žymą filtravimui..."
 
+#: MovieSelection.py:463
 msgid "Please select the movie path..."
 msgstr "Pasirinkite kelią į filmus..."
 
+#: MovieSelection.py:239
 msgid "Please wait... Loading list..."
 msgstr "Palaukite... Įkeliamas sąrašas..."
 
+#: SerienFilm.py:90
 msgid "Really close without saving settings?"
 msgstr "Ar tikrai uždaryti langą neišsaugant nuostatų?"
 
+#: MovieSelection.py:445
 msgid "Recorded files..."
 msgstr "Įrašyti failai..."
 
+#: SerienFilm.py:65
 msgid "Save"
 msgstr "Išsaugoti"
 
+#: MovieSelection.py:406
 msgid "Tag 1"
 msgstr "Žymė 1"
 
+#: MovieSelection.py:411
 msgid "Tag 2"
 msgstr "Žymė 2"
 
+#: MovieSelection.py:418
 msgid "Tags"
 msgstr "Žymės"
 
+#: MovieSelection.py:168
 msgid "You cannot delete this!"
 msgstr "Jūs negalite to ištrinti!"
 
+#: MovieSelection.py:74
 msgid "delete..."
 msgstr "ištrinti..."
 
+#: MovieSelection.py:293
 msgid "exit movielist"
 msgstr "uždaryti filmų sąrašą"
 
+#: plugin.py:119
 msgid "group movies of a series to virtual directories"
 msgstr "sugrupuoja filmus pagal serijas į virtualius katalogus"
 
+#: MovieSelection.py:279
 msgid "menu"
 msgstr "meniu"
 
+#: MovieSelection.py:294
 msgid "select movie"
 msgstr "pasirinkite filmą"
 
+#: MovieSelection.py:274
 msgid "select the movie path"
 msgstr "pasirinkite kelią į filmą"
 
+#: MovieSelection.py:285
 msgid "show all"
 msgstr "rodyti viską"
 
+#: MovieSelection.py:280
 msgid "show event details"
 msgstr "rodyti įvykio detales"
 
+#: MovieSelection.py:286
 msgid "show first selected tag"
 msgstr "rodyti pirmą pasirinktą žymą"
 
+#: MovieSelection.py:287
 msgid "show second selected tag"
 msgstr "rodyti antrą pasirinktą žymą"
 
+#: MovieSelection.py:288
 msgid "show tag menu"
 msgstr "rodyti žymų meniu"
 
+#: MovieSelection.py:150
 msgid "this recording"
 msgstr "šis įrašas"

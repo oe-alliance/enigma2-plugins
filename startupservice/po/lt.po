@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2017-07-11 09:19+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: \n"
@@ -13,23 +13,30 @@ msgstr ""
 "X-Generator: Poedit 2.0.2\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
+#: plugin.py:164
 msgid "If you see this message, please switch to the service you want to mark as startservice and try again."
 msgstr "Jei matote šį pranešimą, įjunkite kanalą, kurį norite pažymėti, kaip pradinį ir bandykite dar kartą."
 
+#: plugin.py:126
 msgid "reset startup service"
 msgstr "atšaukti nustatytą paleisties kanalą"
 
+#: plugin.py:137
 msgid "reset startup service for booting..."
 msgstr "atšaukti nustatytą paleisties kanalą po paleidimo..."
 
+#: plugin.py:138
 msgid "reset startup service for leaving standby mode..."
 msgstr "atšaukti nustatytą paleisties kanalą po budėjimo..."
 
+#: plugin.py:125
 msgid "set as startup service"
 msgstr "nustatyti, kaip paleisties kanalą"
 
+#: plugin.py:132
 msgid "set as startup service after booting..."
 msgstr "pasirinkti paleisties kanalu po paleidimo..."
 
+#: plugin.py:133
 msgid "set as startup service after leaving standby mode..."
 msgstr "pasirinkti paleisties kanalu po budėjimo..."

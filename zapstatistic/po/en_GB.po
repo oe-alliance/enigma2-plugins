@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2012-03-16 16:37+0100\n"
 "Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
@@ -17,65 +17,86 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: plugin.py:618
 msgid "Close plugin"
 msgstr "Close plugin"
 
+#: plugin.py:464
 msgid "Delete"
 msgstr "Delete"
 
+#: plugin.py:604
 msgid "Delete all entries"
 msgstr "Delete all entries"
 
+#: plugin.py:602
 msgid "Delete entry"
 msgstr "Delete entry"
 
+#: plugin.py:467
 msgid "Durations"
 msgstr "Durations"
 
+#: plugin.py:600
 msgid "Play entry"
 msgstr "Play entry"
 
+#: plugin.py:620
 msgid "Please choose a function..."
 msgstr "Please choose a function..."
 
+#: plugin.py:616
 msgid "Show combined duration window"
 msgstr "Show combined duration window"
 
+#: plugin.py:614
 msgid "Show duration window"
 msgstr "Show duration window"
 
+#: plugin.py:653
 msgid "Shows the watched services with some statistic"
 msgstr "Shows the watched services with some statistic"
 
+#: plugin.py:486
 msgid "Sort (date+)"
 msgstr "Sort (date+)"
 
+#: plugin.py:490 plugin.py:577
 msgid "Sort (date-)"
 msgstr "Sort (date-)"
 
+#: plugin.py:252 plugin.py:355
 msgid "Sort (duration+)"
 msgstr "Sort (duration+)"
 
+#: plugin.py:253 plugin.py:356
 msgid "Sort (duration-)"
 msgstr "Sort (duration-)"
 
+#: plugin.py:250 plugin.py:353 plugin.py:485
 msgid "Sort (name+)"
 msgstr "Sort (name+)"
 
+#: plugin.py:251 plugin.py:354 plugin.py:488 plugin.py:562
 msgid "Sort (name-)"
 msgstr "Sort (name-)"
 
+#: plugin.py:610
 msgid "Sort by date (ascending)"
 msgstr "Sort by date (ascending)"
 
+#: plugin.py:612
 msgid "Sort by date (descending)"
 msgstr "Sort by date (descending)"
 
+#: plugin.py:606
 msgid "Sort by name (ascending)"
 msgstr "Sort by name (ascending)"
 
+#: plugin.py:608
 msgid "Sort by name (descending)"
 msgstr "Sort by name (descending)"
 
+#: plugin.py:243 plugin.py:345 plugin.py:455 plugin.py:653
 msgid "Zap Statistic"
 msgstr "Zap Statistic"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2022-05-24 16:54+0200\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: none\n"
@@ -18,81 +18,107 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
+#: CurlyTxSettings.py:92
 msgid "Add new page"
 msgstr "Voeg nieuwe pagina toe"
 
+#: CurlyTxSettings.py:51 CurlyTxSettings.py:210
 msgid "Cancel"
 msgstr "Annuleer"
 
+#: CurlyTx.py:105 CurlyTx.py:108
 msgid "Close window"
 msgstr "Sluit venster"
 
+#: CurlyTxSettings.py:70
 msgid "Default page"
 msgstr "Standaard pagina"
 
+#: CurlyTxSettings.py:54
 msgid "Delete"
 msgstr "Verwijder"
 
+#: CurlyTxSettings.py:95
 msgid "Delete selected page"
 msgstr "Verwijder geselecteerde pagina"
 
+#: CurlyTxSettings.py:80
 msgid "Dismiss all setting changes"
 msgstr "Annuleer alle veranderde instellingen"
 
+#: CurlyTxSettings.py:86
 msgid "Edit selected page"
 msgstr "Bewrk geselecteerde pagina"
 
+#: CurlyTx.py:199
 msgid "Error fetching URL:"
 msgstr "Fout bij binnenhalen URL:"
 
+#: CurlyTxSettings.py:175
 msgid "Error loading page feed:"
 msgstr "Fout bij laden pagina feed:"
 
+#: CurlyTxSettings.py:224
 msgid "Font size"
 msgstr "Lettergrootte"
 
+#: CurlyTx.py:204
 msgid "Go and add a page in the settings"
 msgstr "Voef een pagina toe in de instellingen"
 
+#: CurlyTx.py:212
 msgid "HTTP response headers for"
 msgstr "HTTP antwoord koppen voor"
 
+#: CurlyTx.py:170
 msgid "Invalid page"
 msgstr "Ongeldige pagina"
 
+#: CurlyTxSettings.py:89
 msgid "Load pages from feed"
 msgstr "Laad pagina's van de feed"
 
+#: CurlyTx.py:185
 msgid "Loading ..."
 msgstr "Bezig met laden..."
 
+#: CurlyTxSettings.py:73
 msgid "Menu title"
 msgstr "Menu titel"
 
+#: CurlyTxSettings.py:53
 msgid "New"
 msgstr "Nieuw"
 
+#: CurlyTx.py:56 CurlyTx.py:126
 msgid "Next"
 msgstr "Volgende"
 
+#: CurlyTxSettings.py:145
 msgid "No page feed URL defined"
 msgstr "Geen pagina feed URL gedefinieerd"
 
+#: CurlyTxSettings.py:52 CurlyTxSettings.py:211
 msgid "OK"
 msgstr "OK"
 
+#: CurlyTxSettings.py:222
 msgid "Page URL"
 msgstr "Pagina URL"
 
+#: CurlyTxSettings.py:74
 msgid "Page feed URL"
 msgstr "Pagina feed URL"
 
+#: CurlyTxSettings.py:66
 msgid "Page:"
 msgstr "Pagina:"
 
+#: CurlyTx.py:55 CurlyTx.py:125
 msgid "Prev"
 msgstr "Vorige"
 
+#: CurlyTxSettings.py:112
 msgid ""
 "Really delete this page?\n"
 "It cannot be recovered!"
@@ -100,47 +126,62 @@ msgstr ""
 "Deze pagina echt verwijderen?\n"
 "Dit kan niet ongedaan worden gemaakt!"
 
+#: CurlyTx.py:54 CurlyTx.py:120 CurlyTx.py:124
 msgid "Reload"
 msgstr "Herlaad"
 
+#: CurlyTx.py:96
 msgid "Reload current page URL"
 msgstr "Herlaad huidige pagina URL"
 
+#: CurlyTxSettings.py:83
 msgid "Save settings and close screen"
 msgstr "Sla instellingen op en sluit scherm"
 
+#: CurlyTx.py:87
 msgid "Scroll page contents down"
 msgstr "Scoll pagina omhoog"
 
+#: CurlyTx.py:84
 msgid "Scroll page contents up"
 msgstr "Scroll pagina omlaag"
 
+#: CurlyTx.py:53 CurlyTxSettings.py:40
 msgid "Settings"
 msgstr "Instellingen"
 
+#: CurlyTx.py:90
 msgid "Show HTTP response headers"
 msgstr "Toon HTTP antwoord koppen"
 
+#: CurlyTxSettings.py:72
 msgid "Show in extensions menu"
 msgstr "Toon in extensies"
 
+#: CurlyTxSettings.py:71
 msgid "Show in main menu"
 msgstr "Toon in hoofdmen"
 
+#: CurlyTx.py:93
 msgid "Show program settings"
 msgstr "Toon in programma-instellingen"
 
+#: CurlyTx.py:111
 msgid "Show this help screen"
 msgstr "Toon dit helpscherm"
 
+#: CurlyTx.py:99
 msgid "Switch to next configured page URL"
 msgstr "Ga naar de volgende geconfigureerde pagina URL"
 
+#: CurlyTx.py:102
 msgid "Switch to previous configured page URL"
 msgstr "Ga naar de voorheen geconfigureerde pagina URL"
 
+#: CurlyTxSettings.py:223
 msgid "Title"
 msgstr "Title"
 
+#: plugin.py:38 plugin.py:45
 msgid "View remote text files"
 msgstr "Bekijk remote tekstbestanden"

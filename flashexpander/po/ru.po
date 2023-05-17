@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-03 21:51+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2013-05-05 13:49+0100\n"
 "Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
 "Language-Team: RU locale by Sowa\n"
@@ -18,10 +18,12 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 1.5.5\n"
 
+#: flashexpander.py:76
 #, python-format
 msgid "... is used, %dMB free"
 msgstr "... занято, %dМБ свободно"
 
+#: flashexpander.py:154
 #, python-format
 msgid ""
 "Are you sure want to create FlashExpander on\n"
@@ -32,6 +34,7 @@ msgstr ""
 "%s\n"
 "Раздел %d"
 
+#: flashexpander.py:157
 #, python-format
 msgid ""
 "Are you sure want to create FlashExpander on \n"
@@ -42,43 +45,56 @@ msgstr ""
 "Сервер: %s\n"
 "Путь: %s"
 
+#: flashexpander.py:300
 msgid "Do you want to reboot your STB_BOX?"
 msgstr "Вы хотите перезагрузить STB_BOX?"
 
+#: plugin.py:13
 msgid "FlashExpander"
 msgstr "FlashExpander"
 
+#: flashexpander.py:79
 msgid "FlashExpander is not installed, create? Press Key OK."
 msgstr "FlashExpander ещё не создан, создать? Нажмите кнопку ОК."
 
+#: flashexpander.py:256
 #, python-format
 msgid "Mount failed (%s)"
 msgstr "Монтирование не удалось (%s)"
 
+#: flashexpander.py:145
 msgid "No HDD-, SSD- or USB-Device found. Please first initialized."
 msgstr "Не найдено HDD, SSD или USB-устройств. Пожалуйста, сначала проинициализруйте."
 
+#: flashexpander.py:244
 msgid "Please wait, Flash memory will be copied."
 msgstr "Пожалуйста, подождите, идет копирование флэш-памяти ."
 
+#: flashexpander.py:259
 msgid "Too little free space < 180MB or wrong Filesystem!"
 msgstr "Слишком мало свободного места < 180МБ или не подходящая файловая систеа!"
 
+#: flashexpander.py:104
 msgid "choose device to FlashExpander"
 msgstr "выбор устройства для FlashExpander"
 
+#: flashexpander.py:302
 #, python-format
 msgid "error adding fstab entry for: %s"
 msgstr "ошибка при добавлении записи в fstab для: %s"
 
+#: flashexpander.py:305
 msgid "error copy flash memory"
 msgstr "ошибка при копировании флэш-памяти"
 
+#: plugin.py:13
 msgid "extend your flash memory"
 msgstr "расширяет флэш-память"
 
+#: flashexpander.py:211
 msgid "read UUID"
 msgstr "читать UUID"
 
+#: flashexpander.py:128
 msgid "unknown"
 msgstr "неизвестно"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 EPGSearch plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2014-11-22 20:47+0100\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
 "Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
@@ -14,226 +14,297 @@ msgstr ""
 "X-Poedit-Country: TURKEY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#: EPGSearch.py:335
 #, python-format
 msgid " (%d min)"
 msgstr ""
 
+#: EPGSearch.py:341
 #, python-format
 msgid " (%s%d min)"
 msgstr ""
 
+#: EPGSearchSetup.py:47
 msgid "Add \"Search event in EPG\" to channel menu"
 msgstr ""
 
+#: EPGSearchSetup.py:46
 msgid "Add \"Search event in EPG\" to event menu"
 msgstr ""
 
+#: EPGSearchSetup.py:41
 msgid "Add \"Search\" Button to EPG"
 msgstr ""
 
+#: EPGSearch.py:589
 msgid "Add timer"
 msgstr "Zamanlayıcı eke"
 
+#: EPGSearchSetup.py:47
 msgid "Adds \"Search event in EPG\" item into the channel selection context menu (needs restart GUI)"
 msgstr ""
 
+#: EPGSearchSetup.py:46
 msgid "Adds \"Search event in EPG\" item into the event menu (needs restart GUI)"
 msgstr ""
 
+#: EPGSearch.py:1079 EPGSearchSetup.py:71
 msgid "Cancel"
 msgstr "Vazgeç"
 
+#: EPGSearch.py:1118
 msgid "Channel Selection"
 msgstr "Kanal Seçimi"
 
+#: EPGSearch.py:620 EPGSearch.py:730 plugin.py:52
 msgid "Choice list"
 msgstr ""
 
+#: plugin.py:44
 msgid "Choice list EPGSearch"
 msgstr ""
 
+#: EPGSearch.py:742
 msgid "Choice list RED Button"
 msgstr ""
 
+#: EPGSearchSetup.py:44
 msgid "Choosing an encoding. \"UTF-8\" to search for EPG cyrillic."
 msgstr ""
 
+#: EPGSearch.py:823
 #, fuzzy
 msgid "Clear history"
 msgstr "Geçmiş kaydı yok"
 
+#: EPGSearch.py:872
 #, python-format
 msgid "Could not read AutoTimer timer list: %s"
 msgstr "AutoTimer zamanlayıcı listesi okunamıyor : %s"
 
+#: EPGSearchSetup.py:50
 msgid "Display name service as in bouquets"
 msgstr ""
 
+#: EPGSearch.py:641
 msgid "EPG Search"
 msgstr "EPG Arama"
 
+#: plugin.py:143
 #, fuzzy
 msgid "EPGSearch"
 msgstr "EPG Arama"
 
+#: EPGSearchSetup.py:34 EPGSearchSetup.py:89
 #, fuzzy
 msgid "EPGSearch Setup"
 msgstr "EPG Arama"
 
+#: EPGSearchSetup.py:44
 #, fuzzy
 msgid "Encoding Search to EPG"
 msgstr "EPG'de ara"
 
+#: EPGSearch.py:796
 msgid "Enter text to search for"
 msgstr "Arama metnini girin"
 
+#: EPGSearch.py:815
 msgid "Export selected as AutoTimer"
 msgstr "Seçililenleri AutoTimer olarak dışarı ver"
 
+#: EPGSearch.py:574
 msgid "History"
 msgstr "Geçmiş"
 
+#: EPGSearchSetup.py:40
 msgid "How many entries to keep in the search history at most. 0 disables history entirely!"
 msgstr ""
 
+#: EPGSearchSetup.py:50
 msgid "If 'Search only bouquets' is enabled, show service name as in bouquets for renamed services."
 msgstr ""
 
+#: EPGSearchSetup.py:49
 msgid "If this setting is enabled, searching EPG in only services in user bouquets."
 msgstr ""
 
+#: EPGSearchSetup.py:41
 msgid "If this setting is enabled, the plugin adds a \"Search\" Button to the regular EPG."
 msgstr ""
 
+#: EPGSearchSetup.py:43
 msgid "If this setting is enabled, the plugin adds picons."
 msgstr ""
 
+#: EPGSearch.py:813
 msgid "Import from AutoTimer"
 msgstr "Otomatik zamanlayıcıdan içeri al"
 
+#: EPGSearch.py:802
 msgid "Import from EPG"
 msgstr "EPG'den içeri al"
 
+#: EPGSearch.py:801
 msgid "Import from Timer"
 msgstr "Zamanlayıcıdan içeri al"
 
+#: EPGSearchSetup.py:40
 msgid "Length of History"
 msgstr ""
 
+#: EPGSearch.py:950
 msgid "List of history is cleared !"
 msgstr ""
 
+#: EPGSearch.py:624 EPGSearch.py:738
 msgid "Lookup in TMBD"
 msgstr ""
 
+#: EPGSearch.py:573
 msgid "New Search"
 msgstr "Yeni Arama"
 
+#: EPGSearch.py:968
 #, fuzzy
 msgid "No history !"
 msgstr "Geçmiş kaydı yok"
 
+#: EPGSearch.py:1080 EPGSearchSetup.py:70
 msgid "OK"
 msgstr "Tamam"
 
+#: EPGSearch.py:820
 msgid "Open selected in IMDb"
 msgstr ""
 
+#: EPGSearch.py:739
 msgid "Partnerbox Entries"
 msgstr ""
 
+#: EPGSearch.py:814
 msgid "Save search as AutoTimer"
 msgstr "Aramayı AutoTimer olarak kaydet"
 
+#: plugin.py:40 plugin.py:50
 msgid "Search"
 msgstr "Ara"
 
+#: plugin.py:144
 msgid "Search EPG by title event"
 msgstr ""
 
+#: plugin.py:164 plugin.py:166
 #, fuzzy
 msgid "Search event in EPG"
 msgstr "EPG'de ara"
 
+#: EPGSearch.py:818
 msgid "Search for TMDb info"
 msgstr ""
 
+#: EPGSearchSetup.py:49
 msgid "Search only bouquets"
 msgstr ""
 
+#: EPGSearchSetup.py:48
 msgid "Search strictness"
 msgstr ""
 
+#: EPGSearchSetup.py:45
 #, fuzzy
 msgid "Search type"
 msgstr "Ara"
 
+#: EPGSearchSetup.py:51
 msgid "Search type for filter"
 msgstr ""
 
+#: EPGSearch.py:1094
 msgid "Select a timer to search"
 msgstr "Arama zamanını seçin"
 
+#: EPGSearch.py:741 plugin.py:43
 msgid "Select action:"
 msgstr ""
 
+#: plugin.py:41
 msgid "Select channel"
 msgstr ""
 
+#: EPGSearch.py:883 EPGSearch.py:962
 msgid "Select text to search for"
 msgstr "Arama metnini seçin"
 
+#: EPGSearchSetup.py:51
 msgid "Select type for filter search. Press button P +/- for show/hide filter in description after search."
 msgstr ""
 
+#: EPGSearchSetup.py:45
 msgid "Select type for search, \"partial match\" for the most extensive search."
 msgstr ""
 
+#: EPGSearchSetup.py:42
 msgid "Select type: 'Search and Select channel' or 'Search'."
 msgstr ""
 
+#: EPGSearchSetup.py:48
 msgid "Select whether or not you want to enforce case correctness."
 msgstr ""
 
+#: EPGSearch.py:825
 msgid "Setup"
 msgstr ""
 
+#: EPGSearch.py:824
 msgid "Timers list"
 msgstr ""
 
+#: EPGSearchSetup.py:42
 msgid "Type blue Button"
 msgstr ""
 
+#: EPGSearchSetup.py:43
 msgid "Use Picons"
 msgstr ""
 
+#: EPGSearch.py:810
 msgid "Zap to selected service"
 msgstr ""
 
+#: __init__.py:38
 msgid "case-insensitive search"
 msgstr ""
 
+#: __init__.py:38
 msgid "case-sensitive search"
 msgstr ""
 
+#: __init__.py:31
 msgid "choice (Search and standard)"
 msgstr ""
 
+#: __init__.py:37 __init__.py:39
 msgid "exact match"
 msgstr ""
 
+#: __init__.py:31
 #, fuzzy
 msgid "only Search"
 msgstr "Ara"
 
+#: __init__.py:37 __init__.py:39
 msgid "partial match"
 msgstr ""
 
+#: plugin.py:157
 msgid "search EPG"
 msgstr "EPG'de ara"
 
+#: plugin.py:151
 msgid "search EPG..."
 msgstr "EPG'de ara..."
 
+#: __init__.py:39
 msgid "title starts with"
 msgstr ""

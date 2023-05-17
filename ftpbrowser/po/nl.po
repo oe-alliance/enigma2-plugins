@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2011-10-12 10:37+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: Rob van der Does\n"
@@ -19,13 +19,16 @@ msgstr ""
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 
+#: FTPBrowser.py:719
 #, python-format
 msgid "%d kb/s"
 msgstr "%d kb/s"
 
+#: plugin.py:119
 msgid "A basic FTP client"
 msgstr "Een eenvoudige FTP client"
 
+#: FTPBrowser.py:528
 #, python-format
 msgid ""
 "A file with this name (%s) already exists locally.\n"
@@ -34,6 +37,7 @@ msgstr ""
 "Een bestand met deze naam (%s) bestaat lokaal al.\n"
 "Wilt u die overschrijven?"
 
+#: FTPBrowser.py:558
 #, python-format
 msgid ""
 "A file with this name (%s) already exists on the remote host.\n"
@@ -42,6 +46,7 @@ msgstr ""
 "Een bestand met deze naam (%s) bestaat al op de host.\n"
 "Wilt u die overschrijven?"
 
+#: FTPBrowser.py:753
 msgid ""
 "A transfer is currently in progress.\n"
 "What do you want to do?"
@@ -49,112 +54,147 @@ msgstr ""
 "Een transfer is momenteel bezig.\n"
 "Wat wilt u doen?"
 
+#: FTPBrowser.py:756
 msgid "Abort transfer"
 msgstr "Brekk transfer af"
 
+#: FTPServerManager.py:262
 msgid "Add"
 msgstr "Voeg toe"
 
+#: FTPServerManager.py:159
 msgid "Address:"
 msgstr "Adres:"
 
+#: FTPBrowser.py:445
 #, python-format
 msgid "Are you sure you want to delete %s?"
 msgstr "Weet u zeker dat u %s wilt verwijderen?"
 
+#: FTPBrowser.py:757
 msgid "Cancel"
 msgstr "Annuleer"
 
+#: FTPServerManager.py:371
 msgid "Configuration saved."
 msgstr "Configuratie opgeslagen."
 
+#: plugin.py:107
 msgid "Connect to FTP..."
 msgstr "Verbind met FTP..."
 
+#: FTPBrowser.py:829
 msgid "Could not connect to ftp server!"
 msgstr "Could not connect to ftp server!"
 
+#: FTPBrowser.py:393 FTPBrowser.py:405
 #, python-format
 msgid "Could not delete %s."
 msgstr "Kon %s niet verwijderen."
 
+#: FTPBrowser.py:480
 msgid "Could not obtain list of files."
 msgstr "Kon geen lijst met bestanden krijgen."
 
+#: FTPBrowser.py:337 FTPBrowser.py:352
 #, python-format
 msgid "Could not rename %s."
 msgstr "Kon %s niet hernoemen."
 
+#: FTPBrowser.py:194 FTPServerManager.py:261
 msgid "Delete"
 msgstr "Verwijder"
 
+#: FTPBrowser.py:281
 msgid "Download"
 msgstr "Download"
 
+#: FTPBrowser.py:683
 msgid "Download finished."
 msgstr "Download gereed."
 
+#: FTPBrowser.py:718
 #, python-format
 msgid "ETA %d:%02d min"
 msgstr "ETA %d:%02d min"
 
+#: FTPServerManager.py:263
 msgid "Edit"
 msgstr "Bewerk"
 
+#: FTPServerManager.py:155
 msgid "Enter URI"
 msgstr "Voer URL in"
 
+#: FTPServerManager.py:212
 msgid "Enter URI of FTP Server:"
 msgstr "Voer URI van de FTP Server in:"
 
+#: FTPBrowser.py:376
 msgid "Enter new filename:"
 msgstr "Voer nieuwe bestandsnaam in:"
 
+#: FTPBrowser.py:131 FTPBrowser.py:135
 msgid "Error"
 msgstr "Fout"
 
+#: FTPBrowser.py:668 FTPBrowser.py:692
 msgid "Error during download."
 msgstr "Fout tijdens download."
 
+#: FTPBrowser.py:192 FTPServerManager.py:152
 msgid "Exit"
 msgstr "Sluit af"
 
+#: FTPQueueManager.py:99
 msgid "FTP Queue Manager"
 msgstr "FTP Queue Manager"
 
+#: FTPServerManager.py:149 FTPServerManager.py:176
 msgid "FTP Server Editor"
 msgstr "FTP Server Editor"
 
+#: FTPServerManager.py:286
 msgid "FTP Server Manager"
 msgstr "FTP Server Manager"
 
+#: FTPBrowser.py:185
 msgid "Local"
 msgstr "Lokaal"
 
+#: FTPServerManager.py:158
 msgid "Name:"
 msgstr "Naam:"
 
+#: FTPServerManager.py:153
 msgid "OK"
 msgstr "OK"
 
+#: FTPBrowser.py:108 FTPBrowser.py:130
 msgid "Parent Directory"
 msgstr "Parent Directory"
 
+#: FTPServerManager.py:163
 msgid "Passive:"
 msgstr "Passief:"
 
+#: FTPServerManager.py:161
 msgid "Password:"
 msgstr "Wachtwoord:"
 
+#: FTPServerManager.py:162
 msgid "Port:"
 msgstr "Port:"
 
+#: FTPBrowser.py:271
 msgid "Queue Manager"
 msgstr "Queue Manager"
 
+#: FTPBrowser.py:473
 msgid "Queue processed."
 msgstr "Queue verwerkt."
 
+#: FTPServerManager.py:317
 msgid ""
 "Really delete this entry?\n"
 "It cannot be recovered!"
@@ -162,41 +202,53 @@ msgstr ""
 "Deze entry echt verwijderen?\n"
 "Dit kan niet ongedaan worden gemaakt!"
 
+#: FTPBrowser.py:818
 msgid "Remote"
 msgstr "Remote"
 
+#: FTPBrowser.py:187 FTPBrowser.py:783 FTPBrowser.py:826
 msgid "Remote (not connected)"
 msgstr "Remote (niet verbonden)"
 
+#: FTPBrowser.py:390 FTPBrowser.py:407
 #, python-format
 msgid "Removed %s."
 msgstr "%s verwijderd."
 
+#: FTPBrowser.py:420 FTPBrowser.py:433
 msgid "Removing directories is not supported."
 msgstr "Verwijderen van mappen wordt niet ondersteund"
 
+#: FTPBrowser.py:193
 msgid "Rename"
 msgstr "Hernoem"
 
+#: FTPBrowser.py:334 FTPBrowser.py:354
 #, python-format
 msgid "Renamed %s to %s."
 msgstr "%s in %s hernoemd."
 
+#: FTPBrowser.py:755
 msgid "Run in Background"
 msgstr "Voer op de achtergrond uit"
 
+#: FTPServerManager.py:264
 msgid "Save"
 msgstr "Sla op"
 
+#: FTPBrowser.py:208
 msgid "Select local file list"
 msgstr "Selecteer de lokale bestandslijst"
 
+#: FTPBrowser.py:209
 msgid "Select remote file list"
 msgstr "Selecteer de remote bestandslijst"
 
+#: FTPBrowser.py:270
 msgid "Server Manager"
 msgstr "Server Manager"
 
+#: plugin.py:72
 msgid ""
 "There already is an active connection.\n"
 "Do you want to abort it?"
@@ -204,26 +256,34 @@ msgstr ""
 "Er is al een actieve verbinding.\n"
 "Wilt u afbreken?"
 
+#: FTPBrowser.py:596 FTPBrowser.py:620
 msgid "There already is an active transfer."
 msgstr "Er is al een transfer bezig."
 
+#: FTPBrowser.py:195 FTPBrowser.py:277
 msgid "Upload"
 msgstr "Upload"
 
+#: FTPBrowser.py:659
 msgid "Upload finished."
 msgstr "Upload gereed."
 
+#: FTPServerManager.py:160
 msgid "Username:"
 msgstr "Gebruikersnaam:"
 
+#: plugin.py:85
 msgid "Which server do you want to connect to?"
 msgstr "Met welke server wilt u verbinden?"
 
+#: FTPBrowser.py:202
 msgid "close"
 msgstr "sluit"
 
+#: FTPBrowser.py:201
 msgid "enter directory/get file/put file"
 msgstr "ga map in/verkrijg bestand/plaats bestand"
 
+#: FTPBrowser.py:203
 msgid "open menu"
 msgstr "open menu"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - webinterface\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2014-02-23 22:30+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -16,966 +16,1244 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SearchPath-0: ../enigma2-plugins/webinterface\n"
 
+#: WebComponents/Sources/Movie.py:160
 #, python-format
 msgid "%d error while moving Movie '%s' to '%s': %s"
 msgstr "%d errori nello spostamento della registrazione %s in %s: %s"
 
+#: WebComponents/Sources/Strings.py:184
 #, python-format
 msgid "%s of %s min"
 msgstr "%s di %s min"
 
+#: WebComponents/Sources/Movie.py:106
 #, python-format
 msgid "'%s' already exists in destination directory '%s', set force=1 to move anyway."
 msgstr "%s esiste già nella directori destinazione %s: impostare force=1 per sovrascrivere."
 
+#: WebComponents/Sources/Movie.py:104
 #, python-format
 msgid "'%s' does not exist in source directory."
 msgstr "%s non esiste nella directory sorgente."
 
+#: WebComponents/Sources/MP.py:152
 #, python-format
 msgid "'%s' has been added to playlist"
 msgstr "%s aggiunto alla playlist"
 
+#: WebComponents/Sources/MP.py:140 WebComponents/Sources/MP.py:164
 #, python-format
 msgid "'%s' is neither a valid reference nor a valid file"
 msgstr "%s non è un riferimento o un file valido "
 
+#: WebComponents/Sources/MP.py:175
 #, python-format
 msgid "'%s' not found in playlist"
 msgstr "%s non trovato nella playlist"
 
+#: WebComponents/Sources/MP.py:172
 #, python-format
 msgid "'%s' removed from playlist"
 msgstr "%s rimosso dalla playlist"
 
-msgid "0"
-msgstr ""
-
-msgid "1"
-msgstr ""
-
-msgid "15"
-msgstr ""
-
-msgid "2"
-msgstr ""
-
-msgid "3"
-msgstr ""
-
+#: WebComponents/Sources/AudioTracks.py:52
 msgid "AC3 Downmix disabled"
 msgstr "Downmix AC3 disabilitato"
 
+#: WebComponents/Sources/AudioTracks.py:52
 msgid "AC3 Downmix enabled"
 msgstr "Downmix AC3 abilitato"
 
+#: WebComponents/Sources/Strings.py:95
 msgid "About"
 msgstr "Info"
 
+#: WebComponents/Sources/Strings.py:53
 msgid "Action"
 msgstr "Azione"
 
+#: WebComponents/Sources/Strings.py:43
 msgid "Activate"
 msgstr "Attivato"
 
+#: WebComponents/Sources/SwitchService.py:69
 #, python-format
 msgid "Active service is now '%s'"
 msgstr "Canale ativo: %s"
 
+#: WebComponents/Sources/Strings.py:172
 #, python-format
 msgid "Add %s to playlist"
 msgstr "Aggiungere %s alla Playlist"
 
+#: WebComponents/Sources/Strings.py:109
 msgid "Add Timer"
 msgstr "Agg. timer"
 
+#: WebComponents/Sources/Strings.py:110
 msgid "Add Zap Timer"
 msgstr "Aggiungere timer zap"
 
-#, fuzzy
-msgid "Add/Save"
-msgstr "Salvare"
-
+#: WebComponents/Sources/Strings.py:66
 msgid "After event"
 msgstr "Dopo l'evento"
 
+#: WebComponents/Sources/Strings.py:34
 msgid "All"
 msgstr "Tutti"
 
+#: WebComponents/Sources/Strings.py:36
 msgid "All Timers"
 msgstr "Tutti i timer"
 
+#: WebIfConfig.py:66
 msgid "Allow zapping via Webinterface"
 msgstr "Consentire zapping via webif"
 
+#: WebComponents/Sources/Strings.py:141
 msgid "Audio PID"
 msgstr "PID audio"
 
+#: WebComponents/Sources/Strings.py:115
 msgid "Authors"
 msgstr "Autori"
 
+#: WebComponents/Sources/Strings.py:71
 msgid "Auto"
 msgstr "Auto"
 
+#: WebIfConfig.py:67
 msgid "Autowrite timer"
 msgstr "Scrittura automatica timer"
 
+#: WebComponents/Sources/Strings.py:58
 msgid "Begins"
 msgstr "Inizia"
 
+#: WebComponents/Sources/Strings.py:29
 msgid "Bouquets"
 msgstr "Bouquet"
 
+#: WebComponents/Sources/Strings.py:22
 msgid "BoxControl"
 msgstr "BoxControl"
 
+#: WebIfConfig.py:35
 msgid "Cancel"
 msgstr "Annull."
 
+#: WebComponents/Sources/SwitchService.py:73
 msgid "Cannot zap while device is in Standby"
 msgstr "Zap non consentito con il decoder in standby"
 
+#: WebComponents/Sources/Strings.py:127
 msgid "Capacity"
 msgstr "Capacità"
 
+#: WebComponents/Sources/TPMChallenge.py:41
 msgid "Challenge executed, please verify the result!"
 msgstr "Challenge eseguito: verificare il risultato."
 
+#: WebComponents/Sources/Strings.py:176
 #, python-format
 msgid "Change to %s"
 msgstr "Cambiare in %s"
 
+#: WebComponents/Sources/Timer.py:377
 #, python-format
 msgid "Changing the timer for '%s' failed!"
 msgstr "%s: mofifica timer fallita."
 
+#: WebComponents/Sources/Strings.py:61
 msgid "Channel"
 msgstr "Canale"
 
+#: WebComponents/Sources/Strings.py:39
 msgid "Cleans up the list of timers by removing e.g. finished timers"
 msgstr "Ripulire l'elenco timer cancellando ad esempio quelli terminati"
 
+#: WebComponents/Sources/Strings.py:38
 msgid "Cleanup"
 msgstr "El. conclusi"
 
+#: WebComponents/Sources/Strings.py:28
 msgid "Clear search"
 msgstr "Azzerare ricerca"
 
+#: WebComponents/Sources/Strings.py:96
 msgid "Click to show/hide extended description"
 msgstr "Click >> mostrare/nascondere la descrizione estesa"
 
+#: WebComponents/Sources/Strings.py:182
 msgid "Close MediaPlayer"
 msgstr "Chiudere MediaPlayer"
 
+#: WebComponents/Sources/MP.py:235
 #, python-format
 msgid "Command '%s' executed"
 msgstr "Comando %s eseguito"
 
+#: plugin.py:637 plugin.py:640
 msgid "Configuration for the Webinterface"
 msgstr "Configurazione Interfaccia web"
 
+#: WebComponents/Sources/Timer.py:371 WebComponents/Sources/Timer.py:397
+#: WebComponents/Sources/Timer.py:444
 #, python-format
 msgid "Conflicting Timer(s) detected! %s"
 msgstr "Rilevati timer in conflitto. %s"
 
+#: WebComponents/Sources/Timer.py:402
 #, python-format
 msgid "Could not add timer '%s'!"
 msgstr "Impossibile aggiungere il timer %s."
 
+#: WebComponents/Sources/Movie.py:63
 #, python-format
 msgid "Could not delete Movie '%s'"
 msgstr "Impossibile rimuovere la registrazione %s"
 
+#: WebComponents/Sources/Timer.py:379
 #, python-format
 msgid "Could not find timer '%s' with given start and end time!"
 msgstr "Impossibile trovare un timer %s in base a questi orari di inizio e fine."
 
+#: WebComponents/Sources/Strings.py:37
 msgid "Create Timer"
 msgstr "Agg. Timer"
 
+#: WebComponents/Sources/Strings.py:131
 msgid "DHCP enabled"
 msgstr "DHCP abilitato"
 
+#: WebComponents/Sources/Strings.py:60
 msgid "Days"
 msgstr "Giorni"
 
+#: WebComponents/Sources/Strings.py:44
 msgid "Deactivate"
 msgstr "Disattivato"
 
+#: WebComponents/Sources/Strings.py:80
 msgid "Deepstandby"
 msgstr "Deepstandby"
 
+#: WebComponents/Sources/Strings.py:46
 msgid "Delete"
 msgstr "Canc."
 
+#: WebComponents/Sources/Strings.py:175
 #, python-format
 msgid "Delete %s"
 msgstr "Cancellare %s"
 
+#: WebComponents/Sources/Strings.py:47
 msgid "Delete Timer"
 msgstr "Rimuovere timer"
 
+#: WebComponents/Sources/Strings.py:63
 msgid "Description"
 msgstr "Descrizione"
 
+#: WebComponents/Sources/Movie.py:108
 #, python-format
 msgid "Destination dir '%s' does not exist."
 msgstr "La directory destinazione %s non esiste."
 
+#: WebComponents/Sources/Strings.py:119
 msgid "Device & Versions"
 msgstr "Supporto e versione"
 
+#: WebComponents/Sources/Strings.py:92
 msgid "Device Info"
 msgstr "Info supporto"
 
+#: WebComponents/Sources/Strings.py:120
 msgid "Device Name"
 msgstr "Nome dispositivo"
 
+#: WebComponents/Sources/Strings.py:45
 msgid "Disable"
 msgstr "Disabilitare"
 
+#: WebComponents/Sources/Strings.py:67
 msgid "Do Nothing"
 msgstr "Non fare nulla"
 
+#: WebComponents/Sources/Strings.py:155
 msgid "Down"
 msgstr "Giù"
 
+#: WebComponents/Sources/Strings.py:174
 #, python-format
 msgid "Downlad %s"
 msgstr "Downlad %s"
 
+#: WebComponents/Sources/Strings.py:153
 msgid "Download"
 msgstr "Download"
 
+#: WebComponents/Sources/Strings.py:26
 msgid "EPG-Search"
 msgstr "Ricerca EPG"
 
+#: WebComponents/Sources/SleepTimer.py:112
 msgid "ERROR: Cannot set SleepTimer while device is in Standby-Mode"
 msgstr "ERRORE: impossibile configurare uno Sleep timer con l'apparato in standby"
 
+#: WebComponents/Sources/SleepTimer.py:106
 #, python-format
 msgid "ERROR: Obligatory parameter 'cmd' [get,set] has unspecified value '%s'"
 msgstr "ERRORE: valore non atteso nel parametro richiesto \"cmd\" [get,set]: %s "
 
+#: WebComponents/Sources/SleepTimer.py:54
 #, python-format
 msgid "ERROR: Obligatory parameter 'enabled' [True,False] has unspecified value '%s'"
 msgstr "ERRORE: valore non atteso nel parametro richiesto \"abilitato\" [True,False]: %s "
 
+#: WebComponents/Sources/SleepTimer.py:62
 msgid "ERROR: Obligatory parameter 'time' [0-999] is missing"
 msgstr "ERRORE: parametro richiesto \"time\" [0-999] non presente"
 
+#: WebComponents/Sources/Strings.py:41 WebComponents/Sources/Strings.py:111
 msgid "Edit Timer"
 msgstr "Modificare timer"
 
+#: WebComponents/Sources/Strings.py:42
 msgid "Enable"
 msgstr "Abilitare"
 
+#: WebIfConfig.py:65
 msgid "Enable /media"
 msgstr "Abilitare /media"
 
+#: WebComponents/Sources/Strings.py:165
 msgid "Enable Debug"
 msgstr "Abilitare debug"
 
+#: WebIfConfig.py:69
 msgid "Enable HTTP Access"
 msgstr "Abilitare accesso HTTP"
 
+#: WebIfConfig.py:75
 msgid "Enable HTTP Authentication"
 msgstr "Abilitare autenticazione HTTP"
 
+#: WebIfConfig.py:78
 msgid "Enable HTTPS Access"
 msgstr "Abilitare accesso HTTPS"
 
+#: WebIfConfig.py:82
 msgid "Enable HTTPS Authentication"
 msgstr "Abilitare autenticazione HTTPS"
 
+#: WebIfConfig.py:86
 msgid "Enable Streaming Authentication"
 msgstr "Abilitare autenticazione streaming"
 
+#: WebComponents/Sources/Strings.py:59
 msgid "Ends"
 msgstr "Termina"
 
+#: WebComponents/Sources/Strings.py:121
 msgid "Enigma2 Version"
 msgstr "Versione Enigma2"
 
+#: WebComponents/Sources/AudioTracks.py:41
+#: WebComponents/Sources/AudioTracks.py:43 WebComponents/Sources/Strings.py:50
+#: WebComponents/Sources/Strings.py:88
 msgid "Error"
 msgstr "Errore"
 
+#: WebComponents/Sources/Timer.py:429
 msgid "EventId not found"
 msgstr "Eventid non trovato"
 
+#: WebComponents/Sources/Strings.py:23
 msgid "Extras"
 msgstr "Extra"
 
+#: WebComponents/Sources/AudioTracks.py:13
 msgid "False"
 msgstr "Falso"
 
+#: WebComponents/Sources/Strings.py:179
 msgid "Filebrowser"
 msgstr "Browser file"
 
+#: WebComponents/Sources/Strings.py:114
 msgid "Filter Services"
 msgstr "Filtri canali"
 
+#: WebComponents/Sources/Strings.py:52
 msgid "Finished"
 msgstr "Terminato"
 
+#: WebComponents/Sources/Strings.py:128
 msgid "Free Space"
 msgstr "Spazio libero"
 
+#: WebComponents/Sources/Strings.py:123
 msgid "Frontprocessor Version"
 msgstr "Versione Frontprocessor"
 
+#: WebComponents/Sources/Strings.py:138
 msgid "Gateway"
 msgstr "Gateway"
 
+#: WebComponents/Sources/Strings.py:160
 msgid "Get a Screenshot"
 msgstr "Ottenere uno screenshot"
 
+#: WebComponents/Sources/Strings.py:161
 msgid "Grab Video & OSD"
 msgstr "Screenshot video e OSD"
 
+#: WebIfConfig.py:74
 msgid "HTTP Port"
 msgstr "Porta HTTP"
 
+#: WebIfConfig.py:81
 msgid "HTTPS Port"
 msgstr "Porta HTTPS"
 
+#: WebComponents/Sources/Strings.py:126
 msgid "Harddisk"
 msgstr "Harddisk"
 
+#: WebComponents/Sources/Strings.py:132
 msgid "IP Address"
 msgstr "Indirizzo IP"
 
+#: WebComponents/Sources/Network.py:32 WebComponents/Sources/Strings.py:136
 msgid "IPv4-only Python/Twisted"
 msgstr ""
 
+#: WebComponents/Sources/Network.py:29 WebComponents/Sources/Strings.py:134
 msgid "IPv4-only kernel"
 msgstr ""
 
+#: WebComponents/Sources/Strings.py:133
 #, fuzzy
 msgid "IPv6 address(es)"
 msgstr "Indirizzo IP"
 
+#: WebComponents/Sources/Movie.py:67 WebComponents/Sources/Movie.py:161
 #, python-format
 msgid "Illegal Parameter Value: sRef - '%s'"
 msgstr "Valore parametro illegale: sRef - %s"
 
+#: WebComponents/Sources/Timer.py:246
 #, python-format
 msgid "Illegal Parameter value for Parameter begin : '%s'"
 msgstr "Valore non consentito per il parametro inizio: %s"
 
+#: WebComponents/Sources/Timer.py:268
 #, python-format
 msgid "Illegal Parameter value for Parameter eit : '%s'"
 msgstr "Valore non consentito per il parametro eit: %s"
 
+#: WebComponents/Sources/Strings.py:122
 msgid "Image Version"
 msgstr "Versione Immagine"
 
+#: WebComponents/Sources/Strings.py:86
 msgid "Info"
 msgstr "Info"
 
+#: WebComponents/Sources/Strings.py:100
 msgid "Instant Record"
 msgstr "Registrazione istantanea"
 
+#: WebComponents/Sources/Strings.py:117
 msgid "JavaScript Libraries"
 msgstr "Librerie JavaScript"
 
+#: WebComponents/Sources/TPMChallenge.py:33
 msgid "LEVEL2 and LEVEL3 Certifcates (Base64-encoded)"
 msgstr "Certificati LEVEL2 e LEVEL3 (Base64-encoded)"
 
+#: WebComponents/Sources/Strings.py:48
 msgid "Legend"
 msgstr "Legenda"
 
+#: WebComponents/Sources/Strings.py:118
 msgid "License"
 msgstr "Licenza"
 
+#: WebComponents/Sources/ReadPluginList.py:16
 msgid "List of Plugins has been read"
 msgstr "Elenco plugin letto"
 
+#: WebComponents/Sources/Timer.py:72
 msgid "List of Timers has been cleaned"
 msgstr "Elenco timer ripulito"
 
+#: WebComponents/Sources/Strings.py:106
 msgid "Load Bouquet"
 msgstr "Caricare il bouquet"
 
+#: WebIfConfig.py:68
 msgid "Load movie-length"
 msgstr "Caricare durata registrazioni"
 
+#: WebComponents/Sources/Strings.py:64
 msgid "Location"
 msgstr "Destinazione"
 
+#: WebComponents/Sources/LocationsAndTags.py:80
 #, python-format
 msgid "Location '%s' added successfully"
 msgstr "Destinazione %s aggiunta correttamente"
 
+#: WebComponents/Sources/LocationsAndTags.py:96
 #, python-format
 msgid "Location '%s' does not exist"
 msgstr "La destinazione %s non esiste"
 
+#: WebComponents/Sources/LocationsAndTags.py:76
 #, python-format
 msgid "Location '%s' is already existing"
 msgstr "La destinazione %s è già presente"
 
+#: WebComponents/Sources/LocationsAndTags.py:94
 #, python-format
 msgid "Location '%s' removed successfully"
 msgstr "Destinazione %s rimossa correttamente"
 
+#: WebComponents/Sources/Strings.py:108
 msgid "Lookup on IMDb.com"
 msgstr "Ricercare su IMDb.com"
 
+#: WebComponents/Sources/Strings.py:130
 msgid "Mac Address"
 msgstr "Indirizzo Mac"
 
+#: WebComponents/Sources/Strings.py:91
 msgid "Mediaplayer"
 msgstr "MediaPlayer"
 
+#: WebComponents/Sources/MP.py:129 WebComponents/Sources/MP.py:158
+#: WebComponents/Sources/MP.py:183 WebComponents/Sources/MP.py:202
+#: WebComponents/Sources/MP.py:213 WebComponents/Sources/MP.py:240
 msgid "Mediaplayer not installed"
 msgstr "mediaPlayer non installato"
 
+#: WebComponents/Sources/MP.py:215
 msgid "Mediaplayer was not active"
 msgstr "MediaPlayer non attivo"
 
+#: WebComponents/Sources/Strings.py:83
 msgid "Message"
 msgstr "Messaggio"
 
+#: WebComponents/Sources/Message.py:64
 msgid "Message sent successfully!"
 msgstr "Messaggio inviato con successo."
 
+#: WebComponents/Sources/Timer.py:85 WebComponents/Sources/Timer.py:233
 msgid "Missing Parameter: begin"
 msgstr "Parametro mancante: begin"
 
+#: WebComponents/Sources/Timer.py:321
 msgid "Missing Parameter: beginOld"
 msgstr "Parametro mancante: beginOld"
 
+#: WebComponents/Sources/Timer.py:316
 msgid "Missing Parameter: channelOld"
 msgstr "Parametro mancante: channelOld"
 
+#: WebComponents/Sources/Timer.py:258
 msgid "Missing Parameter: description"
 msgstr "Parametro mancante: description"
 
+#: WebComponents/Sources/Timer.py:90 WebComponents/Sources/Timer.py:237
 msgid "Missing Parameter: end"
 msgstr "Parametro mancante: end"
 
+#: WebComponents/Sources/Timer.py:325
 msgid "Missing Parameter: endOld"
 msgstr "Parametro mancante: endOld"
 
+#: WebComponents/Sources/Timer.py:411
 msgid "Missing Parameter: eventid"
 msgstr "Parametro mancante: eventid"
 
+#: WebComponents/Sources/Timer.py:254
 msgid "Missing Parameter: name"
 msgstr "Parametro mancante: name"
 
+#: WebComponents/Sources/Movie.py:46 WebComponents/Sources/Movie.py:73
+#: WebComponents/Sources/Timer.py:80 WebComponents/Sources/Timer.py:227
+#: WebComponents/Sources/Timer.py:409
 msgid "Missing Parameter: sRef"
 msgstr "Parametro mancante: sRef"
 
+#: WebComponents/Sources/Movie.py:75
 msgid "Missing Paramter: dirname"
 msgstr "Parametro mancante: dirname"
 
+#: WebComponents/Sources/Backup.py:32 WebComponents/Sources/Movie.py:26
 msgid "Missing or Wrong Argument"
 msgstr "Argomento errato o mancante"
 
+#: WebComponents/Sources/MP.py:135
 msgid "Missing or invalid parameter file"
 msgstr "Parametro file errato o mancante"
 
+#: WebComponents/Sources/RemoteControl.py:25
 msgid "Missing or wrong argument"
 msgstr "Argomento errato o mancante"
 
+#: WebComponents/Sources/LocationsAndTags.py:85
 msgid "Missing value for parameter dirname"
 msgstr "Parametro dirname: valore mancante."
 
+#: WebComponents/Sources/Movie.py:65
 #, python-format
 msgid "Movie '%s' deleted"
 msgstr "Registrazione %s rimossa"
 
+#: WebComponents/Sources/Movie.py:124
 #, python-format
 msgid "Movie '%s' has unknown suffix '%s'."
 msgstr "La registrazione%s possiede un suffisso sconosciuto: %s"
 
+#: WebComponents/Sources/Movie.py:158
 #, python-format
 msgid "Movie '%s' moved to '%s' without errors."
 msgstr "Registrazione %s spostata in %s con successo."
 
+#: WebComponents/Sources/Strings.py:19
 msgid "Movies"
 msgstr "Film"
 
+#: WebComponents/Sources/Movie.py:154
 #, python-format
 msgid "Moving Movie '%s' to '%s' in background."
 msgstr "Spostamento di %s a %s in background in corso."
 
+#: WebComponents/Sources/Strings.py:156
 msgid "Mute"
 msgstr "Muto"
 
+#: WebComponents/Sources/Volume.py:27
 msgid "Mute toggled"
 msgstr "Mute commutato"
 
+#: WebComponents/Converter/HddInfo.py:33
 msgid "N/A"
 msgstr "N/A"
 
+#: WebComponents/Sources/Strings.py:62
 msgid "Name"
 msgstr "Nome"
 
+#: WebComponents/Sources/Strings.py:137
 msgid "Netmask"
 msgstr "Netmask"
 
+#: WebComponents/Sources/Strings.py:129
 msgid "Network Interface"
 msgstr "Interfaccia di rete"
 
+#: WebComponents/Sources/Strings.py:177
 msgid "Next"
 msgstr "Successivo"
 
+#: WebComponents/Sources/Strings.py:30
 msgid "No Bouquets to Display"
 msgstr "Nessun bouquet da mostrare"
 
+#: WebComponents/Sources/Message.py:33
 msgid "No Messagetext given"
 msgstr "Nessun messaggio di testo"
 
+#: WebComponents/Sources/Strings.py:112
 msgid "No Service to show"
 msgstr "Nessun canale da mostrare"
 
+#: WebComponents/Sources/Strings.py:40
 msgid "No Timer Available!"
 msgstr "Timer non disponibili"
 
+#: WebComponents/Sources/Strings.py:183
 msgid "No items to show..."
 msgstr "Nessuna voce da mostrare"
 
+#: WebComponents/Sources/Strings.py:152
 msgid "No movies to show..."
 msgstr "Nessuna registrazione da mostrare..."
 
+#: WebComponents/Sources/Strings.py:57
 msgid "Note: For one-time events the days don't have to be specified."
 msgstr "Nota: per gli eventi singoli la specifica del giorno non è richiesta."
 
+#: WebComponents/Sources/Strings.py:56
 msgid "Note: For recurring events dates are not mandatory."
 msgstr "Nota: per gli eventi ricorrenti la data non è obbligatoria."
 
+#: WebComponents/Sources/Strings.py:151
 msgid "Nothing found..."
 msgstr "Nessuna corrispondenza trovata."
 
+#: WebComponents/Sources/Strings.py:149
 msgid "Nothing running..."
 msgstr "Nulla è attivo"
 
+#: WebIfConfig.py:36
 msgid "OK"
 msgstr "Ok"
 
+#: WebComponents/Sources/Strings.py:147
 msgid "ONID"
 msgstr "ONID"
 
+#: WebComponents/Sources/TPMChallenge.py:43
 #, python-format
 msgid "Obligatory parameter \"random\" for cmd=\"%s\" missing"
 msgstr "Parametro richiesto mancante: random per cmd=%s"
 
+#: WebComponents/Sources/RemoteControl.py:49
 msgid "Obligatory parameter 'command' is missing!"
 msgstr "Parametro richiesto mancante: command"
 
+#: WebComponents/Sources/SwitchService.py:71
 msgid "Obligatory parameter 'sRef' is missing"
 msgstr "Parametro richiesto mancante: sRef"
 
+#: WebComponents/Sources/SwitchService.py:14
 msgid "Obligatory parameter sRef is missing"
 msgstr "Parametro richiesto mancante: sRef"
 
+#: WebComponents/Sources/SleepTimer.py:18
 msgid "Obligatory parameters missing [cmd [set,get], time [0-999], action [standby,shutdown], enabled [True,False]"
 msgstr "Parametri richiesti mancanti: [cmd [set,get], time [0-999], action [standby, shutdown], enabled [True,False]"
 
+#: WebComponents/Sources/Strings.py:105
 #, python-format
 msgid "Open Multi-EPG for %s"
 msgstr "Aprire Multi-EPG per %s"
 
+#: WebComponents/Sources/Strings.py:103
 msgid "Open Signal Panel"
 msgstr "Pannello Open Signal"
 
+#: WebComponents/Sources/Strings.py:143
 msgid "PCR PID"
 msgstr "PID PCR"
 
+#: WebComponents/Sources/Strings.py:144
 msgid "PMT PID"
 msgstr "PID PMT"
 
+#: WebComponents/Sources/LocationsAndTags.py:71
 #, python-format
 msgid "Path %s can not be created"
 msgstr "Il percorso %s non può essere creato"
 
+#: WebComponents/Sources/LocationsAndTags.py:73
 #, python-format
 msgid "Path %s does not exist"
 msgstr "Il percorso %s non esiste"
 
+#: WebComponents/Sources/Strings.py:170
 msgid "Play"
 msgstr "Play"
 
+#: WebComponents/Sources/Strings.py:171
 #, python-format
 msgid "Play %s"
 msgstr "Play %s"
 
+#: WebComponents/Sources/MP.py:150
 #, python-format
 msgid "Playback of '%s' started"
 msgstr "Avviata riproduzione di %s"
 
+#: WebComponents/Sources/Strings.py:180
 msgid "Playlist"
 msgstr "Playlist"
 
+#: WebComponents/Sources/MP.py:191
 #, python-format
 msgid "Playlist '%s' does not exist"
 msgstr "La playlist %s non esiste"
 
+#: WebComponents/Sources/Strings.py:107
 #, python-format
 msgid "Playlist for %s"
 msgstr "Playlist per %s"
 
+#: WebComponents/Sources/MP.py:206
 #, python-format
 msgid "Playlist saved to '%s'"
 msgstr "Playlist salvata in %s"
 
+#: WebComponents/Sources/Strings.py:31
 msgid "Please select any bouquet"
 msgstr "Selezionare un bouquet"
 
+#: WebComponents/Sources/Strings.py:73
 msgid "Power Control"
 msgstr "Power Control"
 
+#: WebComponents/Sources/Strings.py:169
 msgid "Previous"
 msgstr "Precedente"
 
+#: WebComponents/Sources/Strings.py:32
 msgid "Providers"
 msgstr "Provider"
 
+#: WebComponents/Sources/RemoteControl.py:88
 #, python-format
 msgid "RC command '%s' has been issued"
 msgstr "Il comando \"%s\" è stato inviato"
 
+#: WebComponents/Sources/Strings.py:18
 msgid "Radio"
 msgstr "Radio"
 
+#: WebComponents/Sources/Strings.py:81
 msgid "Reboot"
 msgstr "Riavvio"
 
+#: WebComponents/Sources/Strings.py:54
 msgid "Record"
 msgstr "Registrare"
 
+#: WebComponents/Sources/Strings.py:101
 msgid "Record current event"
 msgstr "Registrare l'evento corrente"
 
+#: WebComponents/Sources/Strings.py:163
 msgid "Refresh Screenshot"
 msgstr "Aggiornare screenshot"
 
+#: WebComponents/Sources/Strings.py:173
 #, python-format
 msgid "Remove %s from playlist"
 msgstr "Cancellare %s dalla Playlist"
 
+#: WebComponents/Sources/Strings.py:82
 msgid "Restart enigma2"
 msgstr "Riavviare enigma2"
 
+#: WebComponents/Sources/Strings.py:51
 msgid "Running"
 msgstr "Attivato"
 
+#: WebComponents/Sources/Strings.py:148
 msgid "SID"
 msgstr "SID"
 
+#: WebComponents/Sources/Strings.py:33
 msgid "Satellites"
 msgstr "Satelliti"
 
+#: WebComponents/Sources/Strings.py:72
 msgid "Save"
 msgstr "Salvare"
 
+#: WebComponents/Sources/Strings.py:181
 msgid "Save Playlist"
 msgstr "Salvare la playlist"
 
+#: WebComponents/Sources/Strings.py:76
 msgid "Screenshot (All)"
 msgstr "Screenshot (tutto)"
 
+#: WebComponents/Sources/Strings.py:78
 msgid "Screenshot (OSD)"
 msgstr "Screenshot (OSD)"
 
+#: WebComponents/Sources/Strings.py:77
 msgid "Screenshot (Video)"
 msgstr "Screenshot (Video)"
 
+#: WebComponents/Sources/Strings.py:27
 msgid "Search EPG"
 msgstr "Cercare EPG"
 
+#: WebComponents/Sources/Strings.py:89
 msgid "Send"
 msgstr "Inviare"
 
+#: WebComponents/Sources/Strings.py:74 WebComponents/Sources/Strings.py:90
 msgid "Send Message"
 msgstr "Inviare messaggio"
 
+#: WebComponents/Sources/Strings.py:162
 msgid "Send \\\"long\\\" keypress"
 msgstr "Pressione prolungata"
 
+#: WebComponents/Sources/Strings.py:93
 msgid "Settings"
 msgstr "Config."
 
+#: WebComponents/Sources/Strings.py:97
 #, python-format
 msgid "Show EPG for %s"
 msgstr "Mostrare EPG per %s"
 
+#: WebIfConfig.py:64
 msgid "Show Setup in Extensions menu"
 msgstr "Mostrare Configurazione nel menu Estensioni"
 
+#: WebComponents/Sources/Strings.py:70
 msgid "Shutdown"
 msgstr "Spegnere"
 
+#: WebIfConfig.py:87
 msgid "Simple Anti-Hijack Measures (may break clients)"
 msgstr "Semplice misura anti-Hijack (potrebbe scollegare i client)"
 
+#: WebComponents/Sources/SleepTimer.py:89
 msgid "Sleeptimer has been disabled"
 msgstr "Sleep timer è stato disabilitato"
 
+#: WebComponents/Sources/SleepTimer.py:42
 msgid "Sleeptimer is disabled"
 msgstr "Sleep timer disabilitato"
 
+#: WebComponents/Sources/SleepTimer.py:36
 msgid "Sleeptimer is enabled"
 msgstr "Sleep timer abilitato"
 
+#: WebComponents/Sources/SleepTimer.py:93
 #, python-format
 msgid "Sleeptimer set to %s minutes"
 msgstr "Sleep timer è stato impostato a %s minuti.."
 
+#: WebComponents/Sources/Movie.py:102
 msgid "Source and destination folders are the same."
 msgstr "Le cartelle di origine e destinazione coincidono."
 
+#: WebComponents/Sources/Strings.py:69
 msgid "Standby"
 msgstr "Standby"
 
+#: WebIfConfig.py:60
 msgid "Start Webinterface"
 msgstr "Avviare Interfaccia web"
 
+#: WebComponents/Sources/Strings.py:102
 msgid "Start infinite recording"
 msgstr "Avviare registrazione illimitata"
 
+#: WebComponents/Sources/Volume.py:18
 msgid "State"
 msgstr "Stato"
 
+#: WebComponents/Sources/Strings.py:178
 msgid "Stop"
 msgstr "Stop"
 
+#: WebComponents/Sources/Strings.py:99
 msgid "Stream"
 msgstr "Stream"
 
+#: WebComponents/Sources/Strings.py:98
 #, python-format
 msgid "Stream %s"
 msgstr "Stream %s"
 
+#: WebComponents/Sources/AudioTracks.py:39
 msgid "Success"
 msgstr "Correttamente"
 
+#: WebComponents/Sources/Strings.py:146
 msgid "TSID"
 msgstr "TSID"
 
+#: WebComponents/Sources/Strings.py:17
 msgid "TV"
 msgstr "TV"
 
+#: WebComponents/Sources/Strings.py:35
 msgid "Tag Filter"
 msgstr "Filtro etich."
 
+#: WebComponents/Sources/Strings.py:65
 msgid "Tags"
 msgstr "Etich."
 
+#: WebComponents/Sources/Strings.py:150
 msgid "Technical Information"
 msgstr "Informazioni tecniche"
 
+#: WebComponents/Sources/Strings.py:16
 msgid "TeleVision"
 msgstr "Televisione"
 
+#: WebComponents/Sources/Strings.py:145
 msgid "Text PID"
 msgstr "PID text"
 
+#: WebComponents/Sources/SleepTimer.py:92
 #, python-format
 msgid "The sleep timer has been activated for %s minutes."
 msgstr "Sleep timer è stato attivato per %s minuti.."
 
+#: WebComponents/Sources/SleepTimer.py:88
 msgid "The sleep timer has been disabled."
 msgstr "Sleep timer disattivato."
 
+#: WebComponents/Sources/Timer.py:96
 #, python-format
 msgid "The timer '%s' has been deleted successfully"
 msgstr "Timer %s rimosso correttamente."
 
+#: WebComponents/Sources/Timer.py:98
 msgid "The timer has NOT been deleted"
 msgstr "Il timer non è stato rimosso"
 
+#: WebComponents/Sources/AudioTracks.py:55
 msgid "This device does not support AC3 Downmix"
 msgstr "Il dispositivo non supporta il downmix AC3"
 
+#: WebComponents/Sources/Strings.py:84
 msgid "Timeout"
 msgstr "Timeout"
 
+#: WebComponents/Sources/Strings.py:20
 msgid "Timer"
 msgstr "Timer"
 
+#: WebComponents/Sources/Timer.py:390 WebComponents/Sources/Timer.py:437
 #, python-format
 msgid "Timer '%s' added"
 msgstr "Timer %s aggiunto"
 
+#: WebComponents/Sources/Timer.py:451
 msgid "TimerList has been saved"
 msgstr "L'elenco timer è stato salvato"
 
+#: WebComponents/Sources/Timer.py:453
 msgid "TimerList has not been saved"
 msgstr "L'elenco timer non è stato salvato"
 
+#: WebComponents/Sources/Strings.py:21
 msgid "Timers"
 msgstr "Timer"
 
+#: WebComponents/Sources/Strings.py:79
 msgid "Toggle Standby"
 msgstr "Commutare standby"
 
+#: WebIfConfig.py:88
 msgid "Token-based security (may break clients)"
 msgstr "Sicurezza token-based (potrebbe scollegare i client)"
 
+#: WebComponents/Sources/Strings.py:94
 msgid "Tools"
 msgstr "Strumenti"
 
+#: WebComponents/Sources/Strings.py:125
 msgid "Tuners"
 msgstr "Tuner"
 
+#: WebComponents/Sources/Strings.py:85
 msgid "Type"
 msgstr "Tipo"
 
+#: WebComponents/Sources/Volume.py:42
 #, python-format
 msgid "Unknown Volume command %s"
 msgstr "Comando violume sconosciuto: %s"
 
+#: WebComponents/Sources/MP.py:21
 #, python-format
 msgid "Unknown command (%s)"
 msgstr "Comando sconosciuto (%s)"
 
+#: WebComponents/Sources/TPMChallenge.py:45
 #, python-format
 msgid "Unknown for parameter \"cmd\" [%s|%s]"
 msgstr "Parametro sconosciuto per cmd [%s|%s]"
 
+#: WebComponents/Sources/Timer.py:66
 #, python-format
 msgid "Unknown function: '%s'"
 msgstr "Funzion sconosciuta (%s)"
 
+#: WebComponents/Sources/MP.py:234
 #, python-format
 msgid "Unknown parameter %s"
 msgstr "Parametro sconosciuto (%s)"
 
+#: WebComponents/Sources/Strings.py:157
 msgid "Unmute"
 msgstr "Mute off"
 
+#: WebComponents/Sources/Message.py:52
 #, python-format
 msgid "Unsupported Messagetype %s"
 msgstr "Tipo di messaggio non supportato (%s)"
 
+#: WebComponents/Sources/Strings.py:159
 msgid "Up"
 msgstr "Sù"
 
+#: WebComponents/Sources/Strings.py:166
 msgid "Update interval for current service (min. 10 sec)"
 msgstr "Intervallo di aggiornamento per il canale corrente min. 10 sec)"
 
+#: WebComponents/Sources/Strings.py:167
 msgid "Update-Interval for EPG of the current bouquets (min. 60 sec)"
 msgstr "Intervallo di aggiornamento EPG per il bouquet corrente (min. 60 sec)"
 
+#: WebComponents/Sources/Strings.py:142
 msgid "Video PID"
 msgstr "PID Video"
 
+#: WebComponents/Sources/Strings.py:139
 msgid "Video Size"
 msgstr "Dimensioni video"
 
+#: WebComponents/Sources/Strings.py:25
 msgid "Volume"
 msgstr "Volume"
 
+#: WebComponents/Sources/Strings.py:154
 msgid "Volume Down"
 msgstr "Volume -"
 
+#: WebComponents/Sources/Strings.py:158
 msgid "Volume Up"
 msgstr "Volume +"
 
+#: WebComponents/Sources/Volume.py:21 WebComponents/Sources/Volume.py:24
 msgid "Volume changed"
 msgstr "Volume modificato"
 
+#: WebComponents/Sources/Volume.py:38
 #, python-format
 msgid "Volume set to %i"
 msgstr "Livello volume: %i"
 
+#: WebComponents/Sources/Strings.py:164
 msgid "WARNING: Cookies are required to store the settings!"
 msgstr "Attenzione: cookies richiesti per memorizzare la configurazione."
 
+#: WebComponents/Sources/Strings.py:49
 msgid "Waiting"
 msgstr "In attesa"
 
+#: WebComponents/Sources/Strings.py:87
 msgid "Warning"
 msgstr "Avviso"
 
+#: WebComponents/Sources/Strings.py:75
 msgid "WebRemote"
 msgstr "WebRemote"
 
+#: WebComponents/Sources/Strings.py:24
 msgid "WebTV"
 msgstr "WebTV"
 
+#: plugin.py:637
 msgid "Webinterface"
 msgstr "Webinterface"
 
+#: WebComponents/Sources/Strings.py:124
 msgid "Webinterface Version"
 msgstr "Versione Webinterface"
 
+#: WebIfConfig.py:93
 msgid "Webinterface: Main Setup"
 msgstr "Interfaccia web - Configurazione"
 
+#: WebComponents/Sources/Strings.py:140
 msgid "Widescreen"
 msgstr "Schermo panoramico"
 
+#: WebComponents/Sources/Volume.py:40
 #, python-format
 msgid "Wrong parameter format 'set=%s'. Use set=set15"
 msgstr "\"set=%s\": formato parametro errato. Usare set=set15"
 
+#: WebComponents/Sources/Strings.py:55
 msgid "Zap"
 msgstr "Zap"
 
+#: WebComponents/Sources/Strings.py:104
 #, python-format
 msgid "Zap to %s"
 msgstr "Zap a %s"
 
+#: WebComponents/Sources/SwitchService.py:75
 msgid "Zapping is disabled in WebInterface Configuration"
 msgstr "Zapping disabilitato nell'impostazione interfaccia web"
 
+#: WebComponents/Sources/Strings.py:116
 msgid "and many contributors"
 msgstr "e molti con il contributo di molti"
 
+#: WebComponents/Sources/Movie.py:188
 msgid "disabled"
 msgstr "Disabilitato"
 
+#: WebComponents/Sources/Movie.py:238
 msgid "illegal call"
 msgstr "Chiamata illegale"
 
+#: WebComponents/Sources/ServiceListReload.py:60
 #, python-format
 msgid "missing or wrong parameter mode [%i=both, %i=lamedb only, %i=userbouqets only, %i=transponders, %i=parentalcontrol white-/blacklist]"
 msgstr "Parametro mancante o errato [%i=entrambe, %i=solo lamedb, %i=solo bouquet %i=transponder, %i=controllo parentale white-/blacklist]"
 
+#: WebComponents/Sources/Network.py:57 WebComponents/Sources/Strings.py:135
 msgid "none/IPv4-only network"
 msgstr ""
 
+#: WebComponents/Sources/Strings.py:68
 msgid "of"
 msgstr "di"
 
+#: WebComponents/Sources/LocationsAndTags.py:19
 msgid "one two three four unknown command"
 msgstr "Uno due tre quattro comando sconosciuto"
 
+#: WebComponents/Sources/Strings.py:113
 msgid "please select a submenu on the left..."
 msgstr "Selezionare un sottomenu a sx..."
 
+#: WebComponents/Sources/ServiceListReload.py:27
 msgid "reloaded both"
 msgstr "Ricaricati entrambi"
 
+#: WebComponents/Sources/ServiceListReload.py:33
 msgid "reloaded bouquets"
 msgstr "Ricaricati bouquet"
 
+#: WebComponents/Sources/ServiceListReload.py:30
 msgid "reloaded lamedb"
 msgstr "Ricaricato lamedb"
 
+#: WebComponents/Sources/Strings.py:168
 msgid "sec"
 msgstr "sec"
 
-msgid "submit-message"
-msgstr ""
-
+#: WebComponents/Sources/RemoteControl.py:55
 msgid "the command was not > 0"
 msgstr "Il comando non è > 0"
 
+#: WebComponents/Sources/Movie.py:56 WebComponents/Sources/Movie.py:97
 msgid "this recording"
 msgstr "Questa registrazione"
 
+#: WebComponents/Sources/Message.py:40
 #, python-format
 msgid "type %s is not a number"
 msgstr "Il tipo %s non è un numero"
 
+#: WebComponents/Sources/Movie.py:179
 msgid "undefined"
 msgstr "Non definito"
 
+#: WebComponents/Sources/Message.py:19
 #, python-format
 msgid "unknown command (%s)"
 msgstr "Comando sconosciuto (%s)"

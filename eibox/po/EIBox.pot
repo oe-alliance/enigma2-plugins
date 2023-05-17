@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# $PACKAGEDESCRIPION
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the EIBox package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: EIBox 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-14 08:00+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,38 +17,38 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: plugin.py:703
 msgid "(actual)"
 msgstr ""
 
+#: plugin.py:474
 msgid "(offline!)"
 msgstr ""
 
+#: plugin.py:472
 msgid "(online)"
 msgstr ""
 
+#: plugin.py:708
 msgid "(set point)"
 msgstr ""
 
+#: plugin.py:722
 msgid "Visualization for European Installation Bus"
 msgstr ""
 
-msgid "beleuchtung:helligkeitswerte:esstisch"
-msgstr ""
-
-msgid "beleuchtung:helligkeitswerte:schlafen_decke"
-msgstr ""
-
-msgid "beleuchtung:helligkeitswerte:wohnzimmer_decke_1"
-msgstr ""
-
+#: plugin.py:60
 msgid "down"
 msgstr ""
 
+#: plugin.py:581
 msgid "not found"
 msgstr ""
 
+#: plugin.py:619
 msgid "parser error"
 msgstr ""
 
+#: plugin.py:60
 msgid "up"
 msgstr ""

@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# $PACKAGEDESCRIPION
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the CurlyTx package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: CurlyTx 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,127 +17,168 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: CurlyTxSettings.py:92
 msgid "Add new page"
 msgstr ""
 
+#: CurlyTxSettings.py:51 CurlyTxSettings.py:210
 msgid "Cancel"
 msgstr ""
 
+#: CurlyTx.py:105 CurlyTx.py:108
 msgid "Close window"
 msgstr ""
 
+#: CurlyTxSettings.py:70
 msgid "Default page"
 msgstr ""
 
+#: CurlyTxSettings.py:54
 msgid "Delete"
 msgstr ""
 
+#: CurlyTxSettings.py:95
 msgid "Delete selected page"
 msgstr ""
 
+#: CurlyTxSettings.py:80
 msgid "Dismiss all setting changes"
 msgstr ""
 
+#: CurlyTxSettings.py:86
 msgid "Edit selected page"
 msgstr ""
 
+#: CurlyTx.py:199
 msgid "Error fetching URL:"
 msgstr ""
 
+#: CurlyTxSettings.py:175
 msgid "Error loading page feed:"
 msgstr ""
 
+#: CurlyTxSettings.py:224
 msgid "Font size"
 msgstr ""
 
+#: CurlyTx.py:204
 msgid "Go and add a page in the settings"
 msgstr ""
 
+#: CurlyTx.py:212
 msgid "HTTP response headers for"
 msgstr ""
 
+#: CurlyTx.py:170
 msgid "Invalid page"
 msgstr ""
 
+#: CurlyTxSettings.py:89
 msgid "Load pages from feed"
 msgstr ""
 
+#: CurlyTx.py:185
 msgid "Loading ..."
 msgstr ""
 
+#: CurlyTxSettings.py:73
 msgid "Menu title"
 msgstr ""
 
+#: CurlyTxSettings.py:53
 msgid "New"
 msgstr ""
 
+#: CurlyTx.py:56 CurlyTx.py:126
 msgid "Next"
 msgstr ""
 
+#: CurlyTxSettings.py:145
 msgid "No page feed URL defined"
 msgstr ""
 
+#: CurlyTxSettings.py:52 CurlyTxSettings.py:211
 msgid "OK"
 msgstr ""
 
+#: CurlyTxSettings.py:222
 msgid "Page URL"
 msgstr ""
 
+#: CurlyTxSettings.py:74
 msgid "Page feed URL"
 msgstr ""
 
+#: CurlyTxSettings.py:66
 msgid "Page:"
 msgstr ""
 
+#: CurlyTx.py:55 CurlyTx.py:125
 msgid "Prev"
 msgstr ""
 
+#: CurlyTxSettings.py:112
 msgid ""
 "Really delete this page?\n"
 "It cannot be recovered!"
 msgstr ""
 
+#: CurlyTx.py:54 CurlyTx.py:120 CurlyTx.py:124
 msgid "Reload"
 msgstr ""
 
+#: CurlyTx.py:96
 msgid "Reload current page URL"
 msgstr ""
 
+#: CurlyTxSettings.py:83
 msgid "Save settings and close screen"
 msgstr ""
 
+#: CurlyTx.py:87
 msgid "Scroll page contents down"
 msgstr ""
 
+#: CurlyTx.py:84
 msgid "Scroll page contents up"
 msgstr ""
 
+#: CurlyTx.py:53 CurlyTxSettings.py:40
 msgid "Settings"
 msgstr ""
 
+#: CurlyTx.py:90
 msgid "Show HTTP response headers"
 msgstr ""
 
+#: CurlyTxSettings.py:72
 msgid "Show in extensions menu"
 msgstr ""
 
+#: CurlyTxSettings.py:71
 msgid "Show in main menu"
 msgstr ""
 
+#: CurlyTx.py:93
 msgid "Show program settings"
 msgstr ""
 
+#: CurlyTx.py:111
 msgid "Show this help screen"
 msgstr ""
 
+#: CurlyTx.py:99
 msgid "Switch to next configured page URL"
 msgstr ""
 
+#: CurlyTx.py:102
 msgid "Switch to previous configured page URL"
 msgstr ""
 
+#: CurlyTxSettings.py:223
 msgid "Title"
 msgstr ""
 
+#: plugin.py:38 plugin.py:45
 msgid "View remote text files"
 msgstr ""

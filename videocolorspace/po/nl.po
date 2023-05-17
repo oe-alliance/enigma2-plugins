@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VideoColorSpace(POT)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2013-05-25 14:27+0100\n"
 "Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
 "Language-Team: - <cmikula>\n"
@@ -16,20 +16,26 @@ msgstr ""
 "X-Generator: Poedit 1.5.3\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
+#: plugin.py:47
 msgid "A/V-Color space settings"
 msgstr "A/V-Color space instellingen"
 
+#: VideoColorSpace.py:86
 msgid "Cancel"
 msgstr "Annuleer"
 
+#: plugin.py:53 plugin.py:54 VideoColorSpace.py:92
 msgid "Color space setup"
 msgstr "Color space instellingen"
 
+#: VideoColorSpace.py:77
 msgid "Mode:"
 msgstr "Mode:"
 
+#: VideoColorSpace.py:87
 msgid "OK"
 msgstr "OK"
 
+#: plugin.py:53 plugin.py:54
 msgid "Setup color space for video"
 msgstr "Instellingen color space voor video"

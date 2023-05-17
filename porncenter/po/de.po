@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PornCenter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: JuSt611 <Software@Strasdas.de>\n"
 "Language-Team: AliAbdul <aliabdul1978@hotmail.de>\n"
@@ -16,48 +16,63 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
+#: plugin.py:64
 msgid "Adult streaming plugins for dm800/dm8000"
 msgstr "Filme für Erwachsene auf der Receiver"
 
+#: plugin.py:268
 msgid "Buffer device:"
 msgstr "Puffergerät:"
 
+#: plugin.py:269
 msgid "Buffer file handling:"
 msgstr "Pufferdateihandhabung:"
 
+#: plugin.py:267
 msgid "Buffer:"
 msgstr "Puffer:"
 
+#: plugin.py:413
 msgid "Delete this movie?"
 msgstr "Diesen Film löschen?"
 
+#: plugin.py:266
 msgid "Description:"
 msgstr "Beschreibung:"
 
+#: plugin.py:132
 #, python-format
 msgid "Downloading movie: %s"
 msgstr "Filme herunterladen: %s"
 
+#: plugin.py:400
 msgid "Error while getting video url!"
 msgstr "Fehler bei Ermittlung der Video URL!"
 
+#: plugin.py:265
 msgid "Name:"
 msgstr "Name:"
 
+#: plugin.py:63 plugin.py:120 plugin.py:184 plugin.py:203 plugin.py:250
 msgid "Porn Center"
 msgstr "Porn Center"
 
+#: plugin.py:207
 msgid "Select"
 msgstr "Wählen"
 
+#: plugin.py:172
 msgid "Stop playing this movie?"
 msgstr "Diesen Film stoppen?"
 
+#: plugin.py:67
 msgid "ask me"
 msgstr "nachfragen"
 
+#: plugin.py:67
 msgid "delete"
 msgstr "löschen"
 
+#: plugin.py:67
 msgid "keep on device"
 msgstr "auf Datenträger behalten"

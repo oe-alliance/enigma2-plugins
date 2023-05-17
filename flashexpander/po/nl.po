@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flashexpander 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2012-08-13 18:45+0100\n"
 "Last-Translator: bschaar\n"
 "Language-Team: mechatron\n"
@@ -16,10 +16,12 @@ msgstr ""
 "X-Poedit-SourceCharset: iso-8859-15\n"
 "X-Poedit-Country: GERMANY\n"
 
+#: flashexpander.py:76
 #, python-format
 msgid "... is used, %dMB free"
 msgstr "... in gebruik, %dMB vrij"
 
+#: flashexpander.py:154
 #, python-format
 msgid ""
 "Are you sure want to create FlashExpander on\n"
@@ -30,6 +32,7 @@ msgstr ""
 "%s\n"
 "Partitie %d"
 
+#: flashexpander.py:157
 #, python-format
 msgid ""
 "Are you sure want to create FlashExpander on \n"
@@ -40,43 +43,56 @@ msgstr ""
 "Server: %s\n"
 "Pad: %s"
 
+#: flashexpander.py:300
 msgid "Do you want to reboot your STB_BOX?"
 msgstr ""
 
+#: plugin.py:13
 msgid "FlashExpander"
 msgstr ""
 
+#: flashexpander.py:79
 msgid "FlashExpander is not installed, create? Press Key OK."
 msgstr "FlashExpander is niet actief, activeren? Druk OK."
 
+#: flashexpander.py:256
 #, python-format
 msgid "Mount failed (%s)"
 msgstr "Mount mislukt (%s)"
 
+#: flashexpander.py:145
 msgid "No HDD-, SSD- or USB-Device found. Please first initialized."
 msgstr "Geen HDD-, SSD- of USB-medium gevonden. Gelieve eerst te initialiseren."
 
+#: flashexpander.py:244
 msgid "Please wait, Flash memory will be copied."
 msgstr "Even geduld. Flashgeheugen wordt gekopiëerd."
 
+#: flashexpander.py:259
 msgid "Too little free space < 180MB or wrong Filesystem!"
 msgstr "Te weinig vrije ruimte < 180MB of foutief bestandssysteem!"
 
+#: flashexpander.py:104
 msgid "choose device to FlashExpander"
 msgstr "Kies een medium voor FlashExpander"
 
+#: flashexpander.py:302
 #, python-format
 msgid "error adding fstab entry for: %s"
 msgstr "Fout bij het toevoegen van %s in de fstab"
 
+#: flashexpander.py:305
 msgid "error copy flash memory"
 msgstr "Fout bij het kopiëren van het flash-geheugen"
 
+#: plugin.py:13
 msgid "extend your flash memory"
 msgstr "Flash-geheugen uitbreiden"
 
+#: flashexpander.py:211
 msgid "read UUID"
 msgstr "UUID lezen"
 
+#: flashexpander.py:128
 msgid "unknown"
 msgstr "onbekend"

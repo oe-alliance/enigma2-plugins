@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Elektro plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-27 18:11+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2011-10-12 10:21+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: Rob van der Does\n"
@@ -19,38 +19,38 @@ msgstr ""
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#: plugin.py:703
 msgid "(actual)"
 msgstr "(actueel)"
 
+#: plugin.py:474
 msgid "(offline!)"
 msgstr "(offline!)"
 
+#: plugin.py:472
 msgid "(online)"
 msgstr "(online)"
 
+#: plugin.py:708
 msgid "(set point)"
 msgstr "(instel punt)"
 
+#: plugin.py:722
 msgid "Visualization for European Installation Bus"
 msgstr "Visualisatie European Installation Bus"
 
-msgid "beleuchtung:helligkeitswerte:esstisch"
-msgstr "belichting: helderheidswaarde: eettafel"
-
-msgid "beleuchtung:helligkeitswerte:schlafen_decke"
-msgstr "belichting: helderheidswaarde: slapen_plafond"
-
-msgid "beleuchtung:helligkeitswerte:wohnzimmer_decke_1"
-msgstr "belichting: helderheidswaarde: woonkamer_plafond_1"
-
+#: plugin.py:60
 msgid "down"
 msgstr "naar beneden"
 
+#: plugin.py:581
 msgid "not found"
 msgstr "niet gevonden"
 
+#: plugin.py:619
 msgid "parser error"
 msgstr "fout in samenstellen"
 
+#: plugin.py:60
 msgid "up"
 msgstr "omhoog"

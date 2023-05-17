@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 EPGSearch Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-21 10:41+0200\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2014-12-13 18:20+0300\n"
 "Last-Translator: Tapat <taapat@gmail.com>\n"
 "Language-Team: Taapat <taapat@gmail.com>\n"
@@ -14,218 +14,289 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2);\n"
 
+#: EPGSearch.py:335
 #, python-format
 msgid " (%d min)"
 msgstr " (%d min)"
 
+#: EPGSearch.py:341
 #, python-format
 msgid " (%s%d min)"
 msgstr " (%s%d min)"
 
+#: EPGSearchSetup.py:47
 msgid "Add \"Search event in EPG\" to channel menu"
 msgstr "Pievienot \"Meklēt notikumu EPG\" kanālu izvēlnē"
 
+#: EPGSearchSetup.py:46
 msgid "Add \"Search event in EPG\" to event menu"
 msgstr "Pievienot \"Meklēt notikumu EPG\" notikumu izvēlnē"
 
+#: EPGSearchSetup.py:41
 msgid "Add \"Search\" Button to EPG"
 msgstr "Pievienot \"Meklēt\" pogu EPG"
 
+#: EPGSearch.py:589
 msgid "Add timer"
 msgstr "Pievienot taimeri"
 
+#: EPGSearchSetup.py:47
 msgid "Adds \"Search event in EPG\" item into the channel selection context menu (needs restart GUI)"
 msgstr "Pievieno \"Meklēt notikumu EPG\" kanālu izvēlnē (vajag pārstartēt GUI)"
 
+#: EPGSearchSetup.py:46
 msgid "Adds \"Search event in EPG\" item into the event menu (needs restart GUI)"
 msgstr "Pievieno \"Meklēt notikumu EPG\" notikumu izvēlnē (vajag pārstartēt GUI)"
 
+#: EPGSearch.py:1079 EPGSearchSetup.py:71
 msgid "Cancel"
 msgstr "Atcelt"
 
+#: EPGSearch.py:1118
 msgid "Channel Selection"
 msgstr "Kanālu saraksts"
 
+#: EPGSearch.py:620 EPGSearch.py:730 plugin.py:52
 msgid "Choice list"
 msgstr "Izvēlne"
 
+#: plugin.py:44
 msgid "Choice list EPGSearch"
 msgstr "Izvēlieties EPG sarakstu"
 
+#: EPGSearch.py:742
 msgid "Choice list RED Button"
 msgstr "Sarkanā poga attēlo"
 
+#: EPGSearchSetup.py:44
 msgid "Choosing an encoding. \"UTF-8\" to search for EPG cyrillic."
 msgstr "Izvēlieties kodējumu. \"UTF-8\" lai meklētu EPG cyrillic."
 
+#: EPGSearch.py:823
 msgid "Clear history"
 msgstr "Attīrīt vēsturi"
 
+#: EPGSearch.py:872
 #, python-format
 msgid "Could not read AutoTimer timer list: %s"
 msgstr "Nevar nolasīt auto taimeru sarakstu: %s"
 
+#: EPGSearchSetup.py:50
 msgid "Display name service as in bouquets"
 msgstr "Attēlot kanāla nosakukumu kā buķetē"
 
+#: EPGSearch.py:641
 msgid "EPG Search"
 msgstr "EPG meklēšana"
 
+#: plugin.py:143
 msgid "EPGSearch"
 msgstr "EPG meklētājs"
 
+#: EPGSearchSetup.py:34 EPGSearchSetup.py:89
 msgid "EPGSearch Setup"
 msgstr "EPGSearch iestatījumi"
 
+#: EPGSearchSetup.py:44
 msgid "Encoding Search to EPG"
 msgstr "Meklēt EPG kodējumā"
 
+#: EPGSearch.py:796
 msgid "Enter text to search for"
 msgstr "Ievadiet tekstu kuru meklēt"
 
+#: EPGSearch.py:815
 msgid "Export selected as AutoTimer"
 msgstr "Eksportēt iezīmēto kā auto taimeri"
 
+#: EPGSearch.py:574
 msgid "History"
 msgstr "Vēsture"
 
+#: EPGSearchSetup.py:40
 msgid "How many entries to keep in the search history at most. 0 disables history entirely!"
 msgstr "Cik daudz ierakstu paturēt meklēšanas vēsturē. 0 atspējo vēstures ierakstus!"
 
+#: EPGSearchSetup.py:50
 msgid "If 'Search only bouquets' is enabled, show service name as in bouquets for renamed services."
 msgstr "Ja 'Meklēt tikai buķetēs' ir iespējots, tad pārdēvētajiem kanāliem attēlos kanāla nosaukumu kā buķetē."
 
+#: EPGSearchSetup.py:49
 msgid "If this setting is enabled, searching EPG in only services in user bouquets."
 msgstr "Ja šis iestatījums ir iespējots, tad meklēs tikai kanālos kuri ir buķetēs."
 
+#: EPGSearchSetup.py:41
 msgid "If this setting is enabled, the plugin adds a \"Search\" Button to the regular EPG."
 msgstr "Ja šis iestatījums ir iespējots, tad spraudnis pievieno \"Meklēt\" pogu standarata EPG."
 
+#: EPGSearchSetup.py:43
 msgid "If this setting is enabled, the plugin adds picons."
 msgstr "Ja šis istatījums ir iespējots, tad spraudnis pievienos pikonas."
 
+#: EPGSearch.py:813
 msgid "Import from AutoTimer"
 msgstr "Iegūt no auto taimera"
 
+#: EPGSearch.py:802
 msgid "Import from EPG"
 msgstr "Iegūt no EPG"
 
+#: EPGSearch.py:801
 msgid "Import from Timer"
 msgstr "Iegūt no taimera"
 
+#: EPGSearchSetup.py:40
 msgid "Length of History"
 msgstr "Vēstures ilgums"
 
+#: EPGSearch.py:950
 msgid "List of history is cleared !"
 msgstr "Vēsture ir attīrīta!"
 
+#: EPGSearch.py:624 EPGSearch.py:738
 msgid "Lookup in TMBD"
 msgstr "Meklēt TMBD"
 
+#: EPGSearch.py:573
 msgid "New Search"
 msgstr "Meklēt no jauna"
 
+#: EPGSearch.py:968
 msgid "No history !"
 msgstr "Nav vēstures!"
 
+#: EPGSearch.py:1080 EPGSearchSetup.py:70
 msgid "OK"
 msgstr "Labi"
 
+#: EPGSearch.py:820
 msgid "Open selected in IMDb"
 msgstr "Atvērt izvēlēto IMDb"
 
+#: EPGSearch.py:739
 msgid "Partnerbox Entries"
 msgstr "Partnerbox ieraksti"
 
+#: EPGSearch.py:814
 msgid "Save search as AutoTimer"
 msgstr "Saglabāt atrasto kā auto taimeri"
 
+#: plugin.py:40 plugin.py:50
 msgid "Search"
 msgstr "Meklēt"
 
+#: plugin.py:144
 msgid "Search EPG by title event"
 msgstr "Meklēt EPG pēc notikumiem"
 
+#: plugin.py:164 plugin.py:166
 msgid "Search event in EPG"
 msgstr "Meklēt notikumu EPG"
 
+#: EPGSearch.py:818
 msgid "Search for TMDb info"
 msgstr "Meklēt TMDb info"
 
+#: EPGSearchSetup.py:49
 msgid "Search only bouquets"
 msgstr "Meklēt tikai buķetēs"
 
+#: EPGSearchSetup.py:48
 msgid "Search strictness"
 msgstr "Meklēšanas atbilstība"
 
+#: EPGSearchSetup.py:45
 msgid "Search type"
 msgstr "Meklēšanas tips"
 
+#: EPGSearchSetup.py:51
 msgid "Search type for filter"
 msgstr "Meklēšanas tips filtrēšanai"
 
+#: EPGSearch.py:1094
 msgid "Select a timer to search"
 msgstr "Izvēlieties taimeri lai meklētu"
 
+#: EPGSearch.py:741 plugin.py:43
 msgid "Select action:"
 msgstr "Izvēlieties darbību:"
 
+#: plugin.py:41
 msgid "Select channel"
 msgstr "Izvēlieties kanālu"
 
+#: EPGSearch.py:883 EPGSearch.py:962
 msgid "Select text to search for"
 msgstr "Norādiet tekstu kuru meklēt"
 
+#: EPGSearchSetup.py:51
 msgid "Select type for filter search. Press button P +/- for show/hide filter in description after search."
 msgstr "Izvēlieties meklēšanas veidu filtrēšanai. Lietojiet P +/- lai parādītu/slēptu filtrus aprakstā pēc meklēšanas."
 
+#: EPGSearchSetup.py:45
 msgid "Select type for search, \"partial match\" for the most extensive search."
 msgstr "Izvēlieties meklēšanas tipu, \"atbilst daļēji\" lielākam rezultātu daudzumam."
 
+#: EPGSearchSetup.py:42
 msgid "Select type: 'Search and Select channel' or 'Search'."
 msgstr "Izvēlieties veidu: 'Meklēt un izvēlēties kanālu' vai 'meklēt'."
 
+#: EPGSearchSetup.py:48
 msgid "Select whether or not you want to enforce case correctness."
 msgstr "Izvēlieties vai vēlaties lietot reģistra korekciju"
 
+#: EPGSearch.py:825
 msgid "Setup"
 msgstr "Iestatījumi"
 
+#: EPGSearch.py:824
 msgid "Timers list"
 msgstr "Taimeru saraksts"
 
+#: EPGSearchSetup.py:42
 msgid "Type blue Button"
 msgstr "Zilā poga"
 
+#: EPGSearchSetup.py:43
 msgid "Use Picons"
 msgstr "Lietot pikonas"
 
+#: EPGSearch.py:810
 msgid "Zap to selected service"
 msgstr "Pārslēgt uz izvēlēto kanālu"
 
+#: __init__.py:38
 msgid "case-insensitive search"
 msgstr "meklēt reģistr nejūtīgi"
 
+#: __init__.py:38
 msgid "case-sensitive search"
 msgstr "meklēt reģistr jūtīgi"
 
+#: __init__.py:31
 msgid "choice (Search and standard)"
 msgstr "izvēlēties (meklēt vai standarta)"
 
+#: __init__.py:37 __init__.py:39
 msgid "exact match"
 msgstr "atbilst tieši"
 
+#: __init__.py:31
 msgid "only Search"
 msgstr "tikai meklēt"
 
+#: __init__.py:37 __init__.py:39
 msgid "partial match"
 msgstr "atbilst daļēji"
 
+#: plugin.py:157
 msgid "search EPG"
 msgstr "meklēt EPG"
 
+#: plugin.py:151
 msgid "search EPG..."
 msgstr "meklēt EPG..."
 
+#: __init__.py:39
 msgid "title starts with"
 msgstr "nosaukums sākas ar"

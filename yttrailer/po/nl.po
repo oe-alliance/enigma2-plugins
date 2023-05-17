@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-11 13:30+0000\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2012-03-14 12:08+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: Rob van der Does\n"
@@ -19,38 +19,50 @@ msgstr ""
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 
+#: plugin.py:52
 msgid "1080p"
 msgstr "1080p"
 
+#: plugin.py:52
 msgid "720p"
 msgstr "720p"
 
+#: plugin.py:452
 msgid "Best resolution"
 msgstr "Beste resolutie"
 
+#: plugin.py:446
 msgid "Cancel"
 msgstr "Annulee"
 
+#: plugin.py:454
 msgid "Close Player with exit-key"
 msgstr "Sluit speler met exit-key"
 
+#: plugin.py:451
 msgid "Extended search filter"
 msgstr "Uitgebreid zoekfilter"
 
+#: plugin.py:453
 msgid "Max. results in list-mode"
 msgstr "Max. resultaten in list-modus"
 
+#: plugin.py:52
 msgid "No HD streaming"
 msgstr "Geen HD streaming"
 
+#: plugin.py:447
 msgid "Save"
 msgstr "Sla op"
 
+#: plugin.py:450
 msgid "Show Setup in Extensions menu"
 msgstr "Show instellingen in extensies menu"
 
+#: plugin.py:99 plugin.py:101
 msgid "YouTube-Trailer Setup"
 msgstr "YouTube-Trailer instellingen"
 
+#: plugin.py:400 plugin.py:406
 msgid "leave movie player..."
 msgstr "verlaat movieplayer...."

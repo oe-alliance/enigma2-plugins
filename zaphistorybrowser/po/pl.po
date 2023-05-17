@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: open.ATV-ZapHistoryBrowser\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2015-02-06 14:33+0100\n"
 "Last-Translator: Mariusz1970 <Mariusz1970@onet.eu>\n"
 "Language-Team: open.ATV <Mariusz1970@onet.eu>\n"
@@ -16,38 +16,50 @@ msgstr ""
 "X-Generator: Poedit 1.7.4\n"
 "X-Poedit-SearchPath-0: /home/aliabdul/dream/enigma2-plugins/zaphistorybrowser/src\n"
 
+#: plugin.py:217
 msgid "Clear"
 msgstr "Czyść"
 
+#: plugin.py:220
 msgid "Config"
 msgstr "Konfig."
 
+#: plugin.py:218
 msgid "Delete"
 msgstr "Usuń"
 
+#: plugin.py:125
 msgid "Enable zap history:"
 msgstr "Włącz historię przełączania:"
 
+#: plugin.py:127
 msgid "Enigma1-like history:"
 msgstr "Jak historia-Enigma1:"
 
+#: plugin.py:126
 msgid "Maximum zap history entries:"
 msgstr "Historia wpisów maks.przełączeń:"
 
+#: plugin.py:219
 msgid "Zap"
 msgstr "Przełącz"
 
+#: plugin.py:205 plugin.py:318
 msgid "Zap-History Browser"
 msgstr "Historia przeglądania"
 
+#: plugin.py:118
 msgid "Zap-History Configurator"
 msgstr "Konfiguracja Historii"
 
+#: plugin.py:49
 msgid "disabled"
 msgstr "wyłączone"
 
+#: plugin.py:49
 msgid "disabled at parental lock"
 msgstr "wył.w blokadzie rodzicielskiej"
 
+#: plugin.py:49
 msgid "enabled"
 msgstr "włączone"

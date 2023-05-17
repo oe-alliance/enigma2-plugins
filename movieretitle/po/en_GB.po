@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2012-03-16 14:29+0100\n"
 "Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
@@ -17,35 +17,45 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: plugin.py:52
 msgid "Cancel"
 msgstr "Cancel"
 
+#: plugin.py:97
 msgid "Choose target folder"
 msgstr "Choose target folder"
 
+#: plugin.py:73
 msgid "Description"
 msgstr "Description"
 
+#: plugin.py:294
 #, python-format
 msgid "Failed to move the movie %s to %s in the background"
 msgstr "Failed to move the movie %s to %s in the background"
 
+#: plugin.py:71
 msgid "Filename"
 msgstr "Filename"
 
+#: plugin.py:69
 msgid "Location"
 msgstr "Location"
 
+#: plugin.py:82
 msgid "Name and Description Input"
 msgstr "Name and Description Input"
 
+#: plugin.py:51
 msgid "OK"
 msgstr "OK"
 
+#: plugin.py:301
 #, python-format
 msgid "Successfully moved the movie %s"
 msgstr "Successfully moved the movie %s"
 
+#: plugin.py:136
 #, python-format
 msgid ""
 "Target file %s.ts already exist.\n"
@@ -54,15 +64,19 @@ msgstr ""
 "Target file %s.ts already exist.\n"
 "Do you want to replace it?"
 
+#: plugin.py:253
 #, python-format
 msgid "The movie is moved in the background from %s to %s."
 msgstr "The movie is moved in the background from %s to %s."
 
+#: plugin.py:140
 msgid "The target directory is not found. The file is not renamed."
 msgstr "The target directory is not found. The file is not renamed."
 
+#: plugin.py:72
 msgid "Title"
 msgstr "Title"
 
+#: plugin.py:25
 msgid "change name..."
 msgstr "change name..."

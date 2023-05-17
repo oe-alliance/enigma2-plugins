@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: audio sync Persian Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"POT-Creation-Date: 2023-05-17 21:24+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: mehdi <mehdi_ar_yekta@yahoo.com>\n"
 "Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
@@ -15,162 +15,212 @@ msgstr ""
 "X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
 "X-Poedit-SearchPath-0: src\n"
 
+#: AC3main.py:65 AC3main.py:147 AC3main.py:234 AC3main.py:238 AC3main.py:239
 #, python-format
 msgid "%i ms"
 msgstr ""
 
+#: plugin.py:66
 msgid "Audio Sync"
 msgstr "هم زمان سازی صدا"
 
+#: AC3setup.py:32 plugin.py:37 plugin.py:42 plugin.py:47 plugin.py:65
 msgid "Audio Sync Setup"
 msgstr "راه اندازی هم زمان سازی صدا"
 
+#: AC3main.py:73 AC3setup.py:58
 msgid "Cancel"
 msgstr "لغو کردن"
 
+#: MovableScreen.py:37
 msgid "Center screen at the lower border"
 msgstr "قرار دادن مرکزیت صفحه در مرز پایینی"
 
+#: MovableScreen.py:31
 msgid "Center screen at the upper border"
 msgstr "حرکت دادن صفحه به بالاتر از حد مرز بالایی"
 
+#: AC3main.py:83 AC3main.py:84
 msgid "Change active delay"
 msgstr "تغییر تاخیر فعالیت ها"
 
+#: AC3main.py:68
 msgid "Channel audio:"
 msgstr "کانال های صوتی"
 
+#: AC3main.py:86
 msgid "Decrease delay"
 msgstr "کاهش دادن تاخیر"
 
+#: AC3main.py:90 AC3main.py:92 AC3main.py:94
 #, python-format
 msgid "Decrease delay by %i ms (can be set)"
 msgstr ""
 
+#: AC3main.py:82 AC3main.py:87
 msgid "Discard changes and close plugin"
 msgstr "انصراف از انجام تغییرات و بستن پلاگین"
 
+#: MovableScreen.py:23 MovableScreen.py:28
 msgid "Discard changes and close screen"
 msgstr "انصراف از تغییرات و بستن صفحه صفحه مربوطه"
 
+#: AC3main.py:61
 msgid "Global delay"
 msgstr "تاخیر جهانی"
 
+#: AC3main.py:85
 msgid "Increase delay"
 msgstr "افزایش دادن تاخیر"
 
+#: AC3main.py:91 AC3main.py:93 AC3main.py:95
 #, python-format
 msgid "Increase delay by %i ms (can be set)"
 msgstr ""
 
+#: AC3main.py:219 AC3main.py:274
 msgid "Invalid selection"
 msgstr "انتخاب نا معتبر"
 
+#: AC3main.py:272
 #, python-format
 msgid "Key %(Key)s successfully set to %(delay)i ms"
 msgstr ""
 
+#: AC3main.py:255
 #, python-format
 msgid "Key %(key)s (current value: %(value)i ms)"
 msgstr ""
 
+#: AC3main.py:212
 msgid "Menu"
 msgstr "منو"
 
+#: AC3main.py:209
 msgid "Move plugin screen"
 msgstr "جابجا کردن صفحه پلاگین"
 
+#: MovableScreen.py:27
 msgid "Move screen down"
 msgstr "حرکت دادن صفحه به پایین"
 
+#: MovableScreen.py:34
 msgid "Move screen to the center of your TV"
 msgstr "انتقال صفحه به مرکز صفحه تلوزیون شما"
 
+#: MovableScreen.py:24
 msgid "Move screen to the left"
 msgstr "حرکت دادن صفحه به چپ"
 
+#: MovableScreen.py:36
 msgid "Move screen to the lower left corner"
 msgstr "حرکت دادن صفحه به گوشه چپ پایینی"
 
+#: MovableScreen.py:38
 msgid "Move screen to the lower right corner"
 msgstr "حرکت دادن صفحه به گوشه راست پایینی"
 
+#: MovableScreen.py:33
 msgid "Move screen to the middle of the left border"
 msgstr "انتقال صفحه به مرکز مرز چپی"
 
+#: MovableScreen.py:35
 msgid "Move screen to the middle of the right border"
 msgstr "انتقال صفحه به میانه مرز راستی"
 
+#: MovableScreen.py:25
 msgid "Move screen to the right"
 msgstr "حرکت دادن صفحه به راست"
 
+#: MovableScreen.py:30
 msgid "Move screen to the upper left corner"
 msgstr "حرکت دادن صفحه به گوشه چپ بالایی"
 
+#: MovableScreen.py:32
 msgid "Move screen to the upper right corner"
 msgstr "حرکت دادن صفحه به گوشه راست بالایی"
 
+#: MovableScreen.py:26
 msgid "Move screen up"
 msgstr "حرکت دادن صفحه به بالا"
 
+#: AC3main.py:74 AC3setup.py:59
 msgid "OK"
 msgstr "مورد تایید است"
 
+#: AC3main.py:80
 msgid "Open plugin menu"
 msgstr "باز کردن منو پلاگین"
 
+#: AC3setup.py:42
 msgid "Outer Bound (+/-)"
 msgstr "(+/-) سرحد بیرونی"
 
+#: AC3setup.py:38
 #, python-format
 msgid "Plugin: %(plugin)s , Version: %(version)s"
 msgstr ""
 
+#: MovableScreen.py:39
 msgid "Reset saved position"
 msgstr "تنظیم مجدد موقعیت ذخیره سازی شده"
 
+#: AC3main.py:89
 msgid "Save current delay to key"
 msgstr "ذخیره سازی تاخیرات فعلی با کلید"
 
+#: AC3main.py:75
 msgid "Save to key"
 msgstr "ذخیره سازی  با کلید"
 
+#: AC3main.py:81 AC3main.py:88
 msgid "Save values and close plugin"
 msgstr "ذخیره سازی مقادیر و بستن پلاگین "
 
+#: MovableScreen.py:22 MovableScreen.py:29
 msgid "Save values and close screen"
 msgstr "ذخیره سازی مقادیر و بستن صفحه پلاگین "
 
+#: AC3main.py:249
 #, python-format
 msgid "Select the key you want to set to %i ms"
 msgstr ""
 
+#: AC3main.py:60
 msgid "Service delay"
 msgstr "تاخیر در ارائه خدمات"
 
+#: AC3main.py:96 AC3main.py:97 AC3main.py:98 AC3main.py:99
 #, python-format
 msgid "Set delay to %i ms (can be set)"
 msgstr ""
 
+#: AC3main.py:260
 msgid "Setting key canceled"
 msgstr "تنظیمات کلیدها لغو گردید"
 
+#: plugin.py:65
 msgid "Setup for the Audio Sync Plugin"
 msgstr "راه اندازی پلاگین هم زمان سازی صدا "
 
+#: AC3setup.py:43
 msgid "Step in ms for arrow keys"
 msgstr "گامی در ام اس برای کلیدهای جهت دار"
 
+#: AC3setup.py:48 AC3setup.py:49 AC3setup.py:50
 #, python-format
 msgid "Step in ms for key %i"
 msgstr ""
 
+#: AC3setup.py:45 AC3setup.py:46 AC3setup.py:47
 #, python-format
 msgid "Step in ms for keys '%s'"
 msgstr ""
 
+#: AC3setup.py:44
 msgid "Wait time in ms before activation:"
 msgstr "توقف زمان در ام اس قبل از فعال سازی"
 
+#: plugin.py:66
 msgid "sets the Audio Delay (LipSync)"
 msgstr " (LipSync) تنظیم تاخیر صدا بر حسب"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2012-03-16 16:31+0100\n"
 "Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
@@ -17,27 +17,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: plugin.py:88
 msgid "Assign plugin to long blue key pressed"
 msgstr "Assign plugin to long blue key pressed"
 
+#: plugin.py:85
 msgid "Assign plugin to long green key pressed"
 msgstr "Assign plugin to long green key pressed"
 
+#: plugin.py:87
 msgid "Assign plugin to long red key pressed"
 msgstr "Assign plugin to long red key pressed"
 
+#: plugin.py:86
 msgid "Assign plugin to long yellow key pressed"
 msgstr "Assign plugin to long yellow key pressed"
 
+#: plugin.py:90
 msgid "Assign plugin to red key pressed"
 msgstr "Assign plugin to red key pressed"
 
+#: plugin.py:207
 msgid "Cancel"
 msgstr "Cancel"
 
+#: plugin.py:159
 msgid "Display 4:3 content as"
 msgstr "Display 4:3 content as"
 
+#: plugin.py:147 plugin.py:186
 #, python-format
 msgid ""
 "Error!\n"
@@ -46,68 +54,91 @@ msgstr ""
 "Error!\n"
 "Error Text: %s"
 
+#: plugin.py:165 plugin.py:239 plugin.py:288
 msgid "HbbTV Applications"
 msgstr ""
 
+#: plugin.py:155
 msgid "Just Scale"
 msgstr "Just Scale"
 
+#: plugin.py:141 plugin.py:234 plugin.py:280
 msgid "MediaPlayer"
 msgstr "MediaPlayer"
 
+#: plugin.py:136 plugin.py:233 plugin.py:278
 msgid "Multi EPG"
 msgstr "Multi EPG"
 
+#: plugin.py:190
 msgid "No plugin assigned!"
 msgstr "No plugin assigned!"
 
+#: plugin.py:35 plugin.py:36 plugin.py:37 plugin.py:38 plugin.py:39
+#: plugin.py:130 plugin.py:231
 msgid "Nothing"
 msgstr "Nothing"
 
+#: plugin.py:208
 msgid "OK"
 msgstr "OK"
 
+#: plugin.py:259
 msgid "Overwrite HBBTV-red-button"
 msgstr ""
 
+#: plugin.py:154
 msgid "Pan&Scan"
 msgstr "Pan&Scan"
 
+#: plugin.py:153
 msgid "Pillarbox"
 msgstr "Pillarbox"
 
+#: plugin.py:148 plugin.py:235 plugin.py:282
 msgid "Plugin browser"
 msgstr "Plugin browser"
 
+#: plugin.py:188
 msgid "Plugin not found!"
 msgstr "Plugin not found!"
 
+#: plugin.py:131 plugin.py:232 plugin.py:276
 msgid "Single EPG"
 msgstr "Single EPG"
 
+#: plugin.py:161 plugin.py:237 plugin.py:286
 msgid "Timer"
 msgstr "Timer"
 
+#: plugin.py:128
 msgid "Unknown Error"
 msgstr "Unknown Error"
 
+#: plugin.py:268
 msgid "assigned to long blue"
 msgstr "assigned to long blue"
 
+#: plugin.py:266
 msgid "assigned to long green"
 msgstr "assigned to long green"
 
+#: plugin.py:265
 msgid "assigned to long red"
 msgstr "assigned to long red"
 
+#: plugin.py:267
 msgid "assigned to long yellow"
 msgstr "assigned to long yellow"
 
+#: plugin.py:271
 msgid "assigned to red"
 msgstr "assigned to red"
 
+#: plugin.py:78
 msgid "setup for Quickbutton"
 msgstr "setup for Quickbutton"
 
+#: plugin.py:152 plugin.py:236 plugin.py:284
 msgid "switch 4:3 content display"
 msgstr "switch 4:3 content display"

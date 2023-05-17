@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# $PACKAGEDESCRIPION
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the PluginHider package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: PluginHider 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,50 +17,66 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: PluginHiderSetup.py:60
 msgid "Cancel"
 msgstr ""
 
+#: PluginHiderSetup.py:102
 msgid "Could not start Plugin:"
 msgstr ""
 
+#: PluginHiderSetup.py:65
 msgid "Eventinfo"
 msgstr ""
 
+#: PluginHiderSetup.py:64
 msgid "Extensions"
 msgstr ""
 
+#: plugin.py:92
 msgid "Hide Plugins"
 msgstr ""
 
+#: PluginHiderSetup.py:59
 msgid "OK"
 msgstr ""
 
+#: PluginHiderSetup.py:129
 msgid "PluginHider Setup"
 msgstr ""
 
+#: PluginHiderSetup.py:63
 msgid "Plugins"
 msgstr ""
 
+#: PluginHiderSetup.py:62
 msgid "Run"
 msgstr ""
 
+#: PluginHiderSetup.py:102
 msgid "Unable to access InfoBar."
 msgstr ""
 
+#: PluginHiderSetup.py:75
 msgid "end editing"
 msgstr ""
 
+#: PluginHiderSetup.py:77
 msgid "run selected plugin"
 msgstr ""
 
+#: PluginHiderSetup.py:76
 msgid "save"
 msgstr ""
 
+#: PluginHiderSetup.py:78
 msgid "select next tab"
 msgstr ""
 
+#: PluginHiderSetup.py:79
 msgid "select previous tab"
 msgstr ""
 
+#: PluginHiderSetup.py:74
 msgid "toggle selection"
 msgstr ""

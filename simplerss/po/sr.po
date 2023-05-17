@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 SimpleRSS Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-26 12:31+0000\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2009-09-27 18:13+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -18,93 +18,122 @@ msgstr ""
 "X-Poedit-Country: SERBIA\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#: plugin.py:117
 #, python-format
 msgid "%d Feed(s) were added to configuration."
 msgstr "%d Fid(ova) su dodati u konfiguraciju."
 
+#: plugin.py:151
 msgid "A simple to use RSS reader"
 msgstr "Jednostavan RSS čitač"
 
+#: RSSSetup.py:21
 msgid "Autoupdate"
 msgstr "Autoažuriranje"
 
+#: RSSSetup.py:27 RSSSetup.py:78
 msgid "Cancel"
 msgstr "Otkaži"
 
+#: RSSScreens.py:466 RSSScreens.py:471
 msgid "Close"
 msgstr "Zatvori"
 
+#: RSSSetup.py:81
 msgid "Delete"
 msgstr "Obriši"
 
+#: RSSScreens.py:130 RSSScreens.py:217
 msgid "Enclosures"
 msgstr "Prilozi"
 
+#: RSSScreens.py:420 RSSScreens.py:448
 msgid "Entries"
 msgstr "Unosi"
 
+#: RSSScreens.py:125 RSSScreens.py:212 RSSScreens.py:321
 #, python-format
 msgid "Entry %s/%s"
 msgstr "Unos %s/%s"
 
+#: RSSScreens.py:60
 msgid "Error while parsing Feed, this usually means there is something wrong with it."
 msgstr "Greška kod analiziranja fida.ovo obično znači da nešto s njim nije u redu."
 
+#: RSSPoller.py:89
 msgid "Failed to get subscriptions from Google Reader."
 msgstr "Neuspešno dobijanje odobrenja od Gugl Čitača."
 
+#: RSSPoller.py:70
 msgid "Failed to login to Google Reader."
 msgstr "Neuspelo registrovanje u Gugl Čitač."
 
+#: RSSSetup.py:103
 msgid "Feed"
 msgstr "Fid"
 
+#: RSSScreens.py:421 RSSScreens.py:449
 #, python-format
 msgid "Feed %s/%s"
 msgstr "Fidl %s/%s"
 
+#: RSSSetup.py:22
 msgid "Feed URI"
 msgstr "Fid URI"
 
+#: RSSScreens.py:324 RSSScreens.py:326
 msgid "Feed is empty."
 msgstr "Fid je prazan."
 
+#: RSSSetup.py:118
 msgid "Fetch feeds from Google Reader?"
 msgstr "Dobavljati fidove sa Gugl Čitača?"
 
+#: RSSScreens.py:101
 msgid "Found no Enclosure we can display."
 msgstr "Nije nađen nijedan prilog koji se može prikazati."
 
+#: RSSSetup.py:124
 msgid "Google Password"
 msgstr "Gugl lozinka"
 
+#: RSSSetup.py:123
 msgid "Google Username"
 msgstr "Gugl korisničko ime"
 
+#: RSSSetup.py:110
 msgid "Keep running in background"
 msgstr "Nastavi rad u pozadini"
 
+#: RSSSetup.py:80
 msgid "New"
 msgstr "Novi"
 
+#: RSSPoller.py:42 RSSTickerView.py:99
 msgid "New Items"
 msgstr "Novi artikli"
 
+#: RSSPoller.py:43
 msgid "New Items since last Auto-Update"
 msgstr "Novi artikli od zadnjeg autoažuriranja"
 
+#: RSSScreens.py:156 RSSScreens.py:219
 msgid "No such Item."
 msgstr "Nema takvog artikla."
 
+#: plugin.py:16
 msgid "Notification"
 msgstr "Obaveštenje"
 
+#: RSSSetup.py:28 RSSSetup.py:79
 msgid "OK"
 msgstr "OK"
 
+#: plugin.py:17
 msgid "Preview"
 msgstr "Pregled"
 
+#: RSSSetup.py:146
 msgid ""
 "Really delete this entry?\n"
 "It cannot be recovered!"
@@ -112,26 +141,33 @@ msgstr ""
 "Stvarno obrisati ovaj unos?\n"
 "On ne može biti obnovljen!"
 
+#: RSSPoller.py:208
 #, python-format
 msgid "Received %d new news item(s)."
 msgstr "Primljeno %d novih artikala vest(i)."
 
+#: RSSScreens.py:465 RSSScreens.py:470
 msgid "Setup"
 msgstr "podešavanje"
 
+#: RSSSetup.py:116
 msgid "Show new Messages as"
 msgstr "Pokaži nove poruke kao"
 
+#: RSSScreens.py:429
 msgid "Simple RSS Reader"
 msgstr "Jednostavni RSS Čitač"
 
+#: RSSSetup.py:41 RSSSetup.py:96
 msgid "Simple RSS Reader Setup"
 msgstr "Podešavanje jednostavnog RSS Čitača"
 
+#: RSSScreens.py:150 RSSScreens.py:313
 #, python-format
 msgid "Simple RSS Reader: %s"
 msgstr "Jednostavni RSS Čitač: %s"
 
+#: RSSPoller.py:129
 #, python-format
 msgid ""
 "Sorry, this type of feed is unsupported:\n"
@@ -140,21 +176,27 @@ msgstr ""
 "Žao mi je, ovaj tip fida nije podržant:\n"
 "%s"
 
+#: RSSSetup.py:107
 msgid "Start automatically with Enigma2"
 msgstr "Pokreni automatski sa Enigmom2 "
 
+#: plugin.py:140
 msgid "Subscribe Newsfeed..."
 msgstr "Pretplati se na fid vesti..."
 
+#: plugin.py:18
 msgid "Ticker"
 msgstr ""
 
+#: RSSScreens.py:464
 msgid "Update Feed"
 msgstr "Ažuriraj fid"
 
+#: RSSSetup.py:117
 msgid "Update Interval (min)"
 msgstr "Ažuriraj interval (min)"
 
+#: RSSScreens.py:86
 msgid ""
 "Update is being done in Background.\n"
 "Contents will automatically be updated when it's done."
@@ -162,11 +204,14 @@ msgstr ""
 "Ažuriranje se obavlja u pozadini.\n"
 "Sadržaj će automatski biti ažuriran kad se završi."
 
+#: plugin.py:163
 msgid "View RSS..."
 msgstr "Vidi RSS ..."
 
+#: RSSScreens.py:477
 msgid "What to do?"
 msgstr "Šta činiti?"
 
+#: plugin.py:19
 msgid "none"
 msgstr "nijedan"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:24+0100\n"
 "PO-Revision-Date: 2012-05-08 18:28+0100\n"
 "Last-Translator: Ralf Biedermann <ralf.biedermann@rbsoft.de>\n"
 "Language-Team: none\n"
@@ -17,71 +17,99 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: AutomaticVolumeAdjustmentSetup.py:143
 msgid "Add"
 msgstr "Hinzufügen"
 
+#: AutomaticVolumeAdjustmentSetup.py:142 AutomaticVolumeAdjustmentSetup.py:279
 msgid "Adjustment value"
 msgstr "Korrekturwert"
 
+#: plugin.py:62 plugin.py:66
 msgid "Automatic Volume Adjustment"
 msgstr "Automatische Lautstärkekorrektur"
 
+#: AutomaticVolumeAdjustmentSetup.py:58
 msgid "Automatic Volume Adjustment - Config"
 msgstr "Automatische Lautstärkekorrektur - Konfiguration"
 
+#: AutomaticVolumeAdjustmentSetup.py:256
 msgid "Automatic Volume Adjustment - Entry Config"
 msgstr "Automatische Lautstärkekorrektur - Startkonfiguration"
 
+#: AutomaticVolumeAdjustmentSetup.py:140
 msgid "Automatic Volume Adjustment - Service Config"
 msgstr "Automatische Lautstärkekorrektur - Senderkonfiguration"
 
+#: AutomaticVolumeAdjustmentConfig.py:76
 msgid "Automatic volume adjust"
 msgstr "Automatische Lautstärkekorrektur"
 
+#: AutomaticVolumeAdjustmentSetup.py:66 AutomaticVolumeAdjustmentSetup.py:264
 msgid "Cancel"
 msgstr "Abbruch"
 
+#: AutomaticVolumeAdjustmentSetup.py:287
 msgid "Channel Selection"
 msgstr "Senderauswahl"
 
+#: AutomaticVolumeAdjustmentSetup.py:84
 msgid "Default volume adjustment value for AC3/DTS"
 msgstr "Voreingestellter Korrekturwert für AC3/DTS"
 
+#: AutomaticVolumeAdjustmentSetup.py:146
 msgid "Delete"
 msgstr "Löschen"
 
+#: AutomaticVolumeAdjustmentSetup.py:193
 msgid "Do you really want to delete this entry?"
 msgstr "Soll der Eintrag wirklich gelöscht werden?"
 
+#: AutomaticVolumeAdjustmentSetup.py:145
 msgid "Edit"
 msgstr "Bearbeiten"
 
+#: AutomaticVolumeAdjustmentSetup.py:77
 msgid "Enable"
 msgstr "Aktivieren"
 
+#: AutomaticVolumeAdjustmentSetup.py:85
 msgid "Max. volume for mpeg audio"
 msgstr "Maximallautstärke für MPEG Ton"
 
+#: AutomaticVolumeAdjustmentSetup.py:81
 msgid "Modus"
 msgstr ""
 
+#: AutomaticVolumeAdjustmentSetup.py:67 AutomaticVolumeAdjustmentSetup.py:144
+#: AutomaticVolumeAdjustmentSetup.py:265
 msgid "OK"
 msgstr ""
 
+#: AutomaticVolumeAdjustmentSetup.py:86
+msgid "Only AC3/DTS(HD)"
+msgstr ""
+
+#: AutomaticVolumeAdjustmentConfig.py:96
 msgid "Press OK to select a service"
 msgstr "OK drücken um einen Sender zu wählen"
 
+#: AutomaticVolumeAdjustmentConfig.py:76
 msgid "Remember service volume value"
 msgstr "Lautstärkewert für Sender merken"
 
+#: AutomaticVolumeAdjustmentSetup.py:141 AutomaticVolumeAdjustmentSetup.py:277
 msgid "Servicename"
 msgstr "Sendername"
 
+#: AutomaticVolumeAdjustmentSetup.py:87
 msgid "Services"
 msgstr "Sender"
 
+#: AutomaticVolumeAdjustmentSetup.py:88
 msgid "Show volumebar when volume-value was changed"
 msgstr "Zeige Lautstärkebalken wenn Lautstärke geändert wurde"
 
+#: AutomaticVolumeAdjustmentSetup.py:307
 msgid "You must select a valid service!"
 msgstr "Es muss ein gültiger Sender gewählt werden!"

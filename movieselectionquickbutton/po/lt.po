@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MovieSelectionQuickButton\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2017-07-10 18:01+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. vyteniui@gmail.com\n"
@@ -18,24 +18,32 @@ msgstr ""
 "X-Generator: Poedit 2.0.2\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
+#: plugin.py:79
 msgid "Assign plugin to blue key pressed"
 msgstr "Priskirti įskiepiui 'MĖLYNĄ' mygtuką"
 
+#: plugin.py:77
 msgid "Assign plugin to green key pressed"
 msgstr "Priskirti įskiepiui 'ŽALIĄ' mygtuką"
 
+#: plugin.py:76
 msgid "Assign plugin to red key pressed"
 msgstr "Priskirti įskiepiui 'RAUDONĄ' mygtuką"
 
+#: plugin.py:78
 msgid "Assign plugin to yellow key pressed"
 msgstr "Priskirti įskiepiui 'GELTONĄ' mygtuką"
 
+#: plugin.py:187
 msgid "Cancel"
 msgstr "Atšaukti"
 
+#: plugin.py:38 plugin.py:101 plugin.py:102 plugin.py:127 plugin.py:191
+#: plugin.py:243
 msgid "Delete"
 msgstr "Ištrinti"
 
+#: plugin.py:162
 #, python-format
 msgid ""
 "Error!\n"
@@ -44,56 +52,75 @@ msgstr ""
 "Įvyko klaida!\n"
 "Pranešimas: %s"
 
+#: plugin.py:103 plugin.py:104 plugin.py:131 plugin.py:192 plugin.py:245
 msgid "Home"
 msgstr "Pradžia"
 
+#: plugin.py:166
 msgid "No plugin assigned!"
 msgstr "Įskiepis nepriskirtas!"
 
+#: plugin.py:39 plugin.py:40 plugin.py:41 plugin.py:100 plugin.py:126
+#: plugin.py:190
 msgid "Nothing"
 msgstr "Nieko"
 
+#: plugin.py:188
 msgid "OK"
 msgstr "Gerai"
 
+#: plugin.py:164
 msgid "Plugin not found!"
 msgstr "Įskiepio nerasta"
 
+#: plugin.py:266 plugin.py:270
 msgid "Setup for MovieSelection QuickButton"
 msgstr "MovieSelection QuickButton sąranka"
 
+#: plugin.py:220
 msgid "Show Setup in Extensions menu"
 msgstr ""
 
+#: plugin.py:105 plugin.py:134 plugin.py:193 plugin.py:247
 msgid "Sort"
 msgstr "Rūšiuoti"
 
+#: plugin.py:123
 msgid "Unknown Error"
 msgstr "Nežinoma klaida"
 
+#: plugin.py:109 plugin.py:137
 msgid "alphabetic sort"
 msgstr "pagal abėcėlę"
 
+#: plugin.py:218
 msgid "assigned to blue"
 msgstr "priskirtas 'MĖLYNAM'"
 
+#: plugin.py:216
 msgid "assigned to green"
 msgstr "priskirtas 'ŽALIAM'"
 
+#: plugin.py:215
 msgid "assigned to red"
 msgstr "priskirtas 'RAUDONAM'"
 
+#: plugin.py:217
 msgid "assigned to yellow"
 msgstr "priskirtas 'GELTONAM'"
 
+#: plugin.py:219
 msgid "button caption"
 msgstr "mygtuko antraštė"
 
+#: plugin.py:42
 msgid "display plugin description"
 msgstr "rodyti įskiepio aprašymą"
 
+#: plugin.py:42
 msgid "display plugin name"
 msgstr "rodyti įskiepio pavadinimą"
 
+#: plugin.py:107 plugin.py:140
 msgid "sort by date"
 msgstr "rūšiuoti pagal datą"

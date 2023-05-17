@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 WerbeZapper plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:29+0100\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2009-02-08 12:03+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <zveyis@gmail.com>\n"
 "Language-Team: www.turkeyforum.com/satforum <zveyis@gmail.com>\n"
@@ -14,34 +14,44 @@ msgstr ""
 "X-Poedit-Country: TURKEY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#: plugin.py:56
 msgid "Automatically zaps back to current service after given Time"
 msgstr "Girdiğiniz süre dolduğunda izlediğiniz kanala geri dönün"
 
+#: WerbeZapper.py:114
 msgid "Custom"
 msgstr "Özelleştir"
 
+#: WerbeZapper.py:184
 msgid "How many minutes to wait until zapping back?"
 msgstr "Kanal değiştirmek için kaç dakika beklensin?"
 
+#: WerbeZapper.py:53
 #, python-format
 msgid "Monitoring: %s (%d:%02d Min)"
 msgstr ""
 
+#: WerbeZapper.py:153
 msgid "Rezap"
 msgstr ""
 
+#: plugin.py:63
 msgid "Start / Stop monitoring instantly"
 msgstr ""
 
+#: WerbeZapper.py:135
 msgid "Start monitoring"
 msgstr ""
 
+#: WerbeZapper.py:133
 msgid "Stop monitoring"
 msgstr ""
 
+#: WerbeZapper.py:145
 msgid "Stop timer"
 msgstr ""
 
+#: WerbeZapper.py:282
 #, python-format
 msgid ""
 "WerbeZapper\n"
@@ -49,6 +59,7 @@ msgid ""
 "%s"
 msgstr ""
 
+#: WerbeZapper.py:254
 #, python-format
 msgid ""
 "WerbeZapper\n"
@@ -56,28 +67,36 @@ msgid ""
 "%s"
 msgstr ""
 
+#: WerbeZapper.py:265
 msgid ""
 "WerbeZapper\n"
 "Monitoring started unlimited\n"
 "Has to be deactivated manually"
 msgstr ""
 
+#: WerbeZapper.py:108
 msgid "When to Zap back?"
 msgstr "Kanal ne zaman değiştirilsin?"
 
+#: WerbeZapper.py:369
 msgid "Zapping back"
 msgstr ""
 
+#: WerbeZapper.py:334
 #, python-format
 msgid "Zapping back in %d Minute(s)"
 msgstr ""
 
+#: WerbeZapper.py:58
 #, python-format
 msgid "Zapping back in %d:%02d Min"
 msgstr ""
 
+#: WerbeZapper.py:115
 msgid "minute"
 msgstr ""
 
+#: WerbeZapper.py:116 WerbeZapper.py:117 WerbeZapper.py:118 WerbeZapper.py:119
+#: WerbeZapper.py:120 WerbeZapper.py:121 WerbeZapper.py:122 WerbeZapper.py:123
 msgid "minutes"
 msgstr "dakika"

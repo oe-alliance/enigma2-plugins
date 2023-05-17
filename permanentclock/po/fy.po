@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PermanentClock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2009-01-09 17:33+0100\n"
 "Last-Translator: gerrit <gerrit@nedlinux.nl>\n"
 "Language-Team: gerrit <fy@li.org>\n"
@@ -17,81 +17,107 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 
+#: plugin.py:441 plugin.py:469
 msgid "Activate permanent clock"
 msgstr "Permanent klok ynskeakelje"
 
+#: plugin.py:439 plugin.py:472
 msgid "Change permanent clock position"
 msgstr "Feroarje permanent klok posysje"
 
+#: plugin.py:518
 msgid "Choice color clock:"
 msgstr ""
 
+#: plugin.py:445 plugin.py:492
 msgid "Color analog clock"
 msgstr ""
 
+#: plugin.py:448 plugin.py:494
 msgid "Color digital clock"
 msgstr ""
 
+#: plugin.py:438 plugin.py:469
 msgid "Deactivate permanent clock"
 msgstr "Permanent klok útskeakelje"
 
+#: plugin.py:451 plugin.py:482
 msgid "Disable key 'long EXIT' show/hide"
 msgstr ""
 
+#: plugin.py:453 plugin.py:487
 msgid "Enable key 'long EXIT' show/hide"
 msgstr ""
 
+#: plugin.py:69 plugin.py:513
 msgid "PLi-transparent"
 msgstr ""
 
+#: plugin.py:425 plugin.py:595 plugin.py:601
 msgid "Permanent Clock"
 msgstr "Permanent klok"
 
+#: plugin.py:431
 #, fuzzy
 msgid "Permanent Clock Setup"
 msgstr "Permanent klok"
 
+#: plugin.py:396
 msgid "Save"
 msgstr ""
 
+#: plugin.py:396
 msgid "Set slider"
 msgstr ""
 
+#: plugin.py:401
 msgid "Set slider step (1 - 20):"
 msgstr ""
 
+#: plugin.py:447 plugin.py:475
 msgid "Show analog clock"
 msgstr ""
 
+#: plugin.py:444 plugin.py:475
 msgid "Show digital clock"
 msgstr ""
 
+#: plugin.py:601
 msgid "Shows the clock permanent on the screen"
 msgstr "Permanent klok immen op it skerm"
 
+#: plugin.py:69 plugin.py:508
 msgid "black-blue"
 msgstr ""
 
+#: plugin.py:69 plugin.py:510
 msgid "black-white"
 msgstr ""
 
+#: plugin.py:69 plugin.py:507
 msgid "black-yellow"
 msgstr ""
 
+#: plugin.py:69 plugin.py:509
 msgid "blue"
 msgstr ""
 
+#: plugin.py:70 plugin.py:503
 msgid "large white"
 msgstr ""
 
+#: plugin.py:70 plugin.py:502
 msgid "large yellow"
 msgstr ""
 
+#: plugin.py:69 plugin.py:512
 msgid "transparent"
 msgstr ""
 
+#: plugin.py:69 plugin.py:70 plugin.py:501 plugin.py:511
 msgid "white"
 msgstr ""
 
+#: plugin.py:70 plugin.py:500
 msgid "yellow"
 msgstr ""

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-MPHelper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-21 10:08+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2017-07-18 17:16+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P.\n"
@@ -13,65 +13,6 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 2.0.2\n"
 
-msgid "AutoTimer FAQ"
-msgstr "Autolaikmačio DUK"
-
-msgid "AutoTimer Help"
-msgstr "Autolaikmačio pagalba"
-
+#: MPHelp.py:52
 msgid "Close"
 msgstr "Uždaryti"
-
-msgid "Congratulations"
-msgstr "Sveikiname"
-
-msgid "FAQ"
-msgstr "DUK"
-
-msgid "Frequently asked questions about the AutoTimer"
-msgstr "Autolaikmačio Dažnai Užduodami Klausimai"
-
-msgid "Generic setup"
-msgstr "Bendroji sąranka"
-
-msgid "Question: I found a problem with the AutoTimer, can you fix it?/nAnswer: First try the AutoTimer version in a recent (experimental) Image to see if the problem was fixed. Then read the Help again and the upcoming FAQs to make sure that this is actually a problem and not expected behavior./nIf you still think there is something wrong with the AutoTimer, please visit http://www.dream-multimedia-tv.de/board and post your problem there./n/nQ: The plugin only adds timers when leaving the configuration, not automatically. What can I do?/nA: From the Overview press MENU and enter the 'Setup'. In this screen enable 'Poll automatically' and you should be good to go."
-msgstr "Klausimas: Autolaikmatis neteisingai veikia, ar galite tai sutvarkyti?/nAtsakymas: Pirmiausiai išbandykite, gal problema jau sutvarkyta naujausioje autolaikmačio versijoje iš paskutinio, eksperimentinio atvaizdo. Po to vėl perskaitykite \"Pagalbą\" ir naujausius DUK, kad įsitikintumėte, ar tai tikrai šio įskiepio problema./nJei vis dar manote, kad kažkas negerai su autolaikmačiu, apsilankykite http://www.dream-multimedia-tv.de/ ir aprašykite savo problemą forume./n/nK: Įskiepis įtraukia laikmačius tik tada, kai uždaromas konfigūravimo langas, bet ne automatiškai. Ką man daryti?/nA: 'Apžvalgoje' spauskite 'MENU' ir atsidarykite 'Sąranką'. Čia įjunkite 'Užklausti automatiškai' ir viskas veiks."
-
-msgid "Question: My AutoTimer for 'News' does not record the 'Late News'./nAnswer: Check 'Search type' and 'Search strictness' for the given AutoTimer./n/nQ: The show I'm trying to record contains umlauts in its title. AutoTimer does not find it./nA: Check the 'EPG encoding' for the given AutoTimer. For german stations 'UTF-8' should be selected./n/nQ: I seem to be unable to record two subsequent events. There is only a single timer created that spans (part of) both events./nA: From the Overview press MENU and enter the 'Setup'. In this screen disable 'Guess existing timer based on begin/end'."
-msgstr "Klausimas: Mano 'Naujienos' autolaikmatis neįrašinėja 'Paskutinės naujienos'./nAtsakymas: Tikrinkite šio laikmačio 'Paieškos tipas' ir 'Paieškos tikslumas'./n/nK: Mano norimos įrašyti laidos pavadinime yra umliautai ir autolaikmatis jos neranda./nA: Tikrinkite šio autolaikmačio 'EPG kodavimą'. Vokietijos stotims reika pasirinkti 'UTF-8'./n/nK: Man nesigauna įrašyti dviejų paskesnių įvykių. Yra sukurtas tik vienas laikmatis, kur persidengia dalis abiejų renginių./nA: Apžvalgoje spauskite 'MENU', atverkite 'Sąranką' ir išjunkite 'Atspėti esamą laikmatį, remiantis pradžia/pabaiga'."
-
-msgid "Question: You keep talking about help being provided for each parameter. I'm unable to read it (in part or in full)./nAnswer: Try using the default skin and if it works ask the creator of your regular skin. If it still does not work your image might not provide the actual default skin so contact the creator of your image."
-msgstr "Klausimas: Jūs kalbate apie pagalbą dėl kiekvieno parametro. Bet aš negaliu jos perskaityti (iš dalies arba visiškai)./nAtsakymas: Pabandykite perjungti į numatytąją aplinkos temą ir jei tai padės, parašykite apie problemą savos vartotojo aplinkos temos kūrėjui. Jei vis dar negerai, tikriausiai jūsų atvaizdas nepalaiko dabartinės numatytosios temos, todėl parašykite šio atvaizdo kūrėjams."
-
-msgid "The 'Overview'"
-msgstr "'Apžvalga'"
-
-msgid "The AutoTimer overview is the standard entry point to this plugin./n/nIf AutoTimers are configured you can choose them from a list to change them (OK button on your remote) or remove them (YELLOW button on your remote)./nNew Timers can be added by pressing the BLUE button and the control menu can be opened using the MENU button./n/nWhen leaving the plugin using the GREEN button it will search the EPG for matching events ONCE. To configure a regular search interval of the plugin to search for events open the control menu and enter the plugin setup."
-msgstr "Autolaikmačių apžvalga, tai įprastinis šio įskiepio atvėrimo langas./n/nJeigu autolaikmačiai nustatyti, Jūs galite pakeisti pasirinktąjį (pulto mygtuku 'OK'), pašalinti ('GELTONU' pulto mygtuku)./nNaukus laikmačius pridėsite 'MĖLYNU' nuotolinio pulto mygtuku, o valdymo meniu atversite mygtuku 'MENU'./n/nUždarant įskiepį 'ŽALIU' mygtuku, jis VIENĄKAT tikrins EPG tiitinkančių užklausą įvykių. Kad nustatytumėte pastovų įvykių atitikimo paieškos intervalą, per įskiepio valdymo meniu atverkite įskiepio sąanką."
-
-msgid "The control menu hides less frequently used options of the plugin, including the configuration and default settings for new AutoTimers./n/nWhile you can just open the menu and take a look for yourself, let's go through the available options:/n - Help:/n   What you are looking at right now/n - Preview:/n   Simulate EPG search, helps finding errors in your setup./n - Import existing Timer:/n   Create a new AutoTimer based on an existing regular timer./n - Import from EPG:/n   Create an AutoTimer based on an EPG event./n - Setup:/n   Generic configuration of the plugin./n - Edit new timer defaults:/n   Configure default values for new AutoTimers./n - Create a new timer using the wizard/classic editor:/n   Use the non-default editor to create a new AutoTimer."
-msgstr "Valdymo meniu paslepia rečiau naudojamas įskiepio opcijas, įskaitant ir naujų autolaikmačių konfigūravimą ir numatytuosius nustatymus./n/nKol galite tiesiog atidaryti meniu ir peržvelgti dėl savęs, aptarkime galimas parinktis:/n - Pagalba:/n   Tai, ką jūs matote šiuo metu./n - Peržiūra:/n   Imituoja EPG paiešką, padeda surasti jūsų nustatymų klaidas./n - Importuoti esamą laikmatį:/n   Skirta sukurti naują autolaikmatį esamo laikmačio pagrindu./n - Importuoti iš EPG:/n   Skirta sukurti autolaikmatį EPG įvykio pagrindu./n - Sąranka:/n   Bendrieji įskiepio konfigūracijos nustatymai./n - Redaguoti naujo laikmačio numatytąsias reikšmes:/n   Skirta naujai sukurtų autolaikmačių numatytosioms reikšmėms pakeisti./n - Sukurkite naują laikmatį, naudodami vedlį/klasikinį redaktorių:/n   Susikursite naują autolaikmatį, nenaudodami numatytųjų nustatymų."
-
-msgid "This FAQ is supposed to help everyone unwilling to help themselves by reading all the provided help available, and those who did not find a solution to their problems within the provided documentation./n/nTo make these hints a little easier to read, they are split up on multiple pages. You can go to the next page using the BLUE button on your remote control and back using the YELLOW one. Pressing the RED button or EXIT will close the FAQ."
-msgstr "Šis DUK skirtas padėti visiems, nevengiantiems padėti sau, skaitant ir gilinantis į visą prieinamą informaciją ir tiems, kurie neranda savų problemų sprendimo pateiktoje dokumentacijoje./n/nKad padaryti šiuos patarimus patogiau skaitomais, jie padalinti į keletą puslapių. Į kitą puslapį galite pereiti, paspaudę 'MĖLYNĄ' mygtuką, o grįžti atgal su 'GELTONU'. 'RAUDONAS', arba 'EXIT' mygtukai uždarys šį DUK."
-
-msgid "This help screen is supposed to give you a quick look at everything the AutoTimer has to offer./nYou can abort it at any time by pressing the RED or EXIT button on your remote control or bring it up at a later point by selecting it from the control menu using the MENU button from the regular entry point of the plugin (more on that later)./n/n/nBut you really should consider to take the few minutes it takes to read these help pages."
-msgstr "Šis pagalbos langas skirtas greitai visų autolaikmačio galimybių apžvalgai./nJį bet kada galite uždaryti, paspaudę 'RAUDONĄ', arba 'EXIT' mygtukus, arba atsiverti bet kada vėliau iš valdymo meniu, paspaudę 'MENU' mygtuką įskiepio įprastiniame pradiniame lange (apie tai kiek vėliau)./n/n/nBet jums tikrai verta skirti keletą minučių ir perskaityti šiuos pagalbos puslapius."
-
-msgid "This is mostly a matter of taste./nThe Wizard provides you with a reduced set of options and presents them in smaller sets at a time. It is mostly aimed at users not very experienced with this plugin or the 'expert' level features of enigma2./n/nYou can check out the 'classic' editor by opening an existing timer from the overview and if you prefer this view over the wizard you can change the default editor in the setup dialog."
-msgstr "Tai daugiausiai skonio reikalas./nVedlys suteikia jums ribotą parinkčių rinkinį ir tuo pat metu, smulkesnėmis dalimis. Jis geriausiai tinka vartotojams, nelabai patyrusiems su šiuo įskiepiu, ar 'išplėstinio' lygio enigma2 funkcijomis./n/nGalite išmėginti 'klasikinį' redaktorių, atsidarę jau esamą laikmatį apžvalgai ir jei nuspręsite, kad šis vaizdas geriau už vedlį, numatytąjį redaktorių galite pakeisti sąrankos dialoge."
-
-msgid "This screen should be pretty straight-forward. If the option name does not give its meaning away there should be an explanation for each of them when you select them. If there is no visible explanation this is most likely a skin issue and please try if the default skin fixes the issue./n/nA lot of effort has been put in making the parameters as easy to understand as possible, so give reading them a try ;-)."
-msgstr "Šis langas tikrai neturėtų būti sudėtingas. Jei parinkties pavadinimas nepaaiškina jos prasmės, visada yra platesnis kiekvienos jų išaiškinimas, matomas pasirinkus tą parinktį. Jei nematote šių išaiškinimų, tikimiausia to priežastis - jūsų naudojamos aplinkos temos nesuderinamumas. Problemai išspręsti, pasirinkite numatytąją temą./n/nĮ tai, kad visi parametrai būtų kuo lengviau suprantami, įdėta daugybė pastangų, todėl tiesiog bandykite įsiskaityti ir suvokti  ;-)."
-
-msgid "Welcome to the AutoTimer-Plugin"
-msgstr "Sveiki, Autolaikmačio įskiepio vartotojai"
-
-msgid "What is this 'control menu' you keep talking about?"
-msgstr "Kas per 'valdymo meniu', apie kurį nuolat kalbama?"
-
-msgid "Wizard or Classic Editor?"
-msgstr "Vedlys, ar klasikinis redaktorius?"
-
-msgid "You now know almost everything there is to know about the AutoTimer-Plugin./n/nAs a final hint I can't stress how important it is to take a look at the help texts that are shown in the setup dialogs as they cover the most frequently asked questions. Surprisingly even after the hints were added ;-)."
-msgstr "Jūs dabar žinote beveik viską, ką galima žinoti apie autolaikmačio įskiepį./n/nGalutinis patarimas, kurį reikia pabrėžti - kaip svarbu yra skaityti į pagalbos tekstus, rodomus sąrankos dialoguose, nes jie aprėpia dažniausiai užduodamus klausimus. Net ir užduotus po šių tekstų įdėjimo ;-)."

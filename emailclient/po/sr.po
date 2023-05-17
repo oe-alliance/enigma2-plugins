@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 - Plugin EmailClient\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2009-09-27 17:49+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -19,29 +19,41 @@ msgstr ""
 "X-Poedit-Country: SERBIA\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#: plugin.py:144
 #, python-format
 msgid "%(name)s (%(user)s@%(server)s)"
 msgstr ""
 
+#: setup.xml
+msgid "Account Setup"
+msgstr ""
+
+#: plugin.py:993
 msgid "Accounts list"
 msgstr ""
 
+#: plugin.py:411
 msgid "Attachments"
 msgstr "Dodatci"
 
+#: plugin.py:407
 msgid "Bodys"
 msgstr "Oblici"
 
+#: plugin.py:355
 msgid "Date"
 msgstr "Datum"
 
+#: plugin.py:1156
 msgid "Email Client"
 msgstr "Imejl klijent"
 
+#: setup.xml
 #, fuzzy
 msgid "Email setup"
 msgstr "Imejl klijent"
 
+#: plugin.py:190
 #, python-format
 msgid ""
 "EmailClient for %(account)s:\n"
@@ -49,15 +61,19 @@ msgid ""
 "%(error)s"
 msgstr ""
 
+#: plugin.py:353
 msgid "From"
 msgstr "Od"
 
+#: EmailConfig.py:118 setup.xml
 msgid "IMAP Port"
 msgstr "IMAP Port"
 
+#: EmailConfig.py:117 setup.xml
 msgid "IMAP Server"
 msgstr "IMAP Server"
 
+#: plugin.py:586
 #, fuzzy, python-format
 msgid ""
 "New mail arrived for account %s:\n"
@@ -66,13 +82,16 @@ msgstr ""
 "Nova poruka stigla:\n"
 "\n"
 
+#: plugin.py:1056
 #, fuzzy, python-format
 msgid "Really delete account %s?"
 msgstr "stvarno obrisati poruku?"
 
+#: plugin.py:356
 msgid "Subject"
 msgstr "Subjekt"
 
+#: plugin.py:858
 #, python-format
 msgid ""
 "[EmailAccount] %(name)s: _cbCapabilities:\n"
@@ -82,163 +101,211 @@ msgid ""
 "####################################################################################################\n"
 msgstr ""
 
+#: plugin.py:1016
 #, fuzzy, python-format
 msgid "account %s is not connected"
 msgstr "spojen"
 
+#: EmailConfig.py:116 setup.xml
 msgid "account name"
 msgstr ""
 
+#: plugin.py:135 plugin.py:202 plugin.py:242 plugin.py:393 plugin.py:396
+#: plugin.py:402
 #, fuzzy
 msgid "account not connected"
 msgstr "spojen"
 
+#: plugin.py:973
 msgid "add"
 msgstr ""
 
+#: EmailConfig.py:89
 msgid "cancel"
 msgstr "otkaži"
 
+#: plugin.py:744
 msgid "cannot access inbox"
 msgstr ""
 
+#: plugin.py:821
 msgid "cannot get headers of new messages"
 msgstr ""
 
+#: plugin.py:751
 msgid "cannot get list of new messages"
 msgstr ""
 
+#: plugin.py:840
 msgid "connection failed - retrying"
 msgstr ""
 
+#: setup.xml
 msgid "debug"
 msgstr ""
 
+#: plugin.py:364
 msgid "delete"
 msgstr "obriši"
 
+#: setup.xml
 #, fuzzy
 msgid "display connection errors"
 msgstr "vreme prikazivanja nove poruke (sekunde)"
 
+#: setup.xml
 #, fuzzy
 msgid "display timeout (seconds)"
 msgstr "vreme prikazivanja nove poruke (sekunde)"
 
+#: plugin.py:974
 msgid "edit"
 msgstr ""
 
+#: EmailConfig.py:47 EmailConfig.py:132
 msgid "empty values - retry"
 msgstr ""
 
+#: plugin.py:917
 #, python-format
 msgid ""
 "error logging %(who)s in:\n"
 "%(failure)s"
 msgstr ""
 
+#: plugin.py:816
 #, fuzzy
 msgid "failed to load message"
 msgstr "učitavam poruku"
 
+#: plugin.py:238
 #, fuzzy
 msgid "getting message ..."
 msgstr "analiziram poruku"
 
+#: plugin.py:231
 #, python-format
 msgid "have %d messages"
 msgstr "ima %d poruka"
 
+#: plugin.py:233
 #, fuzzy
 msgid "have no messages"
 msgstr "ima %d poruka"
 
+#: plugin.py:213
 msgid "headers loaded, now parsing ..."
 msgstr "Zaglavlja učitana, sad raščlanjujem ..."
 
+#: plugin.py:1102
 #, python-format
 msgid "importing configurations from %s"
 msgstr ""
 
+#: plugin.py:360
 msgid "leave unread"
 msgstr "ostavi nepročitano"
 
+#: EmailConfig.py:123 setup.xml
 msgid "list all mailboxes"
 msgstr ""
 
+#: plugin.py:197
 #, fuzzy
 msgid "loading headers ..."
 msgstr "učitavam poruku"
 
+#: EmailConfig.py:121 setup.xml
 #, fuzzy
 msgid "mail check interval (minutes)"
 msgstr "Interval za proveru novih poruka (u minutima)"
 
+#: EmailConfig.py:122 setup.xml
 msgid "maximum mail size to fetch"
 msgstr ""
 
+#: plugin.py:807
 msgid "message too large"
 msgstr ""
 
+#: plugin.py:1022 plugin.py:1059
 #, fuzzy
 msgid "no account selected"
 msgstr "spojen"
 
+#: plugin.py:355 plugin.py:609
 msgid "no date"
 msgstr "bez datuma"
 
+#: plugin.py:434
 msgid "no filename"
 msgstr "bez imena datoteke"
 
+#: plugin.py:353
 msgid "no from"
 msgstr "bez odakle"
 
+#: plugin.py:204
 msgid "no mailbox?!?!"
 msgstr ""
 
+#: plugin.py:599
 msgid "no sender"
 msgstr "bez pošiljaoca"
 
+#: plugin.py:356 plugin.py:602
 msgid "no subject"
 msgstr "bez subjekta"
 
+#: EmailConfig.py:90
 msgid "ok"
 msgstr "ok"
 
+#: plugin.py:245
 #, fuzzy
 msgid "parsing message ..."
 msgstr "analiziram poruku"
 
+#: EmailConfig.py:120 setup.xml
 #, fuzzy
 msgid "password"
 msgstr "Lozinka"
 
+#: plugin.py:387
 #, fuzzy
 msgid "really delete mail?"
 msgstr "stvarno obrisati poruku?"
 
+#: plugin.py:385
 #, fuzzy
 msgid "really undelete mail?"
 msgstr "stvarno restaurirati poruku?"
 
+#: plugin.py:972
 msgid "remove"
 msgstr ""
 
+#: plugin.py:436
 msgid "select Attachment"
 msgstr "izaberi dodatak"
 
+#: plugin.py:420
 msgid "select Body"
 msgstr "Izaberi oblik"
 
+#: setup.xml
 msgid "show deleted entries"
 msgstr "pokaži obrisane unose"
 
+#: plugin.py:362
 msgid "undelete"
 msgstr "restauriraj"
 
+#: EmailConfig.py:119 setup.xml
 #, fuzzy
 msgid "user name"
 msgstr "Korisn. ime"
 
+#: plugin.py:1156
 msgid "view Emails via IMAP4"
 msgstr "vidi imejlove preko IMAP4"

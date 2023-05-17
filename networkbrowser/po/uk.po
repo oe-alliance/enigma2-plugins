@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox enigma2-plugins 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2019-06-10 21:38+0300\n"
 "Last-Translator: kvinto <badsystem@ukr.net>\n"
 "Language-Team: <sat-ukraine.info>\n"
@@ -14,6 +14,7 @@ msgstr ""
 "X-Generator: Poedit 2.2.3\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
+#: MountEdit.py:342
 msgid ""
 "A mount entry with this name already exists!\n"
 "Update existing entry and continue?\n"
@@ -21,12 +22,15 @@ msgstr ""
 "Монтування з такою назвою вже існує!\n"
 "Оновити існуючий запис і продовжити?\n"
 
+#: MountEdit.py:126
 msgid "AUTOFS (mount as needed)"
 msgstr "AUTOFS (під’єднання за потребою)"
 
+#: MountEdit.py:231
 msgid "Active"
 msgstr "Активний"
 
+#: MountView.py:65
 msgid ""
 "Active/\n"
 "Inactive"
@@ -34,18 +38,23 @@ msgstr ""
 "Активний/\n"
 "Неактивний"
 
+#: MountManager.py:102
 msgid "Add a new NFS or CIFS mount point to your Receiver."
 msgstr "Додати нову NFS чи CIFS точку монтування для Вашого приймача."
 
+#: MountManager.py:102
 msgid "Add new network mount point"
 msgstr "Додати нову мережеву точку монтування"
 
+#: plugin.py:54
 msgid "Adding schedule..."
 msgstr "Додавання завдання..."
 
+#: MountView.py:161
 msgid "Are you sure you want to remove your network mount ?"
 msgstr "Ви впевнені, що хочете видалити мережеве з’єднання?"
 
+#: MountEdit.py:344
 msgid ""
 "Are you sure you want to save this network mount?\n"
 "\n"
@@ -53,123 +62,164 @@ msgstr ""
 "Ви впевнені, що хочете зберегти це мережеве підключення?\n"
 "\n"
 
+#: plugin.py:114
 msgid "Attempt to mount shares again"
 msgstr "Спроба вдруге під’єднатися до ресурсів"
 
+#: plugin.py:114
 msgid "Attempt to recover lost mounts (in background)"
 msgstr "Спроба відновити втрачене з’єднання (в фоновому режимі)"
 
+#: NetworkBrowser.py:192
 msgid "Browse network neighbourhood"
 msgstr "Перегляд мережевого оточення"
 
+#: MountEdit.py:132
 msgid "CIFS share"
 msgstr "CIFS ресурси"
 
+#: MountEdit.py:76 MountManager.py:195 NetworkBrowser.py:630
 msgid "Cancel"
 msgstr "Скасувати"
 
+#: MountManager.py:105
 msgid "Change hostname"
 msgstr "Змінити ім'я хоста"
 
+#: MountManager.py:105
 msgid "Change the hostname of your Receiver."
 msgstr "Змінити ім'я хоста для Вашого приймача."
 
+#: MountManager.py:61 MountView.py:67 NetworkBrowser.py:127 UserDialog.py:101
+#: UserManager.py:51
 msgid "Close"
 msgstr "Закрити"
 
+#: UserManager.py:53
 msgid "Delete"
 msgstr "Видалити"
 
+#: MountView.py:68
 msgid "Delete mount"
 msgstr "Видалити з’єднання"
 
+#: MountView.py:122
 msgid "Dir:"
 msgstr "Директорія:"
 
+#: NetworkBrowser.py:539
 msgid "Do you want to enter a username and password for this host?"
 msgstr "Ви хочете ввести ім'я користувача та пароль для даного хоста?"
 
+#: MountEdit.py:128
 msgid "Enigma2 (mount using enigma2)"
 msgstr "Enigma2 (монтування за допомогою Enigma2)"
 
+#: MountEdit.py:129
 msgid "Enigma2 old format (mount using linux)"
 msgstr "Enigma2 старий формат (монтування з використанням Linux)"
 
+#: NetworkBrowser.py:662
 msgid "Enter IP to scan..."
 msgstr "Введіть АП-адресу для сканування..."
 
+#: MountManager.py:142
 msgid "Enter new hostname for your Receiver"
 msgstr "Введіть нове ім’я хосту для Вашого приймача"
 
+#: MountEdit.py:277
 msgid "Enter options:"
 msgstr "Введіть параметри:"
 
+#: MountEdit.py:281 UserDialog.py:151
 msgid "Enter password:"
 msgstr "Введіть пароль:"
 
+#: MountEdit.py:275
 msgid "Enter share directory:"
 msgstr "Введіть ім’я директорії ресурсу:"
 
+#: MountEdit.py:273
 msgid "Enter share name:"
 msgstr "Введіть ім’я ресурсу:"
 
+#: UserDialog.py:104
 msgid "Enter user and password for host: "
 msgstr "Введіть ім’я користувача і пароль для хосту: "
 
+#: MountEdit.py:279 UserDialog.py:149
 msgid "Enter username:"
 msgstr "Введіть ім’я користувача:"
 
+#: NetworkBrowser.py:130
 msgid "Expert"
 msgstr "Експерт"
 
+#: MountEdit.py:127
 msgid "FSTAB (mount at boot)"
 msgstr "FSTAB (монтування при завантаженні)"
 
+#: MountManager.py:168
 msgid "Finished restarting your network"
 msgstr "Перезапуск мережі завершено"
 
+#: NetworkBrowser.py:647
 msgid "IP Address"
 msgstr "АП Адреса"
 
+#: MountView.py:121
 msgid "IP:"
 msgstr "АП:"
 
+#: MountEdit.py:233
 msgid "Local share name"
 msgstr "Ім’я локального ресурсу"
 
+#: plugin.py:113
 msgid "Manage network shares"
 msgstr "Управління мережевими ресурсами"
 
+#: plugin.py:113
 msgid "Manage your network shares..."
 msgstr "Управління мережевими ресурсами..."
 
+#: plugin.py:114
 msgid "Mount Again"
 msgstr "Монтувати повторно"
 
+#: MountManager.py:90 plugin.py:113
 msgid "Mount Manager"
 msgstr "Помічник монтування"
 
+#: MountView.py:52
 msgid "Mount Viewer"
 msgstr "Перегляд монтувань"
 
+#: plugin.py:114
 msgid "Mount again"
 msgstr "Монтувати повторно"
 
+#: MountView.py:64
 msgid "Mount informations"
 msgstr "Інформація про під’єднання"
 
+#: NetworkBrowser.py:128
 msgid "Mount manager"
 msgstr "Помічник монтування"
 
+#: MountEdit.py:243
 msgid "Mount options"
 msgstr "Параметри монтування"
 
+#: MountEdit.py:235
 msgid "Mount type"
 msgstr "Тип під’єднання"
 
+#: MountEdit.py:229
 msgid "Mount using"
 msgstr "Під’єднання за допомогою"
 
+#: MountView.py:63
 msgid ""
 "Mounted/\n"
 "Unmounted"
@@ -177,127 +227,168 @@ msgstr ""
 "Під’єднаний/\n"
 "Від’єднаний"
 
+#: plugin.py:45
 msgid "Mounting network shares..."
 msgstr "Під’єднання мережевих ресурсів..."
 
+#: MountManager.py:103
 msgid "Mountpoints management"
 msgstr "Управління точками монтування"
 
+#: MountEdit.py:96
 msgid "Mounts editor"
 msgstr "Редактор монтувань"
 
+#: MountEdit.py:133
 msgid "NFS share"
 msgstr "NFS ресурси"
 
+#: plugin.py:38 plugin.py:112
 msgid "Network Browser"
 msgstr "Провідник мережі"
 
+#: NetworkBrowser.py:236 NetworkBrowser.py:238
 msgid "No network devices found!"
 msgstr "Мережевих пристроїв не знайдено!!"
 
+#: MountEdit.py:248 UserDialog.py:140
 msgid "Password"
 msgstr "Пароль"
 
+#: MountEdit.py:408
 msgid "Please wait for activation of your network mount..."
 msgstr "Будь ласка, зачекайте, йде активація вашого мережевого підключення..."
 
+#: MountView.py:172
 msgid "Please wait while removing your network mount..."
 msgstr "Будь ласка, зачекайте, видалення мережевого підключення..."
 
+#: MountEdit.py:370
 msgid "Please wait while updating your network mount..."
 msgstr "Будь ласка, зачекайте, йде оновлення мережевого підключення..."
 
+#: MountManager.py:155
 msgid "Please wait while your network is restarting..."
 msgstr "Будь ласка, зачекайте, поки Ваша мережа перезавантажується..."
 
+#: MountEdit.py:75
 msgid "Press OK to activate the settings."
 msgstr "Натисніть OK, щоб активувати настройки."
 
+#: NetworkBrowser.py:506 NetworkBrowser.py:507
 msgid "Press OK to collapse this host"
 msgstr "Натисніть OK, щоб згорнути цей хост"
 
+#: UserManager.py:52
 msgid "Press OK to edit selected settings."
 msgstr "Натисніть OK, щоб змінити вибрані настройки."
 
+#: MountView.py:66
 msgid "Press OK to edit the settings."
 msgstr "Натисніть OK, щоб змінити налаштування."
 
+#: NetworkBrowser.py:509 NetworkBrowser.py:510
 msgid "Press OK to expand this host"
 msgstr "Натисніть OK, щоб розширити цей хост"
 
+#: NetworkBrowser.py:496
 msgid "Press OK to mount this share!"
 msgstr "Натисніть OK для монтування даного ресурсу!"
 
+#: NetworkBrowser.py:131
 msgid "Press OK to mount!"
 msgstr "Натисніть OK для монтування!"
 
+#: UserDialog.py:100
 msgid "Press OK to save settings."
 msgstr "Натисніть OK, щоб зберегти настройки."
 
+#: MountManager.py:62
 msgid "Press OK to select."
 msgstr "Натисніть OK для підтвердження вибору."
 
+#: MountManager.py:215
 msgid "Re-mount network shares every (in hours)"
 msgstr "Перепід’єднання мережевих ресурсів кожні (в годинах)"
 
+#: MountManager.py:252
 msgid "Really close without saving settings?"
 msgstr "Насправді закрити без збереження налаштувань?"
 
+#: NetworkBrowser.py:129
 msgid "Rescan"
 msgstr "Пересканувати"
 
+#: MountEdit.py:77 MountManager.py:196
 msgid "Save"
 msgstr "Зберегти"
 
+#: NetworkBrowser.py:631
 msgid "Scan NFS share"
 msgstr "Сканування NFS ресурсів"
 
+#: NetworkBrowser.py:632
 msgid "Scan range"
 msgstr "Діапазон сканування"
 
+#: MountManager.py:213 MountManager.py:221
 msgid "Schedule MountAgain"
 msgstr "Розклад повторного монтування"
 
+#: MountManager.py:106
 msgid "Schedule a auto remount of your network shares."
 msgstr "Розклад автоматичного монтування ваших мережевих ресурсів."
 
+#: plugin.py:112
 msgid "Search for network shares"
 msgstr "Пошук мережевих ресурсів"
 
+#: plugin.py:112
 msgid "Search for network shares..."
 msgstr "Пошук мережевих ресурсів..."
 
+#: NetworkBrowser.py:227 NetworkBrowser.py:229
 msgid "Searching your network. Please wait..."
 msgstr "Пошук мережі. Будь ласка, зачекайте..."
 
+#: MountEdit.py:237
 msgid "Server IP"
 msgstr "АП Сервера"
 
+#: MountEdit.py:239
 msgid "Server share"
 msgstr "Ресурси сервера"
 
+#: MountManager.py:106 MountManager.py:187
 msgid "Setup Mount Again"
 msgstr "Повторне налаштування з’єднання"
 
+#: MountEdit.py:241
 #, fuzzy
 msgid "Use as HDD replacement"
 msgstr "використовувати HDD в якості заміни"
 
+#: MountManager.py:104
 msgid "User management"
 msgstr "Управління користувачами"
 
+#: UserManager.py:61
 msgid "Usermanager"
 msgstr "Мененджер користувача"
 
+#: MountEdit.py:246 UserDialog.py:138
 msgid "Username"
 msgstr "Ім’я користувача"
 
+#: MountManager.py:103
 msgid "View, edit or delete mountpoints on your Receiver."
 msgstr "Перегляд, редагування або видалення точки монтування в Вашому приймачі."
 
+#: MountManager.py:104
 msgid "View, edit or delete usernames and passwords for your network."
 msgstr "Перегляд, редагування або видалення імен користувачів і паролів для вашої мережі."
 
+#: MountEdit.py:340
 msgid ""
 "You have changed the share name!\n"
 "Update existing entry and continue?\n"
@@ -305,17 +396,21 @@ msgstr ""
 "Ви змінили ім'я ресурсу!\n"
 "Оновити існуючий запис і продовжити?\n"
 
+#: NetworkBrowser.py:272
 #, python-format
 msgid ""
 "Your network interface %s is not properly configured, so a network scan cannot be done.\n"
 "Please configure the interface and try again."
 msgstr ""
 
+#: MountEdit.py:421
 msgid "Your network mount has been activated."
 msgstr "Ваше мережеве з’єднання було активовано."
 
+#: MountView.py:196
 msgid "Your network mount has been removed."
 msgstr "Ваша мережеве з’єднання було видалено."
 
+#: MountEdit.py:382
 msgid "Your network mount has been updated."
 msgstr "Ваше мережеве з’єднання було оновлено."

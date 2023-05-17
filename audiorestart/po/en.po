@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"POT-Creation-Date: 2023-05-17 21:24+0100\n"
 "PO-Revision-Date: 2012-12-03 15:01+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -17,39 +17,51 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: plugin.py:116
 msgid " "
 msgstr " "
 
+#: plugin.py:152
 msgid "Audio restart Setup"
 msgstr "Audio restart Setup"
 
+#: plugin.py:114
 msgid "Cancel"
 msgstr "Cancel"
 
+#: plugin.py:111
 #, python-format
 msgid "Plugin: %(plugin)s , Version: %(version)s"
 msgstr "Plugin: %(plugin)s , Version: %(version)s"
 
+#: plugin.py:100 plugin.py:154
 msgid "Restart audio"
 msgstr "Restart audio"
 
+#: plugin.py:101
 msgid "Restart audio delay (in sec)"
 msgstr "Restart audio delay (in sec)"
 
+#: plugin.py:115
 msgid "Save"
 msgstr "Save"
 
+#: plugin.py:152
 msgid "Setup for the AudioRestart Plugin"
 msgstr "Setup for the AudioRestart Plugin"
 
+#: plugin.py:20
 msgid "after restart"
 msgstr "after restart"
 
+#: plugin.py:20
 msgid "after restart/standby"
 msgstr "after restart/standby"
 
+#: plugin.py:20
 msgid "after standby"
 msgstr "after standby"
 
+#: plugin.py:20
 msgid "disabled"
 msgstr "disabled"

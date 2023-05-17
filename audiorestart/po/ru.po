@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-03 21:51+0100\n"
+"POT-Creation-Date: 2023-05-17 21:24+0100\n"
 "PO-Revision-Date: 2013-05-05 13:48+0100\n"
 "Last-Translator: Rob van der Does <robvddoes@gmail.com>\n"
 "Language-Team: RU locale by Sowa\n"
@@ -18,39 +18,51 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 1.5.5\n"
 
+#: plugin.py:116
 msgid " "
 msgstr ""
 
+#: plugin.py:152
 msgid "Audio restart Setup"
 msgstr "Настройки Рестарт аудио"
 
+#: plugin.py:114
 msgid "Cancel"
 msgstr "Отменить"
 
+#: plugin.py:111
 #, python-format
 msgid "Plugin: %(plugin)s , Version: %(version)s"
 msgstr "Плагин: %(plugin)s , версия: %(version)s"
 
+#: plugin.py:100 plugin.py:154
 msgid "Restart audio"
 msgstr "Рестарт аудио"
 
+#: plugin.py:101
 msgid "Restart audio delay (in sec)"
 msgstr "Задержка перезагрузки аудио (сек)"
 
+#: plugin.py:115
 msgid "Save"
 msgstr "Сохранить"
 
+#: plugin.py:152
 msgid "Setup for the AudioRestart Plugin"
 msgstr "Настройки плагина Рестарт аудио"
 
+#: plugin.py:20
 msgid "after restart"
 msgstr "после перезагрузки"
 
+#: plugin.py:20
 msgid "after restart/standby"
 msgstr "после перезагрузки/ожидания"
 
+#: plugin.py:20
 msgid "after standby"
 msgstr "после ожидания"
 
+#: plugin.py:20
 msgid "disabled"
 msgstr "отключен"

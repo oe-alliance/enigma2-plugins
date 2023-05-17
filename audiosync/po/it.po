@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - AC3lipsync\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
+"POT-Creation-Date: 2023-05-17 21:24+0100\n"
 "PO-Revision-Date: 2009-12-26 21:07+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net - Italy <spaeleus@croci.org>\n"
@@ -19,162 +19,212 @@ msgstr ""
 "X-Poedit-Basepath: /home/dario/Plugins/ac3lipsync\n"
 "X-Poedit-SearchPath-0: /home/dario/Plugins/ac3lipsync\n"
 
+#: AC3main.py:65 AC3main.py:147 AC3main.py:234 AC3main.py:238 AC3main.py:239
 #, python-format
 msgid "%i ms"
 msgstr "%i ms"
 
+#: plugin.py:66
 msgid "Audio Sync"
 msgstr "Audio Sync"
 
+#: AC3setup.py:32 plugin.py:37 plugin.py:42 plugin.py:47 plugin.py:65
 msgid "Audio Sync Setup"
 msgstr "Configurazione sincronismo audio"
 
+#: AC3main.py:73 AC3setup.py:58
 msgid "Cancel"
 msgstr "Annullare"
 
+#: MovableScreen.py:37
 msgid "Center screen at the lower border"
 msgstr "Centrare "
 
+#: MovableScreen.py:31
 msgid "Center screen at the upper border"
 msgstr "Centrare la finestra al bordo inferiore"
 
+#: AC3main.py:83 AC3main.py:84
 msgid "Change active delay"
 msgstr "Cambiare il ritardo corrente"
 
+#: AC3main.py:68
 msgid "Channel audio:"
 msgstr "Canale audio: "
 
+#: AC3main.py:86
 msgid "Decrease delay"
 msgstr "Diminuire il ritardo"
 
+#: AC3main.py:90 AC3main.py:92 AC3main.py:94
 #, python-format
 msgid "Decrease delay by %i ms (can be set)"
 msgstr "Diminuire il ritardo di %i ms (configurabili)"
 
+#: AC3main.py:82 AC3main.py:87
 msgid "Discard changes and close plugin"
 msgstr "Annullare le modifiche e uscire"
 
+#: MovableScreen.py:23 MovableScreen.py:28
 msgid "Discard changes and close screen"
 msgstr "Annullare le modifiche e chiudere la finestra"
 
+#: AC3main.py:61
 msgid "Global delay"
 msgstr "Ritardo globale"
 
+#: AC3main.py:85
 msgid "Increase delay"
 msgstr "Aumentare il ritardo"
 
+#: AC3main.py:91 AC3main.py:93 AC3main.py:95
 #, python-format
 msgid "Increase delay by %i ms (can be set)"
 msgstr "Aumentare il ritardo di %i ms (configurabili)"
 
+#: AC3main.py:219 AC3main.py:274
 msgid "Invalid selection"
 msgstr "Selezione non valida!"
 
+#: AC3main.py:272
 #, python-format
 msgid "Key %(Key)s successfully set to %(delay)i ms"
 msgstr "Tasto %(Key)s configurato con successo a %(delay)i ms"
 
+#: AC3main.py:255
 #, python-format
 msgid "Key %(key)s (current value: %(value)i ms)"
 msgstr "Tasto %(key)s (valore corrente: %(value)i ms)"
 
+#: AC3main.py:212
 msgid "Menu"
 msgstr "Menu"
 
+#: AC3main.py:209
 msgid "Move plugin screen"
 msgstr "Spostare la finestra del plugin"
 
+#: MovableScreen.py:27
 msgid "Move screen down"
 msgstr "Spostare la finestra giù"
 
+#: MovableScreen.py:34
 msgid "Move screen to the center of your TV"
 msgstr "Posizionare la finestra al centro"
 
+#: MovableScreen.py:24
 msgid "Move screen to the left"
 msgstr "Spostare la finestra a sx"
 
+#: MovableScreen.py:36
 msgid "Move screen to the lower left corner"
 msgstr "Spostare la finestra nell'angolo in basso a sx"
 
+#: MovableScreen.py:38
 msgid "Move screen to the lower right corner"
 msgstr "Spostare la finestra nell'angolo in basso a dx"
 
+#: MovableScreen.py:33
 msgid "Move screen to the middle of the left border"
 msgstr "Spostare la finestra al centro del bordo sx"
 
+#: MovableScreen.py:35
 msgid "Move screen to the middle of the right border"
 msgstr "Spostare la finestra al centro del bordo dx"
 
+#: MovableScreen.py:25
 msgid "Move screen to the right"
 msgstr "Spostare la finestra a dx"
 
+#: MovableScreen.py:30
 msgid "Move screen to the upper left corner"
 msgstr "Spostare la finestra nell'angolo in alto a sx"
 
+#: MovableScreen.py:32
 msgid "Move screen to the upper right corner"
 msgstr "Spostare la finestra nell'angolo in alto a dx"
 
+#: MovableScreen.py:26
 msgid "Move screen up"
 msgstr "Spostare la finestra in sù"
 
+#: AC3main.py:74 AC3setup.py:59
 msgid "OK"
 msgstr "Ok"
 
+#: AC3main.py:80
 msgid "Open plugin menu"
 msgstr "Aprire il menu del plugin"
 
+#: AC3setup.py:42
 msgid "Outer Bound (+/-)"
 msgstr "Ritardo massimo (+/-)"
 
+#: AC3setup.py:38
 #, python-format
 msgid "Plugin: %(plugin)s , Version: %(version)s"
 msgstr "Plugin: %(plugin)s , Versione: %(version)s"
 
+#: MovableScreen.py:39
 msgid "Reset saved position"
 msgstr "Reset della posizione salvata"
 
+#: AC3main.py:89
 msgid "Save current delay to key"
 msgstr "Assegnare ritardo corrente a un tasto"
 
+#: AC3main.py:75
 msgid "Save to key"
 msgstr "Salvare su tasto"
 
+#: AC3main.py:81 AC3main.py:88
 msgid "Save values and close plugin"
 msgstr "Salvare la configurazione e uscire"
 
+#: MovableScreen.py:22 MovableScreen.py:29
 msgid "Save values and close screen"
 msgstr "Salvare la configurazione e chiudere la finestra"
 
+#: AC3main.py:249
 #, python-format
 msgid "Select the key you want to set to %i ms"
 msgstr "Sel. il tasto a cui assegnare %i ms"
 
+#: AC3main.py:60
 msgid "Service delay"
 msgstr "Ritardo canale"
 
+#: AC3main.py:96 AC3main.py:97 AC3main.py:98 AC3main.py:99
 #, python-format
 msgid "Set delay to %i ms (can be set)"
 msgstr "Regolare il ritardo a %i ms (configurabili)"
 
+#: AC3main.py:260
 msgid "Setting key canceled"
 msgstr "Configurazione tasto cancellata!"
 
+#: plugin.py:65
 msgid "Setup for the Audio Sync Plugin"
 msgstr "Configurazione plugin Audio Sync"
 
+#: AC3setup.py:43
 msgid "Step in ms for arrow keys"
 msgstr "Passo tasti cursore (ms):"
 
+#: AC3setup.py:48 AC3setup.py:49 AC3setup.py:50
 #, python-format
 msgid "Step in ms for key %i"
 msgstr "Passo tasto %i (ms):"
 
+#: AC3setup.py:45 AC3setup.py:46 AC3setup.py:47
 #, python-format
 msgid "Step in ms for keys '%s'"
 msgstr "Passo in ms per il tasto \"%s\""
 
+#: AC3setup.py:44
 msgid "Wait time in ms before activation:"
 msgstr "Attesa prima di attivare (ms):"
 
+#: plugin.py:66
 msgid "sets the Audio Delay (LipSync)"
 msgstr "Configurare il ritardo audio (LipSync)"

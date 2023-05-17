@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugin-extensions-satloader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2013-01-01 23:04+0100\n"
 "Last-Translator: Ismail Demir <ismail.demir@gmx.at>\n"
 "Language-Team: Ismail Demir <ismail.demir@gmx.at>\n"
@@ -15,98 +15,130 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
+#: plugin.py:127
 msgid "About"
 msgstr "Hakkında"
 
+#: plugin.py:59
 msgid "Bouquet"
 msgstr "Bouquet"
 
+#: plugin.py:57 plugin.py:173 plugin.py:294 plugin.py:419
 msgid "Cancel"
 msgstr "iptal"
 
+#: plugin.py:110 plugin.py:210 plugin.py:335
 msgid "Do you want to restart the GUI now?"
 msgstr "Şimdi GUI yeniden başlatmak istiyor musunuz?"
 
+#: plugin.py:309
 msgid "Download:"
 msgstr "Yükle"
 
+#: plugin.py:217 plugin.py:218
 msgid "Downloading bouquets failed!"
 msgstr "bouquet indirilmesi başarısız!"
 
+#: plugin.py:103 plugin.py:104 plugin.py:347 plugin.py:348
 msgid "Downloading satellites failed!"
 msgstr "uydular indirilmesi başarısız!"
 
+#: plugin.py:221 plugin.py:351
 msgid "Downloading succesfull! Parsing ..."
 msgstr "indirme başarılı! Ayrıştırmada ..."
 
+#: plugin.py:449
 msgid "Frequency:"
 msgstr "Frekans:"
 
+#: plugin.py:110 plugin.py:210 plugin.py:335
 msgid "GUI needs a restart to apply changes."
 msgstr "GUI değişiklikleri uygulaması için yeniden başlatmak gerekir."
 
+#: plugin.py:117 plugin.py:250 plugin.py:380
 msgid "GUI needs a restart."
 msgstr "GUI yeniden başlamasi gerekir."
 
+#: plugin.py:58
 msgid "Install"
 msgstr "Kurmak"
 
+#: plugin.py:60
 msgid "Multi Sat"
 msgstr "Çoklu uydu"
 
+#: plugin.py:295
 msgid "OK"
 msgstr "OK"
 
+#: plugin.py:244 plugin.py:374
 msgid "Parsing failed!"
 msgstr "Ayrıştırmada başarısız!"
 
+#: plugin.py:214
 msgid "Please select at least one bouquet"
 msgstr "En az bir bouquet seçiniz"
 
+#: plugin.py:338
 msgid "Please select at least one satellite"
 msgstr "En az bir uydu seçiniz"
 
+#: plugin.py:478
 msgid "Please select at least one transponder"
 msgstr "En az bir transponder seçiniz"
 
+#: plugin.py:87 plugin.py:186
 msgid "Please wait..."
 msgstr "Lütfen bekleyiniz..."
 
+#: plugin.py:240
 msgid "Press ok button to select bouquet"
 msgstr "Bouquet seçmek için OK düğmesine basın"
 
+#: plugin.py:370
 msgid "Press ok button to select satellite"
 msgstr "Uydu seçmek için OK düğmesine basın"
 
+#: plugin.py:80
 msgid "Press ok or green button to install satellites.xml"
 msgstr "satellites.xml yüklemek için OK veya yeşil düğmeye basın"
 
+#: plugin.py:111 plugin.py:211 plugin.py:336
 msgid "Restart GUI now?"
 msgstr "Şimdi GUI yeniden başlatılsın mı?"
 
+#: plugin.py:174 plugin.py:420
 msgid "Save"
 msgstr "Kayıt"
 
+#: plugin.py:293
 msgid "Source:"
 msgstr "Kaynak:"
 
+#: plugin.py:449
 msgid "Symbol Rate:"
 msgstr "Sembol Oranı:"
 
+#: plugin.py:296
 msgid "Transponder"
 msgstr "Transponder"
 
+#: plugin.py:398 plugin.py:410
 msgid "Transponder selection"
 msgstr "Transponder seçimi"
 
+#: plugin.py:475
 msgid "has been saved."
 msgstr "kaydedildi."
 
+#: plugin.py:335
 msgid "satellites.xml has been built."
 msgstr "satellites.xml inşa edilmiştir."
 
+#: plugin.py:110
 msgid "satellites.xml is updated"
 msgstr "satellites.xml güncellendi"
 
+#: plugin.py:210
 msgid "selected bouquets are installed"
 msgstr "seçilen bouquetler yüklendi"

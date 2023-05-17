@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:24+0100\n"
 "PO-Revision-Date: 2011-09-08 22:14+0100\n"
 "Last-Translator: R.L. van der Does <robvddoes@gmail.com>\n"
 "Language-Team: Rob van der Does\n"
@@ -19,71 +19,99 @@ msgstr ""
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 
+#: AutomaticVolumeAdjustmentSetup.py:143
 msgid "Add"
 msgstr "Voeg toe"
 
+#: AutomaticVolumeAdjustmentSetup.py:142 AutomaticVolumeAdjustmentSetup.py:279
 msgid "Adjustment value"
 msgstr "Correctie waarde"
 
+#: plugin.py:62 plugin.py:66
 msgid "Automatic Volume Adjustment"
 msgstr "Automatische volume aanpassing"
 
+#: AutomaticVolumeAdjustmentSetup.py:58
 msgid "Automatic Volume Adjustment - Config"
 msgstr "Automatische volume aanpassing - Configuratie"
 
+#: AutomaticVolumeAdjustmentSetup.py:256
 msgid "Automatic Volume Adjustment - Entry Config"
 msgstr "Automatische volume aanpassing - Ingang configuratie"
 
+#: AutomaticVolumeAdjustmentSetup.py:140
 msgid "Automatic Volume Adjustment - Service Config"
 msgstr "Automatische volume aanpassing - Service configuratie"
 
+#: AutomaticVolumeAdjustmentConfig.py:76
 msgid "Automatic volume adjust"
 msgstr "Automatische volume aanpassing"
 
+#: AutomaticVolumeAdjustmentSetup.py:66 AutomaticVolumeAdjustmentSetup.py:264
 msgid "Cancel"
 msgstr "Annuleer"
 
+#: AutomaticVolumeAdjustmentSetup.py:287
 msgid "Channel Selection"
 msgstr "Kanaal selectie"
 
+#: AutomaticVolumeAdjustmentSetup.py:84
 msgid "Default volume adjustment value for AC3/DTS"
 msgstr "Standaard volume aanpassingswaarde voor AC3/DTS"
 
+#: AutomaticVolumeAdjustmentSetup.py:146
 msgid "Delete"
 msgstr "Verwijder"
 
+#: AutomaticVolumeAdjustmentSetup.py:193
 msgid "Do you really want to delete this entry?"
 msgstr "Wilt u deze ingave echt verwijderen?"
 
+#: AutomaticVolumeAdjustmentSetup.py:145
 msgid "Edit"
 msgstr "Bewerk"
 
+#: AutomaticVolumeAdjustmentSetup.py:77
 msgid "Enable"
 msgstr "Schakel in"
 
+#: AutomaticVolumeAdjustmentSetup.py:85
 msgid "Max. volume for mpeg audio"
 msgstr "Max. volume voor mpeg audio"
 
+#: AutomaticVolumeAdjustmentSetup.py:81
 msgid "Modus"
 msgstr "Modus"
 
+#: AutomaticVolumeAdjustmentSetup.py:67 AutomaticVolumeAdjustmentSetup.py:144
+#: AutomaticVolumeAdjustmentSetup.py:265
 msgid "OK"
 msgstr "OK"
 
+#: AutomaticVolumeAdjustmentSetup.py:86
+msgid "Only AC3/DTS(HD)"
+msgstr ""
+
+#: AutomaticVolumeAdjustmentConfig.py:96
 msgid "Press OK to select a service"
 msgstr "Druk op OK om een service te selecteren"
 
+#: AutomaticVolumeAdjustmentConfig.py:76
 msgid "Remember service volume value"
 msgstr "Onthoud volume van service"
 
+#: AutomaticVolumeAdjustmentSetup.py:141 AutomaticVolumeAdjustmentSetup.py:277
 msgid "Servicename"
 msgstr "Servicenaam"
 
+#: AutomaticVolumeAdjustmentSetup.py:87
 msgid "Services"
 msgstr "Services"
 
+#: AutomaticVolumeAdjustmentSetup.py:88
 msgid "Show volumebar when volume-value was changed"
 msgstr "Toon volumeschaal als het volume werd aangepast"
 
+#: AutomaticVolumeAdjustmentSetup.py:307
 msgid "You must select a valid service!"
 msgstr "U moet een geldige service selecteren!"

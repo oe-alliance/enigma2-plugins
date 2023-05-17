@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# $PACKAGEDESCRIPION
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the NameZap package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: NameZap 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,29 +17,38 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: NamezapSetup.py:59
 msgid "Cancel"
 msgstr ""
 
+#: NamezapSetup.py:40
 msgid "Controls the visual appearance of the number zap dialog."
 msgstr ""
 
+#: NamezapSetup.py:34 NamezapSetup.py:76 plugin.py:121
 msgid "NameZAP Setup"
 msgstr ""
 
+#: plugin.py:21
 msgid "Number and Name"
 msgstr ""
 
+#: NamezapSetup.py:58
 msgid "OK"
 msgstr ""
 
+#: plugin.py:19
 msgid "Only Number"
 msgstr ""
 
+#: plugin.py:20
 msgid "Service Name"
 msgstr ""
 
+#: plugin.py:95
 msgid "Unknown Service"
 msgstr ""
 
+#: NamezapSetup.py:40
 msgid "Zapper Style"
 msgstr ""

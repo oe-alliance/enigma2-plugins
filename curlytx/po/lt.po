@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CurlyTx-VTI\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2016-01-23 11:17+0200\n"
 "Last-Translator: \n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
@@ -18,81 +18,107 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
+#: CurlyTxSettings.py:92
 msgid "Add new page"
 msgstr "Pridėti naują puslapį"
 
+#: CurlyTxSettings.py:51 CurlyTxSettings.py:210
 msgid "Cancel"
 msgstr "Atšaukti"
 
+#: CurlyTx.py:105 CurlyTx.py:108
 msgid "Close window"
 msgstr "Užverti langą"
 
+#: CurlyTxSettings.py:70
 msgid "Default page"
 msgstr "Numatytasis puslapis"
 
+#: CurlyTxSettings.py:54
 msgid "Delete"
 msgstr "Pašalinti"
 
+#: CurlyTxSettings.py:95
 msgid "Delete selected page"
 msgstr "Pašalinti pasirinktą puslapį"
 
+#: CurlyTxSettings.py:80
 msgid "Dismiss all setting changes"
 msgstr "Atmesti visus pakeitimus"
 
+#: CurlyTxSettings.py:86
 msgid "Edit selected page"
 msgstr "Redaguoti pasirinktą puslapį"
 
+#: CurlyTx.py:199
 msgid "Error fetching URL:"
 msgstr "Klaida, užeinant į nternetinį adresą:"
 
+#: CurlyTxSettings.py:175
 msgid "Error loading page feed:"
 msgstr "Klaida, atveriant šaltinius:"
 
+#: CurlyTxSettings.py:224
 msgid "Font size"
 msgstr "Šrifto dydis"
 
+#: CurlyTx.py:204
 msgid "Go and add a page in the settings"
 msgstr "Užeikite ir įtraukite puslapį į nustatymus"
 
+#: CurlyTx.py:212
 msgid "HTTP response headers for"
 msgstr "HTTP atsakymo antraštės "
 
+#: CurlyTx.py:170
 msgid "Invalid page"
 msgstr "Neteisingas puslapis"
 
+#: CurlyTxSettings.py:89
 msgid "Load pages from feed"
 msgstr "Atverti puslapius iš šaltinių"
 
+#: CurlyTx.py:185
 msgid "Loading ..."
 msgstr "Įkeliama…"
 
+#: CurlyTxSettings.py:73
 msgid "Menu title"
 msgstr "Meniu pavadinimas"
 
+#: CurlyTxSettings.py:53
 msgid "New"
 msgstr "Naujas"
 
+#: CurlyTx.py:56 CurlyTx.py:126
 msgid "Next"
 msgstr "Sekantis"
 
+#: CurlyTxSettings.py:145
 msgid "No page feed URL defined"
 msgstr "Šaltinių puslapio internetinis nenurodytas"
 
+#: CurlyTxSettings.py:52 CurlyTxSettings.py:211
 msgid "OK"
 msgstr "Gerai"
 
+#: CurlyTxSettings.py:222
 msgid "Page URL"
 msgstr "Puslapio internetinis adresas"
 
+#: CurlyTxSettings.py:74
 msgid "Page feed URL"
 msgstr "Šaltinių puslapio internetinis adresas"
 
+#: CurlyTxSettings.py:66
 msgid "Page:"
 msgstr "Puslapis:"
 
+#: CurlyTx.py:55 CurlyTx.py:125
 msgid "Prev"
 msgstr "Ankstesnis"
 
+#: CurlyTxSettings.py:112
 msgid ""
 "Really delete this page?\n"
 "It cannot be recovered!"
@@ -100,47 +126,62 @@ msgstr ""
 "Tikrai pašalinti šį puslapį?\n"
 "Tai neatstatoma atgal!"
 
+#: CurlyTx.py:54 CurlyTx.py:120 CurlyTx.py:124
 msgid "Reload"
 msgstr "Atnaujinti"
 
+#: CurlyTx.py:96
 msgid "Reload current page URL"
 msgstr "Atnaujinti šio puslapio internetinį adresą"
 
+#: CurlyTxSettings.py:83
 msgid "Save settings and close screen"
 msgstr "Išsaugoti reikšmes ir uždaryti langą"
 
+#: CurlyTx.py:87
 msgid "Scroll page contents down"
 msgstr "Paslinkti puslapiu žemyn"
 
+#: CurlyTx.py:84
 msgid "Scroll page contents up"
 msgstr "Paslinkti puslapiu aukštyn"
 
+#: CurlyTx.py:53 CurlyTxSettings.py:40
 msgid "Settings"
 msgstr "Nuostatos"
 
+#: CurlyTx.py:90
 msgid "Show HTTP response headers"
 msgstr "Rodyti HTTP atsakymo antraštes"
 
+#: CurlyTxSettings.py:72
 msgid "Show in extensions menu"
 msgstr "Rodyti tarp plėtinių meniu"
 
+#: CurlyTxSettings.py:71
 msgid "Show in main menu"
 msgstr "Rodyti pagrindiniame meniu"
 
+#: CurlyTx.py:93
 msgid "Show program settings"
 msgstr "Rodyti programos nustatymus"
 
+#: CurlyTx.py:111
 msgid "Show this help screen"
 msgstr "Rodyti šią pagalbą"
 
+#: CurlyTx.py:99
 msgid "Switch to next configured page URL"
 msgstr "Perjungti į kito sukonfigūruoto puslapio internetinį adresą"
 
+#: CurlyTx.py:102
 msgid "Switch to previous configured page URL"
 msgstr "Perjungti į ankstesnio sukonfigūruoto puslapio internetinį adresą"
 
+#: CurlyTxSettings.py:223
 msgid "Title"
 msgstr "Pavadinimas"
 
+#: plugin.py:38 plugin.py:45
 msgid "View remote text files"
 msgstr "Peržiūrėti nuotolinius tekstinius failus"

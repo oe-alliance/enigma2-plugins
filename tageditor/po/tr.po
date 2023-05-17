@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 TagEditor plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2009-09-24 20:41+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
 "Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
@@ -14,21 +14,27 @@ msgstr ""
 "X-Poedit-Country: TURKEY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#: plugin.py:248
 msgid "Add new tag..."
 msgstr "Etiket ekle..."
 
+#: plugin.py:36
 msgid "Cancel"
 msgstr "Vazgeç"
 
+#: plugin.py:252
 msgid "Delete all tags..."
 msgstr "Tüm etiketleri sil..."
 
+#: plugin.py:250
 msgid "Delete this tag..."
 msgstr "Bu etiketi sil..."
 
+#: plugin.py:251
 msgid "Delete unused tags"
 msgstr "Kullanılmayan etiketleri sil"
 
+#: plugin.py:234
 msgid ""
 "Do you really want to delete all tags everywhere?\n"
 "(Note that 'Cancel' will not undo this!)"
@@ -36,6 +42,7 @@ msgstr ""
 "Bütün etiketleri silmek istediğinizden emin misiniz?\n"
 "(Onaylarsanız, bir sonraki ekrandaki 'Vazgeç' seçimiyle iptal edemezsiniz!)"
 
+#: plugin.py:217
 #, python-format
 msgid ""
 "Do you really want to delete tag \"%s\" everywhere?\n"
@@ -45,24 +52,31 @@ msgstr ""
 "(Onaylarsanız, bir sonraki ekrandaki 'Vazgeç' seçimiyle iptal edemezsiniz!)"
 
 #. TRANSLATORS: This is the title of the TagEditor main screen
+#: plugin.py:68
 msgid "Edit Tags"
 msgstr ""
 
+#: plugin.py:39
 msgid "Load"
 msgstr "Yükle"
 
+#: plugin.py:38
 msgid "New"
 msgstr "Yeni"
 
+#: plugin.py:37
 msgid "OK"
 msgstr "Tamam"
 
+#: plugin.py:74
 msgid "Please enter the new tag"
 msgstr "Lütfen yeni etiket girin"
 
+#: plugin.py:249
 msgid "Rename this tag..."
 msgstr "Bu etiketin adını değiştir..."
 
+#: plugin.py:197
 #, python-format
 msgid "Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo this!)"
 msgstr ""
@@ -70,5 +84,6 @@ msgstr ""
 "(Onaylarsanız, bir sonraki ekrandaki 'Vazgeç' seçimiyle iptal edemezsiniz!)"
 
 #. TRANSLATORS: this is the string used in the movie context menu for TagEditor
+#: plugin.py:348
 msgid "edit tags"
 msgstr "etiket düzenle"

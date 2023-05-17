@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# $PACKAGEDESCRIPION
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the AutomaticVolumeAdjustment package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: AutomaticVolumeAdjustment 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-14 08:00+0100\n"
+"POT-Creation-Date: 2023-05-17 21:24+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,74 +17,99 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: AutomaticVolumeAdjustmentSetup.py:143
 msgid "Add"
 msgstr ""
 
+#: AutomaticVolumeAdjustmentSetup.py:142 AutomaticVolumeAdjustmentSetup.py:279
 msgid "Adjustment value"
 msgstr ""
 
+#: plugin.py:62 plugin.py:66
 msgid "Automatic Volume Adjustment"
 msgstr ""
 
+#: AutomaticVolumeAdjustmentSetup.py:58
 msgid "Automatic Volume Adjustment - Config"
 msgstr ""
 
+#: AutomaticVolumeAdjustmentSetup.py:256
 msgid "Automatic Volume Adjustment - Entry Config"
 msgstr ""
 
+#: AutomaticVolumeAdjustmentSetup.py:140
 msgid "Automatic Volume Adjustment - Service Config"
 msgstr ""
 
+#: AutomaticVolumeAdjustmentConfig.py:76
 msgid "Automatic volume adjust"
 msgstr ""
 
+#: AutomaticVolumeAdjustmentSetup.py:66 AutomaticVolumeAdjustmentSetup.py:264
 msgid "Cancel"
 msgstr ""
 
+#: AutomaticVolumeAdjustmentSetup.py:287
 msgid "Channel Selection"
 msgstr ""
 
+#: AutomaticVolumeAdjustmentSetup.py:84
 msgid "Default volume adjustment value for AC3/DTS"
 msgstr ""
 
+#: AutomaticVolumeAdjustmentSetup.py:146
 msgid "Delete"
 msgstr ""
 
+#: AutomaticVolumeAdjustmentSetup.py:193
 msgid "Do you really want to delete this entry?"
 msgstr ""
 
+#: AutomaticVolumeAdjustmentSetup.py:145
 msgid "Edit"
 msgstr ""
 
+#: AutomaticVolumeAdjustmentSetup.py:77
 msgid "Enable"
 msgstr ""
 
+#: AutomaticVolumeAdjustmentSetup.py:85
 msgid "Max. volume for mpeg audio"
 msgstr ""
 
+#: AutomaticVolumeAdjustmentSetup.py:81
 msgid "Modus"
 msgstr ""
 
+#: AutomaticVolumeAdjustmentSetup.py:67 AutomaticVolumeAdjustmentSetup.py:144
+#: AutomaticVolumeAdjustmentSetup.py:265
 msgid "OK"
 msgstr ""
 
+#: AutomaticVolumeAdjustmentSetup.py:86
 msgid "Only AC3/DTS(HD)"
 msgstr ""
 
+#: AutomaticVolumeAdjustmentConfig.py:96
 msgid "Press OK to select a service"
 msgstr ""
 
+#: AutomaticVolumeAdjustmentConfig.py:76
 msgid "Remember service volume value"
 msgstr ""
 
+#: AutomaticVolumeAdjustmentSetup.py:141 AutomaticVolumeAdjustmentSetup.py:277
 msgid "Servicename"
 msgstr ""
 
+#: AutomaticVolumeAdjustmentSetup.py:87
 msgid "Services"
 msgstr ""
 
+#: AutomaticVolumeAdjustmentSetup.py:88
 msgid "Show volumebar when volume-value was changed"
 msgstr ""
 
+#: AutomaticVolumeAdjustmentSetup.py:307
 msgid "You must select a valid service!"
 msgstr ""

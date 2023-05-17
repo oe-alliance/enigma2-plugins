@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ZapHistoryBrowser\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2009-07-07 09:56+0100\n"
 "Last-Translator: WeeGull <weegull@hotmail.com>\n"
 "Language-Team: Nabil Hanna <nabil1978@web.de>\n"
@@ -16,38 +16,50 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: /home/aliabdul/dream/enigma2-plugins/zaphistorybrowser/src\n"
 
+#: plugin.py:217
 msgid "Clear"
 msgstr "Rensa"
 
+#: plugin.py:220
 msgid "Config"
 msgstr "Konfig"
 
+#: plugin.py:218
 msgid "Delete"
 msgstr "Ta bort"
 
+#: plugin.py:125
 msgid "Enable zap history:"
 msgstr "Aktivera zap historik:"
 
+#: plugin.py:127
 msgid "Enigma1-like history:"
 msgstr ""
 
+#: plugin.py:126
 msgid "Maximum zap history entries:"
 msgstr "Maximum antal zap historik:"
 
+#: plugin.py:219
 msgid "Zap"
 msgstr ""
 
+#: plugin.py:205 plugin.py:318
 msgid "Zap-History Browser"
 msgstr "Zap-History Browser"
 
+#: plugin.py:118
 msgid "Zap-History Configurator"
 msgstr "Zap-History Konfiguration"
 
+#: plugin.py:49
 msgid "disabled"
 msgstr "avaktiverad"
 
+#: plugin.py:49
 msgid "disabled at parental lock"
 msgstr "avaktivera via föräldrarlås"
 
+#: plugin.py:49
 msgid "enabled"
 msgstr "aktiverad"

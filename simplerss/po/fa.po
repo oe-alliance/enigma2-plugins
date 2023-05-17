@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simple rss Persian Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2012-07-26 01:21+0330\n"
 "Last-Translator: mehdi <mehdi_ar_yekta@yahoo.com>\n"
 "Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
@@ -18,149 +18,194 @@ msgstr ""
 "X-Poedit-Language: Persian\n"
 "X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
 
+#: plugin.py:117
 #, python-format
 msgid "%d Feed(s) were added to configuration."
 msgstr ""
 
+#: plugin.py:151
 msgid "A simple to use RSS reader"
 msgstr ""
 
+#: RSSSetup.py:21
 msgid "Autoupdate"
 msgstr "بروزرسانی خودکار"
 
+#: RSSSetup.py:27 RSSSetup.py:78
 msgid "Cancel"
 msgstr "لغور کردن"
 
+#: RSSScreens.py:466 RSSScreens.py:471
 msgid "Close"
 msgstr "بستن"
 
+#: RSSSetup.py:81
 msgid "Delete"
 msgstr "حذف کردن"
 
+#: RSSScreens.py:130 RSSScreens.py:217
 msgid "Enclosures"
 msgstr "ضمائم"
 
+#: RSSScreens.py:420 RSSScreens.py:448
 msgid "Entries"
 msgstr "نوشته ها"
 
+#: RSSScreens.py:125 RSSScreens.py:212 RSSScreens.py:321
 #, python-format
 msgid "Entry %s/%s"
 msgstr ""
 
+#: RSSScreens.py:60
 msgid "Error while parsing Feed, this usually means there is something wrong with it."
 msgstr "اشکال تجزیه و تحلیل خبر ، که معمولا به معنی این است که خطایی همراه آن است "
 
+#: RSSPoller.py:89
 msgid "Failed to get subscriptions from Google Reader."
 msgstr "ناموفق در گرفتن اشتراک از گوگل ریدر"
 
+#: RSSPoller.py:70
 msgid "Failed to login to Google Reader."
 msgstr "ناموفق در ورود به گوگل ریدر"
 
+#: RSSSetup.py:103
 msgid "Feed"
 msgstr ""
 
+#: RSSScreens.py:421 RSSScreens.py:449
 #, python-format
 msgid "Feed %s/%s"
 msgstr ""
 
+#: RSSSetup.py:22
 msgid "Feed URI"
 msgstr ""
 
+#: RSSScreens.py:324 RSSScreens.py:326
 msgid "Feed is empty."
 msgstr ""
 
+#: RSSSetup.py:118
 msgid "Fetch feeds from Google Reader?"
 msgstr ""
 
+#: RSSScreens.py:101
 msgid "Found no Enclosure we can display."
 msgstr ""
 
+#: RSSSetup.py:124
 msgid "Google Password"
 msgstr "رمز عبور گوگل"
 
+#: RSSSetup.py:123
 msgid "Google Username"
 msgstr "نام کاربری گوگل"
 
+#: RSSSetup.py:110
 msgid "Keep running in background"
 msgstr "در حال اجرا پس زمینه"
 
+#: RSSSetup.py:80
 msgid "New"
 msgstr "جدید"
 
+#: RSSPoller.py:42 RSSTickerView.py:99
 msgid "New Items"
 msgstr "گزینه جدید"
 
+#: RSSPoller.py:43
 msgid "New Items since last Auto-Update"
 msgstr "گزینه جدید از زمان آخرین بروزرسانی"
 
+#: RSSScreens.py:156 RSSScreens.py:219
 msgid "No such Item."
 msgstr "نبود گزینه های زیاد"
 
+#: plugin.py:16
 msgid "Notification"
 msgstr "اخطار"
 
+#: RSSSetup.py:28 RSSSetup.py:79
 msgid "OK"
 msgstr "مورد تایید است"
 
+#: plugin.py:17
 msgid "Preview"
 msgstr "پیش نمایش "
 
+#: RSSSetup.py:146
 msgid ""
 "Really delete this entry?\n"
 "It cannot be recovered!"
 msgstr ""
 
+#: RSSPoller.py:208
 #, python-format
 msgid "Received %d new news item(s)."
 msgstr ""
 
+#: RSSScreens.py:465 RSSScreens.py:470
 msgid "Setup"
 msgstr "راه اندازی"
 
+#: RSSSetup.py:116
 msgid "Show new Messages as"
 msgstr "نمایش پیام جدید به عنوان ..."
 
+#: RSSScreens.py:429
 msgid "Simple RSS Reader"
 msgstr "یک آر اس اس ساده"
 
+#: RSSSetup.py:41 RSSSetup.py:96
 msgid "Simple RSS Reader Setup"
 msgstr "راه اندازی یک آر اس اس ساده"
 
+#: RSSScreens.py:150 RSSScreens.py:313
 #, python-format
 msgid "Simple RSS Reader: %s"
 msgstr ""
 
+#: RSSPoller.py:129
 #, python-format
 msgid ""
 "Sorry, this type of feed is unsupported:\n"
 "%s"
 msgstr ""
 
+#: RSSSetup.py:107
 msgid "Start automatically with Enigma2"
 msgstr "راه اندازی خودکار همزمان با انیگما 2"
 
+#: plugin.py:140
 msgid "Subscribe Newsfeed..."
 msgstr "اشتراک اخبار سایت ..."
 
+#: plugin.py:18
 msgid "Ticker"
 msgstr ""
 
+#: RSSScreens.py:464
 msgid "Update Feed"
 msgstr "بروزرسانی اخبار سایت ..."
 
+#: RSSSetup.py:117
 msgid "Update Interval (min)"
 msgstr "به روز رسانی بازه ی زمانی بر حسب دقیقه"
 
+#: RSSScreens.py:86
 msgid ""
 "Update is being done in Background.\n"
 "Contents will automatically be updated when it's done."
 msgstr ""
 
+#: plugin.py:163
 msgid "View RSS..."
 msgstr "نمایش آر اس اس"
 
+#: RSSScreens.py:477
 msgid "What to do?"
 msgstr "چه کاری انجام دهید؟"
 
+#: plugin.py:19
 msgid "none"
 msgstr "هیچ چی"

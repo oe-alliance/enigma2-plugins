@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 plugin - pluginhider\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-26 12:31+0000\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2017-07-10 19:49+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
@@ -17,50 +17,66 @@ msgstr ""
 "X-Generator: Poedit 2.0.2\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/pluginhider\n"
 
+#: PluginHiderSetup.py:60
 msgid "Cancel"
 msgstr "Atšaukti"
 
+#: PluginHiderSetup.py:102
 msgid "Could not start Plugin:"
 msgstr "Nepavyko paleist įskiepio:"
 
+#: PluginHiderSetup.py:65
 msgid "Eventinfo"
 msgstr "Informacija"
 
+#: PluginHiderSetup.py:64
 msgid "Extensions"
 msgstr "Plėtiniai"
 
+#: plugin.py:92
 msgid "Hide Plugins"
 msgstr "Paslėpti įskiepius"
 
+#: PluginHiderSetup.py:59
 msgid "OK"
 msgstr " Gerai"
 
+#: PluginHiderSetup.py:129
 msgid "PluginHider Setup"
 msgstr "'PluginHider' sąranka"
 
+#: PluginHiderSetup.py:63
 msgid "Plugins"
 msgstr "Įskiepiai"
 
+#: PluginHiderSetup.py:62
 msgid "Run"
 msgstr "Vykdyti"
 
+#: PluginHiderSetup.py:102
 msgid "Unable to access InfoBar."
 msgstr "Nepavyko prieiti prie infojuostos."
 
+#: PluginHiderSetup.py:75
 msgid "end editing"
 msgstr "redagavimo pabaiga"
 
+#: PluginHiderSetup.py:77
 msgid "run selected plugin"
 msgstr "paleisti pasirinktą įskiepį"
 
+#: PluginHiderSetup.py:76
 msgid "save"
 msgstr "išsaugoti"
 
+#: PluginHiderSetup.py:78
 msgid "select next tab"
 msgstr "pasirinkti kitą skirtuką"
 
+#: PluginHiderSetup.py:79
 msgid "select previous tab"
 msgstr "pasirinkti ankstesnį skirtuką"
 
+#: PluginHiderSetup.py:74
 msgid "toggle selection"
 msgstr "sukeisti pasirinktus"

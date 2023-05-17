@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AudioRestart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:27+0100\n"
+"POT-Creation-Date: 2023-05-17 21:24+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Tode <sagichnet@gmx.net>\n"
 "Language-Team: \n"
@@ -13,39 +13,51 @@ msgstr ""
 "X-Poedit-Basepath: D:\\Dreambox\\Sources\\enigma2-plugins\\audiorestart\n"
 "X-Poedit-SearchPath-0: src\n"
 
+#: plugin.py:116
 msgid " "
 msgstr " "
 
+#: plugin.py:152
 msgid "Audio restart Setup"
 msgstr "Audio restart Setup"
 
+#: plugin.py:114
 msgid "Cancel"
 msgstr "Abbrechen"
 
+#: plugin.py:111
 #, python-format
 msgid "Plugin: %(plugin)s , Version: %(version)s"
 msgstr "Plugin: %(plugin)s , Version: %(version)s"
 
+#: plugin.py:100 plugin.py:154
 msgid "Restart audio"
 msgstr "Audio neu starten"
 
+#: plugin.py:101
 msgid "Restart audio delay (in sec)"
 msgstr "Verzögerung (in sek)"
 
+#: plugin.py:115
 msgid "Save"
 msgstr "Speichern"
 
+#: plugin.py:152
 msgid "Setup for the AudioRestart Plugin"
 msgstr "Setup für das AudioRestart Plugin"
 
+#: plugin.py:20
 msgid "after restart"
 msgstr "nach Neustart"
 
+#: plugin.py:20
 msgid "after restart/standby"
 msgstr "nach Neustart/Standby"
 
+#: plugin.py:20
 msgid "after standby"
 msgstr "nach Standby"
 
+#: plugin.py:20
 msgid "disabled"
 msgstr "deaktiviert"

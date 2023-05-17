@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 EmailClient Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2009-11-28 18:34+0100\n"
 "Last-Translator: Michael Schmidt <michael@schmidt-schmitten.com>\n"
 "Language-Team: de <de@li.org>\n"
@@ -16,28 +16,41 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: plugin.py:144
 #, python-format
 msgid "%(name)s (%(user)s@%(server)s)"
 msgstr "%(name)s (%(user)s@%(server)s)"
 
+#: setup.xml
+#, fuzzy
+msgid "Account Setup"
+msgstr "Kontenliste"
+
+#: plugin.py:993
 msgid "Accounts list"
 msgstr "Kontenliste"
 
+#: plugin.py:411
 msgid "Attachments"
 msgstr "Anhänge"
 
+#: plugin.py:407
 msgid "Bodys"
 msgstr "Textkörper"
 
+#: plugin.py:355
 msgid "Date"
 msgstr "Datum"
 
+#: plugin.py:1156
 msgid "Email Client"
 msgstr "Email Client"
 
+#: setup.xml
 msgid "Email setup"
 msgstr "Email Einstellungen"
 
+#: plugin.py:190
 #, python-format
 msgid ""
 "EmailClient for %(account)s:\n"
@@ -48,15 +61,19 @@ msgstr ""
 "\n"
 "%(error)s"
 
+#: plugin.py:353
 msgid "From"
 msgstr "Von"
 
+#: EmailConfig.py:118 setup.xml
 msgid "IMAP Port"
 msgstr "IMAP Port"
 
+#: EmailConfig.py:117 setup.xml
 msgid "IMAP Server"
 msgstr "IMAP Server"
 
+#: plugin.py:586
 #, python-format
 msgid ""
 "New mail arrived for account %s:\n"
@@ -65,13 +82,16 @@ msgstr ""
 "Neue Nachricht für %s ist angekommen:\n"
 "\n"
 
+#: plugin.py:1056
 #, python-format
 msgid "Really delete account %s?"
 msgstr "Konto '%s' wirklich löschen?"
 
+#: plugin.py:356
 msgid "Subject"
 msgstr "Betreff"
 
+#: plugin.py:858
 #, python-format
 msgid ""
 "[EmailAccount] %(name)s: _cbCapabilities:\n"
@@ -86,52 +106,69 @@ msgstr ""
 "# cbCapabilities: %(capa)s\n"
 "####################################################################################################\n"
 
+#: plugin.py:1016
 #, python-format
 msgid "account %s is not connected"
 msgstr "Konto %s ist nicht verbunden"
 
+#: EmailConfig.py:116 setup.xml
 msgid "account name"
 msgstr "Kontoname"
 
+#: plugin.py:135 plugin.py:202 plugin.py:242 plugin.py:393 plugin.py:396
+#: plugin.py:402
 msgid "account not connected"
 msgstr "Konto nicht verbunden"
 
+#: plugin.py:973
 msgid "add"
 msgstr "Hinzufügen"
 
+#: EmailConfig.py:89
 msgid "cancel"
 msgstr "Abbruch"
 
+#: plugin.py:744
 msgid "cannot access inbox"
 msgstr "Kein Zugriff auf INBOX"
 
+#: plugin.py:821
 msgid "cannot get headers of new messages"
 msgstr "Kann Header der neuen Nachrichten nicht lesen"
 
+#: plugin.py:751
 msgid "cannot get list of new messages"
 msgstr "Kann Liste neuer Nachrichten nicht bekommen"
 
+#: plugin.py:840
 msgid "connection failed - retrying"
 msgstr "Verbindung fehlgeschlage - neuer Versuch"
 
+#: setup.xml
 msgid "debug"
 msgstr "Debug"
 
+#: plugin.py:364
 msgid "delete"
 msgstr "Löschen"
 
+#: setup.xml
 msgid "display connection errors"
 msgstr "Verbindungsfehler anzeigen"
 
+#: setup.xml
 msgid "display timeout (seconds)"
 msgstr "Anzeige-Timeout (in Sekunden)"
 
+#: plugin.py:974
 msgid "edit"
 msgstr "Bearbeiten"
 
+#: EmailConfig.py:47 EmailConfig.py:132
 msgid "empty values - retry"
 msgstr "Leere Felder, neuer Versuch"
 
+#: plugin.py:917
 #, python-format
 msgid ""
 "error logging %(who)s in:\n"
@@ -140,97 +177,128 @@ msgstr ""
 "Fehler bei Anmeldung von %(who)s:\n"
 "%(failure)s"
 
+#: plugin.py:816
 msgid "failed to load message"
 msgstr "Konnte Nachricht nicht laden"
 
+#: plugin.py:238
 msgid "getting message ..."
 msgstr "Hole Nachricht ..."
 
+#: plugin.py:231
 #, python-format
 msgid "have %d messages"
 msgstr "%d Nachrichten"
 
+#: plugin.py:233
 msgid "have no messages"
 msgstr "Keine Nachrichten"
 
+#: plugin.py:213
 msgid "headers loaded, now parsing ..."
 msgstr "Header geladen, analysiere diese nun ..."
 
+#: plugin.py:1102
 #, python-format
 msgid "importing configurations from %s"
 msgstr "Importiere Konfigurationen von %s"
 
+#: plugin.py:360
 msgid "leave unread"
 msgstr "Ungelesen lassen"
 
+#: EmailConfig.py:123 setup.xml
 msgid "list all mailboxes"
 msgstr "Anzeige aller Mailboxen"
 
+#: plugin.py:197
 msgid "loading headers ..."
 msgstr "Lade Header ..."
 
+#: EmailConfig.py:121 setup.xml
 msgid "mail check interval (minutes)"
 msgstr "Mailcheck-Intervall"
 
+#: EmailConfig.py:122 setup.xml
 msgid "maximum mail size to fetch"
 msgstr "Hole nur Nachrichten bis zur Größe"
 
+#: plugin.py:807
 msgid "message too large"
 msgstr "Nachricht zu groß"
 
+#: plugin.py:1022 plugin.py:1059
 msgid "no account selected"
 msgstr "Kein Konto ausgewählt"
 
+#: plugin.py:355 plugin.py:609
 msgid "no date"
 msgstr "kein Datum"
 
+#: plugin.py:434
 msgid "no filename"
 msgstr "kein Dateiname"
 
+#: plugin.py:353
 msgid "no from"
 msgstr "kein Absender"
 
+#: plugin.py:204
 msgid "no mailbox?!?!"
 msgstr "keine Mailbox?!?!"
 
+#: plugin.py:599
 msgid "no sender"
 msgstr "kein Sender"
 
+#: plugin.py:356 plugin.py:602
 msgid "no subject"
 msgstr "kein Betreff"
 
+#: EmailConfig.py:90
 msgid "ok"
 msgstr "OK"
 
+#: plugin.py:245
 msgid "parsing message ..."
 msgstr "Analysiere Nachricht ..."
 
+#: EmailConfig.py:120 setup.xml
 msgid "password"
 msgstr "Passwort"
 
+#: plugin.py:387
 msgid "really delete mail?"
 msgstr "Nachricht wirklich löschen?"
 
+#: plugin.py:385
 msgid "really undelete mail?"
 msgstr "Nachricht wiederherstellen?"
 
+#: plugin.py:972
 msgid "remove"
 msgstr "Löschen"
 
+#: plugin.py:436
 msgid "select Attachment"
 msgstr "Wähle Anhang"
 
+#: plugin.py:420
 msgid "select Body"
 msgstr "Wähle Textteil"
 
+#: setup.xml
 msgid "show deleted entries"
 msgstr "Anzeige gelöschter Mails"
 
+#: plugin.py:362
 msgid "undelete"
 msgstr "Löschen rückgängig"
 
+#: EmailConfig.py:119 setup.xml
 msgid "user name"
 msgstr "Benutzername"
 
+#: plugin.py:1156
 msgid "view Emails via IMAP4"
 msgstr "Lesen von Emails via IMAP4"

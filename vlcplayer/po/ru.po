@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2.plugins.vlcplayer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2015-10-01 20:20+0300\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: Dimitrij opePLi\n"
@@ -13,73 +13,96 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Poedit 1.8.4\n"
 
+#: VlcPlayer.py:295
 msgid "1 minute"
 msgstr "1 минута"
 
+#: VlcPlayer.py:295
 msgid "10 minutes"
 msgstr "10 минут"
 
+#: VlcPlayer.py:295
 msgid "15 minutes"
 msgstr "15 минут"
 
+#: VlcPlayer.py:295
 msgid "20 minutes"
 msgstr "20 минут"
 
+#: VlcPlayer.py:295
 msgid "3 minutes"
 msgstr "3 минуты"
 
+#: VlcPlayer.py:295
 msgid "30 minutes"
 msgstr "30 минут"
 
+#: VlcPlayer.py:295
 msgid "5 minutes"
 msgstr "5 минут"
 
+#: plugin.py:113
 msgid "A video streaming solution based on VLC"
 msgstr "Потоковое видео на основе плеера VLC"
 
+#: VlcServerConfig.py:460
 #, fuzzy
 msgid "Audio"
 msgstr "Аудио кодек"
 
+#: VlcServerConfig.py:467
 msgid "Audio Bitrate"
 msgstr "Аудио битрейт"
 
+#: VlcServerConfig.py:469
 msgid "Audio Channels"
 msgstr "Аудио каналы"
 
+#: VlcServerConfig.py:466
 msgid "Audio Codec"
 msgstr "Аудио кодек"
 
+#: VlcServerConfig.py:468
 msgid "Audio Samplerate"
 msgstr "Частота дискретизации аудио"
 
+#: VlcServerConfig.py:447
 msgid "Cache Directory"
 msgstr "Каталог кэша"
 
+#: VlcServerConfig.py:432
 msgid "Cancel"
 msgstr "Отмена"
 
+#: VlcPlayer.py:295
 msgid "Choice of minutes to jump"
 msgstr "Выбор минут для перехода"
 
+#: VlcServerList.py:183
 msgid "Choose an action:"
 msgstr "Выберите действие:"
 
+#: VlcServerConfig.py:448
 msgid "DVD Device (leave empty for default)"
 msgstr "Устройство DVD (оставьте пустым по умолчанию)"
 
+#: VlcPlayer.py:369 VlcPlayer.py:371
 msgid "Direct play"
 msgstr "Прямое проигрывание"
 
+#: VlcServerConfig.py:431
 msgid "Edit VLC Server"
 msgstr "Редактор сервера VLC"
 
+#: VlcServerConfig.py:439
 msgid "Enter VLC-Server as FQDN or IP-Address"
 msgstr "Ввод VLC-сервера как FQDN или IP-адрес"
 
+#: VlcServerConfig.py:459
 msgid "Enter subtitles as Track or Language"
 msgstr "Ввод субтитров в качестве треков или языка"
 
+#: VlcMediaList.py:187
 #, python-format
 msgid ""
 "Error loading filelist into server %(server)s:\n"
@@ -88,6 +111,7 @@ msgstr ""
 "Ошибка загрузки файлиста с сервера %(server)s:\n"
 "%(error)s"
 
+#: VlcMediaList.py:165
 #, python-format
 msgid ""
 "Error loading playlist %(media)s into server %(server)s:\n"
@@ -96,6 +120,7 @@ msgstr ""
 "Ошибка загрузки плейлиста %(media)s с сервера %(server)s:\n"
 "%(error)s"
 
+#: VlcMediaList.py:181 VlcMediaList.py:197 VlcMediaList.py:202
 #, python-format
 msgid ""
 "Error loading playlist into server %(server)s:\n"
@@ -104,6 +129,7 @@ msgstr ""
 "Ошибка, загрузки плейлиста с сервера %(server)s:\n"
 "%(error)s"
 
+#: VlcMediaList.py:128
 #, python-format
 msgid ""
 "Error updating filelist from server %(server)s:\n"
@@ -112,6 +138,7 @@ msgstr ""
 "Ошибка обновления файлиста с сервера %(server)s:\n"
 "%(error)s"
 
+#: VlcPlayer.py:362 VlcPlayer.py:447
 #, python-format
 msgid ""
 "Error with VLC server:\n"
@@ -120,18 +147,23 @@ msgstr ""
 "Ошибка VLC-сервера:\n"
 "%s"
 
+#: VlcServerConfig.py:153
 msgid "FQDN"
 msgstr ""
 
+#: VlcMediaList.py:63
 msgid "Filelist"
 msgstr "Файлист"
 
+#: VlcServerConfig.py:442
 msgid "HTTP Port"
 msgstr "Порт HTTP"
 
+#: VlcServerConfig.py:154
 msgid "IP-Address"
 msgstr "IP-Адрес"
 
+#: VlcServerList.py:151
 msgid ""
 "Latest compatible version VLC 2.0.7\n"
 "Setup VLC for PC:\n"
@@ -145,15 +177,19 @@ msgstr ""
 "Найдите файл c:/Program Files/VideoLAN/VLC/Lua/http/.hosts здесь впишите айпи ресивера.\n"
 "Добавить в автозагрузку ярлык для фонового запуска плеера VLC 'C:\\Program Files\\VideoLAN\\VLC\vlc.exe --intf telnet --extraintf http'"
 
+#: VlcServerList.py:103
 msgid "List of known profiles. Note: key info - help"
 msgstr "Список доступных профилей. Заметка: кнопка инфо - помощь"
 
+#: VlcServerConfig.py:445
 msgid "Movie Directory"
 msgstr "Каталог видео"
 
+#: VlcPlayer.py:528
 msgid "No more files in this directory"
 msgstr "Нет больше файлов в этом каталоге"
 
+#: plugin.py:88
 #, python-format
 msgid ""
 "No ping from Server:\n"
@@ -164,9 +200,11 @@ msgstr ""
 "%s\n"
 "%s"
 
+#: VlcPlayer.py:555
 msgid "No previous file in this directory"
 msgstr "Нет предыдущего файла в этом каталоге"
 
+#: VlcPlayer.py:352
 msgid ""
 "No valid Enigma-Service to play a VLC-Stream\n"
 "Check your installation and try again!"
@@ -174,108 +212,143 @@ msgstr ""
 "Нет доступной службы в Enigma для воспроизведения VLC-стрима!\n"
 "Проверьте установку и попробуйте еще раз!"
 
+#: VlcServerConfig.py:433
 msgid "OK"
 msgstr "OK"
 
+#: VlcServerConfig.py:454
 #, python-format
 msgid "Overscan Correction [in %(percentsign)s of Video width]"
 msgstr "Коррекция забегания развёртки [в %(percentsign)s видеоширины]"
 
+#: VlcServerConfig.py:443
 msgid "Ping IP-Address when open Server"
 msgstr "Пинг IP-адреса при открытии сервера"
 
+#: VlcMediaList.py:64
 msgid "Playlist"
 msgstr "Плейлист"
 
+#: VlcServerList.py:158
 msgid "Really delete this Server?"
 msgstr "Действительно удалить этот сервер?"
 
+#: VlcServerList.py:183
 msgid "Reset default"
 msgstr "Сброс дефолтного сервера"
 
+#: VlcPlayer.py:369
 msgid "Save as .ts and play"
 msgstr "Сохранить как .ts и проиграть"
 
+#: VlcServerList.py:102
 msgid "Select VLC-Server profile"
 msgstr "Выбор профиля VLC-сервера"
 
+#: VlcPlayer.py:369
 msgid "Select method?"
 msgstr "Выберите метод:"
 
+#: VlcServerConfig.py:440
 msgid "Server Address"
 msgstr "Адрес сервера"
 
+#: VlcServerConfig.py:438
 msgid "Server Profile Name"
 msgstr "Название профиля сервера"
 
+#: VlcMediaList.py:58
 msgid "Serverlist"
 msgstr "cписок серверов"
 
+#: VlcServerList.py:183
 msgid "Set as default"
 msgstr "Установить как дефолтный сервер"
 
+#: VlcServerConfig.py:456
 msgid "Subtitle overlay"
 msgstr "Наложение субтитров"
 
+#: VlcServerConfig.py:462
 msgid "Subtitles"
 msgstr "Субтитры"
 
+#: VlcServerConfig.py:465
 msgid "Transcode MPEG/DVD Audio"
 msgstr "Транскодируйте аудио MPEG/DVD"
 
+#: VlcServerConfig.py:450
 msgid "Transcode MPEG/DVD Video"
 msgstr "Транскодируйте видео MPEG/DVD"
 
+#: VlcServerConfig.py:446
 msgid "Use saving to Cache Directory"
 msgstr "Использовать сохранение в кэш каталог"
 
+#: VlcServerConfig.py:444
 msgid "VLC < 2.x"
 msgstr ""
 
+#: VlcMediaList.py:51
 msgid "VLC Media List"
 msgstr "VLC список медиа"
 
+#: plugin.py:112
 msgid "VLC Video Player"
 msgstr "VLC видео плеер"
 
+#: VlcServerConfig.py:452
 msgid "Video Bitrate"
 msgstr "Видео битрейт"
 
+#: VlcServerConfig.py:451
 msgid "Video Codec"
 msgstr "Видео кодек"
 
+#: VlcServerConfig.py:453
 msgid "Video Norm"
 msgstr "Видео стандарт"
 
+#: VlcServerConfig.py:457
 msgid "Yellow subtitles"
 msgstr "Желтые субтитры"
 
+#: VlcServerList.py:106
 msgid "add server"
 msgstr "добавить сервер"
 
+#: VlcServerList.py:105
 msgid "delete server"
 msgstr "удалить сервер"
 
+#: VlcServerList.py:107
 msgid "edit server"
 msgstr "изменить сервер"
 
+#: VlcMediaList.py:56 VlcMediaList.py:120
 msgid "filter off"
 msgstr "фильтр выкл"
 
+#: VlcMediaList.py:123
 msgid "filter on"
 msgstr "фильтр вкл"
 
+#: VlcServerConfig.py:234
 msgid "languages"
 msgstr "языки"
 
+#: VlcMediaList.py:59
 msgid "play DVD"
 msgstr "проиграть как DVD"
 
+#: VlcMediaList.py:57
 msgid "refresh"
 msgstr "обновление"
 
+#: VlcServerList.py:108
 msgid "set default"
 msgstr "установка по дефолту"
 
+#: VlcServerConfig.py:233
 msgid "tracks"
 msgstr "треки"

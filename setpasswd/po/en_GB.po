@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2012-03-16 16:32+0100\n"
 "Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
@@ -17,32 +17,42 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: plugin.py:56
 msgid "Cancel"
 msgstr "Cancel"
 
+#: plugin.py:29
 msgid "Change Root Password"
 msgstr "Change Root Password"
 
+#: plugin.py:144
 msgid "Change or reset the root password of your Receiver"
 msgstr "Change or reset the root password of your Receiver"
 
+#: plugin.py:78
 msgid "Enter new Password"
 msgstr "Enter new Password"
 
+#: plugin.py:120
 msgid "Enter your password here:"
 msgstr "Enter your password here:"
 
+#: plugin.py:57
 msgid "Set Password"
 msgstr "Set Password"
 
+#: plugin.py:93
 msgid "Sucessfully changed password for root user to: "
 msgstr "Successfully changed password for root user to: "
 
+#: plugin.py:96
 msgid "Unable to change/reset password for root user"
 msgstr "Unable to change/reset password for root user"
 
+#: plugin.py:58
 msgid "new Random"
 msgstr "new Random"
 
+#: plugin.py:59
 msgid "virt. Keyboard"
 msgstr "virt. Keyboard"

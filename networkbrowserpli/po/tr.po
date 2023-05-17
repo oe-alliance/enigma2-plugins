@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: e2 NetworkBrowser Plugin Turkish locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2009-02-23 18:43+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <zveyis@gmail.com>\n"
 "Language-Team: www.turkeyforum.com/satforum <zveyis@gmail.com>\n"
@@ -16,6 +16,7 @@ msgstr ""
 "X-Poedit-Language: Turkish\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#: MountEdit.py:262
 msgid ""
 "A mount entry with this name already exists!\n"
 "Update existing entry and continue?\n"
@@ -23,9 +24,11 @@ msgstr ""
 "Bu isimde bir bağlantı kaydı zaten mevcut!\n"
 "Mevcut olanın üzerine yazmak ve devam etmek istiyor musunuz?\n"
 
+#: MountEdit.py:168
 msgid "Active"
 msgstr "Etkin"
 
+#: MountView.py:63
 msgid ""
 "Active/\n"
 "Inactive"
@@ -33,12 +36,15 @@ msgstr ""
 "Etkin/\n"
 "Devre dışı"
 
+#: MountManager.py:79
 msgid "Add a new NFS or CIFS mount point to your Dreambox."
 msgstr "Dreambox'ınıza yeni bir NFS veya CIFS ağ bağlantı noktası ekleyin."
 
+#: MountManager.py:79
 msgid "Add new network mount point"
 msgstr "Yeni ağ bağlantı noktası ekle"
 
+#: MountEdit.py:264
 msgid ""
 "Are you sure you want to save this network mount?\n"
 "\n"
@@ -46,102 +52,140 @@ msgstr ""
 "Bu ağ bağlantı noktasını kaydetmek istiyor musunuz?\n"
 "\n"
 
+#: plugin.py:50
 msgid "Attempt to mount shares again"
 msgstr ""
 
+#: plugin.py:53
 msgid "Attempt to recover lost mounts (in background)"
 msgstr ""
 
+#: NetworkBrowser.py:184
 msgid "Browse network neighbourhood"
 msgstr "Ağ komşularına gözat"
 
+#: MountEdit.py:114
 msgid "CIFS share"
 msgstr "CIFS paylaşım"
 
+#: MountEdit.py:84 NetworkBrowser.py:607
 msgid "Cancel"
 msgstr ""
 
+#: MountManager.py:82
 msgid "Change hostname"
 msgstr "Konak adını değiştir"
 
+#: MountManager.py:82
 msgid "Change the hostname of your Dreambox."
 msgstr "Dreambox'ınızın konak adını değiştirin."
 
+#: MountManager.py:57 MountView.py:65 NetworkBrowser.py:120 UserDialog.py:101
+#: UserManager.py:52
 msgid "Close"
 msgstr "Kapat"
 
+#: UserManager.py:54
 msgid "Delete"
 msgstr "Sil"
 
+#: MountView.py:66
 msgid "Delete mount"
 msgstr ""
 
+#: MountView.py:93
 msgid "Dir:"
 msgstr "Klasör:"
 
+#: NetworkBrowser.py:499 NetworkBrowser.py:501 NetworkBrowser.py:514
 msgid "Do you want to enter a username and password for this host?\n"
 msgstr "Bu konak için kullanıcı adı ve parola tanımlamak istiyor musunuz?\n"
 
+#: NetworkBrowser.py:635
 msgid "Enter IP to scan..."
 msgstr ""
 
+#: MountManager.py:114
 msgid "Enter new hostname for your Dreambox"
 msgstr "Dreambox'ınızın yeni konak adını girin"
 
+#: MountEdit.py:210
 msgid "Enter options:"
 msgstr "Seçenekleri girin:"
 
+#: MountEdit.py:214 UserDialog.py:151
 msgid "Enter password:"
 msgstr "Parola girin:"
 
+#: MountEdit.py:208
 msgid "Enter share directory:"
 msgstr "Paylaşım klasörünü girin:"
 
+#: MountEdit.py:206
 msgid "Enter share name:"
 msgstr "Paylaşım adını girin:"
 
+#: UserDialog.py:104
 msgid "Enter user and password for host: "
 msgstr "Konak için kullanıcı adı ve parola girin: "
 
+#: MountEdit.py:212 UserDialog.py:149
 msgid "Enter username:"
 msgstr "Kullanıcı adı girin:"
 
+#: NetworkBrowser.py:123
 msgid "Expert"
 msgstr ""
 
+#: MountManager.py:138
 msgid "Finished restarting your network"
 msgstr "Ağ yeniden başlatıldı"
 
+#: MountEdit.py:176
+msgid "Host name"
+msgstr ""
+
+#: NetworkBrowser.py:623
 msgid "IP Address"
 msgstr ""
 
+#: MountView.py:92
 msgid "IP:"
 msgstr "IP:"
 
+#: MountEdit.py:170
 msgid "Local share name"
 msgstr "Yerel paylaşım adı"
 
+#: plugin.py:49
 msgid "Manage network shares"
 msgstr "Ağ paylaşımlarını yönet"
 
+#: plugin.py:49
 msgid "Manage your network shares..."
 msgstr "Ağ paylaşımlarını yönetin. "
 
+#: plugin.py:50 plugin.py:52
 msgid "Mount again"
 msgstr ""
 
+#: MountView.py:62
 msgid "Mount informations"
 msgstr "Bağlantı bilgileri"
 
+#: MountEdit.py:187
 msgid "Mount options"
 msgstr "Bağlantı seçenekleri"
 
+#: MountEdit.py:172
 msgid "Mount type"
 msgstr "Bağlantı tipi"
 
+#: MountManager.py:67 plugin.py:49
 msgid "MountManager"
 msgstr "Ağ diski yönetimi"
 
+#: MountView.py:61
 msgid ""
 "Mounted/\n"
 "Unmounted"
@@ -149,113 +193,150 @@ msgstr ""
 "Bağlı/\n"
 "Bağlı değil"
 
+#: MountManager.py:80
 msgid "Mountpoints management"
 msgstr "Bağlantı noktası yönetimi"
 
+#: MountEdit.py:87
 msgid "Mounts editor"
 msgstr "Bağlantı düzenleyici"
 
+#: NetworkBrowser.py:121
 msgid "Mounts management"
 msgstr "Ağ Diski Yönetimi"
 
+#: MountEdit.py:114
 msgid "NFS share"
 msgstr "NFS paylaşım"
 
+#: plugin.py:48
 msgid "NetworkBrowser"
 msgstr "Ağ gezgini"
 
+#: NetworkBrowser.py:226
 msgid "No network devices found!"
 msgstr "Ağ aygıtı bulunamadı!"
 
+#: MountEdit.py:192 UserDialog.py:140
 msgid "Password"
 msgstr "Parola"
 
+#: MountEdit.py:323
 msgid "Please wait for activation of your network mount..."
 msgstr "Ağ diski etkinleştirilirken lütfen bekleyin..."
 
+#: MountView.py:133
 msgid "Please wait while removing your network mount..."
 msgstr "Ağ diski kaldırılırken lütfen bekleyin..."
 
+#: MountEdit.py:285
 msgid "Please wait while updating your network mount..."
 msgstr "Ağ diski güncelleştirilirken lütfen bekleyin..."
 
+#: MountManager.py:125
 msgid "Please wait while your network is restarting..."
 msgstr "Ağ diski yeniden başlatılırken lütfen bekleyin..."
 
+#: MountEdit.py:83
 msgid "Press OK to activate the settings."
 msgstr "Onaylamak için OK tuşuna basın."
 
+#: NetworkBrowser.py:471
 msgid "Press OK to collapse this host"
 msgstr ""
 
+#: UserManager.py:53
 msgid "Press OK to edit selected settings."
 msgstr "Seçilen ayarları düzenlemek için OK tuşuna basın."
 
+#: MountView.py:64
 msgid "Press OK to edit the settings."
 msgstr "Düzenlemek için OK tuşuna basın."
 
+#: NetworkBrowser.py:473
 msgid "Press OK to expand this host"
 msgstr ""
 
+#: NetworkBrowser.py:467
 msgid "Press OK to mount this share!"
 msgstr ""
 
+#: NetworkBrowser.py:124
 msgid "Press OK to mount!"
 msgstr "Diski bağlamak için OK tuşuna basın."
 
+#: UserDialog.py:100
 msgid "Press OK to save settings."
 msgstr "Ayarları kaydetmek için OK tuşuna basın."
 
+#: MountManager.py:58
 msgid "Press OK to select."
 msgstr "Seçmek için OK tuşuna basın."
 
+#: NetworkBrowser.py:122
 msgid "Rescan"
 msgstr ""
 
+#: NetworkBrowser.py:608
 msgid "Scan NFS share"
 msgstr ""
 
+#: NetworkBrowser.py:609
 msgid "Scan range"
 msgstr ""
 
+#: plugin.py:48
 msgid "Search for network shares"
 msgstr "Ağ paylaşımlarını ara"
 
+#: plugin.py:48
 msgid "Search for network shares..."
 msgstr "Ağ paylaşımlarını arayın. "
 
+#: NetworkBrowser.py:219
 msgid "Searching your network. Please wait..."
 msgstr "Ağınız aranıyor. Lütfen bekleyin..."
 
+#: MountEdit.py:174
 msgid "Server IP"
 msgstr "Sunucu IP"
 
+#: MountEdit.py:178
 msgid "Server share"
 msgstr "Paylaşım klasörü"
 
+#: MountManager.py:81
 msgid "User management"
 msgstr "Kullanıcı yönetimi"
 
+#: UserManager.py:62
 msgid "Usermanager"
 msgstr "Kullanıcı yönetimi"
 
+#: MountEdit.py:190 UserDialog.py:138
 msgid "Username"
 msgstr "Kullanıcı adı"
 
+#: MountManager.py:80
 msgid "View, edit or delete mountpoints on your Dreambox."
 msgstr "Dreambox'ınızdaki ağ bağlantı noktalarını inceleyin, düzenleyin veya silin."
 
+#: MountManager.py:81
 msgid "View, edit or delete usernames and passwords for your network."
 msgstr "Ağınızdaki kullanıcı hesaplarını inceleyin, düzenleyin veya silin."
 
+#: MountEdit.py:336
 msgid "Your network mount has been activated."
 msgstr "Ağ diski bağlantınız etkinleştirildi."
 
+#: MountView.py:148
 msgid "Your network mount has been removed."
 msgstr "Ağ diski bağlantınız kaldırıldı."
 
+#: MountEdit.py:297
 msgid "Your network mount has been updated."
 msgstr "Ağ diski bağlantınız güncellendi."
 
+#: MountEdit.py:180
 msgid "use as HDD replacement"
 msgstr ""

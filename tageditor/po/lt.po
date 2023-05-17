@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TagEditor\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2017-07-11 09:26+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
@@ -13,21 +13,27 @@ msgstr ""
 "X-Generator: Poedit 2.0.2\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
+#: plugin.py:248
 msgid "Add new tag..."
 msgstr "Pridėti naują žymę..."
 
+#: plugin.py:36
 msgid "Cancel"
 msgstr "Atšaukti"
 
+#: plugin.py:252
 msgid "Delete all tags..."
 msgstr "Šalinti visas žymes..."
 
+#: plugin.py:250
 msgid "Delete this tag..."
 msgstr "Šalinti šią žymę..."
 
+#: plugin.py:251
 msgid "Delete unused tags"
 msgstr "Šalinti nenaudojamas žymes"
 
+#: plugin.py:234
 msgid ""
 "Do you really want to delete all tags everywhere?\n"
 "(Note that 'Cancel' will not undo this!)"
@@ -35,6 +41,7 @@ msgstr ""
 "Ar tikrai norite iš visur pašalinti visas žymes?\n"
 "(Žinokite, kad komanda 'Atšaukti' to jau neatšauks!)"
 
+#: plugin.py:217
 #, python-format
 msgid ""
 "Do you really want to delete tag \"%s\" everywhere?\n"
@@ -44,28 +51,36 @@ msgstr ""
 "(Žinokite, kad komanda 'Atšaukti' to jau neatšauks!)"
 
 #. TRANSLATORS: This is the title of the TagEditor main screen
+#: plugin.py:68
 msgid "Edit Tags"
 msgstr "Redaguoti žymes"
 
+#: plugin.py:39
 msgid "Load"
 msgstr "Įkelti"
 
+#: plugin.py:38
 msgid "New"
 msgstr "Naujas"
 
+#: plugin.py:37
 msgid "OK"
 msgstr "Gerai"
 
+#: plugin.py:74
 msgid "Please enter the new tag"
 msgstr "Įrašykite naują žymę"
 
+#: plugin.py:249
 msgid "Rename this tag..."
 msgstr "Pervadinti šią žymę..."
 
+#: plugin.py:197
 #, python-format
 msgid "Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo this!)"
 msgstr "Visur pakeisti žymes \"%s\" į:   (Žinokite, kad komanda 'Atšaukti' to jau neatšauks!)"
 
 #. TRANSLATORS: this is the string used in the movie context menu for TagEditor
+#: plugin.py:348
 msgid "edit tags"
 msgstr "redaguoti žymes"

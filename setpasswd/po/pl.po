@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2019-08-15 10:09+0100\n"
 "Last-Translator: pololoko\n"
 "Language-Team: \n"
@@ -18,33 +18,43 @@ msgstr ""
 "X-Generator: Poedit 2.2.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 
+#: plugin.py:56
 msgid "Cancel"
 msgstr "Anuluj"
 
+#: plugin.py:29
 msgid "Change Root Password"
 msgstr "Zmień Hasło Roota"
 
+#: plugin.py:144
 #, fuzzy
 msgid "Change or reset the root password of your Receiver"
 msgstr "Zmień lub zresetuj hasło roota twojego odbiornika"
 
+#: plugin.py:78
 msgid "Enter new Password"
 msgstr "Wprowadź nowe hasło"
 
+#: plugin.py:120
 msgid "Enter your password here:"
 msgstr "Wpisz swoje hasło tutaj:"
 
+#: plugin.py:57
 msgid "Set Password"
 msgstr "Ustaw Hasło"
 
+#: plugin.py:93
 msgid "Sucessfully changed password for root user to: "
 msgstr "Pomyślnie zmieniono hasło użytkownika root:"
 
+#: plugin.py:96
 msgid "Unable to change/reset password for root user"
 msgstr "Nie można zmienić / zresetować hasła dla użytkownika root"
 
+#: plugin.py:58
 msgid "new Random"
 msgstr "Losowe Hasło"
 
+#: plugin.py:59
 msgid "virt. Keyboard"
 msgstr "wirt. Klawiatura"

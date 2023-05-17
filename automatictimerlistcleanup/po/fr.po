@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AutomaticTimerlistCleanup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:24+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: OEA\n"
 "Language-Team: french\n"
@@ -16,38 +16,50 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
+#: plugin.py:51 plugin.py:129 plugin.py:133
 msgid "Automatic Timerlist Cleanup Setup"
 msgstr "Configuration de Automatic Timerlist Cleanup"
 
+#: plugin.py:55
 msgid "Cancel"
 msgstr "Annuler"
 
+#: plugin.py:58
 msgid "Cleanup timerlist-entries"
 msgstr "Nettoyer les entrées de la liste des timers"
 
+#: plugin.py:56
 msgid "OK"
 msgstr "OK"
 
+#: plugin.py:37
 msgid "disabled"
 msgstr "désactiver"
 
+#: plugin.py:37
 msgid "immediately after recording"
 msgstr "immédiatement après l'enregistrement"
 
+#: plugin.py:37
 msgid "older than 1 day"
 msgstr "plus vieux que 1 jour"
 
+#: plugin.py:37
 msgid "older than 1 week"
 msgstr "plus vieux que 1 semaine"
 
+#: plugin.py:37
 msgid "older than 2 weeks"
 msgstr "plus vieux que 2 semaines"
 
+#: plugin.py:37
 msgid "older than 3 days"
 msgstr "plus vieux que 3 jours"
 
+#: plugin.py:37
 msgid "older than 4 weeks"
 msgstr "plus vieux que 4 semaines"
 
+#: plugin.py:37
 msgid "older than 6 weeks"
 msgstr "plus vieux que 6 semaines"

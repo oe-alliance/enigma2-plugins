@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# $PACKAGEDESCRIPION
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the FTPBrowser package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: FTPBrowser 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,201 +17,261 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: FTPBrowser.py:719
 #, python-format
 msgid "%d kb/s"
 msgstr ""
 
+#: plugin.py:119
 msgid "A basic FTP client"
 msgstr ""
 
+#: FTPBrowser.py:528
 #, python-format
 msgid ""
 "A file with this name (%s) already exists locally.\n"
 "Do you want to overwrite it?"
 msgstr ""
 
+#: FTPBrowser.py:558
 #, python-format
 msgid ""
 "A file with this name (%s) already exists on the remote host.\n"
 "Do you want to overwrite it?"
 msgstr ""
 
+#: FTPBrowser.py:753
 msgid ""
 "A transfer is currently in progress.\n"
 "What do you want to do?"
 msgstr ""
 
+#: FTPBrowser.py:756
 msgid "Abort transfer"
 msgstr ""
 
+#: FTPServerManager.py:262
 msgid "Add"
 msgstr ""
 
+#: FTPServerManager.py:159
 msgid "Address:"
 msgstr ""
 
+#: FTPBrowser.py:445
 #, python-format
 msgid "Are you sure you want to delete %s?"
 msgstr ""
 
+#: FTPBrowser.py:757
 msgid "Cancel"
 msgstr ""
 
+#: FTPServerManager.py:371
 msgid "Configuration saved."
 msgstr ""
 
+#: plugin.py:107
 msgid "Connect to FTP..."
 msgstr ""
 
+#: FTPBrowser.py:829
 msgid "Could not connect to ftp server!"
 msgstr ""
 
+#: FTPBrowser.py:393 FTPBrowser.py:405
 #, python-format
 msgid "Could not delete %s."
 msgstr ""
 
+#: FTPBrowser.py:480
 msgid "Could not obtain list of files."
 msgstr ""
 
+#: FTPBrowser.py:337 FTPBrowser.py:352
 #, python-format
 msgid "Could not rename %s."
 msgstr ""
 
+#: FTPBrowser.py:194 FTPServerManager.py:261
 msgid "Delete"
 msgstr ""
 
+#: FTPBrowser.py:281
 msgid "Download"
 msgstr ""
 
+#: FTPBrowser.py:683
 msgid "Download finished."
 msgstr ""
 
+#: FTPBrowser.py:718
 #, python-format
 msgid "ETA %d:%02d min"
 msgstr ""
 
+#: FTPServerManager.py:263
 msgid "Edit"
 msgstr ""
 
+#: FTPServerManager.py:155
 msgid "Enter URI"
 msgstr ""
 
+#: FTPServerManager.py:212
 msgid "Enter URI of FTP Server:"
 msgstr ""
 
+#: FTPBrowser.py:376
 msgid "Enter new filename:"
 msgstr ""
 
+#: FTPBrowser.py:131 FTPBrowser.py:135
 msgid "Error"
 msgstr ""
 
+#: FTPBrowser.py:668 FTPBrowser.py:692
 msgid "Error during download."
 msgstr ""
 
+#: FTPBrowser.py:192 FTPServerManager.py:152
 msgid "Exit"
 msgstr ""
 
+#: FTPQueueManager.py:99
 msgid "FTP Queue Manager"
 msgstr ""
 
+#: FTPServerManager.py:149 FTPServerManager.py:176
 msgid "FTP Server Editor"
 msgstr ""
 
+#: FTPServerManager.py:286
 msgid "FTP Server Manager"
 msgstr ""
 
+#: FTPBrowser.py:185
 msgid "Local"
 msgstr ""
 
+#: FTPServerManager.py:158
 msgid "Name:"
 msgstr ""
 
+#: FTPServerManager.py:153
 msgid "OK"
 msgstr ""
 
+#: FTPBrowser.py:108 FTPBrowser.py:130
 msgid "Parent Directory"
 msgstr ""
 
+#: FTPServerManager.py:163
 msgid "Passive:"
 msgstr ""
 
+#: FTPServerManager.py:161
 msgid "Password:"
 msgstr ""
 
+#: FTPServerManager.py:162
 msgid "Port:"
 msgstr ""
 
+#: FTPBrowser.py:271
 msgid "Queue Manager"
 msgstr ""
 
+#: FTPBrowser.py:473
 msgid "Queue processed."
 msgstr ""
 
+#: FTPServerManager.py:317
 msgid ""
 "Really delete this entry?\n"
 "It cannot be recovered!"
 msgstr ""
 
+#: FTPBrowser.py:818
 msgid "Remote"
 msgstr ""
 
+#: FTPBrowser.py:187 FTPBrowser.py:783 FTPBrowser.py:826
 msgid "Remote (not connected)"
 msgstr ""
 
+#: FTPBrowser.py:390 FTPBrowser.py:407
 #, python-format
 msgid "Removed %s."
 msgstr ""
 
+#: FTPBrowser.py:420 FTPBrowser.py:433
 msgid "Removing directories is not supported."
 msgstr ""
 
+#: FTPBrowser.py:193
 msgid "Rename"
 msgstr ""
 
+#: FTPBrowser.py:334 FTPBrowser.py:354
 #, python-format
 msgid "Renamed %s to %s."
 msgstr ""
 
+#: FTPBrowser.py:755
 msgid "Run in Background"
 msgstr ""
 
+#: FTPServerManager.py:264
 msgid "Save"
 msgstr ""
 
+#: FTPBrowser.py:208
 msgid "Select local file list"
 msgstr ""
 
+#: FTPBrowser.py:209
 msgid "Select remote file list"
 msgstr ""
 
+#: FTPBrowser.py:270
 msgid "Server Manager"
 msgstr ""
 
+#: plugin.py:72
 msgid ""
 "There already is an active connection.\n"
 "Do you want to abort it?"
 msgstr ""
 
+#: FTPBrowser.py:596 FTPBrowser.py:620
 msgid "There already is an active transfer."
 msgstr ""
 
+#: FTPBrowser.py:195 FTPBrowser.py:277
 msgid "Upload"
 msgstr ""
 
+#: FTPBrowser.py:659
 msgid "Upload finished."
 msgstr ""
 
+#: FTPServerManager.py:160
 msgid "Username:"
 msgstr ""
 
+#: plugin.py:85
 msgid "Which server do you want to connect to?"
 msgstr ""
 
+#: FTPBrowser.py:202
 msgid "close"
 msgstr ""
 
+#: FTPBrowser.py:201
 msgid "enter directory/get file/put file"
 msgstr ""
 
+#: FTPBrowser.py:203
 msgid "open menu"
 msgstr ""

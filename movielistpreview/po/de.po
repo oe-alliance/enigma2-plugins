@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MovielistPreview\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: AliAbdul <aliabdul1978@hotmail.de>\n"
 "Language-Team: Nabil Hanna <nabil1978@web.de>\n"
@@ -15,39 +15,51 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: /home/aliabdul/dream/ltteam/trunk/additions/plugins/movielistpreview/src\n"
 
+#: plugin.py:437
 #, python-format
 msgid "%s - creating preview for movie %s"
 msgstr "%s - erstelle Vorschaubild für Film %s"
 
+#: plugin.py:494
 msgid "Activate Movielist Preview"
 msgstr "Aktiviere Filmlistenvorschau"
 
+#: plugin.py:496
 msgid "Autocreate of missing previews"
 msgstr "Autoerstellung fehlender Vorschaubilder"
 
+#: plugin.py:467
 msgid "Autocreate of previews aborted due user!"
 msgstr "Autoerstellung fehlender Vorschaubilder wurde abgebrochen!"
 
+#: plugin.py:497
 msgid "Change Movielist Preview position"
 msgstr "Ändere Position der Filmlistenvorschau"
 
+#: plugin.py:424
 msgid "Could not find any movie!"
 msgstr "Konnte keinen Film finden!"
 
+#: plugin.py:495
 msgid "Create preview"
 msgstr "Erstelle Vorschaubild"
 
+#: plugin.py:492
 msgid "Deactivate Movielist Preview"
 msgstr "Deaktiviere Filmlistenvorschau"
 
+#: plugin.py:446
 msgid "Everything done ;)"
 msgstr "Alles erledigt ;)"
 
+#: plugin.py:151 plugin.py:318 plugin.py:374 plugin.py:479 plugin.py:601
 msgid "Movielist Preview"
 msgstr "Filmlistenvorschau"
 
+#: plugin.py:156
 msgid "OK"
 msgstr "OK"
 
+#: plugin.py:360
 msgid "Preview created."
 msgstr "Vorschaubild erstellt."

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AutomaticVolumeAdjustment\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:24+0100\n"
 "PO-Revision-Date: 2015-11-13 20:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: Vytenis Pulokas <vyteniui@gmail.com>\n"
@@ -14,71 +14,99 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
+#: AutomaticVolumeAdjustmentSetup.py:143
 msgid "Add"
 msgstr "Pridėti"
 
+#: AutomaticVolumeAdjustmentSetup.py:142 AutomaticVolumeAdjustmentSetup.py:279
 msgid "Adjustment value"
 msgstr "Patikslinimo vertė"
 
+#: plugin.py:62 plugin.py:66
 msgid "Automatic Volume Adjustment"
 msgstr "Automatinis garso reguliavimas"
 
+#: AutomaticVolumeAdjustmentSetup.py:58
 msgid "Automatic Volume Adjustment - Config"
 msgstr "Automatinis garso reguliavimas - konfig"
 
+#: AutomaticVolumeAdjustmentSetup.py:256
 msgid "Automatic Volume Adjustment - Entry Config"
 msgstr "Automatinis garso reguliavimas - įrašo konfig"
 
+#: AutomaticVolumeAdjustmentSetup.py:140
 msgid "Automatic Volume Adjustment - Service Config"
 msgstr "Automatinis garso reguliavimas - kanalų konfig"
 
+#: AutomaticVolumeAdjustmentConfig.py:76
 msgid "Automatic volume adjust"
 msgstr "Automatiškai reguliuoti garsą"
 
+#: AutomaticVolumeAdjustmentSetup.py:66 AutomaticVolumeAdjustmentSetup.py:264
 msgid "Cancel"
 msgstr "Atšaukti"
 
+#: AutomaticVolumeAdjustmentSetup.py:287
 msgid "Channel Selection"
 msgstr "Kanalo pasirinkimas"
 
+#: AutomaticVolumeAdjustmentSetup.py:84
 msgid "Default volume adjustment value for AC3/DTS"
 msgstr "Numatytasis AC3/DTS kanalų garso lygis"
 
+#: AutomaticVolumeAdjustmentSetup.py:146
 msgid "Delete"
 msgstr "Pašalinti"
 
+#: AutomaticVolumeAdjustmentSetup.py:193
 msgid "Do you really want to delete this entry?"
 msgstr "Ar tikrai norite naikinti šį įrašą?"
 
+#: AutomaticVolumeAdjustmentSetup.py:145
 msgid "Edit"
 msgstr "Redaguoti"
 
+#: AutomaticVolumeAdjustmentSetup.py:77
 msgid "Enable"
 msgstr "Įjungti"
 
+#: AutomaticVolumeAdjustmentSetup.py:85
 msgid "Max. volume for mpeg audio"
 msgstr "Maks. mpeg garso lygis"
 
+#: AutomaticVolumeAdjustmentSetup.py:81
 msgid "Modus"
 msgstr "Būdas"
 
+#: AutomaticVolumeAdjustmentSetup.py:67 AutomaticVolumeAdjustmentSetup.py:144
+#: AutomaticVolumeAdjustmentSetup.py:265
 msgid "OK"
 msgstr "Gerai"
 
+#: AutomaticVolumeAdjustmentSetup.py:86
+msgid "Only AC3/DTS(HD)"
+msgstr ""
+
+#: AutomaticVolumeAdjustmentConfig.py:96
 msgid "Press OK to select a service"
 msgstr "Kad pasirinkti, spauskite 'OK'."
 
+#: AutomaticVolumeAdjustmentConfig.py:76
 msgid "Remember service volume value"
 msgstr "Prisiminti kanalo garso lygį"
 
+#: AutomaticVolumeAdjustmentSetup.py:141 AutomaticVolumeAdjustmentSetup.py:277
 msgid "Servicename"
 msgstr "Kanalo pavadinimas"
 
+#: AutomaticVolumeAdjustmentSetup.py:87
 msgid "Services"
 msgstr "Kanalai"
 
+#: AutomaticVolumeAdjustmentSetup.py:88
 msgid "Show volumebar when volume-value was changed"
 msgstr "Pakeitus garso lygį, parodyti garso juostą"
 
+#: AutomaticVolumeAdjustmentSetup.py:307
 msgid "You must select a valid service!"
 msgstr "Turite pasirinkti realų kanalą!"

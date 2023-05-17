@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: name zap Persian Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Persian Prince <persianprince@persianpros.org>\n"
 "Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
@@ -15,29 +15,38 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
+#: NamezapSetup.py:59
 msgid "Cancel"
 msgstr "لغو کردن"
 
+#: NamezapSetup.py:40
 msgid "Controls the visual appearance of the number zap dialog."
 msgstr "کنترل برخی از محاوره های برنامه های بصری"
 
+#: NamezapSetup.py:34 NamezapSetup.py:76 plugin.py:121
 msgid "NameZAP Setup"
 msgstr " ZAP تنظیم نام"
 
+#: plugin.py:21
 msgid "Number and Name"
 msgstr "تعداد و نام"
 
+#: NamezapSetup.py:58
 msgid "OK"
 msgstr "اوکی"
 
+#: plugin.py:19
 msgid "Only Number"
 msgstr "فقط اعداد"
 
+#: plugin.py:20
 msgid "Service Name"
 msgstr "نام سرویس"
 
+#: plugin.py:95
 msgid "Unknown Service"
 msgstr "سرویس های ناشناس"
 
+#: NamezapSetup.py:40
 msgid "Zapper Style"
 msgstr "Zapper استایل"

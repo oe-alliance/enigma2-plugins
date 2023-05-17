@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RSDownloader_fy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-27 18:11+0100\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2011-09-28 13:27+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
@@ -19,109 +19,143 @@ msgstr ""
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 
+#: plugin.py:1421
 msgid "Abort all downloads"
 msgstr "Annuleer alle downloads"
 
+#: plugin.py:1311 plugin.py:1394
 msgid "Add"
 msgstr "Voeg toe"
 
+#: plugin.py:1418
 msgid "Add downloads from txt files"
 msgstr "Voeg downloads toe van tekst bestanden"
 
+#: plugin.py:1419
 msgid "Add files from container"
 msgstr "Voeg bestanden toe van container"
 
+#: plugin.py:946
 #, python-format
 msgid "Added %s to the download-list."
 msgstr "%s toegevoegd aan de download-lijst."
 
+#: plugin.py:859
 msgid "Allow downloading on friday:"
 msgstr "Downloaden toestaan op vrijdag:"
 
+#: plugin.py:855
 msgid "Allow downloading on monday:"
 msgstr "Downloaden toestaan op maandag:"
 
+#: plugin.py:860
 msgid "Allow downloading on saturday:"
 msgstr "Downloaden toestaan op zaterdag:"
 
+#: plugin.py:861
 msgid "Allow downloading on sunday:"
 msgstr "Downloaden toestaan op zondag:"
 
+#: plugin.py:858
 msgid "Allow downloading on thursday:"
 msgstr "Downloaden toestaan op donderdag:"
 
+#: plugin.py:856
 msgid "Allow downloading on tuesday:"
 msgstr "Downloaden toestaan op dinsdag:"
 
+#: plugin.py:857
 msgid "Allow downloading on wednesday:"
 msgstr "Downloaden toestaan op woensdag:"
 
+#: plugin.py:300 plugin.py:331 plugin.py:363 plugin.py:417 plugin.py:451
 msgid "Checking"
 msgstr "Checking"
 
+#: plugin.py:868
 msgid "Choose reconnect script:"
 msgstr "Kies herverbindings script:"
 
+#: plugin.py:1423
 msgid "Clear finished downloads"
 msgstr "Verwijder downloads die gereed zijn"
 
+#: plugin.py:1430
 msgid "Close plugin"
 msgstr "Sluit plugin"
 
+#: plugin.py:1395
 msgid "Config"
 msgstr "Configuratie"
 
+#: plugin.py:1310 plugin.py:1392
 msgid "Delete"
 msgstr "Verwijderen"
 
+#: plugin.py:1478
 #, python-format
 msgid "Delete %s?"
 msgstr "Verwijder %s?"
 
+#: plugin.py:1416
 msgid "Delete download"
 msgstr "Verwijder download"
 
+#: plugin.py:1420
 msgid "Delete failed downloads"
 msgstr "Verwijder mislukte downloads"
 
+#: plugin.py:1425
 msgid "Delete log"
 msgstr "Verwijder log"
 
+#: plugin.py:863
 msgid "Don't download after:"
 msgstr "Niet downloaden na:"
 
+#: plugin.py:862
 msgid "Don't download before:"
 msgstr "Niet downloaden voor:"
 
+#: plugin.py:870
 msgid "Don't reconnect after:"
 msgstr "Niet herverbinden na:"
 
+#: plugin.py:869
 msgid "Don't reconnect before:"
 msgstr "Niet herverbinden voor:"
 
+#: plugin.py:1574
 msgid "Download files from rapidshare"
 msgstr "Gedownloade bestanden van rapidshare"
 
+#: plugin.py:845
 msgid "Download in the background:"
 msgstr "Download in de achtergrond"
 
+#: plugin.py:355 plugin.py:366 plugin.py:389 plugin.py:395 plugin.py:763
 msgid "Downloading"
 msgstr "Downloaden"
 
+#: plugin.py:853
 msgid "Downloads directory:"
 msgstr "Download directrory:"
 
+#: plugin.py:1282
 msgid "Enter unrar password:"
 msgstr "Voer unrar wachtwoord in:"
 
+#: plugin.py:948
 #, python-format
 msgid "Error while adding %s to the download-list!"
 msgstr "Fout bij het toevoegen van %s aan de lijst!"
 
+#: plugin.py:1550
 #, python-format
 msgid "Error while decrypting %s!"
 msgstr "Fout tijdens ontcijferen %s!"
 
+#: plugin.py:1002
 #, python-format
 msgid ""
 "Error while searching http://rapidshare-search-engine.com!\n"
@@ -132,6 +166,7 @@ msgstr ""
 "\n"
 "Fout: %s"
 
+#: plugin.py:958
 msgid ""
 "Error while searching http://rapidshare-search-engine.com!\n"
 "\n"
@@ -141,114 +176,152 @@ msgstr ""
 "\n"
 "Fout: Niets gevonden, sorry."
 
+#: plugin.py:424 plugin.py:436 plugin.py:572 plugin.py:753 plugin.py:778
 msgid "Failed"
 msgstr "Mislukt"
 
+#: plugin.py:430 plugin.py:572 plugin.py:678 plugin.py:745 plugin.py:1475
 msgid "Finished"
 msgstr "Klaar"
 
+#: plugin.py:854
 msgid "Ignore download times:"
 msgstr "Downloadtijden negeren:"
 
+#: plugin.py:1429
 msgid "Install unrar"
 msgstr "Installeert unrar"
 
+#: plugin.py:1462
 msgid "Installing unrar..."
 msgstr "Installeert unrar..."
 
+#: plugin.py:852
 msgid "Lists directory:"
 msgstr "Lijst directory:"
 
+#: plugin.py:1013
 msgid "Loading next page... please wait!"
 msgstr "Volgende pagina laden... een moment!"
 
+#: plugin.py:1007
 msgid "Loading previous page... please wait!"
 msgstr "Vorige pagina laden...een moment!"
 
+#: plugin.py:872
 msgid "Mark files < 1 MB as failed:"
 msgstr "Markeer bestanden < 1 MB als mislukt:"
 
+#: plugin.py:864
 msgid "Maximal downloads:"
 msgstr "Maximale downloads:"
 
+#: plugin.py:1396
 msgid "Menu"
 msgstr "Menu"
 
+#: plugin.py:68
 msgid "No reconnect"
 msgstr "Geen herverbinding"
 
+#: plugin.py:959
 msgid "Nothing found, sorry."
 msgstr "Niets gevonden, sorry."
 
+#: plugin.py:1427
 msgid "Open unrar Manager"
 msgstr "Open unrar Manager"
 
+#: plugin.py:975
 #, python-format
 msgid "Page %d / %d. Push < > to switch the page..."
 msgstr "Pagina %d / %d. Druk < > om van pagina te wisselen..."
 
+#: plugin.py:849
 msgid "Password (netload.in):"
 msgstr "Wachtwoord (netload.in):"
 
+#: plugin.py:851
 msgid "Password (uploaded.to):"
 msgstr "Wachtwoord (uploaded.to):"
 
+#: plugin.py:847
 msgid "Password:"
 msgstr "Wachtwoord:"
 
+#: plugin.py:1431
 msgid "Please choose a function..."
 msgstr "Kies een functie..."
 
+#: plugin.py:801 plugin.py:1574
 msgid "RS Downloader"
 msgstr "RS downloader"
 
+#: plugin.py:867
 msgid "Reconnect type:"
 msgstr "Herverbindings type:"
 
+#: plugin.py:871
 msgid "Restart failed after 10 minutes:"
 msgstr "Herstart mislukt na 10 minutes:"
 
+#: plugin.py:1422
 msgid "Restart failed downloads"
 msgstr "Herstart mislukte downloads"
 
+#: plugin.py:842
 msgid "Save"
 msgstr "Opslaan"
 
+#: plugin.py:68
 msgid "Script"
 msgstr "Script"
 
+#: plugin.py:1393
 msgid "Search"
 msgstr "Zoek"
 
+#: plugin.py:1487
 msgid "Search http://rapidshare-search-engine.com for:"
 msgstr "Zoek op http://rapidshare-search-engine.com naar:"
 
+#: plugin.py:1424
 msgid "Show log"
 msgstr "Toon log"
 
+#: plugin.py:865
 msgid "Take x downloads to list:"
 msgstr "Neem x downloads van lijst:"
 
+#: plugin.py:1337
 msgid "Unrar is already working!"
 msgstr "Unrar is al bezig!"
 
+#: plugin.py:1417
 msgid "Use search engine"
 msgstr "Gebruik zoekmachine"
 
+#: plugin.py:848
 msgid "Username (netload.in):"
 msgstr "Gebruikersnaam (netload.in):"
 
+#: plugin.py:850
 msgid "Username (uploaded.to):"
 msgstr "Gebruikersnaam (uploaded.to):"
 
+#: plugin.py:846
 msgid "Username:"
 msgstr "Gebruikersnaam:"
 
+#: plugin.py:253 plugin.py:320 plugin.py:344 plugin.py:403 plugin.py:438
+#: plugin.py:588 plugin.py:609 plugin.py:769 plugin.py:783
 msgid "Waiting"
 msgstr "Aan het wachten"
 
+#: plugin.py:866
 msgid "Write log:"
 msgstr "Schrijf log:"
 
+#: plugin.py:68
 msgid "fritz.Box"
 msgstr "fritz.Box"

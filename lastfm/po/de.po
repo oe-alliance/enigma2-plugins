@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Last.FM Internet Radio V. 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: JuSt611 <Software@Strasdas.de>\n"
 "Language-Team: JuSt611\n"
@@ -17,274 +17,364 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
+#: plugin.py:359
 #, python-format
 msgid "%s name"
 msgstr "%s Name"
 
+#: plugin.py:167
 msgid "Album"
 msgstr "Album"
 
+#: plugin.py:165
 msgid "Artist"
 msgstr "Interpret"
 
+#: plugin.py:181
 msgid "Ban"
 msgstr "Missfällt mir"
 
+#: plugin.py:208
 msgid "Ban Track, never play"
 msgstr "Unerwünschter Titel, nie spielen"
 
+#: plugin.py:157
 msgid "Banned Tracks"
 msgstr "Unerwünschte Titel"
 
+#: plugin.py:271
 msgid "Banned Tracks loaded"
 msgstr "Unerwünschte Titel geladen"
 
+#: LastFMConfig.py:56
 msgid "Cancel"
 msgstr "Abbrechen"
 
+#: LastFMConfig.py:37
 msgid "Description"
 msgstr "Beschreibung"
 
+#: plugin.py:35
 msgid "Extensions menu"
 msgstr "Erweiterungs-Menü"
 
+#: plugin.py:157
 msgid "Friends"
 msgstr "Freunde"
 
+#: plugin.py:283
 msgid "Friends loaded"
 msgstr "Freunde galaden"
 
+#: plugin.py:157
 msgid "Global Tags"
 msgstr "Allgemeine Auswahl"
 
+#: plugin.py:259
 msgid "Global Tags loaded"
 msgstr "Allgemeine Auswahl geladen"
 
+#: plugin.py:488
 msgid "Group of"
 msgstr "Gruppe"
 
+#: LastFMConfig.py:53
 msgid "Interval for Coverart Animation"
 msgstr "Intervall der Coverart Animation"
 
+#: LastFMConfig.py:47
 msgid "Interval to refresh Metadata (seconds)"
 msgstr "Aktualisierungsintervall Metadaten (Sekunden)"
 
+#: LastFMConfig.py:15 plugin.py:36
 msgid "Last.FM"
 msgstr "Last.FM"
 
+#: LastFMConfig.py:38
 msgid "Last.FM Username"
 msgstr "Last.FM Benutzername"
 
+#: LastFMConfig.py:42
 msgid "LastFM Proxy port"
 msgstr "LastFM Proxy port"
 
+#: plugin.py:37
 msgid "Listen to Last.FM Internet Radio"
 msgstr "Last.FM Internet Radio hören"
 
+#: plugin.py:519
 msgid "Loading Friends"
 msgstr "Freunde werden geladen"
 
+#: plugin.py:495
 msgid "Loading Global Tags"
 msgstr "Allgemeine Auswahl wird geladen"
 
+#: plugin.py:507 plugin.py:511
 msgid "Loading Loved Tracks"
 msgstr "Bevorzugte Titel werden geladen"
 
+#: plugin.py:515
 msgid "Loading Neighbours"
 msgstr "Nachbarn werden geladen"
 
+#: plugin.py:503
 msgid "Loading Recent Tracks"
 msgstr "Neueste Titel werden geladen"
 
+#: plugin.py:499
 msgid "Loading Top Tacks"
 msgstr "Top Titel werden geladen"
 
+#: plugin.py:180
 msgid "Love"
 msgstr "Gefällt mir"
 
+#: plugin.py:157 plugin.py:456
 msgid "Loved Tracks"
 msgstr "Bevorzugte Titel"
 
+#: plugin.py:275
 msgid "Loved Tracks loaded"
 msgstr "Bevorzugte Titel geladen"
 
+#: plugin.py:207
 msgid "Mark Track as loved"
 msgstr "Titel als \"bevorzugt\"' markieren"
 
+#: LastFMConfig.py:36
 msgid "Name (needs GUI restart)"
 msgstr "Name (erfordert GUI Neustart)"
 
+#: plugin.py:157
 msgid "Neighbours"
 msgstr "Nachbarn"
 
+#: plugin.py:451
 msgid "Neighbours Tracks"
 msgstr "Titel der Nachbarn"
 
+#: plugin.py:279
 msgid "Neighbours loaded"
 msgstr "Nachbarn geladen"
 
+#: plugin.py:201
 msgid "Next Selection"
 msgstr "Nächste Auswahl"
 
+#: LastFMConfig.py:57
 msgid "OK"
 msgstr "OK"
 
+#: plugin.py:209
 msgid "Open"
 msgstr "Öffne"
 
+#: plugin.py:204
 msgid "Page backward Selections"
 msgstr "Auswahl zurückblättern"
 
+#: plugin.py:203
 msgid "Page forward Selections"
 msgstr "Auswahl vorblättern"
 
+#: LastFMConfig.py:39
 msgid "Password"
 msgstr "Passwort"
 
+#: plugin.py:446
 msgid "Personal Recommendations"
 msgstr "Persönliche Empfehlungen"
 
+#: plugin.py:157
 msgid "Personal Stations"
 msgstr "Eigene Stationen"
 
+#: plugin.py:178 plugin.py:407
 msgid "Play"
 msgstr "Start"
 
+#: plugin.py:461
 msgid "Play Artist Radio..."
 msgstr "Interpreten spielen..."
 
+#: plugin.py:466
 msgid "Play Group Radio..."
 msgstr "Gruppe spielen..."
 
+#: plugin.py:471
 msgid "Play Tag Radio..."
 msgstr "Genre spielen..."
 
+#: plugin.py:35
 msgid "Plugin menu"
 msgstr "Plugin Menü"
 
+#: plugin.py:202
 msgid "Previous Selection"
 msgstr "Vorherige Auswahl"
 
+#: plugin.py:210
 msgid "Quit"
 msgstr "Beende"
 
+#: plugin.py:157
 msgid "Recent Tracks"
 msgstr "Neueste Titel"
 
+#: plugin.py:267
 msgid "Recent Tracks loaded"
 msgstr "Neueste Titel geladen"
 
+#: LastFMConfig.py:43
 msgid "Recommendation level"
 msgstr "Empfehlungsstufe"
 
+#: plugin.py:199
 msgid "Select next Tab"
 msgstr "Nächsten Tab auswählen"
 
+#: plugin.py:200
 msgid "Select prev Tab"
 msgstr "Vorherigen Tab auswählen"
 
+#: LastFMConfig.py:40
 msgid "Send now playing Audio Tracks"
 msgstr "Momentan gespielte Titel zeigen"
 
+#: LastFM.py:426
 msgid "Server returned"
 msgstr "Server meldet"
 
+#: LastFMConfig.py:28 plugin.py:209
 msgid "Setup"
 msgstr "Einstellungen"
 
+#: LastFMConfig.py:44
 msgid "Show Coverart"
 msgstr "Coverart zeigen"
 
+#: LastFMConfig.py:51
 msgid "Show Coverart Animation in Screensaver"
 msgstr "Animierte Coverart im Bildschirmschoner zeigen"
 
+#: LastFMConfig.py:50
 msgid "Show Coverart in Screensaver"
 msgstr "Coverart im Bildschirmschoner zeigen"
 
+#: LastFMConfig.py:35
 msgid "Show in (needs GUI restart)"
 msgstr "Zeigen in (erfordert GUI Neustart)"
 
+#: plugin.py:179
 msgid "Skip"
 msgstr "Überspringen"
 
+#: plugin.py:206
 msgid "Skip current Track"
 msgstr "Laufenden Titel überspringen"
 
+#: LastFMConfig.py:52
 msgid "Speed for Coverart Animation"
 msgstr "Tempo der Coverart Animation"
 
+#: plugin.py:205
 msgid "Start/stop streaming"
 msgstr "Übertragung starten/stoppen"
 
+#: plugin.py:386
 msgid "Starting stream"
 msgstr "Übertragung gestartet"
 
+#: LastFM.py:424
 msgid "Station changed"
 msgstr "Station gewechselt"
 
+#: plugin.py:404
 msgid "Stop"
 msgstr "Stop"
 
+#: plugin.py:384
 msgid "Stream stopped"
 msgstr "Übertragung gestoppt"
 
+#: plugin.py:198
 msgid "Switch to selected Station"
 msgstr "Zur gewählten Station schalten"
 
+#: LastFMConfig.py:45
 msgid "Timeout Statustext (seconds)"
 msgstr "Anzeigedauer für Statustext (Sekunden)"
 
+#: LastFMConfig.py:46
 msgid "Timeout to select a Tab (seconds)"
 msgstr "Verzögerung bei Tabwechsel (Sekunden)"
 
+#: plugin.py:157
 msgid "Top Tracks"
 msgstr "Top Titel"
 
+#: plugin.py:263
 msgid "Top Tracks loaded"
 msgstr "Top Titel geladen"
 
+#: plugin.py:168
 msgid "Track"
 msgstr "Titel"
 
+#: plugin.py:253
 msgid "Track banned"
 msgstr "Titel als 'unerwünscht' markiert"
 
+#: plugin.py:250
 msgid "Track loved"
 msgstr "Titel als 'bevorzugt' markiert"
 
+#: plugin.py:247
 msgid "Track skipped"
 msgstr "Titel übersprungen"
 
+#: plugin.py:483
 msgid "Tracks liked by Fans of"
 msgstr "Titel beliebt bei Fans von"
 
+#: plugin.py:478
 msgid "Tracks similar to"
 msgstr "Ähnliche Titel"
 
+#: LastFMConfig.py:41
 msgid "Use LastFM Proxy"
 msgstr "LastFM Proxy benutzen"
 
+#: LastFMConfig.py:48
 msgid "Use Screensaver"
 msgstr "Bildschirmschoner verwenden"
 
+#: plugin.py:97 plugin.py:105 plugin.py:142 plugin.py:413
 msgid "Ver."
 msgstr "Ver."
 
+#: LastFMConfig.py:49
 msgid "Wait before Screensaver (seconds)"
 msgstr "Wartezeit für Bildschirmschoner "
 
+#: plugin.py:231
 msgid "logging into last.FM"
 msgstr "in last.FM einloggen"
 
+#: plugin.py:244
 msgid "login failed! "
 msgstr "Login gescheitert"
 
+#: plugin.py:241
 msgid "login successful"
 msgstr "Login erfolgreich"
 
+#: plugin.py:619
 msgid "playing:"
 msgstr "spielt:"
 
+#: plugin.py:358
 #, python-format
 msgid "please enter an %s name to listen to"
 msgstr "bitte einen %s Namen eingeben"

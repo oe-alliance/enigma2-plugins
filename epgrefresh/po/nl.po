@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - epgrefresh\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-17 15:22+0200\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2019-09-06 13:11+0200\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: AndyBlac/Rob van der Does\n"
@@ -12,71 +12,94 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.2.3\n"
 
+#: EPGRefresh.py:568
 #, python-format
 msgid "%d more services"
 msgstr "%d meer kanalen"
 
+#: EPGRefreshConfiguration.py:186
 msgid "After a successful refresh the AutoTimer will automatically search for new matches if this is enabled. The options 'Ask*' has only affect on a manually refresh. If EPG-Refresh was called in background the default-Answer will be executed!"
 msgstr "Als dit is ingeschakeld zal AutoTimer na een succesvolle refresh naar overeenkomsten zoeken. De opties 'Vraag*' heeft alleen effect op een handmatig uitgevoerde refresh. Als EPG-Refresh op de achtergrond werd uitgevoerd, zal het standaard antwoord worden uitgevoerd!"
 
+#: EPGRefreshConfiguration.py:164
 msgid "An automated refresh will start after this time of day, but before the time specified in next setting."
 msgstr "Automatische refresh zal starten na de ingestelde tijd, maar voor de tijd die in de volgende instelling staat."
 
+#: EPGRefreshConfiguration.py:165
 msgid "An automated refresh will start before this time of day, but after the time specified in previous setting."
 msgstr "Automatische refresh zal starten voor de ingestelde tijd, maar na de tijd die in de vorige instelling staat."
 
+#: plugin.py:56
 msgid "Ask default No"
 msgstr "Vraag default Nee"
 
+#: plugin.py:55
 msgid "Ask default Yes"
 msgstr "Vraag default Ja"
 
+#: EPGRefresh.py:425
 #, python-format
 msgid "AutoTimer failed with error %s"
 msgstr "AutoTimer mislukt met fout %s"
 
+#: plugin.py:267 plugin.py:271 plugin.py:342
 msgid "Automatically refresh EPG"
 msgstr "Automatisch EPG vernieuwen"
 
+#: plugin.py:44 plugin.py:54
 msgid "Background only"
 msgstr "Alleen op de achtergrond"
 
+#: EPGRefreshChannelEditor.py:73
 msgid "Bouquets"
 msgstr "Boeketten"
 
+#: EPGRefreshChannelEditor.py:82 EPGRefreshConfiguration.py:47
+#: EPGRefreshConfiguration.py:64 EPGRefreshConfiguration.py:112
 msgid "Cancel"
 msgstr "Annuleren"
 
+#: EPGRefreshChannelEditor.py:72
 msgid "Channels"
 msgstr "Zenders"
 
+#: EPGRefreshConfiguration.py:144
 msgid "Close and forget changes"
 msgstr "Sluit en annuleer veranderingen"
 
+#: EPGRefreshConfiguration.py:145
 msgid "Close and save changes"
 msgstr "Sluit en sla veranderingen op"
 
+#: EPGRefreshConfiguration.py:166
 msgid "Delay if not in standby (minutes)"
 msgstr "Vertraging indien niet in standby (minuten)"
 
+#: EPGRefreshChannelEditor.py:84
 msgid "Delete"
 msgstr "Verwijder"
 
+#: EPGRefreshConfiguration.py:169
 msgid "Display more Options"
 msgstr "Toon meer opties"
 
+#: EPGRefreshConfiguration.py:163
 msgid "Duration to stay on service (seconds)"
 msgstr "Hoe lang op een kanaal afstemmen (seconden)?"
 
+#: EPGRefreshConfiguration.py:164
 msgid "EPG refresh auto-start earliest (hh:mm)"
 msgstr "Vroegste EPG-refresh auto-start (hh:mm)"
 
+#: EPGRefreshConfiguration.py:165
 msgid "EPG refresh auto-start latest (hh:mm)"
 msgstr "Laatste EPG-refresh auto-start (hh:mm)"
 
+#: EPGRefresh.py:448 PipAdapter.py:84
 msgid "EPG refresh finished."
 msgstr "EPG-refresh gereed."
 
+#: EPGRefresh.py:384
 msgid ""
 "EPG refresh finished.\n"
 "Should AutoTimer be search for new matches?"
@@ -84,226 +107,298 @@ msgstr ""
 "EPG-refresh is gereed.\n"
 "Moet AutoTimer naar nieuwe overeenkomsten zoeken?"
 
+#: PipAdapter.py:34 RecordAdapter.py:32
 msgid "EPG refresh started in background."
 msgstr "EPG-refresh loopt op de achtergrond."
 
+#: MainPictureAdapter.py:23
 msgid "EPG refresh starts scanning channels."
 msgstr "EPG-refresh start het scannen van kanalen."
 
+#: plugin.py:270
 #, fuzzy
 msgid "EPG-Refresh_Pending Services"
 msgstr "EPG-refresh kanalen"
 
+#: plugin.py:268
 #, fuzzy
 msgid "EPG-Refresh_Refresh now"
 msgstr "EPG-refresh kanalen"
 
+#: plugin.py:267
 #, fuzzy
 msgid "EPG-Refresh_SetUp"
 msgstr "EPG-refresh kanalen"
 
+#: plugin.py:269
 #, fuzzy
 msgid "EPG-Refresh_Stop Refresh"
 msgstr "EPG-refresh kanalen"
 
+#: plugin.py:115
 msgid "EPGREFRESH_NOTIFICATION_DOMAIN"
 msgstr "EPGREFRESH_NOTIFICATIE_DOMEIN"
 
+#: plugin.py:271 plugin.py:311 plugin.py:341
 #, fuzzy
 msgid "EPGRefresh"
 msgstr "toevoegen aan EPG-refresh"
 
+#: EPGRefreshConfiguration.py:95 EPGRefreshConfiguration.py:201
 msgid "EPGRefresh Configuration"
 msgstr "EPG-refresh configuratie"
 
+#: EPGRefreshConfiguration.py:49
 msgid "EPGRefresh Configuration Help"
 msgstr "EPG-refresh configuratie Help"
 
+#: EPGRefreshConfiguration.py:66
 msgid "EPGRefresh Functions"
 msgstr "Functies EPG verversen"
 
+#: EPGRefreshChannelEditor.py:62
 msgid "EPGRefresh Services"
 msgstr "EPG-refresh kanalen"
 
+#: EPGRefreshConfiguration.py:115 EPGRefreshConfiguration.py:123
 msgid "Edit Services"
 msgstr "Zenders bewerken"
 
+#: EPGRefreshChannelEditor.py:103
 msgid "Edit Services to refresh"
 msgstr "Bewerk te verniewen zenders"
 
+#: EPGRefreshChannelEditor.py:123
 msgid "Editing"
 msgstr "Wat wil je bewerken"
 
+#: EPGRefreshConfiguration.py:180
 msgid "Enable this item to flush all EPG data before starting a new EPG refresh cycle"
 msgstr ""
 
+#: EPGRefreshConfiguration.py:174
 msgid "Enable this to be able to access the EPGRefresh configuration from within the extension menu."
 msgstr "Toon EPG-refresh instellingsmenu in het extensiemenu."
 
+#: EPGRefreshConfiguration.py:173
 msgid "Enable this to be able to access the EPGRefresh configuration from within the plugin menu."
 msgstr "Schakel dit in om de EPGRefresh-instellingen in applicaties te zien."
 
+#: EPGRefreshConfiguration.py:175
 msgid "Enable this to be able to start the EPGRefresh from within the extension menu."
 msgstr "Schakel dit in om EPG-refresh vanuit het extensiemenu te kunnen starten."
 
+#: EPGRefreshConfiguration.py:185
 msgid "Extend the list of services to refresh by those your AutoTimers use?"
 msgstr "Breidt de lijst met kanalen uit met die kanalen die AutoTimers gebruikt?"
 
+#: plugin.py:66
 msgid "Fake recording"
 msgstr "Nep opname"
 
+#: EPGRefreshConfiguration.py:180
 msgid "Flush EPG before refresh"
 msgstr ""
 
+#: EPGRefresh.py:569
 msgid "Following Services have to be scanned:"
 msgstr "De volgende kanalen moeten worden gescand:"
 
+#: EPGRefreshConfiguration.py:178
 msgid "Force scan even if receiver is in use."
 msgstr "Forceer de scan, zelfs als de ontvanger in gebruik is."
 
+#: plugin.py:45
 msgid "Foreground also"
 msgstr "Ook op voorgrond"
 
+#: EPGRefreshConfiguration.py:114
 msgid "Functions"
 msgstr "Functies"
 
+#: EPGRefreshConfiguration.py:45
 msgid "General Help"
 msgstr "Algemene help"
 
+#: EPGRefreshConfiguration.py:166
 msgid "If the receiver currently isn't in standby, this is the duration which EPGRefresh will wait before retry."
 msgstr "Als de ontvanger momenteel niet in standby is, is dit de tijd die EPG-refresh zal wachten alvorens het weer te proberen."
 
+#: EPGRefreshConfiguration.py:177
 msgid "If this is enabled, the plugin will wake up the receiver from standby if possible. Otherwise it needs to be switched on already."
 msgstr "Als dit is ingeschakeld, zal de plugin de ontvanger indien mogelijk uit standby halen. Anders moet deze al zijn ingeschakeld."
 
+#: EPGRefreshConfiguration.py:168
 msgid "If you want to refresh the EPG in background, you can choose the method which best suits your needs here, e.g. hidden, fake reocrding or regular Picture in Picture."
 msgstr "Als u de de EPG op de achtergrond wilt laten lopen, kunt u de gewenste modus hier aangeven (zoals verborgen, nep-opname of de reguliere PiP)."
 
+#: EPGRefreshConfiguration.py:185
 msgid "Inherit Services from AutoTimer"
 msgstr "Geërfde Services van AutoTimer"
 
+#: EPGRefreshConfiguration.py:46
 msgid "Key Help"
 msgstr "Toets Help"
 
+#: EPGRefreshConfiguration.py:338
 #, python-format
 msgid "Last refresh was %s"
 msgstr "Laatste refresh was %s"
 
+#: plugin.py:61
 msgid "Main Picture"
 msgstr "Hoofd beeld"
 
+#: EPGRefreshConfiguration.py:134
 msgid "Move page down"
 msgstr "Ga een pagina naar beneden"
 
+#: EPGRefreshConfiguration.py:133
 msgid "Move page up"
 msgstr "Ga een pagina naar boven"
 
+#: EPGRefreshChannelEditor.py:85
 msgid "New"
 msgstr "Nieuw"
 
+#: plugin.py:53
 msgid "No"
 msgstr "Nee"
 
+#: EPGRefreshChannelEditor.py:83 EPGRefreshConfiguration.py:113
 msgid "OK"
 msgstr "Ok"
 
+#: EPGRefreshConfiguration.py:61
 msgid "Pending Services"
 msgstr "Nog niet afgewerkte kanalen"
 
+#: PipAdapter.py:84
 msgid "PiP available now."
 msgstr "PiP is nu beschikbaar."
 
+#: plugin.py:63
 msgid "Picture in Picture"
 msgstr "Picture in Picture"
 
+#: plugin.py:64
 msgid "Picture in Picture (hidden)"
 msgstr "Picture in Picture (verborgen)"
 
+#: PipAdapter.py:34
 msgid "Please don't use PiP meanwhile!"
 msgstr "Gebruik PiP intussen niet!"
 
+#: EPGRefreshConfiguration.py:354
 msgid "Really close without saving settings?"
 msgstr "Echt sluiten zonder op te slaan?"
 
+#: EPGRefreshConfiguration.py:161
 msgid "Refresh EPG automatically"
 msgstr "Ververs EPG automatisch"
 
+#: EPGRefreshConfiguration.py:168
 msgid "Refresh EPG using"
 msgstr "Maak voor EPG-refresh gebruik van"
 
+#: EPGRefreshConfiguration.py:63
 msgid "Refresh now"
 msgstr "Nu vernieuwen"
 
+#: EPGRefreshChannelEditor.py:132 EPGRefreshChannelEditor.py:180
 #, fuzzy
 msgid "Refresh using"
 msgstr "Wat wil je vernieuwen"
 
+#: EPGRefreshConfiguration.py:186
 msgid "Run AutoTimer after refresh"
 msgstr "Voer AutoTimer uit na de refresh"
 
+#: EPGRefreshChannelEditor.py:173
 msgid "Select bouquet to refresh"
 msgstr "Kies boeket om te vernieuwen"
 
+#: EPGRefreshChannelEditor.py:167
 msgid "Select channel to refresh"
 msgstr "Kies zender om te vernieuwen"
 
+#: EPGRefreshConfiguration.py:172
 msgid "Should protected services be skipped if refresh was started in interactive-mode?"
 msgstr "Moeten met kinderslot beschermde kanalen overgeslageb worden als de interactieve modus gebruikt wordt?"
 
+#: EPGRefreshConfiguration.py:175
 msgid "Show 'EPGRefresh Start now' in extension menu."
 msgstr "Toon 'EPGRefresh Start nu' in extensies."
 
+#: EPGRefreshConfiguration.py:169
 msgid "Show Advanced Options"
 msgstr "Toon geavanceerde opties"
 
+#: EPGRefreshConfiguration.py:174
 msgid "Show Setup in extension menu"
 msgstr "Toon instellingen in extensies"
 
+#: EPGRefreshConfiguration.py:173
 msgid "Show Setup in plugins"
 msgstr "Toon Instellingen in plugins"
 
+#: EPGRefreshConfiguration.py:128
 msgid "Show last EPGRefresh - Time"
 msgstr "Toon tijdstip laatste EPG verversen"
 
+#: EPGRefreshConfiguration.py:122
 msgid "Show more Functions"
 msgstr "Toon meer functies"
 
+#: EPGRefreshConfiguration.py:176
 msgid "Show popup when refresh starts and ends."
 msgstr "Toon popup als de refresh begint en klaar is."
 
+#: plugin.py:270
 msgid "Show the pending Services for refresh"
 msgstr "Toon de nog niet afgewerkte kanalen"
 
+#: EPGRefreshConfiguration.py:179
 msgid "Shutdown after EPG refresh."
 msgstr "STB afsluiten na EPG refresh."
 
+#: EPGRefreshConfiguration.py:172
 msgid "Skip protected Services"
 msgstr "Sla met kinderslot beschermde kanalen over"
 
+#: plugin.py:268
 msgid "Start EPGrefresh immediately"
 msgstr "Start EPG verversen nu"
 
+#: plugin.py:269
 msgid "Stop Running EPG-refresh"
 msgstr "Stop EPG verversen"
 
+#: EPGRefreshConfiguration.py:60
 msgid "Stop running refresh"
 msgstr "Stop verversen"
 
+#: EPGRefresh.py:291
 msgid "There is still a refresh running. The Operation isn't allowed at this moment."
 msgstr "Deze handeling kan op dit moment niet worden uitgevoerd omdat er nog een refresh loopt."
 
+#: EPGRefreshConfiguration.py:163
 msgid "This is the duration each service/channel will stay active during a refresh."
 msgstr "Dit is de tijdsduur dat elk kanaal afgestemd blijft tijdens een verversing."
 
+#: EPGRefreshConfiguration.py:176
 msgid "This setting controls whether or not an informational message will be shown at start and completion of refresh."
 msgstr "Deze instelling bepaalt of er een melding wordt vertoond by het begin en het einde van een refresh."
 
+#: EPGRefreshConfiguration.py:178
 msgid "This setting controls whether or not the refresh will be initiated even though the receiver is active (either not in standby or currently recording)."
 msgstr "Deze instelling bepaalt of de refresh zal worden geinitieerd zelfs als de ontvanger actief is (dus niet in standby en niet aan het opnemen)."
 
+#: EPGRefreshConfiguration.py:179
 msgid "This setting controls whether the receiver should be set to standby after refresh is completed."
 msgstr "Deze instelling bepaalt of de ontvanger in standby zal gaan als de refresh gereed is."
 
+#: plugin.py:226
 msgid ""
 "To apply your Changes the GUI has to be restarted.\n"
 "Do you want to restart the GUI now?"
@@ -311,20 +406,26 @@ msgstr ""
 "Om de veranderingen op te slaan, moet de GUI herstart worden.\n"
 "Wilt u nu herstarten?"
 
+#: EPGRefreshConfiguration.py:161
 msgid "Unless this is enabled, EPGRefresh won't automatically run but needs to be explicitly started by the yellow button in this menu."
 msgstr "Tenzij dit is ingeschakeld, zal EPG-refresh niet automatisch starten, maar moet met de hand via de gele toets in dit nemu worden gestart."
 
+#: EPGRefreshConfiguration.py:201
 msgid "Version"
 msgstr "Versie"
 
+#: EPGRefreshConfiguration.py:177
 msgid "Wake up from standby for EPG refresh."
 msgstr "Wake-up vanuit stand-by voor EPG refresh."
 
+#: plugin.py:52
 msgid "Yes"
 msgstr "Ja"
 
+#: plugin.py:335
 msgid "add to EPGRefresh"
 msgstr "toevoegen aan EPG-refresh"
 
+#: EPGRefreshConfiguration.py:334
 msgid "never"
 msgstr "nooit"

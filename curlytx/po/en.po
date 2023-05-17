@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2012-12-03 15:01+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -17,81 +17,107 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: CurlyTxSettings.py:92
 msgid "Add new page"
 msgstr "Add new page"
 
+#: CurlyTxSettings.py:51 CurlyTxSettings.py:210
 msgid "Cancel"
 msgstr "Cancel"
 
+#: CurlyTx.py:105 CurlyTx.py:108
 msgid "Close window"
 msgstr "Close window"
 
+#: CurlyTxSettings.py:70
 msgid "Default page"
 msgstr "Default page"
 
+#: CurlyTxSettings.py:54
 msgid "Delete"
 msgstr "Delete"
 
+#: CurlyTxSettings.py:95
 msgid "Delete selected page"
 msgstr "Delete selected page"
 
+#: CurlyTxSettings.py:80
 msgid "Dismiss all setting changes"
 msgstr "Dismiss all setting changes"
 
+#: CurlyTxSettings.py:86
 msgid "Edit selected page"
 msgstr "Edit selected page"
 
+#: CurlyTx.py:199
 msgid "Error fetching URL:"
 msgstr "Error fetching URL:"
 
+#: CurlyTxSettings.py:175
 msgid "Error loading page feed:"
 msgstr "Error loading page feed:"
 
+#: CurlyTxSettings.py:224
 msgid "Font size"
 msgstr "Font size"
 
+#: CurlyTx.py:204
 msgid "Go and add a page in the settings"
 msgstr "Go and add a page in the settings"
 
+#: CurlyTx.py:212
 msgid "HTTP response headers for"
 msgstr "HTTP response headers for"
 
+#: CurlyTx.py:170
 msgid "Invalid page"
 msgstr "Invalid page"
 
+#: CurlyTxSettings.py:89
 msgid "Load pages from feed"
 msgstr "Load pages from feed"
 
+#: CurlyTx.py:185
 msgid "Loading ..."
 msgstr "Loading ..."
 
+#: CurlyTxSettings.py:73
 msgid "Menu title"
 msgstr "Menu title"
 
+#: CurlyTxSettings.py:53
 msgid "New"
 msgstr "New"
 
+#: CurlyTx.py:56 CurlyTx.py:126
 msgid "Next"
 msgstr "Next"
 
+#: CurlyTxSettings.py:145
 msgid "No page feed URL defined"
 msgstr "No page feed URL defined"
 
+#: CurlyTxSettings.py:52 CurlyTxSettings.py:211
 msgid "OK"
 msgstr "OK"
 
+#: CurlyTxSettings.py:222
 msgid "Page URL"
 msgstr "Page URL"
 
+#: CurlyTxSettings.py:74
 msgid "Page feed URL"
 msgstr "Page feed URL"
 
+#: CurlyTxSettings.py:66
 msgid "Page:"
 msgstr "Page:"
 
+#: CurlyTx.py:55 CurlyTx.py:125
 msgid "Prev"
 msgstr "Prev"
 
+#: CurlyTxSettings.py:112
 msgid ""
 "Really delete this page?\n"
 "It cannot be recovered!"
@@ -99,47 +125,62 @@ msgstr ""
 "Really delete this page?\n"
 "It cannot be recovered!"
 
+#: CurlyTx.py:54 CurlyTx.py:120 CurlyTx.py:124
 msgid "Reload"
 msgstr "Reload"
 
+#: CurlyTx.py:96
 msgid "Reload current page URL"
 msgstr "Reload current page URL"
 
+#: CurlyTxSettings.py:83
 msgid "Save settings and close screen"
 msgstr "Save settings and close screen"
 
+#: CurlyTx.py:87
 msgid "Scroll page contents down"
 msgstr "Scroll page contents down"
 
+#: CurlyTx.py:84
 msgid "Scroll page contents up"
 msgstr "Scroll page contents up"
 
+#: CurlyTx.py:53 CurlyTxSettings.py:40
 msgid "Settings"
 msgstr "Settings"
 
+#: CurlyTx.py:90
 msgid "Show HTTP response headers"
 msgstr "Show HTTP response headers"
 
+#: CurlyTxSettings.py:72
 msgid "Show in extensions menu"
 msgstr "Show in extensions menu"
 
+#: CurlyTxSettings.py:71
 msgid "Show in main menu"
 msgstr "Show in main menu"
 
+#: CurlyTx.py:93
 msgid "Show program settings"
 msgstr "Show program settings"
 
+#: CurlyTx.py:111
 msgid "Show this help screen"
 msgstr "Show this help screen"
 
+#: CurlyTx.py:99
 msgid "Switch to next configured page URL"
 msgstr "Switch to next configured page URL"
 
+#: CurlyTx.py:102
 msgid "Switch to previous configured page URL"
 msgstr "Switch to previous configured page URL"
 
+#: CurlyTxSettings.py:223
 msgid "Title"
 msgstr "Title"
 
+#: plugin.py:38 plugin.py:45
 msgid "View remote text files"
 msgstr "View remote text files"

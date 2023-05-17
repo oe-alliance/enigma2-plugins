@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 plugin - namezap\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2015-03-28 16:50+0200\n"
 "Last-Translator: Hasan Kiran <sunder67@hotmail.com>\n"
 "Language-Team: Turkish <>\n"
@@ -18,29 +18,38 @@ msgstr ""
 "X-Generator: Poedit 1.7.5\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/namezap\n"
 
+#: NamezapSetup.py:59
 msgid "Cancel"
 msgstr "İptal"
 
+#: NamezapSetup.py:40
 msgid "Controls the visual appearance of the number zap dialog."
 msgstr "Kanal değişim numaralarının görünümünü kontrol eder."
 
+#: NamezapSetup.py:34 NamezapSetup.py:76 plugin.py:121
 msgid "NameZAP Setup"
 msgstr "NameZAP Ayarı"
 
+#: plugin.py:21
 msgid "Number and Name"
 msgstr "Numara ve İsim"
 
+#: NamezapSetup.py:58
 msgid "OK"
 msgstr "Tamam"
 
+#: plugin.py:19
 msgid "Only Number"
 msgstr "Sadece Numara"
 
+#: plugin.py:20
 msgid "Service Name"
 msgstr "Kanal İsmi"
 
+#: plugin.py:95
 msgid "Unknown Service"
 msgstr "Bilinmeyen Kanal"
 
+#: NamezapSetup.py:40
 msgid "Zapper Style"
 msgstr "Kanal Değişim  Stili"

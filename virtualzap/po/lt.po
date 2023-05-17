@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VirtualZap\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-11 11:31+0300\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2017-07-11 11:33+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
@@ -13,12 +13,15 @@ msgstr ""
 "X-Generator: Poedit 2.0.2\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
+#: plugin.py:735
 msgid "Cancel"
 msgstr "Atšaukti"
 
+#: plugin.py:131
 msgid "Could not open Picture in Picture"
 msgstr "Nepavyko atverti vaizdo vaizde (PiP)"
 
+#: plugin.py:755
 msgid ""
 "GUI needs a restart to apply the new settings.\n"
 "Do you want to Restart the GUI now?"
@@ -26,38 +29,50 @@ msgstr ""
 "Kad pakeitimai įsigaliotų, grafinę aplinką reikia paleisti iš naujo.\n"
 "Paleisti iš naujo dabar?"
 
+#: plugin.py:736
 msgid "OK"
 msgstr "Gerai"
 
+#: plugin.py:743
 msgid "Remember last service"
 msgstr "Įsiminti paskutinį kanalą"
 
+#: plugin.py:756
 msgid "Restart GUI now?"
 msgstr "Paleisti grafinę aplinką iš naujo dabar?"
 
+#: plugin.py:741
 msgid "Show PiP in Infobar"
 msgstr "Rodyti PiP lango infojuostoje"
 
+#: plugin.py:742
 msgid "Start standard PiP after x secs (0 = disabled)"
 msgstr "Atverti įprastinį PiP po X sek. (0 = išjungta)"
 
+#: plugin.py:738
 msgid "Usage"
 msgstr "Naudojimas"
 
+#: plugin.py:740
 msgid "Use PiP"
 msgstr "Naudoti PiP"
 
+#: plugin.py:146
 msgid "Virtual (PiP) Zap"
 msgstr "Virtualus (PiP) perjungimas"
 
+#: plugin.py:144
 msgid "Virtual Zap Setup"
 msgstr "Virtualaus perjungimo sąranka"
 
+#: plugin.py:62
 msgid "as plugin in extended bar"
 msgstr "kaip priedą išplėstinėje juostoje"
 
+#: plugin.py:62
 msgid "with exit button"
 msgstr "'EXIT' mygtuku"
 
+#: plugin.py:62
 msgid "with long OK press"
 msgstr "ilgu 'OK' paspaudimu"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-05 22:58+0000\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2022-04-19 20:52+0300\n"
 "Last-Translator: Orlandox\n"
 "Language-Team: Orlandox\n"
@@ -17,21 +17,27 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
+#: plugin.py:145
 msgid "Cancel"
 msgstr "Peruuta"
 
+#: plugin.py:120
 msgid "Clock show timeout"
 msgstr "Kellon näyttöaika"
 
+#: plugin.py:126
 msgid "Description"
 msgstr "Kuvaus"
 
+#: plugin.py:77
 msgid "Extensions menu"
 msgstr "Laajennukset-valikko"
 
+#: plugin.py:147
 msgid "Help"
 msgstr "Apua"
 
+#: plugin.py:208
 msgid ""
 "Modify the settings to match your preferences. To change the clock position, select \"Move clock\" and relocate using the direction keys. Press OK to store current position and return to the setup menu or EXIT to cancel the moving.\n"
 "\n"
@@ -45,15 +51,19 @@ msgstr ""
 "\n"
 "Jos GP3 on asennettu, niin viikonpäivä näkyy valitulla kielellä, muutoin aina englanniksi."
 
+#: plugin.py:148
 msgid "Move clock"
 msgstr "Siirrä kelloa"
 
+#: plugin.py:124
 msgid "Name"
 msgstr "Nimi"
 
+#: plugin.py:146
 msgid "OK"
 msgstr "OK"
 
+#: plugin.py:217
 msgid ""
 "Please use direction keys to move the clock.\n"
 "\n"
@@ -63,32 +73,42 @@ msgstr ""
 "\n"
 "Paina OK tallentaaksesi nykyisen paikan ja palaa asetukset valikkoon tai EXIT peruuttaaksesi siirron."
 
+#: plugin.py:77
 msgid "Plugin menu"
 msgstr "Lisäosat-valikko"
 
+#: plugin.py:76
 msgid "Push \"Exit\" long to show/hide clock"
 msgstr "Paina\"Exit\" pitkään nähdäksesi/piilottaaksesi kellon"
 
+#: plugin.py:115 plugin.py:170
 msgid "Show Clock Setup"
 msgstr "Näytä kellon asetukset"
 
+#: plugin.py:75
 msgid "Show Clock setup"
 msgstr "Näytä kellon asetukset"
 
+#: plugin.py:122
 msgid "Show in"
 msgstr "Näytä valikossa"
 
+#: plugin.py:121
 msgid "Specify how long (seconds) the clock shall be shown before it disappears. Set to \"0\" to show clock until hidden manually."
 msgstr "Määritä kuinka pitkään (sekuntia) kello näkyy ennen häviämistä. Arvolla \"0\" kello näkyy, kunnes se manuaalisesti piilotetaan."
 
+#: plugin.py:127
 msgid "Specify plugin description to be used in menu (needs GUI restart)."
 msgstr "Määritä lisäosan kuvaus, joka näkyy valikossa (käyttöliittymän uudelleen käynnistys vaaditaan)."
 
+#: plugin.py:125
 msgid "Specify plugin name to be used in menu (needs GUI restart)."
 msgstr "Määritä lisäosan nimi, joka näkyy valikossa (käyttöliittymän uudelleen käynnistys vaaditaan)."
 
+#: plugin.py:123
 msgid "Specify whether plugin shall show up in plugin menu or extensions menu (needs GUI restart)"
 msgstr "Määritä näytetäänkö tämä lisäosa lisäosa-valikossa vai laajennukset-valikossa (käyttöliittymän uudelleen käynnistys vaaditaan)"
 
+#: plugin.py:170 plugin.py:402 plugin.py:410
 msgid "Ver."
 msgstr "Ver."

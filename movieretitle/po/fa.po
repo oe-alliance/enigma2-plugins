@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: movie retitle Persian Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2012-07-25 23:18+0330\n"
 "Last-Translator: mehdi <mehdi_ar_yekta@yahoo.com>\n"
 "Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
@@ -18,50 +18,64 @@ msgstr ""
 "X-Poedit-Language: Persian\n"
 "X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
 
+#: plugin.py:52
 msgid "Cancel"
 msgstr "لغو کردن"
 
+#: plugin.py:97
 msgid "Choose target folder"
 msgstr "انتخاب پوشه مورد نظر"
 
+#: plugin.py:73
 msgid "Description"
 msgstr "توضیحات"
 
+#: plugin.py:294
 #, python-format
 msgid "Failed to move the movie %s to %s in the background"
 msgstr ""
 
+#: plugin.py:71
 msgid "Filename"
 msgstr "نام پوشه"
 
+#: plugin.py:69
 msgid "Location"
 msgstr "مکان"
 
+#: plugin.py:82
 msgid "Name and Description Input"
 msgstr "نام و توضیحات وارد شده"
 
+#: plugin.py:51
 msgid "OK"
 msgstr "OK"
 
+#: plugin.py:301
 #, python-format
 msgid "Successfully moved the movie %s"
 msgstr " %s فیلم های که با موفقیت منتقل شده اند :"
 
+#: plugin.py:136
 #, python-format
 msgid ""
 "Target file %s.ts already exist.\n"
 "Do you want to replace it?"
 msgstr ""
 
+#: plugin.py:253
 #, python-format
 msgid "The movie is moved in the background from %s to %s."
 msgstr ""
 
+#: plugin.py:140
 msgid "The target directory is not found. The file is not renamed."
 msgstr "پوشه مورد نظز پیدا نشد و فایل تغییر نام نیافته است"
 
+#: plugin.py:72
 msgid "Title"
 msgstr "عنوان"
 
+#: plugin.py:25
 msgid "change name..."
 msgstr "تغییر نام"

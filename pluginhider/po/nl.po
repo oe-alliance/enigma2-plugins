@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2011-10-12 10:47+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: Rob van der Does\n"
@@ -19,50 +19,66 @@ msgstr ""
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 
+#: PluginHiderSetup.py:60
 msgid "Cancel"
 msgstr "Annuleer"
 
+#: PluginHiderSetup.py:102
 msgid "Could not start Plugin:"
 msgstr "Kon plugin niet starten:"
 
+#: PluginHiderSetup.py:65
 msgid "Eventinfo"
 msgstr "Eventinfo"
 
+#: PluginHiderSetup.py:64
 msgid "Extensions"
 msgstr "Extensies"
 
+#: plugin.py:92
 msgid "Hide Plugins"
 msgstr "Verberg Plugins"
 
+#: PluginHiderSetup.py:59
 msgid "OK"
 msgstr "OK"
 
+#: PluginHiderSetup.py:129
 msgid "PluginHider Setup"
 msgstr "PluginHider instellingen"
 
+#: PluginHiderSetup.py:63
 msgid "Plugins"
 msgstr "Plugins"
 
+#: PluginHiderSetup.py:62
 msgid "Run"
 msgstr "Voer uit"
 
+#: PluginHiderSetup.py:102
 msgid "Unable to access InfoBar."
 msgstr "Geen toegang tot infobar."
 
+#: PluginHiderSetup.py:75
 msgid "end editing"
 msgstr "stop bewerken"
 
+#: PluginHiderSetup.py:77
 msgid "run selected plugin"
 msgstr "voer geselecteerde plugin uit"
 
+#: PluginHiderSetup.py:76
 msgid "save"
 msgstr "sla op"
 
+#: PluginHiderSetup.py:78
 msgid "select next tab"
 msgstr "selecteer volgende tab"
 
+#: PluginHiderSetup.py:79
 msgid "select previous tab"
 msgstr "kies vorige tab"
 
+#: PluginHiderSetup.py:74
 msgid "toggle selection"
 msgstr "wissel selectie"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma - autotimer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-25 12:54+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2015-07-26 16:39+0100\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: AndyBlac/Rob van der Does\n"
@@ -16,65 +16,6 @@ msgstr ""
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Generator: KBabel 1.11.4\n"
 
-msgid "AutoTimer FAQ"
-msgstr "AutoTimer FAQ"
-
-msgid "AutoTimer Help"
-msgstr "AutoTimer Help"
-
+#: MPHelp.py:52
 msgid "Close"
 msgstr "Sluit"
-
-msgid "Congratulations"
-msgstr "Gefeliciteerd"
-
-msgid "FAQ"
-msgstr "FAQ"
-
-msgid "Frequently asked questions about the AutoTimer"
-msgstr "Frequently asked questions over de AutoTimer"
-
-msgid "Generic setup"
-msgstr "Algemene instellingen"
-
-msgid "Question: I found a problem with the AutoTimer, can you fix it?/nAnswer: First try the AutoTimer version in a recent (experimental) Image to see if the problem was fixed. Then read the Help again and the upcoming FAQs to make sure that this is actually a problem and not expected behavior./nIf you still think there is something wrong with the AutoTimer, please visit http://www.dream-multimedia-tv.de/board and post your problem there./n/nQ: The plugin only adds timers when leaving the configuration, not automatically. What can I do?/nA: From the Overview press MENU and enter the 'Setup'. In this screen enable 'Poll automatically' and you should be good to go."
-msgstr "Vraag: ik ondervond een probleem met de AutoTimer, kunt u dat oplossent?/nAntwoord: Probeer eerst AutoTimer in een recent (experimenteel) Image om te zien of daarin het probleem is opgelost. Lees dan opnieuw de help-functie en de FAQ's om zeker te stellen dat het een probleem is, en geen beoogd gedrag./nAls u nog steeds denkt dat er een probleem is, bezoek dan www.dream-multimedia-tv.de/board en plaats uw probleem daar./n/nQ: De plugin voegt alleen timers toe, als de configuratie wordt verlaten, niet automatisch. Wat kan ik doen?/nA: In het Autotimer scherm drukt u op MENU en vervolgens op 'Instellingen'.In dat scherm zet u 'Controleer automatisch' op 'activeren'."
-
-msgid "Question: My AutoTimer for 'News' does not record the 'Late News'./nAnswer: Check 'Search type' and 'Search strictness' for the given AutoTimer./n/nQ: The show I'm trying to record contains umlauts in its title. AutoTimer does not find it./nA: Check the 'EPG encoding' for the given AutoTimer. For german stations 'UTF-8' should be selected./n/nQ: I seem to be unable to record two subsequent events. There is only a single timer created that spans (part of) both events./nA: From the Overview press MENU and enter the 'Setup'. In this screen disable 'Guess existing timer based on begin/end'."
-msgstr "Vraag: Mijn AutoTimer voor 'Nieuws' maakt geen timers voor 'Laat Nieuws'. /nAntwoord: Controleer 'zoektype' en selecteer 'gedeeltelijke overeenkomst' voor de betreffende timer./n/nQ: Het progamma dat ik wil opnemen heeft een umlaut in de naam. AutoTimer vindt dat programma niet./nA: Controleer 'EPG codering' voor die timer. Voor Duitse benamingen moet 'UTF-8' worden gebruikt./n/nQ: Ik slaag er niet in twee opeenvolgende programma's op te nemen. Er wordt slechts één timer gemaaktI die beide programma's omvat./nA: Ga naar de instellingen en de-activeer 'Raad bestaande timers gebaseerd op begin/eindeFrom the Overview press MENU and enter the 'Setup'."
-
-msgid "Question: You keep talking about help being provided for each parameter. I'm unable to read it (in part or in full)./nAnswer: Try using the default skin and if it works ask the creator of your regular skin. If it still does not work your image might not provide the actual default skin so contact the creator of your image."
-msgstr "Vraag: U heeft het steeds over 'help' die beschikbaar is voor elke parameter. Maar ik zie die niet (of maar gedeeltelijk)./nAntwoord: Probeer eens de defaupt skin te gebruiken: als dat goed gaat stel dan de auteur van uw skin op de hoogte. Als het dan nog niet goed gaat, gebruikt uw image geen goede default skin."
-
-msgid "The 'Overview'"
-msgstr "Het overzicht"
-
-msgid "The AutoTimer overview is the standard entry point to this plugin./n/nIf AutoTimers are configured you can choose them from a list to change them (OK button on your remote) or remove them (YELLOW button on your remote)./nNew Timers can be added by pressing the BLUE button and the control menu can be opened using the MENU button./n/nWhen leaving the plugin using the GREEN button it will search the EPG for matching events ONCE. To configure a regular search interval of the plugin to search for events open the control menu and enter the plugin setup."
-msgstr "Het AutoTimer overzichtscherm is het standaard begin van deze plugin./n/nAls AutoTimers zijn geconfigureeerd kunt u deze vanuit de lijst kiezen om die aan te passen ('OK'-toets) of te verwijderen ('GELE'-toets)./n\"Nieuwe Timers kunnen worden toegevoegd door op de 'BLAUWE'-toets te drukken en het menu kan worden geopend door op de 'MENU'-toets te drukken./n/nAls de plugin wordt verlaten door op de 'GROENE'-toets te drukken,zal de EPG eenmalig worden doorzocht op overeenkomende events. In het menu kunt u configureren met welke intervallen de plugin moet gaan zoeken."
-
-msgid "The control menu hides less frequently used options of the plugin, including the configuration and default settings for new AutoTimers./n/nWhile you can just open the menu and take a look for yourself, let's go through the available options:/n - Help:/n   What you are looking at right now/n - Preview:/n   Simulate EPG search, helps finding errors in your setup./n - Import existing Timer:/n   Create a new AutoTimer based on an existing regular timer./n - Import from EPG:/n   Create an AutoTimer based on an EPG event./n - Setup:/n   Generic configuration of the plugin./n - Edit new timer defaults:/n   Configure default values for new AutoTimers./n - Create a new timer using the wizard/classic editor:/n   Use the non-default editor to create a new AutoTimer."
-msgstr "Het menu verbergt minder gebruikte opties van deze plugin, inclusief de configuratie en de standaard instellingen voor nieuwe AutoTimers./n/nTerwijl u zelf het menu kunt openen om zelf de opties te bekijken, kunnen we even alle beschikbare opties doorlopen:/n - Help:/n  Wat zoek u op dit moment/n - Voorvertoning:/n  Simuleer EPG zoekslag, helpt het vinden van fouten in uw instellingen./n - Importeer bestaande Timer:/n   Creëer een nieuwe AutoTimer gebaseerd op een bestaande gewone timer./n - Import vanuit de EPG:/n   Creëer een AutoTimer gebaseerd op een EPG event./n - Instellingen:/n   Algemene instellingen van de plugin./n - Nieuwe timers aanpassen:/n   Bepaalt de standaard instellingen voor nieuwe AutoTimers./n - Nieuwe timers instellen met de wizard:/n   Geef aan of de klassieke editor of de wizard gebruikt moet worden voor nieuwe timers."
-
-msgid "This FAQ is supposed to help everyone unwilling to help themselves by reading all the provided help available, and those who did not find a solution to their problems within the provided documentation./n/nTo make these hints a little easier to read, they are split up on multiple pages. You can go to the next page using the BLUE button on your remote control and back using the YELLOW one. Pressing the RED button or EXIT will close the FAQ."
-msgstr "Deze FAQ is bedoeld om een ieder te helpen die niet zichzelf wil helpen door alle beschikbare help door te lezen, en ook degenen die voor hun probleem geen oplossing hebben gevonden in de beschikbare documentatie./n/nOm deze hints makkelijker leesbaar te maken, zijn ze in meerdere pagina's gesplitst.U gaat naar de volgende pagina met de BLAUWE toets en met de GELE gaat u terug. U kunt afsluiten doo rop ROOD of EXIT te drukken."
-
-msgid "This help screen is supposed to give you a quick look at everything the AutoTimer has to offer./nYou can abort it at any time by pressing the RED or EXIT button on your remote control or bring it up at a later point by selecting it from the control menu using the MENU button from the regular entry point of the plugin (more on that later)./n/n/nBut you really should consider to take the few minutes it takes to read these help pages."
-msgstr "Dit helpscherm biedt u een snelle blik op alles dat AutoTimer u te bieden heeft./nU kunt het scherm op elk moment verlaten met de RODE of de EXIT toets en het op elk moment weer oproepen door HELP te kiezen in het menu./n/n/nMaar u zou echt  een paar minuten moeten uit trekken om deze pagina's door te nemen."
-
-msgid "This is mostly a matter of taste./nThe Wizard provides you with a reduced set of options and presents them in smaller sets at a time. It is mostly aimed at users not very experienced with this plugin or the 'expert' level features of enigma2./n/nYou can check out the 'classic' editor by opening an existing timer from the overview and if you prefer this view over the wizard you can change the default editor in the setup dialog."
-msgstr "Dit is meestal een kwestie van smaak./nDe Wizard presenteert u een beperkt aantal instelmogelijkheden in een kleiner tijdsinterval, bedoeld voor ongeoefende gebruikers. /n/nU kunt een bestaande timer openen en bekijken of u liever de klassieke editor of de wizard gebruikt."
-
-msgid "This screen should be pretty straight-forward. If the option name does not give its meaning away there should be an explanation for each of them when you select them. If there is no visible explanation this is most likely a skin issue and please try if the default skin fixes the issue./n/nA lot of effort has been put in making the parameters as easy to understand as possible, so give reading them a try ;-)."
-msgstr "Dit scherm zou duidelijk moeten zijn. ALs de naam van de optie niet duidelijk is, wordt er een toelichting gegeven als u die selekteert. Als er geen verklaring zichtbaar is, is dat waarschijnlijk een tekortkoming van de gebrukte skin; u kunt dan proberen of de default skin verbetering brengt./n/nEr is veel moeite gedaan de gebruikte parameters begrijpelijk te maken, dus probeer eens die te lezen  ;-)."
-
-msgid "Welcome to the AutoTimer-Plugin"
-msgstr "Welkom bij de AutoTimer-Plugin"
-
-msgid "What is this 'control menu' you keep talking about?"
-msgstr "Wat is dat 'control menu' waar u het steeds over heeft?"
-
-msgid "Wizard or Classic Editor?"
-msgstr "Wizard of Klassieke Bewerker?"
-
-msgid "You now know almost everything there is to know about the AutoTimer-Plugin./n/nAs a final hint I can't stress how important it is to take a look at the help texts that are shown in the setup dialogs as they cover the most frequently asked questions. Surprisingly even after the hints were added ;-)."
-msgstr "U weet nu vrijwel alles wat er te weten valt over de AutoTimer-Plugin./n/nAls laatste hint willen wij  meegeven dat het heel belangrijk is om naar de help-teksten te kijken die worden getoond in de instellingen dialoog, want die dekken de meeste vragen. Verrassend genoeg zelfs nadat de hints zijn toegevoegd ;-)."

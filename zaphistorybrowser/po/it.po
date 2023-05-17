@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - zaphistorybrowser\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2011-04-08 20:25+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -17,38 +17,50 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: /media/TREKSTOR/git/enigma2-plugins/zaphistorybrowser\n"
 
+#: plugin.py:217
 msgid "Clear"
 msgstr "Pulire"
 
+#: plugin.py:220
 msgid "Config"
 msgstr "Configurare"
 
+#: plugin.py:218
 msgid "Delete"
 msgstr "Cancellare"
 
+#: plugin.py:125
 msgid "Enable zap history:"
 msgstr "Abilitare "
 
+#: plugin.py:127
 msgid "Enigma1-like history:"
 msgstr "History in veste enigma1"
 
+#: plugin.py:126
 msgid "Maximum zap history entries:"
 msgstr "Numero massimo di voci nella history: "
 
+#: plugin.py:219
 msgid "Zap"
 msgstr ""
 
+#: plugin.py:205 plugin.py:318
 msgid "Zap-History Browser"
 msgstr "Zap-History Browser"
 
+#: plugin.py:118
 msgid "Zap-History Configurator"
 msgstr "Configuratore di Zap-History"
 
+#: plugin.py:49
 msgid "disabled"
 msgstr "Disabilitato"
 
+#: plugin.py:49
 msgid "disabled at parental lock"
 msgstr "Disabilitato su blocco parentale"
 
+#: plugin.py:49
 msgid "enabled"
 msgstr "Abilitato"

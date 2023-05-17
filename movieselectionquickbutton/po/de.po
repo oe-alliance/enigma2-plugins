@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MovieSelectionQuickbutton\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: JuSt611 <Software@Strasdas.de>\n"
 "Language-Team: JuSt611 <Software@Strasdas.de>\n"
@@ -16,24 +16,32 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
+#: plugin.py:79
 msgid "Assign plugin to blue key pressed"
 msgstr "Blauer Taste zuordnen"
 
+#: plugin.py:77
 msgid "Assign plugin to green key pressed"
 msgstr "Grüner Taste zuordnen"
 
+#: plugin.py:76
 msgid "Assign plugin to red key pressed"
 msgstr "Roter Taste zuordnen"
 
+#: plugin.py:78
 msgid "Assign plugin to yellow key pressed"
 msgstr "Gelber Taste zuordnen"
 
+#: plugin.py:187
 msgid "Cancel"
 msgstr "Abbrechen"
 
+#: plugin.py:38 plugin.py:101 plugin.py:102 plugin.py:127 plugin.py:191
+#: plugin.py:243
 msgid "Delete"
 msgstr "Löschen"
 
+#: plugin.py:162
 #, python-format
 msgid ""
 "Error!\n"
@@ -42,56 +50,75 @@ msgstr ""
 "Fehler!\n"
 "Fehlertext: %s"
 
+#: plugin.py:103 plugin.py:104 plugin.py:131 plugin.py:192 plugin.py:245
 msgid "Home"
 msgstr "Home"
 
+#: plugin.py:166
 msgid "No plugin assigned!"
 msgstr "Keine Funktion zugeordnet"
 
+#: plugin.py:39 plugin.py:40 plugin.py:41 plugin.py:100 plugin.py:126
+#: plugin.py:190
 msgid "Nothing"
 msgstr "Keine Zuordnung"
 
+#: plugin.py:188
 msgid "OK"
 msgstr "OK"
 
+#: plugin.py:164
 msgid "Plugin not found!"
 msgstr "Plugin wurde nicht gefunden!"
 
+#: plugin.py:266 plugin.py:270
 msgid "Setup for MovieSelection QuickButton"
 msgstr "MovieSelection QuickButton Setup"
 
+#: plugin.py:220
 msgid "Show Setup in Extensions menu"
 msgstr "Setup im Erweiterungs-Menü zeigen"
 
+#: plugin.py:105 plugin.py:134 plugin.py:193 plugin.py:247
 msgid "Sort"
 msgstr "Sortieren"
 
+#: plugin.py:123
 msgid "Unknown Error"
 msgstr "Unbekannter Fehler"
 
+#: plugin.py:109 plugin.py:137
 msgid "alphabetic sort"
 msgstr "Sort. alphabetisch"
 
+#: plugin.py:218
 msgid "assigned to blue"
 msgstr "Auf der blauen Taste"
 
+#: plugin.py:216
 msgid "assigned to green"
 msgstr "Auf der grünen Taste"
 
+#: plugin.py:215
 msgid "assigned to red"
 msgstr "Auf der roten Taste"
 
+#: plugin.py:217
 msgid "assigned to yellow"
 msgstr "Auf der gelben Taste"
 
+#: plugin.py:219
 msgid "button caption"
 msgstr "Tasten beschriften"
 
+#: plugin.py:42
 msgid "display plugin description"
 msgstr "mit der Pluginbeschreibung"
 
+#: plugin.py:42
 msgid "display plugin name"
 msgstr "mit dem Pluginnamen"
 
+#: plugin.py:107 plugin.py:140
 msgid "sort by date"
 msgstr "Sort. nach Datum"

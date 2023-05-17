@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 - MediaDownloader Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2011-09-28 12:32+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: AndyBlac/Rob van der Does\n"
@@ -18,38 +18,49 @@ msgstr ""
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 
+#: MediaDownloader.py:224
 #, python-format
 msgid "%d kb/s"
 msgstr "%d kb/s"
 
+#: MediaDownloader.py:157
 msgid "?? kb/s"
 msgstr "?? kb/s"
 
+#: MediaDownloader.py:254
 msgid "Do you want to try to open the downloaded file?"
 msgstr "Wilt u het gedownloade bestand proberen te openen?"
 
+#: plugin.py:91
 msgid "Download..."
 msgstr "Downloaden..."
 
+#: MediaDownloader.py:154
 msgid "Downloading..."
 msgstr "Downloading..."
 
+#: MediaDownloader.py:223
 #, python-format
 msgid "ETA %d:%02d min"
 msgstr "Geschatte tijd: %d:%02d min"
 
+#: MediaDownloader.py:156
 msgid "ETA ??:?? h"
 msgstr "Geschatte tijd: ??:?? h"
 
+#: MediaDownloader.py:271
 #, python-format
 msgid "Error while downloading file %s"
 msgstr "Fout tijdens het downloaden van bestand %s"
 
+#: MediaDownloader.py:237
 msgid "No suitable Viewer found!"
 msgstr "Geen geschikte viewer gevonden!"
 
+#: MediaDownloader.py:181
 msgid "Where to save?"
 msgstr "Waar opslaan?"
 
+#: plugin.py:65
 msgid "Which file do you want to download?"
 msgstr "Welk bestand wilt u downloaden?"

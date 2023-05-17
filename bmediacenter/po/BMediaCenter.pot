@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# $PACKAGEDESCRIPION
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the BMediaCenter package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: BMediaCenter 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-12 19:16+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,737 +17,874 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: MC_AudioPlayer.py:472 MC_AudioPlayer.py:859
 msgid ""
 "\n"
 "Album: "
 msgstr ""
 
+#: MC_AudioPlayer.py:472 MC_AudioPlayer.py:859
 msgid ""
 "\n"
 "Artist: "
 msgstr ""
 
+#: MC_AudioPlayer.py:472 MC_AudioPlayer.py:859
 msgid ""
 "\n"
 "Comment: "
 msgstr ""
 
+#: MC_AudioPlayer.py:472 MC_AudioPlayer.py:859
 msgid ""
 "\n"
 "Genre: "
 msgstr ""
 
+#: MC_AudioPlayer.py:472 MC_AudioPlayer.py:859
 msgid ""
 "\n"
 "Year: "
 msgstr ""
 
+#: MC_AudioPlayer.py:58
 #, python-format
 msgid "%s"
 msgstr ""
 
+#: MC_AudioPlayer.py:952
 msgid "60s"
 msgstr ""
 
+#: MC_AudioPlayer.py:953
 msgid "70s"
 msgstr ""
 
+#: MC_AudioPlayer.py:954
 msgid "80s"
 msgstr ""
 
+#: MC_AudioPlayer.py:955
 msgid "90s"
 msgstr ""
 
+#: MC_Settings.py:67
 msgid "A background update check is is progress, please wait a few minutes and try again."
 msgstr ""
 
+#: MC_AudioPlayer.py:956
 msgid "Acid_jazz"
 msgstr ""
 
+#: MC_AudioPlayer.py:957
 msgid "African"
 msgstr ""
 
+#: MC_AudioPlayer.py:958
 msgid "Alternative"
 msgstr ""
 
+#: MC_AudioPlayer.py:959
 msgid "Ambient"
 msgstr ""
 
+#: MC_AudioPlayer.py:960
 msgid "Americana"
 msgstr ""
 
+#: MC_AudioPlayer.py:961
 msgid "Anime"
 msgstr ""
 
+#: MC_AudioPlayer.py:962
 msgid "Arabic"
 msgstr ""
 
+#: MC_AudioPlayer.py:963
 msgid "Asian"
 msgstr ""
 
-msgid "Audio Player"
-msgstr ""
-
-msgid "Audioplayer Settings"
-msgstr ""
-
-msgid "BMedia Center Menu"
-msgstr ""
-
+#: MC_AudioPlayer.py:964
 msgid "Bigband"
 msgstr ""
 
+#: MC_AudioPlayer.py:965
 msgid "Bluegrass"
 msgstr ""
 
+#: MC_AudioPlayer.py:966
 msgid "Blues"
 msgstr ""
 
+#: MC_AudioPlayer.py:967
 msgid "Breakbeat"
 msgstr ""
 
+#: setup.xml
 msgid "Cache Thumbnails"
 msgstr ""
 
+#: MC_Settings.py:70
 msgid "Checking Feeds"
 msgstr ""
 
+#: MC_AudioPlayer.py:968
 msgid "Chillout"
 msgstr ""
 
+#: MC_AudioPlayer.py:969
 msgid "Christian"
 msgstr ""
 
+#: MC_AudioPlayer.py:970
 msgid "Classical"
 msgstr ""
 
+#: MC_VideoPlayer.py:224 MC_VideoPlayer.py:398
 msgid "Close"
 msgstr ""
 
+#: MC_AudioPlayer.py:971
 msgid "Club"
 msgstr ""
 
+#: MC_AudioPlayer.py:972
 msgid "College"
 msgstr ""
 
+#: MC_AudioPlayer.py:973
 msgid "Comedy"
 msgstr ""
 
+#: MC_AudioPlayer.py:974
 msgid "Country"
 msgstr ""
 
-msgid "DMC Settings"
-msgstr ""
-
+#: MC_AudioPlayer.py:975
 msgid "Dance"
 msgstr ""
 
+#: MC_AudioPlayer.py:42 MC_VideoPlayer.py:41
 msgid "Date ascending"
 msgstr ""
 
+#: MC_AudioPlayer.py:43 MC_VideoPlayer.py:42
 msgid "Date descending"
 msgstr ""
 
-msgid "Delete"
-msgstr ""
-
+#: MC_VideoPlayer.py:188 MC_VideoPlayer.py:217 MC_VideoPlayer.py:248
+#: MC_VideoPlayer.py:309
 msgid "Delete Movie"
 msgstr ""
 
+#: MC_AudioPlayer.py:1356
 msgid "Delete failed!"
 msgstr ""
 
+#: MC_AudioPlayer.py:976
 msgid "Deutsch"
 msgstr ""
 
+#: MC_VLCPlayer.py:655
 msgid "Directory"
 msgstr ""
 
+#: MC_VLCPlayer.py:616
 msgid "Directory:"
 msgstr ""
 
+#: MC_AudioPlayer.py:977
 msgid "Disco"
 msgstr ""
 
+#: MC_AudioPlayer.py:978
 msgid "Discofox"
 msgstr ""
 
+#: MC_VideoPlayer.py:337
 #, python-format
 msgid ""
 "Do you really want to delete\n"
 "%s ?"
 msgstr ""
 
+#: MC_AudioPlayer.py:1349
 #, python-format
 msgid "Do you really want to delete %s?"
 msgstr ""
 
+#: MC_AudioPlayer.py:521
 msgid "Do you really want to delete this directory and it's content ?"
 msgstr ""
 
+#: MC_AudioPlayer.py:512 MC_AudioPlayer.py:867
 msgid "Do you really want to delete this file ?"
 msgstr ""
 
-msgid "Download"
-msgstr ""
-
+#: MC_AudioPlayer.py:979
 msgid "Downtempo"
 msgstr ""
 
+#: MC_AudioPlayer.py:980
 msgid "Drum'n'bass"
 msgstr ""
 
+#: MC_AudioPlayer.py:981
 msgid "Easylistening"
 msgstr ""
 
+#: MC_AudioPlayer.py:982
 msgid "Ebm"
 msgstr ""
 
+#: MC_AudioPlayer.py:983
 msgid "Electronic"
 msgstr ""
 
+#: MC_VLCPlayer.py:364
 #, python-format
 msgid ""
 "Error loading filelist into server %s:\n"
 "%s"
 msgstr ""
 
+#: MC_VLCPlayer.py:310
 #, python-format
 msgid ""
 "Error loading playlist %s into server %s:\n"
 "%s"
 msgstr ""
 
+#: MC_VLCPlayer.py:358 MC_VLCPlayer.py:374 MC_VLCPlayer.py:379
 #, python-format
 msgid ""
 "Error loading playlist into server %s:\n"
 "%s"
 msgstr ""
 
+#: MC_VLCPlayer.py:449
 #, python-format
 msgid ""
 "Error switching directory:\n"
 "%s"
 msgstr ""
 
+#: MC_VLCPlayer.py:240
 #, python-format
 msgid ""
 "Error updating file- and playlist from server %s:\n"
 "%s"
 msgstr ""
 
+#: MC_VLCPlayer.py:263
 #, python-format
 msgid ""
 "Error updating filelist from server %s:\n"
 "%s"
 msgstr ""
 
+#: MC_VLCPlayer.py:336
 #, python-format
 msgid ""
 "Error with VLC server:\n"
 "%s"
 msgstr ""
 
+#: MC_AudioPlayer.py:984
 msgid "Eurodance"
 msgstr ""
 
-msgid "Favorite Folders"
-msgstr ""
-
+#: MC_AudioPlayer.py:1100
 msgid "File Browser"
 msgstr ""
 
+#: MC_AudioPlayer.py:1641 MC_VideoPlayer.py:510
 msgid "Filelist Sorting:"
 msgstr ""
 
+#: MC_AudioPlayer.py:985
 msgid "Film"
 msgstr ""
 
+#: MC_AudioPlayer.py:986
 msgid "Folk"
 msgstr ""
 
+#: setup.xml
 msgid "Frame size in full view"
 msgstr ""
 
+#: MC_AudioPlayer.py:987
 msgid "France"
 msgstr ""
 
+#: MC_AudioPlayer.py:988
 msgid "Funk"
 msgstr ""
 
+#: MC_AudioPlayer.py:989
 msgid "Gay"
 msgstr ""
 
+#: MC_VideoPlayer.py:392
 msgid "Genres"
 msgstr ""
 
+#: MC_AudioPlayer.py:990
 msgid "Goa"
 msgstr ""
 
+#: MC_AudioPlayer.py:991
 msgid "Gospel"
 msgstr ""
 
+#: MC_AudioPlayer.py:992
 msgid "Gothic"
 msgstr ""
 
+#: MC_AudioPlayer.py:993
 msgid "Greek"
 msgstr ""
 
+#: MC_AudioPlayer.py:994
 msgid "Hardcore"
 msgstr ""
 
+#: MC_AudioPlayer.py:995
 msgid "Hardrock"
 msgstr ""
 
+#: MC_AudioPlayer.py:996
 msgid "Hiphop"
 msgstr ""
 
-msgid "Home"
-msgstr ""
-
+#: MC_AudioPlayer.py:997
 msgid "House"
 msgstr ""
 
+#: MC_AudioPlayer.py:998
 msgid "India"
 msgstr ""
 
+#: MC_AudioPlayer.py:999
 msgid "Indie"
 msgstr ""
 
+#: MC_AudioPlayer.py:1000
 msgid "Industrial"
 msgstr ""
 
+#: MC_Settings.py:99
 msgid "Installing Service"
 msgstr ""
 
+#: MC_AudioPlayer.py:1001
 msgid "Instrumental"
 msgstr ""
 
+#: MC_AudioPlayer.py:1002
 msgid "Italian"
 msgstr ""
 
+#: MC_AudioPlayer.py:1003
 msgid "Jazz"
 msgstr ""
 
+#: MC_AudioPlayer.py:1004
 msgid "Jpop"
 msgstr ""
 
+#: MC_AudioPlayer.py:1005
 msgid "Jungle"
 msgstr ""
 
+#: MC_AudioPlayer.py:1006
 msgid "Latin"
 msgstr ""
 
+#: MC_AudioPlayer.py:1007
 msgid "Lounge"
 msgstr ""
 
+#: MC_AudioPlayer.py:195 MC_AudioPlayer.py:1434
 msgid "Lyrics"
 msgstr ""
 
-msgid "Media Center - VLC Favorites"
-msgstr ""
-
-msgid "Media Center - VLC Player - Serverlist"
-msgstr ""
-
+#: MC_AudioPlayer.py:1008
 msgid "Metal"
 msgstr ""
 
+#: MC_AudioPlayer.py:1009
 msgid "Mixed"
 msgstr ""
 
+#: MC_VideoPlayer.py:149
 msgid "Movie"
 msgstr ""
 
+#: setup.xml
 msgid "Music"
 msgstr ""
 
-msgid "Music Playlist"
-msgstr ""
-
+#: MC_AudioPlayer.py:1010
 msgid "Musical"
 msgstr ""
 
+#: plugin.py:59 plugin.py:77
 msgid "My Music"
 msgstr ""
 
+#: plugin.py:80
 msgid "My Pictures"
 msgstr ""
 
+#: plugin.py:78
 msgid "My Videos"
 msgstr ""
 
+#: MC_VLCPlayer.py:654
 msgid "Name"
 msgstr ""
 
+#: MC_AudioPlayer.py:40 MC_VideoPlayer.py:39
 msgid "Name ascending"
 msgstr ""
 
+#: MC_AudioPlayer.py:41 MC_VideoPlayer.py:40
 msgid "Name descending"
 msgstr ""
 
+#: MC_VLCPlayer.py:615
 msgid "Name:"
 msgstr ""
 
+#: MC_AudioPlayer.py:1528
 msgid "No lyrics found"
 msgstr ""
 
-msgid "OK / Play"
-msgstr ""
-
+#: MC_AudioPlayer.py:1011
 msgid "Oldies"
 msgstr ""
 
+#: MC_AudioPlayer.py:1012
 msgid "Opera"
 msgstr ""
 
+#: MC_VideoPlayer.py:387
 msgid "Overview"
 msgstr ""
 
+#: MC_VideoPlayer.py:404
 msgid "Overwrite TXT"
 msgstr ""
 
-msgid "Pic Viewer"
-msgstr ""
-
+#: setup.xml
 msgid "Picture Settings"
 msgstr ""
 
-msgid "Picture Viewer"
-msgstr ""
-
-msgid "Play / Pause"
-msgstr ""
-
+#: MC_VideoPlayer.py:509
 msgid "Play DVD as:"
 msgstr ""
 
-msgid "Playlist/Filelist"
-msgstr ""
-
+#: MC_AudioPlayer.py:1302
 msgid "Please enter filename (empty = use current date)"
 msgstr ""
 
+#: MC_VideoPlayer.py:156
 msgid "Please select"
 msgstr ""
 
+#: MC_AudioPlayer.py:1344
 msgid "Please select a playlist to delete..."
 msgstr ""
 
+#: MC_AudioPlayer.py:1323
 msgid "Please select a playlist..."
 msgstr ""
 
+#: MC_Settings.py:69
 msgid "Please wait whilst feeds state is checked."
 msgstr ""
 
+#: MC_AudioPlayer.py:1013
 msgid "Polish"
 msgstr ""
 
+#: MC_AudioPlayer.py:1014
 msgid "Polka"
 msgstr ""
 
+#: MC_AudioPlayer.py:950
 msgid "Pop"
 msgstr ""
 
+#: MC_AudioPlayer.py:1015
 msgid "Portugal"
 msgstr ""
 
+#: MC_AudioPlayer.py:1016
 msgid "Progressive"
 msgstr ""
 
+#: MC_AudioPlayer.py:1017
 msgid "Punk"
 msgstr ""
 
+#: MC_AudioPlayer.py:1018
 msgid "Quran"
 msgstr ""
 
+#: MC_AudioPlayer.py:1019
 msgid "Rap"
 msgstr ""
 
+#: MC_VLCPlayer.py:96
 msgid "Really delete this Server?"
 msgstr ""
 
+#: MC_VLCPlayer.py:530
 msgid "Really delete this favorite?"
 msgstr ""
 
+#: MC_AudioPlayer.py:1020
 msgid "Reggae"
 msgstr ""
 
+#: MC_AudioPlayer.py:1523
 #, python-format
 msgid "Response -> lyrics for: %s (%s)"
 msgstr ""
 
+#: MC_AudioPlayer.py:1021
 msgid "Retro"
 msgstr ""
 
+#: MC_AudioPlayer.py:1022
 msgid "Rnb"
 msgstr ""
 
+#: MC_AudioPlayer.py:951
 msgid "Rock"
 msgstr ""
 
+#: MC_AudioPlayer.py:1023
 msgid "Romanian"
 msgstr ""
 
+#: MC_AudioPlayer.py:1024
 msgid "Salsa"
 msgstr ""
 
+#: MC_VideoPlayer.py:223
 msgid "Save Movie Info"
 msgstr ""
 
+#: MC_AudioPlayer.py:1302
 msgid "Save Playlist"
 msgstr ""
 
+#: MC_VideoPlayer.py:406
 msgid "Save as EIT"
 msgstr ""
 
+#: MC_VideoPlayer.py:401
 msgid "Save as TXT"
 msgstr ""
 
+#: setup.xml
 msgid "Scaling Mode"
 msgstr ""
 
+#: MC_AudioPlayer.py:1025
 msgid "Schlager"
 msgstr ""
 
+#: MC_AudioPlayer.py:1638
 msgid "Screensaver Enable:"
 msgstr ""
 
+#: MC_AudioPlayer.py:1639
 msgid "Screensaver Interval"
 msgstr ""
 
+#: MC_AudioPlayer.py:1640
 msgid "Screensaver Style:"
 msgstr ""
 
+#: setup.xml
 msgid "Select music"
 msgstr ""
 
+#: MC_VideoPlayer.py:151
 msgid "Series"
 msgstr ""
 
+#: MC_AudioPlayer.py:676 MC_PictureViewer.py:177 MC_VideoPlayer.py:211
+#: plugin.py:83
 msgid "Settings"
 msgstr ""
 
+#: MC_Settings.py:44
 msgid "Show MC in Extension-Menu"
 msgstr ""
 
+#: MC_Settings.py:43
 msgid "Show MC in Main-Menu"
 msgstr ""
 
+#: MC_VideoPlayer.py:216 MC_VideoPlayer.py:311
 msgid "Show Movie Info"
 msgstr ""
 
+#: MC_AudioPlayer.py:46 MC_VideoPlayer.py:43
 msgid "Size ascending"
 msgstr ""
 
+#: MC_AudioPlayer.py:47 MC_VideoPlayer.py:44
 msgid "Size descending"
 msgstr ""
 
+#: MC_AudioPlayer.py:1026
 msgid "Ska"
 msgstr ""
 
+#: setup.xml
 msgid "Slideshow Interval (sec.)"
 msgstr ""
 
+#: MC_AudioPlayer.py:1027
 msgid "Smooth_jazz"
 msgstr ""
 
+#: MC_Settings.py:82
 msgid "Sorry feeds are down for maintenance, please try again later."
 msgstr ""
 
+#: MC_AudioPlayer.py:1028
 msgid "Soul"
 msgstr ""
 
+#: MC_AudioPlayer.py:1029
 msgid "Soundtrack"
 msgstr ""
 
+#: MC_AudioPlayer.py:1030
 msgid "Spain"
 msgstr ""
 
+#: MC_AudioPlayer.py:1031
 msgid "Spiritual"
 msgstr ""
 
+#: MC_AudioPlayer.py:1032
 msgid "Sport"
 msgstr ""
 
+#: MC_AudioPlayer.py:1033
 msgid "Swing"
 msgstr ""
 
+#: MC_AudioPlayer.py:1034
 msgid "Symphonic"
 msgstr ""
 
+#: MC_AudioPlayer.py:1035
 msgid "Talk"
 msgstr ""
 
+#: MC_AudioPlayer.py:1036
 msgid "Techno"
 msgstr ""
 
+#: MC_AudioPlayer.py:588 MC_AudioPlayer.py:912
 #, python-format
 msgid "This Dreambox can't decode %s video streams!"
 msgstr ""
 
+#: setup.xml
 msgid "Thumbnail Height"
 msgstr ""
 
+#: setup.xml
 msgid "Thumbnail Width"
 msgstr ""
 
+#: MC_AudioPlayer.py:472 MC_AudioPlayer.py:859
 msgid "Title: "
 msgstr ""
 
+#: MC_AudioPlayer.py:949
 msgid "Top_40"
 msgstr ""
 
+#: MC_AudioPlayer.py:1037
 msgid "Trance"
 msgstr ""
 
+#: MC_AudioPlayer.py:1038
 msgid "Turk"
 msgstr ""
 
+#: MC_Settings.py:45
 msgid "UPNP Enabled"
 msgstr ""
 
+#: MC_AudioPlayer.py:1039
 msgid "Urban"
 msgstr ""
 
+#: MC_AudioPlayer.py:1040
 msgid "Usa"
 msgstr ""
 
-msgid "VLC Favorites"
-msgstr ""
-
-msgid "VLC Player - Medialist"
-msgstr ""
-
-msgid "VLC Player - Serverlist"
-msgstr ""
-
+#: MC_AudioPlayer.py:1041
 msgid "Various"
 msgstr ""
 
-msgid "Video Player"
-msgstr ""
-
-msgid "Video Player Settings"
-msgstr ""
-
-msgid "VideoPlayerSettings"
-msgstr ""
-
+#: MC_AudioPlayer.py:1042
 msgid "Wave"
 msgstr ""
 
-msgid "Web Download"
-msgstr ""
-
+#: plugin.py:81
 msgid "Web Radio"
 msgstr ""
 
+#: MC_AudioPlayer.py:1043
 msgid "Worldmusic"
 msgstr ""
 
+#: MC_AudioPlayer.py:1217
 msgid "You have to close playlist before you can go to the next song while playing from file browser."
 msgstr ""
 
+#: MC_AudioPlayer.py:1230
 msgid "You have to close playlist before you can go to the previous song while playing from file browser."
 msgstr ""
 
+#: MC_Settings.py:80
 #, python-format
 msgid "Your %s %s is not connected to the internet, please check your network settings and try again."
 msgstr ""
 
+#: MC_Settings.py:84
 #, python-format
 msgid ""
 "Your %s %s will be restarted after the installation of service\n"
 "Ready to install %s ?"
 msgstr ""
 
-msgid "Zur Playlist"
-msgstr ""
-
+#: MC_AudioPlayer.py:610
 msgid "add all files in directory to playlist"
 msgstr ""
 
+#: MC_AudioPlayer.py:605
 msgid "add directory to playlist"
 msgstr ""
 
+#: MC_AudioPlayer.py:608
 msgid "add file to playlist"
 msgstr ""
 
+#: MC_AudioPlayer.py:609
 msgid "add file to playlist and play"
 msgstr ""
 
+#: setup.xml
 msgid "backgroundcolor"
 msgstr ""
 
+#: MC_PictureViewer.py:21
 msgid "better"
 msgstr ""
 
+#: MC_PictureViewer.py:27 MC_PictureViewer.py:28
 msgid "black"
 msgstr ""
 
+#: MC_PictureViewer.py:27 MC_PictureViewer.py:28
 msgid "blue"
 msgstr ""
 
+#: MC_PictureViewer.py:24
 msgid "by Exif"
 msgstr ""
 
+#: MC_AudioPlayer.py:1364
 msgid "clear playlist"
 msgstr ""
 
+#: MC_AudioPlayer.py:52
 msgid "default"
 msgstr ""
 
+#: MC_AudioPlayer.py:606
 msgid "delete directory"
 msgstr ""
 
+#: MC_AudioPlayer.py:611
 msgid "delete file"
 msgstr ""
 
+#: MC_AudioPlayer.py:1363
 msgid "delete from playlist"
 msgstr ""
 
+#: MC_AudioPlayer.py:1367
 msgid "delete saved playlist"
 msgstr ""
 
+#: MC_PictureViewer.py:574
 msgid "filename"
 msgstr ""
 
+#: MC_PictureViewer.py:27 MC_PictureViewer.py:28
 msgid "green"
 msgstr ""
 
+#: MC_AudioPlayer.py:1365
 msgid "load playlist"
 msgstr ""
 
+#: MC_PictureViewer.py:24
 msgid "manual"
 msgstr ""
 
+#: MC_PictureViewer.py:24
 msgid "none"
 msgstr ""
 
+#: MC_PictureViewer.py:411
 msgid "please wait, loading picture..."
 msgstr ""
 
+#: MC_Settings.py:98
 msgid "please wait..."
 msgstr ""
 
+#: MC_PictureViewer.py:27 MC_PictureViewer.py:28
 msgid "red"
 msgstr ""
 
+#: MC_AudioPlayer.py:1366
 msgid "save playlist"
 msgstr ""
 
+#: setup.xml
 msgid "show Infoline"
 msgstr ""
 
+#: MC_PictureViewer.py:21
 msgid "simple"
 msgstr ""
 
+#: setup.xml
 msgid "slide picture in loop"
 msgstr ""
 
+#: setup.xml
 msgid "textcolor"
 msgstr ""
 
+#: MC_PictureViewer.py:27 MC_PictureViewer.py:28
 msgid "yellow"
 msgstr ""

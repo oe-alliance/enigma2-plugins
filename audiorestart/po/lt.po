@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AudioRestart-VTI\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:24+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
@@ -16,39 +16,51 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: src\n"
 
+#: plugin.py:116
 msgid " "
 msgstr " "
 
+#: plugin.py:152
 msgid "Audio restart Setup"
 msgstr "Garso paleidimo iš naujo sąranka"
 
+#: plugin.py:114
 msgid "Cancel"
 msgstr "Atšaukti"
 
+#: plugin.py:111
 #, python-format
 msgid "Plugin: %(plugin)s , Version: %(version)s"
 msgstr "Įskiepis: %(plugin)s , versija: %(version)s"
 
+#: plugin.py:100 plugin.py:154
 msgid "Restart audio"
 msgstr "Paleisti garso sistemą iš naujo"
 
+#: plugin.py:101
 msgid "Restart audio delay (in sec)"
 msgstr "Garso paleidimo iš naujo delsa (sek.)"
 
+#: plugin.py:115
 msgid "Save"
 msgstr "Išsaugoti"
 
+#: plugin.py:152
 msgid "Setup for the AudioRestart Plugin"
 msgstr "AudioRestart įskiepio sąranka"
 
+#: plugin.py:20
 msgid "after restart"
 msgstr "paleidus iš naujo"
 
+#: plugin.py:20
 msgid "after restart/standby"
 msgstr "paleidus iš naujo/po budėjimo"
 
+#: plugin.py:20
 msgid "after standby"
 msgstr "po budėjimo režimo"
 
+#: plugin.py:20
 msgid "disabled"
 msgstr "išjungta"

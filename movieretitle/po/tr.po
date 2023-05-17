@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 MovieRetitle plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2009-02-15 01:16+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <zveyis@gmail.com>\n"
 "Language-Team: www.turkeyforum.com/satforum <zveyis@gmail.com>\n"
@@ -14,35 +14,45 @@ msgstr ""
 "X-Poedit-Country: TURKEY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#: plugin.py:52
 msgid "Cancel"
 msgstr "Vazgeç"
 
+#: plugin.py:97
 msgid "Choose target folder"
 msgstr "Hedef klasörü seç"
 
+#: plugin.py:73
 msgid "Description"
 msgstr "Açıklama"
 
+#: plugin.py:294
 #, python-format
 msgid "Failed to move the movie %s to %s in the background"
 msgstr "Film %s konumundan %s konumuna taşınırken hata oluştu."
 
+#: plugin.py:71
 msgid "Filename"
 msgstr "Dosya adı"
 
+#: plugin.py:69
 msgid "Location"
 msgstr "Konum"
 
+#: plugin.py:82
 msgid "Name and Description Input"
 msgstr ""
 
+#: plugin.py:51
 msgid "OK"
 msgstr "Tamam"
 
+#: plugin.py:301
 #, python-format
 msgid "Successfully moved the movie %s"
 msgstr "%s filmi başarıyla taşındı."
 
+#: plugin.py:136
 #, python-format
 msgid ""
 "Target file %s.ts already exist.\n"
@@ -51,15 +61,19 @@ msgstr ""
 "Hedefte %s.ts dosyası zaten mevcut.\n"
 "Üzerine yazmak istiyor musunuz?"
 
+#: plugin.py:253
 #, python-format
 msgid "The movie is moved in the background from %s to %s."
 msgstr "Film arkaplanda %s konumundan %s konumuna taşınıyor."
 
+#: plugin.py:140
 msgid "The target directory is not found. The file is not renamed."
 msgstr "Hedef klasör bulunamadı. Dosya adı değiştirilmedi."
 
+#: plugin.py:72
 msgid "Title"
 msgstr "Başlık"
 
+#: plugin.py:25
 msgid "change name..."
 msgstr "Film adını değiştirin, taşıyın..."

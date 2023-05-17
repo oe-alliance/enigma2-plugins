@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2012-05-17 19:16+0100\n"
 "Last-Translator: jerry <ws79@centrum.cz>\n"
 "Language-Team: jerry\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: MountEdit.py:342
 msgid ""
 "A mount entry with this name already exists!\n"
 "Update existing entry and continue?\n"
@@ -23,12 +24,15 @@ msgstr ""
 "Připojený záznam s tímto názvem již existuje!\n"
 "Aktualizovat existující a pokračovat?\n"
 
+#: MountEdit.py:126
 msgid "AUTOFS (mount as needed)"
 msgstr ""
 
+#: MountEdit.py:231
 msgid "Active"
 msgstr "Aktivní"
 
+#: MountView.py:65
 msgid ""
 "Active/\n"
 "Inactive"
@@ -36,18 +40,23 @@ msgstr ""
 "Aktivní/\n"
 "Neaktivní"
 
+#: MountManager.py:102
 msgid "Add a new NFS or CIFS mount point to your Receiver."
 msgstr "Přidá nový NFS nebo CIFS přípojný bod do vašeho stb."
 
+#: MountManager.py:102
 msgid "Add new network mount point"
 msgstr "Přidat nový přípojný bod sítě"
 
+#: plugin.py:54
 msgid "Adding schedule..."
 msgstr "Přidání plánu..."
 
+#: MountView.py:161
 msgid "Are you sure you want to remove your network mount ?"
 msgstr ""
 
+#: MountEdit.py:344
 msgid ""
 "Are you sure you want to save this network mount?\n"
 "\n"
@@ -55,125 +64,166 @@ msgstr ""
 "Opravdu chcete tento síťový bod připojení uložit?\n"
 "\n"
 
+#: plugin.py:114
 msgid "Attempt to mount shares again"
 msgstr "Pokus o znovu připojení"
 
+#: plugin.py:114
 msgid "Attempt to recover lost mounts (in background)"
 msgstr "Pokus o obnovení ztracéného připojení (v pozadí)"
 
+#: NetworkBrowser.py:192
 msgid "Browse network neighbourhood"
 msgstr "Procházení síťové okolí"
 
+#: MountEdit.py:132
 msgid "CIFS share"
 msgstr "Sdílení CIFS"
 
+#: MountEdit.py:76 MountManager.py:195 NetworkBrowser.py:630
 msgid "Cancel"
 msgstr "Zrušit"
 
+#: MountManager.py:105
 msgid "Change hostname"
 msgstr "Změna hostname"
 
+#: MountManager.py:105
 msgid "Change the hostname of your Receiver."
 msgstr "Změní hostname vašeho stb."
 
+#: MountManager.py:61 MountView.py:67 NetworkBrowser.py:127 UserDialog.py:101
+#: UserManager.py:51
 msgid "Close"
 msgstr "Zavřít"
 
+#: UserManager.py:53
 msgid "Delete"
 msgstr "Smazat"
 
+#: MountView.py:68
 msgid "Delete mount"
 msgstr "Smazat bod"
 
+#: MountView.py:122
 msgid "Dir:"
 msgstr "Adr:"
 
+#: NetworkBrowser.py:539
 msgid "Do you want to enter a username and password for this host?"
 msgstr ""
 
+#: MountEdit.py:128
 msgid "Enigma2 (mount using enigma2)"
 msgstr ""
 
+#: MountEdit.py:129
 msgid "Enigma2 old format (mount using linux)"
 msgstr ""
 
+#: NetworkBrowser.py:662
 msgid "Enter IP to scan..."
 msgstr "Vložte IP k prohledání..."
 
+#: MountManager.py:142
 msgid "Enter new hostname for your Receiver"
 msgstr "Vložte nové hostname vašeho stb"
 
+#: MountEdit.py:277
 msgid "Enter options:"
 msgstr "Vložte volby:"
 
+#: MountEdit.py:281 UserDialog.py:151
 msgid "Enter password:"
 msgstr "Vložte heslo:"
 
+#: MountEdit.py:275
 msgid "Enter share directory:"
 msgstr "Vložte sdílený adresář:"
 
+#: MountEdit.py:273
 msgid "Enter share name:"
 msgstr "Vložte název sdílení:"
 
+#: UserDialog.py:104
 msgid "Enter user and password for host: "
 msgstr "Vložte jméno a heslo hosta: "
 
+#: MountEdit.py:279 UserDialog.py:149
 msgid "Enter username:"
 msgstr "Vložte uživatele:"
 
+#: NetworkBrowser.py:130
 msgid "Expert"
 msgstr "Expertní"
 
+#: MountEdit.py:127
 #, fuzzy
 msgid "FSTAB (mount at boot)"
 msgstr "FSTAB (připojit přes linux)"
 
+#: MountManager.py:168
 msgid "Finished restarting your network"
 msgstr "Dokončení restartování sítě"
 
+#: NetworkBrowser.py:647
 msgid "IP Address"
 msgstr "IP adresa"
 
+#: MountView.py:121
 msgid "IP:"
 msgstr ""
 
+#: MountEdit.py:233
 msgid "Local share name"
 msgstr "Místní název sdílení"
 
+#: plugin.py:113
 msgid "Manage network shares"
 msgstr "Správa síťového sdílení"
 
+#: plugin.py:113
 msgid "Manage your network shares..."
 msgstr "Správa síťového sdílení..."
 
+#: plugin.py:114
 msgid "Mount Again"
 msgstr "Připojit"
 
+#: MountManager.py:90 plugin.py:113
 msgid "Mount Manager"
 msgstr "Správce připojení"
 
+#: MountView.py:52
 msgid "Mount Viewer"
 msgstr "Prohlížeč připojení"
 
+#: plugin.py:114
 msgid "Mount again"
 msgstr "Připojit znovu"
 
+#: MountView.py:64
 msgid "Mount informations"
 msgstr "Info připojení"
 
+#: NetworkBrowser.py:128
 #, fuzzy
 msgid "Mount manager"
 msgstr "Správce připojení"
 
+#: MountEdit.py:243
 msgid "Mount options"
 msgstr "Volby připojení"
 
+#: MountEdit.py:235
 msgid "Mount type"
 msgstr "Typ připojení"
 
+#: MountEdit.py:229
 msgid "Mount using"
 msgstr "Připojit přes"
 
+#: MountView.py:63
 msgid ""
 "Mounted/\n"
 "Unmounted"
@@ -181,126 +231,167 @@ msgstr ""
 "Připojeno/\n"
 "Odpojeno"
 
+#: plugin.py:45
 msgid "Mounting network shares..."
 msgstr "Připojení síťového disku..."
 
+#: MountManager.py:103
 msgid "Mountpoints management"
 msgstr "Správa bodů připojení"
 
+#: MountEdit.py:96
 msgid "Mounts editor"
 msgstr "Editor připojení"
 
+#: MountEdit.py:133
 msgid "NFS share"
 msgstr "Disk NFS"
 
+#: plugin.py:38 plugin.py:112
 msgid "Network Browser"
 msgstr "Prohlížeč sítě"
 
+#: NetworkBrowser.py:236 NetworkBrowser.py:238
 msgid "No network devices found!"
 msgstr "Žádné síťové zařízení!"
 
+#: MountEdit.py:248 UserDialog.py:140
 msgid "Password"
 msgstr "Heslo"
 
+#: MountEdit.py:408
 msgid "Please wait for activation of your network mount..."
 msgstr "Počkejte na aktivaci síťového připojení..."
 
+#: MountView.py:172
 msgid "Please wait while removing your network mount..."
 msgstr "Počkejte na odstranění síťového připojení..."
 
+#: MountEdit.py:370
 msgid "Please wait while updating your network mount..."
 msgstr "Počkejte na aktualizaci síťového připojení..."
 
+#: MountManager.py:155
 msgid "Please wait while your network is restarting..."
 msgstr "Počkejte na restart síťového připojení..."
 
+#: MountEdit.py:75
 msgid "Press OK to activate the settings."
 msgstr "OK aktivuje toto nastavení."
 
+#: NetworkBrowser.py:506 NetworkBrowser.py:507
 msgid "Press OK to collapse this host"
 msgstr "OK sbalí tohoto hosta."
 
+#: UserManager.py:52
 msgid "Press OK to edit selected settings."
 msgstr "OK upraví vybrané nastavení."
 
+#: MountView.py:66
 msgid "Press OK to edit the settings."
 msgstr "OK upraví toto nastavení."
 
+#: NetworkBrowser.py:509 NetworkBrowser.py:510
 msgid "Press OK to expand this host"
 msgstr "OK rozbalí tohoto hosta."
 
+#: NetworkBrowser.py:496
 msgid "Press OK to mount this share!"
 msgstr "OK připojí tento sdílený disk!"
 
+#: NetworkBrowser.py:131
 msgid "Press OK to mount!"
 msgstr "OK připojí!."
 
+#: UserDialog.py:100
 msgid "Press OK to save settings."
 msgstr "OK uloží toto nastavení."
 
+#: MountManager.py:62
 msgid "Press OK to select."
 msgstr "OK vybere."
 
+#: MountManager.py:215
 msgid "Re-mount network shares every (in hours)"
 msgstr "Připojovat síťové disky každé (hod)"
 
+#: MountManager.py:252
 msgid "Really close without saving settings?"
 msgstr "Opravdu zavřít bez uložení nastavení?"
 
+#: NetworkBrowser.py:129
 msgid "Rescan"
 msgstr ""
 
+#: MountEdit.py:77 MountManager.py:196
 msgid "Save"
 msgstr "Ulož"
 
+#: NetworkBrowser.py:631
 msgid "Scan NFS share"
 msgstr "Sken NFS disků"
 
+#: NetworkBrowser.py:632
 msgid "Scan range"
 msgstr "Rozsah skenu"
 
+#: MountManager.py:213 MountManager.py:221
 msgid "Schedule MountAgain"
 msgstr "Plán znovu připojení"
 
+#: MountManager.py:106
 msgid "Schedule a auto remount of your network shares."
 msgstr "Naplánuje automatické znovupřipojení síťových disků."
 
+#: plugin.py:112
 msgid "Search for network shares"
 msgstr "Hledání síťových disků"
 
+#: plugin.py:112
 msgid "Search for network shares..."
 msgstr "Hledání síťových disků..."
 
+#: NetworkBrowser.py:227 NetworkBrowser.py:229
 msgid "Searching your network. Please wait..."
 msgstr "Prohledání sítě. Čekejte prosím..."
 
+#: MountEdit.py:237
 msgid "Server IP"
 msgstr "IP serveru"
 
+#: MountEdit.py:239
 msgid "Server share"
 msgstr "Sdílený server"
 
+#: MountManager.py:106 MountManager.py:187
 msgid "Setup Mount Again"
 msgstr "Nastavit znovupřipojení"
 
+#: MountEdit.py:241
 msgid "Use as HDD replacement"
 msgstr "použít jako náhradu HDD"
 
+#: MountManager.py:104
 msgid "User management"
 msgstr "Správa uživatelů"
 
+#: UserManager.py:61
 msgid "Usermanager"
 msgstr ""
 
+#: MountEdit.py:246 UserDialog.py:138
 msgid "Username"
 msgstr "Uživatel"
 
+#: MountManager.py:103
 msgid "View, edit or delete mountpoints on your Receiver."
 msgstr "Prohlíží, edituje nebo maže přípojné body na vašem stb."
 
+#: MountManager.py:104
 msgid "View, edit or delete usernames and passwords for your network."
 msgstr "Prohlíží, edituje nebo maže uživatelská jména a hesla pro vaši síť."
 
+#: MountEdit.py:340
 #, fuzzy
 msgid ""
 "You have changed the share name!\n"
@@ -309,17 +400,21 @@ msgstr ""
 "Připojený záznam s tímto názvem již existuje!\n"
 "Aktualizovat existující a pokračovat?\n"
 
+#: NetworkBrowser.py:272
 #, python-format
 msgid ""
 "Your network interface %s is not properly configured, so a network scan cannot be done.\n"
 "Please configure the interface and try again."
 msgstr ""
 
+#: MountEdit.py:421
 msgid "Your network mount has been activated."
 msgstr "Vaše síťové připojení byl aktivováno."
 
+#: MountView.py:196
 msgid "Your network mount has been removed."
 msgstr "Vaše síťová připojení bylo odebráno."
 
+#: MountEdit.py:382
 msgid "Your network mount has been updated."
 msgstr "Vaše síťová připojení byl aktualizováno."

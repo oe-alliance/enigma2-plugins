@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flashexpander 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2010-04-13 10:19+0200\n"
 "Last-Translator: mechatron\n"
 "Language-Team: mechatron\n"
@@ -16,10 +16,12 @@ msgstr ""
 "X-Poedit-SourceCharset: iso-8859-15\n"
 "X-Poedit-Country: GERMANY\n"
 
+#: flashexpander.py:76
 #, python-format
 msgid "... is used, %dMB free"
 msgstr "... wird benutzt, %dMB frei"
 
+#: flashexpander.py:154
 #, python-format
 msgid ""
 "Are you sure want to create FlashExpander on\n"
@@ -30,6 +32,7 @@ msgstr ""
 "%s\n"
 "Partition %d erstellen"
 
+#: flashexpander.py:157
 #, python-format
 msgid ""
 "Are you sure want to create FlashExpander on \n"
@@ -40,43 +43,56 @@ msgstr ""
 "Server: %s\n"
 "Pfad: %s erstellen"
 
+#: flashexpander.py:300
 msgid "Do you want to reboot your STB_BOX?"
 msgstr ""
 
+#: plugin.py:13
 msgid "FlashExpander"
 msgstr ""
 
+#: flashexpander.py:79
 msgid "FlashExpander is not installed, create? Press Key OK."
 msgstr "FlashExpander ist nicht installiert, erstellen? Drücke OK."
 
+#: flashexpander.py:256
 #, python-format
 msgid "Mount failed (%s)"
 msgstr "Fehler beim Einbinden (%s)"
 
+#: flashexpander.py:145
 msgid "No HDD-, SSD- or USB-Device found. Please first initialized."
 msgstr "Kein HDD-, SSD- oder USB-Gerät gefunden. Bitte initialisieren."
 
+#: flashexpander.py:244
 msgid "Please wait, Flash memory will be copied."
 msgstr "Bitte warten. Flash Speicher wird kopiert."
 
+#: flashexpander.py:259
 msgid "Too little free space < 180MB or wrong Filesystem!"
 msgstr "Zu wenig freier Speicher < 180MB oder falsches Dateisystem"
 
+#: flashexpander.py:104
 msgid "choose device to FlashExpander"
 msgstr "wähle ein Gerät für den FlashExpander"
 
+#: flashexpander.py:302
 #, python-format
 msgid "error adding fstab entry for: %s"
 msgstr "Fehler beim Hinzufügen von %s in die fstab"
 
+#: flashexpander.py:305
 msgid "error copy flash memory"
 msgstr "Fehler beim Kopieren des Flash-Speichers"
 
+#: plugin.py:13
 msgid "extend your flash memory"
 msgstr "erweitere deinen Flash Speicher"
 
+#: flashexpander.py:211
 msgid "read UUID"
 msgstr "UUID lesen"
 
+#: flashexpander.py:128
 msgid "unknown"
 msgstr "unbekannt"

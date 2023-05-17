@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - simplerss\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-26 12:31+0000\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2011-09-20 21:45+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -17,118 +17,154 @@ msgstr ""
 "X-Poedit-Basepath: .../enigma2-plugins/simplerss\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/simplerss\n"
 
+#: plugin.py:117
 #, python-format
 msgid "%d Feed(s) were added to configuration."
 msgstr "%d feed aggiunti alla configurazione. "
 
+#: plugin.py:151
 msgid "A simple to use RSS reader"
 msgstr "Un semplice lettore RSS"
 
+#: RSSSetup.py:21
 msgid "Autoupdate"
 msgstr "Aggiornamento automatico"
 
+#: RSSSetup.py:27 RSSSetup.py:78
 msgid "Cancel"
 msgstr "Annull."
 
+#: RSSScreens.py:466 RSSScreens.py:471
 msgid "Close"
 msgstr "Chiudere"
 
+#: RSSSetup.py:81
 msgid "Delete"
 msgstr "Canc."
 
+#: RSSScreens.py:130 RSSScreens.py:217
 msgid "Enclosures"
 msgstr "Allegati"
 
+#: RSSScreens.py:420 RSSScreens.py:448
 msgid "Entries"
 msgstr "Voci"
 
+#: RSSScreens.py:125 RSSScreens.py:212 RSSScreens.py:321
 #, python-format
 msgid "Entry %s/%s"
 msgstr "Voce %s/%s"
 
+#: RSSScreens.py:60
 msgid "Error while parsing Feed, this usually means there is something wrong with it."
 msgstr "Errore nell'analisi del feed: normalmente indica qualcosa di errato in esso."
 
+#: RSSPoller.py:89
 msgid "Failed to get subscriptions from Google Reader."
 msgstr "Impossibile ottenere sottoscrizioni da Google Reader."
 
+#: RSSPoller.py:70
 msgid "Failed to login to Google Reader."
 msgstr "Connessione a GoogleReader fallita!"
 
+#: RSSSetup.py:103
 msgid "Feed"
 msgstr "Feed"
 
+#: RSSScreens.py:421 RSSScreens.py:449
 #, python-format
 msgid "Feed %s/%s"
 msgstr "Feed %s/%s"
 
+#: RSSSetup.py:22
 msgid "Feed URI"
 msgstr "URI Feed"
 
+#: RSSScreens.py:324 RSSScreens.py:326
 msgid "Feed is empty."
 msgstr "Feed vuoto!"
 
+#: RSSSetup.py:118
 msgid "Fetch feeds from Google Reader?"
 msgstr "Ottenere feed da Google Reader?"
 
+#: RSSScreens.py:101
 msgid "Found no Enclosure we can display."
 msgstr "Nessun allegato visualizzabile trovato!"
 
+#: RSSSetup.py:124
 msgid "Google Password"
 msgstr "Password Google"
 
+#: RSSSetup.py:123
 msgid "Google Username"
 msgstr "Nome user Google"
 
+#: RSSSetup.py:110
 msgid "Keep running in background"
 msgstr "Mantenere attivo in background"
 
+#: RSSSetup.py:80
 msgid "New"
 msgstr "Nuovo"
 
+#: RSSPoller.py:42 RSSTickerView.py:99
 msgid "New Items"
 msgstr "Nuovo elemento"
 
+#: RSSPoller.py:43
 msgid "New Items since last Auto-Update"
 msgstr "Nuovo elemento dall'ultimo aggiornamento automatico"
 
+#: RSSScreens.py:156 RSSScreens.py:219
 msgid "No such Item."
 msgstr "Elemento non trovato."
 
+#: plugin.py:16
 msgid "Notification"
 msgstr "Notifica"
 
+#: RSSSetup.py:28 RSSSetup.py:79
 msgid "OK"
 msgstr "Ok"
 
+#: plugin.py:17
 msgid "Preview"
 msgstr "Anteprima"
 
+#: RSSSetup.py:146
 msgid ""
 "Really delete this entry?\n"
 "It cannot be recovered!"
 msgstr "Cancellare la voce? Non potrà essere recuperata!"
 
+#: RSSPoller.py:208
 #, python-format
 msgid "Received %d new news item(s)."
 msgstr "Nuovi argomenti ricevuti: %d."
 
+#: RSSScreens.py:465 RSSScreens.py:470
 msgid "Setup"
 msgstr "Conf."
 
+#: RSSSetup.py:116
 msgid "Show new Messages as"
 msgstr "Mostrare nuovi messaggi come"
 
+#: RSSScreens.py:429
 msgid "Simple RSS Reader"
 msgstr "Lettore Simple RSS"
 
+#: RSSSetup.py:41 RSSSetup.py:96
 msgid "Simple RSS Reader Setup"
 msgstr "Configurazione lettore Simple RSS"
 
+#: RSSScreens.py:150 RSSScreens.py:313
 #, python-format
 msgid "Simple RSS Reader: %s"
 msgstr "Lettore Simple RSS: %s"
 
+#: RSSPoller.py:129
 #, python-format
 msgid ""
 "Sorry, this type of feed is unsupported:\n"
@@ -137,21 +173,27 @@ msgstr ""
 "Feed non supportato:\n"
 "%s"
 
+#: RSSSetup.py:107
 msgid "Start automatically with Enigma2"
 msgstr "Avviare automaticamente con Enigma2"
 
+#: plugin.py:140
 msgid "Subscribe Newsfeed..."
 msgstr "Sottoscrivere feed News"
 
+#: plugin.py:18
 msgid "Ticker"
 msgstr "Ticker"
 
+#: RSSScreens.py:464
 msgid "Update Feed"
 msgstr "Aggiornare feed"
 
+#: RSSSetup.py:117
 msgid "Update Interval (min)"
 msgstr "Intervallo aggiornamento (min)"
 
+#: RSSScreens.py:86
 msgid ""
 "Update is being done in Background.\n"
 "Contents will automatically be updated when it's done."
@@ -159,11 +201,14 @@ msgstr ""
 "L'aggiornamento verrà effettuato in background.\n"
 "Al termine i contenuti verranno automaticamente aggiornati."
 
+#: plugin.py:163
 msgid "View RSS..."
 msgstr "Vedere RSS"
 
+#: RSSScreens.py:477
 msgid "What to do?"
 msgstr "Che fare?"
 
+#: plugin.py:19
 msgid "none"
 msgstr "Nessuno"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-25 10:00+0200\n"
+"POT-Creation-Date: 2023-05-17 21:24+0100\n"
 "PO-Revision-Date: 2022-05-24 15:47+0200\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
@@ -18,39 +18,51 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
+#: plugin.py:116
 msgid " "
 msgstr " "
 
+#: plugin.py:152
 msgid "Audio restart Setup"
 msgstr "Audio herstart instellingen"
 
+#: plugin.py:114
 msgid "Cancel"
 msgstr "Annuleer"
 
+#: plugin.py:111
 #, python-format
 msgid "Plugin: %(plugin)s , Version: %(version)s"
 msgstr "Plugin: %(plugin)s , Versie: %(version)s"
 
+#: plugin.py:100 plugin.py:154
 msgid "Restart audio"
 msgstr "Herstart audio"
 
+#: plugin.py:101
 msgid "Restart audio delay (in sec)"
 msgstr "Herstart audio vertraging (in sec)"
 
+#: plugin.py:115
 msgid "Save"
 msgstr "Sla op"
 
+#: plugin.py:152
 msgid "Setup for the AudioRestart Plugin"
 msgstr "Instellingen voor de audio herstart plugin"
 
+#: plugin.py:20
 msgid "after restart"
 msgstr "na herstart"
 
+#: plugin.py:20
 msgid "after restart/standby"
 msgstr "na herstart/stand-by"
 
+#: plugin.py:20
 msgid "after standby"
 msgstr "na stand-by"
 
+#: plugin.py:20
 msgid "disabled"
 msgstr "uitgeschakeld"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: litvcom\n"
 "Language-Team: \n"
@@ -13,41 +13,53 @@ msgstr ""
 "X-Generator: Poedit 1.8.11\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+#: setup.py:89
 msgid "Add"
 msgstr "Добавить"
 
+#: setup.py:88 setup.py:344
 msgid "Back"
 msgstr "Назад"
 
+#: setup.py:217
 msgid "Cancel"
 msgstr "Отменить"
 
+#: setup.py:86 setup.py:230
 msgid "City"
 msgstr "Город"
 
+#: setup.py:91 setup.py:219
 msgid "Delete"
 msgstr "Удалить"
 
+#: setup.py:90
 msgid "Edit"
 msgstr "Изменить"
 
+#: plugin.py:215
 #, python-format
 msgid "Feels like %s"
 msgstr "Ощущается как %s"
 
+#: plugin.py:142
 msgid "Getting weather information..."
 msgstr "Получение информации о погоде..."
 
+#: plugin.py:210
 #, python-format
 msgid "Humidity: %s %%"
 msgstr "Влажность: %% %s"
 
+#: setup.py:231
 msgid "Location code"
 msgstr "Код местоположения"
 
+#: setup.py:343
 msgid "MSN location search result"
 msgstr "Результаты поиска местоположения"
 
+#: plugin.py:149
 msgid ""
 "No locations defined...\n"
 "Press 'Menu' to do that."
@@ -55,49 +67,64 @@ msgstr ""
 "Местоположение не определено...\n"
 "Нажмите 'Menu', чтобы сделать это."
 
+#: setup.py:218 setup.py:345
 msgid "OK"
 msgstr "OK"
 
+#: plugin.py:214
 #, python-format
 msgid "Observation point: %s"
 msgstr "Пункт: %s"
 
+#: plugin.py:213
 #, python-format
 msgid "Observation time: %s"
 msgstr "Время наблюдения: %s"
 
+#: setup.py:260 setup.py:272
 msgid "Please enter a valid city name."
 msgstr "Введите правильное название города."
 
+#: setup.py:262 setup.py:275
 msgid "Please enter a valid location code for the city."
 msgstr "Введите правильный код местоположения."
 
+#: setup.py:136 setup.py:293
 msgid "Really delete this WeatherPlugin Entry?"
 msgstr "Действительно удалить эту запись?"
 
+#: setup.py:220
 msgid "Search Code"
 msgstr "Поиск кода"
 
+#: plugin.py:56
 msgid "Show Weather Forecast"
 msgstr "Показать прогноз погоды"
 
+#: setup.py:87 setup.py:232
 msgid "System"
 msgstr "Система"
 
+#: plugin.py:56 plugin.py:93
 msgid "Weather Plugin"
 msgstr "Плагин погоды"
 
+#: setup.py:205
 msgid "WeatherPlugin: Edit Entry"
 msgstr "Изменить запись"
 
+#: setup.py:85
 msgid "WeatherPlugin: List of Entries"
 msgstr "Список записей"
 
+#: setup.py:247
 msgid "You need to enter a valid city name before you can search for the location code."
 msgstr "Прежде чем найти код местонахождения, необходимо ввести действительное название города."
 
+#: setup.py:52
 msgid "imperial system"
 msgstr "английская система"
 
+#: setup.py:52
 msgid "metric system"
 msgstr "метрическая система"

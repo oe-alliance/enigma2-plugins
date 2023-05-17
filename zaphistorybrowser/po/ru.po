@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,38 +17,50 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: plugin.py:217
 msgid "Clear"
 msgstr "Очистить"
 
+#: plugin.py:220
 msgid "Config"
 msgstr "Конфиг"
 
+#: plugin.py:218
 msgid "Delete"
 msgstr "Удалить"
 
+#: plugin.py:125
 msgid "Enable zap history:"
 msgstr "Включить историю просмотра:"
 
+#: plugin.py:127
 msgid "Enigma1-like history:"
 msgstr "Enigma1-история:"
 
+#: plugin.py:126
 msgid "Maximum zap history entries:"
 msgstr "Число каналов в истории просмотра:"
 
+#: plugin.py:219
 msgid "Zap"
 msgstr ""
 
+#: plugin.py:205 plugin.py:318
 msgid "Zap-History Browser"
 msgstr "История просмотра"
 
+#: plugin.py:118
 msgid "Zap-History Configurator"
 msgstr "Настройка истории просмотра"
 
+#: plugin.py:49
 msgid "disabled"
 msgstr "выкл."
 
+#: plugin.py:49
 msgid "disabled at parental lock"
 msgstr "выкл. родительским контролем"
 
+#: plugin.py:49
 msgid "enabled"
 msgstr "вкл."

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Automatic System Cleanup V. 0.1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2023-05-17 21:24+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: JuSt611 <Software@Strasdas.de>\n"
 "Language-Team: JuSt611 <Software@Strasdas.de>\n"
@@ -17,12 +17,15 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
+#: plugin.py:127 plugin.py:197 plugin.py:503
 msgid "Automatic System Cleanup Setup"
 msgstr "Automatische Systembereinigung einrichten"
 
+#: plugin.py:174
 msgid "Cancel"
 msgstr "Abbrechen"
 
+#: plugin.py:220
 msgid ""
 "Cleanup timerlist, orphaned movie files and stored setting backups automatically.\n"
 "\n"
@@ -32,101 +35,134 @@ msgstr ""
 "\n"
 "Ändern Sie die Einstellungen wunschgemäß. Nähere Erläuterungen sind bei jeder Einstellungsoption angegeben."
 
+#: plugin.py:138
 msgid "Delete crashlogs"
 msgstr "Crashlogs löschen"
 
+#: plugin.py:136
 msgid "Delete orphaned movie files"
 msgstr "Verwaiste Film-Dateien löschen"
 
+#: plugin.py:132
 msgid "Delete system setting backups"
 msgstr "Einstellungs-Sicherungen löschen"
 
+#: plugin.py:153 plugin.py:156
 msgid "Delete timerlist entries"
 msgstr "Timerlisten-Einträge löschen"
 
+#: plugin.py:176
 msgid "Help"
 msgstr "Hilfe"
 
+#: plugin.py:137
 msgid "If enabled, orphaned movie files will be automatically deleted from movie directories."
 msgstr "Wenn diese Option aktiviert ist, werden verwaiste Film-Dateien automatisch gelöscht."
 
+#: plugin.py:140
 msgid "Maximum number of crashlogs"
 msgstr "Maximale Anzahl Crashlogs "
 
+#: plugin.py:134
 msgid "Maximum number of system setting backups"
 msgstr "Maximale Anzahl Einstellungs-Sicherungen"
 
+#: plugin.py:135
 msgid "Maximum number of system setting backups to keep, regardless of retention period."
 msgstr "Höchstzahl der aufzuhebenden Einstellungs-Sicherungen, ungeachtet der Aufbewahrungsfrist."
 
+#: plugin.py:175
 msgid "OK"
 msgstr "OK"
 
+#: plugin.py:139 plugin.py:141
 msgid "Sorry, this feature is not available due to license reasons. To get the full version, please search the web for \"dreambox automaticcleanup.\""
 msgstr "Dieses Feature ist aus Lizenzgründen leider nicht verfügbar. Die Vollversion ist im web zu finden unter \"dreambox automaticcleanup\"."
 
+#: plugin.py:157
 msgid "Specify, how long expired timer list entries shall be kept at most. Deactivated repeat timer entries won't be deleted ever."
 msgstr "Wie lange sollen abgelaufene Timer längstens aufbewahrt werden? Deaktivierte Wiederholungstimer werden nicht gelöscht."
 
+#: plugin.py:133
 msgid "Specify, how long system setting backups shall be kept at most (even if maximum number is not yet exceeded). Latest backup will be kept anyway!"
 msgstr "Wie lange sollen Einstellungs-Sicherungen aufbewahrt werden (auch wenn die maximale Anzahl noch nicht erreicht ist)? Die letzte Sicherung wird niemals gelöscht!"
 
+#: plugin.py:499
 msgid "System cleanup"
 msgstr "Systembereinigung"
 
+#: plugin.py:154
 msgid "Timerlist cleanup is enabled in EMC plugin! To avoid crashes, we won't delete entries whilst this option is enabled in EMC."
 msgstr "Bereinigung der Timerliste ist im EMC Plugin aktiviert! Um Abstürze zu verhindern, werden hier keine Einträge gelöscht, solange diese Option in EMC gesetzt ist."
 
+#: plugin.py:197
 msgid "Ver."
 msgstr "Ver."
 
+#: plugin.py:94 plugin.py:98
 msgid "all"
 msgstr "alle"
 
+#: plugin.py:96 plugin.py:100
 msgid "cleanup disabled"
 msgstr "nicht bereinigen"
 
+#: plugin.py:100
 msgid "immediately after recording"
 msgstr "sofort nach der Aufnahme"
 
+#: plugin.py:98
 msgid "last 10"
 msgstr "die letzten 10"
 
+#: plugin.py:98
 msgid "last 2"
 msgstr "die letzten 2"
 
+#: plugin.py:98
 msgid "last 3"
 msgstr "die letzten 3"
 
+#: plugin.py:98
 msgid "last 5"
 msgstr "die letzten 5"
 
+#: plugin.py:100
 msgid "older than 1 day"
 msgstr "älter als 1 Tag"
 
+#: plugin.py:96 plugin.py:100
 msgid "older than 1 week"
 msgstr "älter als 1 Woche"
 
+#: plugin.py:96 plugin.py:100
 msgid "older than 2 weeks"
 msgstr "älter als 2 Wochen"
 
+#: plugin.py:100
 msgid "older than 3 days"
 msgstr "älter als 3 Tage"
 
+#: plugin.py:96
 msgid "older than 3 months"
 msgstr "älter als 3 Monate"
 
+#: plugin.py:96 plugin.py:100
 msgid "older than 4 weeks"
 msgstr "älter als 4 Wochen"
 
+#: plugin.py:96
 msgid "older than 6 months"
 msgstr "älter als 6 Monate"
 
+#: plugin.py:100
 msgid "older than 6 weeks"
 msgstr "älter als 6 Wochen"
 
+#: plugin.py:98
 msgid "only last one"
 msgstr "nur die letzte"
 
+#: plugin.py:92
 msgid "void"
 msgstr "deaktiviert"

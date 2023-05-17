@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MovieTagger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2016-01-31 15:35+0200\n"
 "Last-Translator: JuSt611 <Software@Strasdas.de>\n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
@@ -22,21 +22,27 @@ msgstr ""
 "X-Generator: Poedit 1.8.6\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
+#: plugin.py:276
 msgid "Add Tag"
 msgstr "Pridėti žymą"
 
+#: plugin.py:269
 msgid "Add new Tag"
 msgstr "Pridėti naują žymą"
 
+#: plugin.py:260
 msgid "Assigned Tags"
 msgstr "Paskirtos žymos"
 
+#: plugin.py:174
 msgid "Can't write movietags, because no meta-file found!"
 msgstr "Negalima rašyti filmo žymų, nes meta failas nerastas!"
 
+#: plugin.py:278
 msgid "Clear all Tags"
 msgstr "Išvalyti visas žymas"
 
+#: plugin.py:256
 msgid ""
 "Clear all Tags?\n"
 "\n"
@@ -48,35 +54,46 @@ msgstr ""
 "Bus panaikintos VISOS žymos VISUOSE įrašuose!\n"
 "Jūs įsitikinę, kad to norite?"
 
+#: plugin.py:252
 msgid "Enter the new Tag"
 msgstr "Įrašykite naują žymą"
 
+#: plugin.py:259
 msgid "Movie Tagger"
 msgstr "Filmų žymeklis"
 
+#: plugin.py:322
 msgid "Movie Tagger..."
 msgstr "Filmų žymeklis..."
 
+#: plugin.py:264
 msgid "Predefined Tag"
 msgstr "Numatyta žyma"
 
+#: plugin.py:268
 msgid "Remove Tag"
 msgstr "Šalinti žymą"
 
+#: plugin.py:261
 msgid "Specified Tags"
 msgstr "Nurodytos žymos"
 
+#: plugin.py:271 plugin.py:279
 msgid "Toggle List"
 msgstr "Perjungti sąrašą"
 
+#: plugin.py:262
 msgid "Used Tag"
 msgstr "Naudota žyma"
 
+#: plugin.py:263
 msgid "User-specific Tag"
 msgstr "Vartotojo žyma"
 
+#: plugin.py:259
 msgid "Ver."
 msgstr "Vers."
 
+#: plugin.py:252
 msgid "Whitepace will be replaced by \"_\""
 msgstr "Tarpai bus pakeisti į \"_\""

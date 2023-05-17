@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 3D Settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:24+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Shaderman <shaderman@dreambox-tools.info>\n"
 "Language-Team: Dr. Best <dr.best@dreambox-tools.info>\n"
@@ -14,59 +14,78 @@ msgstr ""
 "X-Poedit-Country: Germany\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#: plugin.py:214 plugin.py:217
 msgid "2D mode"
 msgstr "2D Modus"
 
+#: plugin.py:273 plugin.py:289
 msgid "3D settings"
 msgstr "3D Einstellungen"
 
+#: plugin.py:287
 msgid "3D: 2D menu"
 msgstr "3D: 2D Menu"
 
+#: plugin.py:283
 msgid "3D: Enable side by side menu"
 msgstr "3D: Nebeneinander-Anzeige einschalten"
 
+#: plugin.py:285
 msgid "3D: Enable top/bottom menu"
 msgstr "3D Oben/Unten-Anzeige einschalten"
 
+#: plugin.py:287
 msgid "3D: disable 3D menu"
 msgstr "3D: 3D Anzeige deaktivieren"
 
+#: plugin.py:187
 msgid "Cancel"
 msgstr "Beenden"
 
+#: plugin.py:289
 msgid "Change 3D settings"
 msgstr "3D Einstellungen bearbeiten"
 
+#: plugin.py:188
 msgid "OK"
 msgstr "OK"
 
+#: plugin.py:229
 msgid "Offset"
 msgstr "Offset"
 
+#: plugin.py:222
 msgid "Show side by side option in extension menu"
 msgstr "Aktiviere Nebeneinander Option in Extension-Menü"
 
+#: plugin.py:223
 msgid "Show top/bottom option in extension menu"
 msgstr "Aktiviere Oben/Unten Option in Extension-Menü"
 
+#: plugin.py:211
 msgid "Side by side"
 msgstr "Nebeneinander"
 
+#: plugin.py:224
 msgid "Switch OSD automatically"
 msgstr "Automatisch umstellen"
 
+#: plugin.py:212
 msgid "Top/Bottom"
 msgstr "Oben/Unten"
 
+#: plugin.py:226
 msgid "Turn off display"
 msgstr "Display ausschalten"
 
+#: plugin.py:85
 msgid "off"
 msgstr "Aus"
 
+#: plugin.py:85
 msgid "on with side by side"
 msgstr "an mit Nebeneinander-Anzeige"
 
+#: plugin.py:85
 msgid "on with top/bottom"
 msgstr "an mit Oben/Unten-Anzeige"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2011-09-28 14:06+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
@@ -19,75 +19,98 @@ msgstr ""
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 
+#: VlcPlayer.py:295
 msgid "1 minute"
 msgstr ""
 
+#: VlcPlayer.py:295
 msgid "10 minutes"
 msgstr ""
 
+#: VlcPlayer.py:295
 msgid "15 minutes"
 msgstr ""
 
+#: VlcPlayer.py:295
 msgid "20 minutes"
 msgstr ""
 
+#: VlcPlayer.py:295
 msgid "3 minutes"
 msgstr ""
 
+#: VlcPlayer.py:295
 msgid "30 minutes"
 msgstr ""
 
+#: VlcPlayer.py:295
 msgid "5 minutes"
 msgstr ""
 
+#: plugin.py:113
 msgid "A video streaming solution based on VLC"
 msgstr "Een video streaming oplossing gebaseerd op VLC"
 
+#: VlcServerConfig.py:460
 #, fuzzy
 msgid "Audio"
 msgstr "Audio Codec"
 
+#: VlcServerConfig.py:467
 msgid "Audio Bitrate"
 msgstr "Audio Bitrate"
 
+#: VlcServerConfig.py:469
 msgid "Audio Channels"
 msgstr "Audio kanalen"
 
+#: VlcServerConfig.py:466
 msgid "Audio Codec"
 msgstr "Audio Codec"
 
+#: VlcServerConfig.py:468
 msgid "Audio Samplerate"
 msgstr "Audio Samplerate"
 
+#: VlcServerConfig.py:447
 #, fuzzy
 msgid "Cache Directory"
 msgstr "Movie lokatie"
 
+#: VlcServerConfig.py:432
 msgid "Cancel"
 msgstr "Annuleer"
 
+#: VlcPlayer.py:295
 msgid "Choice of minutes to jump"
 msgstr ""
 
+#: VlcServerList.py:183
 msgid "Choose an action:"
 msgstr ""
 
+#: VlcServerConfig.py:448
 msgid "DVD Device (leave empty for default)"
 msgstr "DVD medium (laat standaard leeg)"
 
+#: VlcPlayer.py:369 VlcPlayer.py:371
 msgid "Direct play"
 msgstr ""
 
+#: VlcServerConfig.py:431
 #, fuzzy
 msgid "Edit VLC Server"
 msgstr "bewerk server"
 
+#: VlcServerConfig.py:439
 msgid "Enter VLC-Server as FQDN or IP-Address"
 msgstr "Voer VLC-Server in als FQDN of IP-adres"
 
+#: VlcServerConfig.py:459
 msgid "Enter subtitles as Track or Language"
 msgstr ""
 
+#: VlcMediaList.py:187
 #, python-format
 msgid ""
 "Error loading filelist into server %(server)s:\n"
@@ -96,6 +119,7 @@ msgstr ""
 "Fout met laden bestandslijst in server %(server)s:\n"
 "%(error)s"
 
+#: VlcMediaList.py:165
 #, python-format
 msgid ""
 "Error loading playlist %(media)s into server %(server)s:\n"
@@ -104,6 +128,7 @@ msgstr ""
 "Probleem met laden playlist %(media)s in server %(server)s:\n"
 "%(error)s"
 
+#: VlcMediaList.py:181 VlcMediaList.py:197 VlcMediaList.py:202
 #, python-format
 msgid ""
 "Error loading playlist into server %(server)s:\n"
@@ -112,6 +137,7 @@ msgstr ""
 "Probleem met laden playlist in server %(server)s:\n"
 "%(error)s"
 
+#: VlcMediaList.py:128
 #, python-format
 msgid ""
 "Error updating filelist from server %(server)s:\n"
@@ -120,6 +146,7 @@ msgstr ""
 "Probleem met updaten van server %(server)s:\n"
 "%(error)s"
 
+#: VlcPlayer.py:362 VlcPlayer.py:447
 #, python-format
 msgid ""
 "Error with VLC server:\n"
@@ -128,18 +155,23 @@ msgstr ""
 "Probleem met VLC server:\n"
 "%s"
 
+#: VlcServerConfig.py:153
 msgid "FQDN"
 msgstr ""
 
+#: VlcMediaList.py:63
 msgid "Filelist"
 msgstr "Bestandslijst"
 
+#: VlcServerConfig.py:442
 msgid "HTTP Port"
 msgstr "HTTP Port"
 
+#: VlcServerConfig.py:154
 msgid "IP-Address"
 msgstr ""
 
+#: VlcServerList.py:151
 msgid ""
 "Latest compatible version VLC 2.0.7\n"
 "Setup VLC for PC:\n"
@@ -148,15 +180,19 @@ msgid ""
 "Add shortcut to the startup of the background start VLC 'C:\\Program Files\\VideoLAN\\VLC\vlc.exe --intf telnet --extraintf http'"
 msgstr ""
 
+#: VlcServerList.py:103
 msgid "List of known profiles. Note: key info - help"
 msgstr ""
 
+#: VlcServerConfig.py:445
 msgid "Movie Directory"
 msgstr "Movie lokatie"
 
+#: VlcPlayer.py:528
 msgid "No more files in this directory"
 msgstr "Niet meer bestanden in deze lokatie"
 
+#: plugin.py:88
 #, python-format
 msgid ""
 "No ping from Server:\n"
@@ -164,9 +200,11 @@ msgid ""
 "%s"
 msgstr ""
 
+#: VlcPlayer.py:555
 msgid "No previous file in this directory"
 msgstr "Geen vorig bestand in deze lokatie"
 
+#: VlcPlayer.py:352
 msgid ""
 "No valid Enigma-Service to play a VLC-Stream\n"
 "Check your installation and try again!"
@@ -174,112 +212,147 @@ msgstr ""
 "Geen geldige Enigma-Service om af te spelen als VLC-Stream\n"
 "Controleer uw installatie en probeer het opnieuw!"
 
+#: VlcServerConfig.py:433
 msgid "OK"
 msgstr "OK"
 
+#: VlcServerConfig.py:454
 #, python-format
 msgid "Overscan Correction [in %(percentsign)s of Video width]"
 msgstr "Overscan correctie [in %(percentsign)s van Video breedte]"
 
+#: VlcServerConfig.py:443
 msgid "Ping IP-Address when open Server"
 msgstr ""
 
+#: VlcMediaList.py:64
 msgid "Playlist"
 msgstr "Playlist"
 
+#: VlcServerList.py:158
 msgid "Really delete this Server?"
 msgstr "Deze server echt verwijderen?"
 
+#: VlcServerList.py:183
 #, fuzzy
 msgid "Reset default"
 msgstr "Stel standaardwaardes in"
 
+#: VlcPlayer.py:369
 msgid "Save as .ts and play"
 msgstr ""
 
+#: VlcServerList.py:102
 #, fuzzy
 msgid "Select VLC-Server profile"
 msgstr "Lijst met bekende VLC-server profielen"
 
+#: VlcPlayer.py:369
 msgid "Select method?"
 msgstr ""
 
+#: VlcServerConfig.py:440
 msgid "Server Address"
 msgstr "Server Adres"
 
+#: VlcServerConfig.py:438
 msgid "Server Profile Name"
 msgstr "Server Profile Naam"
 
+#: VlcMediaList.py:58
 msgid "Serverlist"
 msgstr "Serverljist"
 
+#: VlcServerList.py:183
 #, fuzzy
 msgid "Set as default"
 msgstr "Stel standaardwaardes in"
 
+#: VlcServerConfig.py:456
 msgid "Subtitle overlay"
 msgstr "Subtitle overlay"
 
+#: VlcServerConfig.py:462
 #, fuzzy
 msgid "Subtitles"
 msgstr "Subtitle overlay"
 
+#: VlcServerConfig.py:465
 msgid "Transcode MPEG/DVD Audio"
 msgstr "Transcodeer MPEG/DVD Audio"
 
+#: VlcServerConfig.py:450
 msgid "Transcode MPEG/DVD Video"
 msgstr "Transcodeer MPEG/DVD Video"
 
+#: VlcServerConfig.py:446
 msgid "Use saving to Cache Directory"
 msgstr ""
 
+#: VlcServerConfig.py:444
 msgid "VLC < 2.x"
 msgstr ""
 
+#: VlcMediaList.py:51
 msgid "VLC Media List"
 msgstr ""
 
+#: plugin.py:112
 msgid "VLC Video Player"
 msgstr ""
 
+#: VlcServerConfig.py:452
 msgid "Video Bitrate"
 msgstr "Video Bitrate"
 
+#: VlcServerConfig.py:451
 msgid "Video Codec"
 msgstr "Video Codec"
 
+#: VlcServerConfig.py:453
 msgid "Video Norm"
 msgstr "Video Norm"
 
+#: VlcServerConfig.py:457
 msgid "Yellow subtitles"
 msgstr ""
 
+#: VlcServerList.py:106
 msgid "add server"
 msgstr "voeg server toe"
 
+#: VlcServerList.py:105
 msgid "delete server"
 msgstr "verwijder server"
 
+#: VlcServerList.py:107
 msgid "edit server"
 msgstr "bewerk server"
 
+#: VlcMediaList.py:56 VlcMediaList.py:120
 msgid "filter off"
 msgstr "filter uitgeschakeld"
 
+#: VlcMediaList.py:123
 msgid "filter on"
 msgstr "filter ingeschakeld"
 
+#: VlcServerConfig.py:234
 msgid "languages"
 msgstr ""
 
+#: VlcMediaList.py:59
 msgid "play DVD"
 msgstr "speel DVD"
 
+#: VlcMediaList.py:57
 msgid "refresh"
 msgstr "ververs"
 
+#: VlcServerList.py:108
 msgid "set default"
 msgstr "Stel standaardwaardes in"
 
+#: VlcServerConfig.py:233
 msgid "tracks"
 msgstr ""

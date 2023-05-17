@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: movie list preview Persian Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: mehdi <mehdi_ar_yekta@yahoo.com>\n"
 "Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
@@ -15,39 +15,51 @@ msgstr ""
 "X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
 "X-Poedit-SearchPath-0: /home/aliabdul/dream/ltteam/trunk/additions/plugins/movielistpreview/src\n"
 
+#: plugin.py:437
 #, python-format
 msgid "%s - creating preview for movie %s"
 msgstr ""
 
+#: plugin.py:494
 msgid "Activate Movielist Preview"
 msgstr "فعال کردن لیست نمایش فیلم ها"
 
+#: plugin.py:496
 msgid "Autocreate of missing previews"
 msgstr "ایجاد خودکار نمایش از دست رفته"
 
+#: plugin.py:467
 msgid "Autocreate of previews aborted due user!"
 msgstr "ایجاد خودکار نمایش موارد از بین رفته ناشی از خطای کاربر"
 
+#: plugin.py:497
 msgid "Change Movielist Preview position"
 msgstr "تغییر مکان نمایش لیست فیلم ها"
 
+#: plugin.py:424
 msgid "Could not find any movie!"
 msgstr "هیچ فیلمی را نتوانست پیدا کند "
 
+#: plugin.py:495
 msgid "Create preview"
 msgstr "ایجاد یک نمایش"
 
+#: plugin.py:492
 msgid "Deactivate Movielist Preview"
 msgstr "غیر فعال کردن نمایش لیست فیلم ها"
 
+#: plugin.py:446
 msgid "Everything done ;)"
 msgstr "همه چیز انجام گردید"
 
+#: plugin.py:151 plugin.py:318 plugin.py:374 plugin.py:479 plugin.py:601
 msgid "Movielist Preview"
 msgstr "نمایش لیست فیلم ها"
 
+#: plugin.py:156
 msgid "OK"
 msgstr "مورد تایید است "
 
+#: plugin.py:360
 msgid "Preview created."
 msgstr "نمایش موارد ایجاد شده"

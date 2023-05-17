@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2012-03-16 14:19+0100\n"
 "Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
@@ -17,33 +17,43 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: plugin.py:61
 msgid "Exit"
 msgstr "Exit"
 
+#: plugin.py:64
 msgid "Fullscreen"
 msgstr "Fullscreen"
 
+#: plugin.py:26
 msgid "LIVE"
 msgstr "LIVE"
 
+#: plugin.py:26
 msgid "No Connection"
 msgstr "No Connection"
 
+#: plugin.py:62
 msgid "Play"
 msgstr "Play"
 
+#: plugin.py:147
 #, python-format
 msgid "Streaming error: %s"
 msgstr ""
 
+#: plugin.py:212
 msgid "Watch eUroticTV via HTTP Live Streaming"
 msgstr "Watch eUroticTV via HTTP Live Streaming"
 
+#: plugin.py:26
 msgid "connecting..."
 msgstr "connecting..."
 
+#: plugin.py:26
 msgid "disconnected"
 msgstr "disconnected"
 
+#: plugin.py:26
 msgid "pause"
 msgstr "pause"

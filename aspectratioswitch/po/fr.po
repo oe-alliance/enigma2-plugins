@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Aspect Ratio Switch V.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:24+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: OEA\n"
 "Language-Team: french\n"
@@ -17,30 +17,39 @@ msgstr ""
 "X-Generator: Poedit 1.6.10\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
+#: plugin.py:70 plugin.py:81
 msgid "16:10 Letterbox"
 msgstr "16:10 Letterbox"
 
+#: plugin.py:71 plugin.py:81
 msgid "16:10 PanScan"
 msgstr "16:10 PanScan"
 
+#: plugin.py:68 plugin.py:81
 msgid "16:9"
 msgstr "16:9"
 
+#: plugin.py:72 plugin.py:81
 msgid "16:9 Letterbox"
 msgstr "16:9 Letterbox"
 
+#: plugin.py:69 plugin.py:81
 msgid "16:9 always"
 msgstr "16:9 toujours"
 
+#: plugin.py:66 plugin.py:81
 msgid "4:3 Letterbox"
 msgstr "4:3 Letterbox"
 
+#: plugin.py:67 plugin.py:81
 msgid "4:3 PanScan"
 msgstr "4:3 PanScan"
 
+#: plugin.py:294 plugin.py:298
 msgid "Aspect Ratio Switch setup"
 msgstr "Configuration du basculement du rapport d'aspect"
 
+#: plugin.py:230
 #, python-format
 msgid ""
 "Aspect ratio switched from:\n"
@@ -53,68 +62,89 @@ msgstr ""
 "vers:\n"
 "   %s"
 
+#: plugin.py:107 plugin.py:137
 msgid "AspectRatioSwitch Setup"
 msgstr "Configurer AspectRatioSwitch"
 
+#: plugin.py:79
 msgid "Bouquet +/- long"
 msgstr "Bouquet +/- long"
 
+#: plugin.py:122
 msgid "Cancel"
 msgstr "Annuler"
 
+#: plugin.py:179
 #, python-format
 msgid "Changing keymap failed (%s)."
 msgstr "Le changement de l'assignation des touches a échoué (%s)."
 
+#: plugin.py:84
 msgid "Extensions menu"
 msgstr "Menu extensions"
 
+#: plugin.py:79
 msgid "Help key long"
 msgstr "Touche Help long"
 
+#: plugin.py:114
 #, python-format
 msgid "Include %s"
 msgstr "Inclus %s"
 
+#: plugin.py:111
 msgid "Key mapping"
 msgstr "Assignation des touches"
 
+#: plugin.py:79
 msgid "PVR key long"
 msgstr "Touche PVR long"
 
+#: plugin.py:84
 msgid "Plugin menu"
 msgstr "Menu Plugin"
 
+#: plugin.py:294 plugin.py:298
 msgid "Quick switching of aspect ratio setting"
 msgstr "Bascule rapide du rapport d'aspect"
 
+#: plugin.py:110
 msgid "Quick switching via remote control"
 msgstr "Bascule rapide via la télécommande"
 
+#: plugin.py:79
 msgid "Radio key long"
 msgstr "Touche Radio long"
 
+#: plugin.py:123
 msgid "Save"
 msgstr "Sauvegarder"
 
+#: plugin.py:115
 msgid "Set aspect ratio on startup"
 msgstr "Définir le rapport d'aspect au démarrage"
 
+#: plugin.py:117
 msgid "Show Setup in"
 msgstr "Afficher la configuration dans"
 
+#: plugin.py:112
 msgid "Show switch message"
 msgstr "Afficher un message de bascule"
 
+#: plugin.py:116
 msgid "Startup aspect ratio"
 msgstr "Rapport d'aspect au démarrage"
 
+#: plugin.py:124
 msgid "Use the configured key(s) on your remote control to switch aspect ratio modes. If any 'Quickbutton' actions were assigned to these keys, they will be disabled as long as this plugin is activated!"
 msgstr "Utiliser les touches configurées sur votre télécommande pour basculer les mode de rapport d'aspect. Si n'importe quelles actions 'Quickbutton' a été assignée à ces touches, elles seront désactivées tant que ce plugin sera activé!"
 
+#: plugin.py:137
 msgid "Ver."
 msgstr "Ver."
 
+#: plugin.py:143
 #, python-format
 msgid "You need to include at least %d aspect ratio modes!"
 msgstr "Vous devez inclure au moins les modes de rapport d'aspect %d!"

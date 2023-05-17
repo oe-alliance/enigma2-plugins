@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - permanenttimeshift\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2017-07-10 19:43+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis Pulokas <vyteniui@gmail.com>\n"
@@ -16,6 +16,7 @@ msgstr ""
 "X-Generator: Poedit 2.0.2\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/permanenttimeshift\n"
 
+#: plugin.py:901
 msgid ""
 "\n"
 "An Input/output error usually indicates a corrupted filesystem! Please check the filesystem of your timeshift-device!"
@@ -23,6 +24,7 @@ msgstr ""
 "\n"
 "Įvesties/išvesties klaida paprastai rodo failų sistemos gedimus! Patikrinkite laiko poslinkio įrenginio failų sistemą!"
 
+#: plugin.py:1677
 msgid ""
 "A recording is currently running.\n"
 "What do you want to do?"
@@ -30,15 +32,19 @@ msgstr ""
 "Vyksta įrašymas.\n"
 "Ką norite padaryti?"
 
+#: plugin.py:86
 msgid "Ask user"
 msgstr "Klausti vartotojo"
 
+#: plugin.py:1774
 msgid "Beta: Enable Permanent Recording?"
 msgstr "Beta: Įjungti pastovų įrašymą?"
 
+#: plugin.py:1752
 msgid "Cancel"
 msgstr "Atšaukti"
 
+#: plugin.py:1271
 msgid ""
 "Could not activate Permanent-Timeshift!\n"
 "Timeshift-Path does not exist"
@@ -46,27 +52,35 @@ msgstr ""
 "Nepavyko aktyvuoti nuolatinio laiko poslinkio!\n"
 "Laiko poslinkio įrašų kelias neegzistuoja"
 
+#: plugin.py:214
 msgid "Creating AP and SC Files"
 msgstr "Kuriami AP ir SC failai"
 
+#: plugin.py:882 plugin.py:902
 msgid "Creating Hardlink to Timeshift file failed!"
 msgstr "Sukurti kietos nuorodos į laiko poslinkio failą nepavyko!"
 
+#: plugin.py:548
 msgid "Current Event:"
 msgstr "Šis įvykis:"
 
+#: plugin.py:1667
 msgid "Default storage device is not available!"
 msgstr "Numatytoji laikmena neprieinama!"
 
+#: plugin.py:86
 msgid "Don't save"
 msgstr "Neišsaugoti"
 
+#: plugin.py:531
 msgid "Don't save Timeshift as Movie"
 msgstr "Neišsaugoti laiko poslinkio, kaip filmo"
 
+#: plugin.py:829
 msgid "Getting Event Info failed!"
 msgstr "Nepavyko gauti įvykio informacijos!"
 
+#: plugin.py:1346
 msgid ""
 "Maximum Timeshift length per Event reached!\n"
 "Restarting Timeshift now ..."
@@ -74,18 +88,23 @@ msgstr ""
 "Maksimalus laiko poslinkio vienam įvykiui dydis pasiektas!\n"
 "Laiko poslinkis paleidžiamas iš naujo..."
 
+#: plugin.py:169
 msgid "Merging Timeshift files"
 msgstr "Laiko poslinkio failai sujungiami"
 
+#: plugin.py:1672
 msgid "No HDD found or HDD not initialized!"
 msgstr "HDD nerasta, arba jis neinicializuotas!"
 
+#: plugin.py:645
 msgid "No Timeshift found to save as recording!"
 msgstr "Laiko poslinkio, išsaugotino, kaip įrašo, nerasta!"
 
+#: plugin.py:1661
 msgid "No default storage device found!"
 msgstr "Numatytosios laikmenos nerasta!"
 
+#: plugin.py:782
 #, python-format
 msgid ""
 "Not enough free Diskspace!\n"
@@ -100,80 +119,105 @@ msgstr ""
 "Laisvos vietos: %sMB\n"
 "Kelias: %s"
 
+#: plugin.py:1751
 msgid "OK"
 msgstr "Gerai"
 
+#: plugin.py:642
 #, python-format
 msgid "PTS Plugin Error: %s"
 msgstr "PTS įskiepio klaida: %s"
 
+#: plugin.py:977
 msgid "PTS-Plugin: Merging records failed!"
 msgstr "PTS įskiepis: įrašų sujungti nepavyko!"
 
+#: plugin.py:524
 msgid "PTS-Plugin: Restarting Timeshift!"
 msgstr "PTS įskiepis: laiko poslinkis paleidžiamas iš naujo!"
 
+#: plugin.py:1761
 msgid "Permanent Timeshift Enable"
 msgstr "Įjungti pastovų laiko poslinkį"
 
+#: plugin.py:1764
 msgid "Permanent Timeshift Max Events"
 msgstr "Maksimalus laidų skaičius pastoviame laiko poslinkyje"
 
+#: plugin.py:1765
 msgid "Permanent Timeshift Max Length"
 msgstr "Maksimali pastovaus laiko poslinkio trukmė"
 
+#: plugin.py:1828
 msgid "Permanent Timeshift Settings"
 msgstr "Pastovaus laiko poslinkio nustatymai"
 
+#: plugin.py:1737
 #, python-format
 msgid "Permanent Timeshift Settings Version %s"
 msgstr "Pastovaus laiko poslinkio nustatymų versija %s"
 
+#: plugin.py:1766
 msgid "Permanent Timeshift Start Delay"
 msgstr "Delsa, paleidžiant pastovų laiko poslinkį"
 
+#: plugin.py:1662
 msgid "Please make sure to set up your default storage device in menu -> setup -> system -> recording paths."
 msgstr "Nustatykite numatytąjį saugojimo įrenginį per Meniu-> setup -> system -> recording paths."
 
+#: plugin.py:1658
 msgid "Please make sure to set up your storage devices with the storage management in menu -> setup -> system -> storage devices."
 msgstr "Nustatykite saugojimo įrenginius su saugojimo valdymu per meniu-> setup -> system -> storage devices."
 
+#: plugin.py:1668
 msgid "Please verify if your default storage device is attached or set up your default storage device in menu -> setup -> system -> recording paths."
 msgstr "Patikrinkite, ar numatytasis saugojimo įrenginys yra pajungtas, arba nustatykite jį per meniu-> setup -> system -> recording paths."
 
+#: plugin.py:569
 msgid "Record"
 msgstr "Įrašas"
 
+#: plugin.py:1299
 msgid "Record started! Stopping timeshift now ..."
 msgstr "Įrašas pradėtas! Laiko poslinkis sustabdomas..."
 
+#: plugin.py:530
 msgid "Save Timeshift as Movie and continue recording"
 msgstr "Išsaugoti laiko poslinkį, kaip filmą ir tęsti įrašymą"
 
+#: plugin.py:529
 msgid "Save Timeshift as Movie and stop recording"
 msgstr "Išsaugoti laiko poslinkį, kaip filmą ir nutraukti įrašymą"
 
+#: plugin.py:86
 msgid "Save and record"
 msgstr "Išsaugoti ir pradėti įrašymą"
 
+#: plugin.py:86
 msgid "Save and stop"
 msgstr "Išsaugoti ir sustabdyti"
 
+#: plugin.py:126
 msgid "Saving Timeshift files"
 msgstr "Laiko poslinkio failai išsaugomi"
 
+#: plugin.py:605 plugin.py:778
 msgid "Saving timeshift as movie now. This might take a while!"
 msgstr "Laiko poslinkis išsaugomas, kaip filmas. Tai gali šiek tiek užtrukti!"
 
+#: plugin.py:1769
 msgid "Show PTS Infobar while timeshifting?"
 msgstr "Rodyti PTS infojuostą, naudojant laiko poslinkį?"
 
+#: plugin.py:1690
 msgid "Start recording?"
 msgstr "Pradėti įrašymą?"
 
+#: plugin.py:1768
 msgid "Stop timeshift while recording?"
 msgstr "Nutraukti laiko poslinkį įrašinėjant?"
 
+#: plugin.py:882
 msgid ""
 "The Filesystem on your Timeshift-Device does not support hardlinks.\n"
 "Make sure it is formated in EXT2 or EXT3!"
@@ -181,6 +225,7 @@ msgstr ""
 "Įrenginio, kur saugomas laiko poslinkis, failų sistema nepalaiko kietųjų nuorodų.\n"
 "Įsitikinkite, kad jis formatuotas EXT2, arba EXT3!"
 
+#: plugin.py:528
 msgid ""
 "The Timeshift record was not saved yet!\n"
 "What do you want to do now with the timeshift file?"
@@ -188,59 +233,78 @@ msgstr ""
 "Laiko poslinkio įrašas dar nebuvo išsaugotas!\n"
 "Ką dabar norite daryti su laiko poslinkio failu?"
 
+#: plugin.py:317 plugin.py:1685 plugin.py:1686 plugin.py:1695 plugin.py:1696
 msgid "Timeshift"
 msgstr "Laiko poslinkis"
 
+#: plugin.py:1820
 msgid "Timeshift Settings"
 msgstr "Laiko poslinkio nustatymai"
 
+#: plugin.py:792
 msgid "Timeshift save failed!"
 msgstr "Išsaugoti laiko poslinkio nepavyko!"
 
+#: plugin.py:1042
 msgid "Timeshift saved to your harddisk!"
 msgstr "Laiko poslinkis išsaugotas jūsų diske!"
 
+#: plugin.py:1716
 msgid "Timeshift will get saved at end of event!"
 msgstr "Laiko poslinkis bus išsaugotas įvykio pabaigoje!"
 
+#: plugin.py:1767
 msgid "Timeshift-Save Action on zap"
 msgstr "Išsaugoti laiko poslinkį, perjungiant kanalą"
 
+#: plugin.py:1657
 msgid "Unconfigured storage devices found!"
 msgstr "Rasti saugojimo įrenginiai nesukonfigūruoti!"
 
+#: plugin.py:571
 msgid "Which event do you want to save permanently?"
 msgstr "Kurį įvykį norite išsaugoti visam laikui?"
 
+#: plugin.py:1681 plugin.py:1693
 msgid "add recording (enter recording duration)"
 msgstr "pridėti įrašymą (įrašykite įrašo trukmę)"
 
+#: plugin.py:1682 plugin.py:1694
 msgid "add recording (enter recording endtime)"
 msgstr "pridėti įrašymą (įrašykite pabaigos laiką)"
 
+#: plugin.py:1680 plugin.py:1692
 msgid "add recording (indefinitely)"
 msgstr "pridėti įrašymą (neribotam laikui)"
 
+#: plugin.py:1679 plugin.py:1691
 msgid "add recording (stop after current event)"
 msgstr "pridėti įrašymą (stabdyti po šio įvykio)"
 
+#: plugin.py:1683
 msgid "change recording (duration)"
 msgstr "keisti įrašymą (trukmę)"
 
+#: plugin.py:1684
 msgid "change recording (endtime)"
 msgstr "keisti įrašymą (pabaigos laiką)"
 
+#: plugin.py:1687
 msgid "do nothing"
 msgstr "nieko nedaryti"
 
+#: plugin.py:1697
 msgid "don't record"
 msgstr "neįrašinėti"
 
+#: plugin.py:1686 plugin.py:1696
 msgid "save recording (Select event)"
 msgstr "išsaugoti įrašymą (pasirinkite įvykį)"
 
+#: plugin.py:1685 plugin.py:1695
 msgid "save recording (stop after current event)"
 msgstr "išsaugoti įrašą (sustabdyti po šio įvykio)"
 
+#: plugin.py:1678
 msgid "stop recording"
 msgstr "stabdyti įrašymą"

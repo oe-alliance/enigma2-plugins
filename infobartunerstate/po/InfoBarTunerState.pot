@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# $PACKAGEDESCRIPION
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the InfoBarTunerState package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: InfoBarTunerState 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-14 08:00+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,294 +17,385 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: plugin.py:47
 msgid ""
 "  (C) 2012 by betonme @ IHAD \n"
 "\n"
 msgstr ""
 
+#: plugin.py:48
 msgid "  If You like this plugin and want to support it,\n"
 msgstr ""
 
+#: plugin.py:52
 msgid "  SUPPORT: "
 msgstr ""
 
+#: plugin.py:51
 msgid ""
 "  Thanks a lot ! \n"
 "  PayPal: "
 msgstr ""
 
+#: plugin.py:50
 msgid ""
 "  feel free to donate via PayPal. \n"
 "\n"
 msgstr ""
 
+#: plugin.py:49
 msgid "  or if just want to say ''thanks'',\n"
 msgstr ""
 
+#: InfoBarTunerState.py:1185
 #, python-format
 msgid "%d"
 msgstr ""
 
+#: InfoBarTunerState.py:1235
 #, python-format
 msgid "%d %%"
 msgstr ""
 
+#: InfoBarTunerState.py:1270
 #, python-format
 msgid "%d GB"
 msgstr ""
 
+#: InfoBarTunerState.py:1266
 #, python-format
 msgid "%d MB"
 msgstr ""
 
+#: InfoBarTunerState.py:1198 InfoBarTunerState.py:1205
+#: InfoBarTunerState.py:1213 InfoBarTunerState.py:1216
+#: InfoBarTunerState.py:1231
 #, python-format
 msgid "%d Min"
 msgstr ""
 
+#: InfoBarTunerState.py:1045 InfoBarTunerState.py:1046
 msgid "-"
 msgstr ""
 
+#: plugin.py:99
 msgid "-    HH:MM"
 msgstr ""
 
+#: IBTSConfiguration.py:57
 msgid "Add Setup to extension menu"
 msgstr ""
 
+#: IBTSConfiguration.py:56
 msgid "Add Show to extension menu"
 msgstr ""
 
+#: IBTSConfiguration.py:88
 msgid "Background transparency"
 msgstr ""
 
+#: plugin.py:70
 msgid "Begin"
 msgstr ""
 
+#: plugin.py:65
 msgid "Channel Name"
 msgstr ""
 
+#: plugin.py:64
 msgid "Channel Number"
 msgstr ""
 
+#: IBTSConfiguration.py:41
 msgid "Configuration"
 msgstr ""
 
+#: plugin.py:88
 msgid "DD.MM HH:MM"
 msgstr ""
 
+#: plugin.py:89
 msgid "DD.MM. HH:MM"
 msgstr ""
 
+#: plugin.py:91
 msgid "DD.MM.YYYY HH:MM"
 msgstr ""
 
+#: plugin.py:75
 msgid "Destination"
 msgstr ""
 
+#: plugin.py:78
 msgid "Destination / Client"
 msgstr ""
 
+#: plugin.py:72
 msgid "Duration"
 msgstr ""
 
+#: IBTSConfiguration.py:55
 msgid "Enable InfoBarTunerState"
 msgstr ""
 
+#: plugin.py:71
 msgid "End"
 msgstr ""
 
+#: plugin.py:106
 msgid "End record"
 msgstr ""
 
+#: IBTSConfiguration.py:74
 #, python-format
 msgid "Field %d content"
 msgstr ""
 
+#: IBTSConfiguration.py:76
 #, python-format
 msgid "Field %d width"
 msgstr ""
 
+#: plugin.py:81
 msgid "File Size"
 msgstr ""
 
+#: InfoBarTunerState.py:1173
 msgid "Finished"
 msgstr ""
 
+#: plugin.py:82
 msgid "Free Space"
 msgstr ""
 
+#: plugin.py:87
 msgid "HH:MM"
 msgstr ""
 
+#: plugin.py:93
 msgid "HH:MM DD.MM"
 msgstr ""
 
+#: plugin.py:95
 msgid "HH:MM DD.MM.YYYY"
 msgstr ""
 
+#: plugin.py:94
 msgid "HH:MM MM/DD"
 msgstr ""
 
+#: plugin.py:96
 msgid "HH:MM YYYY/MM/DD"
 msgstr ""
 
+#: IBTSConfiguration.py:80
 msgid "Horizontal offset left in pixel"
 msgstr ""
 
+#: IBTSConfiguration.py:81
 msgid "Horizontal offset right in pixel"
 msgstr ""
 
+#: plugin.py:40
 msgid "InfoBarTunerState"
 msgstr ""
 
+#: plugin.py:42
 msgid "InfoBarTunerState Setup"
 msgstr ""
 
+#: plugin.py:237
 msgid "InfoBarTunerState is disabled"
 msgstr ""
 
+#: IBTSConfiguration.py:94
 msgid "Infobar timeout"
 msgstr ""
 
+#: IBTSConfiguration.py:87
 msgid "List goes up"
 msgstr ""
 
+#: plugin.py:90
 msgid "MM/DD HH:MM"
 msgstr ""
 
+#: IBTSConfiguration.py:64
 msgid "MoviePlayer integration"
 msgstr ""
 
+#: plugin.py:66
 msgid "Name"
 msgstr ""
 
+#: plugin.py:83
 msgid "None"
 msgstr ""
 
+#: InfoBarTunerState.py:756
 msgid "Nothing running"
 msgstr ""
 
+#: IBTSConfiguration.py:68
 msgid "Number of finished recordings in list"
 msgstr ""
 
+#: IBTSConfiguration.py:67
 msgid "Number of pending recordings in list"
 msgstr ""
 
+#: IBTSConfiguration.py:69
 msgid "Number of seconds for displaying finished recordings"
 msgstr ""
 
+#: IBTSConfiguration.py:133
 msgid "Only one Graphical Progress field allowed:"
 msgstr ""
 
+#: IBTSConfiguration.py:128
 msgid "Only one Icon field allowed:"
 msgstr ""
 
+#: IBTSConfiguration.py:125
 msgid "Only one Name field allowed:"
 msgstr ""
 
+#: IBTSConfiguration.py:89
 msgid "Overwrite Infobar timeout"
 msgstr ""
 
+#: IBTSConfiguration.py:86
 msgid "Placeholder for Progressbar"
 msgstr ""
 
+#: plugin.py:108
 msgid "Prepare / Start / End record"
 msgstr ""
 
+#: plugin.py:104
 msgid "Prepare record"
 msgstr ""
 
+#: InfoBarTunerState.py:1169
 msgid "Record"
 msgstr ""
 
+#: plugin.py:41
 msgid "Show InfoBarTunerState"
 msgstr ""
 
+#: IBTSConfiguration.py:95
 msgid "Show Message when Recording starts"
 msgstr ""
 
+#: IBTSConfiguration.py:59
 msgid "Show and hide with InfoBar"
 msgstr ""
 
+#: IBTSConfiguration.py:60
 msgid "Show on events"
 msgstr ""
 
+#: IBTSConfiguration.py:62
 msgid "Show streams"
 msgstr ""
 
+#: plugin.py:107
 msgid "Start / End record"
 msgstr ""
 
+#: plugin.py:105
 msgid "Start record"
 msgstr ""
 
+#: InfoBarTunerState.py:1171
 msgid "Stream"
 msgstr ""
 
+#: plugin.py:76
 msgid "Stream Client"
 msgstr ""
 
+#: plugin.py:77
 msgid "Stream Client with Port"
 msgstr ""
 
+#: IBTSConfiguration.py:83
 msgid "Text padding offset in pixel"
 msgstr ""
 
+#: IBTSConfiguration.py:84
 msgid "Text spacing offset in pixel"
 msgstr ""
 
+#: plugin.py:69
 msgid "Time Elapsed"
 msgstr ""
 
+#: plugin.py:68
 msgid "Time Left"
 msgstr ""
 
+#: plugin.py:67
 msgid "Time Left / Duration"
 msgstr ""
 
+#: IBTSConfiguration.py:65
 msgid "Time format begin"
 msgstr ""
 
+#: IBTSConfiguration.py:66
 msgid "Time format end"
 msgstr ""
 
+#: plugin.py:73
 msgid "Timer Progress (Graphical)"
 msgstr ""
 
+#: plugin.py:74
 msgid "Timer Progress (Text)"
 msgstr ""
 
+#: plugin.py:62
 msgid "Tuner"
 msgstr ""
 
-msgid "Tuner State"
-msgstr ""
-
+#: plugin.py:63
 msgid "Tuner Type"
 msgstr ""
 
+#: plugin.py:60
 msgid "Type (Icon)"
 msgstr ""
 
+#: plugin.py:61
 msgid "Type (Text)"
 msgstr ""
 
+#: IBTSConfiguration.py:49
 msgid "Usage"
 msgstr ""
 
+#: IBTSConfiguration.py:85
 msgid "Variable field width"
 msgstr ""
 
+#: IBTSConfiguration.py:82
 msgid "Vertical offset in pixel"
 msgstr ""
 
+#: plugin.py:97
 msgid "WD DD.MM. HH:MM"
 msgstr ""
 
+#: plugin.py:98
 msgid "WD, DD.MM. HH:MM"
 msgstr ""
 
+#: plugin.py:92
 msgid "YYYY/MM/DD HH:MM"
 msgstr ""
 
+#: plugin.py:183
 msgid "configuration"
 msgstr ""

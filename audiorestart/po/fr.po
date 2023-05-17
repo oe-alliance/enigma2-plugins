@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AudioRestart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:24+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: OEA\n"
 "Language-Team: french\n"
@@ -15,39 +15,51 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-SearchPath-0: src\n"
 
+#: plugin.py:116
 msgid " "
 msgstr ""
 
+#: plugin.py:152
 msgid "Audio restart Setup"
 msgstr "Configuration Audio Restart"
 
+#: plugin.py:114
 msgid "Cancel"
 msgstr "Annuler"
 
+#: plugin.py:111
 #, python-format
 msgid "Plugin: %(plugin)s , Version: %(version)s"
 msgstr "Plugin: %(plugin)s , Version: %(version)s"
 
+#: plugin.py:100 plugin.py:154
 msgid "Restart audio"
 msgstr "Redémarrer audio"
 
+#: plugin.py:101
 msgid "Restart audio delay (in sec)"
 msgstr "Redémarrer le délai audio (en sec)"
 
+#: plugin.py:115
 msgid "Save"
 msgstr "Sauvegarder"
 
+#: plugin.py:152
 msgid "Setup for the AudioRestart Plugin"
 msgstr "Configuration du plugin AudioRestart "
 
+#: plugin.py:20
 msgid "after restart"
 msgstr "après redémarrage"
 
+#: plugin.py:20
 msgid "after restart/standby"
 msgstr "après redémarrage/veille"
 
+#: plugin.py:20
 msgid "after standby"
 msgstr "après veille"
 
+#: plugin.py:20
 msgid "disabled"
 msgstr "désactivé"

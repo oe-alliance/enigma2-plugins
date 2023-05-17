@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma Portuguese\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2008-03-30 18:45-0000\n"
 "Last-Translator: Muaitai <muaitai@gmail.com>\n"
 "Language-Team: Muaitai <muaitai@gmail.com>\n"
@@ -18,238 +18,319 @@ msgstr ""
 "X-Poedit-Country: PORTUGAL\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
+#: MountEdit.py:262
 msgid ""
 "A mount entry with this name already exists!\n"
 "Update existing entry and continue?\n"
 msgstr ""
 
+#: MountEdit.py:168
 msgid "Active"
 msgstr ""
 
+#: MountView.py:63
 msgid ""
 "Active/\n"
 "Inactive"
 msgstr ""
 
+#: MountManager.py:79
 msgid "Add a new NFS or CIFS mount point to your Dreambox."
 msgstr ""
 
+#: MountManager.py:79
 msgid "Add new network mount point"
 msgstr ""
 
+#: MountEdit.py:264
 msgid ""
 "Are you sure you want to save this network mount?\n"
 "\n"
 msgstr ""
 
+#: plugin.py:50
 msgid "Attempt to mount shares again"
 msgstr ""
 
+#: plugin.py:53
 msgid "Attempt to recover lost mounts (in background)"
 msgstr ""
 
+#: NetworkBrowser.py:184
 msgid "Browse network neighbourhood"
 msgstr ""
 
+#: MountEdit.py:114
 msgid "CIFS share"
 msgstr ""
 
+#: MountEdit.py:84 NetworkBrowser.py:607
 msgid "Cancel"
 msgstr ""
 
+#: MountManager.py:82
 msgid "Change hostname"
 msgstr ""
 
+#: MountManager.py:82
 msgid "Change the hostname of your Dreambox."
 msgstr ""
 
+#: MountManager.py:57 MountView.py:65 NetworkBrowser.py:120 UserDialog.py:101
+#: UserManager.py:52
 msgid "Close"
 msgstr ""
 
+#: UserManager.py:54
 msgid "Delete"
 msgstr ""
 
+#: MountView.py:66
 msgid "Delete mount"
 msgstr ""
 
+#: MountView.py:93
 msgid "Dir:"
 msgstr ""
 
+#: NetworkBrowser.py:499 NetworkBrowser.py:501 NetworkBrowser.py:514
 msgid "Do you want to enter a username and password for this host?\n"
 msgstr ""
 
+#: NetworkBrowser.py:635
 msgid "Enter IP to scan..."
 msgstr ""
 
+#: MountManager.py:114
 msgid "Enter new hostname for your Dreambox"
 msgstr ""
 
+#: MountEdit.py:210
 msgid "Enter options:"
 msgstr ""
 
+#: MountEdit.py:214 UserDialog.py:151
 msgid "Enter password:"
 msgstr ""
 
+#: MountEdit.py:208
 msgid "Enter share directory:"
 msgstr ""
 
+#: MountEdit.py:206
 msgid "Enter share name:"
 msgstr ""
 
+#: UserDialog.py:104
 msgid "Enter user and password for host: "
 msgstr ""
 
+#: MountEdit.py:212 UserDialog.py:149
 msgid "Enter username:"
 msgstr ""
 
+#: NetworkBrowser.py:123
 msgid "Expert"
 msgstr ""
 
+#: MountManager.py:138
 msgid "Finished restarting your network"
 msgstr ""
 
+#: MountEdit.py:176
+msgid "Host name"
+msgstr ""
+
+#: NetworkBrowser.py:623
 msgid "IP Address"
 msgstr ""
 
+#: MountView.py:92
 msgid "IP:"
 msgstr ""
 
+#: MountEdit.py:170
 msgid "Local share name"
 msgstr ""
 
+#: plugin.py:49
 msgid "Manage network shares"
 msgstr ""
 
+#: plugin.py:49
 msgid "Manage your network shares..."
 msgstr ""
 
+#: plugin.py:50 plugin.py:52
 msgid "Mount again"
 msgstr ""
 
+#: MountView.py:62
 msgid "Mount informations"
 msgstr ""
 
+#: MountEdit.py:187
 msgid "Mount options"
 msgstr ""
 
+#: MountEdit.py:172
 msgid "Mount type"
 msgstr ""
 
+#: MountManager.py:67 plugin.py:49
 msgid "MountManager"
 msgstr ""
 
+#: MountView.py:61
 msgid ""
 "Mounted/\n"
 "Unmounted"
 msgstr ""
 
+#: MountManager.py:80
 msgid "Mountpoints management"
 msgstr ""
 
+#: MountEdit.py:87
 msgid "Mounts editor"
 msgstr ""
 
+#: NetworkBrowser.py:121
 msgid "Mounts management"
 msgstr ""
 
+#: MountEdit.py:114
 msgid "NFS share"
 msgstr ""
 
+#: plugin.py:48
 msgid "NetworkBrowser"
 msgstr ""
 
+#: NetworkBrowser.py:226
 msgid "No network devices found!"
 msgstr ""
 
+#: MountEdit.py:192 UserDialog.py:140
 msgid "Password"
 msgstr ""
 
+#: MountEdit.py:323
 msgid "Please wait for activation of your network mount..."
 msgstr ""
 
+#: MountView.py:133
 msgid "Please wait while removing your network mount..."
 msgstr ""
 
+#: MountEdit.py:285
 msgid "Please wait while updating your network mount..."
 msgstr ""
 
+#: MountManager.py:125
 msgid "Please wait while your network is restarting..."
 msgstr ""
 
+#: MountEdit.py:83
 msgid "Press OK to activate the settings."
 msgstr ""
 
+#: NetworkBrowser.py:471
 msgid "Press OK to collapse this host"
 msgstr ""
 
+#: UserManager.py:53
 msgid "Press OK to edit selected settings."
 msgstr ""
 
+#: MountView.py:64
 msgid "Press OK to edit the settings."
 msgstr ""
 
+#: NetworkBrowser.py:473
 msgid "Press OK to expand this host"
 msgstr ""
 
+#: NetworkBrowser.py:467
 msgid "Press OK to mount this share!"
 msgstr ""
 
+#: NetworkBrowser.py:124
 msgid "Press OK to mount!"
 msgstr ""
 
+#: UserDialog.py:100
 msgid "Press OK to save settings."
 msgstr ""
 
+#: MountManager.py:58
 msgid "Press OK to select."
 msgstr ""
 
+#: NetworkBrowser.py:122
 msgid "Rescan"
 msgstr ""
 
+#: NetworkBrowser.py:608
 msgid "Scan NFS share"
 msgstr ""
 
+#: NetworkBrowser.py:609
 msgid "Scan range"
 msgstr ""
 
+#: plugin.py:48
 msgid "Search for network shares"
 msgstr ""
 
+#: plugin.py:48
 msgid "Search for network shares..."
 msgstr ""
 
+#: NetworkBrowser.py:219
 msgid "Searching your network. Please wait..."
 msgstr ""
 
+#: MountEdit.py:174
 msgid "Server IP"
 msgstr ""
 
+#: MountEdit.py:178
 msgid "Server share"
 msgstr ""
 
+#: MountManager.py:81
 msgid "User management"
 msgstr ""
 
+#: UserManager.py:62
 msgid "Usermanager"
 msgstr ""
 
+#: MountEdit.py:190 UserDialog.py:138
 msgid "Username"
 msgstr ""
 
+#: MountManager.py:80
 msgid "View, edit or delete mountpoints on your Dreambox."
 msgstr ""
 
+#: MountManager.py:81
 msgid "View, edit or delete usernames and passwords for your network."
 msgstr ""
 
+#: MountEdit.py:336
 msgid "Your network mount has been activated."
 msgstr ""
 
+#: MountView.py:148
 msgid "Your network mount has been removed."
 msgstr ""
 
+#: MountEdit.py:297
 msgid "Your network mount has been updated."
 msgstr ""
 
+#: MountEdit.py:180
 msgid "use as HDD replacement"
 msgstr ""

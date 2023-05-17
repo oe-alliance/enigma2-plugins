@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2022-06-25 18:14+0200\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
@@ -18,77 +18,102 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.1\n"
 
+#: plugin.py:203
 msgid "Ambiguous results"
 msgstr "Dubbelzinnige resultaten"
 
-msgid "Cast: "
+#: plugin.py:376
+#, fuzzy, python-format
+msgid "Cast: %s"
 msgstr "Cast: "
 
+#: plugin.py:47
 msgid "Channel Selection"
 msgstr "Kanaalkeuze:"
 
+#: plugin.py:293
 msgid "Could't get Eventname"
 msgstr "Kon de naam van het event niet lezen"
 
+#: plugin.py:208 plugin.py:336
 msgid "Details"
 msgstr "Details"
 
+#: plugin.py:384
 #, python-format
 msgid "Downloading Movie Poster: %s..."
 msgstr "Bezig met downloaden Movie Poster: %s..."
 
+#: plugin.py:134
 msgid "Exit"
 msgstr "Afsluiten"
 
+#: plugin.py:67
 msgid "Lookup"
 msgstr "Zoekt"
 
+#: plugin.py:320 plugin.py:321
 msgid "No OFDb match."
 msgstr "Geen OFDb overeenkomst."
 
+#: plugin.py:378
 msgid "No cast list found in the database."
 msgstr "Geen cast gevonden in de database."
 
+#: plugin.py:334
 msgid "No details found."
 msgstr "Geen details gevonden."
 
+#: plugin.py:337 plugin.py:406
 msgid "OFDb Details parsed"
 msgstr "OFDb details verwerkt"
 
+#: plugin.py:301
 msgid "OFDb Download completed"
 msgstr "OFDb download compleet"
 
+#: plugin.py:297
 msgid "OFDb Download failed"
 msgstr "OFDb download mislukt"
 
+#: plugin.py:433
 msgid "OFDb Plugin"
 msgstr "OFDb Plugin"
 
+#: plugin.py:326
 msgid "OFDb Re-Download completed"
 msgstr "OFDb herdownload compleet"
 
+#: plugin.py:323
 msgid "OFDb query failed!"
 msgstr "OFDb query mislukt!"
 
+#: plugin.py:204
 msgid "Please select the matching entry"
 msgstr "Selecteer de overeenkomende entry"
 
+#: plugin.py:283
 #, python-format
 msgid "Query OFDb: %s..."
 msgstr "Query OFDb: %s..."
 
+#: plugin.py:453 plugin.py:458 plugin.py:464
 msgid "Query details from the Online-Filmdatenbank"
 msgstr "Query details van de Online-Filmdatabank"
 
+#: plugin.py:218
 #, python-format
 msgid "Re-Query OFDb: %s..."
 msgstr "Re-Query OFDb: %s..."
 
+#: plugin.py:125
 msgid "The Online-Filmdatenbank"
 msgstr "De Online-Filmdatabank"
 
+#: plugin.py:207
 msgid "Title Menu"
 msgstr "Titelmenu"
 
+#: plugin.py:358
 msgid "no user rating yet"
 msgstr "nog geen gebruikerswaardering"

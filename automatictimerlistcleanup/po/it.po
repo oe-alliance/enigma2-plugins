@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - automatictimerlistcleanup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:24+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -17,38 +17,50 @@ msgstr ""
 "X-Poedit-Basepath: /home/dario/Plugins/automatictimerlistcleanup\n"
 "X-Poedit-SearchPath-0: /home/dario/Plugins/automatictimerlistcleanup\n"
 
+#: plugin.py:51 plugin.py:129 plugin.py:133
 msgid "Automatic Timerlist Cleanup Setup"
 msgstr "Configurazione Automatic Timerlist Cleanup"
 
+#: plugin.py:55
 msgid "Cancel"
 msgstr "Annull."
 
+#: plugin.py:58
 msgid "Cleanup timerlist-entries"
 msgstr "Ripulitura elenco timer"
 
+#: plugin.py:56
 msgid "OK"
 msgstr "Ok"
 
+#: plugin.py:37
 msgid "disabled"
 msgstr "disabilitato"
 
+#: plugin.py:37
 msgid "immediately after recording"
 msgstr "Immediatamente dopo la registrazione"
 
+#: plugin.py:37
 msgid "older than 1 day"
 msgstr "Più vecchi di 1 giorno"
 
+#: plugin.py:37
 msgid "older than 1 week"
 msgstr "Più vecchi di 1 settimana"
 
+#: plugin.py:37
 msgid "older than 2 weeks"
 msgstr "Più vecchi di 2 settimane"
 
+#: plugin.py:37
 msgid "older than 3 days"
 msgstr "Più vecchi di 3 giorni"
 
+#: plugin.py:37
 msgid "older than 4 weeks"
 msgstr "Più vecchi di 4 settimane"
 
+#: plugin.py:37
 msgid "older than 6 weeks"
 msgstr "Più vecchi di 6 settimane"

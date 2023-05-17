@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2016-09-14 19:41+0200\n"
 "Last-Translator: Samzam <http://www.world-of-satellite.com>\n"
 "Language-Team: TimoJ\n"
@@ -18,296 +18,395 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.5.7\n"
 
+#: EPGSearch.py:149
 msgid "%e/%m, %H:%M"
 msgstr ""
 
 #. TRANSLATORS: EPGSearch title in EventInfo dialog (does not require further user interaction)
 #. TRANSLATORS: %s inserts a non-printing character and is only used to control the sort order of these WHERE_EVENTINFO entries in Screens.ButtonSetup. Please leave it at the start of the translation string.
+#: plugin.py:73
 #, python-format
 msgid "%ssearch EPG"
 msgstr "%sOhjelmaopashaku"
 
 #. TRANSLATORS: EPGSearch search from search history in EventInfo dialog (requires the user to select a history item to search for)
 #. TRANSLATORS: %s inserts a non-printing character and is only used to control the sort order of these WHERE_EVENTINFO entries in Screens.ButtonSetup. Please leave it at the start of the translation string.
+#: plugin.py:81
 #, python-format
 msgid "%ssearch EPG from history..."
 msgstr "%sOhjelmaoppaan hakuhistoria..."
 
+#: EPGSearch.py:229
 msgid "Add AutoTimer"
 msgstr "Lisää automaattiajastus"
 
+#: EPGSearch.py:250
 msgid "Add Timer"
 msgstr "Lisää ajastus"
 
+#: EPGSearch.py:279
 msgid "Add a record timer for highlighted event"
 msgstr "Lisää ajastus korostetulle ohjelmalle"
 
+#: EPGSearch.py:280
 msgid "Add a zap timer for highlighted event"
 msgstr "Lisää kanavanvaihto korostetulle ohjelmalle"
 
+#: EPGSearch.py:273
 msgid "Add an AutoTimer for highlighted event"
 msgstr "Lisää automaattiajastus korostetulle ohjelmalle"
 
+#: EPGSearch.py:270
 msgid "Add/remove/edit timer for highlighted event"
 msgstr "Lisää/poista/muokkaa korostetun ohjelman ajastusta"
 
+#: EPGSearch.py:595
 msgid "All bouquets"
 msgstr "Kaikki suosikkilistat"
 
+#: EPGSearch.py:594
 msgid "All services"
 msgstr "Kaikki kanavat"
 
+#: EPGSearch.py:842 EPGSearchSetup.py:141
 msgid "Cancel"
 msgstr "Keskeytä"
 
+#: EPGSearch.py:880
 msgid "Channel Selection"
 msgstr "Kanavanvalinta"
 
+#: EPGSearchSetup.py:165 setup.xml
 msgid "Choose the encoding type for searches, helpful for foreign languages."
 msgstr "Valitse erottelutapa hauille. Auttaa vierailla kielillä."
 
+#: EPGSearch.py:256
 msgid "Close dialog"
 msgstr "Sulje"
 
+#: EPGSearchSetup.py:154 setup.xml
 msgid "Control where to search in the EPG. When 'all bouquets' is set, all bouquets are searched, even if 'Enable multiple bouquets' is disabled."
 msgstr "Valitse mistä osista ohjelmaopasta haetaan. Kun 'kaikki suosikkilistat' on valittuna, kaikista haetaan vaikka 'salli useiden suosikkilistojen käyttö' olisi pois päältä."
 
+#: EPGSearch.py:504
 #, python-format
 msgid "Could not read AutoTimer timer list: %s"
 msgstr "Automaattiajastuslistaa ei voitu lukea: %s"
 
+#: EPGSearch.py:596
 msgid "Current bouquet"
 msgstr "Nykyinen suosikkilista"
 
+#: EPGSearch.py:597
 msgid "Current service"
 msgstr "Nykyinen kanava"
 
+#: EPGSearch.py:196
 msgid "DVB-C"
 msgstr "DVB-C"
 
+#: __init__.py:83
 msgid "DVB-C Cable services"
 msgstr "DVB-C kaapelikanavat"
 
+#: EPGSearch.py:194
 msgid "DVB-T"
 msgstr "DVB-T"
 
+#: __init__.py:81
 msgid "DVB-T Terrestrial services"
 msgstr "DVB-T antennikanavat"
 
+#: EPGSearchSetup.py:157 setup.xml
 msgid "Default scope when asked"
 msgstr "Oletuslaajuus"
 
+#: EPGSearch.py:342
 msgid "EPG Search"
 msgstr "Ohjelmaopashaku"
 
+#: EPGSearch.py:478
 msgid "EPG Search setup"
 msgstr "Ohjelmaopashaun asetukset"
 
+#: EPGSearchSetup.py:87 EPGSearchSetup.py:196 plugin.py:65
 msgid "EPGSearch"
 msgstr "Ohjelmaopashaku"
 
+#: EPGSearchSetup.py:36 EPGSearchSetup.py:115 setup.xml
 msgid "EPGSearch Setup"
 msgstr "Ohjelmaopashaun asetukset"
 
+#: EPGSearchSetup.py:163 setup.xml
 msgid "Enable this to allow access to EPG Search from within the plugin browser."
 msgstr "Tämä sallii pääsyn ohjelmaopashakuun laajennusvalikosta"
 
+#: EPGSearch.py:271
 msgid "Enter new search"
 msgstr "Lisää uusi haku"
 
+#: EPGSearch.py:460
 msgid "Enter text to search for"
 msgstr "Syötä haettavan ohjelman nimi"
 
+#: EPGSearchSetup.py:74 EPGSearchSetup.py:216
 msgid "Exclude results from"
 msgstr "Rajoita hakutuloksia"
 
+#: EPGSearch.py:262
 msgid "Exit EPG Search"
 msgstr "Poistu ohjelmaopashausta"
 
+#: EPGSearchSetup.py:68 EPGSearchSetup.py:207
 msgid "Filter results by source"
 msgstr "Suodata hakutulokset lähteestä"
 
+#: EPGSearch.py:269
 msgid "IMDB search for highlighted event"
 msgstr "IMDB haku korostetulle ohjelmalle"
 
+#: EPGSearch.py:249
 msgid "IMDb Search"
 msgstr "IMDb-haku"
 
+#: EPGSearch.py:471
 msgid "Import from AutoTimer"
 msgstr "Tuo automaattiajastuksista"
 
+#: EPGSearch.py:465
 msgid "Import from EPG"
 msgstr "Tuo ohjelmaoppaasta"
 
+#: EPGSearch.py:464
 msgid "Import from Timer"
 msgstr "Tuo ajastuksista"
 
+#: EPGSearchSetup.py:68 EPGSearchSetup.py:207
 msgid "Include or exclude results depending on their source (e.g. by satellite)"
 msgstr "Sisällytä tai rajoita hakutulokset riippuen lähteestä (DVB-T,C,S)"
 
+#: EPGSearchSetup.py:74 EPGSearchSetup.py:214
 msgid "Include results from"
 msgstr "Sisällytä hakutulokset"
 
+#: EPGSearchSetup.py:75 EPGSearchSetup.py:217
 msgid "Include/exclude search results from this type of source"
 msgstr "Sisällytä/rajoita hakutulokset lähteestä"
 
+#: EPGSearchSetup.py:71 EPGSearchSetup.py:210
 msgid "Include/exclude sources"
 msgstr "Sisällytä/rajoita hakutuloksia"
 
+#: EPGSearchSetup.py:162 setup.xml
 msgid "Is the search case-sensitive or case-insensitive?"
 msgstr "Onko haku tapauskohtainen vai yleinen"
 
+#: EPGSearchSetup.py:164 setup.xml
 msgid "Length of history"
 msgstr "Historian pituus"
 
+#: EPGSearchSetup.py:164 setup.xml
 msgid "Maximum number of entries in the search history. Set this to 0 to disable search history."
 msgstr "Hakutuloksien maksimimäärä. 0 poistaa hakuhistorian käytöstä."
 
+#: EPGSearch.py:300
 msgid "Move down"
 msgstr "Siirrä alas"
 
+#: EPGSearch.py:285 EPGSearch.py:288 EPGSearch.py:298
 msgid "Move down a page"
 msgstr "Sivu alaspäin"
 
+#: EPGSearch.py:299
 msgid "Move up"
 msgstr "Siirrä ylös"
 
+#: EPGSearch.py:286 EPGSearch.py:287 EPGSearch.py:297
 msgid "Move up a page"
 msgstr "Sivu ylöspäin"
 
+#: EPGSearch.py:228
 msgid "New Search"
 msgstr "Uusi haku"
 
+#: EPGSearch.py:568
 msgid "No history"
 msgstr "Ei historiaa"
 
+#: EPGSearchSetup.py:72 EPGSearchSetup.py:211
 msgid "Number of filters for inclusion/exclusion of results"
 msgstr "Sisällytettyjen/rajoitettujen hakutuloksien suodattimien määrä"
 
+#: EPGSearchSetup.py:72 EPGSearchSetup.py:211
 msgid "Number of inclusions/exclusions"
 msgstr "Sisällytettyjen/rajoitettujen lähteiden määrä"
 
+#: EPGSearch.py:843 EPGSearchSetup.py:142
 msgid "OK"
 msgstr "OK"
 
+#: EPGSearch.py:475
 msgid "Open selected in IMDb"
 msgstr "Avaa valittu IMDb:ssä"
 
+#: EPGSearch.py:472
 msgid "Save search as AutoTimer"
 msgstr "Tallenna haku automaattiajastukseksi"
 
+#: EPGSearch.py:908 EPGSearch.py:935
 msgid "Search"
 msgstr "Haku"
 
+#: plugin.py:65
 msgid "Search EPG"
 msgstr "Hae ohjelmaoppaasta"
 
+#: EPGSearchSetup.py:165 setup.xml
 msgid "Search encoding"
 msgstr "Haun erottelutapa"
 
+#: EPGSearch.py:601
 msgid "Search in..."
 msgstr "Hae tyypillä..."
 
+#: EPGSearchSetup.py:154 setup.xml
 msgid "Search scope"
 msgstr "Haun laajuus"
 
+#: EPGSearchSetup.py:162 setup.xml
 msgid "Search strictness"
 msgstr "Haun tarkkuus"
 
+#: EPGSearchSetup.py:161 setup.xml
 msgid "Search type"
 msgstr "Hakutyyppi"
 
+#: EPGSearch.py:625
 msgid "Searching..."
 msgstr "Haetaan..."
 
+#: EPGSearch.py:856
 msgid "Select a timer to search"
 msgstr "Valitse haettava ajastus"
 
+#: EPGSearch.py:510 EPGSearch.py:566
 msgid "Select text to search for"
 msgstr "Valitse haettavan ohjelman nimi"
 
+#: EPGSearchSetup.py:161 setup.xml
 msgid "Set type of match used to compare program titles with the search string."
 msgstr "Asettaa hakutyypin jota käytetään lajittelemaan ohjelmanimiä hakutuloksista"
 
+#: EPGSearchSetup.py:157 setup.xml
 msgid "Sets the default search scope when the user is asked."
 msgstr "Asettaa oletuslaajuuden hauille"
 
+#: EPGSearch.py:476 EPGSearch.py:598
 msgid "Setup"
 msgstr "Asetukset"
 
+#: EPGSearch.py:292
 msgid "Setup menu"
 msgstr "Asetusvalikko"
 
+#: EPGSearch.py:274
 msgid "Show AutoTimer list"
 msgstr "Näytä automaattiajastuslista"
 
+#: EPGSearch.py:264 EPGSearch.py:289 EPGSearch.py:290 EPGSearch.py:291
 msgid "Show detailed event information"
 msgstr "Näytä yksityiskohtaiset ohjelmatiedot"
 
+#: EPGSearchSetup.py:163 setup.xml
 msgid "Show in plugin browser"
 msgstr "Näytä lisäosavalikossa"
 
+#: EPGSearchSetup.py:159 setup.xml
 msgid "Show orbital position"
 msgstr "Näytä satelliittisijainti"
 
+#: EPGSearchSetup.py:159 setup.xml
 msgid "Show satellite orbital positions in the search results."
 msgstr "Näytä satelliittisijainnit hakutuloksissa"
 
+#: EPGSearch.py:272 EPGSearch.py:466
 msgid "Show search history"
 msgstr "Näytä hakuhistoria"
 
+#: EPGSearch.py:191
 msgid "Stream"
 msgstr "Streami"
 
+#: EPGSearchSetup.py:71 EPGSearchSetup.py:210
 msgid "Use source restrictions below to only include results from the sources, or exclude them."
 msgstr "Käytä lähderajoituksia sisällyttääksesi tai rajoittaaksesi hakutuloksia riippuen lähteestä (DVB-T,C,S)"
 
+#: EPGSearch.py:263
 msgid "Zap to channel"
 msgstr "Vaihda kanavalle"
 
+#: __init__.py:36 __init__.py:37
 msgid "all bouquets"
 msgstr "Kaikki suosikkilistat"
 
+#: __init__.py:36 __init__.py:37
 msgid "all services"
 msgstr "Kaikki kanavat"
 
+#: __init__.py:36
 msgid "ask user"
 msgstr "Kysy käyttäjältä"
 
+#: __init__.py:39
 msgid "case-insensitive search"
 msgstr "Yleishaku"
 
+#: __init__.py:39
 msgid "case-sensitive search"
 msgstr "Tapauskohtainen haku"
 
+#: __init__.py:36 __init__.py:37
 msgid "current bouquet"
 msgstr "Nykyinen suosikkilista"
 
+#: __init__.py:36 __init__.py:37
 msgid "current service"
 msgstr "Nykyinen kanava"
 
+#: __init__.py:71
 msgid "disabled"
 msgstr "Pois"
 
+#: __init__.py:38
 msgid "exact match"
 msgstr "Tarkka vastaavuus"
 
+#: __init__.py:203
 msgid "exclude"
 msgstr "Rajoita"
 
+#: EPGSearch.py:823 EPGSearchSetup.py:74 EPGSearchSetup.py:213 __init__.py:203
 msgid "include"
 msgstr "Sisällytä"
 
+#: __init__.py:38
+msgid "partial description"
+msgstr ""
+
+#: __init__.py:38
 msgid "partial match"
 msgstr "Osittainen vastaavuus"
 
 #. TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)
+#: plugin.py:88 plugin.py:89
 msgid "search EPG"
 msgstr "Hae ohjelmaoppaasta"
 
 #. TRANSLATORS: EPGSearch search from search history in MovieList (requires the user to select a history item to search for)
+#: plugin.py:96 plugin.py:97
 msgid "search EPG from history..."
 msgstr "Hae ohjelmaoppaan hakuhistoriasta"
 
+#: __init__.py:38
 msgid "title starts with"
 msgstr "Nimi alkaa"

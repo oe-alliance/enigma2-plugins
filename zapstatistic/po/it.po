@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2- zapstatistic\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -17,65 +17,86 @@ msgstr ""
 "X-Poedit-Basepath: /home/dario/Plugins/zapstatistic\n"
 "X-Poedit-SearchPath-0: /home/dario/Plugins/zapstatistic\n"
 
+#: plugin.py:618
 msgid "Close plugin"
 msgstr "Chiudere il plugin"
 
+#: plugin.py:464
 msgid "Delete"
 msgstr "Cancellare"
 
+#: plugin.py:604
 msgid "Delete all entries"
 msgstr "Cancellare tutte le voci"
 
+#: plugin.py:602
 msgid "Delete entry"
 msgstr "Cancellare Voce"
 
+#: plugin.py:467
 msgid "Durations"
 msgstr "Durate"
 
+#: plugin.py:600
 msgid "Play entry"
 msgstr "Riprodurre la voce"
 
+#: plugin.py:620
 msgid "Please choose a function..."
 msgstr "Selezionare una funzione..."
 
+#: plugin.py:616
 msgid "Show combined duration window"
 msgstr "Mostrare la finestra combinata durata"
 
+#: plugin.py:614
 msgid "Show duration window"
 msgstr "Mostrare la finestra durata"
 
+#: plugin.py:653
 msgid "Shows the watched services with some statistic"
 msgstr "Mostrare alcune statistiche circa i canali sintonizzati "
 
+#: plugin.py:486
 msgid "Sort (date+)"
 msgstr "Ordinare (data+)"
 
+#: plugin.py:490 plugin.py:577
 msgid "Sort (date-)"
 msgstr "Ordinare (data-)"
 
+#: plugin.py:252 plugin.py:355
 msgid "Sort (duration+)"
 msgstr "Ordinare (durata+)"
 
+#: plugin.py:253 plugin.py:356
 msgid "Sort (duration-)"
 msgstr "Ordinare (durata-)"
 
+#: plugin.py:250 plugin.py:353 plugin.py:485
 msgid "Sort (name+)"
 msgstr "Ordinare (nome+)"
 
+#: plugin.py:251 plugin.py:354 plugin.py:488 plugin.py:562
 msgid "Sort (name-)"
 msgstr "Ordinare (nome-)"
 
+#: plugin.py:610
 msgid "Sort by date (ascending)"
 msgstr "Ordinare per data (crescente)"
 
+#: plugin.py:612
 msgid "Sort by date (descending)"
 msgstr "Ordinare per data (decrescente)"
 
+#: plugin.py:606
 msgid "Sort by name (ascending)"
 msgstr "Ordinare per nome (crescente)"
 
+#: plugin.py:608
 msgid "Sort by name (descending)"
 msgstr "Ordinare per nome (decrescente)"
 
+#: plugin.py:243 plugin.py:345 plugin.py:455 plugin.py:653
 msgid "Zap Statistic"
 msgstr "disabled"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Quickbutton\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Dr.Best <dr.best@dreambox-tools.info>\n"
 "Language-Team: Dr.Best <dr.best@dreambox-tools.info>\n"
@@ -14,95 +14,126 @@ msgstr ""
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
+#: plugin.py:88
 msgid "Assign plugin to long blue key pressed"
 msgstr "Langer Tastendruck auf Blau"
 
+#: plugin.py:85
 msgid "Assign plugin to long green key pressed"
 msgstr "Langer Tastendruck auf Grün"
 
+#: plugin.py:87
 msgid "Assign plugin to long red key pressed"
 msgstr "Langer Tastendruck auf Rot"
 
+#: plugin.py:86
 msgid "Assign plugin to long yellow key pressed"
 msgstr "Langer Tastendruck auf Gelb"
 
+#: plugin.py:90
 msgid "Assign plugin to red key pressed"
 msgstr "Tastendruck auf Rot"
 
+#: plugin.py:207
 msgid "Cancel"
 msgstr "Abbrechen"
 
+#: plugin.py:159
 msgid "Display 4:3 content as"
 msgstr "4:3 Bild Darstellung als"
 
+#: plugin.py:147 plugin.py:186
 #, python-format
 msgid ""
 "Error!\n"
 "Error Text: %s"
 msgstr ""
 
+#: plugin.py:165 plugin.py:239 plugin.py:288
 msgid "HbbTV Applications"
 msgstr ""
 
+#: plugin.py:155
 msgid "Just Scale"
 msgstr ""
 
+#: plugin.py:141 plugin.py:234 plugin.py:280
 msgid "MediaPlayer"
 msgstr "Medienwiedergabe"
 
+#: plugin.py:136 plugin.py:233 plugin.py:278
 msgid "Multi EPG"
 msgstr ""
 
+#: plugin.py:190
 msgid "No plugin assigned!"
 msgstr "Keine Funktion zugeordnet"
 
+#: plugin.py:35 plugin.py:36 plugin.py:37 plugin.py:38 plugin.py:39
+#: plugin.py:130 plugin.py:231
 msgid "Nothing"
 msgstr "Keine Zuordnung"
 
+#: plugin.py:208
 msgid "OK"
 msgstr ""
 
+#: plugin.py:259
 msgid "Overwrite HBBTV-red-button"
 msgstr "HBBTV-Red-Button überschreiben"
 
+#: plugin.py:154
 msgid "Pan&Scan"
 msgstr ""
 
+#: plugin.py:153
 msgid "Pillarbox"
 msgstr ""
 
+#: plugin.py:148 plugin.py:235 plugin.py:282
 msgid "Plugin browser"
 msgstr "Plugin Browser"
 
+#: plugin.py:188
 msgid "Plugin not found!"
 msgstr "Plugin wurde nicht gefunden!"
 
+#: plugin.py:131 plugin.py:232 plugin.py:276
 msgid "Single EPG"
 msgstr ""
 
+#: plugin.py:161 plugin.py:237 plugin.py:286
 msgid "Timer"
 msgstr "Timerliste"
 
+#: plugin.py:128
 msgid "Unknown Error"
 msgstr "Unbekannter Fehler"
 
+#: plugin.py:268
 msgid "assigned to long blue"
 msgstr "Langer Tastendruck auf Blau"
 
+#: plugin.py:266
 msgid "assigned to long green"
 msgstr "Langer Tastendruck auf Grün"
 
+#: plugin.py:265
 msgid "assigned to long red"
 msgstr "Langer Tastendruck auf Rot"
 
+#: plugin.py:267
 msgid "assigned to long yellow"
 msgstr "Langer Tastendruck auf Gelb"
 
+#: plugin.py:271
 msgid "assigned to red"
 msgstr "Tastendruck auf Rot"
 
+#: plugin.py:78
 msgid "setup for Quickbutton"
 msgstr "Quickbutton Setup"
 
+#: plugin.py:152 plugin.py:236 plugin.py:284
 msgid "switch 4:3 content display"
 msgstr "4:3 Bildumschaltung"

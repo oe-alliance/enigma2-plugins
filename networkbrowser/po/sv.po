@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2013-03-19 22:24+0100\n"
 "Last-Translator: xxx\n"
 "Language-Team: WeeGull <weegull@hotmail.com>\n"
@@ -20,6 +20,7 @@ msgstr ""
 "X-Poedit-Country: SWEDEN\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
+#: MountEdit.py:342
 msgid ""
 "A mount entry with this name already exists!\n"
 "Update existing entry and continue?\n"
@@ -27,12 +28,15 @@ msgstr ""
 "En monteringspunkt med samma namn finns redan!\n"
 "Uppdatera befintligt monteringspunkt och forsätta?\n"
 
+#: MountEdit.py:126
 msgid "AUTOFS (mount as needed)"
 msgstr ""
 
+#: MountEdit.py:231
 msgid "Active"
 msgstr "Aktiv"
 
+#: MountView.py:65
 msgid ""
 "Active/\n"
 "Inactive"
@@ -40,18 +44,23 @@ msgstr ""
 "Aktiv/\n"
 "Inaktiv"
 
+#: MountManager.py:102
 msgid "Add a new NFS or CIFS mount point to your Receiver."
 msgstr ""
 
+#: MountManager.py:102
 msgid "Add new network mount point"
 msgstr "Lägg till ny monteringspunkt"
 
+#: plugin.py:54
 msgid "Adding schedule..."
 msgstr "Lägger till schema..."
 
+#: MountView.py:161
 msgid "Are you sure you want to remove your network mount ?"
 msgstr "Är du säker på att du vill radera din nätverksmontering?"
 
+#: MountEdit.py:344
 msgid ""
 "Are you sure you want to save this network mount?\n"
 "\n"
@@ -59,124 +68,165 @@ msgstr ""
 "Är du säker p att du vill spara den här nätverksmonteringen?\n"
 "\n"
 
+#: plugin.py:114
 msgid "Attempt to mount shares again"
 msgstr "Försök att montera delningar igen"
 
+#: plugin.py:114
 msgid "Attempt to recover lost mounts (in background)"
 msgstr "Försök att återanslutna till tappad montering (I bakgrunden)"
 
+#: NetworkBrowser.py:192
 msgid "Browse network neighbourhood"
 msgstr "Bläddra i nätverket"
 
+#: MountEdit.py:132
 msgid "CIFS share"
 msgstr "CIFS delning"
 
+#: MountEdit.py:76 MountManager.py:195 NetworkBrowser.py:630
 msgid "Cancel"
 msgstr "Avbryt"
 
+#: MountManager.py:105
 msgid "Change hostname"
 msgstr "Byt värdnamn"
 
+#: MountManager.py:105
 msgid "Change the hostname of your Receiver."
 msgstr "Byt värdnamn på din mottagare."
 
+#: MountManager.py:61 MountView.py:67 NetworkBrowser.py:127 UserDialog.py:101
+#: UserManager.py:51
 msgid "Close"
 msgstr "Stäng"
 
+#: UserManager.py:53
 msgid "Delete"
 msgstr "Ta bort"
 
+#: MountView.py:68
 msgid "Delete mount"
 msgstr "Radera montering"
 
+#: MountView.py:122
 msgid "Dir:"
 msgstr "Dir:"
 
+#: NetworkBrowser.py:539
 msgid "Do you want to enter a username and password for this host?"
 msgstr "Vill du ange ett användarnamn och lösenord för den här hosten?"
 
+#: MountEdit.py:128
 msgid "Enigma2 (mount using enigma2)"
 msgstr ""
 
+#: MountEdit.py:129
 msgid "Enigma2 old format (mount using linux)"
 msgstr ""
 
+#: NetworkBrowser.py:662
 msgid "Enter IP to scan..."
 msgstr "Ange IP att söka..."
 
+#: MountManager.py:142
 msgid "Enter new hostname for your Receiver"
 msgstr "Skriv in nytt värdnamn för din mottagare"
 
+#: MountEdit.py:277
 msgid "Enter options:"
 msgstr "Ange optioner:"
 
+#: MountEdit.py:281 UserDialog.py:151
 msgid "Enter password:"
 msgstr "Ange lösenord:"
 
+#: MountEdit.py:275
 msgid "Enter share directory:"
 msgstr "Ange delat bibliotek:"
 
+#: MountEdit.py:273
 msgid "Enter share name:"
 msgstr "Ange delningsnamn:"
 
+#: UserDialog.py:104
 msgid "Enter user and password for host: "
 msgstr "Ange användare och lösenord för host: "
 
+#: MountEdit.py:279 UserDialog.py:149
 msgid "Enter username:"
 msgstr "Ange användarnamn:"
 
+#: NetworkBrowser.py:130
 msgid "Expert"
 msgstr "Expert"
 
+#: MountEdit.py:127
 msgid "FSTAB (mount at boot)"
 msgstr ""
 
+#: MountManager.py:168
 msgid "Finished restarting your network"
 msgstr "Klar med omstart av ditt nätverk"
 
+#: NetworkBrowser.py:647
 msgid "IP Address"
 msgstr "IP-adress"
 
+#: MountView.py:121
 msgid "IP:"
 msgstr "IP:"
 
+#: MountEdit.py:233
 msgid "Local share name"
 msgstr "Lokalt delningsnamn"
 
+#: plugin.py:113
 msgid "Manage network shares"
 msgstr "Hantera nätverksdelningar"
 
+#: plugin.py:113
 msgid "Manage your network shares..."
 msgstr "Hantera dina nätverksdelningar"
 
+#: plugin.py:114
 msgid "Mount Again"
 msgstr "Montera igen"
 
+#: MountManager.py:90 plugin.py:113
 msgid "Mount Manager"
 msgstr "Monteringshantering"
 
+#: MountView.py:52
 msgid "Mount Viewer"
 msgstr "Monteringsvisare"
 
+#: plugin.py:114
 msgid "Mount again"
 msgstr "Montera igen"
 
+#: MountView.py:64
 msgid "Mount informations"
 msgstr "Monteringsinformation"
 
+#: NetworkBrowser.py:128
 #, fuzzy
 msgid "Mount manager"
 msgstr "Monteringshantering"
 
+#: MountEdit.py:243
 msgid "Mount options"
 msgstr "Monteringsalternativ"
 
+#: MountEdit.py:235
 msgid "Mount type"
 msgstr "Monteringstyp"
 
+#: MountEdit.py:229
 msgid "Mount using"
 msgstr "Montera"
 
+#: MountView.py:63
 msgid ""
 "Mounted/\n"
 "Unmounted"
@@ -184,126 +234,167 @@ msgstr ""
 "Monterad/\n"
 "Omonterad"
 
+#: plugin.py:45
 msgid "Mounting network shares..."
 msgstr "Monterar nätverksdelningar..."
 
+#: MountManager.py:103
 msgid "Mountpoints management"
 msgstr "Hantera monteringspunkter"
 
+#: MountEdit.py:96
 msgid "Mounts editor"
 msgstr "Monteringseditor"
 
+#: MountEdit.py:133
 msgid "NFS share"
 msgstr "NFS-delning"
 
+#: plugin.py:38 plugin.py:112
 msgid "Network Browser"
 msgstr "Nätverksbläddring"
 
+#: NetworkBrowser.py:236 NetworkBrowser.py:238
 msgid "No network devices found!"
 msgstr "Inget nätverkskort hittades!"
 
+#: MountEdit.py:248 UserDialog.py:140
 msgid "Password"
 msgstr "Lösenord"
 
+#: MountEdit.py:408
 msgid "Please wait for activation of your network mount..."
 msgstr "Vänligen vänta på aktivering av din nätverksmontering..."
 
+#: MountView.py:172
 msgid "Please wait while removing your network mount..."
 msgstr "Vänligen vänta medan din nätverksmontering tas bort..."
 
+#: MountEdit.py:370
 msgid "Please wait while updating your network mount..."
 msgstr "Vänligen vänta medan din nätverksmontering uppdateras..."
 
+#: MountManager.py:155
 msgid "Please wait while your network is restarting..."
 msgstr "Vänligen vänta medan ditt nätverk startas om..."
 
+#: MountEdit.py:75
 msgid "Press OK to activate the settings."
 msgstr "Tryck OK för att aktivera inställningarna."
 
+#: NetworkBrowser.py:506 NetworkBrowser.py:507
 msgid "Press OK to collapse this host"
 msgstr "Tryck OK för att bryta denna värd"
 
+#: UserManager.py:52
 msgid "Press OK to edit selected settings."
 msgstr "Tryck OK för att ändra vald inställning."
 
+#: MountView.py:66
 msgid "Press OK to edit the settings."
 msgstr "Tryck OK för att ändra inställning."
 
+#: NetworkBrowser.py:509 NetworkBrowser.py:510
 msgid "Press OK to expand this host"
 msgstr "Tryck OK för att expandera denna värd."
 
+#: NetworkBrowser.py:496
 msgid "Press OK to mount this share!"
 msgstr "Tryck OK för att montera denna delning."
 
+#: NetworkBrowser.py:131
 msgid "Press OK to mount!"
 msgstr "Tryck OK för att montera."
 
+#: UserDialog.py:100
 msgid "Press OK to save settings."
 msgstr "Tryck OK för att spara inställningar."
 
+#: MountManager.py:62
 msgid "Press OK to select."
 msgstr "Tryck OK för att välja."
 
+#: MountManager.py:215
 msgid "Re-mount network shares every (in hours)"
 msgstr ""
 
+#: MountManager.py:252
 msgid "Really close without saving settings?"
 msgstr "Vill du verkligen stänga utan att spara inställningar?"
 
+#: NetworkBrowser.py:129
 msgid "Rescan"
 msgstr "Sök om"
 
+#: MountEdit.py:77 MountManager.py:196
 msgid "Save"
 msgstr "Spara"
 
+#: NetworkBrowser.py:631
 msgid "Scan NFS share"
 msgstr ""
 
+#: NetworkBrowser.py:632
 msgid "Scan range"
 msgstr "Sökintervall"
 
+#: MountManager.py:213 MountManager.py:221
 msgid "Schedule MountAgain"
 msgstr "Schemalägg montera igen"
 
+#: MountManager.py:106
 msgid "Schedule a auto remount of your network shares."
 msgstr "Schemalägg en automatisk montering av nätverksdelningar."
 
+#: plugin.py:112
 msgid "Search for network shares"
 msgstr "Söker efter nätverksutdelningar"
 
+#: plugin.py:112
 msgid "Search for network shares..."
 msgstr "Söker efter nätverksutdelningar..."
 
+#: NetworkBrowser.py:227 NetworkBrowser.py:229
 msgid "Searching your network. Please wait..."
 msgstr "Söker ditt nätverk. Vänligen vänta..."
 
+#: MountEdit.py:237
 msgid "Server IP"
 msgstr "Server IP"
 
+#: MountEdit.py:239
 msgid "Server share"
 msgstr "Server delning"
 
+#: MountManager.py:106 MountManager.py:187
 msgid "Setup Mount Again"
 msgstr "Ställ in Montera igen"
 
+#: MountEdit.py:241
 msgid "Use as HDD replacement"
 msgstr ""
 
+#: MountManager.py:104
 msgid "User management"
 msgstr "Användarhantering"
 
+#: UserManager.py:61
 msgid "Usermanager"
 msgstr "Användarhanterare"
 
+#: MountEdit.py:246 UserDialog.py:138
 msgid "Username"
 msgstr "Användarnamn"
 
+#: MountManager.py:103
 msgid "View, edit or delete mountpoints on your Receiver."
 msgstr "Visa, redigera eller radera monteringspunkter i din Miraclebox"
 
+#: MountManager.py:104
 msgid "View, edit or delete usernames and passwords for your network."
 msgstr "Visa, ändra eller ta bort användarnamn och lösenord på ditt nätverk."
 
+#: MountEdit.py:340
 #, fuzzy
 msgid ""
 "You have changed the share name!\n"
@@ -312,17 +403,21 @@ msgstr ""
 "En monteringspunkt med samma namn finns redan!\n"
 "Uppdatera befintligt monteringspunkt och forsätta?\n"
 
+#: NetworkBrowser.py:272
 #, python-format
 msgid ""
 "Your network interface %s is not properly configured, so a network scan cannot be done.\n"
 "Please configure the interface and try again."
 msgstr ""
 
+#: MountEdit.py:421
 msgid "Your network mount has been activated."
 msgstr "Din nätverksmontering har aktiverats."
 
+#: MountView.py:196
 msgid "Your network mount has been removed."
 msgstr "Din nätverksmontering har tagits bort."
 
+#: MountEdit.py:382
 msgid "Your network mount has been updated."
 msgstr "Din nätverksmontering har uppdaterats."

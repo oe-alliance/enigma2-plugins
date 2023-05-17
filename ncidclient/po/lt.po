@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2017-07-10 18:59+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: \n"
@@ -19,31 +19,40 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #. TRANSLATORS: this is a window title.
+#: plugin.py:622
 msgid "Add entry to phonebook"
 msgstr "Įtraukti į telefonų knygą"
 
+#: plugin.py:762
 msgid "Areacode to add to calls without one (if necessary)"
 msgstr "Pridėti šį vietovės kodą be vieneto (jei reikia)"
 
+#: plugin.py:48
 msgid "Austria"
 msgstr "Austrija"
 
+#: plugin.py:786
 msgid "Automatically add new Caller to PhoneBook"
 msgstr "Naują skambinantį į telefonų knygą įtraukti automatiškai"
 
+#: plugin.py:754
 msgid "Call monitoring"
 msgstr "Skambučių stebėsena"
 
 #. TRANSLATORS: keep it short, this is a button
+#: plugin.py:597 plugin.py:721
 msgid "Cancel"
 msgstr "Atšaukti"
 
+#: plugin.py:94
 msgid "Compact Flash"
 msgstr "CF atmintinė"
 
+#: plugin.py:1076
 msgid "Connected to NCID Server"
 msgstr "Prisijungta prie NCID serverio"
 
+#: plugin.py:1094
 #, python-format
 msgid ""
 "Connecting to NCID Server failed\n"
@@ -54,9 +63,11 @@ msgstr ""
 " (%s)\n"
 "kartojama..."
 
+#: plugin.py:1071
 msgid "Connecting to NCID Server..."
 msgstr "Jungiamasi prie NCID serverio..."
 
+#: plugin.py:1086
 #, python-format
 msgid ""
 "Connection to NCID Server lost\n"
@@ -67,16 +78,20 @@ msgstr ""
 " (%s)\n"
 "kartojama"
 
+#: plugin.py:766
 msgid "Country"
 msgstr "Šalis"
 
 #. TRANSLATORS: keep it short, this is a button
+#: plugin.py:462
 msgid "Delete"
 msgstr "Ištrinti"
 
+#: plugin.py:1149
 msgid "Display Fon calls on screen"
 msgstr "Rodyti Fon skambučius ekrane"
 
+#: plugin.py:542
 #, python-format
 msgid ""
 "Do you really want to delete entry for\n"
@@ -92,24 +107,31 @@ msgstr ""
 "%(name)s?"
 
 #. TRANSLATORS: keep it short, this is a button
+#: plugin.py:466
 msgid "Edit"
 msgstr "Redaguoti"
 
+#: plugin.py:664
 msgid "Enter Search Terms"
 msgstr "Įrašykite ieškomą tekstą"
 
+#: plugin.py:630
 msgid "Entry incomplete."
 msgstr "Įrašas nebaigtas."
 
+#: plugin.py:93
 msgid "Flash"
 msgstr "Atmintinė"
 
+#: plugin.py:45
 msgid "France"
 msgstr "Prancūzija"
 
+#: plugin.py:43
 msgid "Germany"
 msgstr "Vokietija"
 
+#: plugin.py:902
 #, python-format
 msgid ""
 "Incoming Call on %s from\n"
@@ -124,106 +146,139 @@ msgstr ""
 "%s\n"
 "---------------------------------------------"
 
+#: plugin.py:46
 msgid "Italy"
 msgstr "Italija"
 
+#: plugin.py:852
 msgid "Last 10 calls:\n"
 msgstr "Paskutiniai 10 skambučių:\n"
 
+#: plugin.py:100
 msgid "Media directory"
 msgstr "Medijos katalogas"
 
 #. TRANSLATORS: this is a window title.
+#: plugin.py:742
 msgid "NCID Client - Setup"
 msgstr "NCID kliento sąranka"
 
+#: plugin.py:756
 msgid "NCID server (Name or IP)"
 msgstr "NCID serveris (pavadinimas arba IP)"
 
+#: plugin.py:757
 msgid "NCID server listening port (1-65535)"
 msgstr "NCID serververio prievadas (1 – 65535)"
 
+#: plugin.py:614
 msgid "Name"
 msgstr "Pavadinimas"
 
+#: plugin.py:106
 msgid "Network mount"
 msgstr "Tinklinis pajungimas"
 
 #. TRANSLATORS: keep it short, this is a button
+#: plugin.py:464
 msgid "New"
 msgstr "Naujas"
 
+#: plugin.py:546 plugin.py:563 plugin.py:655
 msgid "No entry selected"
 msgstr "Nepasirinkta įrašų"
 
+#: plugin.py:821
 msgid "No phonebook"
 msgstr "Telefonų knygos nėra"
 
+#: plugin.py:615
 msgid "Number"
 msgstr "Numeris"
 
 #. TRANSLATORS: keep it short, this is a button
+#: plugin.py:599 plugin.py:723
 msgid "OK"
 msgstr "Gerai"
 
+#: plugin.py:784
 msgid "PhoneBook Location"
 msgstr "Telefonų knygos vieta"
 
 #. TRANSLATORS: this is a window title.
+#: plugin.py:488
 msgid "Phonebook"
 msgstr "Telefonų knyga"
 
+#: plugin.py:819
 msgid "Plugin not active"
 msgstr "Įskiepis neveiklus"
 
+#: plugin.py:764
 msgid "Reverse Lookup Caller ID (select country below)"
 msgstr "Apversti skambinančiųjų ID (pasirinkite šalį)"
 
 #. TRANSLATORS: keep it short, this is a button
+#: plugin.py:468
 msgid "Search"
 msgstr "Paieška"
 
+#: plugin.py:664
 msgid "Search phonebook"
 msgstr "Ieškoti telefonų knygoje"
 
+#: plugin.py:759
 msgid "Show after Standby"
 msgstr "Rodyti po budėjimo"
 
+#: plugin.py:789
 msgid "Show connection information popups"
 msgstr "Rodyti iškylantį prisijungimo pranešimą"
 
+#: plugin.py:788
 msgid "Strip Leading 0"
 msgstr "Nuimti pradinį '0'"
 
+#: plugin.py:47
 msgid "Switzerland"
 msgstr "Šveicarija"
 
+#: plugin.py:44
 msgid "The Netherlands"
 msgstr "Nyderlandai"
 
+#: plugin.py:763
 msgid "Timeout for Call Notifications (seconds)"
 msgstr "Skambučio trukmė iki pranešimo (sek.)"
 
+#: plugin.py:860 plugin.py:863 plugin.py:969 plugin.py:1024
 msgid "UNKNOWN"
 msgstr "NEŽINOMA"
 
+#: plugin.py:95
 msgid "USB Device"
 msgstr "USB įrenginys"
 
+#: plugin.py:768
 msgid "Use internal PhoneBook"
 msgstr "Naudoti vidinę telefonų knygą"
 
+#: plugin.py:849
 msgid "no calls"
 msgstr "be skambučių"
 
+#: plugin.py:1036
 msgid "number suppressed"
 msgstr "numeris užblokuotas"
 
+#: plugin.py:116
 msgid "show as list"
 msgstr "rodyti sąrašu"
 
+#: plugin.py:116
 msgid "show each call"
 msgstr "rodyti visus skambučius"
 
+#: plugin.py:116
 msgid "show nothing"
 msgstr "nerodyti nieko"

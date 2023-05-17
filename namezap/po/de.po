@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: NameZAP\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: JuSt611 <Software@Strasdas.de>\n"
 "Language-Team: JuSt611\n"
@@ -17,29 +17,38 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
+#: NamezapSetup.py:59
 msgid "Cancel"
 msgstr "Abbrechen"
 
+#: NamezapSetup.py:40
 msgid "Controls the visual appearance of the number zap dialog."
 msgstr "Bestimmt das Aussehen der Einblendung bei Sendernr. ZAP. "
 
+#: NamezapSetup.py:34 NamezapSetup.py:76 plugin.py:121
 msgid "NameZAP Setup"
 msgstr "NameZAP einrichten"
 
+#: plugin.py:21
 msgid "Number and Name"
 msgstr "Sender-Nr. und -Name"
 
+#: NamezapSetup.py:58
 msgid "OK"
 msgstr "OK"
 
+#: plugin.py:19
 msgid "Only Number"
 msgstr "Nur Sendernummer"
 
+#: plugin.py:20
 msgid "Service Name"
 msgstr "Sendername"
 
+#: plugin.py:95
 msgid "Unknown Service"
 msgstr "Sender unbekannt"
 
+#: NamezapSetup.py:40
 msgid "Zapper Style"
 msgstr "Zapper-Stil"

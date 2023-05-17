@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Elektro Power Save\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2011-09-29 17:22+0100\n"
 "Last-Translator: joergm6 <joergm6@online.de>\n"
 "Language-Team: Morty <morty@gmx.net>\n"
@@ -16,203 +16,270 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
+#: plugin.py:602
 msgid "A NAS/Server can be shut down. Is required activated Telnet."
 msgstr "Ein NAS/Server kann heruntergefahren werden. Es muss Telnet aktiviert sein."
 
+#: plugin.py:583
 msgid "Active Time Profile"
 msgstr "Aktives Zeit Profil"
 
+#: plugin.py:115
 msgid "Automatically shut down to deep standby"
 msgstr "Elektro Power Save aktivieren"
 
+#: plugin.py:597
 msgid "Avoid deep standby when HDD is active, e.g. for FTP"
 msgstr "Kein Deep Standby, wenn die HDD aktiv ist, z. B. für FTP"
 
+#: plugin.py:588
 msgid "Both profiles are used alternately. When shutting down the other profile is enabled. This allows two time cycles per day. Do not overlap the times."
 msgstr "Beide Profile werden abwechselnd eingesetzt. Beim Herunterfahren wird des anderen Profil aktiviert. Dieses erlaubt 2 Zeitzyclen pro Tag. Die Zeiten dürfen sich nicht überschneiden."
 
+#: plugin.py:398 plugin.py:445 plugin.py:526 plugin.py:629
 msgid "Cancel"
 msgstr "Abbruch"
 
+#: plugin.py:599
 msgid "Check IPs (press OK to edit)"
 msgstr "Teste IPs (drücke OK zum Editieren)"
 
+#: plugin.py:520
 msgid "Command [poweroff, shutdown -h,...]"
 msgstr "Befehl [poweroff, shutdown -h,...]"
 
+#: plugin.py:155
 msgid "Connection Error"
 msgstr "Verbindungs Fehler"
 
+#: plugin.py:611
 msgid "Description"
 msgstr "Beschreibung"
 
+#: plugin.py:604
 msgid "Do not wake up at the end of next deep standby interval."
 msgstr "Die Box wacht nach dem Ende der nächsten Ruhezeit nicht automatisch auf."
 
+#: plugin.py:603
 msgid "Don't wake up"
 msgstr "Nicht aufwachen"
 
+#: plugin.py:114
 msgid "Elektro Power Save"
 msgstr "Elektro Power Save"
 
+#: plugin.py:585
 msgid "Enable Elektro Power Save"
 msgstr "Elektro Power Save aktivieren"
 
+#: plugin.py:116
 msgid "Extensions menu"
 msgstr "Erweiterungs-Menü"
 
+#: plugin.py:595
 msgid "Force sleep (even when not in standby)"
 msgstr "Erzwinge Ruhezustand (auch wenn nicht im Standby)"
 
+#: plugin.py:596
 msgid "Forces deep standby, even when not in standby mode. Scheduled recordings remain unaffected."
 msgstr "Erzwingt den Ruhezustand auch, wenn die Box nicht im Standby ist. Auf Aufnahmen hat dies keinen Einfluss."
 
+#: plugin.py:141
 msgid "Friday"
 msgstr "Freitag"
 
+#: plugin.py:754
 msgid "Go to Standby now?"
 msgstr "Jetzt in den Standby gehen?"
 
+#: plugin.py:903
 msgid "Go to sleep now?"
 msgstr "Jetzt in den Ruhezustand gehen?"
 
+#: plugin.py:631
 msgid "Help"
 msgstr "Hilfe"
 
+#: plugin.py:605
 msgid "Holiday mode (experimental)"
 msgstr "Urlaubsmodus (experimentell)"
 
+#: plugin.py:441
 msgid "IP Address"
 msgstr "IP Adresse"
 
+#: plugin.py:389 plugin.py:394
 msgid "If the box is supposed to enter deep standby e.g. monday night at 1 AM, it actually is already tuesday. To enable this anyway, differing next day start time can be specified here."
 msgstr "Soll die Box z.B. Montag Nacht um 1 Uhr in den Deep Standby gehen, ist es genau genommen schon Dienstag. Damit dies trotzdem möglich ist, muss angegeben werden, wann der nächste Tag anfängt."
 
+#: plugin.py:137
 msgid "Monday"
 msgstr "Montag"
 
+#: plugin.py:601
 msgid "NAS Poweroff (press OK to edit)"
 msgstr "NAS Poweroff (drücke OK zum Editieren)"
 
+#: plugin.py:517
 msgid "NAS/Server Name or IP"
 msgstr "NAS/Server Name oder IP"
 
+#: plugin.py:609
 msgid "Name"
 msgstr "Name"
 
+#: plugin.py:388 plugin.py:393
 msgid "Next day starts at"
 msgstr "Der nächste Tag beginnt um"
 
+#: plugin.py:399 plugin.py:446 plugin.py:527 plugin.py:630
 msgid "Ok"
 msgstr "OK"
 
+#: plugin.py:519
 msgid "Password"
 msgstr "Passwort"
 
+#: plugin.py:116
 msgid "Plugin menu"
 msgstr "Plugin Menü"
 
+#: plugin.py:590
 msgid "Puts the box in standby mode after boot."
 msgstr "Versetzt die Box nach dem Booten in den Standby Modus."
 
+#: plugin.py:528
 msgid "Run"
 msgstr "Ausführen"
 
+#: plugin.py:142
 msgid "Saturday"
 msgstr "Samstag"
 
+#: plugin.py:607
 msgid "Show in"
 msgstr "Zeigen in"
 
+#: plugin.py:680
 msgid "Showing Elektro readme.txt"
 msgstr "Zeige Elektro Readme.txt"
 
+#: plugin.py:387 plugin.py:392
 msgid "Sleep"
 msgstr "Ruhezustand"
 
+#: plugin.py:594
 msgid "Specify how long to show the standby query on boot screen. This value can be set to ensure the box does not shut down to deep standby again too fast when in standby mode."
 msgstr "Stellt ein, wie lange die Standby-Abfrage angezeigt wird. Dieser Wert kann gesetzt werden um sicher zu stellen, dass sich die Box während der Standby-Zeit nicht zu schnell wieder abschaltet."
 
+#: plugin.py:612
 msgid "Specify plugin description to be used in menu (needs GUI restart)."
 msgstr "Beschreibung, mit der das Plugin im Menü erscheinen soll (erfordert GUI Neustart)."
 
+#: plugin.py:610
 msgid "Specify plugin name to be used in menu (needs GUI restart)."
 msgstr "Name, unter dem das Plugin im Menü erscheinen soll (erfordert GUI Neustart)."
 
+#: plugin.py:608
 msgid "Specify whether plugin shall show up in plugin menu or extensions menu (needs GUI restart)"
 msgstr "Auswahl, ob Elektro im Plugin Menü oder Erweiterungs-Menü gezeigt werden soll (erfordert GUI Neustart)."
 
+#: plugin.py:589 plugin.py:749
 msgid "Standby on boot"
 msgstr "Nach dem Booten in den Standby"
 
+#: plugin.py:593
 msgid "Standby on boot screen timeout"
 msgstr "Anzeigedauer der Abfrage \"In den Standby?\""
 
+#: plugin.py:591
 msgid "Standby on manual boot"
 msgstr "Nach dem manuellen Booten in den Standby"
 
+#: plugin.py:143
 msgid "Sunday"
 msgstr "Sonntag"
 
+#: plugin.py:521
 msgid "Telnet Port"
 msgstr "Telnet Port"
 
+#: plugin.py:584
 msgid "The active Time Profile is (1 or 2)."
 msgstr "Das aktive Zeit Profile ist (1 oder 2)"
 
+#: plugin.py:606
 msgid "The box always enters deep standby mode, except for recording."
 msgstr "Die Box bleibt immer im Deep Standby Modus, sofern nicht gerade aufgenommen wird."
 
+#: plugin.py:600
 msgid "This list of IP addresses is checked. Elektro waits until addresses no longer responds to ping."
 msgstr "Diese Liste von IP Adressen wird überprüft. Elektro wartet solange bis keine Adresse mehr auf Ping antwortet."
 
+#: plugin.py:140
 msgid "Thursday"
 msgstr "Donnerstag"
 
+#: plugin.py:632
 msgid "Times"
 msgstr "Uhrzeiten"
 
+#: plugin.py:138
 msgid "Tuesday"
 msgstr "Dienstag"
 
+#: plugin.py:586
 msgid "Unless this is enabled, this plugin won't run automatically."
 msgstr "Aktiviert das Plugin"
 
+#: plugin.py:587
 msgid "Use both profiles alternately"
 msgstr "Beide Profile abwechselnd verwenden"
 
+#: plugin.py:518
 msgid "Username"
 msgstr "Nutzername"
 
+#: plugin.py:333 plugin.py:344 plugin.py:352 plugin.py:652
 msgid "Ver."
 msgstr "Ver."
 
+#: plugin.py:598
 msgid "Wait for the HDD to enter sleep mode. Depending on the configuration this can prevent the box entirely from entering deep standby mode."
 msgstr "Warten bis die Festplatte in den Ruhemodus geht. Je nach Konfiguration kann dies den Ruhezustand vollständig unterbinden."
 
+#: plugin.py:522
 msgid "Waiting until poweroff"
 msgstr "Warte bis poweroff"
 
+#: plugin.py:386 plugin.py:391
 msgid "Wakeup"
 msgstr "Aufwachen"
 
+#: plugin.py:139
 msgid "Wednesday"
 msgstr "Mittwoch"
 
+#: plugin.py:592
 msgid "Whether to put the box in standby when booted manually. On manual boot the box will not go to standby before the next deep standby interval starts, even if this option is set. This option is only active if 'Standby on boot' option is set, too."
 msgstr "Nach einem manuellen Bootvorgang in den Standby Modus gehen? Die Box geht nach einem manuellen Bootvorgang nicht vor der nächsten Deep Standby-Zeit in den Ruhezustand, selbst wenn diese Option aktiviert ist. Diese Option wird nur wirksam, wenn 'Nach dem Booten in den Standby' auch aktiviert ist."
 
+#: plugin.py:154
 msgid "no Name"
 msgstr "kein Name"
 
+#: plugin.py:479
 msgid "please wait..."
 msgstr "Bitte warten..."
 
+#: plugin.py:680
 msgid "readme.txt"
 msgstr "readme-de.txt"
 
+#: plugin.py:128
 msgid "yes, Profile 1"
 msgstr "ja, Profil 1"
 
+#: plugin.py:128
 msgid "yes, Profile 2"
 msgstr "ja, Profil 2"

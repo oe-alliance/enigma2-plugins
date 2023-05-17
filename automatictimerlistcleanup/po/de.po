@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:24+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Dr. Best <dr.best@dreambox-tools.info>\n"
 "Language-Team: \n"
@@ -14,38 +14,50 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
+#: plugin.py:51 plugin.py:129 plugin.py:133
 msgid "Automatic Timerlist Cleanup Setup"
 msgstr "Autom. Aufräumen der Timerlisten"
 
+#: plugin.py:55
 msgid "Cancel"
 msgstr "Abbrechen"
 
+#: plugin.py:58
 msgid "Cleanup timerlist-entries"
 msgstr "Timerlisteneinträge aufräumen"
 
+#: plugin.py:56
 msgid "OK"
 msgstr "OK"
 
+#: plugin.py:37
 msgid "disabled"
 msgstr "abgeschaltet"
 
+#: plugin.py:37
 msgid "immediately after recording"
 msgstr "direkt nach Aufnahme"
 
+#: plugin.py:37
 msgid "older than 1 day"
 msgstr "älter als 1 Tag"
 
+#: plugin.py:37
 msgid "older than 1 week"
 msgstr "älter als 1 Woche"
 
+#: plugin.py:37
 msgid "older than 2 weeks"
 msgstr "älter als 2 Wochen"
 
+#: plugin.py:37
 msgid "older than 3 days"
 msgstr "älter als 3 Tage"
 
+#: plugin.py:37
 msgid "older than 4 weeks"
 msgstr "älter als 4 Wochen"
 
+#: plugin.py:37
 msgid "older than 6 weeks"
 msgstr "älter als 6 Wochen"

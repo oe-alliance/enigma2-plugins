@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2011-10-12 10:31+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: Rob van der Does\n"
@@ -19,28 +19,41 @@ msgstr ""
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 
+#: plugin.py:144
 #, python-format
 msgid "%(name)s (%(user)s@%(server)s)"
 msgstr "%(name)s (%(user)s@%(server)s)"
 
+#: setup.xml
+#, fuzzy
+msgid "Account Setup"
+msgstr "Accounts lijst"
+
+#: plugin.py:993
 msgid "Accounts list"
 msgstr "Accounts lijst"
 
+#: plugin.py:411
 msgid "Attachments"
 msgstr "Aanhangesles"
 
+#: plugin.py:407
 msgid "Bodys"
 msgstr "Bodys"
 
+#: plugin.py:355
 msgid "Date"
 msgstr "Datum"
 
+#: plugin.py:1156
 msgid "Email Client"
 msgstr "Email Client"
 
+#: setup.xml
 msgid "Email setup"
 msgstr "Email instellingen"
 
+#: plugin.py:190
 #, python-format
 msgid ""
 "EmailClient for %(account)s:\n"
@@ -51,15 +64,19 @@ msgstr ""
 "\n"
 "%(error)s"
 
+#: plugin.py:353
 msgid "From"
 msgstr "van"
 
+#: EmailConfig.py:118 setup.xml
 msgid "IMAP Port"
 msgstr "IMAP Port"
 
+#: EmailConfig.py:117 setup.xml
 msgid "IMAP Server"
 msgstr "IMAP Server"
 
+#: plugin.py:586
 #, python-format
 msgid ""
 "New mail arrived for account %s:\n"
@@ -68,13 +85,16 @@ msgstr ""
 "Nieuwe mail in account %s:\n"
 "\n"
 
+#: plugin.py:1056
 #, python-format
 msgid "Really delete account %s?"
 msgstr "Account %s echt verwijderen?"
 
+#: plugin.py:356
 msgid "Subject"
 msgstr "Onderwerp"
 
+#: plugin.py:858
 #, python-format
 msgid ""
 "[EmailAccount] %(name)s: _cbCapabilities:\n"
@@ -89,52 +109,69 @@ msgstr ""
 "# cbCapabilities: %(capa)s\n"
 "####################################################################################################\n"
 
+#: plugin.py:1016
 #, python-format
 msgid "account %s is not connected"
 msgstr "account %s is niet verbonden"
 
+#: EmailConfig.py:116 setup.xml
 msgid "account name"
 msgstr "account naam"
 
+#: plugin.py:135 plugin.py:202 plugin.py:242 plugin.py:393 plugin.py:396
+#: plugin.py:402
 msgid "account not connected"
 msgstr "account iet verbonden"
 
+#: plugin.py:973
 msgid "add"
 msgstr "voeg toe"
 
+#: EmailConfig.py:89
 msgid "cancel"
 msgstr "annuleer"
 
+#: plugin.py:744
 msgid "cannot access inbox"
 msgstr "kan inbox niet bereiken"
 
+#: plugin.py:821
 msgid "cannot get headers of new messages"
 msgstr "kan de headers van nieuwe berichten niet verkrijgen"
 
+#: plugin.py:751
 msgid "cannot get list of new messages"
 msgstr "kan geen lijst met nieuwe berichten verkrijgen"
 
+#: plugin.py:840
 msgid "connection failed - retrying"
 msgstr "verbinden mislukt - probeert opnieuw"
 
+#: setup.xml
 msgid "debug"
 msgstr "debug"
 
+#: plugin.py:364
 msgid "delete"
 msgstr "verwijder"
 
+#: setup.xml
 msgid "display connection errors"
 msgstr "toon verbindings fouten"
 
+#: setup.xml
 msgid "display timeout (seconds)"
 msgstr "toon timeout (seconds)"
 
+#: plugin.py:974
 msgid "edit"
 msgstr "bewerk"
 
+#: EmailConfig.py:47 EmailConfig.py:132
 msgid "empty values - retry"
 msgstr "lege waardes - probeer opnieuw"
 
+#: plugin.py:917
 #, python-format
 msgid ""
 "error logging %(who)s in:\n"
@@ -143,97 +180,128 @@ msgstr ""
 "fout met loggen %(who)s in:\n"
 "%(failure)s"
 
+#: plugin.py:816
 msgid "failed to load message"
 msgstr "kon berichten niet laden"
 
+#: plugin.py:238
 msgid "getting message ..."
 msgstr "verkrijg bericht..."
 
+#: plugin.py:231
 #, python-format
 msgid "have %d messages"
 msgstr "heb %d berichten"
 
+#: plugin.py:233
 msgid "have no messages"
 msgstr "geen berichten"
 
+#: plugin.py:213
 msgid "headers loaded, now parsing ..."
 msgstr "headers gedownload, bezig met samenstellen..."
 
+#: plugin.py:1102
 #, python-format
 msgid "importing configurations from %s"
 msgstr "importeert configuraties van %s"
 
+#: plugin.py:360
 msgid "leave unread"
 msgstr "laat ongelezen"
 
+#: EmailConfig.py:123 setup.xml
 msgid "list all mailboxes"
 msgstr "toon alle mailboxen"
 
+#: plugin.py:197
 msgid "loading headers ..."
 msgstr "laadt headers ..."
 
+#: EmailConfig.py:121 setup.xml
 msgid "mail check interval (minutes)"
 msgstr "mail check interval (minuten)"
 
+#: EmailConfig.py:122 setup.xml
 msgid "maximum mail size to fetch"
 msgstr "maximale mail grootte om binnen te halen"
 
+#: plugin.py:807
 msgid "message too large"
 msgstr "bericht te groot"
 
+#: plugin.py:1022 plugin.py:1059
 msgid "no account selected"
 msgstr "geen account geselecteerd"
 
+#: plugin.py:355 plugin.py:609
 msgid "no date"
 msgstr "geen datum"
 
+#: plugin.py:434
 msgid "no filename"
 msgstr "geen bestandsnaam"
 
+#: plugin.py:353
 msgid "no from"
 msgstr "niet van"
 
+#: plugin.py:204
 msgid "no mailbox?!?!"
 msgstr "geen mailbox?!?!"
 
+#: plugin.py:599
 msgid "no sender"
 msgstr "geen afzender"
 
+#: plugin.py:356 plugin.py:602
 msgid "no subject"
 msgstr "geen onderwerp"
 
+#: EmailConfig.py:90
 msgid "ok"
 msgstr "ok"
 
+#: plugin.py:245
 msgid "parsing message ..."
 msgstr "stelt bericht samen..."
 
+#: EmailConfig.py:120 setup.xml
 msgid "password"
 msgstr "wachtwoord"
 
+#: plugin.py:387
 msgid "really delete mail?"
 msgstr "mail echt verwijderen?"
 
+#: plugin.py:385
 msgid "really undelete mail?"
 msgstr "verwijderde mail echt terughalen?"
 
+#: plugin.py:972
 msgid "remove"
 msgstr "verwijder"
 
+#: plugin.py:436
 msgid "select Attachment"
 msgstr "kies aanhangsel"
 
+#: plugin.py:420
 msgid "select Body"
 msgstr "selecteer Body"
 
+#: setup.xml
 msgid "show deleted entries"
 msgstr "toon verwijderde entries"
 
+#: plugin.py:362
 msgid "undelete"
 msgstr "verwijderen ongedaan maken"
 
+#: EmailConfig.py:119 setup.xml
 msgid "user name"
 msgstr "gebruikers naam"
 
+#: plugin.py:1156
 msgid "view Emails via IMAP4"
 msgstr "bekijk emails via IMAP4"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Quickbutton\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: jerry<jerry00@quick.cz>\n"
 "Language-Team: jerry<jerry00@quick.cz>\n"
@@ -14,27 +14,35 @@ msgstr ""
 "X-Poedit-Country: Czech\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
+#: plugin.py:88
 msgid "Assign plugin to long blue key pressed"
 msgstr "Přiřadit plugin dlouhému stiskutí modrého tlačítka"
 
+#: plugin.py:85
 msgid "Assign plugin to long green key pressed"
 msgstr "Přiřadit plugin dlouhému stiskutí zeleného tlačítka"
 
+#: plugin.py:87
 msgid "Assign plugin to long red key pressed"
 msgstr "Přiřadit plugin dlouhému stiskutí červeného tlačítka"
 
+#: plugin.py:86
 msgid "Assign plugin to long yellow key pressed"
 msgstr "Přiřadit plugin dlouhému stiskutí žlutého tlačítka"
 
+#: plugin.py:90
 msgid "Assign plugin to red key pressed"
 msgstr "Přiřadit plugin stiskutí červeného tlačítka"
 
+#: plugin.py:207
 msgid "Cancel"
 msgstr "Zrušit"
 
+#: plugin.py:159
 msgid "Display 4:3 content as"
 msgstr "Zobrazení obr. 4:3 "
 
+#: plugin.py:147 plugin.py:186
 #, python-format
 msgid ""
 "Error!\n"
@@ -43,68 +51,91 @@ msgstr ""
 "Chyba!\n"
 "Text chyby: %s"
 
+#: plugin.py:165 plugin.py:239 plugin.py:288
 msgid "HbbTV Applications"
 msgstr ""
 
+#: plugin.py:155
 msgid "Just Scale"
 msgstr "Jen roztáhnout"
 
+#: plugin.py:141 plugin.py:234 plugin.py:280
 msgid "MediaPlayer"
 msgstr "Přehrávač Médií"
 
+#: plugin.py:136 plugin.py:233 plugin.py:278
 msgid "Multi EPG"
 msgstr ""
 
+#: plugin.py:190
 msgid "No plugin assigned!"
 msgstr "Nepřiřazen plugin"
 
+#: plugin.py:35 plugin.py:36 plugin.py:37 plugin.py:38 plugin.py:39
+#: plugin.py:130 plugin.py:231
 msgid "Nothing"
 msgstr "Nic"
 
+#: plugin.py:208
 msgid "OK"
 msgstr "OK"
 
+#: plugin.py:259
 msgid "Overwrite HBBTV-red-button"
 msgstr ""
 
+#: plugin.py:154
 msgid "Pan&Scan"
 msgstr "Zvětšit celý obraz"
 
+#: plugin.py:153
 msgid "Pillarbox"
 msgstr "Svislé pruhy"
 
+#: plugin.py:148 plugin.py:235 plugin.py:282
 msgid "Plugin browser"
 msgstr "Prohlížeč pluginů"
 
+#: plugin.py:188
 msgid "Plugin not found!"
 msgstr "Plugin nenalezen"
 
+#: plugin.py:131 plugin.py:232 plugin.py:276
 msgid "Single EPG"
 msgstr ""
 
+#: plugin.py:161 plugin.py:237 plugin.py:286
 msgid "Timer"
 msgstr "Časovač"
 
+#: plugin.py:128
 msgid "Unknown Error"
 msgstr "Neznámá chyba"
 
+#: plugin.py:268
 msgid "assigned to long blue"
 msgstr "Přiřadit dlouhému modrému"
 
+#: plugin.py:266
 msgid "assigned to long green"
 msgstr "Přiřadit dlouhému zelenému"
 
+#: plugin.py:265
 msgid "assigned to long red"
 msgstr "Přiřadit dlouhému červenému"
 
+#: plugin.py:267
 msgid "assigned to long yellow"
 msgstr "Přiřadit dlouhému žlutému"
 
+#: plugin.py:271
 msgid "assigned to red"
 msgstr "Přiřadit červenému"
 
+#: plugin.py:78
 msgid "setup for Quickbutton"
 msgstr "Nastavení Quickbutton"
 
+#: plugin.py:152 plugin.py:236 plugin.py:284
 msgid "switch 4:3 content display"
 msgstr "Přepínač zobrazení 4:3"

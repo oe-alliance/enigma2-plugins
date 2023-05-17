@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MovieRetitle\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2011-09-28 12:36+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: AndyBlac/Rob van der Does\n"
@@ -19,35 +19,45 @@ msgstr ""
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#: plugin.py:52
 msgid "Cancel"
 msgstr "Annuleren"
 
+#: plugin.py:97
 msgid "Choose target folder"
 msgstr "Kies doel map"
 
+#: plugin.py:73
 msgid "Description"
 msgstr "Beschrijving"
 
+#: plugin.py:294
 #, python-format
 msgid "Failed to move the movie %s to %s in the background"
 msgstr "Verplaatsen van opname %s naar %s in de achtergrond is mislukt"
 
+#: plugin.py:71
 msgid "Filename"
 msgstr "Bestandsnaam"
 
+#: plugin.py:69
 msgid "Location"
 msgstr "Locatie"
 
+#: plugin.py:82
 msgid "Name and Description Input"
 msgstr "Ingave naam en beschrijving"
 
+#: plugin.py:51
 msgid "OK"
 msgstr "OK"
 
+#: plugin.py:301
 #, python-format
 msgid "Successfully moved the movie %s"
 msgstr "Opname %s succesvol verplaatst"
 
+#: plugin.py:136
 #, python-format
 msgid ""
 "Target file %s.ts already exist.\n"
@@ -56,15 +66,19 @@ msgstr ""
 "Doel bestand %s.ts bestaat reeds.\n"
 "Wilt u het vervangen?"
 
+#: plugin.py:253
 #, python-format
 msgid "The movie is moved in the background from %s to %s."
 msgstr "De opname is in de achtergrond verplaatst van %s naar %s."
 
+#: plugin.py:140
 msgid "The target directory is not found. The file is not renamed."
 msgstr "Doel map niet gevonden. Het bestand is niet hernoemd."
 
+#: plugin.py:72
 msgid "Title"
 msgstr "Titel"
 
+#: plugin.py:25
 msgid "change name..."
 msgstr "Wijzig naam..."

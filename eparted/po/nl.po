@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eParted 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2012-11-07 08:08+0100\n"
 "Last-Translator: bschaar\n"
 "Language-Team: mechatron\n"
@@ -16,76 +16,99 @@ msgstr ""
 "X-Poedit-SourceCharset: iso-8859-15\n"
 "X-Poedit-Country: GERMANY\n"
 
+#: eparted.py:325
 msgid "End"
 msgstr "Einde"
 
+#: eparted.py:107
 #, python-format
 msgid "Error command '%s'"
 msgstr "Fout commando '%s'"
 
+#: eparted.py:323
 msgid "Nr"
 msgstr ""
 
+#: eparted.py:608
 msgid "Please Wait"
 msgstr "Even geduld"
 
+#: eparted.py:326
 msgid "Size"
 msgstr "Grootte"
 
+#: eparted.py:324 eparted.py:534
 msgid "Start"
 msgstr "Start"
 
+#: eparted.py:327
 msgid "Type"
 msgstr "Type"
 
+#: eparted.py:340
 msgid "add"
 msgstr "Toevoegen"
 
+#: eparted.py:202
 msgid "add partition"
 msgstr "Partitie toevoegen"
 
+#: eparted.py:230
 msgid "cancel"
 msgstr "Annuleren"
 
+#: eparted.py:442
 #, python-format
 msgid "create partition %s"
 msgstr "Partitie %s creëren"
 
+#: plugin.py:13
 msgid "creating and manipulating partition tables"
 msgstr "Partitietabellen creëren en aanpassen"
 
+#: eparted.py:345
 msgid "delete"
 msgstr "Verwijderen"
 
+#: eparted.py:467
 #, python-format
 msgid "delete partition %s"
 msgstr "Partitie %s verwijderen"
 
+#: plugin.py:13
 msgid "eParted"
 msgstr ""
 
+#: eparted.py:499 eparted.py:532
 msgid "execute"
 msgstr "Uitvoeren"
 
+#: eparted.py:227
 msgid "filesystem:"
 msgstr "Bestandssysteem:"
 
+#: eparted.py:350
 msgid "free"
 msgstr "vrij"
 
+#: eparted.py:458
 #, python-format
 msgid "make filesystem '%s' on partition %s (%d %s)"
 msgstr "Bestandssysteem '%s' in partitie %s creëren (%d %s)"
 
+#: eparted.py:231
 msgid "ok"
 msgstr "OK"
 
+#: eparted.py:183
 msgid "partition(s)"
 msgstr "Partitie(s)"
 
+#: eparted.py:594 eparted.py:600
 msgid "quit"
 msgstr "beëindigen"
 
+#: eparted.py:226
 #, python-format
 msgid "size in %s (max %d %s):"
 msgstr "Grootte in %s (max %d %s):"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 MediaDownloader plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2009-02-08 13:52+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <zveyis@gmail.com>\n"
 "Language-Team: www.turkeyforum.com/satforum <zveyis@gmail.com>\n"
@@ -14,38 +14,49 @@ msgstr ""
 "X-Poedit-Country: TURKEY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#: MediaDownloader.py:224
 #, python-format
 msgid "%d kb/s"
 msgstr "%d kb/s"
 
+#: MediaDownloader.py:157
 msgid "?? kb/s"
 msgstr "?? kb/s"
 
+#: MediaDownloader.py:254
 msgid "Do you want to try to open the downloaded file?"
 msgstr "İndirilmiş dosyayı açmak istiyor musunuz?"
 
+#: plugin.py:91
 msgid "Download..."
 msgstr "İndir..."
 
+#: MediaDownloader.py:154
 msgid "Downloading..."
 msgstr "İndiriliyor..."
 
+#: MediaDownloader.py:223
 #, python-format
 msgid "ETA %d:%02d min"
 msgstr "TKS %d:%02d dk."
 
+#: MediaDownloader.py:156
 msgid "ETA ??:?? h"
 msgstr "TKS ??:?? sa."
 
+#: MediaDownloader.py:271
 #, python-format
 msgid "Error while downloading file %s"
 msgstr "%s dosyası indirilirken hata oluştu"
 
+#: MediaDownloader.py:237
 msgid "No suitable Viewer found!"
 msgstr "Uygun gösterici bulunamadı!"
 
+#: MediaDownloader.py:181
 msgid "Where to save?"
 msgstr "Nereye kaydedilsin?"
 
+#: plugin.py:65
 msgid "Which file do you want to download?"
 msgstr "Hangi dosyayı indirmek istiyorsunuz?"

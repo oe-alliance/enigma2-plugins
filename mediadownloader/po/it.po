@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - mediadownloader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2009-05-31 02:26+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -17,38 +17,49 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: /home/dario/Plugins/mediadownloader\n"
 
+#: MediaDownloader.py:224
 #, python-format
 msgid "%d kb/s"
 msgstr "%d kb/s"
 
+#: MediaDownloader.py:157
 msgid "?? kb/s"
 msgstr "?? kb/s"
 
+#: MediaDownloader.py:254
 msgid "Do you want to try to open the downloaded file?"
 msgstr "Tentare di aprire il file scaricato?"
 
+#: plugin.py:91
 msgid "Download..."
 msgstr "Download..."
 
+#: MediaDownloader.py:154
 msgid "Downloading..."
 msgstr "Download in corso..."
 
+#: MediaDownloader.py:223
 #, python-format
 msgid "ETA %d:%02d min"
 msgstr "Stimato %d:%02d min"
 
+#: MediaDownloader.py:156
 msgid "ETA ??:?? h"
 msgstr "Stimato ??:?? h"
 
+#: MediaDownloader.py:271
 #, python-format
 msgid "Error while downloading file %s"
 msgstr "Errore durante il download di %s!"
 
+#: MediaDownloader.py:237
 msgid "No suitable Viewer found!"
 msgstr "Nessun visualizzatore trovato!"
 
+#: MediaDownloader.py:181
 msgid "Where to save?"
 msgstr "Dove salvare?"
 
+#: plugin.py:65
 msgid "Which file do you want to download?"
 msgstr "Quale file scaricare?"

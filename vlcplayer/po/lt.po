@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2017-07-11 11:56+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis Pulokas <vyteniui@gmail.com>\n"
@@ -14,75 +14,98 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
+#: VlcPlayer.py:295
 msgid "1 minute"
 msgstr ""
 
+#: VlcPlayer.py:295
 msgid "10 minutes"
 msgstr ""
 
+#: VlcPlayer.py:295
 msgid "15 minutes"
 msgstr ""
 
+#: VlcPlayer.py:295
 msgid "20 minutes"
 msgstr ""
 
+#: VlcPlayer.py:295
 msgid "3 minutes"
 msgstr ""
 
+#: VlcPlayer.py:295
 msgid "30 minutes"
 msgstr ""
 
+#: VlcPlayer.py:295
 msgid "5 minutes"
 msgstr ""
 
+#: plugin.py:113
 msgid "A video streaming solution based on VLC"
 msgstr "Vaizdo transliacija, VLC pagrindu"
 
+#: VlcServerConfig.py:460
 #, fuzzy
 msgid "Audio"
 msgstr "Garso kodekas"
 
+#: VlcServerConfig.py:467
 msgid "Audio Bitrate"
 msgstr "Garso bitų dažnis"
 
+#: VlcServerConfig.py:469
 msgid "Audio Channels"
 msgstr "Garso kanalai"
 
+#: VlcServerConfig.py:466
 msgid "Audio Codec"
 msgstr "Garso kodekas"
 
+#: VlcServerConfig.py:468
 msgid "Audio Samplerate"
 msgstr "Garso elementų dažnis"
 
+#: VlcServerConfig.py:447
 #, fuzzy
 msgid "Cache Directory"
 msgstr "Filmų katalogas"
 
+#: VlcServerConfig.py:432
 msgid "Cancel"
 msgstr "Atšaukti"
 
+#: VlcPlayer.py:295
 msgid "Choice of minutes to jump"
 msgstr ""
 
+#: VlcServerList.py:183
 msgid "Choose an action:"
 msgstr ""
 
+#: VlcServerConfig.py:448
 msgid "DVD Device (leave empty for default)"
 msgstr "DVD įrenginys (tuščia = numatytas)"
 
+#: VlcPlayer.py:369 VlcPlayer.py:371
 msgid "Direct play"
 msgstr ""
 
+#: VlcServerConfig.py:431
 #, fuzzy
 msgid "Edit VLC Server"
 msgstr "redaguoti serverį"
 
+#: VlcServerConfig.py:439
 msgid "Enter VLC-Server as FQDN or IP-Address"
 msgstr "Įveskite VLC-Server kaip FQDN arba IP adresas"
 
+#: VlcServerConfig.py:459
 msgid "Enter subtitles as Track or Language"
 msgstr ""
 
+#: VlcMediaList.py:187
 #, python-format
 msgid ""
 "Error loading filelist into server %(server)s:\n"
@@ -91,6 +114,7 @@ msgstr ""
 "Klaida, įkeliant failų sąrašą į serverį %(server)s:\n"
 "%(error)s"
 
+#: VlcMediaList.py:165
 #, python-format
 msgid ""
 "Error loading playlist %(media)s into server %(server)s:\n"
@@ -99,6 +123,7 @@ msgstr ""
 "Klaida, įkeliant grojaraštį %(media)s į serverį %(server)s:\n"
 "%(error)s"
 
+#: VlcMediaList.py:181 VlcMediaList.py:197 VlcMediaList.py:202
 #, python-format
 msgid ""
 "Error loading playlist into server %(server)s:\n"
@@ -107,6 +132,7 @@ msgstr ""
 "Klaida, įkeliant grojaraštį į serverį %(server)s:\n"
 "%(error)s"
 
+#: VlcMediaList.py:128
 #, python-format
 msgid ""
 "Error updating filelist from server %(server)s:\n"
@@ -115,6 +141,7 @@ msgstr ""
 "Klaida, atnaujinant failų sąrašą iš serverio %(server)s:\n"
 "%(error)s"
 
+#: VlcPlayer.py:362 VlcPlayer.py:447
 #, python-format
 msgid ""
 "Error with VLC server:\n"
@@ -123,18 +150,23 @@ msgstr ""
 "Klaida su VLC serveriu:\n"
 "%s"
 
+#: VlcServerConfig.py:153
 msgid "FQDN"
 msgstr ""
 
+#: VlcMediaList.py:63
 msgid "Filelist"
 msgstr "Failų sąrašas"
 
+#: VlcServerConfig.py:442
 msgid "HTTP Port"
 msgstr "HTTP prievadas"
 
+#: VlcServerConfig.py:154
 msgid "IP-Address"
 msgstr ""
 
+#: VlcServerList.py:151
 msgid ""
 "Latest compatible version VLC 2.0.7\n"
 "Setup VLC for PC:\n"
@@ -143,15 +175,19 @@ msgid ""
 "Add shortcut to the startup of the background start VLC 'C:\\Program Files\\VideoLAN\\VLC\vlc.exe --intf telnet --extraintf http'"
 msgstr ""
 
+#: VlcServerList.py:103
 msgid "List of known profiles. Note: key info - help"
 msgstr ""
 
+#: VlcServerConfig.py:445
 msgid "Movie Directory"
 msgstr "Filmų katalogas"
 
+#: VlcPlayer.py:528
 msgid "No more files in this directory"
 msgstr "Šiame kataloge daugiau nėra failų"
 
+#: plugin.py:88
 #, python-format
 msgid ""
 "No ping from Server:\n"
@@ -159,9 +195,11 @@ msgid ""
 "%s"
 msgstr ""
 
+#: VlcPlayer.py:555
 msgid "No previous file in this directory"
 msgstr "Šiame kataloge nėra ankstesnio failo"
 
+#: VlcPlayer.py:352
 msgid ""
 "No valid Enigma-Service to play a VLC-Stream\n"
 "Check your installation and try again!"
@@ -169,112 +207,147 @@ msgstr ""
 "Nėra veikiančios Enigma tarnybos VLC srautui priimti\n"
 "Tikrinkite savo įdiegimą ir bandykite dar kartą!"
 
+#: VlcServerConfig.py:433
 msgid "OK"
 msgstr "Gerai"
 
+#: VlcServerConfig.py:454
 #, python-format
 msgid "Overscan Correction [in %(percentsign)s of Video width]"
 msgstr "Skenavimo korekcija [ %(percentsign)s vaizdo pločio]"
 
+#: VlcServerConfig.py:443
 msgid "Ping IP-Address when open Server"
 msgstr ""
 
+#: VlcMediaList.py:64
 msgid "Playlist"
 msgstr "Grojaraštis"
 
+#: VlcServerList.py:158
 msgid "Really delete this Server?"
 msgstr "Tikrai pašalinti šį serverį?"
 
+#: VlcServerList.py:183
 #, fuzzy
 msgid "Reset default"
 msgstr "nustatyti numatytuoju"
 
+#: VlcPlayer.py:369
 msgid "Save as .ts and play"
 msgstr ""
 
+#: VlcServerList.py:102
 #, fuzzy
 msgid "Select VLC-Server profile"
 msgstr "Žinomų VLC-serverio profilių sąrašas"
 
+#: VlcPlayer.py:369
 msgid "Select method?"
 msgstr ""
 
+#: VlcServerConfig.py:440
 msgid "Server Address"
 msgstr "Serverio adresas"
 
+#: VlcServerConfig.py:438
 msgid "Server Profile Name"
 msgstr "Serverio profilio vardas"
 
+#: VlcMediaList.py:58
 msgid "Serverlist"
 msgstr "Serverių sąrašas"
 
+#: VlcServerList.py:183
 #, fuzzy
 msgid "Set as default"
 msgstr "nustatyti numatytuoju"
 
+#: VlcServerConfig.py:456
 msgid "Subtitle overlay"
 msgstr "Subtitrų perdangos"
 
+#: VlcServerConfig.py:462
 #, fuzzy
 msgid "Subtitles"
 msgstr "Subtitrų perdangos"
 
+#: VlcServerConfig.py:465
 msgid "Transcode MPEG/DVD Audio"
 msgstr "Perkoduoti MPEG/DVD garsą"
 
+#: VlcServerConfig.py:450
 msgid "Transcode MPEG/DVD Video"
 msgstr "Perkoduoti MPEG/DVD vaizdą"
 
+#: VlcServerConfig.py:446
 msgid "Use saving to Cache Directory"
 msgstr ""
 
+#: VlcServerConfig.py:444
 msgid "VLC < 2.x"
 msgstr ""
 
+#: VlcMediaList.py:51
 msgid "VLC Media List"
 msgstr ""
 
+#: plugin.py:112
 msgid "VLC Video Player"
 msgstr ""
 
+#: VlcServerConfig.py:452
 msgid "Video Bitrate"
 msgstr "Vaizdo bitų dažnis"
 
+#: VlcServerConfig.py:451
 msgid "Video Codec"
 msgstr "Vaizdo kodekas"
 
+#: VlcServerConfig.py:453
 msgid "Video Norm"
 msgstr "Vaizdo normalizacija"
 
+#: VlcServerConfig.py:457
 msgid "Yellow subtitles"
 msgstr ""
 
+#: VlcServerList.py:106
 msgid "add server"
 msgstr "pridėti serverį"
 
+#: VlcServerList.py:105
 msgid "delete server"
 msgstr "šalinti serverį"
 
+#: VlcServerList.py:107
 msgid "edit server"
 msgstr "redaguoti serverį"
 
+#: VlcMediaList.py:56 VlcMediaList.py:120
 msgid "filter off"
 msgstr "filtras išjungtas"
 
+#: VlcMediaList.py:123
 msgid "filter on"
 msgstr "filtras iįungtas"
 
+#: VlcServerConfig.py:234
 msgid "languages"
 msgstr ""
 
+#: VlcMediaList.py:59
 msgid "play DVD"
 msgstr "leisti DVD"
 
+#: VlcMediaList.py:57
 msgid "refresh"
 msgstr "atnaujinti"
 
+#: VlcServerList.py:108
 msgid "set default"
 msgstr "nustatyti numatytuoju"
 
+#: VlcServerConfig.py:233
 msgid "tracks"
 msgstr ""

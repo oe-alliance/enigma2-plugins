@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 MovieRetitle Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2009-09-10 20:38+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -18,35 +18,45 @@ msgstr ""
 "X-Poedit-Country: SERBIA\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#: plugin.py:52
 msgid "Cancel"
 msgstr "Otkaži"
 
+#: plugin.py:97
 msgid "Choose target folder"
 msgstr "Izaberi ciljnu fasciklu"
 
+#: plugin.py:73
 msgid "Description"
 msgstr "Opis"
 
+#: plugin.py:294
 #, python-format
 msgid "Failed to move the movie %s to %s in the background"
 msgstr "Nije uspelo premeštanje filma %s u %s u pozadini"
 
+#: plugin.py:71
 msgid "Filename"
 msgstr "Ime datoteke"
 
+#: plugin.py:69
 msgid "Location"
 msgstr "Lokacija"
 
+#: plugin.py:82
 msgid "Name and Description Input"
 msgstr ""
 
+#: plugin.py:51
 msgid "OK"
 msgstr "OK"
 
+#: plugin.py:301
 #, python-format
 msgid "Successfully moved the movie %s"
 msgstr "Uspešno premešten film %s "
 
+#: plugin.py:136
 #, python-format
 msgid ""
 "Target file %s.ts already exist.\n"
@@ -55,15 +65,19 @@ msgstr ""
 "Ciljna datoteka %s.ts već postoji.\n"
 "Da li želite da je zamenite?"
 
+#: plugin.py:253
 #, python-format
 msgid "The movie is moved in the background from %s to %s."
 msgstr "Film je premešten u pozadini od %s u %s "
 
+#: plugin.py:140
 msgid "The target directory is not found. The file is not renamed."
 msgstr "Ciljni direktorijum nije pronađen. Datoteka nije preimenovana."
 
+#: plugin.py:72
 msgid "Title"
 msgstr "Naziv"
 
+#: plugin.py:25
 msgid "change name..."
 msgstr "Promeni ime..."

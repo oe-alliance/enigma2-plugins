@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mosaic Persian Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2012-07-25 23:07+0330\n"
 "Last-Translator: mehdi <mehdi_ar_yekta@yahoo.com>\n"
 "Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
@@ -16,14 +16,18 @@ msgstr ""
 "X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
 "X-Poedit-SearchPath-0: /home/aliabdul/dream/enigma2-plugins/mosaic/src\n"
 
+#: plugin.py:199 plugin.py:308
 msgid "Channel: "
 msgstr "کانال :"
 
+#: plugin.py:337
 msgid "Countdown:"
 msgstr "شمارش معکوس :"
 
+#: plugin.py:324
 msgid "Error while creating screenshot. You need grab version 0.8 or higher!"
 msgstr "خطا در حال ایجاد تصویر . شما نیازمند به ورژن 0.8 یا بالاتر هستید  "
 
+#: plugin.py:400
 msgid "Mosaic"
 msgstr "مانند موزائیک بهم پیوستن"

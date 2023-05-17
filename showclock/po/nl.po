@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2011-10-12 10:55+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: Rob van der DOes\n"
@@ -19,21 +19,27 @@ msgstr ""
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 
+#: plugin.py:145
 msgid "Cancel"
 msgstr "Annuleer"
 
+#: plugin.py:120
 msgid "Clock show timeout"
 msgstr "Toon klok timeout"
 
+#: plugin.py:126
 msgid "Description"
 msgstr "Beschrijving"
 
+#: plugin.py:77
 msgid "Extensions menu"
 msgstr "Extensie menu"
 
+#: plugin.py:147
 msgid "Help"
 msgstr "Help"
 
+#: plugin.py:208
 msgid ""
 "Modify the settings to match your preferences. To change the clock position, select \"Move clock\" and relocate using the direction keys. Press OK to store current position and return to the setup menu or EXIT to cancel the moving.\n"
 "\n"
@@ -47,15 +53,19 @@ msgstr ""
 "\n"
 "If GP3 is installed, weekday shows up in selected language, otherwise always in english."
 
+#: plugin.py:148
 msgid "Move clock"
 msgstr "Verplaats klok"
 
+#: plugin.py:124
 msgid "Name"
 msgstr "Naam"
 
+#: plugin.py:146
 msgid "OK"
 msgstr "OK"
 
+#: plugin.py:217
 msgid ""
 "Please use direction keys to move the clock.\n"
 "\n"
@@ -65,32 +75,42 @@ msgstr ""
 "\n"
 "Druk op OK om de huidige positie te behouden en terug te keren naar het vorige menu, of exit om de verplaatsing te annuleren."
 
+#: plugin.py:77
 msgid "Plugin menu"
 msgstr "Plugin menu"
 
+#: plugin.py:76
 msgid "Push \"Exit\" long to show/hide clock"
 msgstr "Druk op \"Exit\" lang om de klok te tonen/verbergen."
 
+#: plugin.py:115 plugin.py:170
 msgid "Show Clock Setup"
 msgstr "Show Clock instellingen"
 
+#: plugin.py:75
 msgid "Show Clock setup"
 msgstr "Show Clock instellingen"
 
+#: plugin.py:122
 msgid "Show in"
 msgstr "Toon over"
 
+#: plugin.py:121
 msgid "Specify how long (seconds) the clock shall be shown before it disappears. Set to \"0\" to show clock until hidden manually."
 msgstr "Geef aan hoe lang (secondes) de klok vertoond zal worden alvorens die verborgen wordt. Gebruik \"0\" om de klok continu te laten zien, tot deze handmatig verborgen wordt."
 
+#: plugin.py:127
 msgid "Specify plugin description to be used in menu (needs GUI restart)."
 msgstr "Geef de pluigin beschrijving die in het menu gebruikt moet worden (GUI herstart noodzakelijk)."
 
+#: plugin.py:125
 msgid "Specify plugin name to be used in menu (needs GUI restart)."
 msgstr "Geef de pluigin naam die in het menu gebruikt moet worden (GUI herstart noodzakelijk)."
 
+#: plugin.py:123
 msgid "Specify whether plugin shall show up in plugin menu or extensions menu (needs GUI restart)"
 msgstr "Geef aan of de plugin in het plugin menu of in het extensie menu getoond moet worden (GUI herstart noodzakelijk)"
 
+#: plugin.py:170 plugin.py:402 plugin.py:410
 msgid "Ver."
 msgstr "Ver."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Autoresolution plugin Official Greek translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:24+0100\n"
 "PO-Revision-Date: 2016-05-30 23:46+0200\n"
 "Last-Translator: MCelliot_g <mcelliot_g@hotmail.com>\n"
 "Language-Team: MCelliot_g <mcelliot_g@hotmail.com>\n"
@@ -18,18 +18,23 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.7.7\n"
 
+#: plugin.py:586
 msgid "Alternative resolution when native not supported"
 msgstr ""
 
+#: plugin.py:582
 msgid "Ask before changing videomode"
 msgstr ""
 
+#: plugin.py:91
 msgid "Auto frame rate (refresh need 'multi')"
 msgstr "Αυτόματος ρυθμός καρέ (η ανανέωση απαιτεί το 'πολλαπλό')"
 
+#: plugin.py:873
 msgid "Autoresolution"
 msgstr "Αυτόματη Ανάλυση"
 
+#: plugin.py:463
 #, python-format
 msgid ""
 "Autoresolution Plugin Testmode:\n"
@@ -38,18 +43,23 @@ msgstr ""
 "Κατάσταση δοκιμής του Πρόσθετου Αυτόματης Ανάλυσης:\n"
 "Είναι το %s OK?"
 
+#: plugin.py:883
 msgid "Autoresolution Switch"
 msgstr "Διακόπτης Αυτόματης Ανάλυσης"
 
+#: plugin.py:588
 msgid "Autoresolution is not working in Scart/DVI-PC Mode"
 msgstr "Η Αυτόματη Ανάλυση δεν είναι διαθέσιμη σε λειτουργία Scart/DVI-PC"
 
+#: plugin.py:535
 msgid "Autoresolution videomode setup"
 msgstr "Ρυθμίσεις λειτουργίας εικόνας της Αυτόματης Ανάλυσης"
 
+#: plugin.py:548
 msgid "Cancel"
 msgstr "Ακύρωση"
 
+#: plugin.py:719
 #, python-format
 msgid ""
 "Changing framerate for current service?\n"
@@ -57,163 +67,229 @@ msgid ""
 "New framerate: %s\n"
 msgstr ""
 
+#: plugin.py:572
 msgid "Deinterlacer mode for interlaced content"
 msgstr "Λειτουργία αποπολυπλεξίας για πεπλεγμένο περιεχόμενο"
 
+#: plugin.py:573
 msgid "Deinterlacer mode for progressive content"
 msgstr "Λειτουργία αποπολυπλεξίας για προοδευτικό περιεχόμενο"
 
+#: plugin.py:570
 msgid "Delay x seconds after service started"
 msgstr "Καθυστέρηση x δευτερόλεπτα αφού ξεκινήσει η υπηρεσία"
 
+#: plugin.py:53
 msgid "Enable 1080p24 Mode"
 msgstr "Ενεργοποίηση Λειτουργίας 1080p24"
 
+#: plugin.py:54
 msgid "Enable 1080p25 Mode"
 msgstr "Ενεργοποίηση Λειτουργίας 1080p25"
 
+#: plugin.py:55
 msgid "Enable 1080p30 Mode"
 msgstr "Ενεργοποίηση Λειτουργίας 1080p30"
 
+#: plugin.py:69
 #, fuzzy
 msgid "Enable 2160p24 Mode"
 msgstr "Ενεργοποίηση Λειτουργίας 720p24"
 
+#: plugin.py:70
 #, fuzzy
 msgid "Enable 2160p25 Mode"
 msgstr "Ενεργοποίηση Λειτουργίας 1080p25"
 
+#: plugin.py:71
 #, fuzzy
 msgid "Enable 2160p30 Mode"
 msgstr "Ενεργοποίηση Λειτουργίας 1080p30"
 
+#: plugin.py:51
 msgid "Enable 720p24 Mode"
 msgstr "Ενεργοποίηση Λειτουργίας 720p24"
 
+#: plugin.py:52
 #, fuzzy
 msgid "Enable 720p50 Mode"
 msgstr "Ενεργοποίηση Λειτουργίας 720p24"
 
+#: plugin.py:553
 msgid "Enable Autoresolution"
 msgstr "Ενεργοποίηση Αυτόματης Ανάλυσης"
 
+#: plugin.py:804
 msgid "Exit"
 msgstr ""
 
+#: plugin.py:61
 #, fuzzy
 msgid "FHD 50/60Hz Progressive Mode"
 msgstr "Λειτουργία Προοδευτικού SD 30/60Hz"
 
+#: plugin.py:574
+msgid "Force set progressive for stream/video content"
+msgstr ""
+
+#: plugin.py:49
 msgid "HD Interlace Mode"
 msgstr "Λειτουργία περιπλεγμένου HD"
 
+#: plugin.py:50
 msgid "HD Progressive Mode"
 msgstr "Λειτουργία προοδευτικού HD"
 
+#: plugin.py:581
 msgid "Lock timeout"
 msgstr "Χρόνος λήξης κλειδώματος"
 
+#: plugin.py:820 plugin.py:885
 #, fuzzy
 msgid "Manual resolution"
 msgstr "Ενεργοποίηση Αυτόματης Ανάλυσης"
 
+#: plugin.py:853
 #, fuzzy
 msgid "Manual resolution is not working in Scart/DVI-PC mode!"
 msgstr "Η Αυτόματη Ανάλυση δεν είναι διαθέσιμη σε λειτουργία Scart/DVI-PC"
 
+#: plugin.py:584
 msgid "Message timeout"
 msgstr ""
 
+#: plugin.py:556
 msgid "Mode"
 msgstr "Λειτουργία"
 
+#: plugin.py:547
 msgid "OK"
 msgstr "ΟΚ"
 
+#: plugin.py:820
 msgid "Please select a resolution..."
 msgstr ""
 
+#: plugin.py:561 plugin.py:563 plugin.py:565 plugin.py:567
 msgid "Refresh Rate"
 msgstr "Ρυθμός Ανανέωσης"
 
+#: plugin.py:592
 msgid "Return back without confirmation after 10 sec."
 msgstr ""
 
+#: plugin.py:571
 msgid "Running in testmode"
 msgstr "Λειτουργία δοκιμής"
 
+#: plugin.py:46
 msgid "SD 24Hz Progressive mode"
 msgstr "Λειτουργία Προοδευτικού SD 24Hz"
 
+#: plugin.py:44
 msgid "SD 25/50Hz Interlace Mode"
 msgstr "Λειτουργία Περιπλεγμένου SD 25/50Hz"
 
+#: plugin.py:47
 msgid "SD 25/50Hz Progressive Mode"
 msgstr "Λειτουργία Προοδευτικού SD 25/50Hz"
 
+#: plugin.py:45
 msgid "SD 30/60Hz Interlace Mode"
 msgstr "Λειτουργία Περιπλεγμένου SD 30/60Hz"
 
+#: plugin.py:48
 msgid "SD 30/60Hz Progressive Mode"
 msgstr "Λειτουργία Προοδευτικού SD 30/60Hz"
 
+#: plugin.py:579
+msgid "Separate colorimetry for HDR (set 'auto' HDMI Colorimetry)"
+msgstr ""
+
+#: plugin.py:590
 msgid "Show 'Manual resolution' in extensions menu"
 msgstr ""
 
+#: plugin.py:569
 msgid "Show info screen"
 msgstr "Εμφάνιση οθόνης πληροφοριών"
 
+#: plugin.py:577
+msgid "Smart HDR type (set 'auto' HDMI HDR type)"
+msgstr ""
+
+#: plugin.py:827
 msgid "This resolution is OK?"
 msgstr ""
 
+#: plugin.py:67
 #, fuzzy
 msgid "UHD Interlace Mode"
 msgstr "Λειτουργία περιπλεγμένου HD"
 
+#: plugin.py:68
 #, fuzzy
 msgid "UHD Progressive Mode"
 msgstr "Λειτουργία προοδευτικού HD"
 
+#: plugin.py:585
 msgid "Use 60Hz instead 30Hz"
 msgstr ""
 
+#: plugin.py:805
 #, fuzzy
 msgid "Video: "
 msgstr "Λειτουργία βίντεο: %s"
 
+#: plugin.py:433
 #, python-format
 msgid "Videocontent: %sx%s%s %sHz"
 msgstr "Περιεχόμενο βίντεο: %sx%s%s %sHz"
 
+#: plugin.py:453 plugin.py:459
 #, python-format
 msgid "Videomode: %s"
 msgstr "Λειτουργία βίντεο: %s"
 
+#: plugin.py:482
 #, python-format
 msgid "Videomode: %s %s %s"
 msgstr "Λειτουργία βίντεο: %s %s %s"
 
+#: plugin.py:84 plugin.py:85
 msgid "auto"
 msgstr "αυτόματο"
 
+#: plugin.py:84 plugin.py:85
 msgid "bob"
 msgstr "διπλασιασμός γραμμών"
 
+#: plugin.py:272
 msgid "default"
 msgstr "προεπιλογή"
 
+#: plugin.py:91
 #, fuzzy
 msgid "manual"
 msgstr "Χειροκίνητα"
 
+#: plugin.py:83
+msgid "no"
+msgstr ""
+
+#: plugin.py:84 plugin.py:85
 msgid "off"
 msgstr "ανενεργό"
 
+#: plugin.py:84 plugin.py:85
 msgid "on"
 msgstr "ενεργό"
 
+#: plugin.py:88
 msgid "second"
 msgstr "δευτερόλεπτο"
 
+#: plugin.py:87 plugin.py:88 plugin.py:89 plugin.py:90 plugin.py:92
+#: plugin.py:96
 msgid "seconds"
 msgstr "δευτερόλεπτα"

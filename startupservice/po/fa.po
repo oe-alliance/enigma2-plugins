@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: startup service Persian Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2012-07-25 22:18+0330\n"
 "Last-Translator: mehdi <mehdi_ar_yekta@yahoo.com>\n"
 "Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
@@ -18,26 +18,33 @@ msgstr ""
 "X-Poedit-Language: Persian\n"
 "X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
 
+#: plugin.py:164
 msgid "If you see this message, please switch to the service you want to mark as startservice and try again."
 msgstr "در صورتی که شما این پیام را مشاهده کردید ، لطفا به سرویسی را که می خواهید علامت گذاری کنید و به عنوان یک شروع سرویس بروی آن سوئیچ کنید و دوباره سعی کنید"
 
+#: plugin.py:126
 msgid "reset startup service"
 msgstr "بازفراخوانی استارت آپ "
 
+#: plugin.py:137
 #, fuzzy
 msgid "reset startup service for booting..."
 msgstr "بازفراخوانی استارت آپ "
 
+#: plugin.py:138
 #, fuzzy
 msgid "reset startup service for leaving standby mode..."
 msgstr "بازفراخوانی استارت آپ "
 
+#: plugin.py:125
 msgid "set as startup service"
 msgstr "تنظیم به عنوان یک سرویس استارت آپ"
 
+#: plugin.py:132
 #, fuzzy
 msgid "set as startup service after booting..."
 msgstr "تنظیم به عنوان یک سرویس استارت آپ"
 
+#: plugin.py:133
 msgid "set as startup service after leaving standby mode..."
 msgstr ""

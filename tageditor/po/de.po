@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 TagEditor Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2011-07-06 09:59+0100\n"
 "Last-Translator: JuSt611 <Software@Strasdas.de>\n"
 "Language-Team: none\n"
@@ -19,21 +19,27 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
+#: plugin.py:248
 msgid "Add new tag..."
 msgstr "Neuen Tag hinzufügen..."
 
+#: plugin.py:36
 msgid "Cancel"
 msgstr "Abbrechen"
 
+#: plugin.py:252
 msgid "Delete all tags..."
 msgstr "Alle Tags entfernen..."
 
+#: plugin.py:250
 msgid "Delete this tag..."
 msgstr "Ausgewählten Tag entfernen..."
 
+#: plugin.py:251
 msgid "Delete unused tags"
 msgstr "Ungenutzte Tags entfernen"
 
+#: plugin.py:234
 msgid ""
 "Do you really want to delete all tags everywhere?\n"
 "(Note that 'Cancel' will not undo this!)"
@@ -41,6 +47,7 @@ msgstr ""
 "Wirklich ALLE gesetzten Tags entfernen?\n"
 "('Abbrechen' kann dies nicht rückgängig machen!)"
 
+#: plugin.py:217
 #, python-format
 msgid ""
 "Do you really want to delete tag \"%s\" everywhere?\n"
@@ -50,29 +57,37 @@ msgstr ""
 "('Abbrechen' kann dies nicht rückgängig machen!)"
 
 #. TRANSLATORS: This is the title of the TagEditor main screen
+#: plugin.py:68
 msgid "Edit Tags"
 msgstr "Tags bearbeiten"
 
+#: plugin.py:39
 msgid "Load"
 msgstr "Laden"
 
+#: plugin.py:38
 msgid "New"
 msgstr "Neu"
 
+#: plugin.py:37
 msgid "OK"
 msgstr "OK"
 
+#: plugin.py:74
 msgid "Please enter the new tag"
 msgstr "Bitte gib den neuen Tag an"
 
+#: plugin.py:249
 msgid "Rename this tag..."
 msgstr "Ausgewählten Tag umbenennen..."
 
+#: plugin.py:197
 #, python-format
 msgid "Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo this!)"
 msgstr "Den Tag \"%s\" überall ersetzen durch:   ('Abbrechen' kann dies nicht rückgängig machen!)"
 
 #. TRANSLATORS: this is the string used in the movie context menu for TagEditor
+#: plugin.py:348
 #, fuzzy
 msgid "edit tags"
 msgstr "Tags bearbeiten"

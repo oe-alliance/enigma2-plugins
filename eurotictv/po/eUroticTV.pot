@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# $PACKAGEDESCRIPION
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the eUroticTV package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: eUroticTV 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,33 +17,43 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: plugin.py:61
 msgid "Exit"
 msgstr ""
 
+#: plugin.py:64
 msgid "Fullscreen"
 msgstr ""
 
+#: plugin.py:26
 msgid "LIVE"
 msgstr ""
 
+#: plugin.py:26
 msgid "No Connection"
 msgstr ""
 
+#: plugin.py:62
 msgid "Play"
 msgstr ""
 
+#: plugin.py:147
 #, python-format
 msgid "Streaming error: %s"
 msgstr ""
 
+#: plugin.py:212
 msgid "Watch eUroticTV via HTTP Live Streaming"
 msgstr ""
 
+#: plugin.py:26
 msgid "connecting..."
 msgstr ""
 
+#: plugin.py:26
 msgid "disconnected"
 msgstr ""
 
+#: plugin.py:26
 msgid "pause"
 msgstr ""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 OFDb Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2009-09-10 20:41+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -19,77 +19,102 @@ msgstr ""
 "X-Poedit-Country: SERBIA\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#: plugin.py:203
 msgid "Ambiguous results"
 msgstr "Dvosmisleni rezultati"
 
-msgid "Cast: "
+#: plugin.py:376
+#, fuzzy, python-format
+msgid "Cast: %s"
 msgstr "Uloge: "
 
+#: plugin.py:47
 msgid "Channel Selection"
 msgstr "Izbor kanala"
 
+#: plugin.py:293
 msgid "Could't get Eventname"
 msgstr "Nije moguć naziv događaja"
 
+#: plugin.py:208 plugin.py:336
 msgid "Details"
 msgstr "Detalji"
 
+#: plugin.py:384
 #, python-format
 msgid "Downloading Movie Poster: %s..."
 msgstr "Preuzimam poster filma: %s..."
 
+#: plugin.py:134
 msgid "Exit"
 msgstr "Izaći"
 
+#: plugin.py:67
 msgid "Lookup"
 msgstr "Pretraga"
 
+#: plugin.py:320 plugin.py:321
 msgid "No OFDb match."
 msgstr "Nema OFDb slaganja."
 
+#: plugin.py:378
 msgid "No cast list found in the database."
 msgstr "Lista uloga nije nađena u bazi podataka."
 
+#: plugin.py:334
 msgid "No details found."
 msgstr "Nisu nađeni detalji."
 
+#: plugin.py:337 plugin.py:406
 msgid "OFDb Details parsed"
 msgstr "OFDb detalji analizirani"
 
+#: plugin.py:301
 msgid "OFDb Download completed"
 msgstr "Preuzimanje sa OFDb  završeno"
 
+#: plugin.py:297
 msgid "OFDb Download failed"
 msgstr "Preuzimanje sa OFDb neuspešno"
 
+#: plugin.py:433
 msgid "OFDb Plugin"
 msgstr "OFDb dodatak"
 
+#: plugin.py:326
 msgid "OFDb Re-Download completed"
 msgstr "Ponovno preuzimanje sa OFDb  završeno"
 
+#: plugin.py:323
 msgid "OFDb query failed!"
 msgstr "Upit OFDb nije uspeo!"
 
+#: plugin.py:204
 msgid "Please select the matching entry"
 msgstr "Molim izaberite unos koji se slaže"
 
+#: plugin.py:283
 #, python-format
 msgid "Query OFDb: %s..."
 msgstr "Upit OFDb: %s..."
 
+#: plugin.py:453 plugin.py:458 plugin.py:464
 msgid "Query details from the Online-Filmdatenbank"
 msgstr "Detalji upita sa onlajn filmske baze podataka"
 
+#: plugin.py:218
 #, python-format
 msgid "Re-Query OFDb: %s..."
 msgstr "Ponovni upit OFDb: %s..."
 
+#: plugin.py:125
 msgid "The Online-Filmdatenbank"
 msgstr "Onlajn filmska baza podataka"
 
+#: plugin.py:207
 msgid "Title Menu"
 msgstr "Meni naslova"
 
+#: plugin.py:358
 msgid "no user rating yet"
 msgstr "Još nema ocene"

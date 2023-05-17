@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DVDBackup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: JuSt611 <Software@Strasdas.de>\n"
 "Language-Team: Nabil Hanna <nabil1978@web.de>\n"
@@ -15,63 +15,83 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
+#: plugin.py:269
 msgid "Abort"
 msgstr "Abbrechen"
 
+#: plugin.py:343
 msgid "Backup"
 msgstr "Sicherung"
 
+#: plugin.py:216
 msgid "Backup of DVD finished."
 msgstr "Sicherung der DVD abgeschlossen."
 
+#: plugin.py:464
 msgid "Backup your Video-DVD to your harddisk"
 msgstr "Sichert Video-DVD auf Festplatte"
 
+#: plugin.py:155
 msgid "Could not find any file to backup!"
 msgstr "Konnte keine Datei zum Sichern finden!"
 
+#: plugin.py:158
 msgid "Could not read the DVD informations!"
 msgstr "Konnte die DVD Informationen nicht lesen!"
 
+#: plugin.py:355
 msgid "Create iso:"
 msgstr "ISO erstellen:"
 
+#: plugin.py:460 plugin.py:464
 msgid "DVD Backup"
 msgstr "DVD Backup"
 
+#: plugin.py:351
 msgid "Device:"
 msgstr "Gerät:"
 
+#: plugin.py:352
 msgid "Directory:"
 msgstr "Ordner:"
 
+#: plugin.py:216
 msgid "Duration:"
 msgstr "Dauer:"
 
+#: plugin.py:216
 msgid "Eject DVD?"
 msgstr "DVD auswerfen?"
 
+#: plugin.py:164 plugin.py:194
 msgid "Error while backup of DVD!"
 msgstr "Fehler beim Sichern der DVD!"
 
+#: plugin.py:344
 msgid "Keyboard"
 msgstr "Tastatur"
 
+#: plugin.py:345
 msgid "Location"
 msgstr "Ort"
 
+#: plugin.py:354
 msgid "Log:"
 msgstr "Log:"
 
+#: plugin.py:57 plugin.py:421
 msgid "Name of DVD"
 msgstr "Name der DVD"
 
+#: plugin.py:353
 msgid "Name:"
 msgstr "Name:"
 
+#: plugin.py:342
 msgid "Progress"
 msgstr "Fortschritt"
 
+#: plugin.py:199
 msgid ""
 "genisoimage job done.\n"
 "Delete DVD directory?"

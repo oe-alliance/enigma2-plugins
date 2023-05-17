@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: curlytx 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 21:28+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2011-12-06 18:20+0100\n"
 "Last-Translator: Christian Weiske <cweiske@cweiske.de>\n"
 "Language-Team: \n"
@@ -19,81 +19,107 @@ msgstr ""
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#: CurlyTxSettings.py:92
 msgid "Add new page"
 msgstr "Neue Seite hinzufügen"
 
+#: CurlyTxSettings.py:51 CurlyTxSettings.py:210
 msgid "Cancel"
 msgstr "Abbrechen"
 
+#: CurlyTx.py:105 CurlyTx.py:108
 msgid "Close window"
 msgstr "Fenster schließen"
 
+#: CurlyTxSettings.py:70
 msgid "Default page"
 msgstr "Standardseite"
 
+#: CurlyTxSettings.py:54
 msgid "Delete"
 msgstr "Löschen"
 
+#: CurlyTxSettings.py:95
 msgid "Delete selected page"
 msgstr "Ausgewählte Seite löschen"
 
+#: CurlyTxSettings.py:80
 msgid "Dismiss all setting changes"
 msgstr "Alle Änderungen verwerfen"
 
+#: CurlyTxSettings.py:86
 msgid "Edit selected page"
 msgstr "Ausgewählte Seite bearbeiten"
 
+#: CurlyTx.py:199
 msgid "Error fetching URL:"
 msgstr "Fehler beim Laden der URL:"
 
+#: CurlyTxSettings.py:175
 msgid "Error loading page feed:"
 msgstr "Fehler beim Laden des Seiten-Feeds:"
 
+#: CurlyTxSettings.py:224
 msgid "Font size"
 msgstr "Schriftgröße"
 
+#: CurlyTx.py:204
 msgid "Go and add a page in the settings"
 msgstr "Füg eine Seite in den Einstellungen hinzu"
 
+#: CurlyTx.py:212
 msgid "HTTP response headers for"
 msgstr "HTTP-Antwortheader für"
 
+#: CurlyTx.py:170
 msgid "Invalid page"
 msgstr "Ungültige Seite"
 
+#: CurlyTxSettings.py:89
 msgid "Load pages from feed"
 msgstr "Seiten aus Feed laden"
 
+#: CurlyTx.py:185
 msgid "Loading ..."
 msgstr "Lade ..."
 
+#: CurlyTxSettings.py:73
 msgid "Menu title"
 msgstr "Menütitel"
 
+#: CurlyTxSettings.py:53
 msgid "New"
 msgstr "Neu"
 
+#: CurlyTx.py:56 CurlyTx.py:126
 msgid "Next"
 msgstr "Weiter"
 
+#: CurlyTxSettings.py:145
 msgid "No page feed URL defined"
 msgstr "Keine Seiten-Feed-URL definiert"
 
+#: CurlyTxSettings.py:52 CurlyTxSettings.py:211
 msgid "OK"
 msgstr "OK"
 
+#: CurlyTxSettings.py:222
 msgid "Page URL"
 msgstr "Seiten-URL"
 
+#: CurlyTxSettings.py:74
 msgid "Page feed URL"
 msgstr "Seiten-Feed-URL"
 
+#: CurlyTxSettings.py:66
 msgid "Page:"
 msgstr "Seite: "
 
+#: CurlyTx.py:55 CurlyTx.py:125
 msgid "Prev"
 msgstr "Zurück"
 
+#: CurlyTxSettings.py:112
 msgid ""
 "Really delete this page?\n"
 "It cannot be recovered!"
@@ -101,47 +127,62 @@ msgstr ""
 "Soll diese Seite wirklich gelöscht werden?\n"
 "Dies kann nicht rückgängig gemacht werden."
 
+#: CurlyTx.py:54 CurlyTx.py:120 CurlyTx.py:124
 msgid "Reload"
 msgstr "Neu laden"
 
+#: CurlyTx.py:96
 msgid "Reload current page URL"
 msgstr "Aktuelle Seite neu laden"
 
+#: CurlyTxSettings.py:83
 msgid "Save settings and close screen"
 msgstr "Änderungen speichern und schließen"
 
+#: CurlyTx.py:87
 msgid "Scroll page contents down"
 msgstr "Seiteninhalt runterscrollen"
 
+#: CurlyTx.py:84
 msgid "Scroll page contents up"
 msgstr "Seiteninhalt hochscrollen"
 
+#: CurlyTx.py:53 CurlyTxSettings.py:40
 msgid "Settings"
 msgstr "Einstellungen"
 
+#: CurlyTx.py:90
 msgid "Show HTTP response headers"
 msgstr "Zeige HTTP-Antwortheader"
 
+#: CurlyTxSettings.py:72
 msgid "Show in extensions menu"
 msgstr "Im Extensionmenü anzeigen"
 
+#: CurlyTxSettings.py:71
 msgid "Show in main menu"
 msgstr "Im Hauptmenü anzeigen"
 
+#: CurlyTx.py:93
 msgid "Show program settings"
 msgstr "Programmeinstellungen anzeigen"
 
+#: CurlyTx.py:111
 msgid "Show this help screen"
 msgstr "Diese Hilfe anzeigen"
 
+#: CurlyTx.py:99
 msgid "Switch to next configured page URL"
 msgstr "Zur nächsten Seite wechseln"
 
+#: CurlyTx.py:102
 msgid "Switch to previous configured page URL"
 msgstr "Zur vorherigen Seite wechseln"
 
+#: CurlyTxSettings.py:223
 msgid "Title"
 msgstr "Titel"
 
+#: plugin.py:38 plugin.py:45
 msgid "View remote text files"
 msgstr "Textdateien aus dem Netzwerk anzeigen"

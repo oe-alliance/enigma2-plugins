@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - tageditor\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-26 12:31+0000\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2011-10-03 22:39+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -17,21 +17,27 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/tageditor\n"
 
+#: plugin.py:248
 msgid "Add new tag..."
 msgstr "Aggiungere nuova etichetta..."
 
+#: plugin.py:36
 msgid "Cancel"
 msgstr "Annull."
 
+#: plugin.py:252
 msgid "Delete all tags..."
 msgstr "Cancellare tutte le etichette"
 
+#: plugin.py:250
 msgid "Delete this tag..."
 msgstr "Cancellare etichetta..."
 
+#: plugin.py:251
 msgid "Delete unused tags"
 msgstr "Cancellare le etichette inutilizzate"
 
+#: plugin.py:234
 msgid ""
 "Do you really want to delete all tags everywhere?\n"
 "(Note that 'Cancel' will not undo this!)"
@@ -39,6 +45,7 @@ msgstr ""
 "Cancellare ovunque tutte le etichetta?\n"
 "(Nota: \"Annull.\" non potrà annullare!)"
 
+#: plugin.py:217
 #, python-format
 msgid ""
 "Do you really want to delete tag \"%s\" everywhere?\n"
@@ -48,28 +55,36 @@ msgstr ""
 "(Nota: \"Annull.\" non potrà annullare!)"
 
 #. TRANSLATORS: This is the title of the TagEditor main screen
+#: plugin.py:68
 msgid "Edit Tags"
 msgstr "Mod. etich."
 
+#: plugin.py:39
 msgid "Load"
 msgstr "Caricare"
 
+#: plugin.py:38
 msgid "New"
 msgstr "Nuovo"
 
+#: plugin.py:37
 msgid "OK"
 msgstr "Ok"
 
+#: plugin.py:74
 msgid "Please enter the new tag"
 msgstr "Inserire la nuova etichetta"
 
+#: plugin.py:249
 msgid "Rename this tag..."
 msgstr "Rinominare etichetta..."
 
+#: plugin.py:197
 #, python-format
 msgid "Replace tag \"%s\" everywhere with:   (Note that 'Cancel' will not undo this!)"
 msgstr "Sostituire ovunque l'etichetta \"%s\" con:   (Nota: \"Annull.\" non potrà annullare!)"
 
 #. TRANSLATORS: this is the string used in the movie context menu for TagEditor
+#: plugin.py:348
 msgid "edit tags"
 msgstr "Mod. etich."

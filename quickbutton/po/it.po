@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - quickbutton\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -17,27 +17,35 @@ msgstr ""
 "X-Poedit-Basepath: /home/dario/Plugins/quickbutton\n"
 "X-Poedit-SearchPath-0: /home/dario/Plugins/quickbutton\n"
 
+#: plugin.py:88
 msgid "Assign plugin to long blue key pressed"
 msgstr "Assegnare il plugin al tasto blu (lungo)"
 
+#: plugin.py:85
 msgid "Assign plugin to long green key pressed"
 msgstr "Assegnare il plugin al tasto verde (lungo)"
 
+#: plugin.py:87
 msgid "Assign plugin to long red key pressed"
 msgstr "Assegnare il plugin al tasto rosso (lungo)"
 
+#: plugin.py:86
 msgid "Assign plugin to long yellow key pressed"
 msgstr "Assegnare il plugin al tasto giallo (lungo)"
 
+#: plugin.py:90
 msgid "Assign plugin to red key pressed"
 msgstr "Assegnare il plugin al tasto rosso (breve)"
 
+#: plugin.py:207
 msgid "Cancel"
 msgstr "Annull."
 
+#: plugin.py:159
 msgid "Display 4:3 content as"
 msgstr "Mostrare contenuti in 4:3 come"
 
+#: plugin.py:147 plugin.py:186
 #, python-format
 msgid ""
 "Error!\n"
@@ -46,68 +54,91 @@ msgstr ""
 "Errore!\n"
 "Tipo errore: %s"
 
+#: plugin.py:165 plugin.py:239 plugin.py:288
 msgid "HbbTV Applications"
 msgstr ""
 
+#: plugin.py:155
 msgid "Just Scale"
 msgstr "Scalare solamente"
 
+#: plugin.py:141 plugin.py:234 plugin.py:280
 msgid "MediaPlayer"
 msgstr "MediaPlayer"
 
+#: plugin.py:136 plugin.py:233 plugin.py:278
 msgid "Multi EPG"
 msgstr "Multi EPG"
 
+#: plugin.py:190
 msgid "No plugin assigned!"
 msgstr "Nessun plugin assegnato"
 
+#: plugin.py:35 plugin.py:36 plugin.py:37 plugin.py:38 plugin.py:39
+#: plugin.py:130 plugin.py:231
 msgid "Nothing"
 msgstr "Nulla"
 
+#: plugin.py:208
 msgid "OK"
 msgstr "Ok"
 
+#: plugin.py:259
 msgid "Overwrite HBBTV-red-button"
 msgstr ""
 
+#: plugin.py:154
 msgid "Pan&Scan"
 msgstr "Pan&Scan"
 
+#: plugin.py:153
 msgid "Pillarbox"
 msgstr "Pillarbox"
 
+#: plugin.py:148 plugin.py:235 plugin.py:282
 msgid "Plugin browser"
 msgstr "Browser plugin"
 
+#: plugin.py:188
 msgid "Plugin not found!"
 msgstr "Plugin non trovato!"
 
+#: plugin.py:131 plugin.py:232 plugin.py:276
 msgid "Single EPG"
 msgstr "EPG singolo"
 
+#: plugin.py:161 plugin.py:237 plugin.py:286
 msgid "Timer"
 msgstr "Timer"
 
+#: plugin.py:128
 msgid "Unknown Error"
 msgstr "Errore Sconosciuto: "
 
+#: plugin.py:268
 msgid "assigned to long blue"
 msgstr "Assegnato al tasto blu (lungo)"
 
+#: plugin.py:266
 msgid "assigned to long green"
 msgstr "Assegnato al tasto verde (lungo)"
 
+#: plugin.py:265
 msgid "assigned to long red"
 msgstr "Assegnato al tasto rosso (lungo)"
 
+#: plugin.py:267
 msgid "assigned to long yellow"
 msgstr "Assegnato al tasto giallo (lungo)"
 
+#: plugin.py:271
 msgid "assigned to red"
 msgstr "Assegnato al tasto rosso (breve)"
 
+#: plugin.py:78
 msgid "setup for Quickbutton"
 msgstr "Configurazione per Quickbutton"
 
+#: plugin.py:152 plugin.py:236 plugin.py:284
 msgid "switch 4:3 content display"
 msgstr "Commutare visual. contenuti in 4:3"

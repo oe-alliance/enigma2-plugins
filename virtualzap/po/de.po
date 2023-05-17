@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: koivo <koivo@hdfreaks.cc>\n"
 "Language-Team: \n"
@@ -12,12 +12,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.5.5\n"
 
+#: plugin.py:735
 msgid "Cancel"
 msgstr "Abbruch"
 
+#: plugin.py:131
 msgid "Could not open Picture in Picture"
 msgstr ""
 
+#: plugin.py:755
 msgid ""
 "GUI needs a restart to apply the new settings.\n"
 "Do you want to Restart the GUI now?"
@@ -25,38 +28,50 @@ msgstr ""
 "Die GUI benötigt einen Neustart, damit die Änderungen wirksam werden.\n"
 "Soll die GUI jezt neu gestartet werden?"
 
+#: plugin.py:736
 msgid "OK"
 msgstr "OK"
 
+#: plugin.py:743
 msgid "Remember last service"
 msgstr "Letzten Kanal merken"
 
+#: plugin.py:756
 msgid "Restart GUI now?"
 msgstr "GUI Neustart?"
 
+#: plugin.py:741
 msgid "Show PiP in Infobar"
 msgstr "PiP in Infobar anzeigen"
 
+#: plugin.py:742
 msgid "Start standard PiP after x secs (0 = disabled)"
 msgstr "Standard PiP nach x Sek. starten (0 = aus)"
 
+#: plugin.py:738
 msgid "Usage"
 msgstr "Benutzung"
 
+#: plugin.py:740
 msgid "Use PiP"
 msgstr "PiP-Anzeige verwenden"
 
+#: plugin.py:146
 msgid "Virtual (PiP) Zap"
 msgstr "Virtual (PiP) Zap"
 
+#: plugin.py:144
 msgid "Virtual Zap Setup"
 msgstr "Virtual Zap Einstellungen"
 
+#: plugin.py:62
 msgid "as plugin in extended bar"
 msgstr "als Plugin in Extended Bar"
 
+#: plugin.py:62
 msgid "with exit button"
 msgstr "mit \"Exit\" auf Fernbedienung"
 
+#: plugin.py:62
 msgid "with long OK press"
 msgstr "mit langen Druck auf \"OK\""

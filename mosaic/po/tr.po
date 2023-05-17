@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 mosaic plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2008-12-04 16:06+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <zveyis@gmail.com>\n"
 "Language-Team: www.turkeyforum.com/satforum <zveyis@gmail.com>\n"
@@ -14,14 +14,18 @@ msgstr ""
 "X-Poedit-Country: TURKEY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#: plugin.py:199 plugin.py:308
 msgid "Channel: "
 msgstr "Kanal:"
 
+#: plugin.py:337
 msgid "Countdown:"
 msgstr "Sayaç:"
 
+#: plugin.py:324
 msgid "Error while creating screenshot. You need grab version 0.8 or higher!"
 msgstr "Ekran görüntüsü oluşturulurken hata oluştu. Grab sürüm 0.8 veya daha üstü gerekli!"
 
+#: plugin.py:400
 msgid "Mosaic"
 msgstr "Mozaik"

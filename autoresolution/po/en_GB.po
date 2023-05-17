@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:24+0100\n"
 "PO-Revision-Date: 2012-03-05 22:58+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -17,18 +17,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: plugin.py:586
 msgid "Alternative resolution when native not supported"
 msgstr ""
 
+#: plugin.py:582
 msgid "Ask before changing videomode"
 msgstr ""
 
+#: plugin.py:91
 msgid "Auto frame rate (refresh need 'multi')"
 msgstr ""
 
+#: plugin.py:873
 msgid "Autoresolution"
 msgstr "Auto resolution"
 
+#: plugin.py:463
 #, python-format
 msgid ""
 "Autoresolution Plugin Testmode:\n"
@@ -37,18 +42,23 @@ msgstr ""
 "Auto resolution Plugin Test mode:\n"
 "Is %s OK?"
 
+#: plugin.py:883
 msgid "Autoresolution Switch"
 msgstr "Auto resolution Switch"
 
+#: plugin.py:588
 msgid "Autoresolution is not working in Scart/DVI-PC Mode"
 msgstr "Auto resolution is not working in Scart/DVI-PC Mode"
 
+#: plugin.py:535
 msgid "Autoresolution videomode setup"
 msgstr "Auto resolution video mode setup"
 
+#: plugin.py:548
 msgid "Cancel"
 msgstr "Cancel"
 
+#: plugin.py:719
 #, python-format
 msgid ""
 "Changing framerate for current service?\n"
@@ -56,161 +66,227 @@ msgid ""
 "New framerate: %s\n"
 msgstr ""
 
+#: plugin.py:572
 msgid "Deinterlacer mode for interlaced content"
 msgstr "De-interlace mode for interlaced content"
 
+#: plugin.py:573
 msgid "Deinterlacer mode for progressive content"
 msgstr "De-interlace mode for progressive content"
 
+#: plugin.py:570
 msgid "Delay x seconds after service started"
 msgstr "Delay x seconds after service started"
 
+#: plugin.py:53
 msgid "Enable 1080p24 Mode"
 msgstr "Enable 1080p24 Mode"
 
+#: plugin.py:54
 msgid "Enable 1080p25 Mode"
 msgstr "Enable 1080p25 Mode"
 
+#: plugin.py:55
 msgid "Enable 1080p30 Mode"
 msgstr "Enable 1080p30 Mode"
 
+#: plugin.py:69
 #, fuzzy
 msgid "Enable 2160p24 Mode"
 msgstr "Enable 720p24 Mode"
 
+#: plugin.py:70
 #, fuzzy
 msgid "Enable 2160p25 Mode"
 msgstr "Enable 1080p25 Mode"
 
+#: plugin.py:71
 #, fuzzy
 msgid "Enable 2160p30 Mode"
 msgstr "Enable 1080p30 Mode"
 
+#: plugin.py:51
 msgid "Enable 720p24 Mode"
 msgstr "Enable 720p24 Mode"
 
+#: plugin.py:52
 #, fuzzy
 msgid "Enable 720p50 Mode"
 msgstr "Enable 720p24 Mode"
 
+#: plugin.py:553
 msgid "Enable Autoresolution"
 msgstr "Enable Auto resolution"
 
+#: plugin.py:804
 msgid "Exit"
 msgstr ""
 
+#: plugin.py:61
 #, fuzzy
 msgid "FHD 50/60Hz Progressive Mode"
 msgstr "SD 30/60Hz Progressive Mode"
 
+#: plugin.py:574
+msgid "Force set progressive for stream/video content"
+msgstr ""
+
+#: plugin.py:49
 msgid "HD Interlace Mode"
 msgstr "HD Interlace Mode"
 
+#: plugin.py:50
 msgid "HD Progressive Mode"
 msgstr "HD Progressive Mode"
 
+#: plugin.py:581
 msgid "Lock timeout"
 msgstr ""
 
+#: plugin.py:820 plugin.py:885
 #, fuzzy
 msgid "Manual resolution"
 msgstr "Enable Auto resolution"
 
+#: plugin.py:853
 #, fuzzy
 msgid "Manual resolution is not working in Scart/DVI-PC mode!"
 msgstr "Auto resolution is not working in Scart/DVI-PC Mode"
 
+#: plugin.py:584
 msgid "Message timeout"
 msgstr ""
 
+#: plugin.py:556
 msgid "Mode"
 msgstr ""
 
+#: plugin.py:547
 msgid "OK"
 msgstr "OK"
 
+#: plugin.py:820
 msgid "Please select a resolution..."
 msgstr ""
 
+#: plugin.py:561 plugin.py:563 plugin.py:565 plugin.py:567
 msgid "Refresh Rate"
 msgstr "Refresh Rate"
 
+#: plugin.py:592
 msgid "Return back without confirmation after 10 sec."
 msgstr ""
 
+#: plugin.py:571
 msgid "Running in testmode"
 msgstr "Running in test mode"
 
+#: plugin.py:46
 msgid "SD 24Hz Progressive mode"
 msgstr "SD 24Hz Progressive mode"
 
+#: plugin.py:44
 msgid "SD 25/50Hz Interlace Mode"
 msgstr "SD 25/50Hz Interlace Mode"
 
+#: plugin.py:47
 msgid "SD 25/50Hz Progressive Mode"
 msgstr "SD 25/50Hz Progressive Mode"
 
+#: plugin.py:45
 msgid "SD 30/60Hz Interlace Mode"
 msgstr "SD 30/60Hz Interlace Mode"
 
+#: plugin.py:48
 msgid "SD 30/60Hz Progressive Mode"
 msgstr "SD 30/60Hz Progressive Mode"
 
+#: plugin.py:579
+msgid "Separate colorimetry for HDR (set 'auto' HDMI Colorimetry)"
+msgstr ""
+
+#: plugin.py:590
 msgid "Show 'Manual resolution' in extensions menu"
 msgstr ""
 
+#: plugin.py:569
 msgid "Show info screen"
 msgstr "Show info screen"
 
+#: plugin.py:577
+msgid "Smart HDR type (set 'auto' HDMI HDR type)"
+msgstr ""
+
+#: plugin.py:827
 msgid "This resolution is OK?"
 msgstr ""
 
+#: plugin.py:67
 #, fuzzy
 msgid "UHD Interlace Mode"
 msgstr "HD Interlace Mode"
 
+#: plugin.py:68
 #, fuzzy
 msgid "UHD Progressive Mode"
 msgstr "HD Progressive Mode"
 
+#: plugin.py:585
 msgid "Use 60Hz instead 30Hz"
 msgstr ""
 
+#: plugin.py:805
 msgid "Video: "
 msgstr ""
 
+#: plugin.py:433
 #, python-format
 msgid "Videocontent: %sx%s%s %sHz"
 msgstr ""
 
+#: plugin.py:453 plugin.py:459
 #, python-format
 msgid "Videomode: %s"
 msgstr ""
 
+#: plugin.py:482
 #, python-format
 msgid "Videomode: %s %s %s"
 msgstr ""
 
+#: plugin.py:84 plugin.py:85
 msgid "auto"
 msgstr "auto"
 
+#: plugin.py:84 plugin.py:85
 msgid "bob"
 msgstr "bob"
 
+#: plugin.py:272
 msgid "default"
 msgstr "default"
 
+#: plugin.py:91
 msgid "manual"
 msgstr ""
 
+#: plugin.py:83
+msgid "no"
+msgstr ""
+
+#: plugin.py:84 plugin.py:85
 msgid "off"
 msgstr "off"
 
+#: plugin.py:84 plugin.py:85
 msgid "on"
 msgstr "on"
 
+#: plugin.py:88
 msgid "second"
 msgstr "second"
 
+#: plugin.py:87 plugin.py:88 plugin.py:89 plugin.py:90 plugin.py:92
+#: plugin.py:96
 msgid "seconds"
 msgstr "seconds"

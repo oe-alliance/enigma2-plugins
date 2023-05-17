@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2015-07-22 17:55+0200\n"
 "Last-Translator: Timo\n"
 "Language-Team: Kojo_\n"
@@ -18,6 +18,7 @@ msgstr ""
 "X-Poedit-Language: Finnish\n"
 "X-Poedit-Country: FINLAND\n"
 
+#: MountEdit.py:342
 msgid ""
 "A mount entry with this name already exists!\n"
 "Update existing entry and continue?\n"
@@ -25,12 +26,15 @@ msgstr ""
 "Tämän niminen liitos löytyy jo!\n"
 "Päivitä kyseinen liitos ja jatka?\n"
 
+#: MountEdit.py:126
 msgid "AUTOFS (mount as needed)"
 msgstr "AUTOFS (liitä tarvittaessa)"
 
+#: MountEdit.py:231
 msgid "Active"
 msgstr "Aktiivinen"
 
+#: MountView.py:65
 msgid ""
 "Active/\n"
 "Inactive"
@@ -38,18 +42,23 @@ msgstr ""
 "Aktiivinen/\n"
 "Pois päältä"
 
+#: MountManager.py:102
 msgid "Add a new NFS or CIFS mount point to your Receiver."
 msgstr "Lisää uusi NFS tai CIFS -liitos vastaanottimeesi."
 
+#: MountManager.py:102
 msgid "Add new network mount point"
 msgstr "Lisää uusi verkkoliitos"
 
+#: plugin.py:54
 msgid "Adding schedule..."
 msgstr "Lisäämässä aikataulua..."
 
+#: MountView.py:161
 msgid "Are you sure you want to remove your network mount ?"
 msgstr "Oletko varma että haluat poistaa verkkoliitoksen?"
 
+#: MountEdit.py:344
 msgid ""
 "Are you sure you want to save this network mount?\n"
 "\n"
@@ -57,123 +66,164 @@ msgstr ""
 "Oletko varma että haluat tallentaa tämän verkkoliitoksen?\n"
 "\n"
 
+#: plugin.py:114
 msgid "Attempt to mount shares again"
 msgstr "Yritä liittää jaot uudelleen"
 
+#: plugin.py:114
 msgid "Attempt to recover lost mounts (in background)"
 msgstr "Yritä palauttaa kadonneet liitokset (taustalla)"
 
+#: NetworkBrowser.py:192
 msgid "Browse network neighbourhood"
 msgstr "Tarkastele sisäverkkoasi"
 
+#: MountEdit.py:132
 msgid "CIFS share"
 msgstr "CIFS -jako"
 
+#: MountEdit.py:76 MountManager.py:195 NetworkBrowser.py:630
 msgid "Cancel"
 msgstr "Peruuta"
 
+#: MountManager.py:105
 msgid "Change hostname"
 msgstr "Vaihda isäntäkoneen nimeä"
 
+#: MountManager.py:105
 msgid "Change the hostname of your Receiver."
 msgstr "Vaihda vastaanottimesi verkkonimeä"
 
+#: MountManager.py:61 MountView.py:67 NetworkBrowser.py:127 UserDialog.py:101
+#: UserManager.py:51
 msgid "Close"
 msgstr "Sulje"
 
+#: UserManager.py:53
 msgid "Delete"
 msgstr "Poista"
 
+#: MountView.py:68
 msgid "Delete mount"
 msgstr "Poista liitos"
 
+#: MountView.py:122
 msgid "Dir:"
 msgstr "Hakemisto:"
 
+#: NetworkBrowser.py:539
 msgid "Do you want to enter a username and password for this host?"
 msgstr "Haluatko antaa käyttäjätunnuksen ja salasanan tälle laiteelle?"
 
+#: MountEdit.py:128
 msgid "Enigma2 (mount using enigma2)"
 msgstr "Enigma2 (liitä käyttäen Enigma2:sta )"
 
+#: MountEdit.py:129
 msgid "Enigma2 old format (mount using linux)"
 msgstr "Vanhanaikainen Enigma2 (liitä käyttäen Unixia)"
 
+#: NetworkBrowser.py:662
 msgid "Enter IP to scan..."
 msgstr "Syötä skannattava IP"
 
+#: MountManager.py:142
 msgid "Enter new hostname for your Receiver"
 msgstr "Syötä vastaanottimellesi uusi verkkonimi"
 
+#: MountEdit.py:277
 msgid "Enter options:"
 msgstr "Syötä vaihtoehdot:"
 
+#: MountEdit.py:281 UserDialog.py:151
 msgid "Enter password:"
 msgstr "Syötä salasana:"
 
+#: MountEdit.py:275
 msgid "Enter share directory:"
 msgstr "Syötä jakokansio:"
 
+#: MountEdit.py:273
 msgid "Enter share name:"
 msgstr "Syötä jaon nimi:"
 
+#: UserDialog.py:104
 msgid "Enter user and password for host: "
 msgstr "Syötä isäntäkoneelle käyttäjätunnus ja salasana:"
 
+#: MountEdit.py:279 UserDialog.py:149
 msgid "Enter username:"
 msgstr "Syötä käyttäjätunnus:"
 
+#: NetworkBrowser.py:130
 msgid "Expert"
 msgstr "Edistynyt"
 
+#: MountEdit.py:127
 msgid "FSTAB (mount at boot)"
 msgstr "FSTAB (liitä käynnistyksen yhteydessä)"
 
+#: MountManager.py:168
 msgid "Finished restarting your network"
 msgstr "Verkon uudelleenkäynnistys on valmis"
 
+#: NetworkBrowser.py:647
 msgid "IP Address"
 msgstr "IP -osoite"
 
+#: MountView.py:121
 msgid "IP:"
 msgstr "IP:"
 
+#: MountEdit.py:233
 msgid "Local share name"
 msgstr "Paikallisen jaon nimi"
 
+#: plugin.py:113
 msgid "Manage network shares"
 msgstr "Hallitse verkkojakoja"
 
+#: plugin.py:113
 msgid "Manage your network shares..."
 msgstr "Hallitse sinun verkkojakojasi..."
 
+#: plugin.py:114
 msgid "Mount Again"
 msgstr "MountAgain"
 
+#: MountManager.py:90 plugin.py:113
 msgid "Mount Manager"
 msgstr "Liitoksien hallinnointi"
 
+#: MountView.py:52
 msgid "Mount Viewer"
 msgstr "Liitosten katselmointi"
 
+#: plugin.py:114
 msgid "Mount again"
 msgstr "Liitä uudelleen"
 
+#: MountView.py:64
 msgid "Mount informations"
 msgstr "Tietoa liitoksista"
 
+#: NetworkBrowser.py:128
 msgid "Mount manager"
 msgstr "Liitosten hallinnointi"
 
+#: MountEdit.py:243
 msgid "Mount options"
 msgstr "Liitosvaihtoehdot"
 
+#: MountEdit.py:235
 msgid "Mount type"
 msgstr "Liitoksen tyyppi"
 
+#: MountEdit.py:229
 msgid "Mount using"
 msgstr "Liitä käyttäen"
 
+#: MountView.py:63
 msgid ""
 "Mounted/\n"
 "Unmounted"
@@ -181,126 +231,167 @@ msgstr ""
 "Liitetty/\n"
 "Liitos purettu"
 
+#: plugin.py:45
 msgid "Mounting network shares..."
 msgstr "Liittää verkkojakoja..."
 
+#: MountManager.py:103
 msgid "Mountpoints management"
 msgstr "Liitosten hallinnointi"
 
+#: MountEdit.py:96
 msgid "Mounts editor"
 msgstr "Liitosten muokkaus"
 
+#: MountEdit.py:133
 msgid "NFS share"
 msgstr "NFS -jako"
 
+#: plugin.py:38 plugin.py:112
 msgid "Network Browser"
 msgstr "Verkkoympäristö"
 
+#: NetworkBrowser.py:236 NetworkBrowser.py:238
 msgid "No network devices found!"
 msgstr "Verkkolaitteita ei löytynyt"
 
+#: MountEdit.py:248 UserDialog.py:140
 msgid "Password"
 msgstr "Salasana"
 
+#: MountEdit.py:408
 msgid "Please wait for activation of your network mount..."
 msgstr "Verkkoliitostasi aktivoidaan. Ole hyvä ja odota..."
 
+#: MountView.py:172
 msgid "Please wait while removing your network mount..."
 msgstr "Verkkoliitoksesi poistetaan. Ole hyvä ja odota..."
 
+#: MountEdit.py:370
 msgid "Please wait while updating your network mount..."
 msgstr "Verkkoliitoksesi päivittyy. Ole hyvä ja odota..."
 
+#: MountManager.py:155
 msgid "Please wait while your network is restarting..."
 msgstr "Verkkosi uudelleenkäynnistyy. Ole hyvä ja odota."
 
+#: MountEdit.py:75
 msgid "Press OK to activate the settings."
 msgstr "Paina OK aktivoidaksesi asetukset."
 
+#: NetworkBrowser.py:506 NetworkBrowser.py:507
 msgid "Press OK to collapse this host"
 msgstr "Paina OK kutistaaksesi tämän isäntäkoneen tiedot"
 
+#: UserManager.py:52
 msgid "Press OK to edit selected settings."
 msgstr "Paina OK muokataksesi valittuja asetuksia."
 
+#: MountView.py:66
 msgid "Press OK to edit the settings."
 msgstr "Paina OK muokataksesi asetuksia"
 
+#: NetworkBrowser.py:509 NetworkBrowser.py:510
 msgid "Press OK to expand this host"
 msgstr "Paina OK laajentaaksesi tämän isäntäkoneen tietoja"
 
+#: NetworkBrowser.py:496
 msgid "Press OK to mount this share!"
 msgstr "Paina OK liittääksesi tämän jaon!"
 
+#: NetworkBrowser.py:131
 msgid "Press OK to mount!"
 msgstr "Paina OK liittääksesi"
 
+#: UserDialog.py:100
 msgid "Press OK to save settings."
 msgstr "Paina OK tallentaaksesi asetukset"
 
+#: MountManager.py:62
 msgid "Press OK to select."
 msgstr "Paina OK valitaksesi."
 
+#: MountManager.py:215
 msgid "Re-mount network shares every (in hours)"
 msgstr "Määritä tunnit kuinka usein verkkojakosi liitetään uudelleen"
 
+#: MountManager.py:252
 msgid "Really close without saving settings?"
 msgstr "Oletko varma että haluat sulkea tallentamatta?"
 
+#: NetworkBrowser.py:129
 msgid "Rescan"
 msgstr "Skannaa uudelleen"
 
+#: MountEdit.py:77 MountManager.py:196
 msgid "Save"
 msgstr "Tallenna"
 
+#: NetworkBrowser.py:631
 msgid "Scan NFS share"
 msgstr "Skannaa NFS -jako"
 
+#: NetworkBrowser.py:632
 msgid "Scan range"
 msgstr "Skannaa alue"
 
+#: MountManager.py:213 MountManager.py:221
 msgid "Schedule MountAgain"
 msgstr "Ajasta MountAgain"
 
+#: MountManager.py:106
 msgid "Schedule a auto remount of your network shares."
 msgstr "Ajasta automaattinen verkkojakojesi uudelleenliitos."
 
+#: plugin.py:112
 msgid "Search for network shares"
 msgstr "Etsi verkkojakoja"
 
+#: plugin.py:112
 msgid "Search for network shares..."
 msgstr "Etsi verkkojakoja..."
 
+#: NetworkBrowser.py:227 NetworkBrowser.py:229
 msgid "Searching your network. Please wait..."
 msgstr "Etsii verkkoasi. Ole hyvä ja odota..."
 
+#: MountEdit.py:237
 msgid "Server IP"
 msgstr "Palvelimen IP"
 
+#: MountEdit.py:239
 msgid "Server share"
 msgstr "Palvelinjako"
 
+#: MountManager.py:106 MountManager.py:187
 msgid "Setup Mount Again"
 msgstr "MountAgain asetukset"
 
+#: MountEdit.py:241
 msgid "Use as HDD replacement"
 msgstr "Käytä korvaavana kovalevynä"
 
+#: MountManager.py:104
 msgid "User management"
 msgstr "Käyttäjien hallinnointi"
 
+#: UserManager.py:61
 msgid "Usermanager"
 msgstr "Käyttäjähallinnointi"
 
+#: MountEdit.py:246 UserDialog.py:138
 msgid "Username"
 msgstr "Käyttäjätunnus"
 
+#: MountManager.py:103
 msgid "View, edit or delete mountpoints on your Receiver."
 msgstr "Tarkasta, muokkaa tai poista vastaanottimesi liitoksia"
 
+#: MountManager.py:104
 msgid "View, edit or delete usernames and passwords for your network."
 msgstr "Tarkasta, muokkaa tai poista verkkosi käyttäjätunnuksia ja salasanoja."
 
+#: MountEdit.py:340
 msgid ""
 "You have changed the share name!\n"
 "Update existing entry and continue?\n"
@@ -308,17 +399,21 @@ msgstr ""
 "Vaihdoit jakosi nimeä!\n"
 "Päivitä syöttämäsi tiedot ja jatka?\n"
 
+#: NetworkBrowser.py:272
 #, python-format
 msgid ""
 "Your network interface %s is not properly configured, so a network scan cannot be done.\n"
 "Please configure the interface and try again."
 msgstr ""
 
+#: MountEdit.py:421
 msgid "Your network mount has been activated."
 msgstr "Verkkoliitoksesi on aktivoitu."
 
+#: MountView.py:196
 msgid "Your network mount has been removed."
 msgstr "Verkkoliitoksesi on poistettu."
 
+#: MountEdit.py:382
 msgid "Your network mount has been updated."
 msgstr "Verkkoliitoksesi on päivitetty."

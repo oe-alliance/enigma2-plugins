@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# $PACKAGEDESCRIPION
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the PornCenter package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: PornCenter 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,48 +17,63 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: plugin.py:64
 msgid "Adult streaming plugins for dm800/dm8000"
 msgstr ""
 
+#: plugin.py:268
 msgid "Buffer device:"
 msgstr ""
 
+#: plugin.py:269
 msgid "Buffer file handling:"
 msgstr ""
 
+#: plugin.py:267
 msgid "Buffer:"
 msgstr ""
 
+#: plugin.py:413
 msgid "Delete this movie?"
 msgstr ""
 
+#: plugin.py:266
 msgid "Description:"
 msgstr ""
 
+#: plugin.py:132
 #, python-format
 msgid "Downloading movie: %s"
 msgstr ""
 
+#: plugin.py:400
 msgid "Error while getting video url!"
 msgstr ""
 
+#: plugin.py:265
 msgid "Name:"
 msgstr ""
 
+#: plugin.py:63 plugin.py:120 plugin.py:184 plugin.py:203 plugin.py:250
 msgid "Porn Center"
 msgstr ""
 
+#: plugin.py:207
 msgid "Select"
 msgstr ""
 
+#: plugin.py:172
 msgid "Stop playing this movie?"
 msgstr ""
 
+#: plugin.py:67
 msgid "ask me"
 msgstr ""
 
+#: plugin.py:67
 msgid "delete"
 msgstr ""
 
+#: plugin.py:67
 msgid "keep on device"
 msgstr ""

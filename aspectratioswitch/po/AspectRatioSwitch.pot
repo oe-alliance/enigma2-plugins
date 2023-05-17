@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# $PACKAGEDESCRIPION
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the AspectRatioSwitch package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: AspectRatioSwitch 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:24+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,30 +17,39 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: plugin.py:70 plugin.py:81
 msgid "16:10 Letterbox"
 msgstr ""
 
+#: plugin.py:71 plugin.py:81
 msgid "16:10 PanScan"
 msgstr ""
 
+#: plugin.py:68 plugin.py:81
 msgid "16:9"
 msgstr ""
 
+#: plugin.py:72 plugin.py:81
 msgid "16:9 Letterbox"
 msgstr ""
 
+#: plugin.py:69 plugin.py:81
 msgid "16:9 always"
 msgstr ""
 
+#: plugin.py:66 plugin.py:81
 msgid "4:3 Letterbox"
 msgstr ""
 
+#: plugin.py:67 plugin.py:81
 msgid "4:3 PanScan"
 msgstr ""
 
+#: plugin.py:294 plugin.py:298
 msgid "Aspect Ratio Switch setup"
 msgstr ""
 
+#: plugin.py:230
 #, python-format
 msgid ""
 "Aspect ratio switched from:\n"
@@ -49,68 +58,89 @@ msgid ""
 "   %s"
 msgstr ""
 
+#: plugin.py:107 plugin.py:137
 msgid "AspectRatioSwitch Setup"
 msgstr ""
 
+#: plugin.py:79
 msgid "Bouquet +/- long"
 msgstr ""
 
+#: plugin.py:122
 msgid "Cancel"
 msgstr ""
 
+#: plugin.py:179
 #, python-format
 msgid "Changing keymap failed (%s)."
 msgstr ""
 
+#: plugin.py:84
 msgid "Extensions menu"
 msgstr ""
 
+#: plugin.py:79
 msgid "Help key long"
 msgstr ""
 
+#: plugin.py:114
 #, python-format
 msgid "Include %s"
 msgstr ""
 
+#: plugin.py:111
 msgid "Key mapping"
 msgstr ""
 
+#: plugin.py:79
 msgid "PVR key long"
 msgstr ""
 
+#: plugin.py:84
 msgid "Plugin menu"
 msgstr ""
 
+#: plugin.py:294 plugin.py:298
 msgid "Quick switching of aspect ratio setting"
 msgstr ""
 
+#: plugin.py:110
 msgid "Quick switching via remote control"
 msgstr ""
 
+#: plugin.py:79
 msgid "Radio key long"
 msgstr ""
 
+#: plugin.py:123
 msgid "Save"
 msgstr ""
 
+#: plugin.py:115
 msgid "Set aspect ratio on startup"
 msgstr ""
 
+#: plugin.py:117
 msgid "Show Setup in"
 msgstr ""
 
+#: plugin.py:112
 msgid "Show switch message"
 msgstr ""
 
+#: plugin.py:116
 msgid "Startup aspect ratio"
 msgstr ""
 
+#: plugin.py:124
 msgid "Use the configured key(s) on your remote control to switch aspect ratio modes. If any 'Quickbutton' actions were assigned to these keys, they will be disabled as long as this plugin is activated!"
 msgstr ""
 
+#: plugin.py:137
 msgid "Ver."
 msgstr ""
 
+#: plugin.py:143
 #, python-format
 msgid "You need to include at least %d aspect ratio modes!"
 msgstr ""

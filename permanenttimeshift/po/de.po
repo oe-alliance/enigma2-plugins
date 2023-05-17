@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pts-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2010-06-26 13:22+0100\n"
 "Last-Translator: Homey <homey@battletracker.com>\n"
 "Language-Team: none\n"
@@ -19,25 +19,31 @@ msgstr ""
 "X-Poedit-SourceCharset: iso-8859-15\n"
 "X-Poedit-Country: GERMANY\n"
 
+#: plugin.py:901
 msgid ""
 "\n"
 "An Input/output error usually indicates a corrupted filesystem! Please check the filesystem of your timeshift-device!"
 msgstr ""
 
+#: plugin.py:1677
 msgid ""
 "A recording is currently running.\n"
 "What do you want to do?"
 msgstr ""
 
+#: plugin.py:86
 msgid "Ask user"
 msgstr ""
 
+#: plugin.py:1774
 msgid "Beta: Enable Permanent Recording?"
 msgstr ""
 
+#: plugin.py:1752
 msgid "Cancel"
 msgstr ""
 
+#: plugin.py:1271
 msgid ""
 "Could not activate Permanent-Timeshift!\n"
 "Timeshift-Path does not exist"
@@ -45,27 +51,35 @@ msgstr ""
 "Permanent-Timeshift konnte nicht aktiviert werden!\n"
 "Aufnahmeverzeichnis existiert nicht!"
 
+#: plugin.py:214
 msgid "Creating AP and SC Files"
 msgstr ""
 
+#: plugin.py:882 plugin.py:902
 msgid "Creating Hardlink to Timeshift file failed!"
 msgstr "Fehler beim erstellen des Hardlinks zur Timeshift Datei!"
 
+#: plugin.py:548
 msgid "Current Event:"
 msgstr "Aktuelle Sendung:"
 
+#: plugin.py:1667
 msgid "Default storage device is not available!"
 msgstr ""
 
+#: plugin.py:86
 msgid "Don't save"
 msgstr "Nicht speichern"
 
+#: plugin.py:531
 msgid "Don't save Timeshift as Movie"
 msgstr "Timeshiftaufnahme nicht als Film speichern"
 
+#: plugin.py:829
 msgid "Getting Event Info failed!"
 msgstr "Fehler bei lesen der Event-Infos!"
 
+#: plugin.py:1346
 msgid ""
 "Maximum Timeshift length per Event reached!\n"
 "Restarting Timeshift now ..."
@@ -73,18 +87,23 @@ msgstr ""
 "Maximale länge für eine Timeshiftaufnahme erreicht!\n"
 "Timeshiftaufnahme wird neu gestartet ..."
 
+#: plugin.py:169
 msgid "Merging Timeshift files"
 msgstr "Füge Timeshift Dateien zusammen"
 
+#: plugin.py:1672
 msgid "No HDD found or HDD not initialized!"
 msgstr ""
 
+#: plugin.py:645
 msgid "No Timeshift found to save as recording!"
 msgstr "Keine Timeshift Datei gefunden zum speichern!"
 
+#: plugin.py:1661
 msgid "No default storage device found!"
 msgstr ""
 
+#: plugin.py:782
 #, python-format
 msgid ""
 "Not enough free Diskspace!\n"
@@ -94,85 +113,111 @@ msgid ""
 "Path: %s"
 msgstr ""
 
+#: plugin.py:1751
 msgid "OK"
 msgstr ""
 
+#: plugin.py:642
 #, python-format
 msgid "PTS Plugin Error: %s"
 msgstr ""
 
+#: plugin.py:977
 msgid "PTS-Plugin: Merging records failed!"
 msgstr ""
 
+#: plugin.py:524
 msgid "PTS-Plugin: Restarting Timeshift!"
 msgstr ""
 
+#: plugin.py:1761
 msgid "Permanent Timeshift Enable"
 msgstr "Permanent Timeshift aktivieren"
 
+#: plugin.py:1764
 msgid "Permanent Timeshift Max Events"
 msgstr "Permanent Timeshift Max Sendungen"
 
+#: plugin.py:1765
 msgid "Permanent Timeshift Max Length"
 msgstr "Permanent Timeshift Max Länge"
 
+#: plugin.py:1828
 msgid "Permanent Timeshift Settings"
 msgstr "Permanent Timeshift Einstellungen"
 
+#: plugin.py:1737
 #, fuzzy, python-format
 msgid "Permanent Timeshift Settings Version %s"
 msgstr "Permanent Timeshift Einstellungen"
 
+#: plugin.py:1766
 msgid "Permanent Timeshift Start Delay"
 msgstr "Permanent Timeshift Start Verzögerung"
 
+#: plugin.py:1662
 msgid "Please make sure to set up your default storage device in menu -> setup -> system -> recording paths."
 msgstr ""
 
+#: plugin.py:1658
 msgid "Please make sure to set up your storage devices with the storage management in menu -> setup -> system -> storage devices."
 msgstr ""
 
+#: plugin.py:1668
 msgid "Please verify if your default storage device is attached or set up your default storage device in menu -> setup -> system -> recording paths."
 msgstr ""
 
+#: plugin.py:569
 msgid "Record"
 msgstr "Aufnahme"
 
+#: plugin.py:1299
 msgid "Record started! Stopping timeshift now ..."
 msgstr "Aufnahme gestartet! Stoppe timeshift aufnahme ..."
 
+#: plugin.py:530
 msgid "Save Timeshift as Movie and continue recording"
 msgstr "Timeshiftaufnahme als Film speichern und weiter aufnehmen"
 
+#: plugin.py:529
 msgid "Save Timeshift as Movie and stop recording"
 msgstr "Timeshiftaufnahme als Film speichern und Aufnahme beenden"
 
+#: plugin.py:86
 msgid "Save and record"
 msgstr "Save and record"
 
+#: plugin.py:86
 msgid "Save and stop"
 msgstr "Save and stop"
 
+#: plugin.py:126
 msgid "Saving Timeshift files"
 msgstr "Speichere Timeshift Dateien"
 
+#: plugin.py:605 plugin.py:778
 msgid "Saving timeshift as movie now. This might take a while!"
 msgstr "Speichere nun Timeshift als Film. Das kann eine Weile dauern!"
 
+#: plugin.py:1769
 msgid "Show PTS Infobar while timeshifting?"
 msgstr "PTS Infobar anzeigen während des timeshiftens?"
 
+#: plugin.py:1690
 msgid "Start recording?"
 msgstr ""
 
+#: plugin.py:1768
 msgid "Stop timeshift while recording?"
 msgstr "Timeshift beenden wenn Aufnahme läuft?"
 
+#: plugin.py:882
 msgid ""
 "The Filesystem on your Timeshift-Device does not support hardlinks.\n"
 "Make sure it is formated in EXT2 or EXT3!"
 msgstr ""
 
+#: plugin.py:528
 msgid ""
 "The Timeshift record was not saved yet!\n"
 "What do you want to do now with the timeshift file?"
@@ -180,64 +225,83 @@ msgstr ""
 "Die Timeshiftaufnahme wurde noch nicht gespeichert!\n"
 "Was möchtest du nun mit der Timeshift aufnahme tun?"
 
+#: plugin.py:317 plugin.py:1685 plugin.py:1686 plugin.py:1695 plugin.py:1696
 msgid "Timeshift"
 msgstr "Timeshift"
 
+#: plugin.py:1820
 #, fuzzy
 msgid "Timeshift Settings"
 msgstr "Permanent Timeshift Einstellungen"
 
+#: plugin.py:792
 msgid "Timeshift save failed!"
 msgstr "Fehler beim speichern der Timeshiftaufnahme!"
 
+#: plugin.py:1042
 msgid "Timeshift saved to your harddisk!"
 msgstr "Timeshiftaufnahme auf Festplatte gespeichert!"
 
+#: plugin.py:1716
 msgid "Timeshift will get saved at end of event!"
 msgstr "Timeshiftaufnahme wird am Ende dieses Films gespeichert!"
 
+#: plugin.py:1767
 msgid "Timeshift-Save Action on zap"
 msgstr "Timeshift-Save Aktion beim zap"
 
+#: plugin.py:1657
 msgid "Unconfigured storage devices found!"
 msgstr ""
 
+#: plugin.py:571
 msgid "Which event do you want to save permanently?"
 msgstr "Welche Sendung möchtest du permanent speichern?"
 
+#: plugin.py:1681 plugin.py:1693
 msgid "add recording (enter recording duration)"
 msgstr ""
 
+#: plugin.py:1682 plugin.py:1694
 #, fuzzy
 msgid "add recording (enter recording endtime)"
 msgstr "Aufnahme speichern (Aktuelle Sendung)"
 
+#: plugin.py:1680 plugin.py:1692
 msgid "add recording (indefinitely)"
 msgstr ""
 
+#: plugin.py:1679 plugin.py:1691
 #, fuzzy
 msgid "add recording (stop after current event)"
 msgstr "Aufnahme speichern (Aktuelle Sendung)"
 
+#: plugin.py:1683
 #, fuzzy
 msgid "change recording (duration)"
 msgstr "Aufnahme speichern (Sendung auswählen)"
 
+#: plugin.py:1684
 #, fuzzy
 msgid "change recording (endtime)"
 msgstr "Aufnahme speichern (Sendung auswählen)"
 
+#: plugin.py:1687
 msgid "do nothing"
 msgstr ""
 
+#: plugin.py:1697
 msgid "don't record"
 msgstr ""
 
+#: plugin.py:1686 plugin.py:1696
 msgid "save recording (Select event)"
 msgstr "Aufnahme speichern (Sendung auswählen)"
 
+#: plugin.py:1685 plugin.py:1695
 msgid "save recording (stop after current event)"
 msgstr "Aufnahme speichern (Aktuelle Sendung)"
 
+#: plugin.py:1678
 msgid "stop recording"
 msgstr ""

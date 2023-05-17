@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
+"POT-Creation-Date: 2023-05-17 21:26+0100\n"
 "PO-Revision-Date: 2012-12-03 15:01+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -17,109 +17,143 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: plugin.py:1421
 msgid "Abort all downloads"
 msgstr "Abort all downloads"
 
+#: plugin.py:1311 plugin.py:1394
 msgid "Add"
 msgstr "Add"
 
+#: plugin.py:1418
 msgid "Add downloads from txt files"
 msgstr "Add downloads from txt files"
 
+#: plugin.py:1419
 msgid "Add files from container"
 msgstr "Add files from container"
 
+#: plugin.py:946
 #, python-format
 msgid "Added %s to the download-list."
 msgstr "Added %s to the download-list."
 
+#: plugin.py:859
 msgid "Allow downloading on friday:"
 msgstr "Allow downloading on friday:"
 
+#: plugin.py:855
 msgid "Allow downloading on monday:"
 msgstr "Allow downloading on monday:"
 
+#: plugin.py:860
 msgid "Allow downloading on saturday:"
 msgstr "Allow downloading on saturday:"
 
+#: plugin.py:861
 msgid "Allow downloading on sunday:"
 msgstr "Allow downloading on sunday:"
 
+#: plugin.py:858
 msgid "Allow downloading on thursday:"
 msgstr "Allow downloading on thursday:"
 
+#: plugin.py:856
 msgid "Allow downloading on tuesday:"
 msgstr "Allow downloading on tuesday:"
 
+#: plugin.py:857
 msgid "Allow downloading on wednesday:"
 msgstr "Allow downloading on wednesday:"
 
+#: plugin.py:300 plugin.py:331 plugin.py:363 plugin.py:417 plugin.py:451
 msgid "Checking"
 msgstr "Checking"
 
+#: plugin.py:868
 msgid "Choose reconnect script:"
 msgstr "Choose reconnect script:"
 
+#: plugin.py:1423
 msgid "Clear finished downloads"
 msgstr "Clear finished downloads"
 
+#: plugin.py:1430
 msgid "Close plugin"
 msgstr "Close plugin"
 
+#: plugin.py:1395
 msgid "Config"
 msgstr "Config"
 
+#: plugin.py:1310 plugin.py:1392
 msgid "Delete"
 msgstr "Delete"
 
+#: plugin.py:1478
 #, python-format
 msgid "Delete %s?"
 msgstr "Delete %s?"
 
+#: plugin.py:1416
 msgid "Delete download"
 msgstr "Delete download"
 
+#: plugin.py:1420
 msgid "Delete failed downloads"
 msgstr "Delete failed downloads"
 
+#: plugin.py:1425
 msgid "Delete log"
 msgstr "Delete log"
 
+#: plugin.py:863
 msgid "Don't download after:"
 msgstr "Don't download after:"
 
+#: plugin.py:862
 msgid "Don't download before:"
 msgstr "Don't download before:"
 
+#: plugin.py:870
 msgid "Don't reconnect after:"
 msgstr "Don't reconnect after:"
 
+#: plugin.py:869
 msgid "Don't reconnect before:"
 msgstr "Don't reconnect before:"
 
+#: plugin.py:1574
 msgid "Download files from rapidshare"
 msgstr "Download files from rapidshare"
 
+#: plugin.py:845
 msgid "Download in the background:"
 msgstr "Download in the background:"
 
+#: plugin.py:355 plugin.py:366 plugin.py:389 plugin.py:395 plugin.py:763
 msgid "Downloading"
 msgstr "Downloading"
 
+#: plugin.py:853
 msgid "Downloads directory:"
 msgstr "Downloads directory:"
 
+#: plugin.py:1282
 msgid "Enter unrar password:"
 msgstr "Enter unrar password:"
 
+#: plugin.py:948
 #, python-format
 msgid "Error while adding %s to the download-list!"
 msgstr "Error while adding %s to the download-list!"
 
+#: plugin.py:1550
 #, python-format
 msgid "Error while decrypting %s!"
 msgstr "Error while decrypting %s!"
 
+#: plugin.py:1002
 #, python-format
 msgid ""
 "Error while searching http://rapidshare-search-engine.com!\n"
@@ -130,6 +164,7 @@ msgstr ""
 "\n"
 "Error: %s"
 
+#: plugin.py:958
 msgid ""
 "Error while searching http://rapidshare-search-engine.com!\n"
 "\n"
@@ -139,114 +174,152 @@ msgstr ""
 "\n"
 "Error: Nothing found, sorry."
 
+#: plugin.py:424 plugin.py:436 plugin.py:572 plugin.py:753 plugin.py:778
 msgid "Failed"
 msgstr "Failed"
 
+#: plugin.py:430 plugin.py:572 plugin.py:678 plugin.py:745 plugin.py:1475
 msgid "Finished"
 msgstr "Finished"
 
+#: plugin.py:854
 msgid "Ignore download times:"
 msgstr "Ignore download times:"
 
+#: plugin.py:1429
 msgid "Install unrar"
 msgstr "Install unrar"
 
+#: plugin.py:1462
 msgid "Installing unrar..."
 msgstr "Installing unrar..."
 
+#: plugin.py:852
 msgid "Lists directory:"
 msgstr "Lists directory:"
 
+#: plugin.py:1013
 msgid "Loading next page... please wait!"
 msgstr "Loading next page... please wait!"
 
+#: plugin.py:1007
 msgid "Loading previous page... please wait!"
 msgstr "Loading previous page... please wait!"
 
+#: plugin.py:872
 msgid "Mark files < 1 MB as failed:"
 msgstr "Mark files < 1 MB as failed:"
 
+#: plugin.py:864
 msgid "Maximal downloads:"
 msgstr "Maximal downloads:"
 
+#: plugin.py:1396
 msgid "Menu"
 msgstr "Menu"
 
+#: plugin.py:68
 msgid "No reconnect"
 msgstr "No reconnect"
 
+#: plugin.py:959
 msgid "Nothing found, sorry."
 msgstr "Nothing found, sorry."
 
+#: plugin.py:1427
 msgid "Open unrar Manager"
 msgstr "Open unrar Manager"
 
+#: plugin.py:975
 #, python-format
 msgid "Page %d / %d. Push < > to switch the page..."
 msgstr "Page %d / %d. Push < > to switch the page..."
 
+#: plugin.py:849
 msgid "Password (netload.in):"
 msgstr "Password (netload.in):"
 
+#: plugin.py:851
 msgid "Password (uploaded.to):"
 msgstr "Password (uploaded.to):"
 
+#: plugin.py:847
 msgid "Password:"
 msgstr "Password:"
 
+#: plugin.py:1431
 msgid "Please choose a function..."
 msgstr "Please choose a function..."
 
+#: plugin.py:801 plugin.py:1574
 msgid "RS Downloader"
 msgstr "RS Downloader"
 
+#: plugin.py:867
 msgid "Reconnect type:"
 msgstr "Reconnect type:"
 
+#: plugin.py:871
 msgid "Restart failed after 10 minutes:"
 msgstr "Restart failed after 10 minutes:"
 
+#: plugin.py:1422
 msgid "Restart failed downloads"
 msgstr "Restart failed downloads"
 
+#: plugin.py:842
 msgid "Save"
 msgstr "Save"
 
+#: plugin.py:68
 msgid "Script"
 msgstr "Script"
 
+#: plugin.py:1393
 msgid "Search"
 msgstr "Search"
 
+#: plugin.py:1487
 msgid "Search http://rapidshare-search-engine.com for:"
 msgstr "Search http://rapidshare-search-engine.com for:"
 
+#: plugin.py:1424
 msgid "Show log"
 msgstr "Show log"
 
+#: plugin.py:865
 msgid "Take x downloads to list:"
 msgstr "Take x downloads to list:"
 
+#: plugin.py:1337
 msgid "Unrar is already working!"
 msgstr "Unrar is already working!"
 
+#: plugin.py:1417
 msgid "Use search engine"
 msgstr "Use search engine"
 
+#: plugin.py:848
 msgid "Username (netload.in):"
 msgstr "Username (netload.in):"
 
+#: plugin.py:850
 msgid "Username (uploaded.to):"
 msgstr "Username (uploaded.to):"
 
+#: plugin.py:846
 msgid "Username:"
 msgstr "Username:"
 
+#: plugin.py:253 plugin.py:320 plugin.py:344 plugin.py:403 plugin.py:438
+#: plugin.py:588 plugin.py:609 plugin.py:769 plugin.py:783
 msgid "Waiting"
 msgstr "Waiting"
 
+#: plugin.py:866
 msgid "Write log:"
 msgstr "Write log:"
 
+#: plugin.py:68
 msgid "fritz.Box"
 msgstr "fritz.Box"

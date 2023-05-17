@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-16 18:40+0000\n"
+"POT-Creation-Date: 2023-05-17 21:25+0100\n"
 "PO-Revision-Date: 2022-04-18 16:04+0200\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: \n"
@@ -18,80 +18,106 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
+#: plugin.py:77
 msgid "Copy"
 msgstr "Kopieer"
 
+#: plugin.py:75
 msgid "Delete"
 msgstr "Verwijder"
 
+#: plugin.py:21
 msgid "Filebrowser"
 msgstr "Filebrowser"
 
+#: setup.xml
 msgid "Filebrowser Settings"
 msgstr "Filebrowser instellingen"
 
+#: setup.xml
 msgid "Filesystemposition list left"
 msgstr "Bestandssysteempositie linker lijst"
 
+#: setup.xml
 msgid "Filesystemposition list right"
 msgstr "Bestandssysteempositie rechter lijst"
 
+#: plugin.py:80
 msgid "HELP"
 msgstr "HELP"
 
+#: plugin.py:79
 msgid "MENU"
 msgstr "MENU"
 
+#: plugin.py:76
 msgid "Move"
 msgstr "Verplaats"
 
+#: plugin.py:78
 msgid "Rename"
 msgstr "Hernoem"
 
+#: setup.xml
 msgid "add Plugin to Extensionmenu"
 msgstr "toon plugin in extensies"
 
+#: setup.xml
 msgid "add Plugin to Mainmenu"
 msgstr "toon plugin in hoofdmenu"
 
+#: plugin.py:140
 msgid "copy file"
 msgstr "kopieer bestand"
 
+#: plugin.py:148
 msgid "copying file ..."
 msgstr "kopieert bestand..."
 
+#: plugin.py:157
 msgid "delete file"
 msgstr "verwijder bestand"
 
+#: plugin.py:164
 msgid "deleting file ..."
 msgstr "verwijdert bestand..."
 
+#: plugin.py:98
 msgid "filebrowser buttons"
 msgstr "filebrowser toetsen"
 
+#: plugin.py:22
 msgid "manage local Files"
 msgstr "beheer lokale bestanden"
 
+#: plugin.py:174
 msgid "move file"
 msgstr "verlaats bestand"
 
+#: plugin.py:182
 msgid "moving file ..."
 msgstr "verplaatst bestand..."
 
+#: plugin.py:140 plugin.py:157 plugin.py:174
 msgid "no"
 msgstr "nee"
 
+#: plugin.py:229
 msgid "no Viewer installed for this mimetype!"
 msgstr "geen viewer geïnstalleerd voor dit minetype!"
 
+#: plugin.py:191
 msgid "rename file"
 msgstr "hernoem bestand"
 
+#: plugin.py:197
 msgid "renaming file ..."
 msgstr "hernoemt bestand..."
 
+#: setup.xml
 msgid "save Filesystemposition on exit"
 msgstr "bewaar bestandssysteempositie bij afsluiten"
 
+#: plugin.py:140 plugin.py:157 plugin.py:174
 msgid "yes"
 msgstr "ja"
