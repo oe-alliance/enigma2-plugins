@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 EPGRefresh Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-12 10:30+CEST\n"
+"POT-Creation-Date: 2023-05-17 15:22+0200\n"
 "PO-Revision-Date: 2020-03-07 10:13+0300\n"
 "Last-Translator: mosad - مساعد الجعيد <abo-mishal@hotmail.com>\n"
 "Language-Team: mosad - مساعد الجعيد\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
+#, python-format
 msgid "%d more services"
 msgstr "% d قنوات أكثر"
 
@@ -34,6 +35,7 @@ msgstr "اسأل الافتراضي لا"
 msgid "Ask default Yes"
 msgstr "اسأل الافتراضي نعم"
 
+#, python-format
 msgid "AutoTimer failed with error %s"
 msgstr "فشل التوقيت التلقائي مع الخطأ %s"
 
@@ -92,8 +94,28 @@ msgstr "تشغيل تحديث دليل البرامج الإلكترونية ف�
 msgid "EPG refresh starts scanning channels."
 msgstr "تحديث دليل البرامج الإلكترونية يبدأ بالبحث في القنوات."
 
+#, fuzzy
+msgid "EPG-Refresh_Pending Services"
+msgstr "قنوات تحديث دليل البرامج الإلكترونية"
+
+#, fuzzy
+msgid "EPG-Refresh_Refresh now"
+msgstr "قنوات تحديث دليل البرامج الإلكترونية"
+
+#, fuzzy
+msgid "EPG-Refresh_SetUp"
+msgstr "قنوات تحديث دليل البرامج الإلكترونية"
+
+#, fuzzy
+msgid "EPG-Refresh_Stop Refresh"
+msgstr "قنوات تحديث دليل البرامج الإلكترونية"
+
 msgid "EPGREFRESH_NOTIFICATION_DOMAIN"
 msgstr "تحديث دليل البرامج الإلكترونية_تنبيهات_نطاق"
+
+#, fuzzy
+msgid "EPGRefresh"
+msgstr "إضافة إلى تحديث دليل البرامج الإلكترونية"
 
 msgid "EPGRefresh Configuration"
 msgstr "إعدادات تحديث دليل البرامج الإلكترونية"
@@ -107,12 +129,6 @@ msgstr "وظائف تحديث دليل البرامج الإلكترونية"
 msgid "EPGRefresh Services"
 msgstr "قنوات تحديث دليل البرامج الإلكترونية"
 
-msgid "EXTENSIONMENU_PREFIX"
-msgstr ""
-
-msgid "EXTENSIONNAME_SETUP"
-msgstr ""
-
 msgid "Edit Services"
 msgstr "تحرير"
 
@@ -121,6 +137,9 @@ msgstr "تعديل تحديث القنوات"
 
 msgid "Editing"
 msgstr "التحرير"
+
+msgid "Enable this item to flush all EPG data before starting a new EPG refresh cycle"
+msgstr ""
 
 msgid "Enable this to be able to access the EPGRefresh configuration from within the extension menu."
 msgstr "تمكين هذا ليكون قادر على الوصول إلى إعدادات تحديث دليل البرامج الإلكترونية من خلال قائمة الملحقات."
@@ -134,17 +153,11 @@ msgstr "تمكين هذا ليكون قادر على تشغيل تحديث دل�
 msgid "Extend the list of services to refresh by those your AutoTimers use?"
 msgstr "توسيع قائمة القنوات لتحديث باستخدام المؤقتات التلقائية الخاص بك؟"
 
-msgid "FILELIST_BIGGEST"
-msgstr ""
-
-msgid "FILELIST_FORCED"
-msgstr ""
-
-msgid "FILELIST_YOUNGEST"
-msgstr ""
-
 msgid "Fake recording"
 msgstr "تسجيل وهمي"
+
+msgid "Flush EPG before refresh"
+msgstr ""
 
 msgid "Following Services have to be scanned:"
 msgstr "القنوات التالية يجب أن يتم فحصها:"
@@ -154,14 +167,6 @@ msgstr "التركيز على البحث حتى لو كان الرسيفر مش�
 
 msgid "Foreground also"
 msgstr "المقدمة أيضا"
-
-msgid ""
-"Found a total of %d matching Events.\n"
-"%d Timer were added and\n"
-"%d modified,\n"
-"%d conflicts encountered,\n"
-"%d similars added."
-msgstr ""
 
 msgid "Functions"
 msgstr "الوظائف"
@@ -186,6 +191,7 @@ msgstr "القنوات من المؤقت التلقائي"
 msgid "Key Help"
 msgstr "مفتاح المساعدة"
 
+#, python-format
 msgid "Last refresh was %s"
 msgstr "آخر تحديث كان %s"
 
@@ -204,15 +210,8 @@ msgstr "جديد"
 msgid "No"
 msgstr "لا"
 
-msgid "No Backupfiles found"
-msgstr ""
-
 msgid "OK"
 msgstr "موافق"
-
-#, fuzzy
-msgid "PLUGINNAME_EPGRefresh"
-msgstr "تحديث دليل البرامج الإلكترونية"
 
 msgid "Pending Services"
 msgstr "القنوات المعلقة"
@@ -241,14 +240,12 @@ msgstr "تحديث دليل البرامج الإلكترونية قيد الإ�
 msgid "Refresh now"
 msgstr "التحديث الآن"
 
-msgid "Refreshing"
+#, fuzzy
+msgid "Refresh using"
 msgstr "محدث"
 
 msgid "Run AutoTimer after refresh"
 msgstr "تشغيل المؤقت التلقائي بعد التحديث"
-
-msgid "Select a file to force a Backup"
-msgstr ""
 
 msgid "Select bouquet to refresh"
 msgstr "حدد باقة للتحديث"
@@ -292,10 +289,6 @@ msgstr "تخطي حماية القنوات"
 msgid "Start EPGrefresh immediately"
 msgstr "التشغيل الفوري لتحديث دليل البرامج الإلكترونية"
 
-#, fuzzy
-msgid "Stop Refresh"
-msgstr "إضافة إلى تحديث دليل البرامج الإلكترونية"
-
 msgid "Stop Running EPG-refresh"
 msgstr "إيقاف تشغيل تحديث دليل البرامج الإلكترونية"
 
@@ -319,14 +312,6 @@ msgstr "يتحكم في إعداد ما إذا كان يجب تعيين المت
 
 msgid ""
 "To apply your Changes the GUI has to be restarted.\n"
-"Do you want to restart the GUI now?"
-msgstr ""
-"لتطبيق التغييرات الخاصة بك يجب إعادة تشغيل واجهة المستخدم الرسومية.\n"
-"هل تريد إعادة تشغيل واجهة المستخدم الرسومية الآن؟"
-
-#, fuzzy
-msgid ""
-"To load the Backupfile the GUI has to be restarted.\n"
 "Do you want to restart the GUI now?"
 msgstr ""
 "لتطبيق التغييرات الخاصة بك يجب إعادة تشغيل واجهة المستخدم الرسومية.\n"

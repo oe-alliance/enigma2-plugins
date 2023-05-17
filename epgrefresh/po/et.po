@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-12 10:30+CEST\n"
+"POT-Creation-Date: 2023-05-17 15:22+0200\n"
 "PO-Revision-Date: 2012-08-25 12:53+0300\n"
 "Last-Translator: rimas\n"
 "Language-Team: \n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#, fuzzy
+#, fuzzy, python-format
 msgid "%d more services"
 msgstr "Kanalid"
 
@@ -37,6 +37,7 @@ msgstr ""
 msgid "Ask default Yes"
 msgstr ""
 
+#, python-format
 msgid "AutoTimer failed with error %s"
 msgstr ""
 
@@ -93,8 +94,28 @@ msgstr "EPG uuendamine algas taustal."
 msgid "EPG refresh starts scanning channels."
 msgstr "EPG uuendaja alustab kanalite uurimist."
 
+#, fuzzy
+msgid "EPG-Refresh_Pending Services"
+msgstr "EPGRefresh kanalid"
+
+#, fuzzy
+msgid "EPG-Refresh_Refresh now"
+msgstr "EPGRefresh kanalid"
+
+#, fuzzy
+msgid "EPG-Refresh_SetUp"
+msgstr "EPGRefresh kanalid"
+
+#, fuzzy
+msgid "EPG-Refresh_Stop Refresh"
+msgstr "EPGRefresh kanalid"
+
 msgid "EPGREFRESH_NOTIFICATION_DOMAIN"
 msgstr ""
+
+#, fuzzy
+msgid "EPGRefresh"
+msgstr "lisa EPG uuendajasse"
 
 msgid "EPGRefresh Configuration"
 msgstr "EPGRefresh seadistused"
@@ -110,12 +131,6 @@ msgstr "EPGRefresh seadistused"
 msgid "EPGRefresh Services"
 msgstr "EPGRefresh kanalid"
 
-msgid "EXTENSIONMENU_PREFIX"
-msgstr ""
-
-msgid "EXTENSIONNAME_SETUP"
-msgstr ""
-
 msgid "Edit Services"
 msgstr "Kanalid"
 
@@ -124,6 +139,9 @@ msgstr "Muuda kanaleid"
 
 msgid "Editing"
 msgstr "Muutmine"
+
+msgid "Enable this item to flush all EPG data before starting a new EPG refresh cycle"
+msgstr ""
 
 msgid "Enable this to be able to access the EPGRefresh configuration from within the extension menu."
 msgstr "Luba see, pääsemaks ligi EPGRefresh seadistustele laienduste menüüs."
@@ -139,17 +157,11 @@ msgstr "Luba see, pääsemaks ligi EPGRefresh seadistustele laienduste menüüs.
 msgid "Extend the list of services to refresh by those your AutoTimers use?"
 msgstr "Lisada kanalid, mida juba kasutab Autotaimer?"
 
-msgid "FILELIST_BIGGEST"
-msgstr ""
-
-msgid "FILELIST_FORCED"
-msgstr ""
-
-msgid "FILELIST_YOUNGEST"
-msgstr ""
-
 msgid "Fake recording"
 msgstr "Võltssalvestus."
+
+msgid "Flush EPG before refresh"
+msgstr ""
 
 msgid "Following Services have to be scanned:"
 msgstr ""
@@ -158,14 +170,6 @@ msgid "Force scan even if receiver is in use."
 msgstr "Sunnitud uuendamine ka siis, kui tuuner on hõivatud"
 
 msgid "Foreground also"
-msgstr ""
-
-msgid ""
-"Found a total of %d matching Events.\n"
-"%d Timer were added and\n"
-"%d modified,\n"
-"%d conflicts encountered,\n"
-"%d similars added."
 msgstr ""
 
 msgid "Functions"
@@ -190,6 +194,7 @@ msgstr "Võta kanalid Autotaimerist"
 msgid "Key Help"
 msgstr ""
 
+#, python-format
 msgid "Last refresh was %s"
 msgstr "Viimane uuendamine: %s"
 
@@ -208,14 +213,8 @@ msgstr "Uus"
 msgid "No"
 msgstr ""
 
-msgid "No Backupfiles found"
-msgstr ""
-
 msgid "OK"
 msgstr "OK"
-
-msgid "PLUGINNAME_EPGRefresh"
-msgstr ""
 
 #, fuzzy
 msgid "Pending Services"
@@ -245,14 +244,12 @@ msgstr "Uuenda EPG kasutades"
 msgid "Refresh now"
 msgstr "Uuenda nüüd"
 
-msgid "Refreshing"
+#, fuzzy
+msgid "Refresh using"
 msgstr "EPG uuendamine"
 
 msgid "Run AutoTimer after refresh"
 msgstr "Pärast EPG uuendamist käivita Autotaimer"
-
-msgid "Select a file to force a Backup"
-msgstr ""
 
 msgid "Select bouquet to refresh"
 msgstr "Vali lemmiknimekiri, millelt uuendada"
@@ -301,10 +298,6 @@ msgstr "Kanalid"
 msgid "Start EPGrefresh immediately"
 msgstr ""
 
-#, fuzzy
-msgid "Stop Refresh"
-msgstr "lisa EPG uuendajasse"
-
 msgid "Stop Running EPG-refresh"
 msgstr ""
 
@@ -329,11 +322,6 @@ msgstr "Siit saab määrata, kas vastuvõtja läheb sügavooterežiimile pärast
 
 msgid ""
 "To apply your Changes the GUI has to be restarted.\n"
-"Do you want to restart the GUI now?"
-msgstr ""
-
-msgid ""
-"To load the Backupfile the GUI has to be restarted.\n"
 "Do you want to restart the GUI now?"
 msgstr ""
 

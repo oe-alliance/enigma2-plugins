@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - epgrefresh\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-12 10:30+CEST\n"
+"POT-Creation-Date: 2023-05-17 15:22+0200\n"
 "PO-Revision-Date: 2020-04-18 17:11+0200\n"
 "Last-Translator: Alexwilmac\n"
 "Language-Team: \n"
@@ -16,6 +16,7 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 "X-Poedit-SearchPath-0: .../epgrefresh\n"
 
+#, python-format
 msgid "%d more services"
 msgstr "%d canali in più"
 
@@ -34,6 +35,7 @@ msgstr "Nessuna impostazione predefinita"
 msgid "Ask default Yes"
 msgstr "Impostazioni predefinite"
 
+#, python-format
 msgid "AutoTimer failed with error %s"
 msgstr "AutoTimer fallito. Errore: %s"
 
@@ -92,8 +94,28 @@ msgstr "EPG refresh avviato in background."
 msgid "EPG refresh starts scanning channels."
 msgstr "EPG Refresh ha iniziato la scansione dei canali."
 
+#, fuzzy
+msgid "EPG-Refresh_Pending Services"
+msgstr "Canali EPGRefresh"
+
+#, fuzzy
+msgid "EPG-Refresh_Refresh now"
+msgstr "Canali EPGRefresh"
+
+#, fuzzy
+msgid "EPG-Refresh_SetUp"
+msgstr "Canali EPGRefresh"
+
+#, fuzzy
+msgid "EPG-Refresh_Stop Refresh"
+msgstr "Canali EPGRefresh"
+
 msgid "EPGREFRESH_NOTIFICATION_DOMAIN"
 msgstr "EPGRefresh"
+
+#, fuzzy
+msgid "EPGRefresh"
+msgstr "aggiungere a EPGRefresh"
 
 msgid "EPGRefresh Configuration"
 msgstr "Impostazioni EPGRefresh"
@@ -107,12 +129,6 @@ msgstr "Funzioni EPGRefresh"
 msgid "EPGRefresh Services"
 msgstr "Canali EPGRefresh"
 
-msgid "EXTENSIONMENU_PREFIX"
-msgstr ""
-
-msgid "EXTENSIONNAME_SETUP"
-msgstr ""
-
 msgid "Edit Services"
 msgstr "Mod. Canali"
 
@@ -121,6 +137,9 @@ msgstr "Mod. canali da aggiornare"
 
 msgid "Editing"
 msgstr "Modificare"
+
+msgid "Enable this item to flush all EPG data before starting a new EPG refresh cycle"
+msgstr ""
 
 msgid "Enable this to be able to access the EPGRefresh configuration from within the extension menu."
 msgstr "Abilitando questa opzione, sarà possibile accedere alle impostazioni di EPGRefresh dal menu estensioni."
@@ -135,17 +154,11 @@ msgstr "Abilitando questa opzione, sarà possibile accedere alle impostazioni di
 msgid "Extend the list of services to refresh by those your AutoTimers use?"
 msgstr "Estendere l'elenco dei canali da aggiornate in base a quelli usati da Auto Timer?"
 
-msgid "FILELIST_BIGGEST"
-msgstr ""
-
-msgid "FILELIST_FORCED"
-msgstr ""
-
-msgid "FILELIST_YOUNGEST"
-msgstr ""
-
 msgid "Fake recording"
 msgstr "Falsa registrazione"
+
+msgid "Flush EPG before refresh"
+msgstr ""
 
 msgid "Following Services have to be scanned:"
 msgstr "I seguenti canali devono essere analizzati:"
@@ -155,14 +168,6 @@ msgstr "Forzare la scansione anche se il ricevitore è in uso"
 
 msgid "Foreground also"
 msgstr "Anche in primo piano"
-
-msgid ""
-"Found a total of %d matching Events.\n"
-"%d Timer were added and\n"
-"%d modified,\n"
-"%d conflicts encountered,\n"
-"%d similars added."
-msgstr ""
 
 msgid "Functions"
 msgstr "Funzioni"
@@ -185,6 +190,7 @@ msgstr "Ereditare canali da AutoTimer"
 msgid "Key Help"
 msgstr "Tasto Help"
 
+#, python-format
 msgid "Last refresh was %s"
 msgstr "Ultimo aggiornamento: %s"
 
@@ -203,14 +209,8 @@ msgstr "Nuovo"
 msgid "No"
 msgstr "No"
 
-msgid "No Backupfiles found"
-msgstr ""
-
 msgid "OK"
 msgstr "Ok"
-
-msgid "PLUGINNAME_EPGRefresh"
-msgstr ""
 
 msgid "Pending Services"
 msgstr "Canali in attesa"
@@ -239,14 +239,12 @@ msgstr "Aggiornare l'EPG usando"
 msgid "Refresh now"
 msgstr "Agg. ora"
 
-msgid "Refreshing"
+#, fuzzy
+msgid "Refresh using"
 msgstr "Aggiornamento in corso"
 
 msgid "Run AutoTimer after refresh"
 msgstr "Avviare Auto Timer dopo un aggiornamento"
-
-msgid "Select a file to force a Backup"
-msgstr ""
 
 msgid "Select bouquet to refresh"
 msgstr "Selezionare bouquet da aggiornare"
@@ -291,10 +289,6 @@ msgstr "Ignorare i canali protetti"
 msgid "Start EPGrefresh immediately"
 msgstr "Avviare EPGRefresh immediatamente"
 
-#, fuzzy
-msgid "Stop Refresh"
-msgstr "aggiungere a EPGRefresh"
-
 msgid "Stop Running EPG-refresh"
 msgstr "Arrestare  l'aggiornamento EPG"
 
@@ -318,14 +312,6 @@ msgstr "Questa funzione determina se il decoder debba essere posto in standby al
 
 msgid ""
 "To apply your Changes the GUI has to be restarted.\n"
-"Do you want to restart the GUI now?"
-msgstr ""
-"L'attivazione delle nuove impostazioni richiede\n"
-"il riavvio di enigma2. Riavviare?"
-
-#, fuzzy
-msgid ""
-"To load the Backupfile the GUI has to be restarted.\n"
 "Do you want to restart the GUI now?"
 msgstr ""
 "L'attivazione delle nuove impostazioni richiede\n"

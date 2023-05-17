@@ -3,7 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: epgrefresh\n"
-"POT-Creation-Date: 2014-04-12 10:30+CEST\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-17 15:22+0200\n"
 "PO-Revision-Date: 2020-07-03 11:59+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -15,6 +16,7 @@ msgstr ""
 "X-Generator: Poedit 2.3.1\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 
+#, python-format
 msgid "%d more services"
 msgstr "%d więcej usług"
 
@@ -33,6 +35,7 @@ msgstr "Zapytaj domyślnie Nie"
 msgid "Ask default Yes"
 msgstr "Zapytaj domyślnie Tak"
 
+#, python-format
 msgid "AutoTimer failed with error %s"
 msgstr "AutoTimer z błędem %s"
 
@@ -91,8 +94,28 @@ msgstr "Odświeżanie EPG rozpoczęło się w tle."
 msgid "EPG refresh starts scanning channels."
 msgstr "Odświeżanie EPG rozpoczyna skanowanie kanałów."
 
+#, fuzzy
+msgid "EPG-Refresh_Pending Services"
+msgstr "Usługi odświeżania EPG"
+
+#, fuzzy
+msgid "EPG-Refresh_Refresh now"
+msgstr "Usługi odświeżania EPG"
+
+#, fuzzy
+msgid "EPG-Refresh_SetUp"
+msgstr "Usługi odświeżania EPG"
+
+#, fuzzy
+msgid "EPG-Refresh_Stop Refresh"
+msgstr "Usługi odświeżania EPG"
+
 msgid "EPGREFRESH_NOTIFICATION_DOMAIN"
 msgstr ""
+
+#, fuzzy
+msgid "EPGRefresh"
+msgstr "dodaj do EPG Odśwież"
 
 msgid "EPGRefresh Configuration"
 msgstr "EPG Konfiguracja"
@@ -106,12 +129,6 @@ msgstr "EPG Funkcje"
 msgid "EPGRefresh Services"
 msgstr "Usługi odświeżania EPG"
 
-msgid "EXTENSIONMENU_PREFIX"
-msgstr ""
-
-msgid "EXTENSIONNAME_SETUP"
-msgstr ""
-
 msgid "Edit Services"
 msgstr "Edytuj Usługi"
 
@@ -120,6 +137,9 @@ msgstr "Edytuj usługi, aby odświeżyć"
 
 msgid "Editing"
 msgstr "Edytowanie"
+
+msgid "Enable this item to flush all EPG data before starting a new EPG refresh cycle"
+msgstr ""
 
 msgid "Enable this to be able to access the EPGRefresh configuration from within the extension menu."
 msgstr "Włącz tę opcję, aby uzyskać dostęp do konfiguracji EPGRefresh z poziomu menu rozszerzenia."
@@ -133,17 +153,11 @@ msgstr "Włącz to, aby móc uruchomić EPGRefresh z poziomu menu rozszerzenia."
 msgid "Extend the list of services to refresh by those your AutoTimers use?"
 msgstr "Rozszerzyć listę usług, aby odświeżyć je o te, których używają AutoTimery?"
 
-msgid "FILELIST_BIGGEST"
-msgstr ""
-
-msgid "FILELIST_FORCED"
-msgstr ""
-
-msgid "FILELIST_YOUNGEST"
-msgstr ""
-
 msgid "Fake recording"
 msgstr "Fałszywe nagrywanie"
+
+msgid "Flush EPG before refresh"
+msgstr ""
 
 msgid "Following Services have to be scanned:"
 msgstr "Należy przeskanować następujące usługi:"
@@ -153,19 +167,6 @@ msgstr "Wymuś odświeżanie, nawet jeśli odbiornik jest w użyciu."
 
 msgid "Foreground also"
 msgstr "Pierwszy plan również"
-
-msgid ""
-"Found a total of %d matching Events.\n"
-"%d Timer were added and\n"
-"%d modified,\n"
-"%d conflicts encountered,\n"
-"%d similars added."
-msgstr ""
-"Znaleziono w sumie %d pasujących zdarzeń.\n"
-"%d  Timer został dodany i  \n"
-"%d  zmodyfikowany, \n"
-"%d  napotkane konflikty,\n"
-"%d  dodano podobne."
 
 msgid "Functions"
 msgstr "Funkcje"
@@ -188,6 +189,7 @@ msgstr "Dziedzicz usługi od AutoTimer"
 msgid "Key Help"
 msgstr "Kluczowa pomoc"
 
+#, python-format
 msgid "Last refresh was %s"
 msgstr "Ostatnie odświeżenie to %s"
 
@@ -206,14 +208,8 @@ msgstr "Nowy"
 msgid "No"
 msgstr "Nie"
 
-msgid "No Backupfiles found"
-msgstr "Nie znaleziono plików kopii zapasowych"
-
 msgid "OK"
 msgstr "OK"
-
-msgid "PLUGINNAME_EPGRefresh"
-msgstr "Odświeżanie  EPG"
 
 msgid "Pending Services"
 msgstr "Oczekujące usługi"
@@ -242,14 +238,12 @@ msgstr "Odśwież EPG za pomocą"
 msgid "Refresh now"
 msgstr "Odśwież teraz"
 
-msgid "Refreshing"
+#, fuzzy
+msgid "Refresh using"
 msgstr "Odświeżanie"
 
 msgid "Run AutoTimer after refresh"
 msgstr "Uruchom AutoTimer po odświeżeniu"
-
-msgid "Select a file to force a Backup"
-msgstr "Wybierz plik, aby wymusić utworzenie kopii zapasowej"
 
 msgid "Select bouquet to refresh"
 msgstr "Wybierz bukiet do odświeżenia"
@@ -293,9 +287,6 @@ msgstr "Pomiń chronione usługi"
 msgid "Start EPGrefresh immediately"
 msgstr "Natychmiast uruchom odświeżanie EPG"
 
-msgid "Stop Refresh"
-msgstr "Zatrzymaj odświeżanie"
-
 msgid "Stop Running EPG-refresh"
 msgstr "Przestań uruchamiać odświeżanie EPG"
 
@@ -322,13 +313,6 @@ msgid ""
 "Do you want to restart the GUI now?"
 msgstr ""
 "Aby zastosować zmiany, należy ponownie uruchomić GUI.\n"
-"Czy chcesz teraz ponownie uruchomić GUI?"
-
-msgid ""
-"To load the Backupfile the GUI has to be restarted.\n"
-"Do you want to restart the GUI now?"
-msgstr ""
-"Aby załadować plik kopii zapasowej, należy ponownie uruchomić GUI.\n"
 "Czy chcesz teraz ponownie uruchomić GUI?"
 
 msgid "Unless this is enabled, EPGRefresh won't automatically run but needs to be explicitly started by the yellow button in this menu."

@@ -5,7 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: EPGRefresh v1.0\n"
-"POT-Creation-Date: 2014-04-12 10:30+CEST\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-17 15:22+0200\n"
 "PO-Revision-Date: 2018-04-08 12:06+0200\n"
 "Last-Translator: Alec <alex1vagyok@gmail.com>\n"
 "Language-Team: alec <alex1vagyok@gmail.com>\n"
@@ -16,6 +17,7 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 "X-Generator: Poedit 2.0.6\n"
 
+#, python-format
 msgid "%d more services"
 msgstr "%d több csatorna"
 
@@ -34,6 +36,7 @@ msgstr "Alapértelmezett kérdés: Nem"
 msgid "Ask default Yes"
 msgstr "Alapértelmezett kérdés: Igen"
 
+#, python-format
 msgid "AutoTimer failed with error %s"
 msgstr "Az AutoTimer nem sikerült a(z) %s hibával"
 
@@ -92,8 +95,28 @@ msgstr "Az EPG frissítése a háttérben elkezdődött."
 msgid "EPG refresh starts scanning channels."
 msgstr "Az EPG Műsorújság frissítés elindítja a csatornák szkennelését."
 
+#, fuzzy
+msgid "EPG-Refresh_Pending Services"
+msgstr "EPG Műsorújság frissítés csatornái"
+
+#, fuzzy
+msgid "EPG-Refresh_Refresh now"
+msgstr "EPG Műsorújság frissítés csatornái"
+
+#, fuzzy
+msgid "EPG-Refresh_SetUp"
+msgstr "EPG Műsorújság frissítés csatornái"
+
+#, fuzzy
+msgid "EPG-Refresh_Stop Refresh"
+msgstr "EPG Műsorújság frissítés csatornái"
+
 msgid "EPGREFRESH_NOTIFICATION_DOMAIN"
 msgstr "EPGREFRESH"
+
+#, fuzzy
+msgid "EPGRefresh"
+msgstr "adja a EPG Műsorújság frissítéséhez"
 
 msgid "EPGRefresh Configuration"
 msgstr "EPG Műsorújság frissítés konfiguráció"
@@ -107,12 +130,6 @@ msgstr "EPG Műsorújság frissítés funkciók"
 msgid "EPGRefresh Services"
 msgstr "EPG Műsorújság frissítés csatornái"
 
-msgid "EXTENSIONMENU_PREFIX"
-msgstr "EPGRefresh"
-
-msgid "EXTENSIONNAME_SETUP"
-msgstr "Configuration"
-
 msgid "Edit Services"
 msgstr "Csatornák szerkesztése"
 
@@ -121,6 +138,9 @@ msgstr "Csatornák szerkesztése a frissítéshez"
 
 msgid "Editing"
 msgstr "Szerkesztés"
+
+msgid "Enable this item to flush all EPG data before starting a new EPG refresh cycle"
+msgstr ""
 
 msgid "Enable this to be able to access the EPGRefresh configuration from within the extension menu."
 msgstr "Engedélyezze ezt, hogy hozzáférhessen az 'Műsorújság frissítése' konfigurációhoz a Bővítmények menüben."
@@ -135,17 +155,11 @@ msgstr "Engedélyezze ezt, hogy el tudja indítani az EPG Műsorújság frissít
 msgid "Extend the list of services to refresh by those your AutoTimers use?"
 msgstr "Kiegészítse a frissítési csatornák listáját az AutoTimer használatával?"
 
-msgid "FILELIST_BIGGEST"
-msgstr "FILELIST_BIGGEST"
-
-msgid "FILELIST_FORCED"
-msgstr "FILELIST_FORCED"
-
-msgid "FILELIST_YOUNGEST"
-msgstr "FILELIST_YOUNGEST"
-
 msgid "Fake recording"
 msgstr "Műsorra ugrás"
+
+msgid "Flush EPG before refresh"
+msgstr ""
 
 msgid "Following Services have to be scanned:"
 msgstr "A következő csatornákat kell feltérképezni:"
@@ -155,19 +169,6 @@ msgstr "Frissítés kikényszerítésa még akkor is, ha vevő van használatban
 
 msgid "Foreground also"
 msgstr "Előtérben is"
-
-msgid ""
-"Found a total of %d matching Events.\n"
-"%d Timer were added and\n"
-"%d modified,\n"
-"%d conflicts encountered,\n"
-"%d similars added."
-msgstr ""
-"Összesen %d eseményt talált.\n"
-"%d Az időzítő hozzá lett adva és\n"
-"%d módosítva,\n"
-"%d ütközések észlelve,\n"
-"%d hasonlók hozzáadva."
 
 msgid "Functions"
 msgstr "Funkciók"
@@ -190,6 +191,7 @@ msgstr "AutoTimerből is figyelembe vegye a csatornákat"
 msgid "Key Help"
 msgstr "Billentyű gombok súgója"
 
+#, python-format
 msgid "Last refresh was %s"
 msgstr "Az utolsó frissítés volt %s"
 
@@ -208,14 +210,8 @@ msgstr "Új"
 msgid "No"
 msgstr "Nem"
 
-msgid "No Backupfiles found"
-msgstr "Nincsenek biztonsági mentési fájlok"
-
 msgid "OK"
 msgstr "OK"
-
-msgid "PLUGINNAME_EPGRefresh"
-msgstr "EPGRefresh"
 
 msgid "Pending Services"
 msgstr "Függő csatornák"
@@ -244,14 +240,12 @@ msgstr "Frissítse a Műsorújságot"
 msgid "Refresh now"
 msgstr "Frissítés most"
 
-msgid "Refreshing"
+#, fuzzy
+msgid "Refresh using"
 msgstr "Frissítés"
 
 msgid "Run AutoTimer after refresh"
 msgstr "Futtassa az AutoTimer-et a frissítés után"
-
-msgid "Select a file to force a Backup"
-msgstr "Jelöljön ki egy fájlt, hogy kikényszerítsen egy mentést"
 
 msgid "Select bouquet to refresh"
 msgstr "Válassza ki a csatornacsomagot a frissítéshez"
@@ -296,9 +290,6 @@ msgstr "A védett csatornák kihagyása"
 msgid "Start EPGrefresh immediately"
 msgstr "Indítsa el közvetlenül az EPG Műsorújság frissítés programot"
 
-msgid "Stop Refresh"
-msgstr "Frissítés leállítása"
-
 msgid "Stop Running EPG-refresh"
 msgstr "Állítsa le az EPG Műsorújság frissítés futtatását"
 
@@ -325,13 +316,6 @@ msgid ""
 "Do you want to restart the GUI now?"
 msgstr ""
 "A változtatások alkalmazásához újra kell indítani a GUI-t (grafikus felhasználói felületet).\n"
-"Szeretné újraindítani a grafikus felhasználói felületet?"
-
-msgid ""
-"To load the Backupfile the GUI has to be restarted.\n"
-"Do you want to restart the GUI now?"
-msgstr ""
-"A mentési fájl betöltéséhez a GUI-t újra kell indítani.\n"
 "Szeretné újraindítani a grafikus felhasználói felületet?"
 
 msgid "Unless this is enabled, EPGRefresh won't automatically run but needs to be explicitly started by the yellow button in this menu."

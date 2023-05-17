@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 AutoTimer Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-12 10:30+CEST\n"
+"POT-Creation-Date: 2023-05-17 15:22+0200\n"
 "PO-Revision-Date: 2009-09-10 20:30+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Poedit-Language: Serbian\n"
 "X-Poedit-Country: SERBIA\n"
 
-#, fuzzy
+#, fuzzy, python-format
 msgid "%d more services"
 msgstr "Uredi kanale"
 
@@ -36,6 +36,7 @@ msgstr ""
 msgid "Ask default Yes"
 msgstr ""
 
+#, python-format
 msgid "AutoTimer failed with error %s"
 msgstr ""
 
@@ -92,8 +93,28 @@ msgstr ""
 msgid "EPG refresh starts scanning channels."
 msgstr ""
 
+#, fuzzy
+msgid "EPG-Refresh_Pending Services"
+msgstr "EPG osvežavanje kanala"
+
+#, fuzzy
+msgid "EPG-Refresh_Refresh now"
+msgstr "EPG osvežavanje kanala"
+
+#, fuzzy
+msgid "EPG-Refresh_SetUp"
+msgstr "EPG osvežavanje kanala"
+
+#, fuzzy
+msgid "EPG-Refresh_Stop Refresh"
+msgstr "EPG osvežavanje kanala"
+
 msgid "EPGREFRESH_NOTIFICATION_DOMAIN"
 msgstr ""
+
+#, fuzzy
+msgid "EPGRefresh"
+msgstr "Osvežavanje"
 
 msgid "EPGRefresh Configuration"
 msgstr "Konfiguracija EPG osvežavanja"
@@ -109,12 +130,6 @@ msgstr "Konfiguracija EPG osvežavanja"
 msgid "EPGRefresh Services"
 msgstr "EPG osvežavanje kanala"
 
-msgid "EXTENSIONMENU_PREFIX"
-msgstr ""
-
-msgid "EXTENSIONNAME_SETUP"
-msgstr ""
-
 msgid "Edit Services"
 msgstr "Uredi kanale"
 
@@ -123,6 +138,9 @@ msgstr "Uredi kanale za osvežavanje"
 
 msgid "Editing"
 msgstr "Uređivanje"
+
+msgid "Enable this item to flush all EPG data before starting a new EPG refresh cycle"
+msgstr ""
 
 msgid "Enable this to be able to access the EPGRefresh configuration from within the extension menu."
 msgstr ""
@@ -136,16 +154,10 @@ msgstr ""
 msgid "Extend the list of services to refresh by those your AutoTimers use?"
 msgstr ""
 
-msgid "FILELIST_BIGGEST"
-msgstr ""
-
-msgid "FILELIST_FORCED"
-msgstr ""
-
-msgid "FILELIST_YOUNGEST"
-msgstr ""
-
 msgid "Fake recording"
+msgstr ""
+
+msgid "Flush EPG before refresh"
 msgstr ""
 
 msgid "Following Services have to be scanned:"
@@ -155,14 +167,6 @@ msgid "Force scan even if receiver is in use."
 msgstr ""
 
 msgid "Foreground also"
-msgstr ""
-
-msgid ""
-"Found a total of %d matching Events.\n"
-"%d Timer were added and\n"
-"%d modified,\n"
-"%d conflicts encountered,\n"
-"%d similars added."
 msgstr ""
 
 msgid "Functions"
@@ -186,6 +190,7 @@ msgstr ""
 msgid "Key Help"
 msgstr ""
 
+#, python-format
 msgid "Last refresh was %s"
 msgstr ""
 
@@ -204,14 +209,8 @@ msgstr "Novi"
 msgid "No"
 msgstr ""
 
-msgid "No Backupfiles found"
-msgstr ""
-
 msgid "OK"
 msgstr "OK"
-
-msgid "PLUGINNAME_EPGRefresh"
-msgstr ""
 
 #, fuzzy
 msgid "Pending Services"
@@ -241,13 +240,11 @@ msgstr ""
 msgid "Refresh now"
 msgstr "Osveži sada"
 
-msgid "Refreshing"
+#, fuzzy
+msgid "Refresh using"
 msgstr "Osvežavanje"
 
 msgid "Run AutoTimer after refresh"
-msgstr ""
-
-msgid "Select a file to force a Backup"
 msgstr ""
 
 msgid "Select bouquet to refresh"
@@ -296,10 +293,6 @@ msgid "Start EPGrefresh immediately"
 msgstr ""
 
 #, fuzzy
-msgid "Stop Refresh"
-msgstr "Dodaj u  EPG osvežavanje"
-
-#, fuzzy
 msgid "Stop Running EPG-refresh"
 msgstr "Konfiguriši EPG osvežavanje"
 
@@ -324,11 +317,6 @@ msgstr ""
 
 msgid ""
 "To apply your Changes the GUI has to be restarted.\n"
-"Do you want to restart the GUI now?"
-msgstr ""
-
-msgid ""
-"To load the Backupfile the GUI has to be restarted.\n"
 "Do you want to restart the GUI now?"
 msgstr ""
 

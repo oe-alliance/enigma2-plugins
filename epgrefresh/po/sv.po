@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 EPGRefresh Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-12 10:30+CEST\n"
+"POT-Creation-Date: 2023-05-17 15:22+0200\n"
 "PO-Revision-Date: 2009-09-28 09:12+0100\n"
 "Last-Translator: WeeGull <weegull@hotmail.com>\n"
 "Language-Team: german <de@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#, fuzzy
+#, fuzzy, python-format
 msgid "%d more services"
 msgstr "Ändra kanaler"
 
@@ -34,6 +34,7 @@ msgstr ""
 msgid "Ask default Yes"
 msgstr ""
 
+#, python-format
 msgid "AutoTimer failed with error %s"
 msgstr ""
 
@@ -90,8 +91,28 @@ msgstr ""
 msgid "EPG refresh starts scanning channels."
 msgstr ""
 
+#, fuzzy
+msgid "EPG-Refresh_Pending Services"
+msgstr "EPGRefresh Kanaler"
+
+#, fuzzy
+msgid "EPG-Refresh_Refresh now"
+msgstr "EPGRefresh Kanaler"
+
+#, fuzzy
+msgid "EPG-Refresh_SetUp"
+msgstr "EPGRefresh Kanaler"
+
+#, fuzzy
+msgid "EPG-Refresh_Stop Refresh"
+msgstr "EPGRefresh Kanaler"
+
 msgid "EPGREFRESH_NOTIFICATION_DOMAIN"
 msgstr ""
+
+#, fuzzy
+msgid "EPGRefresh"
+msgstr "Lägg till i EPGRefresh"
 
 msgid "EPGRefresh Configuration"
 msgstr "EPGRefresh Konfiguration"
@@ -107,12 +128,6 @@ msgstr "EPGRefresh Konfiguration"
 msgid "EPGRefresh Services"
 msgstr "EPGRefresh Kanaler"
 
-msgid "EXTENSIONMENU_PREFIX"
-msgstr ""
-
-msgid "EXTENSIONNAME_SETUP"
-msgstr ""
-
 msgid "Edit Services"
 msgstr "Ändra kanaler"
 
@@ -121,6 +136,9 @@ msgstr "Ändra kanaler för uppdatering"
 
 msgid "Editing"
 msgstr "Ändra"
+
+msgid "Enable this item to flush all EPG data before starting a new EPG refresh cycle"
+msgstr ""
 
 msgid "Enable this to be able to access the EPGRefresh configuration from within the extension menu."
 msgstr ""
@@ -134,16 +152,10 @@ msgstr ""
 msgid "Extend the list of services to refresh by those your AutoTimers use?"
 msgstr ""
 
-msgid "FILELIST_BIGGEST"
-msgstr ""
-
-msgid "FILELIST_FORCED"
-msgstr ""
-
-msgid "FILELIST_YOUNGEST"
-msgstr ""
-
 msgid "Fake recording"
+msgstr ""
+
+msgid "Flush EPG before refresh"
 msgstr ""
 
 msgid "Following Services have to be scanned:"
@@ -153,14 +165,6 @@ msgid "Force scan even if receiver is in use."
 msgstr "Tvinga sökning även om mottagare används"
 
 msgid "Foreground also"
-msgstr ""
-
-msgid ""
-"Found a total of %d matching Events.\n"
-"%d Timer were added and\n"
-"%d modified,\n"
-"%d conflicts encountered,\n"
-"%d similars added."
 msgstr ""
 
 msgid "Functions"
@@ -184,6 +188,7 @@ msgstr ""
 msgid "Key Help"
 msgstr ""
 
+#, python-format
 msgid "Last refresh was %s"
 msgstr ""
 
@@ -202,14 +207,8 @@ msgstr "Ny"
 msgid "No"
 msgstr ""
 
-msgid "No Backupfiles found"
-msgstr ""
-
 msgid "OK"
 msgstr "OK"
-
-msgid "PLUGINNAME_EPGRefresh"
-msgstr ""
 
 #, fuzzy
 msgid "Pending Services"
@@ -239,13 +238,11 @@ msgstr ""
 msgid "Refresh now"
 msgstr "Uppdatera nu"
 
-msgid "Refreshing"
+#, fuzzy
+msgid "Refresh using"
 msgstr "Uppdaterar"
 
 msgid "Run AutoTimer after refresh"
-msgstr ""
-
-msgid "Select a file to force a Backup"
 msgstr ""
 
 msgid "Select bouquet to refresh"
@@ -293,10 +290,6 @@ msgid "Start EPGrefresh immediately"
 msgstr ""
 
 #, fuzzy
-msgid "Stop Refresh"
-msgstr "Lägg till i EPGRefresh"
-
-#, fuzzy
 msgid "Stop Running EPG-refresh"
 msgstr "EPGRefresh Konfiguration"
 
@@ -321,11 +314,6 @@ msgstr ""
 
 msgid ""
 "To apply your Changes the GUI has to be restarted.\n"
-"Do you want to restart the GUI now?"
-msgstr ""
-
-msgid ""
-"To load the Backupfile the GUI has to be restarted.\n"
 "Do you want to restart the GUI now?"
 msgstr ""
 

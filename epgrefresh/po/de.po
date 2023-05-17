@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 EPGRefresh Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-12 10:30+CEST\n"
+"POT-Creation-Date: 2023-05-17 15:22+0200\n"
 "PO-Revision-Date: 2019-05-03 14:14+0200\n"
 "Last-Translator: Schimmelreiter\n"
 "Language-Team: none\n"
@@ -15,6 +15,7 @@ msgstr ""
 "X-Generator: Poedit 2.2\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
+#, python-format
 msgid "%d more services"
 msgstr "%d weitere Sender"
 
@@ -33,6 +34,7 @@ msgstr "Fragen default Nein"
 msgid "Ask default Yes"
 msgstr "Fragen default Ja"
 
+#, python-format
 msgid "AutoTimer failed with error %s"
 msgstr "Parsen des EPGs durch den AutoTimer hat einen Fehler verursacht %s"
 
@@ -107,6 +109,10 @@ msgstr "Aktualisierung stoppen"
 msgid "EPGREFRESH_NOTIFICATION_DOMAIN"
 msgstr "EPG-Refresh"
 
+#, fuzzy
+msgid "EPGRefresh"
+msgstr "Zu EPG-Refresh hinzufügen"
+
 # sonst Versionsnummer in Überschrift nicht sichtbar
 msgid "EPGRefresh Configuration"
 msgstr "EPG-Refresh   "
@@ -120,26 +126,17 @@ msgstr "EPG-Refresh Funktionen"
 msgid "EPGRefresh Services"
 msgstr "EPG-Refresh Sender"
 
-msgid "EXTENSIONMENU_PREFIX"
-msgstr "EPG-Refresh"
-
-msgid "EXTENSIONNAME_SETUP"
-msgstr ""
-
 msgid "Edit Services"
 msgstr "Sender"
-
-msgid "Flush EPG before refresh"
-msgstr "EPG-Daten vor dem Aktualisieren löschen"
-
-msgid "Enable this item to flush all EPG data before starting a new EPG refresh cycle"
-msgstr "Sollen vor der Aktualisierung alte EPG-Daten gelöscht werden?"
 
 msgid "Edit Services to refresh"
 msgstr "Sender zur Aktualisierung auswählen"
 
 msgid "Editing"
 msgstr "Bearbeite"
+
+msgid "Enable this item to flush all EPG data before starting a new EPG refresh cycle"
+msgstr "Sollen vor der Aktualisierung alte EPG-Daten gelöscht werden?"
 
 msgid "Enable this to be able to access the EPGRefresh configuration from within the extension menu."
 msgstr "Soll die Konfiguration direkt aus dem Erweiterungsmenü heraus aufgerufen werden können?"
@@ -153,17 +150,11 @@ msgstr "Soll der Menüpunkt \"EPG-Refresh jetzt aktualisieren\" direkt aus dem E
 msgid "Extend the list of services to refresh by those your AutoTimers use?"
 msgstr "Liste der Sender automatisch um die des AutoTimers erweitern?"
 
-msgid "FILELIST_BIGGEST"
-msgstr "Größtes"
-
-msgid "FILELIST_FORCED"
-msgstr "erzwungen"
-
-msgid "FILELIST_YOUNGEST"
-msgstr "Jüngstes"
-
 msgid "Fake recording"
 msgstr "Pseudo-Aufnahme"
+
+msgid "Flush EPG before refresh"
+msgstr "EPG-Daten vor dem Aktualisieren löschen"
 
 msgid "Following Services have to be scanned:"
 msgstr "Folgende Sender werden noch gescannt:"
@@ -173,19 +164,6 @@ msgstr "Aktualisierung erzwingen"
 
 msgid "Foreground also"
 msgstr "auch im Vordergrund"
-
-msgid ""
-"Found a total of %d matching Events.\n"
-"%d Timer were added and\n"
-"%d modified,\n"
-"%d conflicts encountered,\n"
-"%d similars added."
-msgstr ""
-"Habe insgesamt %d Sendungen gefunden.\n"
-"%d Timer wurden hinzugefügt und\n"
-"%d geändert,\n"
-"%d Konflikte gefunden,\n"
-"%d alternative Timer hinzugefügt."
 
 msgid "Functions"
 msgstr "Funktionen"
@@ -209,6 +187,7 @@ msgstr "Zusätzlich Sender vom AutoTimer verwenden"
 msgid "Key Help"
 msgstr "Tastenhilfe"
 
+#, python-format
 msgid "Last refresh was %s"
 msgstr "Letzte Aktualisierung: %s"
 
@@ -227,14 +206,8 @@ msgstr "Neu"
 msgid "No"
 msgstr "Nein"
 
-msgid "No Backupfiles found"
-msgstr "Keine Backupdateien gefunden"
-
 msgid "OK"
 msgstr "OK"
-
-msgid "PLUGINNAME_EPGRefresh"
-msgstr "EPG-Refresh"
 
 msgid "Pending Services"
 msgstr "Ausstehende Sender"
@@ -263,14 +236,12 @@ msgstr "Aktualisiere unter Verwendung von"
 msgid "Refresh now"
 msgstr "Jetzt aktualisieren"
 
-msgid "Refreshing"
+#, fuzzy
+msgid "Refresh using"
 msgstr "Aktualisiere"
 
 msgid "Run AutoTimer after refresh"
 msgstr "AutoTimer nach der Aktualisierung starten"
-
-msgid "Select a file to force a Backup"
-msgstr "Eine Datei auswählen, um ein Backup zu starten"
 
 msgid "Select bouquet to refresh"
 msgstr "Zu aktualisierendes Bouquet auswählen"
@@ -314,9 +285,6 @@ msgstr "überspringe geschützte Sender"
 msgid "Start EPGrefresh immediately"
 msgstr "Eine Aktualisierung sofort starten"
 
-msgid "Stop Refresh"
-msgstr "Aktualisierung stoppen"
-
 msgid "Stop Running EPG-refresh"
 msgstr "Laufende Aktualisierung stoppen"
 
@@ -343,13 +311,6 @@ msgid ""
 "Do you want to restart the GUI now?"
 msgstr ""
 "Um die Änderungen zu übernehmen muss die GUI neu gestartet werden.\n"
-"Wollen Sie die GUI jetzt neu starten?"
-
-msgid ""
-"To load the Backupfile the GUI has to be restarted.\n"
-"Do you want to restart the GUI now?"
-msgstr ""
-"Um die Backupdatei zu laden, muss die GUI neu gestartet werden.\n"
 "Wollen Sie die GUI jetzt neu starten?"
 
 msgid "Unless this is enabled, EPGRefresh won't automatically run but needs to be explicitly started by the yellow button in this menu."

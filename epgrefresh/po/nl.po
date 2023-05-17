@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - epgrefresh\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-12 10:30+CEST\n"
+"POT-Creation-Date: 2023-05-17 15:22+0200\n"
 "PO-Revision-Date: 2019-09-06 13:11+0200\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: AndyBlac/Rob van der Does\n"
@@ -12,6 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.2.3\n"
 
+#, python-format
 msgid "%d more services"
 msgstr "%d meer kanalen"
 
@@ -30,6 +31,7 @@ msgstr "Vraag default Nee"
 msgid "Ask default Yes"
 msgstr "Vraag default Ja"
 
+#, python-format
 msgid "AutoTimer failed with error %s"
 msgstr "AutoTimer mislukt met fout %s"
 
@@ -88,8 +90,28 @@ msgstr "EPG-refresh loopt op de achtergrond."
 msgid "EPG refresh starts scanning channels."
 msgstr "EPG-refresh start het scannen van kanalen."
 
+#, fuzzy
+msgid "EPG-Refresh_Pending Services"
+msgstr "EPG-refresh kanalen"
+
+#, fuzzy
+msgid "EPG-Refresh_Refresh now"
+msgstr "EPG-refresh kanalen"
+
+#, fuzzy
+msgid "EPG-Refresh_SetUp"
+msgstr "EPG-refresh kanalen"
+
+#, fuzzy
+msgid "EPG-Refresh_Stop Refresh"
+msgstr "EPG-refresh kanalen"
+
 msgid "EPGREFRESH_NOTIFICATION_DOMAIN"
 msgstr "EPGREFRESH_NOTIFICATIE_DOMEIN"
+
+#, fuzzy
+msgid "EPGRefresh"
+msgstr "toevoegen aan EPG-refresh"
 
 msgid "EPGRefresh Configuration"
 msgstr "EPG-refresh configuratie"
@@ -103,12 +125,6 @@ msgstr "Functies EPG verversen"
 msgid "EPGRefresh Services"
 msgstr "EPG-refresh kanalen"
 
-msgid "EXTENSIONMENU_PREFIX"
-msgstr "EXTENSIONMENU_PREFIX"
-
-msgid "EXTENSIONNAME_SETUP"
-msgstr "EXTENSIONNAME_SETUP"
-
 msgid "Edit Services"
 msgstr "Zenders bewerken"
 
@@ -117,6 +133,9 @@ msgstr "Bewerk te verniewen zenders"
 
 msgid "Editing"
 msgstr "Wat wil je bewerken"
+
+msgid "Enable this item to flush all EPG data before starting a new EPG refresh cycle"
+msgstr ""
 
 msgid "Enable this to be able to access the EPGRefresh configuration from within the extension menu."
 msgstr "Toon EPG-refresh instellingsmenu in het extensiemenu."
@@ -130,17 +149,11 @@ msgstr "Schakel dit in om EPG-refresh vanuit het extensiemenu te kunnen starten.
 msgid "Extend the list of services to refresh by those your AutoTimers use?"
 msgstr "Breidt de lijst met kanalen uit met die kanalen die AutoTimers gebruikt?"
 
-msgid "FILELIST_BIGGEST"
-msgstr ""
-
-msgid "FILELIST_FORCED"
-msgstr ""
-
-msgid "FILELIST_YOUNGEST"
-msgstr ""
-
 msgid "Fake recording"
 msgstr "Nep opname"
+
+msgid "Flush EPG before refresh"
+msgstr ""
 
 msgid "Following Services have to be scanned:"
 msgstr "De volgende kanalen moeten worden gescand:"
@@ -150,14 +163,6 @@ msgstr "Forceer de scan, zelfs als de ontvanger in gebruik is."
 
 msgid "Foreground also"
 msgstr "Ook op voorgrond"
-
-msgid ""
-"Found a total of %d matching Events.\n"
-"%d Timer were added and\n"
-"%d modified,\n"
-"%d conflicts encountered,\n"
-"%d similars added."
-msgstr ""
 
 msgid "Functions"
 msgstr "Functies"
@@ -180,6 +185,7 @@ msgstr "Geërfde Services van AutoTimer"
 msgid "Key Help"
 msgstr "Toets Help"
 
+#, python-format
 msgid "Last refresh was %s"
 msgstr "Laatste refresh was %s"
 
@@ -198,15 +204,8 @@ msgstr "Nieuw"
 msgid "No"
 msgstr "Nee"
 
-msgid "No Backupfiles found"
-msgstr ""
-
 msgid "OK"
 msgstr "Ok"
-
-#, fuzzy
-msgid "PLUGINNAME_EPGRefresh"
-msgstr "EPG-refresh"
 
 msgid "Pending Services"
 msgstr "Nog niet afgewerkte kanalen"
@@ -235,14 +234,12 @@ msgstr "Maak voor EPG-refresh gebruik van"
 msgid "Refresh now"
 msgstr "Nu vernieuwen"
 
-msgid "Refreshing"
+#, fuzzy
+msgid "Refresh using"
 msgstr "Wat wil je vernieuwen"
 
 msgid "Run AutoTimer after refresh"
 msgstr "Voer AutoTimer uit na de refresh"
-
-msgid "Select a file to force a Backup"
-msgstr ""
 
 msgid "Select bouquet to refresh"
 msgstr "Kies boeket om te vernieuwen"
@@ -286,9 +283,6 @@ msgstr "Sla met kinderslot beschermde kanalen over"
 msgid "Start EPGrefresh immediately"
 msgstr "Start EPG verversen nu"
 
-msgid "Stop Refresh"
-msgstr "Stop verversen"
-
 msgid "Stop Running EPG-refresh"
 msgstr "Stop EPG verversen"
 
@@ -312,14 +306,6 @@ msgstr "Deze instelling bepaalt of de ontvanger in standby zal gaan als de refre
 
 msgid ""
 "To apply your Changes the GUI has to be restarted.\n"
-"Do you want to restart the GUI now?"
-msgstr ""
-"Om de veranderingen op te slaan, moet de GUI herstart worden.\n"
-"Wilt u nu herstarten?"
-
-#, fuzzy
-msgid ""
-"To load the Backupfile the GUI has to be restarted.\n"
 "Do you want to restart the GUI now?"
 msgstr ""
 "Om de veranderingen op te slaan, moet de GUI herstart worden.\n"
