@@ -1,0 +1,14 @@
+<mphelp skin="EPGRefreshHelp" caption="EPGRefresh Help">
+	<page title="Tervetuloa EPGRefresh:n">
+		<text value="Tämän näkymän pitäisi kertoa sinulle pikaisesti mitä EPGRefresh osaa tehdä.\nVoit keskeyttää tekemisesi milloin vaan painamalla kaukosäätimen punaista tai EXIT -nappia. Saat tämän näkymän takaisin myös painamalla HELP -nappia asetusvalikossa (tästä lisää myöhemmin).\n\n\nSuosittelen että käytät muutaman minuutin näiden opastussivujen läpikäymiseen."/>
+	</page>
+	<page title="Konfiguraatiovalikko">
+		<text value="Tämä on EPGRefresh:n käyttöliittymä. Tästä valikosta voit muokata plugin:n asetuksia.\nJokaiselle valinnalle on selitekenttä ruudun alareunassa, joka auttaa Sinua ymmärtämään paremmin asetuksen merkitystä. Ole hyvä ja lue ne tarkkaan.\n\nKeltaisesta napista voit käynnistää virkistyksen manuaalisesti. Laajennukset-valikosta voi myös laittaa toimintoja päälle. INFO-näppäin kertoo milloin virkistys on edellisen kerran mennyt onnistuneesti läpi. Laajennukset-valikosta voit myös pysäyttää virkistyksen.\nSininen nappi avaa palveluiden muokkauksen (seuraava sivu)."/>
+	</page>
+	<page title="Kanavalistan muokkaus">
+		<text value="Vaikka tämä näkymä ei näytä ihmeelliseltä, sillä on aika paljon annettavaa. Ylin rivi on kanavien ja suosikkilistojen muokkaamiseen ja seuraavat sisältävät kanavat/suosikkilistat, jotka valitset virkistettäviksi.\n\nSinisellä näppäimellä lisäät uuden ja keltaisella poistat olemassa olevan.\n\n\nSuurimmalle osalle käyttäjistä riittää, että valitsee jonkin suosikkilistan ja lisää sen painamalla sinistä näppäintä."/>
+	</page>
+	<page title="Onnittelut">
+		<text value="Nyt osaat alkeet miten EPGRefresh:iä käytetään.\n\nViimeisenä huomautuksena kertoisin, että tämä plugin ei tee mitään itsestään. Jos haluat virkistyksen tapahtuvat automaattisesti tiettyyn aikaan, sinun pitää itse määritellä asetukset."/>
+	</page>
+</mphelp>
