@@ -1,18 +1,22 @@
 #!/bin/bash
 # Script to generate po files outside of the normal build process
-#  
+#
 # Pre-requisite:
 # The following tools must be installed on your system and accessible from path
-# gawk, find, xgettext, sed, python, msguniq, msgmerge, msgattrib, msgfmt, msginit
+# find, xgettext, sed/gsed, python/python3, msguniq, msgmerge, msgattrib, msgfmt
 #
-# Run this script from within the po folder.
+# xml2po.py in this folder is also needed
 #
-# Author: Pr2 for OpenPLi Team
-# Version: 1.1
+# Run this script in the root folder of this repo.
+# Each package needs a po and src folder
+#
+# Example usage
+# ./updatepot.sh -p epgrefresh -n EPGRefresh
 #
 # Author: jbleyel
-# Version: 1.2
+# Version: 2.0
 #
+# partly based of the script by Pr2
 
 while getopts p:n: flag
 do
@@ -25,10 +29,11 @@ done
 PACKAGENAME=$packagename
 PACKAGEFOLDER="./$packagefolder"
 PACKAGEFOLDERPO="./$packagefolder/po/"
+PACKAGEFOLDERSRC="./$packagefolder/src/"
 PACKAGECONTROL="./$packagefolder/CONTROL/control"
 PACKAGEVERSION="1.1"
 PACKAGEDESCRIPION="SOME DESCRIPTIVE TITLE."
-
+CURRENT=$(pwd) &> /dev/null
 
 if [[ $PACKAGEFOLDER == "./" ]]; then
 	echo "missing parameter -p packagefolder"
@@ -50,6 +55,11 @@ if [ ! -d "$PACKAGEFOLDERPO" ]; then
 	exit 1
 fi
 
+if [ ! -d "$PACKAGEFOLDERSRC" ]; then
+	echo "Directory ${PACKAGEFOLDERSRC} DOES NOT exists."
+	exit 1
+fi
+
 #if test -f "$PACKAGECONTROL"; then
 #	echo "Directory ${PACKAGECONTROL} DOES NOT exists."
 #	exit 1
@@ -65,7 +75,7 @@ sed --version 2> /dev/null | grep -q "GNU"
 if [ $? -eq 0 ]; then
 	localgsed="sed"
 else
-	"$localgsed" --version | grep -q "GNU"
+	"$localgsed" --version 2> /dev/null | grep -q "GNU"
 	if [ $? -eq 0 ]; then
 		printf "GNU sed found: [%s]\n" $localgsed
 	fi
@@ -99,39 +109,28 @@ if [[ "$OSTYPE" == "darwin"* ]]
 fi
 
 #
-# Arguments to generate the pot and po files are not retrieved from the Makefile.
-# So if parameters are changed in Makefile please report the same changes in this script.
-#
 printf "Creating temporary file $PACKAGEFOLDER-py.pot\n"
-find $findoptions $PACKAGEFOLDER -name "*.py" -exec xgettext --no-wrap -L Python --from-code=UTF-8 -kpgettext:1c,2 --add-comments="TRANSLATORS:" -d $PACKAGENAME -s -o $PACKAGENAME-py.pot --package-name=$PACKAGENAME --package-version=$PACKAGEVERSION {} \+
-$localgsed --in-place $PACKAGENAME-py.pot --expression=s/CHARSET/UTF-8/
-$localgsed --in-place $PACKAGENAME-py.pot --expression=s/SOME DESCRIPTIVE TITLE./$PACKAGEDESCRIPION
+pushd $PACKAGEFOLDERSRC
+find $findoptions . -name "*.py" -exec xgettext --no-wrap -L Python --from-code=UTF-8 -kpgettext:1c,2 --add-comments="TRANSLATORS:" -d $PACKAGENAME -s -o $PACKAGENAME-py.pot --package-name=$PACKAGENAME --package-version=$PACKAGEVERSION {} \+
+$localgsed --in-place $PACKAGENAME-py.pot --expression='s/CHARSET/UTF-8/g'
+$localgsed --in-place $PACKAGENAME-py.pot --expression='s/SOME DESCRIPTIVE TITLE./$PACKAGEDESCRIPION/g'
 printf "Creating temporary file enigma2-xml.pot\n"
 which python
 if [ $? -eq 0 ]; then
-	find $findoptions $PACKAGEFOLDER -name "setup.xml" -exec python xml2po.py {} \+ > $PACKAGENAME-xml.pot
+	find $findoptions . -name "setup.xml" -exec python $CURRENT/xml2po.py {} \+ > $PACKAGENAME-xml.pot
 else
-	find $findoptions $PACKAGEFOLDER -name "setup.xml" -exec python3 xml2po.py {} \+ > $PACKAGENAME-xml.pot
+	find $findoptions . -name "setup.xml" -exec python3 $CURRENT/xml2po.py {} \+ > $PACKAGENAME-xml.pot
 fi
 printf "Merging pot files to create: $PACKAGENAME.pot\n"
-cat $PACKAGENAME-py.pot $PACKAGENAME-xml.pot | msguniq -s --no-wrap --no-location -o $PACKAGENAME.pot -
-cp -f $PACKAGEFOLDERPO$PACKAGENAME.pot $PACKAGENAME-old.pot
-cp -f $PACKAGENAME.pot $PACKAGENAME-new.pot
-$localgsed -i -e'/POT-Creation/d' $PACKAGENAME-old.pot
-$localgsed -i -e'/POT-Creation/d' $PACKAGENAME-new.pot
-DIFF=$(diff $PACKAGENAME-old.pot $PACKAGENAME-new.pot)
-if [ "$DIFF" != "" ] 
-then
-	mv -f $PACKAGENAME.pot $PACKAGEFOLDERPO$PACKAGENAME.pot
-fi
+cat $PACKAGENAME-py.pot $PACKAGENAME-xml.pot | msguniq -s --no-wrap -o ../po/$PACKAGENAME.pot -
 printf "remove temp pot files\n"
-rm $PACKAGENAME-py.pot $PACKAGENAME-xml.pot $PACKAGENAME-old.pot $PACKAGENAME-new.pot $PACKAGENAME.pot
+rm $PACKAGENAME-py.pot $PACKAGENAME-xml.pot
 printf "pot update from script finished!\n"
-
+popd
 pushd $PACKAGEFOLDERPO
-languages=($(ls *.po | tr "\n" " " | gsed 's/.po//g'))
+languages=($(ls *.po | tr "\n" " " | $localgsed 's/.po//g'))
 for lang in "${languages[@]}" ; do
-	msgmerge --backup=none --no-wrap --no-location -s -U $lang.po $PACKAGENAME.pot && touch $lang.po
+	msgmerge --backup=none --no-wrap -s -U $lang.po $PACKAGENAME.pot && touch $lang.po
 	msgattrib --no-wrap --no-obsolete $lang.po -o $lang.po
 done
 popd
