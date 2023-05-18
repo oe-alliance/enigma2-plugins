@@ -1,14 +1,14 @@
 <mphelp skin="EPGRefreshHelp" caption="EPGRefresh Help">
 	<page title="Tervetuloa EPGRefresh:n">
-		<text value="Tämän näkymän pitäisi kertoa sinulle pikaisesti mitä EPGRefresh osaa tehdä.\nVoit keskeyttää tekemisesi milloin vaan painamalla kaukosäätimen punaista tai EXIT -nappia. Saat tämän näkymän takaisin myös painamalla HELP -nappia asetusvalikossa (tästä lisää myöhemmin).\n\n\nSuosittelen että käytät muutaman minuutin näiden opastussivujen läpikäymiseen."/>
+		<text value="Tämän ohjenäytön on tarkoitus antaa sinulle nopea katsaus kaikkeen, mitä EPGRefresh tarjoaa.\nVoit keskeyttää sen milloin tahansa painamalla kaukosäätimen PUNAISTA tai EXIT-näppäintä tai tuoda sen esiin myöhemmin painamalla HELP-näppäintä asetusvalikossa (lisää siitä myöhemmin).\n\n\nMutta sinun kannattaa todellakin käyttää muutama minuutti näiden ohjesivujen lukemiseen."/>
 	</page>
-	<page title="Konfiguraatiovalikko">
-		<text value="Tämä on EPGRefresh:n käyttöliittymä. Tästä valikosta voit muokata plugin:n asetuksia.\nJokaiselle valinnalle on selitekenttä ruudun alareunassa, joka auttaa Sinua ymmärtämään paremmin asetuksen merkitystä. Ole hyvä ja lue ne tarkkaan.\n\nKeltaisesta napista voit käynnistää virkistyksen manuaalisesti. Laajennukset-valikosta voi myös laittaa toimintoja päälle. INFO-näppäin kertoo milloin virkistys on edellisen kerran mennyt onnistuneesti läpi. Laajennukset-valikosta voit myös pysäyttää virkistyksen.\nSininen nappi avaa palveluiden muokkauksen (seuraava sivu)."/>
+	<page title="Asetukset">
+		<text value="Tämä on EPGRefreshin asetusvalikko. Tästä valikosta voit määrittää EPGRefresh:n kaikkia osia.\nKullakin asetusvaihtoehdolla on selitys, jonka oletetaan auttavan sinua ymmärtämään niiden merkityksiä paremmin. Kokeile lukea niitä, ne voivat säästää paljon aikaa.\n\nKELTAISELLA näppäimellä voit aloittaa virkistyksen manuaalisesti. Voit myös laittaa toiminntoja päälle Laajennukset-valikossa. INFO-näppäin näyttää päivämäärän, jolloin viimeinen virkistys onnistui. Löydät myös Laajennukset-valikosta kohdan käynnissä olevan virkistyksen pysäyttämiseksi.\nSININEN-näppäin avaa palvelujen valinnat (seuraava sivu)."/>
 	</page>
-	<page title="Kanavalistan muokkaus">
-		<text value="Vaikka tämä näkymä ei näytä ihmeelliseltä, sillä on aika paljon annettavaa. Ylin rivi on kanavien ja suosikkilistojen muokkaamiseen ja seuraavat sisältävät kanavat/suosikkilistat, jotka valitset virkistettäviksi.\n\nSinisellä näppäimellä lisäät uuden ja keltaisella poistat olemassa olevan.\n\n\nSuurimmalle osalle käyttäjistä riittää, että valitsee jonkin suosikkilistan ja lisää sen painamalla sinistä näppäintä."/>
+	<page title="Muokkaa palveluita">
+		<text value="Vaikka näyttö ei heti näytä sitä, sillä on paljon tarjottavaa. Ylimmällä rivillä voit valita kanavien ja suosikkilistojen valintojen välillä, ja seuraavat rivit sisältävät kanavat/suosikkilistat, jotka olet valinnut virkistettäviksi.\n\nVoit käyttää SINISTÄ näppäintä lisätäksesi uuden valinnan luetteloon tai KELTAISTA näppäintä poistaaksesi luettelosta olemassa oleva.\n\n\nUseimmille ihmisille riittää jonkin suosikkilistan lisääminen valitsemalla ensimmäiseltä riviltä 'Suosikkilistat' ja lisäämällä valittu lista SINISELLÄ painikeella."/>
 	</page>
 	<page title="Onnittelut">
-		<text value="Nyt osaat alkeet miten EPGRefresh:iä käytetään.\n\nViimeisenä huomautuksena kertoisin, että tämä plugin ei tee mitään itsestään. Jos haluat virkistyksen tapahtuvat automaattisesti tiettyyn aikaan, sinun pitää itse määritellä asetukset."/>
+		<text value="Tiedät nyt kuinka EPGRefresh:ä käytetään.\n\nViimeisenä huomautuksena haluan vihjata, että EPGRefresh ei tee mitään itsestään ilman määrityksiäsi. Joten jos haluat virkistyksen tapahtuvan automaattisesti taustalla, sinun on määritettävä laajennus tekemään niin.\nTätä ei tehty siksi, että siitä aiheutuisi sinulle mitään haittaa, vaan antaakseen sinulle valinnanvapauden."/>
 	</page>
 </mphelp>
