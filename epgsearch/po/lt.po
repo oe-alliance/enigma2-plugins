@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EPGSearch\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-18 02:07+0100\n"
 "PO-Revision-Date: 2017-07-10 16:57+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
@@ -298,6 +298,9 @@ msgstr "išskyrus"
 
 msgid "include"
 msgstr "įtraukti"
+
+msgid "partial description"
+msgstr ""
 
 msgid "partial match"
 msgstr "dalinis atitikimas"

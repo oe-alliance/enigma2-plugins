@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AutomaticVolumeAdjustment\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-18 02:07+0100\n"
 "PO-Revision-Date: 2015-11-13 20:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: Vytenis Pulokas <vyteniui@gmail.com>\n"
@@ -64,6 +64,9 @@ msgstr "Būdas"
 
 msgid "OK"
 msgstr "Gerai"
+
+msgid "Only AC3/DTS(HD)"
+msgstr ""
 
 msgid "Press OK to select a service"
 msgstr "Kad pasirinkti, spauskite 'OK'."

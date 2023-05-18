@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-18 02:08+0100\n"
 "PO-Revision-Date: 2009-06-04 20:19+0200\n"
 "Last-Translator: \n"
 "Language-Team:  <en@li.org>\n"
@@ -126,6 +126,16 @@ msgstr ""
 "probeert opnieuw"
 
 msgid "Could not get call list; wrong version?"
+msgstr ""
+
+msgid "Could not load barring list: "
+msgstr ""
+
+#, python-format
+msgid "Could not load barring list: %s"
+msgstr ""
+
+msgid "Could not load deflections list: "
 msgstr ""
 
 msgid "Could not load phonebook: "
@@ -383,9 +393,6 @@ msgstr "Laat MSN zien (door een komma gescheiden)"
 msgid "Mailbox"
 msgstr "Mailbox"
 
-msgid "Make it more skin friendly"
-msgstr ""
-
 #. TRANSLATORS: keep it short, this is a button
 msgid "Missed"
 msgstr "Gemist"
@@ -423,12 +430,6 @@ msgstr "Geen mailbox actief"
 
 msgid "No phonebook"
 msgstr ""
-
-msgid "No result from LDIF"
-msgstr "Geen resultaat uit LDIF"
-
-msgid "No result from Outlook export"
-msgstr "Geen Resultaat van Outlook export"
 
 msgid "No result from reverse lookup"
 msgstr "Geen resultaat uit omgekeerd zoeken"
@@ -534,12 +535,6 @@ msgstr "Zoeken (hoofdletter ongevoelig)"
 
 msgid "Search phonebook"
 msgstr "Doorzoek het telefoonboek"
-
-msgid "Searching in LDIF..."
-msgstr "Zoekt in LDIF..."
-
-msgid "Searching in Outlook export..."
-msgstr "Zoekt in Outlook export..."
 
 msgid "Setting..."
 msgstr ""
@@ -674,9 +669,6 @@ msgstr ""
 "Dit kan een communicatieprobleem zijn, probeer opnieuw."
 
 msgid "before 05.27"
-msgstr ""
-
-msgid "business"
 msgstr ""
 
 msgid "call diversions active"

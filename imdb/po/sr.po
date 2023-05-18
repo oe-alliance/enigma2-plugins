@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 IMDb Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-18 02:08+0100\n"
 "PO-Revision-Date: 2009-09-10 20:30+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -18,36 +18,22 @@ msgstr ""
 "X-Poedit-Language: Serbian\n"
 "X-Poedit-Country: SERBIA\n"
 
-msgid " as "
-msgstr "kao "
-
-msgid "* = Restart Required"
-msgstr ""
-
 msgid "Ambiguous results"
 msgstr "Dvosmisleni rezultati"
 
-msgid "Cancel"
-msgstr ""
-
-msgid "Cast: "
-msgstr "Uloge: "
-
-msgid "Channel Selection"
-msgstr "Izbor kanala"
-
-msgid "Content:"
-msgstr ""
-
-msgid "Could't get event name"
+#, fuzzy
+msgid "Couldn't get event name"
 msgstr "Nema naziva dešavanja"
 
 msgid "Details"
 msgstr "Detalji"
 
-#, python-format
-msgid "Downloading Movie Poster: %s..."
+#, fuzzy
+msgid "Downloading Movie Poster..."
 msgstr "Skidam poster filma: %s..."
+
+msgid "E"
+msgstr ""
 
 msgid "Enable this to be able to access IMDb search setup from within the plugin browser."
 msgstr ""
@@ -74,7 +60,7 @@ msgstr "Nema IMDb pogodaka."
 msgid "Extra Info"
 msgstr "Dodatni info"
 
-msgid "Genre:"
+msgid "IMDB Exception"
 msgstr ""
 
 msgid "IMDb Details parsed"
@@ -96,14 +82,7 @@ msgstr "IMDb dodatak"
 msgid "IMDb Re-Download completed"
 msgstr "Ponovno skidanje sa IMDb završeno"
 
-#, fuzzy
-msgid "IMDb Save - Download completed"
-msgstr "Ponovno skidanje sa IMDb završeno"
-
 msgid "IMDb Setup"
-msgstr ""
-
-msgid "IMDb can not get Movie Information to write to .jpg and .txt files!"
 msgstr ""
 
 msgid "IMDb can not get Movie Information to write to .txt file!"
@@ -113,14 +92,26 @@ msgid "IMDb query failed!"
 msgstr "IMDb upit neuspešan!"
 
 #, fuzzy
+msgid "IMDb save completed"
+msgstr "Skidanje sa IMDb završeno"
+
+#, fuzzy
 msgid "IMDb search"
 msgstr "Nema IMDb pogodaka."
 
 msgid "IMDb setup"
 msgstr ""
 
-msgid "Lookup"
-msgstr "Pregledanje"
+#, python-format
+msgid "Ignoring invalid imdbId: %s"
+msgstr ""
+
+msgid "Include episodes in the results. Takes effect after the next search of IMDb for a show name."
+msgstr ""
+
+#, python-format
+msgid "Local file does not exist: %s"
+msgstr ""
 
 msgid "Menu"
 msgstr ""
@@ -138,9 +129,6 @@ msgstr "Nije nađena lista uloga u bazi podataka."
 msgid "No details found."
 msgstr "Nisu nađeni detalji."
 
-msgid "OK"
-msgstr ""
-
 msgid "Page down"
 msgstr ""
 
@@ -153,12 +141,6 @@ msgstr ""
 msgid "Please select the matching entry"
 msgstr "Molim,izaberite odgovarajući unos"
 
-msgid "Plot Outline"
-msgstr ""
-
-msgid "Production Countries:"
-msgstr ""
-
 #, fuzzy, python-format
 msgid "Query IMDb: %s"
 msgstr "Upit IMDb: %s..."
@@ -167,10 +149,7 @@ msgstr "Upit IMDb: %s..."
 msgid "Re-Query IMDb: %s..."
 msgstr "Ponovni upit IMDb: %s..."
 
-msgid "Release Date:"
-msgstr ""
-
-msgid "Runtime:"
+msgid "S"
 msgstr ""
 
 msgid "Save current Details as .html for offline use"
@@ -189,14 +168,14 @@ msgstr ""
 msgid "Search for details from the Internet Movie Database"
 msgstr "Upit za detalje sa Internet filmske baze podataka"
 
-msgid "Select from EPG"
-msgstr ""
-
 #, fuzzy
 msgid "Settings for Internet Movie Database searches"
 msgstr "Internet filmska baza podataka"
 
 msgid "Setup"
+msgstr ""
+
+msgid "Show a bigger poster"
 msgstr ""
 
 msgid "Show episode and year information for cast when available. Takes effect after the next fetch of show details."
@@ -205,7 +184,10 @@ msgstr ""
 msgid "Show episode and year information in cast list"
 msgstr ""
 
-msgid "Show full movie or series name in title menu"
+msgid "Show episodes in title menu"
+msgstr ""
+
+msgid "Show extra information in title menu"
 msgstr ""
 
 msgid "Show in movie list"
@@ -220,13 +202,19 @@ msgstr ""
 msgid "Show movie and series extra details"
 msgstr ""
 
+msgid "Show movie and series synopsis"
+msgstr ""
+
 msgid "Show search in plugin browser"
 msgstr ""
 
 msgid "Show setup in plugin browser"
 msgstr ""
 
-msgid "Show the whole IMDb title information for a movie or series, including, for example, alternative names and whether it's a series. Takes effect after the next search of IMDb for a show name."
+msgid "Show the type of the title and top cast. Takes effect after the next search of IMDb for a show name."
+msgstr ""
+
+msgid "Synopsis"
 msgstr ""
 
 msgid "The Internet Movie Database"
@@ -238,14 +226,14 @@ msgstr ""
 msgid "Title Menu"
 msgstr "Meni naslova"
 
-msgid "Unknown category"
-msgstr ""
-
-msgid "User Rating"
-msgstr ""
-
 msgid "Words / phrases to ignore "
+msgstr ""
+
+msgid "connection error"
 msgstr ""
 
 msgid "no user rating yet"
 msgstr "Još nema korisn. ocena"
+
+msgid "timeout"
+msgstr ""

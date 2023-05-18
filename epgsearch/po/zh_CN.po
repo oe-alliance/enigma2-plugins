@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-27 06:11+0200\n"
+"POT-Creation-Date: 2023-05-18 02:07+0100\n"
 "PO-Revision-Date: 2017-05-29 20:23+0800\n"
 "Last-Translator: 孤独之剑 <haotzyy1970@163.com>\n"
 "Language-Team: none\n"
@@ -13,9 +13,18 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.5.7\n"
 
+msgid "%e/%m, %H:%M"
+msgstr ""
+
+#. TRANSLATORS: EPGSearch title in EventInfo dialog (does not require further user interaction)
+#. TRANSLATORS: %s inserts a non-printing character and is only used to control the sort order of these WHERE_EVENTINFO entries in Screens.ButtonSetup. Please leave it at the start of the translation string.
+#, python-format
 msgid "%ssearch EPG"
 msgstr "%s搜索EPG"
 
+#. TRANSLATORS: EPGSearch search from search history in EventInfo dialog (requires the user to select a history item to search for)
+#. TRANSLATORS: %s inserts a non-printing character and is only used to control the sort order of these WHERE_EVENTINFO entries in Screens.ButtonSetup. Please leave it at the start of the translation string.
+#, python-format
 msgid "%ssearch EPG from history..."
 msgstr "%sEPG搜索历史..."
 
@@ -55,12 +64,10 @@ msgstr "选择搜索的编码类型，对外语很有帮助."
 msgid "Close dialog"
 msgstr "关闭对话框"
 
-msgid ""
-"Control where to search in the EPG. When 'all bouquets' is set, all bouquets "
-"are searched, even if 'Enable multiple bouquets' is disabled."
-msgstr ""
-"控制在EPG中搜索的地方.当'所有花束'设置，所有花束搜索，即使'启用多分组'被禁用"
+msgid "Control where to search in the EPG. When 'all bouquets' is set, all bouquets are searched, even if 'Enable multiple bouquets' is disabled."
+msgstr "控制在EPG中搜索的地方.当'所有花束'设置，所有花束搜索，即使'启用多分组'被禁用"
 
+#, python-format
 msgid "Could not read AutoTimer timer list: %s"
 msgstr "无法读取自动计时器定时器列表: %s"
 
@@ -91,21 +98,14 @@ msgstr "EPG搜索"
 msgid "EPG Search setup"
 msgstr "EPG搜索设置 "
 
-msgid "EPG-Selection"
-msgstr "EPG选择 "
-
 msgid "EPGSearch"
 msgstr "EPG搜索"
 
 msgid "EPGSearch Setup"
 msgstr "EPG搜索设置 "
 
-msgid ""
-"Enable this to allow access to EPG Search from within the plugin browser."
+msgid "Enable this to allow access to EPG Search from within the plugin browser."
 msgstr "启用此允许从插件浏览器中访问EPG搜索."
-
-msgid "End Time:"
-msgstr "结束时间: "
 
 msgid "Enter new search"
 msgstr "输入新搜索 "
@@ -137,8 +137,7 @@ msgstr "导入EPG "
 msgid "Import from Timer"
 msgstr "导入计时器"
 
-msgid ""
-"Include or exclude results depending on their source (e.g. by satellite)"
+msgid "Include or exclude results depending on their source (e.g. by satellite)"
 msgstr "包含或排除取决于其来源的结果（例如通过卫星） "
 
 msgid "Include results from"
@@ -150,15 +149,14 @@ msgstr "搜索结果包括/排除在本类型的源 "
 msgid "Include/exclude sources"
 msgstr "包括/排除源 "
 
-msgid "Is the search case-sensitive or case-insensitive"
+#, fuzzy
+msgid "Is the search case-sensitive or case-insensitive?"
 msgstr "搜索情况是否敏感或不区分大小写 "
 
 msgid "Length of history"
 msgstr "历史长度 "
 
-msgid ""
-"Maximum number of entries in the search history. Set this to 0 to disable "
-"search history."
+msgid "Maximum number of entries in the search history. Set this to 0 to disable search history."
 msgstr "搜索历史中的最大条目数.设置为0来禁用搜索历史. "
 
 msgid "Move down"
@@ -224,7 +222,8 @@ msgstr "选择要搜索的计时器 "
 msgid "Select text to search for"
 msgstr "选择要搜索的文本"
 
-msgid "Set type of match used to compare program titles with the search string"
+#, fuzzy
+msgid "Set type of match used to compare program titles with the search string."
 msgstr "设置用于比较程序标题与搜索字符串的匹配类型 "
 
 msgid "Sets the default search scope when the user is asked."
@@ -254,15 +253,10 @@ msgstr "在搜索结果中显示卫星轨道位置。"
 msgid "Show search history"
 msgstr "显示搜索历史 "
 
-msgid "Start Time:"
-msgstr "开始时间: "
-
 msgid "Stream"
 msgstr "流 "
 
-msgid ""
-"Use source restrictions below to only include results from the sources, or "
-"exclude them."
+msgid "Use source restrictions below to only include results from the sources, or exclude them."
 msgstr "使用下面的源限制只包含源的结果,或排除它们."
 
 msgid "Zap to channel"
@@ -301,12 +295,17 @@ msgstr "排除 "
 msgid "include"
 msgstr "包括 "
 
+msgid "partial description"
+msgstr ""
+
 msgid "partial match"
 msgstr "部分匹配 "
 
+#. TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)
 msgid "search EPG"
 msgstr "搜索EPG "
 
+#. TRANSLATORS: EPGSearch search from search history in MovieList (requires the user to select a history item to search for)
 msgid "search EPG from history..."
 msgstr "从历史搜索EPG..."
 

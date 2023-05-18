@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MerlinMusicPlayer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-18 02:08+0100\n"
 "PO-Revision-Date: 2015-10-07 18:57+0300\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: openpli.org\n"
@@ -52,6 +52,10 @@ msgid ""
 msgstr ""
 "%s\n"
 "вставлен и будет играть в следующей композиции"
+
+#, python-format
+msgid "%s (%s)"
+msgstr ""
 
 msgid "Activate screensaver"
 msgstr "Активировать скринсейвер"
@@ -262,10 +266,6 @@ msgstr "Запоминать последний путь для браузера
 
 msgid "Repeat is not available yet with cue-files!"
 msgstr "Повтор пока не доступен для cue-файлов!"
-
-#, python-format
-msgid "Response -> lyrics for: %s (%s)"
-msgstr "Ответ -> тест композиции для: %s (%s)"
 
 msgid "Scan path for music files and add them to database"
 msgstr "Путь сканирования для муз. файлов и добавление их в базу данных"

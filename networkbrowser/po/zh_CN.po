@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-25 12:31+0200\n"
+"POT-Creation-Date: 2023-05-18 02:08+0100\n"
 "PO-Revision-Date: 2021-07-20 23:10+0800\n"
 "Last-Translator: 孤独之剑 <haotzyy1970@163.com>\n"
 "Language-Team: 孤独之剑 <haotzyy1970@163.com>\n"
@@ -277,9 +277,6 @@ msgstr "服务器共享 "
 msgid "Setup Mount Again"
 msgstr "设置再次挂载"
 
-msgid "Umstellen"
-msgstr "重置 "
-
 msgid "Use as HDD replacement"
 msgstr "用作硬盘替换"
 
@@ -305,6 +302,12 @@ msgstr ""
 "您已更改了共享名称!\n"
 "更新现有的条目并继续吗?\n"
 
+#, python-format
+msgid ""
+"Your network interface %s is not properly configured, so a network scan cannot be done.\n"
+"Please configure the interface and try again."
+msgstr ""
+
 msgid "Your network mount has been activated."
 msgstr "您的网络挂载已被激活."
 
@@ -313,6 +316,3 @@ msgstr "您的网络挂载已被删除."
 
 msgid "Your network mount has been updated."
 msgstr "您的网络挂载已更新."
-
-msgid "use as HDD replacement"
-msgstr "用作硬盘替换"

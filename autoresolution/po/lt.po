@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-AutoResolution\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-18 02:07+0100\n"
 "PO-Revision-Date: 2016-02-20 10:05+0200\n"
 "Last-Translator: Vytenis P.\n"
 "Language-Team: Vytenis Pulokas <vytemiui@gmail.com>\n"
@@ -98,6 +98,9 @@ msgstr ""
 msgid "FHD 50/60Hz Progressive Mode"
 msgstr "UHD pilnaeilis (progressive) režimas"
 
+msgid "Force set progressive for stream/video content"
+msgstr ""
+
 #
 #, fuzzy
 msgid "HD Interlace Mode"
@@ -163,10 +166,16 @@ msgstr "UHD dvieilio pynimo (interlace) režimas"
 msgid "SD 30/60Hz Progressive Mode"
 msgstr "UHD pilnaeilis (progressive) režimas"
 
+msgid "Separate colorimetry for HDR (set 'auto' HDMI Colorimetry)"
+msgstr ""
+
 msgid "Show 'Manual resolution' in extensions menu"
 msgstr ""
 
 msgid "Show info screen"
+msgstr ""
+
+msgid "Smart HDR type (set 'auto' HDMI HDR type)"
 msgstr ""
 
 msgid "This resolution is OK?"
@@ -208,6 +217,9 @@ msgid "default"
 msgstr ""
 
 msgid "manual"
+msgstr ""
+
+msgid "no"
 msgstr ""
 
 msgid "off"

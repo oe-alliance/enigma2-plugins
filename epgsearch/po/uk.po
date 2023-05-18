@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-18 02:07+0100\n"
 "PO-Revision-Date: 2019-06-03 10:31+0300\n"
 "Last-Translator: kvinto <badsystem@ukr.net>\n"
 "Language-Team: <sat-ukraine.info>\n"
@@ -298,6 +298,9 @@ msgstr "включати"
 
 msgid "include"
 msgstr "включати"
+
+msgid "partial description"
+msgstr ""
 
 msgid "partial match"
 msgstr ""

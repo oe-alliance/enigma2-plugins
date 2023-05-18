@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-18 02:07+0100\n"
 "PO-Revision-Date: 2014-10-28 19:06+0100\n"
 "Last-Translator: OEA\n"
 "Language-Team: french\n"
@@ -104,6 +104,9 @@ msgstr ""
 msgid "FHD 50/60Hz Progressive Mode"
 msgstr "SD 30/60Hz Mode progressif"
 
+msgid "Force set progressive for stream/video content"
+msgstr ""
+
 msgid "HD Interlace Mode"
 msgstr "HD Mode Interlacé"
 
@@ -157,11 +160,17 @@ msgstr "SD 30/60Hz Mode interlacé"
 msgid "SD 30/60Hz Progressive Mode"
 msgstr "SD 30/60Hz Mode progressif"
 
+msgid "Separate colorimetry for HDR (set 'auto' HDMI Colorimetry)"
+msgstr ""
+
 msgid "Show 'Manual resolution' in extensions menu"
 msgstr ""
 
 msgid "Show info screen"
 msgstr "Afficher la fenêtre d'info"
+
+msgid "Smart HDR type (set 'auto' HDMI HDR type)"
+msgstr ""
 
 msgid "This resolution is OK?"
 msgstr ""
@@ -202,6 +211,9 @@ msgid "default"
 msgstr "défaut"
 
 msgid "manual"
+msgstr ""
+
+msgid "no"
 msgstr ""
 
 msgid "off"

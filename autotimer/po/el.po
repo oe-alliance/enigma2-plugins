@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-18 02:07+0100\n"
 "PO-Revision-Date: 2016-06-18 02:25+0200\n"
 "Last-Translator: MCelliot_g <mcelliot_g@hotmail.com>\n"
 "Language-Team: none\n"
@@ -55,9 +55,6 @@ msgstr "%d.%B %Y"
 msgid "%s: %s at %s"
 msgstr "%s: %s σε %s"
 
-msgid "Abort this Wizard."
-msgstr ""
-
 msgid "Activate VPS"
 msgstr "Ενεργοποίηση VPS"
 
@@ -98,6 +95,9 @@ msgstr "Εγγραφή πάντα του αρχείου ρυθμίσεων"
 msgid "Amount of recordings left"
 msgstr "Αριθμός εγγραφών που απομένουν"
 
+msgid "Any Day filter refers to the day of the timespan start, even if the timespan crosses midnight."
+msgstr ""
+
 msgid "Any service/recording"
 msgstr "Κάθε υπηρεσία/εγγραφή"
 
@@ -118,16 +118,8 @@ msgstr "Μενού Περιεχομένων Αυτ. Χρ/κόπτη"
 msgid "AutoTimer Editor"
 msgstr "Επεξεργασία Αυτ. Χρ/κόπτη"
 
-#, fuzzy
-msgid "AutoTimer FAQ"
-msgstr "Αυτόματος Χρονοδιακόπτης"
-
 msgid "AutoTimer Filters"
 msgstr "Φίλτρα Αυτ. Χρ/κόπτη"
-
-#, fuzzy
-msgid "AutoTimer Help"
-msgstr "Αυτόματος Χρονοδιακόπτης"
 
 msgid "AutoTimer Services"
 msgstr "Υπηρεσίες Αυτ. Χρ/κόπτη"
@@ -214,18 +206,11 @@ msgstr "Κλείσιμο και αγνόηση αλλαγών"
 msgid "Close and save changes"
 msgstr "Κλείσιμο και αγνόηση αλλαγών"
 
-msgid "Congratulations"
-msgstr ""
-
 msgid "Control recording completely by service"
 msgstr "Πλήρης έλεγχος της εγγραφής από την υπηρεσία"
 
 msgid "Couldn't load config file!"
 msgstr "Αδυναμία φόρτωσης του αρχείου ρυθμίσεων!"
-
-#, fuzzy
-msgid "Create a new AutoTimer."
-msgstr "Δημιουργία Αυτ. Χρ/κόπτη"
 
 msgid "Create a new timer using the classic editor"
 msgstr "Δημιουργία νέου χρονοδιακόπτη με χρήση κλασσικής επεξεργασίας"
@@ -333,16 +318,8 @@ msgstr "Εκτέλεση του \"μετά το πρόγραμμα\" κατά τ
 msgid "Exit"
 msgstr ""
 
-msgid "FAQ"
-msgstr ""
-
 msgid "Filter"
 msgstr "Φίλτρο"
-
-msgid ""
-"Filters are another powerful tool when matching events. An AutoTimer can be restricted to certain Weekdays or only match an event with a text inside eg it's Description.\n"
-"Press BLUE to add a new restriction and YELLOW to remove the selected one."
-msgstr ""
 
 msgid "First day to match events. No event that begins before this date will be matched."
 msgstr "Πρώτη ημέρα συσχέτισης προγραμμάτων. Δεν θα συσχετίζεται κανένα πρόγραμμα πριν αυτή την ημερομηνία."
@@ -365,18 +342,11 @@ msgstr ""
 msgid "Frequently asked questions"
 msgstr "Συχνές ερωτήσεις"
 
-#, fuzzy
-msgid "Frequently asked questions about the AutoTimer"
-msgstr "Συχνές ερωτήσεις"
-
 msgid "Fri"
 msgstr "Παρ"
 
 msgid "Friday"
 msgstr "Παρασκευή"
-
-msgid "Generic setup"
-msgstr ""
 
 msgid "Guess existing timer based on begin/end"
 msgstr "Υπολογισμός  υπάρχοντος χρονοδιακόπτη βάσει αρχής/τέλους"
@@ -453,12 +423,6 @@ msgstr "Συμπερίληψη \"Αυτ. Χρ/κόπτη\" στις ετικέτ
 msgid "Include AutoTimer name in tags"
 msgstr "Συμπερίληψη Αυτ. Χρ/κόπτη στις ετικέτες"
 
-msgid ""
-"It's possible to restrict an AutoTimer to certain Services or Bouquets or to deny specific ones.\n"
-"An Event will only match this AutoTimer if it's on a specific and not denied Service (inside a Bouquet).\n"
-"Press BLUE to add a new restriction and YELLOW to remove the selected one."
-msgstr ""
-
 msgid "Label Timers with season, episode and title, according to the SeriesPlugin settings."
 msgstr "Ονοματοδοσία Χρονοδιακοπτών βάσει σαιζόν, επεισοδίου και τίτλου, σύμφωνα με τις ρυθμίσεις του SeriesPlugin."
 
@@ -525,9 +489,6 @@ msgstr "Νέο"
 
 msgid "No"
 msgstr "Όχι"
-
-msgid "No, remove them."
-msgstr ""
 
 msgid "None"
 msgstr "Κανένα"
@@ -610,15 +571,6 @@ msgstr "Προεπισκόπηση"
 
 msgid "Preview AutoTimer"
 msgstr "Προεπισκόπηση Αυτ. Χρ/κόπτη"
-
-msgid "Question: I found a problem with the AutoTimer, can you fix it?/nAnswer: First try the AutoTimer version in a recent (experimental) Image to see if the problem was fixed. Then read the Help again and the upcoming FAQs to make sure that this is actually a problem and not expected behavior./nIf you still think there is something wrong with the AutoTimer, please visit http://www.dream-multimedia-tv.de/board and post your problem there./n/nQ: The plugin only adds timers when leaving the configuration, not automatically. What can I do?/nA: From the Overview press MENU and enter the 'Setup'. In this screen enable 'Poll automatically' and you should be good to go."
-msgstr ""
-
-msgid "Question: My AutoTimer for 'News' does not record the 'Late News'./nAnswer: Check 'Search type' and 'Search strictness' for the given AutoTimer./n/nQ: The show I'm trying to record contains umlauts in its title. AutoTimer does not find it./nA: Check the 'EPG encoding' for the given AutoTimer. For german stations 'UTF-8' should be selected./n/nQ: I seem to be unable to record two subsequent events. There is only a single timer created that spans (part of) both events./nA: From the Overview press MENU and enter the 'Setup'. In this screen disable 'Guess existing timer based on begin/end'."
-msgstr ""
-
-msgid "Question: You keep talking about help being provided for each parameter. I'm unable to read it (in part or in full)./nAnswer: Try using the default skin and if it works ask the creator of your regular skin. If it still does not work your image might not provide the actual default skin so contact the creator of your image."
-msgstr ""
 
 msgid "Really close without saving settings?"
 msgstr "Έξοδος χωρίς αποθήκευση ρυθμίσεων;"
@@ -785,30 +737,7 @@ msgstr "Ετικέτες"
 msgid "Tags the Timer/Recording will have."
 msgstr "Ετικέτες που θα έχει ο Χρονοδιακόπτης/Εγγραφή"
 
-msgid ""
-"Thank you for using the wizard. Your new AutoTimer has been added to the List.\n"
-"Please press OK to continue."
-msgstr ""
-
-#, fuzzy
-msgid "The 'Overview'"
-msgstr "Επισκόπηση Αυτ. Χρ/κόπτη"
-
-msgid "The AutoTimer overview is the standard entry point to this plugin./n/nIf AutoTimers are configured you can choose them from a list to change them (OK button on your remote) or remove them (YELLOW button on your remote)./nNew Timers can be added by pressing the BLUE button and the control menu can be opened using the MENU button./n/nWhen leaving the plugin using the GREEN button it will search the EPG for matching events ONCE. To configure a regular search interval of the plugin to search for events open the control menu and enter the plugin setup."
-msgstr ""
-
-msgid ""
-"The Timer will not be added to the List.\n"
-"Please press OK to close this Wizard."
-msgstr ""
-
-msgid "The Timespan of an AutoTimer is the first 'advanced' attribute. If a timespan is specified an event will only match this AutoTimer if it lies inside of this timespan."
-msgstr ""
-
 msgid "The autotimer file (/etc/enigma2/autotimer.xml) is corrupt. A new and empty config was created. A backup of the config can be found here (/etc/enigma2/autotimer.xml_old) "
-msgstr ""
-
-msgid "The control menu hides less frequently used options of the plugin, including the configuration and default settings for new AutoTimers./n/nWhile you can just open the menu and take a look for yourself, let's go through the available options:/n - Help:/n   What you are looking at right now/n - Preview:/n   Simulate EPG search, helps finding errors in your setup./n - Import existing Timer:/n   Create a new AutoTimer based on an existing regular timer./n - Import from EPG:/n   Create an AutoTimer based on an EPG event./n - Setup:/n   Generic configuration of the plugin./n - Edit new timer defaults:/n   Configure default values for new AutoTimers./n - Create a new timer using the wizard/classic editor:/n   Use the non-default editor to create a new AutoTimer."
 msgstr ""
 
 msgid "The counter can automatically be reset to the limit at certain intervals."
@@ -820,22 +749,13 @@ msgstr "Επεξεργαστής για νέους Αυτ. Χρ/κόπτες. Α
 msgid "The match attribute is mandatory."
 msgstr "Η παράμετρος συσχέτισης είναι υποχρεωτική."
 
-msgid "This FAQ is supposed to help everyone unwilling to help themselves by reading all the provided help available, and those who did not find a solution to their problems within the provided documentation./n/nTo make these hints a little easier to read, they are split up on multiple pages. You can go to the next page using the BLUE button on your remote control and back using the YELLOW one. Pressing the RED button or EXIT will close the FAQ."
-msgstr ""
-
 msgid ""
 "This allows you to apply other filters.\n"
 "Use the yellow key to edit other filters."
 msgstr ""
 
-msgid "This help screen is supposed to give you a quick look at everything the AutoTimer has to offer./nYou can abort it at any time by pressing the RED or EXIT button on your remote control or bring it up at a later point by selecting it from the control menu using the MENU button from the regular entry point of the plugin (more on that later)./n/n/nBut you really should consider to take the few minutes it takes to read these help pages."
-msgstr ""
-
 msgid "This is a name you can give the AutoTimer. It will be shown in the Overview and the Preview."
 msgstr "Αυτό είναι το όνομα που μπορείτε να δώσετε στον Αυτ. Χρ/κόπτη. Θα εμφανίζεται στην Επισκόπηση και την Προεπισκόπηση."
-
-msgid "This is mostly a matter of taste./nThe Wizard provides you with a reduced set of options and presents them in smaller sets at a time. It is mostly aimed at users not very experienced with this plugin or the 'expert' level features of enigma2./n/nYou can check out the 'classic' editor by opening an existing timer from the overview and if you prefer this view over the wizard you can change the default editor in the setup dialog."
-msgstr ""
 
 #, fuzzy, python-format
 msgid "This is the delay in %s that the AutoTimer will wait after doing a search before searching the EPG again."
@@ -850,9 +770,6 @@ msgstr "Καθυστέρηση σε λεπτά όπου ο Αυτ. Χρ/κόπτ
 
 msgid "This is what will be looked for in event titles. Note that looking for e.g. german umlauts can be tricky as you have to know the encoding the channel uses."
 msgstr "Σε αυτό θα γίνεται αναζήτηση στους τίτλους προγραμμάτων. Σημειώστε ότι η αναζήτηση ειδικών χαρακτήρων π.χ διαλυτικά μπορεί να είναι προβληματική καθώς πρέπει να γνωρίζετε την κωδικοποίηση χαρακτήρων του καναλιού."
-
-msgid "This screen should be pretty straight-forward. If the option name does not give its meaning away there should be an explanation for each of them when you select them. If there is no visible explanation this is most likely a skin issue and please try if the default skin fixes the issue./n/nA lot of effort has been put in making the parameters as easy to understand as possible, so give reading them a try ;-)."
-msgstr ""
 
 msgid "This setting controls the behavior when a timer matches a found event."
 msgstr "Αυτή η ρύθμιση ελέγχει τη συμπεριφορά ενός χρονοδιακόπτη όταν συσχετίζεται με ένα πρόγραμμα που έχει βρεθεί."
@@ -927,18 +844,6 @@ msgstr "Εβδομαδιαία (Δευτέρα)"
 msgid "Weekly (Sunday)"
 msgstr "Εβδομαδιαία (Κυριακή)"
 
-msgid "Welcome to the AutoTimer-Plugin"
-msgstr ""
-
-msgid ""
-"Welcome.\n"
-"\n"
-"This Wizard will help you to create a new AutoTimer by providing descriptions for common settings."
-msgstr ""
-
-msgid "What is this 'control menu' you keep talking about?"
-msgstr ""
-
 msgid "When supporting \"Fast Scan\" the service type is ignored. You don't need to enable this unless your Image supports \"Fast Scan\" and you are using it."
 msgstr "Όταν υποστηρίζεται η \"Γρήγορη Ανίχνευση\" αγνοείται ο τύπος της υπηρεσίας. Δεν χρειάζεται να είναι ενεργό, εκτός και αν το Image σας υποστηρίζει τη \"Γρήγορη Ανίχνευση\" και τη χρησιμοποιείτε."
 
@@ -962,14 +867,8 @@ msgstr "Με αυτή την επιλογή, μπορείτε να περιορ�
 msgid "Wizard"
 msgstr "Οδηγός"
 
-msgid "Wizard or Classic Editor?"
-msgstr ""
-
 msgid "Write the config file after every change which the user quits by saving."
 msgstr "Εγγραφή του αρχείου ρυθμίσεων μετά κάθε αλλαγή που εγκαταλείπει ο χρήστης αποθηκεύοντας."
-
-msgid "Yes"
-msgstr ""
 
 msgid "Yes, and delete all timers generated by this autotimer"
 msgstr "Ναι, και να διαγραφούν όλοι οι χρονοδιακόπτες που δημιουργήθηκαν"
@@ -977,21 +876,8 @@ msgstr "Ναι, και να διαγραφούν όλοι οι χρονοδια�
 msgid "Yes, but keep timers generated by this autotimer"
 msgstr "Ναι, αλλά να κρατηθούν οι χρονοδιακόπτες που δημιουργήθηκαν"
 
-msgid "Yes, keep them."
-msgstr ""
-
 msgid "You can control for how many days in the future timers are added. Set this to 0 to disable this feature."
 msgstr "Έλεγχος του αριθμού ημερών όπου θα προστίθενται χρονοδιακόπτες στο μέλλον. Θέστε 0 για απενεργοποίηση."
-
-msgid ""
-"You can set the basic properties of an AutoTimer here.\n"
-"While 'Name' is just a human-readable name displayed in the Overview, 'Match in title' is what is looked for in the EPG."
-msgstr ""
-
-msgid ""
-"You did not provide a valid 'Match in title' Attribute for your new AutoTimer.\n"
-"As this is a mandatory Attribute you cannot continue without doing so."
-msgstr ""
 
 #, python-format
 msgid ""
@@ -1000,20 +886,6 @@ msgid ""
 msgstr ""
 "Έχετε εισάγει το \"%s\" ως Κείμενο προς συσχέτιση.\n"
 "Θέλετε να αφαιρεθούν τα κενά που ακολουθούν;"
-
-msgid "You now know almost everything there is to know about the AutoTimer-Plugin./n/nAs a final hint I can't stress how important it is to take a look at the help texts that are shown in the setup dialogs as they cover the most frequently asked questions. Surprisingly even after the hints were added ;-)."
-msgstr ""
-
-msgid ""
-"You successfully configured a new AutoTimer. Do you want to add it to the list?\n"
-"\n"
-"You can go back a step by pressing EXIT on your remote."
-msgstr ""
-
-msgid ""
-"Your 'Match in title' Attribute ends with a Whitespace.\n"
-"Please confirm if this was intentional, if not they will be removed."
-msgstr ""
 
 #, python-format
 msgid ""
