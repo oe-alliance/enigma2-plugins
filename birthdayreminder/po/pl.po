@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Birthday Reminder\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
+"POT-Creation-Date: 2023-05-18 02:07+0100\n"
 "PO-Revision-Date: 2023-03-30 09:32+0200\n"
 "Last-Translator: paps\n"
 "Language-Team: paps\n"
@@ -13,6 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 "X-Generator: Poedit 3.2.2\n"
 
+#, python-format
 msgid "%s will turn %s in %s!"
 msgstr "%s będzie miał/a %s urodziny za %s!"
 
@@ -46,6 +47,7 @@ msgstr "Przypomnienie o urodzinach"
 msgid "Birthday Reminder Settings"
 msgstr "Ustawienia Birthday Reminder"
 
+#, python-format
 msgid "Birthday Reminder received %s birthdays from %s."
 msgstr "Birthday Remainder odebrał %s wpisów urodzin od %s."
 
@@ -58,12 +60,15 @@ msgstr "Lista urodzin"
 msgid "CSV import successful!"
 msgstr "Pomyślnie zaimportowano plik CSV!"
 
+#, python-format
 msgid "Can't find CSV file %s!"
 msgstr "Nie można znaleźć pliku CSV: %s!"
 
+#, python-format
 msgid "Can't import CSV data from file %s."
 msgstr "Nie można zaimportować danych z pliku CSV: %s."
 
+#, python-format
 msgid "Can't write CSV file %s."
 msgstr "Nie można zapisać pliku CSV: %s."
 
@@ -79,11 +84,16 @@ msgstr "Wyłączone"
 msgid "Distribute birthdays to other Dreamboxes"
 msgstr "Wysyłanie pliku z urodzinami do innych STB"
 
+#, python-format
 msgid "Do you really want to delete the entry for %s?"
 msgstr "Czy na pewno chcesz usunąć wpis '%s'?"
 
 msgid "Edit"
 msgstr "Edycja"
+
+#, fuzzy
+msgid "Edit Birthday Settings"
+msgstr "Edycja urodzin"
 
 msgid "Edit birthday"
 msgstr "Edycja urodzin"
@@ -94,6 +104,7 @@ msgstr "Edycja urodzin"
 msgid "Edit the selected entry"
 msgstr "Edycja zaznaczonego wpisu"
 
+#, python-format
 msgid ""
 "Error reading file %s.\n"
 "\n"
@@ -103,6 +114,7 @@ msgstr ""
 "\n"
 "Błąd: %s, %s"
 
+#, python-format
 msgid ""
 "Error writing file %s.\n"
 "\n"
@@ -163,6 +175,10 @@ msgstr "Usuń"
 msgid "Remove the selected entry"
 msgstr "Usuń zaznaczony wpis"
 
+#, fuzzy
+msgid "Select a path for the birthday file"
+msgstr "Ścieżka do pliku z urodzinami:"
+
 msgid "Show plugin in extensions menu:"
 msgstr "Pokaż wtyczkę w rozszerzonym menu:"
 
@@ -177,6 +193,7 @@ msgstr "Następne"
 msgid "Sorting previous"
 msgstr "Poprzednie"
 
+#, python-format
 msgid ""
 "Today is %s's birthday!\n"
 "\n"
@@ -189,6 +206,7 @@ msgstr ""
 msgid "What do you want to do?"
 msgstr "Co chcesz zrobić?"
 
+#, python-format
 msgid "Wrote CSV file %s."
 msgstr "Zapisano plik CSV: %s."
 

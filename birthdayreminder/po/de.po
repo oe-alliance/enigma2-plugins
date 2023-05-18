@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BirthdayReminder 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-18 02:07+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: <shaderman@dreambox-tools.info>\n"
@@ -25,9 +25,6 @@ msgstr "1 Woche"
 
 msgid "3 days"
 msgstr "3 Tage"
-
-msgid "Accept changes"
-msgstr "Änderungen übernehmen"
 
 msgid "Add"
 msgstr "Hinzufügen"
@@ -75,15 +72,6 @@ msgstr "Die Daten der CSV- Datei %s konnten nicht importiert werden."
 msgid "Can't write CSV file %s."
 msgstr "Die CSV- Datei %s konnte nicht gespeichert werden."
 
-msgid "Cancel"
-msgstr "Abbrechen"
-
-msgid "Change path"
-msgstr "Pfad ändern"
-
-msgid "Choose the filename:"
-msgstr "Wähle den Dateinamen:"
-
 msgid "Date format:"
 msgstr "Datumsformat:"
 
@@ -103,6 +91,10 @@ msgstr "Wollen Sie den Eintrag für %s wirklich löschen?"
 msgid "Edit"
 msgstr "Bearbeiten"
 
+#, fuzzy
+msgid "Edit Birthday Settings"
+msgstr "Geburtstage bearbeiten"
+
 msgid "Edit birthday"
 msgstr "Geburtstag bearbeiten"
 
@@ -111,9 +103,6 @@ msgstr "Geburtstage bearbeiten"
 
 msgid "Edit the selected entry"
 msgstr "Gewählten Eintrag bearbeiten"
-
-msgid "Enter the name of the person:"
-msgstr "Geben den Namen der Person ein:"
 
 #, python-format
 msgid ""
@@ -150,9 +139,6 @@ msgstr "Erinnert an Geburtstage"
 msgid "Import CSV file"
 msgstr "CSV- Datei importieren"
 
-msgid "Invalid Location"
-msgstr "Fehlerhafter Ort"
-
 msgid "Invalid date!"
 msgstr "Ungültiges Datum!"
 
@@ -174,9 +160,6 @@ msgstr "Nächstem Geburtstag"
 msgid "Notification time:"
 msgstr "Zeit für Benachrichtigungen:"
 
-msgid "OK"
-msgstr "OK"
-
 msgid "Open the extras menu"
 msgstr "Extras menu öffnen"
 
@@ -192,8 +175,9 @@ msgstr "Entfernen"
 msgid "Remove the selected entry"
 msgstr "Gewählten Eintrag löschen"
 
-msgid "Save"
-msgstr "Speichern"
+#, fuzzy
+msgid "Select a path for the birthday file"
+msgstr "Pfad zur Geburtstagsdatei:"
 
 msgid "Show plugin in extensions menu:"
 msgstr "Zeige Plugin im Erweiterungsmenu:"
@@ -216,9 +200,6 @@ msgstr ""
 "Heute ist %s's Geburtstag!\n"
 "\n"
 "Sie/er wurde am %s geboren und ist jetzt %s Jahr(e) alt."
-
-msgid "VirtualKeyBoard"
-msgstr "VirtualKeyBoard"
 
 msgid "What do you want to do?"
 msgstr "Was wollen Sie tun?"

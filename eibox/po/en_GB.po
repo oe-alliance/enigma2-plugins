@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-15 14:10+0000\n"
+"POT-Creation-Date: 2023-05-18 02:07+0100\n"
 "PO-Revision-Date: 2012-03-16 13:23+0100\n"
 "Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
@@ -31,15 +31,6 @@ msgstr "(set point)"
 
 msgid "Visualization for European Installation Bus"
 msgstr "Visualisation for European Installation Bus"
-
-msgid "beleuchtung:helligkeitswerte:esstisch"
-msgstr "beleuchtung:helligkeitswerte:esstisch"
-
-msgid "beleuchtung:helligkeitswerte:schlafen_decke"
-msgstr "beleuchtung:helligkeitswerte:schlafen_decke"
-
-msgid "beleuchtung:helligkeitswerte:wohnzimmer_decke_1"
-msgstr "beleuchtung:helligkeitswerte:wohnzimmer_decke_1"
 
 msgid "down"
 msgstr "down"

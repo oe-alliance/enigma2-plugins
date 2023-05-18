@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins-extension-WebInterface\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-18 02:09+0100\n"
 "PO-Revision-Date: 2009-06-22 16:41+0100\n"
 "Last-Translator: Sebastian <zbigzbig2@op.pl>\n"
 "Language-Team: none\n"
@@ -49,21 +49,6 @@ msgstr ""
 msgid "'%s' removed from playlist"
 msgstr ""
 
-msgid "0"
-msgstr ""
-
-msgid "1"
-msgstr ""
-
-msgid "15"
-msgstr ""
-
-msgid "2"
-msgstr ""
-
-msgid "3"
-msgstr ""
-
 msgid "AC3 Downmix disabled"
 msgstr ""
 
@@ -91,9 +76,6 @@ msgid "Add Timer"
 msgstr ""
 
 msgid "Add Zap Timer"
-msgstr ""
-
-msgid "Add/Save"
 msgstr ""
 
 msgid "After event"
@@ -969,9 +951,6 @@ msgid "reloaded lamedb"
 msgstr ""
 
 msgid "sec"
-msgstr ""
-
-msgid "submit-message"
 msgstr ""
 
 msgid "the command was not > 0"

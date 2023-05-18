@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: network browser Persian Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-18 02:08+0100\n"
 "PO-Revision-Date: 2012-07-26 00:20+0330\n"
 "Last-Translator: mehdi <mehdi_ar_yekta@yahoo.com>\n"
 "Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
@@ -108,6 +108,9 @@ msgstr ""
 
 msgid "Finished restarting your network"
 msgstr "اتمام راه اندازی شبکه شما"
+
+msgid "Host name"
+msgstr ""
 
 msgid "IP Address"
 msgstr ""

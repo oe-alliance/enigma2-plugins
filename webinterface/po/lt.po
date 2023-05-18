@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WebInterface\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-18 02:09+0100\n"
 "PO-Revision-Date: 2017-07-11 16:56+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P.\n"
@@ -45,21 +45,6 @@ msgstr "'%s' grojaraštyje nerasta"
 msgid "'%s' removed from playlist"
 msgstr "'%s' pašalinta iš grojaraščio"
 
-msgid "0"
-msgstr ""
-
-msgid "1"
-msgstr ""
-
-msgid "15"
-msgstr ""
-
-msgid "2"
-msgstr ""
-
-msgid "3"
-msgstr ""
-
 msgid "AC3 Downmix disabled"
 msgstr "AC3 kanalų suliejimas išjungtas"
 
@@ -88,10 +73,6 @@ msgstr "Pridėti laikmatį"
 
 msgid "Add Zap Timer"
 msgstr "Pridėti perjungimo laikmatį"
-
-#, fuzzy
-msgid "Add/Save"
-msgstr "Išsaugoti"
 
 msgid "After event"
 msgstr "Po užduoties"
@@ -955,9 +936,6 @@ msgstr "lamedb įkelta iš naujo"
 
 msgid "sec"
 msgstr "sek."
-
-msgid "submit-message"
-msgstr ""
 
 msgid "the command was not > 0"
 msgstr "komanda nebuvo > 0"

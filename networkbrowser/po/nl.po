@@ -203,16 +203,13 @@ msgid "Password"
 msgstr "Wachtwoord"
 
 msgid "Please wait for activation of your network mount..."
-msgstr ""
-"Een ogenblikje geduld a.u.b. terwijl we uw netwerkverbinding activeren..."
+msgstr "Een ogenblikje geduld a.u.b. terwijl we uw netwerkverbinding activeren..."
 
 msgid "Please wait while removing your network mount..."
-msgstr ""
-"Een ogenblikje geduld a.u.b. terwijl we uw netwerkverbinding verwijderen..."
+msgstr "Een ogenblikje geduld a.u.b. terwijl we uw netwerkverbinding verwijderen..."
 
 msgid "Please wait while updating your network mount..."
-msgstr ""
-"Een ogenblikje geduld a.u.b. terwijl we uw netwerkverbinding bijwerken..."
+msgstr "Een ogenblikje geduld a.u.b. terwijl we uw netwerkverbinding bijwerken..."
 
 msgid "Please wait while your network is restarting..."
 msgstr "Een ogenblikje geduld a.u.b. terwijl we uw netwerk herstarten..."
@@ -302,8 +299,7 @@ msgid "View, edit or delete mountpoints on your Receiver."
 msgstr "Bekijken, verwijderen of aanpassen van de mounts van uw ontvanger."
 
 msgid "View, edit or delete usernames and passwords for your network."
-msgstr ""
-"Bekijk, wijzig of verwijder gebruikersnaam en wachtwoord voor uw netwerk."
+msgstr "Bekijk, wijzig of verwijder gebruikersnaam en wachtwoord voor uw netwerk."
 
 msgid ""
 "You have changed the share name!\n"
@@ -314,12 +310,10 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Your network interface %s is not properly configured, so a network scan "
-"cannot be done.\n"
+"Your network interface %s is not properly configured, so a network scan cannot be done.\n"
 "Please configure the interface and try again."
 msgstr ""
-"Uw netwerkinterface %s is niet correct geconfigureerd, waardoor geen "
-"netwerkscan kan worden uitgevoerd.\n"
+"Uw netwerkinterface %s is niet correct geconfigureerd, waardoor geen netwerkscan kan worden uitgevoerd.\n"
 "Configureer de interface en probeer het opnieuw."
 
 msgid "Your network mount has been activated."

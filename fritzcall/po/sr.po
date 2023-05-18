@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-18 02:08+0100\n"
 "PO-Revision-Date: 2009-09-10 22:47+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -127,6 +127,17 @@ msgstr ""
 "pokušavam ponovo..."
 
 msgid "Could not get call list; wrong version?"
+msgstr ""
+
+#, fuzzy
+msgid "Could not load barring list: "
+msgstr "FRITZ!Box - Ne mogu učitati pozive: %s"
+
+#, fuzzy, python-format
+msgid "Could not load barring list: %s"
+msgstr "FRITZ!Box - Ne mogu učitati pozive: %s"
+
+msgid "Could not load deflections list: "
 msgstr ""
 
 msgid "Could not load phonebook: "
@@ -384,9 +395,6 @@ msgstr "Pokazati MSN (odvojen sa  ,)"
 msgid "Mailbox"
 msgstr "Poštansko sanduče"
 
-msgid "Make it more skin friendly"
-msgstr ""
-
 #. TRANSLATORS: keep it short, this is a button
 msgid "Missed"
 msgstr "Propušten"
@@ -424,12 +432,6 @@ msgstr "Nema aktivnog pošz. sand."
 
 msgid "No phonebook"
 msgstr ""
-
-msgid "No result from LDIF"
-msgstr "Nema rezultata iz LDIF"
-
-msgid "No result from Outlook export"
-msgstr "Nema rezultata iz Outlook-Export"
 
 msgid "No result from reverse lookup"
 msgstr "Nema rezultata traženja unazad"
@@ -535,12 +537,6 @@ msgstr "Traži ( isto velika i mala slova)"
 
 msgid "Search phonebook"
 msgstr "Pretraži imenik"
-
-msgid "Searching in LDIF..."
-msgstr "Traži u  LDIF..."
-
-msgid "Searching in Outlook export..."
-msgstr "Tražim u Outlook-Export..."
 
 msgid "Setting..."
 msgstr ""
@@ -675,9 +671,6 @@ msgstr ""
 
 msgid "before 05.27"
 msgstr ""
-
-msgid "business"
-msgstr "posao"
 
 msgid "call diversions active"
 msgstr ""

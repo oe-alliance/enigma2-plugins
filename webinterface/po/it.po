@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - webinterface\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-18 02:09+0100\n"
 "PO-Revision-Date: 2014-02-23 22:30+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -48,21 +48,6 @@ msgstr "%s non trovato nella playlist"
 msgid "'%s' removed from playlist"
 msgstr "%s rimosso dalla playlist"
 
-msgid "0"
-msgstr ""
-
-msgid "1"
-msgstr ""
-
-msgid "15"
-msgstr ""
-
-msgid "2"
-msgstr ""
-
-msgid "3"
-msgstr ""
-
 msgid "AC3 Downmix disabled"
 msgstr "Downmix AC3 disabilitato"
 
@@ -91,10 +76,6 @@ msgstr "Agg. timer"
 
 msgid "Add Zap Timer"
 msgstr "Aggiungere timer zap"
-
-#, fuzzy
-msgid "Add/Save"
-msgstr "Salvare"
 
 msgid "After event"
 msgstr "Dopo l'evento"
@@ -959,9 +940,6 @@ msgstr "Ricaricato lamedb"
 
 msgid "sec"
 msgstr "sec"
-
-msgid "submit-message"
-msgstr ""
 
 msgid "the command was not > 0"
 msgstr "Il comando non è > 0"

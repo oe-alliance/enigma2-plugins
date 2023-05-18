@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-20 09:29+0320\n"
+"POT-Creation-Date: 2023-05-18 02:08+0100\n"
 "PO-Revision-Date: 2022-03-20 09:50+0100\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: none\n"
@@ -85,9 +85,6 @@ msgstr "Background transparency"
 
 msgid "Begin"
 msgstr "Begin"
-
-msgid "Cancel"
-msgstr "Cancel"
 
 msgid "Channel Name"
 msgstr "Channel Name"
@@ -202,9 +199,6 @@ msgstr "Number of pending recordings in list"
 msgid "Number of seconds for displaying finished recordings"
 msgstr "Number of seconds for displaying finished recordings"
 
-msgid "OK"
-msgstr "OK"
-
 msgid "Only one Graphical Progress field allowed:"
 msgstr "Only one Graphical Progress field allowed:"
 
@@ -225,9 +219,6 @@ msgstr "Prepare / Start / End record"
 
 msgid "Prepare record"
 msgstr "Prepare record"
-
-msgid "Really close without saving settings?"
-msgstr "Really close without saving settings?"
 
 msgid "Record"
 msgstr "Record"
@@ -321,6 +312,3 @@ msgstr "YYYY/MM/DD HH:MM"
 
 msgid "configuration"
 msgstr "configuration"
-
-msgid "Tuner State"
-msgstr "Tuner State"

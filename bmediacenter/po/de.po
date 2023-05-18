@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BMediaCenter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-12 19:16+0100\n"
+"POT-Creation-Date: 2023-05-18 02:07+0100\n"
 "PO-Revision-Date: 2023-01-13 14:14+0100\n"
 "Last-Translator: Masta2002\n"
 "Language-Team: bonkel\n"
@@ -67,12 +67,8 @@ msgstr "80s"
 msgid "90s"
 msgstr "90s"
 
-msgid ""
-"A background update check is is progress, please wait a few minutes and try "
-"again."
-msgstr ""
-"Es wird eine Hintergrundaktualisierung durchgeführt. Bitte warten Sie ein "
-"paar Minuten und versuchen Sie es erneut."
+msgid "A background update check is is progress, please wait a few minutes and try again."
+msgstr "Es wird eine Hintergrundaktualisierung durchgeführt. Bitte warten Sie ein paar Minuten und versuchen Sie es erneut."
 
 msgid "Acid_jazz"
 msgstr "Acid_jazz"
@@ -97,15 +93,6 @@ msgstr "Arabic"
 
 msgid "Asian"
 msgstr "Asian"
-
-msgid "Audio Player"
-msgstr "Audioplayer"
-
-msgid "Audioplayer Settings"
-msgstr "Audioplayer Einstellungen"
-
-msgid "BMedia Center Menu"
-msgstr "BMedia Center Menü"
 
 msgid "Bigband"
 msgstr "Bigband"
@@ -149,9 +136,6 @@ msgstr "Comedy"
 msgid "Country"
 msgstr "Country"
 
-msgid "DMC Settings"
-msgstr "DMC Einstellungen"
-
 msgid "Dance"
 msgstr "Dance"
 
@@ -160,9 +144,6 @@ msgstr "Datum aufsteigend"
 
 msgid "Date descending"
 msgstr "Datum absteigend"
-
-msgid "Delete"
-msgstr "Löschen"
 
 msgid "Delete Movie"
 msgstr "Film löschen"
@@ -202,9 +183,6 @@ msgstr "Willst du diesen Ordner samt den Inhalt wirklich löschen?"
 
 msgid "Do you really want to delete this file ?"
 msgstr "Willst du die Datei wirklich löschen?"
-
-msgid "Download"
-msgstr "Download"
 
 msgid "Downtempo"
 msgstr "Downtempo"
@@ -280,9 +258,6 @@ msgstr ""
 msgid "Eurodance"
 msgstr "Eurodance"
 
-msgid "Favorite Folders"
-msgstr "Favoriten verzeichniss"
-
 msgid "File Browser"
 msgstr "Dateibrowser"
 
@@ -331,9 +306,6 @@ msgstr "Hardrock"
 msgid "Hiphop"
 msgstr "Hiphop"
 
-msgid "Home"
-msgstr "Home"
-
 msgid "House"
 msgstr "House"
 
@@ -373,12 +345,6 @@ msgstr "Lounge"
 msgid "Lyrics"
 msgstr "Songtexte"
 
-msgid "Media Center - VLC Favorites"
-msgstr "Media Center - VLC Favoriten"
-
-msgid "Media Center - VLC Player - Serverlist"
-msgstr "Media Center - VLC Player - Serverliste"
-
 msgid "Metal"
 msgstr "Metal"
 
@@ -390,9 +356,6 @@ msgstr "Film"
 
 msgid "Music"
 msgstr "Musik"
-
-msgid "Music Playlist"
-msgstr "Musik Wiedergabeliste"
 
 msgid "Musical"
 msgstr "Musical"
@@ -421,9 +384,6 @@ msgstr "Name:"
 msgid "No lyrics found"
 msgstr "Keine Songtexte gefunden"
 
-msgid "OK / Play"
-msgstr "OK / Play"
-
 msgid "Oldies"
 msgstr "Oldies"
 
@@ -436,23 +396,11 @@ msgstr "Überblick"
 msgid "Overwrite TXT"
 msgstr "Überblick TXT"
 
-msgid "Pic Viewer"
-msgstr "Bildbetrachter"
-
 msgid "Picture Settings"
 msgstr "Bild Einstellungen"
 
-msgid "Picture Viewer"
-msgstr "Bildbetrachter"
-
-msgid "Play / Pause"
-msgstr "Play / Pause"
-
 msgid "Play DVD as:"
 msgstr "DVD abspielen als:"
-
-msgid "Playlist/Filelist"
-msgstr "Playliste/Dateiliste"
 
 msgid "Please enter filename (empty = use current date)"
 msgstr "Bitte gib den Dateinamen ein (leer= benutz aktuelles Datum)"
@@ -578,14 +526,11 @@ msgstr "Ska"
 msgid "Slideshow Interval (sec.)"
 msgstr "Slideshow Intervall (sek.)"
 
-#| msgid "Smooth"
 msgid "Smooth_jazz"
 msgstr "Smooth_jazz"
 
 msgid "Sorry feeds are down for maintenance, please try again later."
-msgstr ""
-"Entschuldigung, die Feeds sind wegen Wartungsarbeiten nicht verfügbar. Bitte "
-"versuche es später erneut."
+msgstr "Entschuldigung, die Feeds sind wegen Wartungsarbeiten nicht verfügbar. Bitte versuche es später erneut."
 
 msgid "Soul"
 msgstr "Soul"
@@ -611,7 +556,6 @@ msgstr "Symphonic"
 msgid "Talk"
 msgstr "Talk"
 
-#| msgid "Techno/House"
 msgid "Techno"
 msgstr "Techno"
 
@@ -631,7 +575,6 @@ msgstr "Titel: "
 msgid "Top_40"
 msgstr "Top_40"
 
-#| msgid "Cancel"
 msgid "Trance"
 msgstr "Trance"
 
@@ -647,32 +590,11 @@ msgstr "Urban"
 msgid "Usa"
 msgstr "Usa"
 
-msgid "VLC Favorites"
-msgstr "VLC Favoriten"
-
-msgid "VLC Player - Medialist"
-msgstr "VLC Player - Medienliste"
-
-msgid "VLC Player - Serverlist"
-msgstr "VLC Player - Serverliste"
-
 msgid "Various"
 msgstr "Various"
 
-msgid "Video Player"
-msgstr "Videoplayer"
-
-msgid "Video Player Settings"
-msgstr "Videoplayer Einstellungen"
-
-msgid "VideoPlayerSettings"
-msgstr "Videoplayer Einstellungen"
-
 msgid "Wave"
 msgstr "Wave"
-
-msgid "Web Download"
-msgstr "Web Download"
 
 msgid "Web Radio"
 msgstr "Web Radio"
@@ -680,27 +602,15 @@ msgstr "Web Radio"
 msgid "Worldmusic"
 msgstr "Weltmusik"
 
-msgid ""
-"You have to close playlist before you can go to the next song while playing "
-"from file browser."
-msgstr ""
-"Du musst die Wiedergabeliste schließen, bevor du den nächsten Song aus dem "
-"Filebrowser abspielen kannst."
+msgid "You have to close playlist before you can go to the next song while playing from file browser."
+msgstr "Du musst die Wiedergabeliste schließen, bevor du den nächsten Song aus dem Filebrowser abspielen kannst."
 
-msgid ""
-"You have to close playlist before you can go to the previous song while "
-"playing from file browser."
-msgstr ""
-"Du musst die Wiedergabeliste schließen, bevor du den vorhergehenden Song aus "
-"dem Filebrowser abspielen kannst."
+msgid "You have to close playlist before you can go to the previous song while playing from file browser."
+msgstr "Du musst die Wiedergabeliste schließen, bevor du den vorhergehenden Song aus dem Filebrowser abspielen kannst."
 
 #, python-format
-msgid ""
-"Your %s %s is not connected to the internet, please check your network "
-"settings and try again."
-msgstr ""
-"Ihr %s %s ist nicht mit dem Internet verbunden, bitte überprüfen Sie Ihre "
-"Netzwerkeinstellungen und versuchen Sie es erneut."
+msgid "Your %s %s is not connected to the internet, please check your network settings and try again."
+msgstr "Ihr %s %s ist nicht mit dem Internet verbunden, bitte überprüfen Sie Ihre Netzwerkeinstellungen und versuchen Sie es erneut."
 
 #, python-format
 msgid ""
@@ -709,10 +619,6 @@ msgid ""
 msgstr ""
 "Ihr %s %s wird nach der Installation des Dienstes neu gestartet\n"
 "Bereit, %s zu installieren?"
-
-#| msgid "Music Playlist"
-msgid "Zur Playlist"
-msgstr "Zur Playliste"
 
 msgid "add all files in directory to playlist"
 msgstr "Alle Dateien im Ordner zur Wiedergabeliste hinzufügen"

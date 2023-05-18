@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EPGSearch enigma2 plugin portuguese trasnlation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-18 02:07+0100\n"
 "PO-Revision-Date: 2020-04-22 14:21+0100\n"
 "Last-Translator: BH Team <nunigaia@gmail.com>\n"
 "Language-Team: BH team\n"
@@ -302,6 +302,9 @@ msgstr "excluir"
 
 msgid "include"
 msgstr "incluir"
+
+msgid "partial description"
+msgstr ""
 
 msgid "partial match"
 msgstr "correspondência parcial"

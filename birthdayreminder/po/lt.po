@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-18 02:07+0100\n"
 "PO-Revision-Date: 2023-03-30 11:49+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: \n"
@@ -30,9 +30,6 @@ msgstr "1 savaitę"
 
 msgid "3 days"
 msgstr "3 dienas"
-
-msgid "Accept changes"
-msgstr "Priimti pakeitimus"
 
 msgid "Add"
 msgstr "Pridėti"
@@ -80,15 +77,6 @@ msgstr "Importuoti CSV duomenų iš failo %s negalima."
 msgid "Can't write CSV file %s."
 msgstr "Įrašyti CSV failo %s nepavyko."
 
-msgid "Cancel"
-msgstr "Atšaukti"
-
-msgid "Change path"
-msgstr "Keisti kelią"
-
-msgid "Choose the filename:"
-msgstr "Pasirinkite failo pavadinimą:"
-
 msgid "Date format:"
 msgstr "Datos formatas:"
 
@@ -108,6 +96,10 @@ msgstr "Ar tikrai norite trinti įrašą %s?"
 msgid "Edit"
 msgstr "Redaguoti"
 
+#, fuzzy
+msgid "Edit Birthday Settings"
+msgstr "Redaguoti gimtadienius"
+
 msgid "Edit birthday"
 msgstr "Redaguoti gimtadienį"
 
@@ -116,9 +108,6 @@ msgstr "Redaguoti gimtadienius"
 
 msgid "Edit the selected entry"
 msgstr "Redaguoti pasirinktą įrašą"
-
-msgid "Enter the name of the person:"
-msgstr "Įveskite asmens vardą ir pavardę:"
 
 #, python-format
 msgid ""
@@ -155,9 +144,6 @@ msgstr "Padeda prisiminti apie gimtadienius"
 msgid "Import CSV file"
 msgstr "Importuoti CSV failą"
 
-msgid "Invalid Location"
-msgstr "Neteisinga vieta"
-
 msgid "Invalid date!"
 msgstr "Neleistina data!"
 
@@ -179,9 +165,6 @@ msgstr "Kitas gimtadienis"
 msgid "Notification time:"
 msgstr "Pranešimo laikas:"
 
-msgid "OK"
-msgstr "Gerai"
-
 msgid "Open the extras menu"
 msgstr "Atidaryti priedų meniu"
 
@@ -197,8 +180,9 @@ msgstr "Pašalinti"
 msgid "Remove the selected entry"
 msgstr "Pašalinti pasirinktą įrašą"
 
-msgid "Save"
-msgstr "Išsaugoti"
+#, fuzzy
+msgid "Select a path for the birthday file"
+msgstr "Kelias į gimtadienių failą:"
 
 msgid "Show plugin in extensions menu:"
 msgstr "Rodyti tarp plėtinių meniu:"
@@ -221,9 +205,6 @@ msgstr ""
 "Šiandien %s gimtadienis!\n"
 "\n"
 "Gimė %s ir dabar yra %s metų amžiaus."
-
-msgid "VirtualKeyBoard"
-msgstr "VirtualKeyBoard"
 
 msgid "What do you want to do?"
 msgstr "Ką norite daryti?"

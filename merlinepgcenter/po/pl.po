@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MerlinEPGCenter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-05-18 02:08+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: kosmacz <anteneczka@gmail.com>\n"
 "Language-Team: Shaderman <shaderman@dreambox-tools.info>\n"
@@ -91,9 +91,6 @@ msgstr "Położenie:"
 
 msgid "Match title:"
 msgstr "Dopasuj tytuł:"
-
-msgid "Merlin EPG Center"
-msgstr ""
 
 msgid "Monday"
 msgstr "Poniedziałek"
