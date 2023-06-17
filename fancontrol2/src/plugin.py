@@ -1304,9 +1304,9 @@ def autostart(reason, **kwargs):
 			from twisted.web import static
 			root = static.File("/usr/lib/enigma2/python/Plugins/Extensions/FanControl2/data")
 #			root = FC2web()
-			root.putChild("", FC2web())
-			root.putChild("log", FC2webLog())
-			root.putChild("chart", FC2webChart())
+			root.putChild(b"", FC2web())
+			root.putChild(b"log", FC2webLog())
+			root.putChild(b"chart", FC2webChart())
 			if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/WebInterface/web/external.xml"):
 				try:
 					addExternalChild(("fancontrol", root, "Fan Control 2", Version, True))
