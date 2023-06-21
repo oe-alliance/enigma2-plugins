@@ -40,6 +40,11 @@ from enigma import eServiceCenter, eServiceReference, iServiceInformation, getDe
 # Default Record Directory
 from Tools import Directories
 
+# So we can check for a valid regex
+#
+from re import compile as re_compile
+from sys import version_info as pv_info
+
 # Tags
 try:
 	from Screens.TagEditor import TagEditor
@@ -1099,6 +1104,51 @@ class AutoTimerEditorSilent(AutoTimerEditor):
 	def retval(self):
 		return self.returnVal
 
+# Check that every entry in a *list* of strings is a valid regular
+# expressions. So if you just have one, make a list from it.
+# Returns the error message from the *first* invalid regex.
+# Returns an empty string if all are OK
+#
+def CheckREList(re_list):
+	try:
+		for val in re_list:
+			dnc = re_compile(val)
+	except Exception as ex:
+		import traceback
+		estr = traceback.format_exception_only(ex)
+		errm = (_("The filter must be a valid regular expression.\n") +
+			_("%s is not valid.") % val +
+			"\n\n" + estr[0] + "\n" +
+			_("See: ") +
+			"https://docs.python.org/%d.%d/library/re.html" % (pv_info.major, pv_info.minor)
+		       )
+		return errm
+	return ""
+
+# Extend the ConfigText class so we can check that we have a valid
+# regular expression before saving it.
+# Text filters are actually regexes!
+#
+class ConfigRegex(ConfigText):
+	def __init__(self, err_timeout=5, rpt_session=None, **kwargs):
+		ConfigText.__init__(self, **kwargs)
+		self.err_timeout = err_timeout
+		self.rpt_session = rpt_session
+
+	def setValue(self, val):
+		errm = CheckREList([val])   # Needs a list
+		if errm != "":
+			if self.rpt_session:
+				self.rpt_session.open(
+					MessageBox,
+					errm,
+					type=MessageBox.TYPE_ERROR,
+					timeout=self.err_timeout
+				)
+			else:
+				print("[AutoTimerEditor::ConfigRegex]", errm)
+			return
+		ConfigText.setValue(self, val)
 
 class AutoTimerFilterEditor(Screen, ConfigListScreen):
 	"""Edit AutoTimer Filter"""
@@ -1287,7 +1337,7 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 			if self.typeSelection.value == "day":
 				entry = getConfigListEntry(text, NoSave(ConfigSelection(choices=weekdays)))
 			else:
-				entry = getConfigListEntry(text, NoSave(ConfigText(fixed_size=False)))
+				entry = getConfigListEntry(text, NoSave(ConfigRegex(rpt_session=self.session,fixed_size=False)))
 
 			list.insert(pos, entry)
 			self["config"].setList(list)
