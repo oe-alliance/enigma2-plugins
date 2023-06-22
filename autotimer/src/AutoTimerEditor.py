@@ -1109,6 +1109,8 @@ class AutoTimerEditorSilent(AutoTimerEditor):
 # Returns the error message from the *first* invalid regex.
 # Returns an empty string if all are OK
 #
+
+
 def CheckREList(re_list):
 	try:
 		for val in re_list:
@@ -1127,6 +1129,8 @@ def CheckREList(re_list):
 # regular expression before saving it.
 # Text filters are actually regexes!
 #
+
+
 class ConfigRegex(ConfigText):
 	def __init__(self, err_timeout=5, rpt_session=None, **kwargs):
 		ConfigText.__init__(self, **kwargs)
@@ -1147,6 +1151,7 @@ class ConfigRegex(ConfigText):
 				print("[AutoTimerEditor::ConfigRegex]", errm)
 			return
 		ConfigText.setValue(self, val)
+
 
 class AutoTimerFilterEditor(Screen, ConfigListScreen):
 	"""Edit AutoTimer Filter"""
