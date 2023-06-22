@@ -16,6 +16,8 @@ from .plugin import autotimer, AUTOTIMER_VERSION
 
 from .AutoTimerSettings import getAutoTimerSettingsDefinitions
 
+from .AutoTimerEditor import CheckREList
+
 API_VERSION = "1.7"
 
 
@@ -410,6 +412,10 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 				description.remove('')
 			while '' in dayofweek:
 				dayofweek.remove('')
+# These must be valid regexes
+			errm = CheckREList(title + shortdescription + description)
+			if errm != "":
+				return self.returnResult(req, False, errm)
 			timer.include = (title, shortdescription, description, dayofweek)
 
 		# Excludes
@@ -431,6 +437,10 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 				description.remove('')
 			while '' in dayofweek:
 				dayofweek.remove('')
+# These must be valid regexes
+			errm = CheckREList(title + shortdescription + description)
+			if errm != "":
+				return self.returnResult(req, False, errm)
 			timer.exclude = (title, shortdescription, description, dayofweek)
 
 		tags = getA("tag")
