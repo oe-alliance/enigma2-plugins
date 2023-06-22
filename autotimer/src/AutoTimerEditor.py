@@ -1335,7 +1335,7 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 			if self.typeSelection.value == "day":
 				entry = getConfigListEntry(text, NoSave(ConfigSelection(choices=weekdays)))
 			else:
-				entry = getConfigListEntry(text, NoSave(ConfigRegex(rpt_session=self.session,fixed_size=False)))
+				entry = getConfigListEntry(text, NoSave(ConfigRegex(rpt_session=self.session, fixed_size=False)))
 
 			list.insert(pos, entry)
 			self["config"].setList(list)
