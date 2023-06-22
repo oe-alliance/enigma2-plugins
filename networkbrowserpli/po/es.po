@@ -266,3 +266,6 @@ msgstr "Tu montaje de red se ha actualizado."
 
 msgid "use as HDD replacement"
 msgstr "usar como reemplazo del HDD"
+
+msgid "Mount shares again"
+msgstr "Montar de nuevo los recursos de red"
