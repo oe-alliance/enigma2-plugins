@@ -324,3 +324,6 @@ msgstr "El teu muntatge s'ha eliminat."
 
 msgid "Your network mount has been updated."
 msgstr "El teu muntatge s'ha actualitzat."
+
+msgid "Mount shares again"
+msgstr "Muntar de nou els recursos de xarxa"
