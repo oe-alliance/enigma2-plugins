@@ -75,6 +75,7 @@ SUBDIRS = \
 	shoutcast \
 	showclock \
 	simplerss \
+	srfmediathek \
 	startuptostandby \
 	subsdownloader2 \
 	svdrp \
