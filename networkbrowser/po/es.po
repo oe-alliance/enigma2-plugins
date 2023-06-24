@@ -323,3 +323,6 @@ msgstr "Tu punto de montaje de red ha sido eliminado."
 
 msgid "Your network mount has been updated."
 msgstr "Tu punto de montaje de red ha sido actualizado."
+
+msgid "Mount shares again"
+msgstr "Montar de nuevo los recursos de red"
