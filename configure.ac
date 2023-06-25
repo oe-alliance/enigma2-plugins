@@ -848,6 +848,11 @@ zapstatistic/meta/Makefile
 zapstatistic/po/Makefile
 zapstatistic/src/Makefile
 
+srfmediathek/Makefile
+srfmediathek/meta/Makefile
+srfmediathek/src/Makefile
+srfmediathek/src/img/Makefile
+
 zdfmediathek/Makefile
 zdfmediathek/meta/Makefile
 zdfmediathek/src/Makefile
