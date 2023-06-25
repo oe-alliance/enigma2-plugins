@@ -75,7 +75,6 @@ SUBDIRS = \
 	shoutcast \
 	showclock \
 	simplerss \
-	srfmediathek \
 	startuptostandby \
 	subsdownloader2 \
 	svdrp \
@@ -142,7 +141,7 @@ else
 SUBDIRS += networkbrowser epgsearch
 endif
 
-SUBDIRS += tetris ardmediathek netzkino Series2Folder
+SUBDIRS += tetris ardmediathek netzkino Series2Folder srfmediathek
 
 metadir = $(datadir)/meta
 meta_DATA = index-enigma2-plugins.xml
