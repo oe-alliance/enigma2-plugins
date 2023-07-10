@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:08+0100\n"
+"POT-Creation-Date: 2021-10-10 20:35+0000\n"
 "PO-Revision-Date: 2022-01-01 09:11+0100\n"
 "Last-Translator: @Kos\n"
 "Language-Team: Special for OpenATV\n"
@@ -13,31 +13,59 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.2\n"
 
+msgid " as "
+msgstr " jako "
+
+msgid "* = Restart Required"
+msgstr "* = Wymagane jest ponowne uruchomienie"
+
+msgid "Also known as: "
+msgstr "Znany również jako: "
+
 msgid "Ambiguous results"
 msgstr "Niejednoznaczne wyniki"
 
-#, fuzzy
-msgid "Couldn't get event name"
+msgid "Cancel"
+msgstr "Anuluj"
+
+msgid "Cast: "
+msgstr "Obsada: "
+
+msgid "Content: "
+msgstr "Skład: "
+
+msgid "Could't get event name"
 msgstr "Nie można pobrać nazwy wydarzenia"
+
+msgid "Country of origin: "
+msgstr "Kraj pochodzenia: "
 
 msgid "Details"
 msgstr "Szczegóły"
 
-#, fuzzy
-msgid "Downloading Movie Poster..."
+msgid "Downloading Movie Poster: %s..."
 msgstr "Pobieranie Plakatu Filmu: %s..."
 
-msgid "E"
+msgid "Episodes: "
+msgstr "Odcinki: "
+
+msgid ""
+"Enable this to be able to access IMDb search setup from within the plugin "
+"browser."
 msgstr ""
+"Włącz tę opcję, aby mieć dostęp do konfiguracji wyszukiwania IMDb z poziomu "
+"przeglądarki wtyczek."
 
-msgid "Enable this to be able to access IMDb search setup from within the plugin browser."
-msgstr "Włącz tę opcję, aby mieć dostęp do konfiguracji wyszukiwania IMDb z poziomu przeglądarki wtyczek."
-
-msgid "Enable this to be able to access IMDb searches from within the movie list."
+msgid ""
+"Enable this to be able to access IMDb searches from within the movie list."
 msgstr "Włącz tę opcję, aby mieć dostęp do wyszukiwania IMDb z listy filmów."
 
-msgid "Enable this to be able to access IMDb searches from within the plugin browser."
-msgstr "Włącz tę opcję, aby mieć dostęp do wyszukiwań IMDb z poziomu przeglądarki wtyczek."
+msgid ""
+"Enable this to be able to access IMDb searches from within the plugin "
+"browser."
+msgstr ""
+"Włącz tę opcję, aby mieć dostęp do wyszukiwań IMDb z poziomu przeglądarki "
+"wtyczek."
 
 msgid "Enter search"
 msgstr "Wpisz wyszukiwanie"
@@ -54,8 +82,8 @@ msgstr "Zakończ wyszukiwanie IMDb"
 msgid "Extra Info"
 msgstr "Informacje dodatkowe"
 
-msgid "IMDB Exception"
-msgstr ""
+msgid "Genre: "
+msgstr "Gatunek: "
 
 msgid "IMDb Details parsed"
 msgstr "Analiza detali IMDb"
@@ -66,18 +94,20 @@ msgstr "Pobieranie IMDb zakończone"
 msgid "IMDb Download failed"
 msgstr "Pobieranie IMDb zakończone niepowodzeniem"
 
-#, fuzzy
-msgid "IMDb Menu"
-msgstr "IMDb Ustawienia"
-
 msgid "IMDb Plugin"
 msgstr "Wtyczka IMDb"
 
 msgid "IMDb Re-Download completed"
 msgstr "Ponowne pobranie IMDb zakończone"
 
+msgid "IMDb Save - Download completed"
+msgstr "Pobieranie IMDb zakończone"
+
 msgid "IMDb Setup"
 msgstr "IMDb Ustawienia"
+
+msgid "IMDb can not get Movie Information to write to .jpg and .txt files!"
+msgstr "IMDb nie może pobrać informacji o filmie z plików .jpg i .txt!"
 
 msgid "IMDb can not get Movie Information to write to .txt file!"
 msgstr "IMDb nie może pobrać informacji o filmie do zapisania w pliku .txt!"
@@ -85,27 +115,11 @@ msgstr "IMDb nie może pobrać informacji o filmie do zapisania w pliku .txt!"
 msgid "IMDb query failed!"
 msgstr "Zapytanie IMDb nie powiodło się!"
 
-#, fuzzy
-msgid "IMDb save completed"
-msgstr "Pobieranie IMDb zakończone"
-
 msgid "IMDb search"
 msgstr "IMDb Szukaj"
 
 msgid "IMDb setup"
 msgstr "IMDb Ustawienia"
-
-#, python-format
-msgid "Ignoring invalid imdbId: %s"
-msgstr ""
-
-#, fuzzy
-msgid "Include episodes in the results. Takes effect after the next search of IMDb for a show name."
-msgstr "Pokaż informacje o odcinku i roku dla obsady, jeśli są dostępne. Działa po następnym pobraniu szczegółów programu."
-
-#, python-format
-msgid "Local file does not exist: %s"
-msgstr ""
 
 msgid "Menu"
 msgstr "Menu"
@@ -122,6 +136,9 @@ msgstr "Brak obsady w bazie danych."
 msgid "No details found."
 msgstr "Nie znaleziono żadnych szczegółów."
 
+msgid "OK"
+msgstr "Zapisz"
+
 msgid "Page down"
 msgstr "Strona w dół"
 
@@ -134,16 +151,20 @@ msgstr "Odtwórz Zwiastun"
 msgid "Please select the matching entry"
 msgstr "Proszę wybrać pasujący wpis"
 
-#, python-format
+msgid "Production Countries: "
+msgstr "Produkcja: "
+
 msgid "Query IMDb: %s"
 msgstr "Szukam w IMDb: %s"
 
-#, python-format
 msgid "Re-Query IMDb: %s..."
 msgstr "Ponowne zapytanie IMDb: %s..."
 
-msgid "S"
-msgstr ""
+msgid "Release Date: "
+msgstr "Data wydania: "
+
+msgid "Runtime: "
+msgstr "Czas wykonywania: "
 
 msgid "Save current Details as .html for offline use"
 msgstr "Zapisz bieżące szczegóły jako .html do użytku offline"
@@ -160,34 +181,32 @@ msgstr "Szukaj Zwiastun"
 msgid "Search for details from the Internet Movie Database"
 msgstr "Wyszukaj szczegóły w internetowej bazie danych filmów"
 
+msgid "Season: "
+msgstr "Rok: "
+
 msgid "Settings for Internet Movie Database searches"
 msgstr "Ustawienia przeszukiwania internetowej bazy danych filmów"
 
 msgid "Setup"
 msgstr "Ustawienia"
 
-msgid "Show a bigger poster"
+msgid ""
+"Show episode and year information for cast when available. Takes effect "
+"after the next fetch of show details."
 msgstr ""
-
-msgid "Show episode and year information for cast when available. Takes effect after the next fetch of show details."
-msgstr "Pokaż informacje o odcinku i roku dla obsady, jeśli są dostępne. Działa po następnym pobraniu szczegółów programu."
+"Pokaż informacje o odcinku i roku dla obsady, jeśli są dostępne. Działa po "
+"następnym pobraniu szczegółów programu."
 
 msgid "Show episode and year information in cast list"
 msgstr "Pokaż informacje o odcinku i roku na liście obsady"
 
-#, fuzzy
-msgid "Show episodes in title menu"
+msgid "Show full movie or series name in title menu"
 msgstr "Pokaż pełną nazwę filmu lub serii w menu tytułowym"
-
-#, fuzzy
-msgid "Show extra information in title menu"
-msgstr "Pokaż informacje o odcinku i roku na liście obsady"
 
 msgid "Show in movie list"
 msgstr "Pokaż na liście filmów"
 
-#, fuzzy
-msgid "Show list of matched movies an series"
+msgid "Show list of matched movies and series"
 msgstr "Pokaż listę dopasowanych filmów i seriali"
 
 msgid "Show movie and series basic details"
@@ -196,40 +215,39 @@ msgstr "Pokaż podstawowe informacje o filmie i serialu"
 msgid "Show movie and series extra details"
 msgstr "Pokaż dodatkowe szczegóły filmu i serialu"
 
-#, fuzzy
-msgid "Show movie and series synopsis"
-msgstr "Pokaż podstawowe informacje o filmie i serialu"
-
 msgid "Show search in plugin browser"
 msgstr "Pokaż wyszukiwanie w przeglądarce wtyczek"
 
 msgid "Show setup in plugin browser"
 msgstr "Pokaż w przeglądarce wtyczek"
 
-#, fuzzy
-msgid "Show the type of the title and top cast. Takes effect after the next search of IMDb for a show name."
-msgstr "Pokaż informacje o odcinku i roku dla obsady, jeśli są dostępne. Działa po następnym pobraniu szczegółów programu."
-
-msgid "Synopsis"
+msgid ""
+"Show the whole IMDb title information for a movie or series, including, for "
+"example, alternative names and whether it's a series. Takes effect after the "
+"next search of IMDb for a show name."
 msgstr ""
+"Pokaż całą informację o tytule IMDb dla filmu lub serialu, w tym na przykład "
+"alternatywne nazwy i czy to serial. Odnosi się do następnego wyszukiwania "
+"IMDb nazwy programu."
 
 msgid "The Internet Movie Database"
 msgstr "Internetowa baza filmów"
 
-msgid "This option allows you add words/phrases for IMDb to ignore when searching. Please separate the words/phrases with commas."
-msgstr "Ta opcja pozwala na dodanie słów,fraz aby podczas wyszukiwania  można było je zignorować . Proszę oddzielić słowa/frazy przecinkami."
+msgid ""
+"This option allows you add words/phrases for IMDb to ignore when searching. "
+"Please separate the words/phrases with commas."
+msgstr ""
+"Ta opcja pozwala na dodanie słów,fraz aby podczas wyszukiwania  można było "
+"je zignorować . Proszę oddzielić słowa/frazy przecinkami."
 
 msgid "Title Menu"
 msgstr "Znalezione wyniki"
 
+msgid "User Rating"
+msgstr "Oceny użytkowników"
+
 msgid "Words / phrases to ignore "
 msgstr "Słowa / frazy ignorowane "
 
-msgid "connection error"
-msgstr ""
-
 msgid "no user rating yet"
 msgstr "brak ocen użytkowników jeszcze"
-
-msgid "timeout"
-msgstr ""

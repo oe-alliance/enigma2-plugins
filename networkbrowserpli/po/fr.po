@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:08+0100\n"
+"POT-Creation-Date: 2012-01-28 16:39+0100\n"
 "PO-Revision-Date: 2012-12-16 12:35+0100\n"
 "Last-Translator: thelexia <thelexia@hotmail.fr>\n"
 "Language-Team: french\n"
@@ -107,9 +107,6 @@ msgstr "Expert"
 
 msgid "Finished restarting your network"
 msgstr "Terminé le redémarrage de votre réseau"
-
-msgid "Host name"
-msgstr ""
 
 msgid "IP Address"
 msgstr "Adresse IP"

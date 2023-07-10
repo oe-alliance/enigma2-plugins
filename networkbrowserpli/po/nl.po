@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - networkbrowser\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:08+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2019-09-04 23:02+0100\n"
 "Last-Translator: Smokey\n"
 "Language-Team:  <Benny.DeTandt@gmail.com>\n"
@@ -115,9 +115,6 @@ msgstr "Expert"
 
 msgid "Finished restarting your network"
 msgstr "Herstarten van uw netwerk is voltooid"
-
-msgid "Host name"
-msgstr ""
 
 msgid "IP Address"
 msgstr "IP Adres"

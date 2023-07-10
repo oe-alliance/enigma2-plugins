@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Automatic Screen Resolution V. 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:07+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: jerry00 <jerry00@quick.cz>\n"
 "Language-Team: jerry00\n"
@@ -101,9 +101,6 @@ msgstr ""
 msgid "FHD 50/60Hz Progressive Mode"
 msgstr "SD 30/60Hz progresivní režim"
 
-msgid "Force set progressive for stream/video content"
-msgstr ""
-
 msgid "HD Interlace Mode"
 msgstr "HD prokládaný režim"
 
@@ -156,17 +153,11 @@ msgstr "SD 30/60Hz prokládaný režim"
 msgid "SD 30/60Hz Progressive Mode"
 msgstr "SD 30/60Hz progresivní režim"
 
-msgid "Separate colorimetry for HDR (set 'auto' HDMI Colorimetry)"
-msgstr ""
-
 msgid "Show 'Manual resolution' in extensions menu"
 msgstr ""
 
 msgid "Show info screen"
 msgstr "Zobrazit panel informací"
-
-msgid "Smart HDR type (set 'auto' HDMI HDR type)"
-msgstr ""
 
 msgid "This resolution is OK?"
 msgstr ""
@@ -207,9 +198,6 @@ msgid "default"
 msgstr "výchozí"
 
 msgid "manual"
-msgstr ""
-
-msgid "no"
 msgstr ""
 
 msgid "off"

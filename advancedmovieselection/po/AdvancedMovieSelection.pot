@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the AdvancedMovieSelection package.
+# This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: AdvancedMovieSelection\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:10+0100\n"
+"POT-Creation-Date: 2023-01-14 08:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1104,6 +1104,9 @@ msgid "Infos for: %s"
 msgstr ""
 
 msgid "Initial location in new timers"
+msgstr ""
+
+msgid "Input"
 msgstr ""
 
 msgid "Instant record location"
@@ -2389,6 +2392,9 @@ msgid "Video-button"
 msgstr ""
 
 msgid "Virtual"
+msgstr ""
+
+msgid "Virtual KeyBoard"
 msgstr ""
 
 msgid "Virtual and Numerical"

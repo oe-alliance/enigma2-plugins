@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2-plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:08+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2018-02-20 10:46+0100\n"
 "Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
 "Language-Team: none\n"
@@ -125,16 +125,6 @@ msgstr ""
 "reintentando..."
 
 msgid "Could not get call list; wrong version?"
-msgstr ""
-
-msgid "Could not load barring list: "
-msgstr ""
-
-#, python-format
-msgid "Could not load barring list: %s"
-msgstr ""
-
-msgid "Could not load deflections list: "
 msgstr ""
 
 msgid "Could not load phonebook: "
@@ -392,6 +382,9 @@ msgstr "MSN a mostrar (separado por ,)"
 msgid "Mailbox"
 msgstr "Carpeta de correo"
 
+msgid "Make it more skin friendly"
+msgstr ""
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "Missed"
 msgstr "Perdidas"
@@ -429,6 +422,12 @@ msgstr "No cuenta de correo activa"
 
 msgid "No phonebook"
 msgstr ""
+
+msgid "No result from LDIF"
+msgstr "No hay resultado desde LDIF"
+
+msgid "No result from Outlook export"
+msgstr "No hay resultado desde la exportación de Outlook"
 
 msgid "No result from reverse lookup"
 msgstr "No hay resultado de resolución inversa"
@@ -534,6 +533,12 @@ msgstr "Buscar (may/min indistinto)"
 
 msgid "Search phonebook"
 msgstr "Buscar agenda"
+
+msgid "Searching in LDIF..."
+msgstr "Buscando en LDIF..."
+
+msgid "Searching in Outlook export..."
+msgstr "Buscando en la exportación de Outlook..."
 
 msgid "Setting..."
 msgstr ""
@@ -669,6 +674,9 @@ msgstr ""
 "Puede hacer un problema de comunicación, sólo reintente otra vez."
 
 msgid "before 05.27"
+msgstr ""
+
+msgid "business"
 msgstr ""
 
 msgid "call diversions active"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - networkbrowser\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:08+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2009-10-29 14:01+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: WWW.Linsat.net <spaeleus@croci.org>\n"
@@ -114,9 +114,6 @@ msgstr "Avanzato"
 
 msgid "Finished restarting your network"
 msgstr "Riavvio rete terminato"
-
-msgid "Host name"
-msgstr ""
 
 msgid "IP Address"
 msgstr "Indirizzo IP"

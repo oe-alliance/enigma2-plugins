@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:07+0100\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2012-03-16 13:23+0100\n"
 "Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
@@ -54,9 +54,6 @@ msgstr "EasyMedia settings..."
 msgid "Enabled"
 msgstr "Enabled"
 
-msgid "FileCommander"
-msgstr ""
-
 msgid "Filebrowser"
 msgstr "File browser"
 
@@ -70,22 +67,8 @@ msgid "InternetRadio"
 msgstr ""
 
 #, fuzzy
-msgid "InternetRadio Plugin is not installed!"
-msgstr "Weather Plugin is not installed!"
-
-#, fuzzy
 msgid "InternetRadio player:"
 msgstr "NetRadio player:"
-
-msgid "Kodi"
-msgstr ""
-
-#, fuzzy
-msgid "Kodi is not installed!"
-msgstr "VideoDB is not installed!"
-
-msgid "Kodi:"
-msgstr ""
 
 msgid "MediaPlayer"
 msgstr "MediaPlayer"
@@ -147,8 +130,8 @@ msgstr "Radio"
 msgid "Radio-mode"
 msgstr "Radio-mode"
 
-msgid "SHOUTcast"
-msgstr ""
+msgid "SHOUTcast Plugin is not installed!"
+msgstr "SHOUTcast Plugin is not installed!"
 
 msgid "Select bookmark..."
 msgstr "Select bookmark..."

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: auto resolution Persian Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:07+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Persian Prince <persianprince@persianpros.org>\n"
 "Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
@@ -99,9 +99,6 @@ msgstr ""
 msgid "FHD 50/60Hz Progressive Mode"
 msgstr "مد تصاعدی برای فرکانس های 30/60 هرتز اس دی"
 
-msgid "Force set progressive for stream/video content"
-msgstr ""
-
 msgid "HD Interlace Mode"
 msgstr "مد در هم آمیختن برای تصاویر اچ دی"
 
@@ -155,17 +152,11 @@ msgstr "مد در هم آمیختن برای فرکانس های 60 /30 هرتز
 msgid "SD 30/60Hz Progressive Mode"
 msgstr "مد تصاعدی برای فرکانس های 30/60 هرتز اس دی"
 
-msgid "Separate colorimetry for HDR (set 'auto' HDMI Colorimetry)"
-msgstr ""
-
 msgid "Show 'Manual resolution' in extensions menu"
 msgstr ""
 
 msgid "Show info screen"
 msgstr "نمایش اطلاعات صفحه نمایش"
-
-msgid "Smart HDR type (set 'auto' HDMI HDR type)"
-msgstr ""
 
 msgid "This resolution is OK?"
 msgstr ""
@@ -206,9 +197,6 @@ msgid "default"
 msgstr "پیش فرض"
 
 msgid "manual"
-msgstr ""
-
-msgid "no"
 msgstr ""
 
 msgid "off"

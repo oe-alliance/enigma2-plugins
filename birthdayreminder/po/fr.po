@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:07+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2023-03-30 11:46+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: french\n"
@@ -30,6 +30,9 @@ msgstr "1 semaine"
 
 msgid "3 days"
 msgstr "3 jours"
+
+msgid "Accept changes"
+msgstr "Accepter les changements"
 
 msgid "Add"
 msgstr "Ajouter"
@@ -77,6 +80,15 @@ msgstr "Impossible d'importer des données du fichier CSV %s."
 msgid "Can't write CSV file %s."
 msgstr "Impossible d'écrire un fichier CSV %s."
 
+msgid "Cancel"
+msgstr "Annuler"
+
+msgid "Change path"
+msgstr "Changer le chemin"
+
+msgid "Choose the filename:"
+msgstr "Choisissez le nom du fichier:"
+
 msgid "Date format:"
 msgstr "Format date:"
 
@@ -96,10 +108,6 @@ msgstr "Voulez-vous vraiment effacer l'entrée pour %s?"
 msgid "Edit"
 msgstr "Éditer"
 
-#, fuzzy
-msgid "Edit Birthday Settings"
-msgstr "Éditer anniversaires"
-
 msgid "Edit birthday"
 msgstr "Éditer anniversaire"
 
@@ -108,6 +116,9 @@ msgstr "Éditer anniversaires"
 
 msgid "Edit the selected entry"
 msgstr "Éditer l'entrée sélectionnée"
+
+msgid "Enter the name of the person:"
+msgstr "Saisissez le nom de la personne:"
 
 #, python-format
 msgid ""
@@ -144,6 +155,9 @@ msgstr "Aide pour se rappeler les anniversaires"
 msgid "Import CSV file"
 msgstr "Importer un fichier CSV"
 
+msgid "Invalid Location"
+msgstr "Localisation non valide"
+
 msgid "Invalid date!"
 msgstr "Date non valide!"
 
@@ -165,6 +179,9 @@ msgstr "Anniversaire suivant"
 msgid "Notification time:"
 msgstr "Heure de notification:"
 
+msgid "OK"
+msgstr "OK"
+
 msgid "Open the extras menu"
 msgstr "Ouvrir le menu extras"
 
@@ -180,9 +197,8 @@ msgstr "Enlever"
 msgid "Remove the selected entry"
 msgstr "Enlever l'entrée sélectionnée"
 
-#, fuzzy
-msgid "Select a path for the birthday file"
-msgstr "Chemin vers le fichier des anniversaires:"
+msgid "Save"
+msgstr "Sauvegarder"
 
 msgid "Show plugin in extensions menu:"
 msgstr "Afficher plugin dans le menu extensions:"
@@ -205,6 +221,9 @@ msgstr ""
 "Aujourd'hui c'est l'anniversaire de %s!\n"
 "\n"
 "Il/Elle est né(e) en %s et a donc %s an(s)."
+
+msgid "VirtualKeyBoard"
+msgstr "VirtualKeyBoard"
 
 msgid "What do you want to do?"
 msgstr "Que voulez-vous faire?"

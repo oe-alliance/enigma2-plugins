@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AutoTimer v1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:07+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2018-04-09 09:14+0200\n"
 "Last-Translator: Alec <alex1vagyok@gmail.com>\n"
 "Language-Team: alec <alex1vagyok@gmail.com>\n"
@@ -54,6 +54,9 @@ msgstr "%Y. %B %d."
 msgid "%s: %s at %s"
 msgstr "%s: %s at %s"
 
+msgid "Abort this Wizard."
+msgstr "Megszakítja a varázslót."
+
 msgid "Activate VPS"
 msgstr "VPS aktiválása"
 
@@ -93,9 +96,6 @@ msgstr "Konfiguráció írása mindig"
 msgid "Amount of recordings left"
 msgstr "Az elmaradt felvételek mennyisége"
 
-msgid "Any Day filter refers to the day of the timespan start, even if the timespan crosses midnight."
-msgstr ""
-
 msgid "Any service/recording"
 msgstr "Bármely csatornánál/felvételnél"
 
@@ -114,8 +114,14 @@ msgstr "AutoTimer kontextus menü"
 msgid "AutoTimer Editor"
 msgstr "AutoTimer szerkesztő"
 
+msgid "AutoTimer FAQ"
+msgstr "AutoTimer FAQ"
+
 msgid "AutoTimer Filters"
 msgstr "AutoTimer Szűrők"
+
+msgid "AutoTimer Help"
+msgstr "AutoTimer Segítség"
 
 msgid "AutoTimer Services"
 msgstr "AutoTimer Csatornák"
@@ -200,11 +206,17 @@ msgstr "Bezárás és a változások elfelejtése"
 msgid "Close and save changes"
 msgstr "Bezárás és a változások mentése"
 
+msgid "Congratulations"
+msgstr "Gratulálunk"
+
 msgid "Control recording completely by service"
 msgstr "Ellenőrizze a felvételt teljes mértékben szervizeléssel"
 
 msgid "Couldn't load config file!"
 msgstr "Nem sikerült betölteni a konfigurációs fájlt!"
+
+msgid "Create a new AutoTimer."
+msgstr "Egy új AutoTimer létrehozása."
 
 msgid "Create a new timer using the classic editor"
 msgstr "Hozzon létre egy új időzítőt a klasszikus szerkesztő segítségével"
@@ -311,8 +323,18 @@ msgstr "Az \"esemény utáni\" végrehajtása az időtartam alatt"
 msgid "Exit"
 msgstr ""
 
+msgid "FAQ"
+msgstr ""
+
 msgid "Filter"
 msgstr "Szűrő"
+
+msgid ""
+"Filters are another powerful tool when matching events. An AutoTimer can be restricted to certain Weekdays or only match an event with a text inside eg it's Description.\n"
+"Press BLUE to add a new restriction and YELLOW to remove the selected one."
+msgstr ""
+"A szűrők egy másik hatékony eszköz az események illesztésében. Az AutoTimer bizonyos munkanapokon korlátozható, vagy csak egy eseményhez illeszkedik.\n"
+"Nyomja meg a KÉK gombot egy új korlátozás hozzáadásához és a SÁRGA elemet a kiválasztott elem eltávolításához."
 
 msgid "First day to match events. No event that begins before this date will be matched."
 msgstr "Nem lehet olyan esemény amely ezen időpont elött kezdődik."
@@ -336,11 +358,17 @@ msgstr ""
 msgid "Frequently asked questions"
 msgstr "Gyakran ismételt kérdések"
 
+msgid "Frequently asked questions about the AutoTimer"
+msgstr "Gyakran feltett kérdések a AutoTimer-ről"
+
 msgid "Fri"
 msgstr "Pén"
 
 msgid "Friday"
 msgstr "Péntek"
+
+msgid "Generic setup"
+msgstr "Általános beállítás"
 
 msgid "Guess existing timer based on begin/end"
 msgstr "Találd ki a meglévő időzítőt a kezdés/vége alapján"
@@ -417,6 +445,15 @@ msgstr "Tartalmazza az \"AutoTimer\" címkéket"
 msgid "Include AutoTimer name in tags"
 msgstr "Adja meg az AutoTimer nevét a címkékben"
 
+msgid ""
+"It's possible to restrict an AutoTimer to certain Services or Bouquets or to deny specific ones.\n"
+"An Event will only match this AutoTimer if it's on a specific and not denied Service (inside a Bouquet).\n"
+"Press BLUE to add a new restriction and YELLOW to remove the selected one."
+msgstr ""
+"It's possible to restrict an AutoTimer to certain Services or Bouquets or to deny specific ones.\n"
+"An Event will only match this AutoTimer if it's on a specific and not denied Service (inside a Bouquet).\n"
+"Press BLUE to add a new restriction and YELLOW to remove the selected one."
+
 msgid "Label Timers with season, episode and title, according to the SeriesPlugin settings."
 msgstr "Címke időzítők szezon, epizód és cím alapján, a SeriesPlugin beállítások szerint."
 
@@ -483,6 +520,9 @@ msgstr "Új"
 
 msgid "No"
 msgstr "Nem"
+
+msgid "No, remove them."
+msgstr "Nem, távolítsa el őket."
 
 msgid "None"
 msgstr "Nincs"
@@ -564,6 +604,15 @@ msgstr "Előnézet"
 
 msgid "Preview AutoTimer"
 msgstr "AutoTimer előnézete"
+
+msgid "Question: I found a problem with the AutoTimer, can you fix it?/nAnswer: First try the AutoTimer version in a recent (experimental) Image to see if the problem was fixed. Then read the Help again and the upcoming FAQs to make sure that this is actually a problem and not expected behavior./nIf you still think there is something wrong with the AutoTimer, please visit http://www.dream-multimedia-tv.de/board and post your problem there./n/nQ: The plugin only adds timers when leaving the configuration, not automatically. What can I do?/nA: From the Overview press MENU and enter the 'Setup'. In this screen enable 'Poll automatically' and you should be good to go."
+msgstr "Kérdés: Az AutoTimerrel kapcsolatos problémát észleltem?/nVálasz: Próbálja meg először egy (kísérleti) lemezképen az AutoTimer verziót, hogy megnézze a probléma megoldását. Ezután olvassa el újra a Súgót és a GYIK-okat, hogy megbizonyosodjon róla, hogy valóban ez a probléma, és ez a nem várható viselkedés./nHa még mindig úgy gondolja, hogy valami nincs rendben az AutoTimerrel kapcsolatban, látogasson el a http://www.dream-multimedia-tv.de/board címre és küldje be a problémát ott./n/nKérdés: A beépülő modul csak időzítőt ad hozzá a konfiguráció elhagyásakor, nem automatikusan. Mit tehetek?/nVálasz: Az Áttekintés menüben nyomja meg a MENÜ gombot, és lépjen be a \"Beállítás\" menübe. Ebben a képernyőn engedélyezze a \"Poll automatikus\" lehetőséget, és utána jónak kell lennie."
+
+msgid "Question: My AutoTimer for 'News' does not record the 'Late News'./nAnswer: Check 'Search type' and 'Search strictness' for the given AutoTimer./n/nQ: The show I'm trying to record contains umlauts in its title. AutoTimer does not find it./nA: Check the 'EPG encoding' for the given AutoTimer. For german stations 'UTF-8' should be selected./n/nQ: I seem to be unable to record two subsequent events. There is only a single timer created that spans (part of) both events./nA: From the Overview press MENU and enter the 'Setup'. In this screen disable 'Guess existing timer based on begin/end'."
+msgstr "Kérdés: Az AutoTimer a \"Hírek\"-nél nem rögzíti az \"Híradást\". nVálasz: Ellenőrizze a 'keresett típust' és a 'keresést szigorúan' az adott AutoTimer számára./n/nKérdés: A megpróbáltam rögzíteni címben bizonyos ékezetes szavakat. Az AutoTimer nem találja meg azokat./aVálasz: Ellenőrizze az adott \"AutoTimer\" EPG kódolását. A német csatornák számára az \"UTF-8\" -t kell választani./n/nKérdés: Úgy tűnik, lehetetlen további két további eseményt rögzíteni. Csak egy időzítő van létrehozva, amely mindkét eseményt kezeli./nVálasz: Az Áttekintés alatt nyomja meg a MENÜ gombot, és írja be a \"Beállítás\" parancsot. Ebben a képernyőn tiltsa le a \"Találd meg a meglévő időzítőt a kezdő/vége alapján\"."
+
+msgid "Question: You keep talking about help being provided for each parameter. I'm unable to read it (in part or in full)./nAnswer: Try using the default skin and if it works ask the creator of your regular skin. If it still does not work your image might not provide the actual default skin so contact the creator of your image."
+msgstr "Kérdés: Arról szólnak, hogy segítséget nyújtanak az egyes paraméterekhez. Nem tudom elolvasni (részben vagy teljes egészében). nVálasz: Próbálja meg használni az alapértelmezett kinézetet, és ha ez működik, kérdezze meg a rendszeres kinézetét. Ha még mindig nem működik, akkor a lemezkép nem biztosítja az aktuális alapértelmezett kinézetet, ezért lépjen kapcsolatba a lemezkép készítőjével."
 
 msgid "Really close without saving settings?"
 msgstr "Tényleg bezárja a beállítások mentése nélkül?"
@@ -735,8 +784,34 @@ msgstr "Címkék"
 msgid "Tags the Timer/Recording will have."
 msgstr "Az Időzítő/Felvétel funkcióinak van-e címkéje."
 
+msgid ""
+"Thank you for using the wizard. Your new AutoTimer has been added to the List.\n"
+"Please press OK to continue."
+msgstr ""
+"Köszönjük, hogy a varázslót használja. Az új AutoTimer hozzá lett adva a listához.\n"
+"A folytatáshoz nyomja meg az OK gombot."
+
+msgid "The 'Overview'"
+msgstr "Az 'Áttekintés'"
+
+msgid "The AutoTimer overview is the standard entry point to this plugin./n/nIf AutoTimers are configured you can choose them from a list to change them (OK button on your remote) or remove them (YELLOW button on your remote)./nNew Timers can be added by pressing the BLUE button and the control menu can be opened using the MENU button./n/nWhen leaving the plugin using the GREEN button it will search the EPG for matching events ONCE. To configure a regular search interval of the plugin to search for events open the control menu and enter the plugin setup."
+msgstr "Az AutoTimer áttekintése a beépülő modul szabványos belépési pontja./n/nHa az AutoTimers konfigurálva kiválaszthatja őket egy listából, hogy megváltoztassa őket (OK gomb a távirányítón), vagy távolítsa el őket (SÁRGA gomb a távirányítón)./nÚj időzítők a KÉK gombbal lehet megnyitni, és a vezérlőmenü megnyitható a MENU gombbal./n/nA ZÖLD gomb segítségével hagyja el a plugint, akkor az EPG-t az egyszer megfelelő eseményekre keresheti. A plugin rendszeres keresési intervallumának konfigurálása események kereséséhez nyissa meg a vezérlőmenüt, és adja meg a beépülő modul beállításait."
+
+msgid ""
+"The Timer will not be added to the List.\n"
+"Please press OK to close this Wizard."
+msgstr ""
+"Az időzítő nem kerül hozzáadásra a listára.\n"
+"A varázsló bezárásához nyomja meg az OK gombot."
+
+msgid "The Timespan of an AutoTimer is the first 'advanced' attribute. If a timespan is specified an event will only match this AutoTimer if it lies inside of this timespan."
+msgstr "Az AutoTimer időintervalluma az első 'haladó' attribútum. Ha időintervallumot ad meg, egy esemény csak akkor fog megfelelni az AutoTimernek, ha ez a határidőn belül van."
+
 msgid "The autotimer file (/etc/enigma2/autotimer.xml) is corrupt. A new and empty config was created. A backup of the config can be found here (/etc/enigma2/autotimer.xml_old) "
 msgstr "Az autotimer fájl (/etc/enigma2/autotimer.xml) sérült. Új és üres beállítást lett létre hozva. A konfiguráció biztonsági mentése itt található (/etc/enigma2/autotimer.xml_old) "
+
+msgid "The control menu hides less frequently used options of the plugin, including the configuration and default settings for new AutoTimers./n/nWhile you can just open the menu and take a look for yourself, let's go through the available options:/n - Help:/n   What you are looking at right now/n - Preview:/n   Simulate EPG search, helps finding errors in your setup./n - Import existing Timer:/n   Create a new AutoTimer based on an existing regular timer./n - Import from EPG:/n   Create an AutoTimer based on an EPG event./n - Setup:/n   Generic configuration of the plugin./n - Edit new timer defaults:/n   Configure default values for new AutoTimers./n - Create a new timer using the wizard/classic editor:/n   Use the non-default editor to create a new AutoTimer."
+msgstr "A vezérlő menü elrejti a bővítmény kevésbé használt beállításait, beleértve az új AutoTimerek konfigurációját és alapértelmezett beállításait is./n/nAmennyiben megnyithatja a menüt, akkor megnézheti magának azt, menjen végig a rendelkezésre álló lehetőségeken:/n - Súgó :/nAz, amit most nézel/n - Előnézet:/nSzimulálja az EPG keresést, segít megállapítani a beállítások hibáit./n - Import meglévő időzítő importálása:/nHozzon létre egy új automatikus mutatót egy meglévő rendszeres időzítő alapján. - Import EPG-ből:/nHozzon létre egy automatikus műsorújságot egy EPG esemény alapján./n - Beállítás:/nA plugin./n általános konfigurációja - Az új időzítő alapértelmezett értékeinek szerkesztése: n Az új AutoTimers alapértelmezett értékeinek beállítása. egy új időzítő a varázsló/klasszikus szerkesztővel:/n Használja a nem alapértelmezett szerkesztőt új AutoTimer létrehozásához."
 
 msgid "The counter can automatically be reset to the limit at certain intervals."
 msgstr "A számláló bizonyos időközönként automatikusan visszaállítható a határértékre."
@@ -747,6 +822,9 @@ msgstr "Az új AutoTimer időzítésekhez használt szerkesztő. Ez lehet a var�
 msgid "The match attribute is mandatory."
 msgstr "Az egyezőségi attribútum kötelező."
 
+msgid "This FAQ is supposed to help everyone unwilling to help themselves by reading all the provided help available, and those who did not find a solution to their problems within the provided documentation./n/nTo make these hints a little easier to read, they are split up on multiple pages. You can go to the next page using the BLUE button on your remote control and back using the YELLOW one. Pressing the RED button or EXIT will close the FAQ."
+msgstr "Ez a GYIK segíteni fog mindenkinek, aki nem tud segíteni magának, ha elolvassa az összes rendelkezésre álló segítséget, és azokat, akik nem találtak megoldást a problémáikra a rendelkezésre bocsátott dokumentációban./n/nAz útmutatók kicsit könnyebb olvashatósága érdekében. több oldalra van osztva. A következő oldalon a távvezérlő KÉK gombjával, majd a SÁRGA gombbal léphet. A PIROS gombbal vagy az EXIT gombbal bezárhatja a GYIK-ot."
+
 msgid ""
 "This allows you to apply other filters.\n"
 "Use the yellow key to edit other filters."
@@ -754,8 +832,14 @@ msgstr ""
 "Ez lehetővé teszi a további szűrő alkalmazását.\n"
 "Használja a sárga gombot a további szűrő szerkesztéséhez."
 
+msgid "This help screen is supposed to give you a quick look at everything the AutoTimer has to offer./nYou can abort it at any time by pressing the RED or EXIT button on your remote control or bring it up at a later point by selecting it from the control menu using the MENU button from the regular entry point of the plugin (more on that later)./n/n/nBut you really should consider to take the few minutes it takes to read these help pages."
+msgstr "Ez a súgó képernyő gyorsan áttekintheti mindazt, amit az AutoTimer kínál./nBármikor megszakíthatja a távvezérlő PIROS vagy EXIT gombjának megnyomásával vagy egy későbbi időpontban történő felemelésével a vezérlőmenüt a plugin rendszeres belépési pontján található MENU gombbal (többet később is)./n/n/nFordítson néhány percet a súgó oldalak végig olvasásához."
+
 msgid "This is a name you can give the AutoTimer. It will be shown in the Overview and the Preview."
 msgstr "Ez a név lesz beállítva az AutoTimer időzítéshez. Ezzel a névvel jelenik meg az Áttekintés és az Előnézet között."
+
+msgid "This is mostly a matter of taste./nThe Wizard provides you with a reduced set of options and presents them in smaller sets at a time. It is mostly aimed at users not very experienced with this plugin or the 'expert' level features of enigma2./n/nYou can check out the 'classic' editor by opening an existing timer from the overview and if you prefer this view over the wizard you can change the default editor in the setup dialog."
+msgstr "Ez többnyire ízlés kérdése./nA varázsló csökkentett opciókat kínál, és egyszerre kisebb készletekben jeleníti meg őket. Leginkább olyan felhasználók számára készült, akik nem nagyon tapasztalták ezt a plugint vagy az enigma2./n/nszakértői szintű funkcióit. A klasszikus szerkesztőt a meglévő időzítő megnyitásával tekintheti meg az áttekintésből, és ha ezt a nézetet varázsló segítségével megváltoztathatja az alapértelmezett szerkesztőt a beállítási párbeszédablakban."
 
 #, fuzzy, python-format
 msgid "This is the delay in %s that the AutoTimer will wait after doing a search before searching the EPG again."
@@ -769,6 +853,9 @@ msgstr "Ez az a perc késleltetés, amelyet az AutoTimer a kezdeti indításkor 
 
 msgid "This is what will be looked for in event titles. Note that looking for e.g. german umlauts can be tricky as you have to know the encoding the channel uses."
 msgstr "Ezt keresi a műsorok címében. Vegye figyelembe az ékezetes karakterek kódolását is."
+
+msgid "This screen should be pretty straight-forward. If the option name does not give its meaning away there should be an explanation for each of them when you select them. If there is no visible explanation this is most likely a skin issue and please try if the default skin fixes the issue./n/nA lot of effort has been put in making the parameters as easy to understand as possible, so give reading them a try ;-)."
+msgstr "Ez a képernyő legyen elég egyszerű. Ha az opció neve nem adja meg értelmét, mindegyiknek magyarázatot kell adnia, amikor kiválasztja őket. Ha nincs látható magyarázata, ez valószínűleg kinézeti probléma, és kérjük, próbálja meg, hogy az alapértelmezett kinézet javítja-e a problémát./n/nA sok erőfeszítést tettek a paraméterek minél könnyebb megértésére, ezért olvasd el őket, s próbáld ki azokat;-)."
 
 msgid "This setting controls the behavior when a timer matches a found event."
 msgstr "Ez a beállítás szabályozza a viselkedést, amikor egy időzítő megegyezik egy talált eseménnyel."
@@ -842,6 +929,21 @@ msgstr "Hetente (Hétfő)"
 msgid "Weekly (Sunday)"
 msgstr "Hetente (Vasárnap)"
 
+msgid "Welcome to the AutoTimer-Plugin"
+msgstr "Üdvözöljük az AutoTimer bővítményben"
+
+msgid ""
+"Welcome.\n"
+"\n"
+"This Wizard will help you to create a new AutoTimer by providing descriptions for common settings."
+msgstr ""
+"Üdvözöljük.\n"
+"\n"
+"Ez a varázsló segít új AutoTimer létrehozásában a közös beállítások leírásaival."
+
+msgid "What is this 'control menu' you keep talking about?"
+msgstr "Mi ez a 'vezérlő menü', amiről beszélünk?"
+
 msgid "When supporting \"Fast Scan\" the service type is ignored. You don't need to enable this unless your Image supports \"Fast Scan\" and you are using it."
 msgstr "A \"Gyors keresés\" támogatásakor a szolgáltatás típusát figyelmen kívül hagyja. Ezt nem szükséges engedélyezni, hacsak a lemezkép nem támogatja a \"Gyors keresés\" funkciót, és Ön nem használja azt."
 
@@ -864,8 +966,14 @@ msgstr "Ezzel az opcióval az AutoTimer korlátozott mennyiségű ütemezett fel
 msgid "Wizard"
 msgstr "Varázsló"
 
+msgid "Wizard or Classic Editor?"
+msgstr "Varázsló vagy klasszikus szerkesztő?"
+
 msgid "Write the config file after every change which the user quits by saving."
 msgstr "Konfigurációs fájl írása minden olyan módosítás után, amelyet a felhasználó mentéssel ment le."
+
+msgid "Yes"
+msgstr "Igen"
 
 msgid "Yes, and delete all timers generated by this autotimer"
 msgstr "Igen, és törölje az AutoTimer által generált összes időzítőt"
@@ -873,8 +981,25 @@ msgstr "Igen, és törölje az AutoTimer által generált összes időzítőt"
 msgid "Yes, but keep timers generated by this autotimer"
 msgstr "Igen, és tartsa meg az AutoTimer által generált összes időzítőt"
 
+msgid "Yes, keep them."
+msgstr "Igen, tartsa meg őket."
+
 msgid "You can control for how many days in the future timers are added. Set this to 0 to disable this feature."
 msgstr "Beállíthatja, hogy hány napot adjon a jövőbeli időzítőkhez. Állítsa ezt 0-ra a funkció letiltásához."
+
+msgid ""
+"You can set the basic properties of an AutoTimer here.\n"
+"While 'Name' is just a human-readable name displayed in the Overview, 'Match in title' is what is looked for in the EPG."
+msgstr ""
+"Itt beállíthatja az AutoTimer alapvető tulajdonságait.\n"
+"Bár a \"Név\" csak egy ember által olvasható név, amelyet az Áttekintés tartalmaz, az EPG-ben keresett 'Egyezőség a címben'."
+
+msgid ""
+"You did not provide a valid 'Match in title' Attribute for your new AutoTimer.\n"
+"As this is a mandatory Attribute you cannot continue without doing so."
+msgstr ""
+"Nem adott meg egy érvényes 'Egyezőség a címben' attribútumot az új AutoTimer számára.\n"
+"Mivel ez kötelező attribútum, akkor nem folytathatod anélkül, hogy ezt megtennéd."
 
 #, python-format
 msgid ""
@@ -883,6 +1008,25 @@ msgid ""
 msgstr ""
 "A(z) \"%s\" kifejezést a szöveg illeszkedve adta meg\n"
 "El szeretné távolítani a befejező fehér területeket?"
+
+msgid "You now know almost everything there is to know about the AutoTimer-Plugin./n/nAs a final hint I can't stress how important it is to take a look at the help texts that are shown in the setup dialogs as they cover the most frequently asked questions. Surprisingly even after the hints were added ;-)."
+msgstr "Most már majdnem mindent tudsz, amit az AutoTimer -Pluginról tudni akarsz./n/nEgy utolsó ötletként nem tudom hangsúlyozni, mennyire fontos megnézni azokat a súgószövegeket, amelyek a beállítási párbeszédpanelen jelennek meg, leggyakrabban a feltett kérdéseket. Meglepő módon még a tippek után is ;-)."
+
+msgid ""
+"You successfully configured a new AutoTimer. Do you want to add it to the list?\n"
+"\n"
+"You can go back a step by pressing EXIT on your remote."
+msgstr ""
+"Sikeresen konfigurálta az új AutoTimer beállítást. Szeretné hozzáadni a listához?\n"
+"\n"
+"A távvezérlő EXIT gombjának megnyomásával léphet vissza."
+
+msgid ""
+"Your 'Match in title' Attribute ends with a Whitespace.\n"
+"Please confirm if this was intentional, if not they will be removed."
+msgstr ""
+"Az \"Egyezés a címben\" attribútum véget ér fehér területtel.\n"
+"Kérjük, erősítse meg, hogy ez szándékos volt-e, ha nem, eltávolítják őket."
 
 #, python-format
 msgid ""

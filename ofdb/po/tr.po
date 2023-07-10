@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 OFDb plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:08+0100\n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
 "PO-Revision-Date: 2009-09-22 13:18+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
 "Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
@@ -17,8 +17,7 @@ msgstr ""
 msgid "Ambiguous results"
 msgstr "Muhtemel eşleşen başlıklar"
 
-#, fuzzy, python-format
-msgid "Cast: %s"
+msgid "Cast: "
 msgstr "Oyuncular: "
 
 msgid "Channel Selection"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AdvancedMovieSelection\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:07+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2013-10-05 12:07+0100\n"
 "Last-Translator: cmikula\n"
 "Language-Team: IhaD <JackDaniel@i-have-a-dreambox.com>\n"
@@ -44,12 +44,6 @@ msgstr ""
 "Der Timer wird gelöscht und die Aufnahme von %s in den Papierkorb verschoben.\n"
 "\n"
 "Wollen Sie wirklich fortfahren?"
-
-#, python-format
-msgid ""
-"\n"
-"Last modified at TheTVDB.com: %s"
-msgstr ""
 
 #, python-format
 msgid "%s is currently recording!"
@@ -110,10 +104,6 @@ msgstr "Abbruch durch Benutzer!!"
 msgid "About Advanced Movie Selection"
 msgstr "Über die Erweiterte Filmauswahl"
 
-#, python-format
-msgid "Actors: %s\n"
-msgstr ""
-
 msgid "Add Tag(s) for Recordings/Timer or AutoTimer"
 msgstr "Tag(s) hinzufügen für Aufnahmen/Timer oder AutoTimer"
 
@@ -150,14 +140,6 @@ msgstr "Erweiterte Filmauswahl Info"
 msgid "Advanced movielist menu"
 msgstr "Erw. Filmauswahl Menü"
 
-#, python-format
-msgid "Air Day: %s"
-msgstr ""
-
-#, python-format
-msgid "Air Time: %s"
-msgstr ""
-
 msgid "All directorys below '/media'"
 msgstr "Alles unter '/media'"
 
@@ -180,10 +162,6 @@ msgstr "Weitere %s sind erforderlich um die Daten kopieren zu können."
 #, python-format
 msgid "Another %s are required to move the data."
 msgstr "Weitere %s sind erforderlich um die Daten verschieben zu können."
-
-#, python-format
-msgid "Appeared: %s"
-msgstr ""
 
 #, python-format
 msgid "Around %d minute"
@@ -346,10 +324,6 @@ msgstr "Lesezeichen ein/aus"
 msgid "Branch:"
 msgstr "Branch:"
 
-#, python-format
-msgid "Broadcast TV network: %s"
-msgstr ""
-
 msgid "Button caption"
 msgstr "Tastenbezeichnung bei Erweiterungen:"
 
@@ -361,10 +335,6 @@ msgstr "Abbrechen"
 
 msgid "Cancelled"
 msgstr "Abgebrochen"
-
-#, fuzzy, python-format
-msgid "Certification: %s"
-msgstr "Speicherort: %s"
 
 msgid "Change Bookmarkname"
 msgstr "Lesezeichenname ändern"
@@ -457,9 +427,6 @@ msgstr "DM-800HDse"
 msgid "Daily"
 msgstr "Täglich"
 
-msgid "Data already exists! Should anything be updated?"
-msgstr ""
-
 #, fuzzy
 msgid "Default movie location"
 msgstr "Am letzten Speicherort starten:"
@@ -512,20 +479,12 @@ msgstr "Beschreibung:"
 msgid "Destination carrier"
 msgstr "Ziel Datenträger"
 
-#, fuzzy, python-format
-msgid "Details for: %s"
-msgstr "Tag(s) ändern für: %s"
-
 msgid ""
 "Developer:\n"
 "  JackDaniel, cmikula"
 msgstr ""
 "Entwickler:\n"
 " JackDaniel, cmikula"
-
-#, fuzzy, python-format
-msgid "Director: %s"
-msgstr "Verzeichnisse"
 
 msgid "Directories"
 msgstr "Verzeichnisse"
@@ -787,27 +746,11 @@ msgstr "Lesezeichen 7 Tastenbezeichnung eingeben:"
 msgid "Enter Home button descrition:"
 msgstr "Heimtaste Tastenbezeichnung eingeben:"
 
-#, fuzzy
-msgid "Enter new movie name for search:"
-msgstr "Bitte Filmnamen für die Suche eingeben "
-
 msgid "Enter new moviename to search for"
 msgstr "Bitte Filmnamen für die Suche eingeben "
 
 msgid "Enter text to search for"
 msgstr "Bitte Suchtext eingeben"
-
-#, fuzzy, python-format
-msgid "Episode details for: %s"
-msgstr "Tag(s) ändern für: %s"
-
-#, python-format
-msgid "Episode: %s"
-msgstr ""
-
-#, fuzzy, python-format
-msgid "Episodes for: %s"
-msgstr "Info für: %s"
 
 msgid "Error"
 msgstr "Fehler"
@@ -820,12 +763,6 @@ msgstr "ISO-Abbild konnte nicht geladen werden!"
 
 msgid "Error occurred during unmounting device!"
 msgstr "Beim aushängen ist ein Fehler aufgetreten!"
-
-#, fuzzy, python-format
-msgid ""
-"Error!\n"
-"%s"
-msgstr "Fehler"
 
 msgid "Error:"
 msgstr "Fehler:"
@@ -861,10 +798,6 @@ msgstr "Nach Kurzbeschreibung filtern"
 msgid "Finished"
 msgstr "Beendet"
 
-#, python-format
-msgid "First Aired: %s"
-msgstr ""
-
 msgid "Foldername:"
 msgstr "Ordnername:"
 
@@ -877,10 +810,6 @@ msgstr "Frei:"
 msgid "From:"
 msgstr "Von:"
 
-#, fuzzy, python-format
-msgid "Genre: %s\n"
-msgstr "Dateiname: %s"
-
 msgid "German (with Starttime)"
 msgstr "Deutsch (mit Startzeit)"
 
@@ -890,22 +819,6 @@ msgstr "Deutsch (mit Jahr)"
 msgid "German (without Year)"
 msgstr "Deutsch (ohne Jahr)"
 
-#, fuzzy, python-format
-msgid "Getting episodes details for ' %s ', please wait ..."
-msgstr "Suche nach %s, bitte warten ..."
-
-#, fuzzy, python-format
-msgid "Getting episodes list for ' %s ', please wait ..."
-msgstr "Suche nach Dreamboxen, bitte warten ..."
-
-#, fuzzy, python-format
-msgid "Getting search result for ' %s ', please wit ..."
-msgstr "Suche nach %s, bitte warten ..."
-
-#, fuzzy, python-format
-msgid "Getting show details for ' %s ', please wait ..."
-msgstr "Suche nach %s, bitte warten ..."
-
 msgid "Go manual to position (OK for seek):"
 msgstr "Manuelles springen (OK Taste für Sprung):"
 
@@ -914,10 +827,6 @@ msgstr "Grün"
 
 msgid "Grey"
 msgstr "Grau"
-
-#, python-format
-msgid "Guest Stars: %s\n"
-msgstr ""
 
 msgid "Here you can adjust the manually jump length relative to the film length in percent."
 msgstr "Hier können Sie die manuelle Sprunglänge relativ zur Filmlänge in Prozent einstellen."
@@ -1037,10 +946,6 @@ msgstr "Hostname:"
 msgid "How to proceed '%s'"
 msgstr "Wie soll ' %s '"
 
-#, python-format
-msgid "ID: %s"
-msgstr ""
-
 msgid "IMDB search"
 msgstr "IMDB suche"
 
@@ -1125,14 +1030,14 @@ msgstr "Wenn Sie diese Funktion aktivieren, wird eine Vorschau vom ausgewählten
 msgid "If you enable this function, your recorded movies will be marked in epg list."
 msgstr "Wenn Sie diese Funktion aktivieren, werden die aufgenommenen Filme mit einem Stern in der EPG Liste angezeigt."
 
-msgid "Info/Cover save"
-msgstr ""
-
 #, python-format
 msgid "Infos for: %s"
 msgstr "Info für: %s"
 
 msgid "Initial location in new timers"
+msgstr ""
+
+msgid "Input"
 msgstr ""
 
 msgid "Instant record location"
@@ -1266,16 +1171,8 @@ msgstr "Verschieben"
 msgid "Move Copy Progress"
 msgstr "Verschieben/Kopieren Fortschritt"
 
-#, fuzzy
-msgid "Move down"
-msgstr "Verschieben von"
-
 msgid "Move of"
 msgstr "Verschieben von"
-
-#, fuzzy
-msgid "Move up"
-msgstr "Verschieben"
 
 msgid "Move-Copy"
 msgstr "Versch. / Kopieren"
@@ -1403,20 +1300,6 @@ msgstr "DVD-Player Erweiterung nicht gefunden!"
 msgid "No Helptext available!"
 msgstr "Kein Hilfstext vorhanden!"
 
-#, python-format
-msgid "No data found for ' %s ' at themoviedb.org!"
-msgstr ""
-
-#, python-format
-msgid ""
-"No data found for ' %s ' at themoviedb.org!\n"
-"Do you want to edit the search name?"
-msgstr ""
-
-#, python-format
-msgid "No description for ' %s ' at themoviedb.org found!"
-msgstr ""
-
 msgid "No internet connection available!"
 msgstr "Keine Internetverbindung vorhanden!"
 
@@ -1434,9 +1317,6 @@ msgstr "Keine Erweiterung zugeordnet!"
 
 msgid "No tags are set on these movies."
 msgstr "No tags are set on these movies."
-
-msgid "No user voted!"
-msgstr ""
 
 msgid "No, but restart from begin"
 msgstr "Nein, von Anfang nochmals beginnen"
@@ -1488,9 +1368,6 @@ msgstr "Aktuelles Filmverzeichnis"
 msgid "Only last three digits from the IP must be set."
 msgstr "Es müssen nur die letzten drei Ziffern der IP Adresse angegeben werden."
 
-msgid "Only those, which are not available!"
-msgstr ""
-
 msgid "Open servicelist"
 msgstr "EPG anzeigen"
 
@@ -1502,17 +1379,6 @@ msgstr "Orange"
 
 msgid "Original (1400x2100)"
 msgstr "Original (1400x2100)"
-
-msgid "Overwrite both (description & cover)"
-msgstr ""
-
-#, fuzzy
-msgid "Overwrite movie cover"
-msgstr "Filminfo und Cover löschen"
-
-#, fuzzy
-msgid "Overwrite movie description"
-msgstr "Film nach Kurzbeschreibung wählen:"
 
 msgid "Own button description"
 msgstr "Eigene Tastenbezeichnung"
@@ -1587,10 +1453,6 @@ msgstr "Mit dieser Option startet die Filmvorschau auf der letzten Stop Position
 msgid "Processing: %s"
 msgstr "Fortschritt: %s"
 
-#, fuzzy, python-format
-msgid "Production: %s\n"
-msgstr "Fortschritt: %s"
-
 msgid "Provider Logo path:"
 msgstr "Speicherort der Senderlogos:"
 
@@ -1602,10 +1464,6 @@ msgstr "Aufn."
 
 msgid "Radio-button"
 msgstr "Radio-Taste"
-
-#, python-format
-msgid "Rating: %s\n"
-msgstr ""
 
 msgid "Really close without saving settings?"
 msgstr "Wirklich ohne Speichern schließen?"
@@ -1648,10 +1506,6 @@ msgstr "Aufnahme"
 
 msgid "Red"
 msgstr "Rot"
-
-#, python-format
-msgid "Regie: %s"
-msgstr ""
 
 msgid "Remaining elements:"
 msgstr "Verbleibend:"
@@ -1700,24 +1554,8 @@ msgstr "Zurück zur Filmliste"
 msgid "Return to previous service"
 msgstr "Zurück zum LiveTV"
 
-#, fuzzy, python-format
-msgid "Runtime: %s minutes"
-msgstr "Ungefähr %d Minuten"
-
-#, fuzzy, python-format
-msgid "Runtime: %s minutes\n"
-msgstr "Ungefähr %d Minuten"
-
 msgid "Save"
 msgstr "Speichern"
-
-#, fuzzy, python-format
-msgid "Save Info/Cover for ' %s ', please wait ..."
-msgstr "Suche nach %s, bitte warten ..."
-
-#, fuzzy
-msgid "Save info/cover"
-msgstr "Infos/Cover speichern"
 
 msgid "Save infos/cover"
 msgstr "Infos/Cover speichern"
@@ -1732,28 +1570,12 @@ msgstr "Trailer im Web suchen"
 msgid "Search for %s, please wait..."
 msgstr "Suche nach %s, bitte warten ..."
 
-#, fuzzy, python-format
-msgid "Search result for: %s"
-msgstr "Ergebnis(se) für: %s"
-
 #, python-format
 msgid "Search result(s) for %s"
 msgstr "Ergebnis(se) für: %s"
 
-#, fuzzy, python-format
-msgid "Search trailer for ' %s ', please wait ..."
-msgstr "Suche nach %s, bitte warten ..."
-
 msgid "Search:"
 msgstr "Suche:"
-
-#, fuzzy, python-format
-msgid "Searching for ' %s ' on TMDb, please wait ..."
-msgstr "Suche nach %s, bitte warten ..."
-
-#, fuzzy, python-format
-msgid "Searching for ' %s ' on TheTVDB.com, please wait ..."
-msgstr "Suche nach %s, bitte warten ..."
 
 msgid "Searching for clients, please wait ..."
 msgstr "Suche nach Dreamboxen, bitte warten ..."
@@ -1761,10 +1583,6 @@ msgstr "Suche nach Dreamboxen, bitte warten ..."
 #, python-format
 msgid "Searchtitle: %s"
 msgstr "Gesuchter Titel: %s"
-
-#, python-format
-msgid "Season: %s"
-msgstr ""
 
 msgid "Second"
 msgstr "Sekunde"
@@ -1926,14 +1744,6 @@ msgstr "Verzeichnisgröße in der Filmliste anzeigen:"
 msgid "Show disk usage in description:"
 msgstr "Datenträgerinformation in der Beschreibung anzeigen"
 
-#, fuzzy
-msgid "Show episode detail"
-msgstr "Filminfos anzeigen"
-
-#, fuzzy
-msgid "Show episodes overview"
-msgstr "Alle Filme anzeigen"
-
 msgid "Show event details"
 msgstr "Filminfos anzeigen"
 
@@ -1979,10 +1789,6 @@ msgstr "Fortschritt für kopieren/verschieben anzeigen:"
 msgid "Show movie color status in movielist"
 msgstr "Filmstatus in Farbe in der Filmliste anzeigen"
 
-#, fuzzy
-msgid "Show movie detail"
-msgstr "Filminfos anzeigen"
-
 msgid "Show movie library symbol in movielist:"
 msgstr "Bibliothek in der Filmliste anzeigen:"
 
@@ -2001,10 +1807,6 @@ msgstr "Filmtags zuordnen im Menü der Filmliste anzeigen:"
 msgid "Show new recordings icon:"
 msgstr "Neue Aufnahmen Icon anzeigen:"
 
-#, fuzzy
-msgid "Show next cover"
-msgstr "Alle Filme anzeigen"
-
 msgid "Show path marker within movie library movies:"
 msgstr "Filmpfad als Marker in der Bibliothek anzeigen:"
 
@@ -2016,10 +1818,6 @@ msgstr "Prozentanzeige in der Filmliste anzeigen"
 
 msgid "Show plugin config in extensions menu from movielist:"
 msgstr "Einstellungen im Menü der Filmliste anzeigen:"
-
-#, fuzzy
-msgid "Show previous cover"
-msgstr "Zum vorigen Marker springen"
 
 msgid "Show progress of move or copy job"
 msgstr "Fortschritt von Verschieben/Kopieren anzeigen"
@@ -2036,19 +1834,11 @@ msgstr "Umbenennen im Menü der Filmliste anzeigen:"
 msgid "Show runtime entry in movielist"
 msgstr "Filmlänge in der Filmliste einblenden"
 
-#, fuzzy
-msgid "Show search result"
-msgstr "Ergebnis(se) für: %s"
-
 msgid "Show search trailer on web in extensions menu from movielist:"
 msgstr "Trailer im Web suchen im Menü der Filmliste anzeigen:"
 
 msgid "Show seen movies"
 msgstr "Alle Filme anzeigen"
-
-#, fuzzy
-msgid "Show serie detail"
-msgstr "Filminfos anzeigen"
 
 msgid "Show sort options in extensions menu from movielist:"
 msgstr "Sortieroptionen im Menü der Filmliste anzeigen:"
@@ -2107,27 +1897,6 @@ msgstr ""
 
 msgid "Some settings changes require close/reopen the movielist to take effect."
 msgstr "Einige Einstellungen benötigen das Schließen und erneutes öffnen der Filmliste um wirksam zu werden."
-
-msgid "Sorry, no data found at TheTVDB.com!"
-msgstr ""
-
-#, python-format
-msgid "Sorry, no description for ' %s ' at TheTVDB.com found!"
-msgstr ""
-
-msgid "Sorry, no description for this episode at TheTVDB.com available!"
-msgstr ""
-
-msgid "Sorry, no description found at www.thetvdb.com!"
-msgstr ""
-
-#, fuzzy
-msgid "Sorry, no episode titel available!"
-msgstr "Kein Status vom nächsten leeren verfügbar!"
-
-#, python-format
-msgid "Sorry, no info/cover found for title: %s"
-msgstr ""
 
 msgid "Sort"
 msgstr "Sortieren"
@@ -2194,10 +1963,6 @@ msgstr "Das abspielen des Filmes beenden?"
 
 msgid "Stop search IP:"
 msgstr "Stoppe suche bei IP:"
-
-#, python-format
-msgid "Studio: %s"
-msgstr ""
 
 msgid "Switch library/movielist"
 msgstr "Zur Bibliothek/Filmliste wechseln"
@@ -2311,18 +2076,11 @@ msgstr "Zur Filmliste"
 msgid "To:"
 msgstr "Nach:"
 
-msgid "Toggle detail and list view"
-msgstr ""
-
 msgid "Toggle seen"
 msgstr "Umschalten Gesehen/Ungesehen"
 
 msgid "Toggle selected"
 msgstr "Auswahl verwenden/nicht verwenden"
-
-#, fuzzy, python-format
-msgid "Total %s"
-msgstr "Gesamtgröße:"
 
 msgid "Total size:"
 msgstr "Gesamtgröße:"
@@ -2354,10 +2112,6 @@ msgid "Unknown"
 msgstr "Unbekannt"
 
 msgid "Unknown error!"
-msgstr "Unbekannter Fehler!"
-
-#, fuzzy
-msgid "Unknown error!!"
 msgstr "Unbekannter Fehler!"
 
 msgid "Unknown service"
@@ -2459,12 +2213,12 @@ msgstr "Video-Taste"
 msgid "Virtual"
 msgstr "Virtuelle Tastatur"
 
+#, fuzzy
+msgid "Virtual KeyBoard"
+msgstr "Virtuelle Tastatur"
+
 msgid "Virtual and Numerical"
 msgstr "Virtuelle und Numerische"
-
-#, fuzzy, python-format
-msgid "Voted: %s"
-msgstr "Sortiert:"
 
 msgid "Waiting"
 msgstr "Warten"
@@ -2539,10 +2293,6 @@ msgstr "Mit dieser Option können Sie bestimmen das für die Cover anzeige von O
 msgid "Would you really abort current job?"
 msgstr "Soll die Aufgabe wirklich abgebrochen werden?"
 
-#, fuzzy, python-format
-msgid "Writer: %s\n"
-msgstr "Gesuchter Titel: %s"
-
 msgid "YTTrailer plugin NOT installed. Search for trailers on the Web is NOT possible."
 msgstr "YTTrailer Erweiterung ist NICHT installiert. Trailer können NICHT im Web gesucht werden."
 
@@ -2579,12 +2329,6 @@ msgstr "um"
 msgid "be moved/copied?"
 msgstr "verschoben/kopiert werden?"
 
-msgid "episode found"
-msgstr ""
-
-msgid "episodes found"
-msgstr ""
-
 #, python-format
 msgid "from %s"
 msgstr "von %s"
@@ -2595,29 +2339,11 @@ msgstr "interne HDD"
 msgid "movie"
 msgstr "Film"
 
-#, fuzzy
-msgid "movie found"
-msgstr "Film"
-
 msgid "movies"
 msgstr "Filmen"
 
-#, fuzzy
-msgid "movies found"
-msgstr "Filmen"
-
-#, fuzzy
-msgid "show found"
-msgstr "Ordner einblenden"
-
-msgid "shows found"
-msgstr ""
-
 msgid "this recording"
 msgstr "this recording"
-
-msgid "times"
-msgstr ""
 
 #, python-format
 msgid "to %s"

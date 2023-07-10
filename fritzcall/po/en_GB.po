@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:08+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2012-12-03 17:32-0000\n"
 "Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
 "Language-Team: none\n"
@@ -129,18 +129,6 @@ msgstr ""
 
 msgid "Could not get call list; wrong version?"
 msgstr "Could not get call list; wrong version?"
-
-#, fuzzy
-msgid "Could not load barring list: "
-msgstr "FRITZ!Box - Could not load phonebook: %s"
-
-#, fuzzy, python-format
-msgid "Could not load barring list: %s"
-msgstr "FRITZ!Box - Could not load phonebook: %s"
-
-#, fuzzy
-msgid "Could not load deflections list: "
-msgstr "FRITZ!Box - Could not load phonebook: %s"
 
 #, fuzzy
 msgid "Could not load phonebook: "
@@ -419,6 +407,9 @@ msgstr "MSN to show (separated by ,)"
 msgid "Mailbox"
 msgstr "Mailbox"
 
+msgid "Make it more skin friendly"
+msgstr ""
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "Missed"
 msgstr "Missed"
@@ -459,6 +450,12 @@ msgstr "No mailbox active"
 
 msgid "No phonebook"
 msgstr "No phonebook"
+
+msgid "No result from LDIF"
+msgstr "No result from LDIF"
+
+msgid "No result from Outlook export"
+msgstr "No result from Outlook export"
 
 msgid "No result from reverse lookup"
 msgstr "No result from reverse lookup"
@@ -575,6 +572,12 @@ msgstr "Search (case insensitive)"
 
 msgid "Search phonebook"
 msgstr "Search phonebook"
+
+msgid "Searching in LDIF..."
+msgstr "Searching in LDIF..."
+
+msgid "Searching in Outlook export..."
+msgstr "Searching in Outlook export..."
 
 msgid "Setting..."
 msgstr ""
@@ -715,6 +718,9 @@ msgstr ""
 
 msgid "before 05.27"
 msgstr "before 05.27"
+
+msgid "business"
+msgstr "business"
 
 #, fuzzy
 msgid "call diversions active"

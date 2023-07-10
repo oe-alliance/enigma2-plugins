@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EasyMedia\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:07+0100\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2011-01-11 09:41+0100\n"
 "Last-Translator: \n"
 "Language-Team: none\n"
@@ -48,9 +48,6 @@ msgstr "EasyMedia Einstellungen..."
 msgid "Enabled"
 msgstr "Eingeschaltet"
 
-msgid "FileCommander"
-msgstr ""
-
 msgid "Filebrowser"
 msgstr "Datei Browser"
 
@@ -64,22 +61,8 @@ msgid "InternetRadio"
 msgstr ""
 
 #, fuzzy
-msgid "InternetRadio Plugin is not installed!"
-msgstr "Wetter Plugin ist nicht  installiert!"
-
-#, fuzzy
 msgid "InternetRadio player:"
 msgstr "Internet Radio-Player:"
-
-msgid "Kodi"
-msgstr ""
-
-#, fuzzy
-msgid "Kodi is not installed!"
-msgstr "VideoDB ist nicht  installiert!"
-
-msgid "Kodi:"
-msgstr ""
 
 msgid "MediaPlayer"
 msgstr ""
@@ -141,8 +124,8 @@ msgstr ""
 msgid "Radio-mode"
 msgstr "Radio-Modus"
 
-msgid "SHOUTcast"
-msgstr ""
+msgid "SHOUTcast Plugin is not installed!"
+msgstr "SHOUTcast Plugin ist nicht  installiert!"
 
 msgid "Select bookmark..."
 msgstr "Lesezeichen selektieren..."

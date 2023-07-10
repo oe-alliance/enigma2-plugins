@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MerlinMusicPlayer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:08+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2016-06-25 07:41+0300\n"
 "Last-Translator: \n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
@@ -58,10 +58,6 @@ msgid ""
 msgstr ""
 "%s \n"
 "įtraukta ir bus grojama, kaip kita daina"
-
-#, python-format
-msgid "%s (%s)"
-msgstr ""
 
 msgid "Activate screensaver"
 msgstr "Įjungti ekrano užsklandą"
@@ -272,6 +268,10 @@ msgstr "Įsiminti paskutinį failų naršyklės kelią"
 
 msgid "Repeat is not available yet with cue-files!"
 msgstr ".cue failų pakartoti negalima!"
+
+#, python-format
+msgid "Response -> lyrics for: %s (%s)"
+msgstr "Atsakas -> žodžiai: %s (%s)"
 
 msgid "Scan path for music files and add them to database"
 msgstr "Kelias, ieškoti muzikos failų ir įtraukti juos į duomenų bazę"

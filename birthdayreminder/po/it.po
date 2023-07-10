@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 plugin - birthday reminder\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:07+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2023-03-30 11:49+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -29,6 +29,9 @@ msgstr "1 settimana"
 
 msgid "3 days"
 msgstr "3 giorni"
+
+msgid "Accept changes"
+msgstr "Conf. modifiche"
 
 msgid "Add"
 msgstr "Agg"
@@ -76,6 +79,15 @@ msgstr "Impossible importare dati dal file %s."
 msgid "Can't write CSV file %s."
 msgstr "Impossibile scrivere file CVS %s."
 
+msgid "Cancel"
+msgstr "Annullare"
+
+msgid "Change path"
+msgstr "Mod. percorso"
+
+msgid "Choose the filename:"
+msgstr "Scegliere il nome del file:"
+
 msgid "Date format:"
 msgstr "Formato data:"
 
@@ -95,10 +107,6 @@ msgstr "%s: RIMUOVERE la voce?"
 msgid "Edit"
 msgstr "Mod"
 
-#, fuzzy
-msgid "Edit Birthday Settings"
-msgstr "Mod. compleanni"
-
 msgid "Edit birthday"
 msgstr "Modificare compleanno"
 
@@ -107,6 +115,9 @@ msgstr "Mod. compleanni"
 
 msgid "Edit the selected entry"
 msgstr "Mod. voce selezionata"
+
+msgid "Enter the name of the person:"
+msgstr "Inserire il nome della persona:"
 
 #, python-format
 msgid ""
@@ -143,6 +154,9 @@ msgstr "Un aiuto per ricordare i compleanni"
 msgid "Import CSV file"
 msgstr "Importare CVS"
 
+msgid "Invalid Location"
+msgstr "Estinazione non valida"
+
 msgid "Invalid date!"
 msgstr "Data non valida!"
 
@@ -164,6 +178,9 @@ msgstr "Prossimo compleanno"
 msgid "Notification time:"
 msgstr "Ora notifica:"
 
+msgid "OK"
+msgstr "Ok"
+
 msgid "Open the extras menu"
 msgstr "Aprire menu extra"
 
@@ -179,9 +196,8 @@ msgstr "Rimuov"
 msgid "Remove the selected entry"
 msgstr "Rimuov. voce selezionata"
 
-#, fuzzy
-msgid "Select a path for the birthday file"
-msgstr "Percorso file compleanni:"
+msgid "Save"
+msgstr "Salvare"
 
 msgid "Show plugin in extensions menu:"
 msgstr "Mostrare nel menu estensioni:"
@@ -204,6 +220,9 @@ msgstr ""
 "Oggi è il compleanno di %s!\n"
 "\n"
 "Data di nascita: %s - Età: %s."
+
+msgid "VirtualKeyBoard"
+msgstr "Tastiera virtuale"
 
 msgid "What do you want to do?"
 msgstr "Cosa si desidera fare?"

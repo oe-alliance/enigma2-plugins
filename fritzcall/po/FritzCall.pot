@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the FritzCall package.
+# This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: FritzCall\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:11+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -119,16 +119,6 @@ msgid ""
 msgstr ""
 
 msgid "Could not get call list; wrong version?"
-msgstr ""
-
-msgid "Could not load barring list: "
-msgstr ""
-
-#, python-format
-msgid "Could not load barring list: %s"
-msgstr ""
-
-msgid "Could not load deflections list: "
 msgstr ""
 
 msgid "Could not load phonebook: "
@@ -381,6 +371,9 @@ msgstr ""
 msgid "Mailbox"
 msgstr ""
 
+msgid "Make it more skin friendly"
+msgstr ""
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "Missed"
 msgstr ""
@@ -417,6 +410,12 @@ msgid "No mailbox active"
 msgstr ""
 
 msgid "No phonebook"
+msgstr ""
+
+msgid "No result from LDIF"
+msgstr ""
+
+msgid "No result from Outlook export"
 msgstr ""
 
 msgid "No result from reverse lookup"
@@ -522,6 +521,12 @@ msgid "Search (case insensitive)"
 msgstr ""
 
 msgid "Search phonebook"
+msgstr ""
+
+msgid "Searching in LDIF..."
+msgstr ""
+
+msgid "Searching in Outlook export..."
 msgstr ""
 
 msgid "Setting..."
@@ -652,6 +657,9 @@ msgid ""
 msgstr ""
 
 msgid "before 05.27"
+msgstr ""
+
+msgid "business"
 msgstr ""
 
 msgid "call diversions active"

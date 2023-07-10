@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EPGSearch v1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:07+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2018-04-08 10:32+0200\n"
 "Last-Translator: Alec <alex1vagyok@gmail.com>\n"
 "Language-Team: alec <alex1vagyok@gmail.com>\n"
@@ -297,9 +297,6 @@ msgstr "kizár"
 
 msgid "include"
 msgstr "tartalmazza"
-
-msgid "partial description"
-msgstr ""
 
 msgid "partial match"
 msgstr "részleges egyezés, illeszkedés"

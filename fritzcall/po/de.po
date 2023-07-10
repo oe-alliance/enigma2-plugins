@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:08+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2019-01-21 08:53+0100\n"
 "Last-Translator: Michael Schmidt <michael@schmidt-schmitten.com>\n"
 "Language-Team: german <de@li.org>\n"
@@ -127,18 +127,6 @@ msgstr ""
 
 msgid "Could not get call list; wrong version?"
 msgstr "Konnte Anrufliste nicht bekommen; falsche Firmware-Version?"
-
-#, fuzzy
-msgid "Could not load barring list: "
-msgstr "Konnte Telefonbuch nicht laden: "
-
-#, fuzzy, python-format
-msgid "Could not load barring list: %s"
-msgstr "\"Telefonbuch konnte nicht geladen werden: %ss"
-
-#, fuzzy
-msgid "Could not load deflections list: "
-msgstr "Konnte Telefonbuch nicht laden: "
 
 msgid "Could not load phonebook: "
 msgstr "Konnte Telefonbuch nicht laden: "
@@ -411,6 +399,9 @@ msgstr "anzuzeigende MSNs (getrennt durch ,)"
 msgid "Mailbox"
 msgstr "Anrufbeantworter"
 
+msgid "Make it more skin friendly"
+msgstr "Mehr Möglichkeiten für Skins"
+
 #. TRANSLATORS: keep it short, this is a button
 msgid "Missed"
 msgstr "Verpasst"
@@ -448,6 +439,12 @@ msgstr "Kein Anrufbeantworter aktiv"
 
 msgid "No phonebook"
 msgstr "Kein Telefonbuch"
+
+msgid "No result from LDIF"
+msgstr "Kein Ergebnis von LDIF"
+
+msgid "No result from Outlook export"
+msgstr "Kein Ergebnis von Outlook-Export"
 
 msgid "No result from reverse lookup"
 msgstr "Kein Ergebnis von Rückwärtssuche"
@@ -559,6 +556,12 @@ msgstr "Suche Zeichenfolge (groß/klein egal)"
 
 msgid "Search phonebook"
 msgstr "Telefonbuchsuche"
+
+msgid "Searching in LDIF..."
+msgstr "Suche in LDIF..."
+
+msgid "Searching in Outlook export..."
+msgstr "Suche in Outlook-Export..."
 
 msgid "Setting..."
 msgstr "Setze..."
@@ -696,6 +699,9 @@ msgstr ""
 
 msgid "before 05.27"
 msgstr "vor 05.27"
+
+msgid "business"
+msgstr ""
 
 msgid "call diversions active"
 msgstr "Rufumleitungen aktiv"

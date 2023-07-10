@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EasyMedia\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:07+0100\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2011-10-12 10:20+0100\n"
 "Last-Translator: R.L. van der Does\n"
 "Language-Team: Rob van der Does\n"
@@ -51,9 +51,6 @@ msgstr "EasyMedia instellingen..."
 msgid "Enabled"
 msgstr "Ingeschakeld"
 
-msgid "FileCommander"
-msgstr ""
-
 msgid "Filebrowser"
 msgstr "Bestandsbrowser"
 
@@ -67,22 +64,8 @@ msgid "InternetRadio"
 msgstr ""
 
 #, fuzzy
-msgid "InternetRadio Plugin is not installed!"
-msgstr "Weer plugin is niet geïnstalleerd!"
-
-#, fuzzy
 msgid "InternetRadio player:"
 msgstr "Internet radio-speler:"
-
-msgid "Kodi"
-msgstr ""
-
-#, fuzzy
-msgid "Kodi is not installed!"
-msgstr "VideoDB is niet geïnstalleerd!"
-
-msgid "Kodi:"
-msgstr ""
 
 msgid "MediaPlayer"
 msgstr "MediaPlayer"
@@ -144,8 +127,8 @@ msgstr "Radio"
 msgid "Radio-mode"
 msgstr "Radio-Mode"
 
-msgid "SHOUTcast"
-msgstr ""
+msgid "SHOUTcast Plugin is not installed!"
+msgstr "SHOUTcast Plugin is niet geïnstalleerd!"
 
 msgid "Select bookmark..."
 msgstr "Markeerpunt kiezen..."

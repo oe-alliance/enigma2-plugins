@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: InfoBarTunerState\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:08+0100\n"
+"POT-Creation-Date: 2022-03-20 09:29+0320\n"
 "PO-Revision-Date: 2022-03-20 11:50+0100\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: \n"
@@ -18,7 +18,8 @@ msgstr ""
 "X-Poedit-Basepath: .../enigma2-plugins/infobartunerstate\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 3.0\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
+"%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/infobartunerstate\n"
 
 msgid ""
@@ -84,6 +85,9 @@ msgstr "Fono skaidrumas"
 
 msgid "Begin"
 msgstr "Pradžia"
+
+msgid "Cancel"
+msgstr "Atšaukti"
 
 msgid "Channel Name"
 msgstr "Kanalo pavadinimas"
@@ -195,6 +199,7 @@ msgid "Nothing running"
 msgstr "Niekas neveikia"
 
 #, fuzzy
+#| msgid "Number of finished records in list"
 msgid "Number of finished recordings in list"
 msgstr "Baigtų įrašų skaičius sąraše"
 
@@ -203,8 +208,12 @@ msgid "Number of pending recordings in list"
 msgstr "Baigtų įrašų skaičius sąraše"
 
 #, fuzzy
+#| msgid "Number of seconds for displaying finished records"
 msgid "Number of seconds for displaying finished recordings"
 msgstr "Kiek sekundžių rodyti baigto įrašo pranešimą"
+
+msgid "OK"
+msgstr "Gerai"
 
 msgid "Only one Graphical Progress field allowed:"
 msgstr "Leidžiamas tik vienas grafinio progreso laukas:"
@@ -227,6 +236,9 @@ msgid "Prepare / Start / End record"
 msgstr ""
 
 msgid "Prepare record"
+msgstr ""
+
+msgid "Really close without saving settings?"
 msgstr ""
 
 msgid "Record"
@@ -325,3 +337,7 @@ msgstr "YYYY.MM.DD HH:MM"
 
 msgid "configuration"
 msgstr "konfigūracija"
+
+#, fuzzy
+msgid "Tuner State"
+msgstr "Imtuvo stovis infojuostoje"

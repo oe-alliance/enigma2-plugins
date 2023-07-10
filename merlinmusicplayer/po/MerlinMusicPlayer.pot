@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the MerlinMusicPlayer package.
+# This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: MerlinMusicPlayer\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:11+0100\n"
+"POT-Creation-Date: 2023-01-14 08:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -119,6 +119,9 @@ msgstr ""
 msgid "Configuration"
 msgstr ""
 
+msgid "Create iDream DB"
+msgstr ""
+
 msgid "Create new playlist"
 msgstr ""
 
@@ -192,6 +195,15 @@ msgstr ""
 msgid "Lyrics"
 msgstr ""
 
+msgid "MERLIN  MUSIC  PLAYER"
+msgstr ""
+
+msgid "MMP  Path Select"
+msgstr ""
+
+msgid "MMP  Setup"
+msgstr ""
+
 msgid "Main Menu"
 msgstr ""
 
@@ -211,6 +223,18 @@ msgid "Merlin Music Player TV"
 msgstr ""
 
 msgid "Merlin music player"
+msgstr ""
+
+msgid "MerlinMusicPlayerScreenSaver"
+msgstr ""
+
+msgid "MerlinMusicPlayerTV"
+msgstr ""
+
+msgid "Music Player Lyrics"
+msgstr ""
+
+msgid "MusicPlayer"
 msgstr ""
 
 msgid "No lyrics found"
@@ -254,6 +278,9 @@ msgstr ""
 msgid "Repeat is not available yet with cue-files!"
 msgstr ""
 
+msgid "Save"
+msgstr ""
+
 msgid "Scan path for music files and add them to database"
 msgstr ""
 
@@ -274,6 +301,9 @@ msgstr ""
 
 #, python-format
 msgid "Search results for \"%s\" in title, artist or album"
+msgstr ""
+
+msgid "Select Path"
 msgstr ""
 
 msgid "Select path"
@@ -297,6 +327,9 @@ msgstr ""
 msgid "Shuffle is not available yet with cue-files!"
 msgstr ""
 
+msgid "Songlist"
+msgstr ""
+
 #, python-format
 msgid "Songs (%d)"
 msgstr ""
@@ -312,6 +345,9 @@ msgstr ""
 
 #, python-format
 msgid "Track %s"
+msgstr ""
+
+msgid "WWW.DREAMBOX-TOOLS.INFO"
 msgstr ""
 
 msgid "Wait for screensaver (in min)"

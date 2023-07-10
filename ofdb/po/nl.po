@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:08+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2022-06-25 18:14+0200\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
@@ -21,8 +21,7 @@ msgstr ""
 msgid "Ambiguous results"
 msgstr "Dubbelzinnige resultaten"
 
-#, fuzzy, python-format
-msgid "Cast: %s"
+msgid "Cast: "
 msgstr "Cast: "
 
 msgid "Channel Selection"

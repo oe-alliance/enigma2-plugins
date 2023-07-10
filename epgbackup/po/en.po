@@ -5,8 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: EPGBackup\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:07+0100\n"
+"POT-Creation-Date: 2014-09-17 06:38+CEST\n"
 "PO-Revision-Date: 2014-08-22 21:11+0100\n"
 "Last-Translator: Joe128 <johnny.u@gmx.at>\n"
 "Language-Team: \n"
@@ -33,7 +32,6 @@ msgstr ""
 msgid "After that times of unsuccesfully boot enigma2, the EPG-File will be deleted."
 msgstr ""
 
-#, python-format
 msgid "Backup \"%s\" successfully created!"
 msgstr ""
 
@@ -43,19 +41,15 @@ msgstr ""
 msgid "Backup and restore EPG Data, including integration of EPGRefresh-plugin"
 msgstr ""
 
-#, python-format
 msgid "Backup-File to restore is older or equal EPG-file: Backup-File: %s; Epg-File: %s"
 msgstr ""
 
-#, python-format
 msgid "Backup-File to restore is smaller or equal EPG-file: Backup-File: %s; Epg-File: %s"
 msgstr ""
 
-#, python-format
 msgid "Backup-file \"%s\" successfully loaded!"
 msgstr ""
 
-#, python-format
 msgid "Backup-file \"%s\" will be loaded on next boot!"
 msgstr ""
 
@@ -71,14 +65,12 @@ msgstr ""
 msgid "Close and save changes"
 msgstr ""
 
-#, python-format
 msgid ""
 "Couldn't create a backup.\n"
 "Reason: %s.\n"
 "Press OK to see the logfile!"
 msgstr ""
 
-#, python-format
 msgid ""
 "Couldn't load backup-file.\n"
 "Reason: %s.\n"
@@ -91,7 +83,6 @@ msgstr ""
 msgid "Display more Options"
 msgstr ""
 
-#, python-format
 msgid "EPG-File is too small for Backup: Size: %s; your setting: %s"
 msgstr ""
 
@@ -104,7 +95,6 @@ msgstr ""
 msgid "EPGBACKUP_NOTIFICATION_DOMAIN"
 msgstr "EPGBackup"
 
-#, python-format
 msgid "EPGBackup Config V %s"
 msgstr ""
 
@@ -150,7 +140,6 @@ msgstr ""
 msgid "Log-directory"
 msgstr ""
 
-#, python-format
 msgid ""
 "Logfile %s:\n"
 "%s"
@@ -188,7 +177,6 @@ msgstr ""
 msgid "No Backupfiles found"
 msgstr ""
 
-#, python-format
 msgid "No EPG-File found at %s!"
 msgstr ""
 
@@ -280,7 +268,6 @@ msgstr ""
 msgid "Start making a Backup"
 msgstr ""
 
-#, python-format
 msgid ""
 "The EPG-Backup was not performed, because there were %d unsuccessfully boot-attempts!\n"
 "The last restored backup-file was \"%s\".\n"
@@ -306,7 +293,6 @@ msgid ""
 "If it is older than the current existing EPG-file and the EPG-file isn't valid then the biggest backup-file will be restored."
 msgstr ""
 
-#, python-format
 msgid "There is no logfile named \"%s\"!"
 msgstr ""
 

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - merlinepgcenter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:08+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -94,6 +94,9 @@ msgstr "Destinazione:"
 
 msgid "Match title:"
 msgstr "Confronto titolo:"
+
+msgid "Merlin EPG Center"
+msgstr ""
 
 msgid "Monday"
 msgstr "Lunedì"

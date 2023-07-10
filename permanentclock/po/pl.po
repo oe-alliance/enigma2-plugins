@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:08+0100\n"
+"POT-Creation-Date: 2020-02-11 20:20+0000\n"
 "PO-Revision-Date: 2022-01-03 16:21+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -19,10 +19,6 @@ msgstr "Aktywuj zegar na ekranie"
 msgid "Change permanent clock position"
 msgstr "Zmień stałą pozycję zegara"
 
-#, fuzzy
-msgid "Choice color clock:"
-msgstr "Pokaż zegar analogowy"
-
 msgid "Color analog clock"
 msgstr "Kolorowy zegar analogowy"
 
@@ -38,24 +34,8 @@ msgstr "Wyłącz klawisz „długie EXIT” pokaż/ukryj"
 msgid "Enable key 'long EXIT' show/hide"
 msgstr "Włącz klawisz „długie EXIT” pokaż/ukryj"
 
-msgid "PLi-transparent"
-msgstr ""
-
 msgid "Permanent Clock"
 msgstr "Zegar na ekranie"
-
-#, fuzzy
-msgid "Permanent Clock Setup"
-msgstr "Zegar na ekranie"
-
-msgid "Save"
-msgstr ""
-
-msgid "Set slider"
-msgstr ""
-
-msgid "Set slider step (1 - 20):"
-msgstr ""
 
 msgid "Show analog clock"
 msgstr "Pokaż zegar analogowy"
@@ -65,30 +45,3 @@ msgstr "Pokaż zegar cyfrowy"
 
 msgid "Shows the clock permanent on the screen"
 msgstr "Pokazuje zegar na stałe na ekranie"
-
-msgid "black-blue"
-msgstr ""
-
-msgid "black-white"
-msgstr ""
-
-msgid "black-yellow"
-msgstr ""
-
-msgid "blue"
-msgstr ""
-
-msgid "large white"
-msgstr ""
-
-msgid "large yellow"
-msgstr ""
-
-msgid "transparent"
-msgstr ""
-
-msgid "white"
-msgstr ""
-
-msgid "yellow"
-msgstr ""

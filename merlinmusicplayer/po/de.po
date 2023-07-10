@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MerlinMusicPlayer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:08+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2014-12-29 12:19+0100\n"
 "Last-Translator: husky <husky@mail.to>\n"
 "Language-Team: OpenATV\n"
@@ -55,10 +55,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "aufgenommen und wird als nächstes abgespielt"
-
-#, python-format
-msgid "%s (%s)"
-msgstr ""
 
 msgid "Activate screensaver"
 msgstr "Bildschirmschoner aktivieren"
@@ -276,6 +272,10 @@ msgstr "Letzten Ordner im Dateibrowser merken"
 
 msgid "Repeat is not available yet with cue-files!"
 msgstr "Wiederholen ist noch nicht verfügbar für Cue-Dateien!"
+
+#, python-format
+msgid "Response -> lyrics for: %s (%s)"
+msgstr "Antwort-> Songtexte für: %s (%s)"
 
 msgid "Scan path for music files and add them to database"
 msgstr "Pfad duchsuchen und Musikdateien zur Datenbank hinzufügen"

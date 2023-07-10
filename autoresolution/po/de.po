@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:07+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2020-03-24 00:58+0100\n"
 "Last-Translator: Pike_Bishop <alfredzngr023@gmail.com>\n"
 "Language-Team: \n"
@@ -98,9 +98,6 @@ msgstr "Beenden"
 msgid "FHD 50/60Hz Progressive Mode"
 msgstr "FHD 50/60Hz Progressiv Modus"
 
-msgid "Force set progressive for stream/video content"
-msgstr ""
-
 msgid "HD Interlace Mode"
 msgstr "HD Interlace Modus"
 
@@ -152,17 +149,11 @@ msgstr "SD 30/60Hz Interlace Modus"
 msgid "SD 30/60Hz Progressive Mode"
 msgstr "SD 30/60Hz Progressiv Modus"
 
-msgid "Separate colorimetry for HDR (set 'auto' HDMI Colorimetry)"
-msgstr ""
-
 msgid "Show 'Manual resolution' in extensions menu"
 msgstr "Zeige 'Manuelle Aufl.' im Erweiterten Menü"
 
 msgid "Show info screen"
 msgstr "Zeige Info im Bild"
-
-msgid "Smart HDR type (set 'auto' HDMI HDR type)"
-msgstr ""
 
 msgid "This resolution is OK?"
 msgstr "Ist diese Auflösung ok ?"
@@ -202,9 +193,6 @@ msgstr "Standard"
 
 msgid "manual"
 msgstr "Manuell"
-
-msgid "no"
-msgstr ""
 
 msgid "off"
 msgstr "Aus"

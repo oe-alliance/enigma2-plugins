@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 IMDb Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:08+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2018-12-05 00:28+0300\n"
 "Last-Translator: mosad - مساعد الجعيد <abo-mishal@hotmail.com>\n"
 "Language-Team: mosad - مساعد الجعيد\n"
@@ -15,22 +15,36 @@ msgstr ""
 "X-Generator: Poedit 2.2\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
+msgid " as "
+msgstr " مثل "
+
+msgid "* = Restart Required"
+msgstr "* = إعادة التشغيل مطلوبة"
+
 msgid "Ambiguous results"
 msgstr "نتائج غامضة"
 
-#, fuzzy
-msgid "Couldn't get event name"
+msgid "Cancel"
+msgstr "إلغاء"
+
+msgid "Cast: "
+msgstr "الممثلين: "
+
+msgid "Channel Selection"
+msgstr "إختيار القناة"
+
+msgid "Content:"
+msgstr "المحتوى:"
+
+msgid "Could't get event name"
 msgstr "لا يمكن الحصول علي اسم الحدث"
 
 msgid "Details"
 msgstr "تفاصيل"
 
-#, fuzzy
-msgid "Downloading Movie Poster..."
+#, python-format
+msgid "Downloading Movie Poster: %s..."
 msgstr "تحميل ملصق الفيلم: %s..."
-
-msgid "E"
-msgstr ""
 
 msgid "Enable this to be able to access IMDb search setup from within the plugin browser."
 msgstr "قم بتمكين هذا لتتمكن من الوصول إلى إعداد بحث قاعدة بيانات معلومات الافلام من داخل متصفح البلج إنز."
@@ -56,7 +70,7 @@ msgstr "خروج من بحث قاعدة بيانات معلومات الأفلا
 msgid "Extra Info"
 msgstr "معلومات إضافية"
 
-msgid "IMDB Exception"
+msgid "Genre:"
 msgstr ""
 
 msgid "IMDb Details parsed"
@@ -78,8 +92,15 @@ msgid "IMDb Re-Download completed"
 msgstr "إكتمال إعادة تحميل قاعدة بيانات معلومات الأفلام"
 
 #, fuzzy
+msgid "IMDb Save - Download completed"
+msgstr "إكتمال إعادة تحميل قاعدة بيانات معلومات الأفلام"
+
+#, fuzzy
 msgid "IMDb Setup"
 msgstr "ضبط قاعدة بيانات معلومات الأفلام"
+
+msgid "IMDb can not get Movie Information to write to .jpg and .txt files!"
+msgstr ""
 
 msgid "IMDb can not get Movie Information to write to .txt file!"
 msgstr ""
@@ -87,27 +108,14 @@ msgstr ""
 msgid "IMDb query failed!"
 msgstr "فشل الاستعلام قاعدة بيانات معلومات الأفلام!"
 
-#, fuzzy
-msgid "IMDb save completed"
-msgstr "إكتمال تحميل قاعدة بيانات معلومات الأفلام"
-
 msgid "IMDb search"
 msgstr "البحث في قاعدة بيانات معلومات الأفلام"
 
 msgid "IMDb setup"
 msgstr "ضبط قاعدة بيانات معلومات الأفلام"
 
-#, python-format
-msgid "Ignoring invalid imdbId: %s"
-msgstr ""
-
-#, fuzzy
-msgid "Include episodes in the results. Takes effect after the next search of IMDb for a show name."
-msgstr "عرض معلومات الحلقة والسنة ومعلومات الممثلين عندما تكون متوفرة. تؤتي ثمارها بعد الحصول على تفاصيل العرض القادم."
-
-#, python-format
-msgid "Local file does not exist: %s"
-msgstr ""
+msgid "Lookup"
+msgstr "المشاهدة"
 
 msgid "Menu"
 msgstr "قائمة"
@@ -125,6 +133,9 @@ msgstr "لا توجد قائمة موجودة للممثلين في قاعدة �
 msgid "No details found."
 msgstr "لم يتم العثور علي تفاصيل."
 
+msgid "OK"
+msgstr ""
+
 msgid "Page down"
 msgstr "يسار الصفحة"
 
@@ -137,6 +148,12 @@ msgstr "تشغيل المقطع المختصر"
 msgid "Please select the matching entry"
 msgstr "من فضلك حدد النتائج المتطابقة"
 
+msgid "Plot Outline"
+msgstr ""
+
+msgid "Production Countries:"
+msgstr "البلدان المنتجة:"
+
 #, fuzzy, python-format
 msgid "Query IMDb: %s"
 msgstr "إعادة الاستعلام عن قاعدة بيانات معلومات الأفلام: %s..."
@@ -145,8 +162,11 @@ msgstr "إعادة الاستعلام عن قاعدة بيانات معلوما�
 msgid "Re-Query IMDb: %s..."
 msgstr "إعادة الاستعلام عن قاعدة بيانات معلومات الأفلام: %s..."
 
-msgid "S"
-msgstr ""
+msgid "Release Date:"
+msgstr "تاريخ الإصدار:"
+
+msgid "Runtime:"
+msgstr "وقت التشغيل:"
 
 msgid "Save current Details as .html for offline use"
 msgstr "حفظ التفاصيل الحالية بتنسيق .html للاستخدام دون اتصال"
@@ -163,14 +183,14 @@ msgstr "بحث عن المقطع المختصر"
 msgid "Search for details from the Internet Movie Database"
 msgstr "البحث عن التفاصيل من قاعده بيانات الأفلام على الإنترنت"
 
+msgid "Select from EPG"
+msgstr "حدد من دليل البرامج الإلكترونية"
+
 msgid "Settings for Internet Movie Database searches"
 msgstr "إعدادات لعمليات البحث في قاعدة بيانات الأفلام على الإنترنت"
 
 msgid "Setup"
 msgstr "الضبط"
-
-msgid "Show a bigger poster"
-msgstr ""
 
 msgid "Show episode and year information for cast when available. Takes effect after the next fetch of show details."
 msgstr "عرض معلومات الحلقة والسنة ومعلومات الممثلين عندما تكون متوفرة. تؤتي ثمارها بعد الحصول على تفاصيل العرض القادم."
@@ -178,13 +198,8 @@ msgstr "عرض معلومات الحلقة والسنة ومعلومات الم�
 msgid "Show episode and year information in cast list"
 msgstr "عرض الحلقة و السنة في قائمة الممثلين"
 
-#, fuzzy
-msgid "Show episodes in title menu"
+msgid "Show full movie or series name in title menu"
 msgstr "عرض أسم الفلم كامل أو المسلسلات في قائمة العناوين"
-
-#, fuzzy
-msgid "Show extra information in title menu"
-msgstr "عرض الحلقة و السنة في قائمة الممثلين"
 
 msgid "Show in movie list"
 msgstr "عرض في قائمة الأفلام"
@@ -198,22 +213,14 @@ msgstr "عرض التفاصيل الأساسية للأفلام والمسلسل
 msgid "Show movie and series extra details"
 msgstr "عرض تفاصيل إضافية للأفلام والمسلسلات"
 
-#, fuzzy
-msgid "Show movie and series synopsis"
-msgstr "عرض التفاصيل الأساسية للأفلام والمسلسلات"
-
 msgid "Show search in plugin browser"
 msgstr "عرض البحث في متصفح البلج إنز"
 
 msgid "Show setup in plugin browser"
 msgstr "عرض الضبط في متصفح البلج إنز"
 
-#, fuzzy
-msgid "Show the type of the title and top cast. Takes effect after the next search of IMDb for a show name."
-msgstr "عرض معلومات الحلقة والسنة ومعلومات الممثلين عندما تكون متوفرة. تؤتي ثمارها بعد الحصول على تفاصيل العرض القادم."
-
-msgid "Synopsis"
-msgstr ""
+msgid "Show the whole IMDb title information for a movie or series, including, for example, alternative names and whether it's a series. Takes effect after the next search of IMDb for a show name."
+msgstr "عرض معلومات عنوان قاعدة بيانات معلومات الأفلام بالكامل لفيلم أو المسلسل ، بما في ذلك ، على سبيل المثال ، أسماء بديلة وما إذا كان مسلسل. يأخذ بعد البحث القادم من قاعدة بيانات معلومات الأفلام أسم المعرض."
 
 msgid "The Internet Movie Database"
 msgstr "قاعده بيانات الفيلم علي الإنترنت"
@@ -224,14 +231,14 @@ msgstr "يتيح لك هذا الخيار إضافة كلمات / عبارات �
 msgid "Title Menu"
 msgstr "قائمه العناوين"
 
+msgid "Unknown category"
+msgstr ""
+
+msgid "User Rating"
+msgstr "تقييم المستخدم"
+
 msgid "Words / phrases to ignore "
 msgstr "الكلمات/العبارات تجاهلها "
 
-msgid "connection error"
-msgstr ""
-
 msgid "no user rating yet"
 msgstr "لا تقييم المستخدم حتى الآن"
-
-msgid "timeout"
-msgstr ""

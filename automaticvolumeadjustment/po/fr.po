@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Automatic Volume Adjustement\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:07+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2014-10-28 18:57+0100\n"
 "Last-Translator: OEA\n"
 "Language-Team: french\n"
@@ -68,9 +68,6 @@ msgstr "Modus"
 
 msgid "OK"
 msgstr "OK"
-
-msgid "Only AC3/DTS(HD)"
-msgstr ""
 
 msgid "Press OK to select a service"
 msgstr "Appuyer sur OK pour choisir un service"

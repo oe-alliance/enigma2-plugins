@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EasyMedia\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:07+0100\n"
+"POT-Creation-Date: 2021-04-16 19:04+0430\n"
 "PO-Revision-Date: 2017-07-10 14:51+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
@@ -51,9 +51,6 @@ msgstr "EasyMedia parametrai ..."
 msgid "Enabled"
 msgstr "Įjungta"
 
-msgid "FileCommander"
-msgstr ""
-
 msgid "Filebrowser"
 msgstr "Failų naršyklė"
 
@@ -67,22 +64,8 @@ msgid "InternetRadio"
 msgstr ""
 
 #, fuzzy
-msgid "InternetRadio Plugin is not installed!"
-msgstr "Orų įskiepis neįdiegtas."
-
-#, fuzzy
 msgid "InternetRadio player:"
 msgstr "NetRadio grotuvas:"
-
-msgid "Kodi"
-msgstr ""
-
-#, fuzzy
-msgid "Kodi is not installed!"
-msgstr "VideoDB neįdiegta!"
-
-msgid "Kodi:"
-msgstr ""
 
 msgid "MediaPlayer"
 msgstr "Mediagrotuvas"
@@ -144,8 +127,8 @@ msgstr "Radijas"
 msgid "Radio-mode"
 msgstr "Radijo-režimas"
 
-msgid "SHOUTcast"
-msgstr ""
+msgid "SHOUTcast Plugin is not installed!"
+msgstr "SHOUTcast įskiepis neįdiegtas!"
 
 msgid "Select bookmark..."
 msgstr "Pasirinkite atžymą..."

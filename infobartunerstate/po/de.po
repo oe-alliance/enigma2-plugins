@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 InfoBarTunerState Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:08+0100\n"
+"POT-Creation-Date: 2022-03-20 19:08+0100\n"
 "PO-Revision-Date: 2022-03-20 19:13+0100\n"
 "Last-Translator: mike99 <mike99@mail.to>\n"
 "Language-Team: none\n"
@@ -15,216 +15,20 @@ msgstr ""
 "X-Generator: Poedit 3.0.1\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
-msgid ""
-"  (C) 2012 by betonme @ IHAD \n"
-"\n"
-msgstr ""
-"  (C) 2012 by betonme @ IHAD \n"
-"\n"
-
-msgid "  If You like this plugin and want to support it,\n"
-msgstr "  Wenn Sie dieses Plugin mögen und spenden möchten\n"
-
-msgid "  SUPPORT: "
-msgstr "  UNTERSTÜTZUNG: "
-
-msgid ""
-"  Thanks a lot ! \n"
-"  PayPal: "
-msgstr ""
-"  Vielen Dank ! \n"
-"  PayPal: "
-
-msgid ""
-"  feel free to donate via PayPal. \n"
-"\n"
-msgstr ""
-"  Sie können gerne über PayPal spenden. \n"
-"\n"
-
-msgid "  or if just want to say ''thanks'',\n"
-msgstr "  oder wenn Sie einfach nur \"Danke\" sagen wollen,\n"
-
-#, python-format
-msgid "%d"
-msgstr "%d"
-
-#, python-format
-msgid "%d %%"
-msgstr "%d %%"
-
-#, python-format
-msgid "%d GB"
-msgstr "%d GB"
-
-#, python-format
-msgid "%d MB"
-msgstr "%d MB"
-
-#, python-format
-msgid "%d Min"
-msgstr "%d Min"
-
-msgid "-"
-msgstr "-"
-
-msgid "-    HH:MM"
-msgstr "-    HH:MM"
-
-msgid "Add Setup to extension menu"
-msgstr "Einstellungen in Erweiterungen aufführen"
-
-msgid "Add Show to extension menu"
-msgstr "InfoBarTunerState in Erweiterungen aufführen"
-
-msgid "Background transparency"
-msgstr "Hintergrundtransparenz"
-
-msgid "Begin"
-msgstr "Anfang"
-
-msgid "Channel Name"
-msgstr "Sendername"
-
-msgid "Channel Number"
-msgstr "Sendernummer"
-
 msgid "Configuration"
 msgstr "Konfiguration"
 
-msgid "DD.MM HH:MM"
-msgstr "DD.MM HH:MM"
-
-msgid "DD.MM. HH:MM"
-msgstr "DD.MM. HH:MM"
-
-msgid "DD.MM.YYYY HH:MM"
-msgstr "DD.MM.YYYY HH:MM"
-
-msgid "Destination"
-msgstr "Ziel"
-
-msgid "Destination / Client"
-msgstr "Ziel / Klient"
-
-msgid "Duration"
-msgstr "Dauer"
+msgid "Usage"
+msgstr "Verwendung"
 
 msgid "Enable InfoBarTunerState"
 msgstr "Aktivieren InfoBarTunerState"
 
-msgid "End"
-msgstr "Ende"
+msgid "Add Show to extension menu"
+msgstr "InfoBarTunerState in Erweiterungen aufführen"
 
-msgid "End record"
-msgstr "End record"
-
-#, python-format
-msgid "Field %d content"
-msgstr "Feld %d Inhalt"
-
-#, python-format
-msgid "Field %d width"
-msgstr "Feld %d Breite"
-
-msgid "File Size"
-msgstr "Dateigröße"
-
-msgid "Finished"
-msgstr "Beendet"
-
-msgid "Free Space"
-msgstr "Frei"
-
-msgid "HH:MM"
-msgstr "HH:MM"
-
-msgid "HH:MM DD.MM"
-msgstr "HH:MM DD.MM"
-
-msgid "HH:MM DD.MM.YYYY"
-msgstr "HH:MM DD.MM.YYYY"
-
-msgid "HH:MM MM/DD"
-msgstr "HH:MM MM/DD"
-
-msgid "HH:MM YYYY/MM/DD"
-msgstr "HH:MM YYYY/MM/DD"
-
-msgid "Horizontal offset left in pixel"
-msgstr "Horizontale Versatz links in Pixel"
-
-msgid "Horizontal offset right in pixel"
-msgstr "Horizontaler Versatz rechts in Pixel"
-
-msgid "InfoBarTunerState"
-msgstr "InfoBarTunerState"
-
-msgid "InfoBarTunerState Setup"
-msgstr "InfoBarTunerState Einstellungen"
-
-msgid "InfoBarTunerState is disabled"
-msgstr "InfoBarTunerState ist deaktiviert"
-
-msgid "Infobar timeout"
-msgstr "InfoBar Timeout"
-
-msgid "List goes up"
-msgstr "Die Liste geht nach oben"
-
-msgid "MM/DD HH:MM"
-msgstr "MM/DD HH:MM"
-
-msgid "MoviePlayer integration"
-msgstr "Medienplayerintegration"
-
-msgid "Name"
-msgstr "Name"
-
-msgid "None"
-msgstr "Keine"
-
-msgid "Nothing running"
-msgstr "Es läuft nichts"
-
-msgid "Number of finished recordings in list"
-msgstr "Anzahl beendeter Aufnahmen in der InfoBar"
-
-msgid "Number of pending recordings in list"
-msgstr "Anzahl der anstehenden Aufnahmen in der InfoBar"
-
-msgid "Number of seconds for displaying finished recordings"
-msgstr "Anzahl von Sekunden für die Anzeige beendeter Aufnahmen"
-
-msgid "Only one Graphical Progress field allowed:"
-msgstr "Nur eine grafische Fortschrittsanzeige erlaubt:"
-
-msgid "Only one Icon field allowed:"
-msgstr "Nur ein Icon erlaubt:"
-
-msgid "Only one Name field allowed:"
-msgstr "Es ist nur ein Namensfeld erlaubt:"
-
-msgid "Overwrite Infobar timeout"
-msgstr "Überschreibe Infobar Timeout"
-
-msgid "Placeholder for Progressbar"
-msgstr "Platzhalter für Progressbar"
-
-msgid "Prepare / Start / End record"
-msgstr "Aufnahme vorbereiten / beginnen / beenden"
-
-msgid "Prepare record"
-msgstr "Aufnahme vorbereiten"
-
-msgid "Record"
-msgstr "Aufnahme"
-
-msgid "Show InfoBarTunerState"
-msgstr "Zeige InfoBarTunerState"
-
-msgid "Show Message when Recording starts"
-msgstr "Zeige Nachricht wenn Aufnahme startet"
+msgid "Add Setup to extension menu"
+msgstr "Einstellungen in Erweiterungen aufführen"
 
 msgid "Show and hide with InfoBar"
 msgstr "Mit InfoBar zeigen und verbergen"
@@ -235,35 +39,8 @@ msgstr "In Programmen zeigen"
 msgid "Show streams"
 msgstr "Zeige Streams"
 
-msgid "Start / End record"
-msgstr "Aufnahme Start / Ende"
-
-msgid "Start record"
-msgstr "Aufnahme starten"
-
-msgid "Stream"
-msgstr "Stream"
-
-msgid "Stream Client"
-msgstr "Stream Klient"
-
-msgid "Stream Client with Port"
-msgstr "Stream Klient auf Port"
-
-msgid "Text padding offset in pixel"
-msgstr "Textfüllung Offset in Pixel"
-
-msgid "Text spacing offset in pixel"
-msgstr "Textabstand Offset in Pixel"
-
-msgid "Time Elapsed"
-msgstr "Zeit vergangen"
-
-msgid "Time Left"
-msgstr "Zeit verbleibend"
-
-msgid "Time Left / Duration"
-msgstr "Zeit verbleibend / Dauer"
+msgid "MoviePlayer integration"
+msgstr "Medienplayerintegration"
 
 msgid "Time format begin"
 msgstr "Zeitformat Anfang"
@@ -271,17 +48,141 @@ msgstr "Zeitformat Anfang"
 msgid "Time format end"
 msgstr "Zeitformat Ende"
 
-msgid "Timer Progress (Graphical)"
-msgstr "Timerfortschritt (grafisch)"
+msgid "Number of pending recordings in list"
+msgstr "Anzahl der anstehenden Aufnahmen in der InfoBar"
 
-msgid "Timer Progress (Text)"
-msgstr "Timerfortschritt (Text)"
+msgid "Number of finished recordings in list"
+msgstr "Anzahl beendeter Aufnahmen in der InfoBar"
 
-msgid "Tuner"
-msgstr "Tuner"
+msgid "Number of seconds for displaying finished recordings"
+msgstr "Anzahl von Sekunden für die Anzeige beendeter Aufnahmen"
 
-msgid "Tuner Type"
-msgstr "Tuner Typ"
+#, python-format
+msgid "Field %d content"
+msgstr "Feld %d Inhalt"
+
+#, python-format
+msgid "Field %d width"
+msgstr "Feld %d Breite"
+
+msgid "Horizontal offset left in pixel"
+msgstr "Horizontale Versatz links in Pixel"
+
+msgid "Horizontal offset right in pixel"
+msgstr "Horizontaler Versatz rechts in Pixel"
+
+msgid "Vertical offset in pixel"
+msgstr "Vertikaler Offset in Pixel"
+
+msgid "Text padding offset in pixel"
+msgstr "Textfüllung Offset in Pixel"
+
+msgid "Text spacing offset in pixel"
+msgstr "Textabstand Offset in Pixel"
+
+msgid "Variable field width"
+msgstr "Feldbreite Variable"
+
+msgid "Placeholder for Progressbar"
+msgstr "Platzhalter für Progressbar"
+
+msgid "List goes up"
+msgstr "Die Liste geht nach oben"
+
+msgid "Background transparency"
+msgstr "Hintergrundtransparenz"
+
+msgid "Overwrite Infobar timeout"
+msgstr "Überschreibe Infobar Timeout"
+
+msgid "Infobar timeout"
+msgstr "InfoBar Timeout"
+
+msgid "Show Message when Recording starts"
+msgstr "Zeige Nachricht wenn Aufnahme startet"
+
+msgid "Only one Name field allowed:"
+msgstr "Es ist nur ein Namensfeld erlaubt:"
+
+msgid "Only one Icon field allowed:"
+msgstr "Nur ein Icon erlaubt:"
+
+msgid "Only one Graphical Progress field allowed:"
+msgstr "Nur eine grafische Fortschrittsanzeige erlaubt:"
+
+msgid "Nothing running"
+msgstr "Es läuft nichts"
+
+msgid "-"
+msgstr "-"
+
+msgid "Record"
+msgstr "Aufnahme"
+
+msgid "Stream"
+msgstr "Stream"
+
+msgid "Finished"
+msgstr "Beendet"
+
+#, python-format
+msgid "%d"
+msgstr "%d"
+
+#, python-format
+msgid "%d Min"
+msgstr "%d Min"
+
+#, python-format
+msgid "%d %%"
+msgstr "%d %%"
+
+#, python-format
+msgid "%d MB"
+msgstr "%d MB"
+
+#, python-format
+msgid "%d GB"
+msgstr "%d GB"
+
+msgid "InfoBarTunerState"
+msgstr "InfoBarTunerState"
+
+msgid "Show InfoBarTunerState"
+msgstr "Zeige InfoBarTunerState"
+
+msgid "InfoBarTunerState Setup"
+msgstr "InfoBarTunerState Einstellungen"
+
+msgid ""
+"  (C) 2012 by betonme @ IHAD \n"
+"\n"
+msgstr ""
+"  (C) 2012 by betonme @ IHAD \n"
+"\n"
+
+msgid "  If You like this plugin and want to support it,\n"
+msgstr "  Wenn Sie dieses Plugin mögen und spenden möchten\n"
+
+msgid "  or if just want to say ''thanks'',\n"
+msgstr "  oder wenn Sie einfach nur \"Danke\" sagen wollen,\n"
+
+msgid ""
+"  feel free to donate via PayPal. \n"
+"\n"
+msgstr ""
+"  Sie können gerne über PayPal spenden. \n"
+"\n"
+
+msgid ""
+"  Thanks a lot ! \n"
+"  PayPal: "
+msgstr ""
+"  Vielen Dank ! \n"
+"  PayPal: "
+
+msgid "  SUPPORT: "
+msgstr "  UNTERSTÜTZUNG: "
 
 msgid "Type (Icon)"
 msgstr "Typ (Icon)"
@@ -289,14 +190,95 @@ msgstr "Typ (Icon)"
 msgid "Type (Text)"
 msgstr "Typ (Text)"
 
-msgid "Usage"
-msgstr "Verwendung"
+msgid "Tuner"
+msgstr "Tuner"
 
-msgid "Variable field width"
-msgstr "Feldbreite Variable"
+msgid "Tuner Type"
+msgstr "Tuner Typ"
 
-msgid "Vertical offset in pixel"
-msgstr "Vertikaler Offset in Pixel"
+msgid "Channel Number"
+msgstr "Sendernummer"
+
+msgid "Channel Name"
+msgstr "Sendername"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "Time Left / Duration"
+msgstr "Zeit verbleibend / Dauer"
+
+msgid "Time Left"
+msgstr "Zeit verbleibend"
+
+msgid "Time Elapsed"
+msgstr "Zeit vergangen"
+
+msgid "Begin"
+msgstr "Anfang"
+
+msgid "End"
+msgstr "Ende"
+
+msgid "Duration"
+msgstr "Dauer"
+
+msgid "Timer Progress (Graphical)"
+msgstr "Timerfortschritt (grafisch)"
+
+msgid "Timer Progress (Text)"
+msgstr "Timerfortschritt (Text)"
+
+msgid "Destination"
+msgstr "Ziel"
+
+msgid "Stream Client"
+msgstr "Stream Klient"
+
+msgid "Stream Client with Port"
+msgstr "Stream Klient auf Port"
+
+msgid "Destination / Client"
+msgstr "Ziel / Klient"
+
+msgid "File Size"
+msgstr "Dateigröße"
+
+msgid "Free Space"
+msgstr "Frei"
+
+msgid "None"
+msgstr "Keine"
+
+msgid "HH:MM"
+msgstr "HH:MM"
+
+msgid "DD.MM HH:MM"
+msgstr "DD.MM HH:MM"
+
+msgid "DD.MM. HH:MM"
+msgstr "DD.MM. HH:MM"
+
+msgid "MM/DD HH:MM"
+msgstr "MM/DD HH:MM"
+
+msgid "DD.MM.YYYY HH:MM"
+msgstr "DD.MM.YYYY HH:MM"
+
+msgid "YYYY/MM/DD HH:MM"
+msgstr "YYYY/MM/DD HH:MM"
+
+msgid "HH:MM DD.MM"
+msgstr "HH:MM DD.MM"
+
+msgid "HH:MM MM/DD"
+msgstr "HH:MM MM/DD"
+
+msgid "HH:MM DD.MM.YYYY"
+msgstr "HH:MM DD.MM.YYYY"
+
+msgid "HH:MM YYYY/MM/DD"
+msgstr "HH:MM YYYY/MM/DD"
 
 msgid "WD DD.MM. HH:MM"
 msgstr "WD DD.MM. HH:MM"
@@ -304,8 +286,38 @@ msgstr "WD DD.MM. HH:MM"
 msgid "WD, DD.MM. HH:MM"
 msgstr "WD, DD.MM. HH:MM"
 
-msgid "YYYY/MM/DD HH:MM"
-msgstr "YYYY/MM/DD HH:MM"
+msgid "-    HH:MM"
+msgstr "-    HH:MM"
+
+msgid "Prepare record"
+msgstr "Aufnahme vorbereiten"
+
+msgid "Start record"
+msgstr "Aufnahme starten"
+
+msgid "End record"
+msgstr "End record"
+
+msgid "Start / End record"
+msgstr "Aufnahme Start / Ende"
+
+msgid "Prepare / Start / End record"
+msgstr "Aufnahme vorbereiten / beginnen / beenden"
 
 msgid "configuration"
 msgstr "Konfiguration"
+
+msgid "InfoBarTunerState is disabled"
+msgstr "InfoBarTunerState ist deaktiviert"
+
+#~ msgid "Cancel"
+#~ msgstr "Abbruch"
+
+#~ msgid "OK"
+#~ msgstr "OK"
+
+#~ msgid "Really close without saving settings?"
+#~ msgstr "Wirklich schließen, ohne die Einstellungen zu speichern?"
+
+#~ msgid "Tuner State"
+#~ msgstr "Tuner Status"

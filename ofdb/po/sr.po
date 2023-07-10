@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 OFDb Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:08+0100\n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
 "PO-Revision-Date: 2009-09-10 20:41+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -22,8 +22,7 @@ msgstr ""
 msgid "Ambiguous results"
 msgstr "Dvosmisleni rezultati"
 
-#, fuzzy, python-format
-msgid "Cast: %s"
+msgid "Cast: "
 msgstr "Uloge: "
 
 msgid "Channel Selection"

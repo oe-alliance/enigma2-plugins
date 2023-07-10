@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - weatherplugin\n"
 "Report-Msgid-Bugs-To: Spaeleus <spaeleus@croci.org>\n"
-"POT-Creation-Date: 2023-05-18 02:09+0100\n"
+"POT-Creation-Date: 2012-10-25 14:49+0100\n"
 "PO-Revision-Date: 2021-12-12 11:34+0000\n"
 "Last-Translator: zeberil <pfrodrigues@sapo.pt>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -35,14 +35,12 @@ msgstr "Apagar"
 msgid "Edit"
 msgstr "Editar"
 
-#, python-format
 msgid "Feels like %s"
 msgstr "Feels like %s"
 
 msgid "Getting weather information..."
 msgstr "Recuperar informação meteorológica em curso..."
 
-#, python-format
 msgid "Humidity: %s %%"
 msgstr "Humidade: %s %%"
 
@@ -62,11 +60,9 @@ msgstr ""
 msgid "OK"
 msgstr "Ok"
 
-#, python-format
 msgid "Observation point: %s"
 msgstr "Ponto de observação: %s"
 
-#, python-format
 msgid "Observation time: %s"
 msgstr "Hora de observação: %s"
 
@@ -98,10 +94,15 @@ msgid "WeatherPlugin: List of Entries"
 msgstr "WeatherPlugin: Lista de Entradas"
 
 msgid "You need to enter a valid city name before you can search for the location code."
-msgstr "Tem que inserir um nome válido de uma cidade antes de procurar o código da localização código da localidade."
+msgstr ""
+"Tem que inserir um nome válido de uma cidade antes de procurar o código da localização "
+"código da localidade."
 
 msgid "imperial system"
 msgstr "Sistema imperial"
 
 msgid "metric system"
 msgstr "Sistema métrico"
+
+msgid "Change,edit,add,delete locations"
+msgstr "Mudar, editar, adicionar e apagar localizações"

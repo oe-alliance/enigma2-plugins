@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 IMDb Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:08+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2020-06-07 16:07+0200\n"
 "Last-Translator: \n"
 "Language-Team: Danskholdet <dk-translation@pm.me>\n"
@@ -15,22 +15,36 @@ msgstr ""
 "X-Generator: Poedit 2.0.6\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
+msgid " as "
+msgstr " som "
+
+msgid "* = Restart Required"
+msgstr "* = Genstart påkrævet"
+
 msgid "Ambiguous results"
 msgstr "Tvetydige resultater"
 
-#, fuzzy
-msgid "Couldn't get event name"
+msgid "Cancel"
+msgstr "Afbryd"
+
+msgid "Cast: "
+msgstr "Rolleliste: "
+
+msgid "Channel Selection"
+msgstr "Kanalvalg"
+
+msgid "Content:"
+msgstr "Indhold:"
+
+msgid "Could't get event name"
 msgstr "Kan ikke få fat i begivenhedsnavn"
 
 msgid "Details"
 msgstr "Detaljer"
 
-#, fuzzy
-msgid "Downloading Movie Poster..."
+#, python-format
+msgid "Downloading Movie Poster: %s..."
 msgstr "Downloading Filmopslag: %s..."
-
-msgid "E"
-msgstr ""
 
 msgid "Enable this to be able to access IMDb search setup from within the plugin browser."
 msgstr "Aktiver dette for at være i stand til tilgå Søg i IMDb opsætningen inde fra Plugin browseren."
@@ -56,7 +70,7 @@ msgstr "Afslut Søg i IMDb"
 msgid "Extra Info"
 msgstr "Ekstra Info"
 
-msgid "IMDB Exception"
+msgid "Genre:"
 msgstr ""
 
 msgid "IMDb Details parsed"
@@ -77,8 +91,15 @@ msgstr "IMDb Plugin"
 msgid "IMDb Re-Download completed"
 msgstr "IMDb Gen-Download fuldført"
 
+#, fuzzy
+msgid "IMDb Save - Download completed"
+msgstr "IMDb Gen-Download fuldført"
+
 msgid "IMDb Setup"
 msgstr "IMDb opsætning"
+
+msgid "IMDb can not get Movie Information to write to .jpg and .txt files!"
+msgstr ""
 
 msgid "IMDb can not get Movie Information to write to .txt file!"
 msgstr ""
@@ -86,27 +107,14 @@ msgstr ""
 msgid "IMDb query failed!"
 msgstr "IMDb forespørgsel mislykkedes!"
 
-#, fuzzy
-msgid "IMDb save completed"
-msgstr "IMDb Download fuldført"
-
 msgid "IMDb search"
 msgstr "Søg i IMDb"
 
 msgid "IMDb setup"
 msgstr "IMDb opsætning"
 
-#, python-format
-msgid "Ignoring invalid imdbId: %s"
-msgstr ""
-
-#, fuzzy
-msgid "Include episodes in the results. Takes effect after the next search of IMDb for a show name."
-msgstr "Vis episode information og årstal for castet når tilgængelig. Får virkning næste gang show-detaljer hentes."
-
-#, python-format
-msgid "Local file does not exist: %s"
-msgstr ""
+msgid "Lookup"
+msgstr "Slå op"
 
 msgid "Menu"
 msgstr "Menu"
@@ -123,6 +131,9 @@ msgstr "Ingen rolleliste fundet i databasen."
 msgid "No details found."
 msgstr "Ingen detaljer fundet."
 
+msgid "OK"
+msgstr ""
+
 msgid "Page down"
 msgstr "Side ned"
 
@@ -135,6 +146,12 @@ msgstr "Afspil forfilm"
 msgid "Please select the matching entry"
 msgstr "Vælg venligst en tilsvarende post"
 
+msgid "Plot Outline"
+msgstr ""
+
+msgid "Production Countries:"
+msgstr "Produktionslande:"
+
 #, fuzzy, python-format
 msgid "Query IMDb: %s"
 msgstr "Spørg IMDb igen: %s..."
@@ -143,8 +160,11 @@ msgstr "Spørg IMDb igen: %s..."
 msgid "Re-Query IMDb: %s..."
 msgstr "Spørg IMDb igen: %s..."
 
-msgid "S"
-msgstr ""
+msgid "Release Date:"
+msgstr "Frigivelsesdato:"
+
+msgid "Runtime:"
+msgstr "Kørselstid:"
 
 msgid "Save current Details as .html for offline use"
 msgstr "Gem nuværende Detaljer som .html til offline brug"
@@ -161,14 +181,14 @@ msgstr "Søg i Forfilm"
 msgid "Search for details from the Internet Movie Database"
 msgstr "Søg efter detaljer i Internet Film Databasen"
 
+msgid "Select from EPG"
+msgstr "Vælg fra EPG"
+
 msgid "Settings for Internet Movie Database searches"
 msgstr "Indstillinger for Internet Film Database søgninger"
 
 msgid "Setup"
 msgstr "Opsætning"
-
-msgid "Show a bigger poster"
-msgstr ""
 
 msgid "Show episode and year information for cast when available. Takes effect after the next fetch of show details."
 msgstr "Vis episode information og årstal for castet når tilgængelig. Får virkning næste gang show-detaljer hentes."
@@ -176,13 +196,8 @@ msgstr "Vis episode information og årstal for castet når tilgængelig. Får vi
 msgid "Show episode and year information in cast list"
 msgstr "Vis episode og årstal i cast-liste"
 
-#, fuzzy
-msgid "Show episodes in title menu"
+msgid "Show full movie or series name in title menu"
 msgstr "Vis fulde film- eller serienavne i titelmenu"
-
-#, fuzzy
-msgid "Show extra information in title menu"
-msgstr "Vis episode og årstal i cast-liste"
 
 msgid "Show in movie list"
 msgstr "Søg i filmliste"
@@ -196,22 +211,14 @@ msgstr "Vis basale detaljer for film og serie"
 msgid "Show movie and series extra details"
 msgstr "Vis ekstra detaljer for  film og serie"
 
-#, fuzzy
-msgid "Show movie and series synopsis"
-msgstr "Vis basale detaljer for film og serie"
-
 msgid "Show search in plugin browser"
 msgstr "Vis søgning i Plugin browser"
 
 msgid "Show setup in plugin browser"
 msgstr "Vis opsætning i Plugin browser"
 
-#, fuzzy
-msgid "Show the type of the title and top cast. Takes effect after the next search of IMDb for a show name."
-msgstr "Vis episode information og årstal for castet når tilgængelig. Får virkning næste gang show-detaljer hentes."
-
-msgid "Synopsis"
-msgstr ""
+msgid "Show the whole IMDb title information for a movie or series, including, for example, alternative names and whether it's a series. Takes effect after the next search of IMDb for a show name."
+msgstr "Vis alt IMDb titelinformation for en film eller serie, inklusiv f.eks. alternative navne og om det er en serie. Får virkning efter næste søgning af IMDb efter et show-navn."
 
 msgid "The Internet Movie Database"
 msgstr "Internet Filmdatabasen"
@@ -222,14 +229,14 @@ msgstr "Denne mulighed tillader dig at tilføje ord/udtryk som IMDb ignorer ved 
 msgid "Title Menu"
 msgstr "Titelmenu"
 
+msgid "Unknown category"
+msgstr ""
+
+msgid "User Rating"
+msgstr "Brugervurdering"
+
 msgid "Words / phrases to ignore "
 msgstr "Ord/udtryk der ignoreres "
 
-msgid "connection error"
-msgstr ""
-
 msgid "no user rating yet"
 msgstr "ingen brugervurdering endnu"
-
-msgid "timeout"
-msgstr ""

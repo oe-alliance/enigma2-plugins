@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AutoTimer-VTI\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:07+0100\n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
 "PO-Revision-Date: 2017-07-10 14:15+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
@@ -56,6 +56,9 @@ msgstr "%Y %B %d."
 msgid "%s: %s at %s"
 msgstr "%s: %s tarp %s"
 
+msgid "Abort this Wizard."
+msgstr "Išjungti šį vedlį."
+
 msgid "Activate VPS"
 msgstr "Aktyvuoti VPS"
 
@@ -95,9 +98,6 @@ msgstr "Visada rašyti konfigūraciją"
 msgid "Amount of recordings left"
 msgstr "Likęs įrašų kiekis"
 
-msgid "Any Day filter refers to the day of the timespan start, even if the timespan crosses midnight."
-msgstr ""
-
 msgid "Any service/recording"
 msgstr "Bet kuris kanalas/įrašymas"
 
@@ -116,8 +116,14 @@ msgstr "Autolaikmačio kontekstinis meniu"
 msgid "AutoTimer Editor"
 msgstr "Autolaikmačio redaktorius"
 
+msgid "AutoTimer FAQ"
+msgstr "Autolaikmačio DUK"
+
 msgid "AutoTimer Filters"
 msgstr "Autolaikmačio filtrai"
+
+msgid "AutoTimer Help"
+msgstr "Autolaikmačio pagalba"
 
 msgid "AutoTimer Services"
 msgstr "Autolaikmačio kanalai"
@@ -202,11 +208,17 @@ msgstr "Uždaryti ir atmesti pakeitimus"
 msgid "Close and save changes"
 msgstr "Uždaryti ir išsaugoti pakeitimus"
 
+msgid "Congratulations"
+msgstr "Sveikiname"
+
 msgid "Control recording completely by service"
 msgstr "Valdykite įrašymą, priklausomai nuo kanalo"
 
 msgid "Couldn't load config file!"
 msgstr "Konfigūracijos failo įkelti nepavyko!"
+
+msgid "Create a new AutoTimer."
+msgstr "Sukurkite naują autolaikmatį."
 
 msgid "Create a new timer using the classic editor"
 msgstr "Sukurkite naują laikmatį, naudodami klasikinį redaktorių"
@@ -313,8 +325,18 @@ msgstr "Vykdyti 'po įvykio' per laikotarpį"
 msgid "Exit"
 msgstr ""
 
+msgid "FAQ"
+msgstr ""
+
 msgid "Filter"
 msgstr "Filtras"
+
+msgid ""
+"Filters are another powerful tool when matching events. An AutoTimer can be restricted to certain Weekdays or only match an event with a text inside eg it's Description.\n"
+"Press BLUE to add a new restriction and YELLOW to remove the selected one."
+msgstr ""
+"Filtrai yra dar vienas galingas įvykių derinimo įrankis. Autolaikmatis gali būti apribotas tam tikromis savaitės dienomis, ar pvz., teksto įvykio aprašyme atitikimu.\n"
+"Spauskite 'MĖLYNĄ' mygtuką, kad pridėti naują apribojimą, ar 'GELTONĄ', kad pašalinti pasirinktą."
 
 msgid "First day to match events. No event that begins before this date will be matched."
 msgstr "Pirma diena, kurią turi atitikti įvykis. Įvykis, kuris prasideda prieš šią datą nebus tinkamas."
@@ -338,11 +360,17 @@ msgstr ""
 msgid "Frequently asked questions"
 msgstr "Dažnai užduodami klausimai"
 
+msgid "Frequently asked questions about the AutoTimer"
+msgstr "Autolaikmačio dažniausiai užduodami klausimai"
+
 msgid "Fri"
 msgstr "Pen"
 
 msgid "Friday"
 msgstr "penktadienis"
+
+msgid "Generic setup"
+msgstr "Bendrasis nustatymas"
 
 msgid "Guess existing timer based on begin/end"
 msgstr "Atspėti esamą laikmatį, remiantis pradžia/pabaiga"
@@ -420,6 +448,15 @@ msgstr "Pridėti autolaikmatį prie žymių"
 msgid "Include AutoTimer name in tags"
 msgstr "Pridėti autolaikmačio pavadinimą, kaip žymę"
 
+msgid ""
+"It's possible to restrict an AutoTimer to certain Services or Bouquets or to deny specific ones.\n"
+"An Event will only match this AutoTimer if it's on a specific and not denied Service (inside a Bouquet).\n"
+"Press BLUE to add a new restriction and YELLOW to remove the selected one."
+msgstr ""
+"Galima apriboti autolaikmatį tam tikrais kanalais, bukietais, ar kažkuriuos pilnai atmesti.\n"
+"Įvykis tik tada atitiks šį autolaikmatį, jei bus specifiniame ir neuždraustame kanale (bukieto ribose).\n"
+"Spauskite 'MĖLYNĄ' mygtuką, kad pridėti naują apribojimą, ar 'GELTONĄ', kad pašalinti pasirinktą."
+
 msgid "Label Timers with season, episode and title, according to the SeriesPlugin settings."
 msgstr "Pažymėti laikmačius sezonu, epizodu ir pavadinimu, pagal SeriesPlugin parametrus."
 
@@ -486,6 +523,9 @@ msgstr "Naujas"
 
 msgid "No"
 msgstr "Ne"
+
+msgid "No, remove them."
+msgstr "Ne, pašalinti."
 
 msgid "None"
 msgstr "Joks"
@@ -567,6 +607,34 @@ msgstr "Peržiūra"
 
 msgid "Preview AutoTimer"
 msgstr "Peržiūrėti autolaikmatį"
+
+#, fuzzy
+msgid "Question: I found a problem with the AutoTimer, can you fix it?/nAnswer: First try the AutoTimer version in a recent (experimental) Image to see if the problem was fixed. Then read the Help again and the upcoming FAQs to make sure that this is actually a problem and not expected behavior./nIf you still think there is something wrong with the AutoTimer, please visit http://www.dream-multimedia-tv.de/board and post your problem there./n/nQ: The plugin only adds timers when leaving the configuration, not automatically. What can I do?/nA: From the Overview press MENU and enter the 'Setup'. In this screen enable 'Poll automatically' and you should be good to go."
+msgstr ""
+"Klausimas: Autolaikmatis neteisingai veikia, ar galite tai sutvarkyti?\n"
+"Atsakymas: Pirmiausiai išbandykite, gal problema jau sutvarkyta naujausioje autolaikmačio versijoje iš paskutinio, eksperimentinio atvaizdo. Po to vėl perskaitykite \"Pagalbą\" ir naujausius DUK, kad įsitikintumėte, ar tai tikrai šio įskiepio problema.\n"
+"Jei vis dar manote, kad kažkas negerai su autolaikmačiu, apsilankykite http://www.dream-multimedia-tv.de/ ir aprašykite savo problemą forume.\n"
+"\n"
+"K: Įskiepis įtraukia laikmačius tik tada, kai uždaromas konfigūravimo langas, bet ne automatiškai. Ką man daryti?\n"
+"A: 'Apžvalgoje' spauskite 'MENU' ir atsidarykite 'Sąranką'. Čia įjunkite 'Užklausti automatiškai' ir viskas veiks."
+
+#, fuzzy
+msgid "Question: My AutoTimer for 'News' does not record the 'Late News'./nAnswer: Check 'Search type' and 'Search strictness' for the given AutoTimer./n/nQ: The show I'm trying to record contains umlauts in its title. AutoTimer does not find it./nA: Check the 'EPG encoding' for the given AutoTimer. For german stations 'UTF-8' should be selected./n/nQ: I seem to be unable to record two subsequent events. There is only a single timer created that spans (part of) both events./nA: From the Overview press MENU and enter the 'Setup'. In this screen disable 'Guess existing timer based on begin/end'."
+msgstr ""
+"Klausimas: Mano 'Naujienos' autolaikmatis neįrašinėja 'Paskutinės naujienos'.\n"
+"Atsakymas: Tikrinkite šio laikmačio 'Paieškos tipas' ir 'Paieškos tikslumas'.\n"
+"\n"
+"K: Mano norimos įrašyti laidos pavadinime yra umliautai ir autolaikmatis jos neranda.\n"
+"A: Tikrinkite šio autolaikmačio 'EPG kodavimą'. Vokietijos stotims reika pasirinkti 'UTF-8'.\n"
+"\n"
+"K: Man nesigauna įrašyti dviejų paskesnių įvykių. Yra sukurtas tik vienas laikmatis, kur persidengia dalis abiejų renginių.\n"
+"A: Apžvalgoje spauskite 'MENU', atverkite 'Sąranką' ir išjunkite 'Atspėti esamą laikmatį, remiantis pradžia/pabaiga'."
+
+#, fuzzy
+msgid "Question: You keep talking about help being provided for each parameter. I'm unable to read it (in part or in full)./nAnswer: Try using the default skin and if it works ask the creator of your regular skin. If it still does not work your image might not provide the actual default skin so contact the creator of your image."
+msgstr ""
+"Klausimas: Jūs kalbate apie pagalbą dėl kiekvieno parametro. Bet aš negaliu jos perskaityti (iš dalies arba visiškai).\n"
+"Atsakymas: Pabandykite perjungti į numatytąją aplinkos temą ir jei tai padės, parašykite apie problemą savos vartotojo aplinkos temos kūrėjui. Jei vis dar negerai, tikriausiai jūsų atvaizdas nepalaiko dabartinės numatytosios temos, todėl parašykite šio atvaizdo kūrėjams."
 
 msgid "Really close without saving settings?"
 msgstr "Ar tikrai užverti be nustatymų išsaugojimo ?"
@@ -738,8 +806,59 @@ msgstr "Žymės"
 msgid "Tags the Timer/Recording will have."
 msgstr "Turės žymas Laikmatis/Įrašas."
 
+msgid ""
+"Thank you for using the wizard. Your new AutoTimer has been added to the List.\n"
+"Please press OK to continue."
+msgstr ""
+"Ačiū, kad naudojatės vedliu. Jūsų naujasis autolaikmatis įtrauktas į sąrašą.\n"
+"Spauskite 'OK', kad tęsti."
+
+msgid "The 'Overview'"
+msgstr "'Apžvalga'"
+
+#, fuzzy
+msgid "The AutoTimer overview is the standard entry point to this plugin./n/nIf AutoTimers are configured you can choose them from a list to change them (OK button on your remote) or remove them (YELLOW button on your remote)./nNew Timers can be added by pressing the BLUE button and the control menu can be opened using the MENU button./n/nWhen leaving the plugin using the GREEN button it will search the EPG for matching events ONCE. To configure a regular search interval of the plugin to search for events open the control menu and enter the plugin setup."
+msgstr ""
+"Autolaikmačio 'Apžvalga' yra standartinis šio įskiepio pradžios taškas.\n"
+"\n"
+"Sukonfigūruotame autolaikmatyje ją galite pasirinkti redagavimui ('OK' mygtukas), arba pašalinimui ('GELTONAS' mygtukas).\n"
+"Naujus laikmačius galite įtraukti, paspaudę 'MĖLYNĄ' mygtuką, valdymo meniu atsidarysite paspaudę 'MENU' mygtuką.\n"
+"\n"
+"Uždarant įskiepį 'ŽALIU' mygtuku, jis VIENĄKART ieškos EPG atitinkančių nustatymą įvykių. Kad nustatyti įskiepio pastovios paieškos intervalą įvykių paieškai, atverkite 'Sąranką', esančią įskiepio valdymo meniu."
+
+msgid ""
+"The Timer will not be added to the List.\n"
+"Please press OK to close this Wizard."
+msgstr ""
+"Laikmatis nebus įtrauktas į sąrašą.\n"
+"Spauskite 'OK', kad uždaryti šį vedlį."
+
+msgid "The Timespan of an AutoTimer is the first 'advanced' attribute. If a timespan is specified an event will only match this AutoTimer if it lies inside of this timespan."
+msgstr "Autolaikmačio laikotarpis yra pirmasis 'išplėstinis' požymis. Jei nurodytas laikotarpis, tai įvykis tik tada atitiks šį autolaikmatį, jei jis yra to laikotarpio ribose."
+
 msgid "The autotimer file (/etc/enigma2/autotimer.xml) is corrupt. A new and empty config was created. A backup of the config can be found here (/etc/enigma2/autotimer.xml_old) "
 msgstr "Autolaikmačio failas (/etc/enigma2/autotimer.xml) sugadintas Sukurtas naujas tuščias konfigūracijos failas. Atsarginę konfigūracijos failo kopiją rasite /etc/enigma2/autotimer.xml_old "
+
+#, fuzzy
+msgid "The control menu hides less frequently used options of the plugin, including the configuration and default settings for new AutoTimers./n/nWhile you can just open the menu and take a look for yourself, let's go through the available options:/n - Help:/n   What you are looking at right now/n - Preview:/n   Simulate EPG search, helps finding errors in your setup./n - Import existing Timer:/n   Create a new AutoTimer based on an existing regular timer./n - Import from EPG:/n   Create an AutoTimer based on an EPG event./n - Setup:/n   Generic configuration of the plugin./n - Edit new timer defaults:/n   Configure default values for new AutoTimers./n - Create a new timer using the wizard/classic editor:/n   Use the non-default editor to create a new AutoTimer."
+msgstr ""
+"Valdymo meniu paslepia rečiau naudojamas įskiepio opcijas, įskaitant ir naujų autolaikmačių konfigūravimą ir numatytuosius nustatymus.\n"
+"\n"
+"Kol galite tiesiog atidaryti meniu ir peržvelgti dėl savęs, aptarkime galimas parinktis:\n"
+" - Pagalba:\n"
+"   Tai, ką jūs matote šiuo metu.\n"
+" - Peržiūra:\n"
+"   Imituoja EPG paiešką, padeda surasti jūsų nustatymų klaidas.\n"
+" - Importuoti esamą laikmatį:\n"
+"   Skirta sukurti naują autolaikmatį esamo laikmačio pagrindu.\n"
+" - Importuoti iš EPG:\n"
+"   Skirta sukurti autolaikmatį EPG įvykio pagrindu.\n"
+" - Sąranka:\n"
+"   Bendrieji įskiepio konfigūracijos nustatymai.\n"
+" - Redaguoti naujo laikmačio numatytąsias reikšmes:\n"
+"   Skirta naujai sukurtų autolaikmačių numatytosioms reikšmėms pakeisti.\n"
+" - Sukurkite naują laikmatį, naudodami vedlį/klasikinį redaktorių:\n"
+"   Susikursite naują autolaikmatį, nenaudodami numatytųjų nustatymų."
 
 msgid "The counter can automatically be reset to the limit at certain intervals."
 msgstr "Skaitiklis gali būti atstatytas iki ribos automatiškai tam tikrais intervalais."
@@ -750,6 +869,13 @@ msgstr "Redaktorius, naudojamas naujiems autolaikmačiams. Tai gali būti arba v
 msgid "The match attribute is mandatory."
 msgstr "Atitikimo požymis privalomas."
 
+#, fuzzy
+msgid "This FAQ is supposed to help everyone unwilling to help themselves by reading all the provided help available, and those who did not find a solution to their problems within the provided documentation./n/nTo make these hints a little easier to read, they are split up on multiple pages. You can go to the next page using the BLUE button on your remote control and back using the YELLOW one. Pressing the RED button or EXIT will close the FAQ."
+msgstr ""
+"Šis DUK skirtas padėti visiems, nevengiantiems padėti sau, skaitant ir gilinantis į visą prieinamą informaciją ir tiems, kurie neranda savų problemų sprendimo pateiktoje dokumentacijoje.\n"
+"\n"
+"Kad padaryti šiuos patarimus patogiau skaitomais, jie padalinti į keletą puslapių. Į kitą puslapį galite pereiti, paspaudę 'MĖLYNĄ' mygtuką, o grįžti atgal su 'GELTONU'. 'RAUDONAS', arba 'EXIT' mygtukai uždarys šį DUK."
+
 msgid ""
 "This allows you to apply other filters.\n"
 "Use the yellow key to edit other filters."
@@ -757,8 +883,25 @@ msgstr ""
 "Tai suteikia galimybę taikyti kitus filtrus.\n"
 "Kitiems filtrams redaguoti naudokite 'GELTONĄ' mygtuką."
 
+#, fuzzy
+msgid "This help screen is supposed to give you a quick look at everything the AutoTimer has to offer./nYou can abort it at any time by pressing the RED or EXIT button on your remote control or bring it up at a later point by selecting it from the control menu using the MENU button from the regular entry point of the plugin (more on that later)./n/n/nBut you really should consider to take the few minutes it takes to read these help pages."
+msgstr ""
+"Šis pagalbos langas skirtas greitai visų autolaikmačio galimybių apžvalgai.\n"
+"Jį bet kada galite uždaryti, paspaudę 'RAUDONĄ', arba 'EXIT' mygtukus, arba atsiverti bet kada vėliau iš valdymo meniu, paspaudę 'MENU' mygtuką įskiepio įprastiniame pradiniame lange (apie tai kiek vėliau).\n"
+"\n"
+"\n"
+"Bet jums tikrai verta skirti keletą minučių ir perskaityti šiuos pagalbos puslapius."
+
 msgid "This is a name you can give the AutoTimer. It will be shown in the Overview and the Preview."
 msgstr "Tai pavadinimas, kurį jūs galite duoti autolaikmačiui. Jis bus rodomas apžvalgoje ir peržiūroje."
+
+#, fuzzy
+msgid "This is mostly a matter of taste./nThe Wizard provides you with a reduced set of options and presents them in smaller sets at a time. It is mostly aimed at users not very experienced with this plugin or the 'expert' level features of enigma2./n/nYou can check out the 'classic' editor by opening an existing timer from the overview and if you prefer this view over the wizard you can change the default editor in the setup dialog."
+msgstr ""
+"Tai daugiausiai skonio reikalas.\n"
+"Vedlys suteikia jums ribotą parinkčių rinkinį ir tuo pat metu, smulkesnėmis dalimis. Jis geriausiai tinka vartotojams, nelabai patyrusiems su šiuo įskiepiu, ar 'išplėstinio' lygio enigma2 funkcijomis.\n"
+"\n"
+"Galite išmėginti 'klasikinį' redaktorių, atsidarę jau esamą laikmatį apžvalgai ir jei nuspręsite, kad šis vaizdas geriau už vedlį, numatytąjį redaktorių galite pakeisti sąrankos dialoge."
 
 #, fuzzy, python-format
 msgid "This is the delay in %s that the AutoTimer will wait after doing a search before searching the EPG again."
@@ -772,6 +915,13 @@ msgstr "Tai yra delsa minutėmis, kiek autolaikmatis lauks po pradinio įjungimo
 
 msgid "This is what will be looked for in event titles. Note that looking for e.g. german umlauts can be tricky as you have to know the encoding the channel uses."
 msgstr "Tai, kas bus ieškoma įvykių pavadinimuose. Žinokite, kad pvz. vokiškų umliautų ieškojimas gali būti sudėtingas, nes turite žinoti kanalo naudojamą rašmenų kodavimą."
+
+#, fuzzy
+msgid "This screen should be pretty straight-forward. If the option name does not give its meaning away there should be an explanation for each of them when you select them. If there is no visible explanation this is most likely a skin issue and please try if the default skin fixes the issue./n/nA lot of effort has been put in making the parameters as easy to understand as possible, so give reading them a try ;-)."
+msgstr ""
+"Šis langas tikrai neturėtų būti sudėtingas. Jei parinkties pavadinimas nepaaiškina jos prasmės, visada yra platesnis kiekvienos jų išaiškinimas, matomas pasirinkus tą parinktį. Jei nematote šių išaiškinimų, tikimiausia to priežastis - jūsų naudojamos aplinkos temos nesuderinamumas. Problemai išspręsti, pasirinkite numatytąją temą.\n"
+"\n"
+"Į tai, kad visi parametrai būtų kuo lengviau suprantami, įdėta daugybė pastangų, todėl tiesiog bandykite įsiskaityti ir suvokti  ;-)"
 
 msgid "This setting controls the behavior when a timer matches a found event."
 msgstr "Šis nustatymas nurodo elgseną, kai laikmatis atitinka surastą įvykį."
@@ -845,6 +995,21 @@ msgstr "Kas savaitę (pirmadienis)"
 msgid "Weekly (Sunday)"
 msgstr "Kas savaitę (sekmadienis)"
 
+msgid "Welcome to the AutoTimer-Plugin"
+msgstr "Sveiki, naudojantys Autolaikmačio įskiepį"
+
+msgid ""
+"Welcome.\n"
+"\n"
+"This Wizard will help you to create a new AutoTimer by providing descriptions for common settings."
+msgstr ""
+"Sveiki. \n"
+"\n"
+"Šis vedlys, paaiškindamas bendriausias nustatymų reikšmes, padės jums sukurti naują autolaikmatį."
+
+msgid "What is this 'control menu' you keep talking about?"
+msgstr "Kas per 'valdymo meniu', apie kurį nuolat kalbama?"
+
 msgid "When supporting \"Fast Scan\" the service type is ignored. You don't need to enable this unless your Image supports \"Fast Scan\" and you are using it."
 msgstr "'Greitoje paieškoje', kanalų tipas yra ignoruojamas. Neverta čia įjungti, nebent šis atvaizdas palaiko 'Greitą paiešką' ir jūs ją naudojate."
 
@@ -867,8 +1032,14 @@ msgstr "Šia parinktimi galite apriboti autolaikmatį iki tam tikro kiekio numat
 msgid "Wizard"
 msgstr "Vedlys"
 
+msgid "Wizard or Classic Editor?"
+msgstr "Vedlys, ar klasikinis redaktorius?"
+
 msgid "Write the config file after every change which the user quits by saving."
 msgstr "Įrašyti konfigūracijos failą po kiekvieno pakeitimo, kuriuos vartotojas užveria išsaugant."
+
+msgid "Yes"
+msgstr "Taip"
 
 msgid "Yes, and delete all timers generated by this autotimer"
 msgstr "Taip, ir pašalinti visus šio autolaikmačio sugeneruotus laikmačius"
@@ -876,8 +1047,25 @@ msgstr "Taip, ir pašalinti visus šio autolaikmačio sugeneruotus laikmačius"
 msgid "Yes, but keep timers generated by this autotimer"
 msgstr "Taip, bet išsaugoti šio autolaikmačio sugeneruotus laikmačius"
 
+msgid "Yes, keep them."
+msgstr "Taip, išsaugoti."
+
 msgid "You can control for how many days in the future timers are added. Set this to 0 to disable this feature."
 msgstr "Galite pasirinkti, kelioms dienoms į priekį pridėti laikmačius. '0' - funkcija išjungta."
+
+msgid ""
+"You can set the basic properties of an AutoTimer here.\n"
+"While 'Name' is just a human-readable name displayed in the Overview, 'Match in title' is what is looked for in the EPG."
+msgstr ""
+"Čia galite nustatyti pagrindines autolaikmačio ypatybes.\n"
+"Jei 'Pavadinimas' tėra įskaitomas pavadinimas, matomas peržiūroje, 'Atitikimas pavadinime' yra tai, kas ieškoma EPG."
+
+msgid ""
+"You did not provide a valid 'Match in title' Attribute for your new AutoTimer.\n"
+"As this is a mandatory Attribute you cannot continue without doing so."
+msgstr ""
+"Savo naujam autolaikmačiui nesuteikėte veiksnaus 'Atitikimo pavadinime' požymio.\n"
+"Kadangi šis požymis yra privalomas, jūs negalite tęsti, kol to nepadarysite."
 
 #, python-format
 msgid ""
@@ -886,6 +1074,29 @@ msgid ""
 msgstr ""
 "Jūs įrašėte \"%s \" tekstą atitikimui.\n"
 "Ar norite pašalinti tarpus?"
+
+#, fuzzy
+msgid "You now know almost everything there is to know about the AutoTimer-Plugin./n/nAs a final hint I can't stress how important it is to take a look at the help texts that are shown in the setup dialogs as they cover the most frequently asked questions. Surprisingly even after the hints were added ;-)."
+msgstr ""
+"Jūs dabar žinote beveik viską, ką galima žinoti apie autolaikmačio įskiepį.\n"
+"\n"
+"Galutinis patarimas, kurį reikia pabrėžti - kaip svarbu yra skaityti į pagalbos tekstus, rodomus sąrankos dialoguose, nes jie aprėpia dažniausiai užduodamus klausimus. Net ir užduotus po šių tekstų įdėjimo ;-)."
+
+msgid ""
+"You successfully configured a new AutoTimer. Do you want to add it to the list?\n"
+"\n"
+"You can go back a step by pressing EXIT on your remote."
+msgstr ""
+"Jūs sėkmingai sukūrėte naują autolaikmatį. Ar norite įtraukti jį į sąrašą?\n"
+"\n"
+"Jūs galite grįžti žingsnį atgal, paspausdami 'EXIT'."
+
+msgid ""
+"Your 'Match in title' Attribute ends with a Whitespace.\n"
+"Please confirm if this was intentional, if not they will be removed."
+msgstr ""
+"Jūsų 'Atitikimo pavadinime' požymis baigiasi tuščiais tarpais.\n"
+"Patvirtinkite, jei tai padarėte specialiai, jei ne - jie bus pašalinti."
 
 #, python-format
 msgid ""

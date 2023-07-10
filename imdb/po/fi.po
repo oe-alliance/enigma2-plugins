@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 02:08+0100\n"
+"POT-Creation-Date: 2018-06-25 08:17+0100\n"
 "PO-Revision-Date: 2022-12-01 12:43+0200\n"
 "Last-Translator: Orlandox\n"
 "Language-Team: Samzan/Kojo/Orlandox\n"
@@ -18,21 +18,36 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.1.1\n"
 
+msgid " as "
+msgstr " roolissa "
+
+msgid "* = Restart Required"
+msgstr "* = Uudelleen käynnistys vaaditaan"
+
 msgid "Ambiguous results"
 msgstr "Useita tuloksia:"
 
-#, fuzzy
-msgid "Couldn't get event name"
+msgid "Cancel"
+msgstr "Peruuta"
+
+msgid "Cast: "
+msgstr "Pääosissa: "
+
+msgid "Channel Selection"
+msgstr "Kanavavalinta"
+
+msgid "Content:"
+msgstr "Sisältö:"
+
+msgid "Could't get event name"
 msgstr "Ei löytynyt tuloksia"
 
 msgid "Details"
 msgstr "Tiedot"
 
+#, python-format
 msgid "Downloading Movie Poster..."
 msgstr "Ladataan elokuvan julistetta..."
-
-msgid "E"
-msgstr ""
 
 msgid "Enable this to be able to access IMDb search setup from within the plugin browser."
 msgstr "Näytä IMDb-hakuasetukset Plugin-lisäosat -valikossa."
@@ -58,8 +73,8 @@ msgstr "Poistu IMDb-hausta"
 msgid "Extra Info"
 msgstr "Lisätiedot"
 
-msgid "IMDB Exception"
-msgstr ""
+msgid "Genre:"
+msgstr "Tyylilaji:"
 
 msgid "IMDb Details parsed"
 msgstr "Elokuvan IMDb tiedot"
@@ -79,8 +94,14 @@ msgstr "IMDb Plugin"
 msgid "IMDb Re-Download completed"
 msgstr "IMDb lataus valmis"
 
+msgid "IMDb Save - Download completed"
+msgstr "IMDb Tallennus - Lataus valmis"
+
 msgid "IMDb Setup"
 msgstr "IMDb asetukset"
+
+msgid "IMDb can not get Movie Information to write to .jpg and .txt files!"
+msgstr "IMDb ei löydä elokuvan tietoja kuva,-ja tekstitiedostoihin!"
 
 msgid "IMDb can not get Movie Information to write to .txt file!"
 msgstr "IMDb ei saa kirjoitettua elokuvan tietoja tekstitiedostoon!"
@@ -88,26 +109,14 @@ msgstr "IMDb ei saa kirjoitettua elokuvan tietoja tekstitiedostoon!"
 msgid "IMDb query failed!"
 msgstr "IMDb haku epäonnistui!"
 
-#, fuzzy
-msgid "IMDb save completed"
-msgstr "IMDb lataus valmis"
-
 msgid "IMDb search"
 msgstr "IMDb-haku"
 
 msgid "IMDb setup"
 msgstr "IMDb-asetukset"
 
-#, python-format
-msgid "Ignoring invalid imdbId: %s"
-msgstr ""
-
-msgid "Include episodes in the results. Takes effect after the next search of IMDb for a show name."
-msgstr "Sisällytä jaksot tuloksiin. Astuu voimaan, kun seuraavan kerran haetaan IMDb:sta ohjelman nimeä."
-
-#, python-format
-msgid "Local file does not exist: %s"
-msgstr ""
+msgid "Lookup"
+msgstr "Tiedot"
 
 msgid "Menu"
 msgstr "Valikko"
@@ -124,6 +133,9 @@ msgstr "Ei löytynyt näyttelijätietoja."
 msgid "No details found."
 msgstr "Ei löytynyt tietoja."
 
+msgid "OK"
+msgstr "OK"
+
 msgid "Page down"
 msgstr "Sivu alas"
 
@@ -136,6 +148,12 @@ msgstr "Näytä traileri"
 msgid "Please select the matching entry"
 msgstr "Valitse sopivin hakutulos"
 
+msgid "Plot Outline"
+msgstr "Juoni lyhyesti"
+
+msgid "Production Countries:"
+msgstr "Tuotantomaat:"
+
 #, python-format
 msgid "Query IMDb: %s"
 msgstr "IMDb haku: %s"
@@ -144,8 +162,11 @@ msgstr "IMDb haku: %s"
 msgid "Re-Query IMDb: %s..."
 msgstr "IMDb haku: %s..."
 
-msgid "S"
-msgstr ""
+msgid "Release Date:"
+msgstr "Julkaisupäivä:"
+
+msgid "Runtime:"
+msgstr "Kesto:"
 
 msgid "Save current Details as .html for offline use"
 msgstr "Tallenna nykyiset Lisätiedot HTML-tiedostona"
@@ -162,14 +183,14 @@ msgstr "Etsi traileria"
 msgid "Search for details from the Internet Movie Database"
 msgstr "Etsi IMDb:stä lisätietoja"
 
+msgid "Select from EPG"
+msgstr "Valitse ohjelmaoppaasta"
+
 msgid "Settings for Internet Movie Database searches"
 msgstr "IMDb-haun asetukset"
 
 msgid "Setup"
 msgstr "Asetukset"
-
-msgid "Show a bigger poster"
-msgstr "Näytä isompi juliste"
 
 msgid "Show episode and year information for cast when available. Takes effect after the next fetch of show details."
 msgstr "Näytä näytteliöiden jakso,- ja vuositiedot, jos ne ovat saatavilla. Tämä astuu voimaan seuraavassa haussa."
@@ -177,11 +198,8 @@ msgstr "Näytä näytteliöiden jakso,- ja vuositiedot, jos ne ovat saatavilla. 
 msgid "Show episode and year information in cast list"
 msgstr "Näytä jakso ja vuosi pääosalistassa"
 
-msgid "Show episodes in title menu"
-msgstr "Näytä jaksot nimivalikossa"
-
-msgid "Show extra information in title menu"
-msgstr "Näytä lisätiedot nimivalikossa"
+msgid "Show full movie or series name in title menu"
+msgstr "Näytä elokuvan tai sarjan koko nimi otsikkovalikossa"
 
 msgid "Show in movie list"
 msgstr "Näytä tallenne-hakemistossa"
@@ -195,20 +213,14 @@ msgstr "Näytä elokuvien ja sarjojen perustiedot"
 msgid "Show movie and series extra details"
 msgstr "Näytä elokuvien ja sarjojen lisätiedot"
 
-msgid "Show movie and series synopsis"
-msgstr "Näytä elokuvan ja sarjan tiivistelmä"
-
 msgid "Show search in plugin browser"
 msgstr "Näytä hakutoiminnot Plugin-lisäosat -valikossa"
 
 msgid "Show setup in plugin browser"
 msgstr "Näytä asetukset Plugin-lisäosat-valikossa"
 
-msgid "Show the type of the title and top cast. Takes effect after the next search of IMDb for a show name."
-msgstr "Näytä otsikon tyyppi ja huippunäyttelijät. Astuu voimaan, kun seuraavan kerran haetaan IMDb:sta ohjelman nimeä."
-
-msgid "Synopsis"
-msgstr ""
+msgid "Show the whole IMDb title information for a movie or series, including, for example, alternative names and whether it's a series. Takes effect after the next search of IMDb for a show name."
+msgstr "Näytä nimikkeen kaikki tiedot, esimerkiksi vaihtoehtoinen nimi, tai onko kyseessa sarja. Astuu voimaan, kun seuraavan kerran haetaan IMDb:sta ohjelman nimeä."
 
 msgid "The Internet Movie Database"
 msgstr "The Internet Movie Database"
@@ -219,14 +231,32 @@ msgstr "Syötä sanoja tai lauseita joita ei oteta huomioon hauissa. Erottele eh
 msgid "Title Menu"
 msgstr "Nimivalikko"
 
+msgid "Unknown category"
+msgstr "Tuntematon kategoria"
+
+msgid "User Rating"
+msgstr "Arvostelut"
+
 msgid "Words / phrases to ignore "
 msgstr "Hylättävät sanat / lauseet "
-
-msgid "connection error"
-msgstr ""
 
 msgid "no user rating yet"
 msgstr "Ei arvostelua vielä"
 
-msgid "timeout"
-msgstr ""
+msgid "Show extra information in title menu"
+msgstr "Näytä lisätiedot nimivalikossa"
+
+msgid "Show the type of the title and top cast. Takes effect after the next search of IMDb for a show name."
+msgstr "Näytä otsikon tyyppi ja huippunäyttelijät. Astuu voimaan, kun seuraavan kerran haetaan IMDb:sta ohjelman nimeä."
+
+msgid "Show episodes in title menu"
+msgstr "Näytä jaksot nimivalikossa"
+
+msgid "Include episodes in the results. Takes effect after the next search of IMDb for a show name."
+msgstr "Sisällytä jaksot tuloksiin. Astuu voimaan, kun seuraavan kerran haetaan IMDb:sta ohjelman nimeä."
+
+msgid "Show a bigger poster"
+msgstr "Näytä isompi juliste"
+
+msgid "Show movie and series synopsis"
+msgstr "Näytä elokuvan ja sarjan tiivistelmä"
