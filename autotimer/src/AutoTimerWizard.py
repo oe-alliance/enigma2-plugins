@@ -1,17 +1,15 @@
 from __future__ import absolute_import
-from __future__ import print_function
 # l10n
 from . import _
 
 # GUI (Screens)
-from Screens.WizardLanguage import WizardLanguage
+from Screens.Wizard import Wizard
 try:
 	from Screens.HelpMenu import ShowRemoteControl
 except ImportError:
 	from Screens.Rc import Rc as ShowRemoteControl
 
-from .AutoTimerEditor import AutoTimerEditorBase, AutoTimerServiceEditor, \
-		AutoTimerFilterEditor
+from .AutoTimerEditor import AutoTimerEditorBase, AutoTimerServiceEditor, AutoTimerFilterEditor
 
 # GUI (Components)
 from Components.ActionMap import ActionMap
@@ -19,14 +17,13 @@ from Components.Pixmap import Pixmap
 from Components.Sources.Boolean import Boolean
 
 # Configuration
-from Components.config import getConfigListEntry, KEY_0, KEY_DELETE, \
-		KEY_BACKSPACE
+from Components.config import getConfigListEntry, KEY_0, KEY_DELETE, KEY_BACKSPACE
 
 # Wizard XML Path
-from Tools import Directories
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
 
-class AutoTimerWizard(WizardLanguage, AutoTimerEditorBase, ShowRemoteControl):
+class AutoTimerWizard(Wizard, AutoTimerEditorBase, ShowRemoteControl):
 	STEP_ID_BASIC = 2
 	STEP_ID_TIMESPAN = 5
 	STEP_ID_SERVICES = 7
@@ -39,8 +36,6 @@ class AutoTimerWizard(WizardLanguage, AutoTimerEditorBase, ShowRemoteControl):
 				<convert type="StringList" />
 			</widget>
 			<widget name="config" position="53,340" zPosition="1" size="440,180" transparent="1" scrollbarMode="showOnDemand" />
-			<ePixmap pixmap="skin_default/buttons/button_red.png" position="40,225" zPosition="0" size="15,16" transparent="1" alphatest="on" />
-			<widget name="languagetext" position="55,225" size="95,30" font="Regular;18" />
 			<widget name="wizard" pixmap="skin_default/wizard.png" position="40,50" zPosition="10" size="110,174" alphatest="on" />
 			<widget name="rc" pixmaps="skin_default/rc0.png,skin_default/rc1.png,skin_default/rc2.png" position="500,50" zPosition="10" size="154,500" alphatest="on" />
 			<widget name="arrowdown" pixmap="skin_default/arrowdown.png" position="-100,-100" zPosition="11" size="37,70" alphatest="on" />
@@ -54,9 +49,9 @@ class AutoTimerWizard(WizardLanguage, AutoTimerEditorBase, ShowRemoteControl):
 		</screen>"""
 
 	def __init__(self, session, newTimer):
-		self.xmlfile = Directories.resolveFilename(Directories.SCOPE_PLUGINS, "Extensions/AutoTimer/autotimerwizard.xml")
+		self.xmlfile = resolveFilename(SCOPE_PLUGINS, "Extensions/AutoTimer/autotimerwizard.xml")
 
-		WizardLanguage.__init__(self, session, showSteps=True, showStepSlider=True)
+		Wizard.__init__(self, session, showSteps=True, showStepSlider=True)
 		AutoTimerEditorBase.__init__(self, newTimer)
 		ShowRemoteControl.__init__(self)
 
@@ -167,7 +162,7 @@ class AutoTimerWizard(WizardLanguage, AutoTimerEditorBase, ShowRemoteControl):
 		if self.currStep == AutoTimerWizard.STEP_ID_BASIC or self.currStep == AutoTimerWizard.STEP_ID_TIMESPAN:
 			self["config"].handleKey(KEY_0 + number)
 		else:
-			WizardLanguage.keyNumberGlobal(self, number)
+			Wizard.keyNumberGlobal(self, number)
 
 	def blue(self):
 		if self.currStep == AutoTimerWizard.STEP_ID_SERVICES:
@@ -207,6 +202,6 @@ class AutoTimerWizard(WizardLanguage, AutoTimerEditorBase, ShowRemoteControl):
 
 	def close(self, *args, **kwargs):
 		if self.doCancel:
-			WizardLanguage.close(self, None)
+			Wizard.close(self, None)
 		else:
-			WizardLanguage.close(self, self.timer)
+			Wizard.close(self, self.timer)
