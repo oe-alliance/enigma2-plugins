@@ -1,6 +1,5 @@
 # -*- coding: UTF-8 -*-
 from Components.ActionMap import ActionMap
-from Components.AVSwitch import AVSwitch
 from Components.Pixmap import Pixmap
 from Components.ScrollLabel import ScrollLabel
 from Components.Sources.List import List
@@ -182,9 +181,8 @@ class netzkino(Screen):
     def get_cover(self, img):
         self.picload = ePicLoad()
         self['cover'].instance.setPixmap(gPixmapPtr())
-        scale = AVSwitch().getFramebufferScale()
         size = self['cover'].instance.size()
-        self.picload.setPara((size.width(), size.height(), scale[0], scale[1], False, 1, '#FF000000'))
+        self.picload.setPara((size.width(), size.height(), 1, 1, False, 1, '#FF000000'))
         if self.picload.startDecode(img, 0, 0, False) == 0:
             ptr = self.picload.getData()
             if ptr is not None:

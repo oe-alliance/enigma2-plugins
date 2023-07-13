@@ -5,7 +5,6 @@ from twisted.internet import reactor
 from six import ensure_binary
 from six.moves.urllib.parse import urlparse, urlunparse
 from enigma import ePicLoad, eTimer, getDesktop
-from Components.AVSwitch import AVSwitch
 from Components.config import config
 from Components.Pixmap import Pixmap
 from Components.ActionMap import ActionMap
@@ -126,8 +125,7 @@ class PictureScreen(Screen):
 
 		self.picload = ePicLoad()
 		self.picload.PictureData.get().append(self.setPictureCB)
-		sc = AVSwitch().getFramebufferScale()
-		self.picload.setPara((size_w, size_h, sc[0], sc[1], False, 1, '#ff000000'))
+		self.picload.setPara((size_w, size_h, 1, 1, False, 1, '#ff000000'))
 		self["pixmap"] = Pixmap()
 
 		self.paused = False

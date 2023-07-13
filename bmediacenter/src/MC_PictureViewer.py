@@ -40,7 +40,7 @@ def getAspect():
 
 
 def getScale():
-	return AVSwitch().getFramebufferScale()
+	return (1, 1)
 
 
 class MC_PictureViewer(Screen, HelpableScreen):

@@ -13,7 +13,6 @@ from Components.Pixmap import Pixmap
 from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
 from Components.Button import Button
-from Components.AVSwitch import AVSwitch
 from Components.MenuList import MenuList
 from Components.Language import language
 from Components.ProgressBar import ProgressBar
@@ -405,8 +404,7 @@ class OFDB(Screen):
 	def OFDBPoster(self, noPoster=False):
 		self["statusbar"].setText(_("OFDb Details parsed"))
 		filename = resolveFilename(SCOPE_PLUGINS, "Extensions/OFDb/no_poster.png") if noPoster else "/tmp/poster.jpg"
-		sc = AVSwitch().getFramebufferScale()
-		self.picload.setPara((self["poster"].instance.size().width(), self["poster"].instance.size().height(), sc[0], sc[1], False, 1, "#00000000"))
+		self.picload.setPara((self["poster"].instance.size().width(), self["poster"].instance.size().height(), 1, 1, False, 1, "#00000000"))
 		self.picload.startDecode(filename)
 
 	def paintPosterPixmapCB(self, picInfo=None):

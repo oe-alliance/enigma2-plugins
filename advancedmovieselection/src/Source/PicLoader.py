@@ -23,16 +23,13 @@
 #    that they, too, receive or can get the source code. And you must show them these terms so they know their rights.
 #
 
-from Components.AVSwitch import AVSwitch
 from enigma import ePicLoad
 
 
 class PicLoader:
     def __init__(self, width, height, sc=None):
         self.picload = ePicLoad()
-        if (not sc):
-            sc = AVSwitch().getFramebufferScale()
-        self.picload.setPara((width, height, sc[0], sc[1], False, 1, "#ff000000"))
+        self.picload.setPara((width, height, 1, 1, False, 1, "#ff000000"))
 
     def load(self, filename):
         self.picload.startDecode(filename, 0, 0, False)

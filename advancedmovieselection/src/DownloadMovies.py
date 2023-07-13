@@ -28,7 +28,6 @@ from Components.Label import Label
 from Components.Button import Button
 from Components.Pixmap import Pixmap
 from Components.ActionMap import ActionMap
-from Components.AVSwitch import AVSwitch
 from threading import Thread
 from enigma import eServiceReference, ePicLoad
 from timer import eTimer
@@ -206,8 +205,7 @@ class DownloadMovies(Screen):
                     downloadCover(cover_url, jpg_file, True)
                 else:
                     jpg_file = resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/AdvancedMovieSelection/images/nocover_de.png")
-                sc = AVSwitch().getFramebufferScale()
-                self.picload.setPara((self["poster"].instance.size().width(), self["poster"].instance.size().height(), sc[0], sc[1], False, 1, "#ff000000"))
+                self.picload.setPara((self["poster"].instance.size().width(), self["poster"].instance.size().height(), 1, 1, False, 1, "#ff000000"))
                 self.picload.startDecode(jpg_file)
             except Exception as e:
                 print(e)

@@ -34,7 +34,6 @@ from Components.MenuList import MenuList
 from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
 from Components.Pixmap import Pixmap
-from Components.AVSwitch import AVSwitch
 from Components.config import config, ConfigSubsection, ConfigText
 from Components.Sources.StaticText import StaticText
 from Tools.Directories import fileExists, pathExists
@@ -858,7 +857,6 @@ class PictureExplorerII(Screen):
 		self.whatDir = whatDir
 		self.picList = []
 		self.Pindex = 0
-		self.EXscale = (AVSwitch().getFramebufferScale())
 		self.EXpicload = ePicLoad()
 		self["Picture"] = Pixmap()
 		self["State"] = Label(_('loading... ' + self.whatPic))
@@ -876,7 +874,7 @@ class PictureExplorerII(Screen):
 
 	def Show_Picture(self):
 		if self.whatPic is not None:
-			self.EXpicload.setPara([self["Picture"].instance.size().width(), self["Picture"].instance.size().height(), self.EXscale[0], self.EXscale[1], 0, 1, "#002C2C39"])
+			self.EXpicload.setPara([self["Picture"].instance.size().width(), self["Picture"].instance.size().height(), 1, 1, 0, 1, "#002C2C39"])
 			self.EXpicload.startDecode(self.whatPic)
 		if self.whatDir is not None:
 			pidx = 0

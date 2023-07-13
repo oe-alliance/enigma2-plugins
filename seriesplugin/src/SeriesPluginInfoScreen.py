@@ -35,7 +35,6 @@ from Screens.Setup import SetupSummary
 from Screens.MessageBox import MessageBox
 from Screens.ChannelSelection import ChannelSelectionBase
 
-from Components.AVSwitch import AVSwitch
 from Components.ActionMap import ActionMap
 from Components.Button import Button
 from Components.Label import Label
@@ -360,7 +359,6 @@ class SeriesPluginInfoScreen(Screen):
 
 	# Handle pixmaps
 	def loadPixmap(self, widget, path):
-		sc = AVSwitch().getFramebufferScale()
 		size = self[widget].instance.size()
 		self.picload = ePicLoad()
 		self.picload_conn = None
@@ -370,7 +368,7 @@ class SeriesPluginInfoScreen(Screen):
 			self.picload_conn = True
 			self.picload.PictureData.get().append(boundFunction(self.loadPixmapCallback, widget))
 		if self.picload and self.picload_conn:
-			self.picload.setPara((size.width(), size.height(), sc[0], sc[1], False, 1, "#00000000"))  # Background dynamically
+			self.picload.setPara((size.width(), size.height(), 1, 1, False, 1, "#00000000"))  # Background dynamically
 			if self.picload.startDecode(path) != 0:
 				del self.picload
 

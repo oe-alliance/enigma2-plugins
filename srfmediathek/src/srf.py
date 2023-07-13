@@ -7,7 +7,6 @@ import re
 import time
 import requests
 from Components.ActionMap import ActionMap
-from Components.AVSwitch import AVSwitch
 from Components.ConfigList import ConfigListScreen
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigDirectory, ConfigSelection, ConfigYesNo, configfile
 from Components.FileList import FileList
@@ -441,9 +440,8 @@ class SRFMediathek(Screen):
     def get_cover(self, img):
         picload = ePicLoad()
         self["cover"].instance.setPixmap(gPixmapPtr())
-        scale = AVSwitch().getFramebufferScale()
         size = self["cover"].instance.size()
-        picload.setPara((size.width(), size.height(), scale[0], scale[1], False, 1, "#FF000000"))
+        picload.setPara((size.width(), size.height(), 1, 1, False, 1, "#FF000000"))
         if picload.startDecode(img, 0, 0, False) == 0:
             ptr = picload.getData()
             if ptr is not None:

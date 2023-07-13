@@ -21,7 +21,6 @@
 #
 from __future__ import print_function
 from __future__ import absolute_import
-from Components.AVSwitch import AVSwitch
 from Components.Pixmap import Pixmap
 from enigma import ePicLoad, gPixmapPtr, eTimer
 from Tools.Directories import fileExists
@@ -57,8 +56,7 @@ class MoviePreview():
         del self.picload
 
     def layoutFinish(self):
-        sc = AVSwitch().getFramebufferScale()
-        self.picload.setPara((self["CoverPreview"].instance.size().width(), self["CoverPreview"].instance.size().height(), sc[0], sc[1], False, 1, "#ff000000"))
+        self.picload.setPara((self["CoverPreview"].instance.size().width(), self["CoverPreview"].instance.size().height(), 1, 1, False, 1, "#ff000000"))
         self.cpX = self["CoverPreview"].instance.position().x()
         self.cpY = self["CoverPreview"].instance.position().y()
         self.cpW = self["CoverPreview"].instance.size().width()

@@ -16,7 +16,6 @@ from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.MenuList import MenuList
 from Components.FileList import EXTENSIONS
-from Components.AVSwitch import AVSwitch
 ## configmenu
 from Components.config import config, ConfigSubsection, ConfigSelection, ConfigText, ConfigYesNo
 ####
@@ -440,10 +439,9 @@ class PictureViewer(Screen):
 			selectedfile = self["menu"].getSelection()[0]
 		else:
 			selectedfile = self["slist"].l.getCurrentSelection()[1]
-		sc = AVSwitch().getFramebufferScale()
 		self.picload = ePicLoad()
 		self.picload.PictureData.get().append(self.updateInfoPanelCB)
-		self.picload.setPara((self["pixmap"].instance.size().width(), self["pixmap"].instance.size().height(), sc[0], sc[1], False, 1, "#FF000000"))
+		self.picload.setPara((self["pixmap"].instance.size().width(), self["pixmap"].instance.size().height(), 1, 1, False, 1, "#FF000000"))
 		self.picload.startDecode(selectedfile)
 
 	def updateInfoPanelCB(self, picInfo=None):

@@ -12,7 +12,6 @@ from os import path as os_path, mkdir as os_mkdir
 from enigma import ePicLoad, eTimer
 from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
-from Components.AVSwitch import AVSwitch
 from Screens.MessageBox import MessageBox
 from Components.config import config
 from Components.ProgressBar import ProgressBar
@@ -270,11 +269,10 @@ class TMDbMain(Screen, HelpableScreen, InfoLoadChoice):
 
     def layoutFinished(self):
         self['tmdblogo'].instance.setPixmapFromFile(resolveFilename(SCOPE_CURRENT_PLUGIN, 'Extensions/AdvancedMovieSelection/images/tmdb.png'))
-        sc = AVSwitch().getFramebufferScale()
         self.picload.setPara((self['cover'].instance.size().width(),
          self['cover'].instance.size().height(),
-         sc[0],
-         sc[1],
+         1,
+         1,
          False,
          1,
          '#ff000000'))

@@ -47,7 +47,6 @@ from enigma import eEPGCache, ePythonMessagePump
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
-from Components.AVSwitch import AVSwitch
 from Components.FileList import FileList
 from Components.SystemInfo import SystemInfo
 from Components.VideoWindow import VideoWindow
@@ -2654,8 +2653,7 @@ class MerlinMediaPixmap(Pixmap):
 
     def onShow(self):
         Pixmap.onShow(self)
-        sc = AVSwitch().getFramebufferScale()
-        self.picload.setPara((self.instance.size().width(), self.instance.size().height(), sc[0], sc[1], False, 1, "#00000000"))
+        self.picload.setPara((self.instance.size().width(), self.instance.size().height(), 1, 1, False, 1, "#00000000"))
 
     def paintCoverArtPixmapCB(self, picInfo=None):
         ptr = self.picload.getData()

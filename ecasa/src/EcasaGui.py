@@ -15,7 +15,6 @@ from .EcasaSetup import EcasaSetup
 
 #pragma mark Components
 from Components.ActionMap import HelpableActionMap
-from Components.AVSwitch import AVSwitch
 from Components.Label import Label
 from Components.Pixmap import Pixmap, MovingPixmap
 from Components.Sources.StaticText import StaticText
@@ -150,8 +149,7 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 		self["highlight"].hide()
 
 		size = self['image0'].instance.size()
-		sc = AVSwitch().getFramebufferScale()
-		self.picload.setPara((size.width(), size.height(), sc[0], sc[1], False, 1, '#ff000000'))
+		self.picload.setPara((size.width(), size.height(), 1, 1, False, 1, '#ff000000'))
 
 	@property
 	def highlighted(self):
@@ -817,8 +815,7 @@ class EcasaPicture(Screen, HelpableScreen, InfoBarNotifications):
 			real_w = size.width()
 			real_h = size.height()
 
-		sc = AVSwitch().getFramebufferScale()
-		self.picload.setPara((real_w, real_h, sc[0], sc[1], False, 1, '#ff000000'))
+		self.picload.setPara((real_w, real_h, 1, 1, False, 1, '#ff000000'))
 
 		# NOTE: no need to start an extra thread for this, twisted is "parallel" enough in this case
 		self.api.downloadPhoto(photo).addCallbacks(self.cbDownload, self.ebDownload)

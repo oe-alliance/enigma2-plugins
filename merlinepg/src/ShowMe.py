@@ -24,7 +24,6 @@
 
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
-from Components.AVSwitch import AVSwitch
 from Components.Pixmap import Pixmap
 from enigma import ePicLoad, getDesktop
 
@@ -50,7 +49,6 @@ class ShowMe(Screen):
 		self.skin = ShowMe.skin
 		Screen.__init__(self, session)
 		self.whatPic = whatPic
-		self.EXscale = (AVSwitch().getFramebufferScale())
 		self.EXpicload = ePicLoad()
 		self["Picture"] = Pixmap()
 		self["actions"] = ActionMap(["WizardActions"],
@@ -63,7 +61,7 @@ class ShowMe(Screen):
 
 	def Show_Picture(self):
 		if self.whatPic is not None:
-			self.EXpicload.setPara([self["Picture"].instance.size().width(), self["Picture"].instance.size().height(), self.EXscale[0], self.EXscale[1], 0, 1, "#121214"])
+			self.EXpicload.setPara([self["Picture"].instance.size().width(), self["Picture"].instance.size().height(), 1, 1, 0, 1, "#121214"])
 			self.EXpicload.startDecode(self.whatPic)
 
 	def DecodeAction(self, pictureInfo=" "):

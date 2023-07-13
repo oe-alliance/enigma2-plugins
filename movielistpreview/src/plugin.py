@@ -4,7 +4,6 @@ from __future__ import print_function
 ## by AliAbdul
 ##
 from Components.ActionMap import ActionMap
-from Components.AVSwitch import AVSwitch
 from Components.config import config, ConfigInteger, ConfigSelection, ConfigSubsection, ConfigYesNo, getConfigListEntry
 
 from Components.ConfigList import ConfigListScreen
@@ -111,11 +110,10 @@ class MovielistPreview():
 				png = movie + "_mp.jpg"
 				if fileExists(png):
 					self.working = True
-					sc = AVSwitch().getFramebufferScale()
 					self.picload = ePicLoad()
 					self.picload.PictureData.get().append(self.showPreviewCallback)
 					size = config.plugins.MovielistPreview.size.value.split("x")
-					self.picload.setPara((int(size[0]), int(size[1]), sc[0], sc[1], False, 1, "#00000000"))
+					self.picload.setPara((int(size[0]), int(size[1]), 1, 1, False, 1, "#00000000"))
 					self.picload.startDecode(png)
 
 	def showPreviewCallback(self, picInfo=None):

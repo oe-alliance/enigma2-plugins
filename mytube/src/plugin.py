@@ -2,7 +2,6 @@ from __future__ import print_function
 from __future__ import absolute_import
 from . import _
 
-from Components.AVSwitch import AVSwitch
 from Components.ActionMap import ActionMap
 from Components.Button import Button
 from Components.ConfigList import ConfigListScreen
@@ -1294,11 +1293,10 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			thumbnailFile = resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/MyTube/plugin.png")
 		else:
 			thumbnailFile = "/tmp/" + str(tubeid) + ".jpg"
-		sc = AVSwitch().getFramebufferScale()
 		if (os_path.exists(thumbnailFile) == True):
 			self.picloads[tubeid] = ePicLoad()
 			self.picloads[tubeid].PictureData.get().append(boundFunction(self.finish_decode, tubeid))
-			self.picloads[tubeid].setPara((self["thumbnail"].instance.size().width(), self["thumbnail"].instance.size().height(), sc[0], sc[1], False, 1, "#00000000"))
+			self.picloads[tubeid].setPara((self["thumbnail"].instance.size().width(), self["thumbnail"].instance.size().height(), 1, 1, False, 1, "#00000000"))
 			self.picloads[tubeid].startDecode(thumbnailFile)
 		else:
 			self.pixmaps_to_load.append(tubeid)
@@ -1495,7 +1493,6 @@ class MyTubeVideoInfoScreen(Screen):
 		self.decodePic(index)
 
 	def decodePic(self, index):
-		sc = AVSwitch().getFramebufferScale()
 		self.picloads[index] = ePicLoad()
 		self.picloads[index].PictureData.get().append(boundFunction(self.finish_decode, index))
 		for entry in self.thumbnails:
@@ -1504,7 +1501,7 @@ class MyTubeVideoInfoScreen(Screen):
 				thumbnailFile = entry[2]
 				if (os_path.exists(thumbnailFile) == True):
 					print("[decodePic] DECODING THUMBNAIL for INDEX:" + str(self.index) + "and file: " + thumbnailFile)
-					self.picloads[index].setPara((self["thumbnail"].instance.size().width(), self["thumbnail"].instance.size().height(), sc[0], sc[1], False, 1, "#00000000"))
+					self.picloads[index].setPara((self["thumbnail"].instance.size().width(), self["thumbnail"].instance.size().height(), 1, 1, False, 1, "#00000000"))
 					self.picloads[index].startDecode(thumbnailFile)
 				else:
 					print("[decodePic] Thumbnail file NOT FOUND !!!-->:", thumbnailFile)

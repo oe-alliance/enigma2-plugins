@@ -19,12 +19,9 @@
 
 
 from Screens.Screen import Screen
-from Screens.MessageBox import MessageBox
 from Plugins.Plugin import PluginDescriptor
 from Components.ActionMap import NumberActionMap
-from Components.AVSwitch import AVSwitch
 from Components.Pixmap import Pixmap
-from Components.MenuList import MenuList
 from Components.Label import Label
 from Tools.Directories import fileExists
 from enigma import ePicLoad, getDesktop, eEnv
@@ -91,7 +88,6 @@ class ORFteletextScreen(Screen):
 		self.seite = config.plugins.ORFteletext.startHZ.value
 		self.strseite = ""
 		self.subseite = config.plugins.ORFteletext.startNZ.value
-		self.EXscale = (AVSwitch().getFramebufferScale())
 		self.EXpicload = ePicLoad()
 		self["Picture"] = Pixmap()
 		self["actions"] = NumberActionMap(["DirectionActions", "ColorActions", "OkCancelActions", "NumberActions", "EPGSelectActions"],
@@ -130,7 +126,7 @@ class ORFteletextScreen(Screen):
 
 	def Show_Picture(self):
 		if self.whatPic is not None:
-			self.EXpicload.setPara([self["Picture"].instance.size().width(), self["Picture"].instance.size().height(), self.EXscale[0], self.EXscale[1], 0, 1, "#121214"])
+			self.EXpicload.setPara([self["Picture"].instance.size().width(), self["Picture"].instance.size().height(), 1, 1, 0, 1, "#121214"])
 			self.EXpicload.startDecode(self.whatPic)
 
 	def DecodeAction(self, pictureInfo=" "):

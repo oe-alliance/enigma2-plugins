@@ -16,7 +16,6 @@ from Components.ActionMap import ActionMap
 from Components.Input import Input
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
 from Components.Pixmap import Pixmap
-from Components.AVSwitch import AVSwitch
 from Screens.Screen import Screen
 from Screens.InputBox import InputBox
 from Tools.BoundFunction import boundFunction
@@ -179,11 +178,10 @@ class TravelWebcamviewer(Screen):
 		print("fetchFinished", x, webcamid)
 		self.pixmaps_to_load.remove(webcamid)
 
-		sc = AVSwitch().getFramebufferScale()
 		if (os_path_exists("/tmp/" + str(webcamid) + "_thumb.jpg") == True):
 			self.picloads[webcamid] = ePicLoad()
 			self.picloads[webcamid].PictureData.get().append(boundFunction(self.finish_decode, webcamid))
-			self.picloads[webcamid].setPara((self["thumbnail"].instance.size().width(), self["thumbnail"].instance.size().height(), sc[0], sc[1], False, 1, "#00000000"))
+			self.picloads[webcamid].setPara((self["thumbnail"].instance.size().width(), self["thumbnail"].instance.size().height(), 1, 1, False, 1, "#00000000"))
 			self.picloads[webcamid].startDecode("/tmp/" + str(webcamid) + "_thumb.jpg")
 		else:
 			print("[decodePic] Thumbnail file NOT FOUND !!!-->:", thumbnailFile)

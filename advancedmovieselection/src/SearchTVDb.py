@@ -15,7 +15,6 @@ from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
 from Tools.Directories import pathExists
 from enigma import ePicLoad
-from Components.AVSwitch import AVSwitch
 from Components.ProgressBar import ProgressBar
 from os import environ
 from Source.ServiceProvider import ServiceCenter
@@ -288,18 +287,17 @@ class TheTVDBMain(Screen, InfoLoadChoice):
 
     def layoutFinished(self):
         self['thetvdb_logo'].instance.setPixmapFromFile(resolveFilename(SCOPE_CURRENT_PLUGIN, 'Extensions/AdvancedMovieSelection/images/thetvdb_logo.png'))
-        sc = AVSwitch().getFramebufferScale()
         self.picload.setPara((self['cover'].instance.size().width(),
          self['cover'].instance.size().height(),
-         sc[0],
-         sc[1],
+         1,
+         1,
          False,
          1,
          '#ff000000'))
         self.picload2.setPara((self['banner'].instance.size().width(),
          self['banner'].instance.size().height(),
-         sc[0],
-         sc[1],
+         1,
+         1,
          False,
          1,
          '#ff000000'))

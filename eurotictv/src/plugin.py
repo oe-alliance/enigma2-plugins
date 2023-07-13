@@ -97,8 +97,6 @@ class EuroticTVPlayer(Screen, InfoBarBase, InfoBarSeek, HelpableScreen):
 		self.setState(self.STATE_DISCONNECTED)
 
 	def __onExecBegin(self):
-		from Components.AVSwitch import AVSwitch
-		sc = AVSwitch().getFramebufferScale()
 		self.picload.setPara((self["poster"].instance.size().width(), self["poster"].instance.size().height(), self.PIP_DIM[0], self.PIP_DIM[1], False, 1, "#00000000"))
 		self.picload.startDecode(resolveFilename(SCOPE_PLUGINS) + "Extensions/eUroticTV/" + "eurotic.jpg")
 

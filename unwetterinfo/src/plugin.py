@@ -15,7 +15,6 @@ from Screens.Console import Console
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.MenuList import MenuList
-from Components.AVSwitch import AVSwitch
 from Components.Pixmap import Pixmap
 from enigma import eTimer, ePicLoad
 from re import sub, search, findall
@@ -48,8 +47,7 @@ class PictureView(Screen):
 		}, -1)
 
 		self.picload = ePicLoad()
-		sc = AVSwitch().getFramebufferScale()
-		self.picload.setPara((550, 550, sc[0], sc[1], 0, 0, '#ff000000'))
+		self.picload.setPara((550, 550, 1, 1, 0, 0, '#ff000000'))
 		self.picload.PictureData.get().append(self.gotPic)
 		self.onLayoutFinish.append(self.getPic)
 
@@ -101,8 +99,7 @@ class HelpPictureView(Screen):
 		self.index = 0
 
 		self.picload = ePicLoad()
-		sc = AVSwitch().getFramebufferScale()
-		self.picload.setPara((690, 225, sc[0], sc[1], 0, 0, '#ff000000'))
+		self.picload.setPara((690, 225, 1, 1, 0, 0, '#ff000000'))
 		self.picload.PictureData.get().append(self.gotPic)
 
 		self.onShown.append(self.getPic)
@@ -253,8 +250,7 @@ class UnwetterMain(Screen):
 		else:
 			picture = pluginpath + "/uwzat.png"
 		picload = self.picload
-		sc = AVSwitch().getFramebufferScale()
-		picload.setPara((90, 40, sc[0], sc[1], 0, 0, '#ff000000'))
+		picload.setPara((90, 40, 1, 1, 0, 0, '#ff000000'))
 		l = picload.PictureData.get()
 		del l[:]
 		l.append(self.gotThumbLand)
@@ -283,8 +279,7 @@ class UnwetterMain(Screen):
 				height = 150
 
 			picload = self.picload
-			sc = AVSwitch().getFramebufferScale()
-			picload.setPara((width, height, sc[0], sc[1], 0, 0, '#ff000000'))
+			picload.setPara((width, height, 1, 1, 0, 0, '#ff000000'))
 			l = picload.PictureData.get()
 			del l[:]
 			l.append(self.gotThumb)

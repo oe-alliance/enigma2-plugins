@@ -1,6 +1,5 @@
 from __future__ import print_function
 # PornCenter by AliAbdul
-from Components.AVSwitch import AVSwitch
 from enigma import ePicLoad, eTimer
 from os import listdir, remove
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
@@ -14,7 +13,7 @@ import six
 
 class Cache:
 	def __init__(self):
-		self.sc = AVSwitch().getFramebufferScale()
+		self.sc = (1, 1)
 		self.idx = -1
 		self.finishCallback = None
 		self.finishCallbackTimer = eTimer()

@@ -33,7 +33,6 @@ from Components.Pixmap import Pixmap
 from Components.Sources.StaticText import StaticText
 from Screens.MessageBox import MessageBox
 from Screens.InfoBar import MoviePlayer as MP_parent
-from Components.AVSwitch import AVSwitch
 from Components.ActionMap import ActionMap
 from Plugins.Plugin import PluginDescriptor
 from Tools.HardwareInfo import HardwareInfo
@@ -236,7 +235,6 @@ class SubsDownloaderApplication(Screen):
 		self["myActionMap_hidded"].setEnabled(False)
 
 		#PICTURE INITIALIZATION
-		self.EXscale = (AVSwitch().getFramebufferScale())
 		#1st picture
 		self.ServerPicture = ePicLoad()
 		self["serverPicture"] = Pixmap()
@@ -436,7 +434,7 @@ class SubsDownloaderApplication(Screen):
 
 	def Show_Server_Picture(self):
 		"""This function is required to init witget ["serverPicture"] and picture class [self.ServerPicture]"""
-		self.ServerPicture.setPara([self["serverPicture"].instance.size().width(), self["serverPicture"].instance.size().height(), self.EXscale[0], self.EXscale[1], 0, 1, "#002C2C39"])
+		self.ServerPicture.setPara([self["serverPicture"].instance.size().width(), self["serverPicture"].instance.size().height(), 1, 1, 0, 1, "#002C2C39"])
 		self.ServerPicture.startDecode(self.serverPicturePath)
 
 	def DecodeServerPictureAction(self, pictureInfo=""):
@@ -458,7 +456,7 @@ class SubsDownloaderApplication(Screen):
 
 	def Show_Commertial_Picture(self):
 		"""This function is required to init witget ["commertialPicture"] and picture class self.CommertialPicture"""
-		self.CommertialPicture.setPara([self["commertialPicture"].instance.size().width(), self["commertialPicture"].instance.size().height(), self.EXscale[0], self.EXscale[1], 0, 1, "#002C2C39"])
+		self.CommertialPicture.setPara([self["commertialPicture"].instance.size().width(), self["commertialPicture"].instance.size().height(), 1, 1, 0, 1, "#002C2C39"])
 		self.CommertialPicture.startDecode(self.CommertialPicturePath)
 
 	def DecodeCommertialPictureAction(self, pictureInfo=""):
@@ -1315,7 +1313,6 @@ class PictureExplorerII(Screen):
 		self.whatDir = whatDir
 		self.picList = []
 		self.Pindex = 0
-		self.EXscale = (AVSwitch().getFramebufferScale())
 		self.EXpicload = ePicLoad()
 		self["Picture"] = Pixmap()
 		self["State"] = Label(_('loading... ' + self.whatPic))
@@ -1333,7 +1330,7 @@ class PictureExplorerII(Screen):
 
 	def Show_Picture(self):
 		if self.whatPic is not None:
-			self.EXpicload.setPara([self["Picture"].instance.size().width(), self["Picture"].instance.size().height(), self.EXscale[0], self.EXscale[1], 0, 1, "#002C2C39"])
+			self.EXpicload.setPara([self["Picture"].instance.size().width(), self["Picture"].instance.size().height(), 1, 1, 0, 1, "#002C2C39"])
 			self.EXpicload.startDecode(self.whatPic)
 		if self.whatDir is not None:
 			pidx = 0
