@@ -3,7 +3,7 @@ from Components.ServiceEventTracker import ServiceEventTracker
 from Components.config import config
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
-from enigma import iPlayableService, eAVSwitch
+from enigma import iPlayableService
 
 # list of mode choices to cycle through
 MODE_CHOICES = ["letterbox", "panscan"]
