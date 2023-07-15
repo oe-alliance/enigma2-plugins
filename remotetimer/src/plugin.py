@@ -65,7 +65,7 @@ def getPage(url, callback, errback):
 		if PY3:
 			base64string = base64string.encode('utf-8')
 		base64string = b64encode(base64string)
-		authheader = {"Authorization": "Basic %s" % base64string}
+		authheader = {b"Authorization": b"Basic %s" % base64string}
 		print("[remotetimer] Headers=%s" % (authheader))
 		try:
 			r = get(url, headers=authheader)
