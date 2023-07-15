@@ -246,7 +246,7 @@ class EPGSearch(EPGSelection):
 		self.currch = None
 		self.sort_type = 0
 		self.eventviewDialog = None
-		self["key_red"] = Button(_("IMDb Search"))
+		self["key_red"] = Button(self.redButtonText() if hasattr(self, "redButtonText") else _("IMDb Search"))
 		self["key_green"] = Button(_("Add Timer"))
 		self.key_green_choice = self.ADD_TIMER
 		self.key_red_choice = self.EMPTY
@@ -266,7 +266,7 @@ class EPGSearch(EPGSelection):
 		self["okactions"].csel = self
 
 		self["colouractions"] = HelpableActionMap(self, "ColorActions", {
-			"red": (self.redButtonPressed, _("IMDB search for highlighted event")),
+			"red": (self.redButtonPressed, self.redButtonDescription() if hasattr(self, "redButtonDescription") else _("IMDB search for highlighted event")),
 			"green": (self.timerAdd, _("Add/remove/edit timer for highlighted event")),
 			"yellow": (self.yellowButtonPressed, _("Enter new search")),
 			"yellowlong": (self.showHistory, _("Show search history")),
