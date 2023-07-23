@@ -81,7 +81,7 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 				iPlayableService.evEOF: self.__evEOF,
 			})
 
-		self["actions"] = ActionMap(["OkCancelActions", "InfobarSeekActions", "MediaPlayerActions", "MovieSelectionActions"],
+		self["actions"] = ActionMap(["OkCancelActions", "InfobarSeekActions", "MediaPlayerActions", "InfoActions"],
 		{
 				"ok": self.ok,
 				"cancel": self.leavePlayer,
@@ -89,7 +89,7 @@ class dreamMediathekPlayer(Screen, InfoBarNotifications):
 				"playpauseService": self.playpauseService,
 				"seekFwd": self.playNextFile,
 				"seekBack": self.playPrevFile,
-				"showEventInfo": self.showVideoInfo,
+				"info": self.showVideoInfo,
 			}, -2)
 
 		self.lastservice = lastservice

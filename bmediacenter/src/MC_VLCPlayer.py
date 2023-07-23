@@ -187,7 +187,7 @@ class MC_VLCMedialist(Screen):
 				iPlayableService.evStopped: self.StopPlayback
 			})
 
-		self["actions"] = ActionMap(["WizardActions", "InfobarActions", "MovieSelectionActions", "MenuActions", "ShortcutActions", "MoviePlayerActions", "EPGSelectActions"],
+		self["actions"] = ActionMap(["WizardActions", "InfobarActions", "MenuActions", "ShortcutActions", "MoviePlayerActions", "EPGSelectActions"],
 			{
 			 "back": self.Exit,
 			 "red": self.JumpToFavs,

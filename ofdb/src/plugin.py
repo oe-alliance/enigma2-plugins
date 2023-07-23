@@ -135,7 +135,7 @@ class OFDB(Screen):
 		self["key_yellow"] = Button("")
 		self["key_blue"] = Button("")
 		self.Page = 0  # 0 = multiple query selection menu page, 1 = movie info page, 2 = extra infos page
-		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "MovieSelectionActions", "DirectionActions"],
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "MenuActions", "InfoActions"],
 		{
 			"ok": self.showDetails,
 			"cancel": self.close,
@@ -145,8 +145,8 @@ class OFDB(Screen):
 			"green": self.showMenu,
 			"yellow": self.showDetails,
 			"blue": self.showExtras,
-			"contextMenu": self.openChannelSelection,
-			"showEventInfo": self.showDetails
+			"menu": self.openChannelSelection,
+			"info": self.showDetails
 		}, -1)
 		self.getOFDB()
 

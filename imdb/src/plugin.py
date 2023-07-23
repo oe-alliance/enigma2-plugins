@@ -282,10 +282,10 @@ class IMDB(Screen, HelpableScreen):
 			"yellow": (self.showDetails, _("Show movie and series basic details")),
 			"blue": (self.showExtras, _("Show movie and series extra details")),
 		}, -1)
-		self["actionsMovieSel"] = HelpableActionMap(self, "MovieSelectionActions",
+		self["actionsMovieSel"] = HelpableActionMap(self, ["MenuActions", "InfoActions"],
 		{
-			"contextMenu": (self.contextMenuPressed, _("Menu")),
-			"showEventInfo": (self.showDetails, _("Show movie and series basic details")),
+			"menu": (self.contextMenuPressed, _("Menu")),
+			"info": (self.showDetails, _("Show movie and series basic details")),
 		}, -1)
 		self["actionsInfobar"] = HelpableActionMap(self, ["InfobarActions", "InfobarTeletextActions"],
 		{

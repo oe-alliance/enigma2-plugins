@@ -39,11 +39,11 @@ class PictureView(Screen):
 
 		self["picture"] = Pixmap()
 
-		self["actions"] = ActionMap(["OkCancelActions", "MovieSelectionActions"],
+		self["actions"] = ActionMap(["OkCancelActions", "InfoActions"],
 		{
 			"cancel": self.exit,
 			"ok": self.exit,
-			"showEventInfo": self.HelpView,
+			"info": self.HelpView,
 		}, -1)
 
 		self.picload = ePicLoad()
@@ -144,7 +144,7 @@ class UnwetterMain(Screen):
 		self["thumbland"] = Pixmap()
 		self["thumbnail"] = Pixmap()
 		self["hmenu"] = MenuList([])
-		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "MovieSelectionActions"],
+		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "MenuActions"],
 		{
 			"ok": self.ok,
 			"up": self.up,
@@ -152,7 +152,7 @@ class UnwetterMain(Screen):
 			"left": self.leftUp,
 			"down": self.down,
 			"cancel": self.exit,
-			"contextMenu": self.switchDeA,
+			"menu": self.switchDeA,
 		}, -1)
 
 		self.loadinginprogress = False

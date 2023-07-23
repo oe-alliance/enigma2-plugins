@@ -394,7 +394,7 @@ class MC_PicView(Screen, InfoBarBase, InfoBarSeek, InfoBarNotifications, Helpabl
 		Screen.__init__(self, session)
 		InfoBarBase.__init__(self)
 		InfoBarSeek.__init__(self, actionmap="MediaPlayerSeekActions")
-		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "MovieSelectionActions"],
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "InfoActions"],
 		{
 			"cancel": self.Exit,
 			"green": self.PlayPause,
@@ -403,7 +403,7 @@ class MC_PicView(Screen, InfoBarBase, InfoBarSeek, InfoBarNotifications, Helpabl
 			"red": self.prevPic,
 			"left": self.prevPic,
 			"right": self.nextPic,
-			"showEventInfo": self.StartExif,
+			"info": self.StartExif,
 		}, -1)
 		self["point"] = Pixmap()
 		self["pic"] = Pixmap()

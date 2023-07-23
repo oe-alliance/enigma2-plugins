@@ -327,7 +327,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			"0": self.toggleScreenVisibility
 		}, -2)
 
-		self["videoactions"] = ActionMap(["ShortcutActions", "WizardActions", "MediaPlayerActions", "MovieSelectionActions", "HelpActions", "DirectionActions"],
+		self["videoactions"] = ActionMap(["ShortcutActions", "WizardActions", "MediaPlayerActions", "InfoActions", "HelpActions", "DirectionActions"],
 		{
 			"ok": self.keyOK,
 			"back": self.leavePlayer,
@@ -337,7 +337,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			"down": self.keyDown,
 			"nextBouquet": self.switchToConfigList,
 			"green": self.keyStdFeed,
-			"showEventInfo": self.showVideoInfo,
+			"info": self.showVideoInfo,
 			"displayHelp": self.handleHelpWindow,
 			"menu": self.handleMenu,
 		}, -2)
@@ -352,7 +352,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			"menu": self.handleMenu
 		}, -2)
 
-		self["historyactions"] = ActionMap(["ShortcutActions", "WizardActions", "MediaPlayerActions", "MovieSelectionActions", "HelpActions", "DirectionActions"],
+		self["historyactions"] = ActionMap(["ShortcutActions", "WizardActions", "MediaPlayerActions", "HelpActions", "DirectionActions"],
 		{
 			"ok": self.keyOK,
 			"back": self.closeHistory,
@@ -1394,7 +1394,7 @@ class MyTubeVideoInfoScreen(Screen):
 		self["published"] = Label()
 		self["views"] = Label()
 		self["tags"] = Label()
-		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions", "MovieSelectionActions", "DirectionActions"],
+		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions", "DirectionActions"],
 		{
 			"back": self.close,
 			"red": self.close,
@@ -1648,7 +1648,7 @@ class MyTubePlayer(Screen, InfoBarNotifications, InfoBarSeek):
 				iPlayableService.evEOF: self.__evEOF,
 			})
 
-		self["actions"] = ActionMap(["OkCancelActions", "InfobarSeekActions", "MediaPlayerActions", "MovieSelectionActions"],
+		self["actions"] = ActionMap(["OkCancelActions", "InfobarSeekActions", "MediaPlayerActions", "InfoActions"],
 		{
 				"ok": self.ok,
 				"cancel": self.leavePlayer,
@@ -1656,7 +1656,7 @@ class MyTubePlayer(Screen, InfoBarNotifications, InfoBarSeek):
 				"playpauseService": self.playpauseService,
 				"seekFwd": self.playNextFile,
 				"seekBack": self.playPrevFile,
-				"showEventInfo": self.showVideoInfo,
+				"info": self.showVideoInfo,
 			}, -2)
 
 		self.lastservice = lastservice
