@@ -1,5 +1,4 @@
 from __future__ import print_function
-import subprocess
 import os
 try:
 	is_libmediainfo = True
@@ -19,7 +18,7 @@ from Plugins.Extensions.SubsDownloader2.SourceCode.NapiProjekt import NapiProjek
 from Plugins.Extensions.SubsDownloader2.SourceCode.Napisy24_pl import Napisy24_pl, GuessFileData_from_FileName, CompareMovie_and_Subtite_FileData
 from Plugins.Extensions.SubsDownloader2.SourceCode.chardet_OutpuyTranslation import chardetOutputTranslation
 from Plugins.Extensions.SubsDownloader2.SourceCode.myFileList import EXTENSIONS, FileList  # *
-from Plugins.Extensions.SubsDownloader2.pluginOnlineContent import IsNewVersionCheck, zlib_link, libmediainfo_link, unrar_link, Subtitle_Downloader_temp_dir, PluginIpkUpdate, InstallDownloadableContent, CommertialBannerDownload  # flagcounetr,
+from Plugins.Extensions.SubsDownloader2.pluginOnlineContent import Subtitle_Downloader_temp_dir, CommertialBannerDownload  # flagcounetr,
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from os import system as os_system
 from os import stat as os_stat
@@ -36,12 +35,12 @@ from Screens.InfoBar import MoviePlayer as MP_parent
 from Components.ActionMap import ActionMap
 from Plugins.Plugin import PluginDescriptor
 from Tools.HardwareInfo import HardwareInfo
-from Tools.Directories import fileExists, pathExists
+from Tools.Directories import fileExists
 from time import strftime as time_strftime
 from time import localtime as time_localtime
 from re import compile as re_compile
 from os import path as os_path, listdir
-from enigma import eConsoleAppContainer, eServiceReference, ePicLoad, getDesktop, eServiceCenter, eTimer
+from enigma import eServiceReference, ePicLoad, getDesktop, eTimer
 
 #import players like Picture player, dvd player, music palyer
 if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/PicturePlayer/plugin.pyo") or os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/PicturePlayer/plugin.pyc"):
@@ -69,7 +68,6 @@ config.plugins.subsdownloader = ConfigSubsection()
 config.plugins.subsdownloader.path = ConfigText(default="/", fixed_size=False)
 config.plugins.subsdownloader.pathSave = ConfigYesNo(default=True)
 config.plugins.subsdownloader.BlueButtonMenu = ConfigYesNo(default=True)
-config.plugins.subsdownloader.AutoUpdate = ConfigYesNo(default=True)
 config.plugins.subsdownloader.pathUseMediaPaternFilter = ConfigYesNo(default=False)
 config.plugins.subsdownloader.extendedMenuConfig = ConfigYesNo(default=False)
 config.plugins.subsdownloader.ItasaUser = ConfigText(default="login", fixed_size=False)
@@ -1121,26 +1119,9 @@ class SubsDownloaderConfig(ConfigListScreen, Screen):
 		        "left": self.keyLeft,
 		        "right": self.keyRight,
 		        "ok": self.saveConfig,
-		        "yellow": self.installLibMediaInfo,
 			"cancel": self.cancelWithoutSave  # add the RC Command "cancel" to close your Screen
 		}, -1)
 		self.createConfigMenu()
-
-	def installLibMediaInfo(self):
-		file = open("/proc/cpuinfo", 'r')
-		cpu_info = file.read()
-		file.close()
-		if (is_libmediainfo == False or os.popen("unrar").readlines() == []) and "mips" in cpu_info:
-			content_to_download = []
-			if is_libmediainfo == False:
-				content_to_download.append(zlib_link)
-				content_to_download.append(libmediainfo_link)
-			if os.popen("unrar").readlines() == []:
-				content_to_download.append(unrar_link)
-			self.libmediaInfoInstallation = InstallDownloadableContent(self.session, content_to_download)
-			self.libmediaInfoInstallation.__install__()
-		else:
-			self.session.open(MessageBox, _("Mipsel architecture not detected.\n\nPlease supplie requires binaries by Yourself."), MessageBox.TYPE_ERROR)
 
 	def keyLeft(self):  # ABY DZIALALA AUTOMATYCZNA ZMIANA LIST WYSWIETLANEJ TA FUNKCJA MUSI SIE TAK NAZYWAC
 		ConfigListScreen.keyLeft(self)
@@ -1173,7 +1154,6 @@ class SubsDownloaderConfig(ConfigListScreen, Screen):
 			self.list.append(getConfigListEntry(_("Use media patern filter in FileList:"), config.plugins.subsdownloader.pathUseMediaPaternFilter))
 			self.list.append(getConfigListEntry(_("Add Subs Downloader to BlueButton menu:"), config.plugins.subsdownloader.BlueButtonMenu))
 			#self.list.append(getConfigListEntry(_("Delete oryginal subtitle after local convertion:"), config.plugins.subsdownloader.del_sub_after_conv))
-			self.list.append(getConfigListEntry(_("Plugin autoupdate:"), config.plugins.subsdownloader.AutoUpdate))
 		self["config"].list = self.list
 		self["config"].setList(self.list)
 
@@ -1567,12 +1547,7 @@ class MusicExplorer(MoviePlayer_4_MusicExploret):
 
 def main(session, **kwargs):
 	print("\n[SubsDownloaderApplication] start\n")
-	if config.plugins.subsdownloader.AutoUpdate.value == True:
-		session.open(SubsDownloaderApplication)
-		autoupdate = IsNewVersionCheck(session)
-		autoupdate.start()
-	else:
-		session.open(SubsDownloaderApplication)
+	session.open(SubsDownloaderApplication)
 
 
 #########################################################################

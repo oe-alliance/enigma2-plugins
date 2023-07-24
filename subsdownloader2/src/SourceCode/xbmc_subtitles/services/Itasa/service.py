@@ -3,11 +3,10 @@
 import os
 import sys
 import re
-import string
 import time
-import urllib
-import urllib2
-import cookielib
+from urllib.parse import urlencode
+from urllib.request import build_opener, install_opener, urlopen, Request, HTTPCookieProcessor
+from http.cookiejar import CookieJar
 from Screens.MessageBox import MessageBox
 from Components.config import config
 #import xbmc, xbmcgui
@@ -45,7 +44,7 @@ subtitle_download_pattern = '<a href=\'http://www\.italiansubs\.net/(index\.php\
 def geturl(url):
     log(__name__, " Getting url: %s" % (url))
     try:
-        response = urllib2.urlopen(url)
+        response = urlopen(url)
         content = response.read()
     except:
         log(__name__, " Failed to get url:%s" % (url))
@@ -66,13 +65,13 @@ def login(username, password):
                 return_value = match.group(1)
                 unique_name = match.group(2)
                 unique_value = match.group(3)
-                login_postdata = urllib.urlencode({'username': username, 'passwd': password, 'remember': 'yes', 'Submit': 'Login', 'remember': 'yes', 'option': 'com_user', 'task': 'login', 'silent': 'true', 'return': return_value, unique_name: unique_value})
-                cj = cookielib.CookieJar()
-                my_opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
+                login_postdata = urlencode({'username': username, 'passwd': password, 'remember': 'yes', 'Submit': 'Login', 'remember': 'yes', 'option': 'com_user', 'task': 'login', 'silent': 'true', 'return': return_value, unique_name: unique_value})
+                cj = CookieJar()
+                my_opener = build_opener(HTTPCookieProcessor(cj))
                 my_opener.addheaders = [('Referer', main_url)]
-                urllib2.install_opener(my_opener)
-                request = urllib2.Request(main_url + 'index.php', login_postdata)
-                response = urllib2.urlopen(request).read()
+                install_opener(my_opener)
+                request = Request(main_url + 'index.php', login_postdata)
+                response = urlopen(request).read()
                 match = re.search('logouticon.png', response, re.IGNORECASE | re.DOTALL)
                 if match:
                     return 1
@@ -89,7 +88,7 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
     msg = ""
     if len(tvshow) > 0:
         italian = 0
-        if (string.lower(lang1) == "italian") or (string.lower(lang2) == "italian") or (string.lower(lang3) == "italian") or (string.lower(lang1) == "all") or (string.lower(lang2) == "all") or (string.lower(lang3) == "all"):
+        if (lang1.lower() == "italian") or (lang2.lower() == "italian") or (lang3.lower() == "italian") or (lang1.lower() == "all") or (lang2.lower() == "all") or (lang3.lower() == "all"):
             #username = __settings__.getSetting( "ITuser" )
             #password = __settings__.getSetting( "ITpass" )
             username = config.plugins.subsdownloader.ItasaUser.value
@@ -198,17 +197,6 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
                             files_after_unrar = list_directory_files(tmp_sub_dir)
                             subs_file = new_file_in_directory(files_before_unrar, files_after_unrar)
                             os.remove(local_tmp_file)
-                        else:
-                            try:
-                                from Components.Opkg import OpkgComponent as IpkgComponent
-                                from Screens.Opkg import Opkg as Ipkg
-                            except ImportError:
-                                from Components.Ipkg import IpkgComponent
-                                from Screens.Ipkg import Ipkg
-
-                            __cmdList = []
-                            __cmdList.append((IpkgComponent.CMD_INSTALL, {"package": 'unrar'}))
-                            screen_session.openWithCallback(__restartMessage__(screen_session, callback=None), Ipkg, cmdList=__cmdList)
 
                 return False, language, subs_file  # standard output
     #log( __name__ ," Login to Itasa failed. Check your username/password at the addon configuration.")
