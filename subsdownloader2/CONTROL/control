@@ -1,2 +1,2 @@
 Description: Subtitle Downloader
-Depends: enigma2, enigma2-plugin-extensions-pictureplayer, enigma2-plugin-extensions-dvdplayer, python-zlib, python-io, python-shell, python-compression, python-html, python-subprocess, python-chardet, python-beautifulsoup4
+Depends: enigma2, unrar, enigma2-plugin-extensions-pictureplayer, enigma2-plugin-extensions-dvdplayer, python-zlib, python-io, python-shell, python-compression, python-html, python-subprocess, python-chardet, python-beautifulsoup4
