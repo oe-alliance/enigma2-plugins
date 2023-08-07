@@ -20,7 +20,7 @@ from __future__ import print_function
 #
 
 from Components.ActionMap import ActionMap
-from Components.config import config, ConfigSubsection, ConfigYesNo, getConfigListEntry,\
+from Components.config import config, ConfigSubsection, ConfigYesNo, getConfigListEntry, \
 	ConfigSlider, ConfigSelection
 from Components.ConfigList import ConfigListScreen
 from Components.Sources.StaticText import StaticText

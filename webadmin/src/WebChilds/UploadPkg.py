@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
-from os import rename as os_rename,\
-	chmod as os_chmod,\
-	write as os_write,\
-	close as os_close,\
+from os import rename as os_rename, \
+	chmod as os_chmod, \
+	write as os_write, \
+	close as os_close, \
 	unlink as os_unlink, \
 	popen as os_popen
 from tempfile import mkstemp

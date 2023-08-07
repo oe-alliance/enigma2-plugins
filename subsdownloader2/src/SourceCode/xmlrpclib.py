@@ -1148,7 +1148,7 @@ def dumps(params, methodname=None, methodresponse=None, encoding=None,
     where necessary.
     """
 
-    assert isinstance(params, TupleType) or isinstance(params, Fault),\
+    assert isinstance(params, TupleType) or isinstance(params, Fault), \
            "argument must be tuple or Fault instance"
 
     if isinstance(params, Fault):
