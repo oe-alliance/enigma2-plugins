@@ -142,7 +142,10 @@ class RemoteTimerScreen(Screen):
 	def _gotPageLoad(self, data):
 		print("[remotetimer] data=%s" % (data))
 		# this call is not optimized so it is easier to extend this functionality to support other kinds of receiver
-		self["timerlist"].timerListWidget.setList(self.generateTimerE2(data))
+		try:  # openatv
+			self["timerlist"].timerListWidget.setList(self.generateTimerE2(data))
+		except:  # all other distros
+			self["timerlist"].l.setList(self.generateTimerE2(data))
 		# info = _("finish fetching remote data...")
 		self["text"].setText("")
 
