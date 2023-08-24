@@ -1,3 +1,4 @@
+# ENIGMA IMPORTS
 from Components.MenuList import MenuList
 from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_WRAP
 from skin import parseFont
@@ -6,7 +7,6 @@ from skin import parseFont
 class RSSFeedList(MenuList):
 	def __init__(self, entries):
 		MenuList.__init__(self, entries, False, content=eListboxPythonMultiContent)
-
 		l = self.l
 		l.setFont(0, gFont("Regular", 22))
 		self.descriptionFont = gFont("Regular", 18)
@@ -44,7 +44,6 @@ class RSSFeedList(MenuList):
 	def moveToEntry(self, feed):
 		if feed is None:
 			return
-
 		idx = 0
 		for x in self.list:
 			if feed.uri == x[0].uri:
@@ -57,7 +56,6 @@ class RSSFeedList(MenuList):
 		width = size.width()
 		descriptionHeight = self.descriptionFont.pointSize + 2
 		titleHeight = size.height() - descriptionHeight
-
 		return [
 			None,
 			(eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width, titleHeight, 0, RT_HALIGN_LEFT | RT_WRAP, feed.title),

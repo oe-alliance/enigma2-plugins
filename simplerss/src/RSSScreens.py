@@ -1,20 +1,23 @@
+# PYTHON IMPORTS
 from __future__ import print_function
 from __future__ import absolute_import
+from twisted.internet.reactor import callInThread
 
-# for localized messages
-from . import _
-
+# ENIGMA IMPORTS
 from enigma import eTimer
-
-from Screens.Screen import Screen
-from Screens.MessageBox import MessageBox
-
 from Components.ActionMap import ActionMap
+from Components.Scanner import openList
 from Components.ScrollLabel import ScrollLabel
 from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText
+from Screens.ChoiceBox import ChoiceBox
+from Screens.Screen import Screen
+from Screens.MessageBox import MessageBox
 
+# PLUGIN IMPORTS
+from . import _  # for localized messages
 from .RSSList import RSSFeedList
+from .RSSSetup import RSSSetup
 
 
 class RSSSummary(Screen):
@@ -55,58 +58,29 @@ class RSSBaseView(Screen):
 
 	def errorPolling(self, errmsg=""):
 		# An error occured while polling
-		self.session.open(
-			MessageBox,
-			_("Error while parsing Feed, this usually means there is something wrong with it."),
-			type=MessageBox.TYPE_ERROR,
-			timeout=3
-		)
-
+		self.session.open(MessageBox, _("Error while parsing Feed, this usually means there is something wrong with it."), type=MessageBox.TYPE_ERROR, timeout=3)
 		# Don't show "we're updating"-dialog any longer
 		if self.pollDialog:
 			self.pollDialog.close()
 			self.pollDialog = None
 
-	def singleUpdate(self, feedid, errback=None):
+	def singleUpdate(self, feedid):
 		# Don't do anything if we have no poller
 		if self.rssPoller is None:
 			return
-
-		# Default errorback to self.errorPolling
-		# If an empty errorback is wanted the Screen needs to provide it
-		if errback is None:
-			errback = self.errorPolling
-
 		# Tell Poller to poll
-		self.rssPoller.singlePoll(feedid, callback=True, errorback=errback)
-
+		callInThread(self.rssPoller.singlePoll, feedid, errorback=self.errorPolling)
 		# Open Dialog and save locally
-		self.pollDialog = self.session.open(
-			MessageBox,
-			_("Update is being done in Background.\nContents will automatically be updated when it's done."),
-			type=MessageBox.TYPE_INFO,
-			timeout=5
-		)
+		self.pollDialog = self.session.open(MessageBox, _("Update is being done in Background.\nContents will automatically be updated when it's done."), type=MessageBox.TYPE_INFO, timeout=3)
 
 	def selectEnclosure(self, enclosures):
 		# Empty List
-		if enclosures is None:
-			return
-
-		from Components.Scanner import openList
-
-		if not openList(self.session, enclosures):
-			self.session.open(
-				MessageBox,
-				_("Found no Enclosure we can display."),
-				type=MessageBox.TYPE_INFO,
-				timeout=5
-			)
+		if enclosures is not None and not openList(self.session, enclosures):
+			self.session.open(MessageBox, _("Found no Enclosure we can display."), type=MessageBox.TYPE_INFO, timeout=3)
 
 
 class RSSEntryView(RSSBaseView):
-	"""Shows a RSS Item"""
-
+	# Shows a RSS Item
 	skin = """
 		<screen position="center,center" size="460,420" title="Simple RSS Reader" >
 			<widget source="info" render="Label" position="0,0" size="460, 20" halign="right" font="Regular; 18" />
@@ -115,22 +89,12 @@ class RSSEntryView(RSSBaseView):
 
 	def __init__(self, session, data, feedTitle="", cur_idx=None, entries=None, parent=None):
 		RSSBaseView.__init__(self, session, None, parent)
-
 		self.data = data
 		self.feedTitle = feedTitle
 		self.cur_idx = cur_idx
 		self.entries = entries
-
-		if cur_idx is not None and entries is not None:
-			self["info"] = StaticText(_("Entry %s/%s") % (cur_idx + 1, entries))
-		else:
-			self["info"] = StaticText()
-
-		if data:
-			self["content"] = ScrollLabel(''.join((data[0], '\n\n', data[2], '\n\n', str(len(data[3])), ' ', _("Enclosures"))))
-		else:
-			self["content"] = ScrollLabel()
-
+		self["info"] = StaticText(_("Entry %s/%s") % (cur_idx + 1, entries)) if cur_idx is not None and entries is not None else StaticText()
+		self["content"] = ScrollLabel(''.join((data[0], '\n\n', data[2], '\n\n', str(len(data[3])), ' ', _("Enclosures")))) if data else ScrollLabel()
 		self["actions"] = ActionMap(["OkCancelActions", "ChannelSelectBaseActions", "ColorActions", "DirectionActions"],
 		{
 			"cancel": self.close,
@@ -143,18 +107,13 @@ class RSSEntryView(RSSBaseView):
 			"nextBouquet": self.nextFeed,
 			"prevBouquet": self.previousFeed,
 		})
-
 		self.onLayoutFinish.append(self.setConditionalTitle)
 
 	def setConditionalTitle(self):
 		self.setTitle(_("Simple RSS Reader: %s") % (self.feedTitle))
 
 	def updateInfo(self):
-		if self.data:
-			text = self.data[0]
-		else:
-			text = _("No such Item.")
-
+		text = self.data[0] if self.data else _("No such Item.")
 		for x in self.onChangedEntry:
 			try:
 				x(text)
@@ -219,14 +178,13 @@ class RSSEntryView(RSSBaseView):
 			self["content"].setText(_("No such Item."))
 		self.updateInfo()
 
-	def selectEnclosure(self):
-		if self.data is not None:
+	def selectEnclosure(self, ignore):
+		if self.data:
 			RSSBaseView.selectEnclosure(self, self.data[3])
 
 
 class RSSFeedView(RSSBaseView):
-	"""Shows a RSS-Feed"""
-
+	#  Shows a RSS-Feed
 	skin = """
 		<screen position="center,center" size="460,415" title="Simple RSS Reader" >
 			<widget source="info" render="Label" position="0,0" size="460,20" halign="right" font="Regular; 18" />
@@ -245,15 +203,12 @@ class RSSFeedView(RSSBaseView):
 
 	def __init__(self, session, feed=None, newItems=False, parent=None, rssPoller=None, id=None):
 		RSSBaseView.__init__(self, session, rssPoller, parent)
-
 		self.feed = feed
 		self.newItems = newItems
 		self.id = id
-
-		self["content"] = List(self.feed.history)
+		self["content"] = List(feed.history) if feed else List([])
 		self["summary"] = StaticText()
 		self["info"] = StaticText()
-
 		if not newItems:
 			self["actions"] = ActionMap(["OkCancelActions", "ChannelSelectBaseActions", "MenuActions", "ColorActions"],
 			{
@@ -266,18 +221,15 @@ class RSSFeedView(RSSBaseView):
 			})
 			self.onLayoutFinish.append(self.__show)
 			self.onClose.append(self.__close)
-
 			self.timer = None
 		else:
 			self["actions"] = ActionMap(["OkCancelActions"],
 			{
 				"cancel": self.close,
 			})
-
 			self.timer = eTimer()
 			self.timer.callback.append(self.timerTick)
 			self.onExecBegin.append(self.startTimer)
-
 		self["content"].onSelectionChanged.append(self.updateInfo)
 		self.onLayoutFinish.extend((
 			self.updateInfo,
@@ -285,11 +237,12 @@ class RSSFeedView(RSSBaseView):
 		))
 
 	def startTimer(self):
-		self.timer.startLongTimer(5)
+		if self.timer:
+			self.timer.startLongTimer(5)
 
 	def timerTick(self):
-		self.timer.callback.remove(self.timerTick)
-
+		if self.timer:
+			self.timer.callback.remove(self.timerTick)
 		self.close()
 
 	def __show(self):
@@ -303,28 +256,27 @@ class RSSFeedView(RSSBaseView):
 
 	def pollCallback(self, id=None):
 		print("[SimpleRSS] SimpleRSSFeed called back")
-
-		if id is None or id + 1 == self.id:
+		if (id is None or id + 1 == self.id) and self.feed:
 			self["content"].updateList(self.feed.history)
 			self.setConditionalTitle()
 			self.updateInfo()
 
 	def setConditionalTitle(self):
-		self.setTitle(_("Simple RSS Reader: %s") % (self.feed.title))
+		if self.feed:
+			self.setTitle(_("Simple RSS Reader: %s") % (self.feed.title))
 
 	def updateInfo(self):
 		current_entry = self["content"].current
 		if current_entry:
 			self["summary"].text = current_entry[2]
-
 			cur_idx = self["content"].index
-			self["info"].text = _("Entry %s/%s") % (cur_idx + 1, len(self.feed.history))
+			if self.feed:
+				self["info"].text = _("Entry %s/%s") % (cur_idx + 1, len(self.feed.history))
 			summary_text = current_entry[0]
 		else:
 			self["summary"].text = _("Feed is empty.")
 			self["info"].text = ""
 			summary_text = _("Feed is empty.")
-
 		for x in self.onChangedEntry:
 			try:
 				x(summary_text)
@@ -332,16 +284,18 @@ class RSSFeedView(RSSBaseView):
 				pass
 
 	def menu(self):
-		if self.id > 0:
+		if self.id and self.id > 0:
 			self.singleUpdate(self.id - 1)
 
 	def nextEntry(self):
 		self["content"].selectNext()
-		return (self["content"].current, self["content"].index, len(self.feed.history))
+		if self.feed:
+			return (self["content"].current, self["content"].index, len(self.feed.history))
 
 	def previousEntry(self):
 		self["content"].selectPrevious()
-		return (self["content"].current, self["content"].index, len(self.feed.history))
+		if self.feed:
+			return (self["content"].current, self["content"].index, len(self.feed.history))
 
 	def next(self):
 		# Show next Feed
@@ -352,7 +306,8 @@ class RSSFeedView(RSSBaseView):
 			self.updateInfo()
 			self.setConditionalTitle()  # Update title
 			return (self.feed.title, self.feed.history, self.id)
-		return (self.feed.title, self.feed.history, self.id)
+		if self.feed:
+			return (self.feed.title, self.feed.history, self.id)
 
 	def previous(self):
 		# Show previous Feed
@@ -363,38 +318,28 @@ class RSSFeedView(RSSBaseView):
 			self.updateInfo()
 			self.setConditionalTitle()  # Update title
 			return (self.feed.title, self.feed.history, self.id)
-		return (self.feed.title, self.feed.history, self.id)
+		if self.feed:
+			return (self.feed.title, self.feed.history, self.id)
 
 	def checkEmpty(self):
-		if self.id > 0 and not len(self.feed.history):
+		if self.id and self.feed and self.id > 0 and not len(self.feed.history):
 			self.singleUpdate(self.id - 1)
 
 	def showCurrentEntry(self):
 		current_entry = self["content"].current
 		if not current_entry:  # empty list
 			return
+		if self.feed:
+			self.session.openWithCallback(self.updateInfo, RSSEntryView, current_entry, cur_idx=self["content"].index, entries=len(self.feed.history), feedTitle=self.feed.title, parent=self)
 
-		self.session.openWithCallback(
-			self.updateInfo,
-			RSSEntryView,
-			current_entry,
-			cur_idx=self["content"].index,
-			entries=len(self.feed.history),
-			feedTitle=self.feed.title,
-			parent=self
-		)
-
-	def selectEnclosure(self):
+	def selectEnclosure(self, ignore):
 		current_entry = self["content"].current
-		if not current_entry:  # empty list
-			return
-
-		RSSBaseView.selectEnclosure(self, current_entry[3])
+		if current_entry:
+			RSSBaseView.selectEnclosure(self, current_entry[3])
 
 
 class RSSOverview(RSSBaseView):
-	"""Shows an Overview over all RSS-Feeds known to rssPoller"""
-
+	#  Shows an Overview over all RSS-Feeds known to rssPoller"""
 	skin = """
 		<screen position="center,center" size="460,415" title="Simple RSS Reader" >
 			<widget source="info" render="Label" position="0,0" size="460,20" halign="right" font="Regular; 18" />
@@ -404,7 +349,6 @@ class RSSOverview(RSSBaseView):
 
 	def __init__(self, session, poller):
 		RSSBaseView.__init__(self, session, poller)
-
 		self["actions"] = ActionMap(["OkCancelActions", "MenuActions", "ColorActions"],
 		{
 			"ok": self.showCurrentEntry,
@@ -412,14 +356,11 @@ class RSSOverview(RSSBaseView):
 			"menu": self.menu,
 			"yellow": self.selectEnclosure,
 		})
-
 		self.fillFeeds()
-
 		# We always have at least "New Items"-Feed
 		self["content"] = RSSFeedList(self.feeds)
 		self["summary"] = StaticText(' '.join((str(len(self.feeds[0][0].history)), _("Entries"))))
 		self["info"] = StaticText(_("Feed %s/%s") % (1, len(self.feeds)))
-
 		self["content"].connectSelChanged(self.updateInfo)
 		self.onLayoutFinish.append(self.__show)
 		self.onClose.append(self.__close)
@@ -448,7 +389,6 @@ class RSSOverview(RSSBaseView):
 		self["summary"].text = ' '.join((str(len(current_entry.history)), _("Entries")))
 		self["info"].text = _("Feed %s/%s") % (self["content"].getSelectedIndex() + 1, len(self.feeds))
 		summary_text = current_entry.title
-
 		for x in self.onChangedEntry:
 			try:
 				x(summary_text)
@@ -456,27 +396,9 @@ class RSSOverview(RSSBaseView):
 				pass
 
 	def menu(self):
-		from Screens.ChoiceBox import ChoiceBox
-
 		cur_idx = self["content"].getSelectedIndex()
-		if cur_idx > 0:
-			possible_actions = (
-				(_("Update Feed"), "update"),
-				(_("Setup"), "setup"),
-				(_("Close"), "close")
-			)
-		else:
-			possible_actions = (
-				(_("Setup"), "setup"),
-				(_("Close"), "close")
-			)
-
-		self.session.openWithCallback(
-			self.menuChoice,
-			ChoiceBox,
-			_("What to do?"),
-			possible_actions
-		)
+		possible_actions = ((_("Update Feed"), "update"), (_("Setup"), "setup"), (_("Close"), "close")) if cur_idx > 0 else ((_("Setup"), "setup"), (_("Close"), "close"))
+		self.session.openWithCallback(self.menuChoice, ChoiceBox, _("What to do?"), possible_actions)
 
 	def menuChoice(self, result):
 		if result:
@@ -485,22 +407,14 @@ class RSSOverview(RSSBaseView):
 				if cur_idx > 0:
 					self.singleUpdate(cur_idx - 1)
 			elif result[1] == "setup":
-				from .RSSSetup import RSSSetup
-
-				self.session.openWithCallback(
-					self.refresh,
-					RSSSetup,
-					rssPoller=self.rssPoller
-				)
+				self.session.openWithCallback(self.refresh, RSSSetup, rssPoller=self.rssPoller)
 			elif result[1] == "close":
 				self.close()
 
 	def refresh(self):
 		current_entry = self["content"].getCurrent()
-
 		self.fillFeeds()
 		self["content"].setList(self.feeds)
-
 		self["content"].moveToEntry(current_entry)
 		self.updateInfo()
 
@@ -514,18 +428,12 @@ class RSSOverview(RSSBaseView):
 
 	def showCurrentEntry(self):
 		current_entry = self["content"].getCurrent()
-		self.session.openWithCallback(
-			self.updateInfo,
-			RSSFeedView,
-			feed=current_entry,
-			parent=self,
-			rssPoller=self.rssPoller,
-			id=self["content"].getSelectedIndex()
-		)
+		self.session.openWithCallback(self.updateInfo, RSSFeedView, feed=current_entry, parent=self, rssPoller=self.rssPoller, id=self["content"].getSelectedIndex())
 
-	def selectEnclosure(self):
+	def selectEnclosure(self, ignore):
 		# Build a list of all enclosures in this feed
 		enclosures = []
 		for entry in self["content"].getCurrent().history:
 				enclosures.extend(entry[3])
-		RSSBaseView.selectEnclosure(self, enclosures)
+		if enclosures:
+			RSSBaseView.selectEnclosure(self, enclosures)
