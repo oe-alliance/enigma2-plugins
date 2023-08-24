@@ -1,12 +1,13 @@
-# for localized messages
-from . import _
-
-#pragma mark MovingLabel
-
-from Components.Label import Label
-from enigma import eTimer
-
+# PYTHON IMPORTS
 from six import PY2
+
+# ENIGMA IMPORTS
+from enigma import eTimer
+from Components.Label import Label
+from Screens.Screen import Screen
+
+# PLUGIN IMPORTS
+from . import _  # for localized messages
 
 
 class MovingLabel(Label):
@@ -15,9 +16,7 @@ class MovingLabel(Label):
 	def __init__(self, text=""):
 		self.offset = 0
 		self.displayLength = 100
-
 		Label.__init__(self, text)
-
 		self.moveTimer = eTimer()
 		self.moveTimer.callback.append(self.doMove)
 
@@ -53,11 +52,9 @@ class MovingLabel(Label):
 		offset = self.offset + 1
 		text = self.longText[offset:self.displayLength + offset]
 		self.offset = offset
-
 		if not text:
 			# it appears we're done displaying the full text, so stop now or waste cpu time forever :D
 			self.stopMoving()
-
 		try:
 			if PY2:
 				text = text.encode('utf-8', 'ignore')
@@ -78,13 +75,8 @@ class MovingCallbackLabel(MovingLabel):
 		if self.callback:
 			self.callback()
 
-#pragma mark RSSTickerView
 
-
-from Screens.Screen import Screen
-
-
-class RSSTickerView(Screen):
+class RSSTickerView(Screen):  # pragma mark RSSTickerView
 	skin = """
 	<!--- kinda sucks because of overscan, but gives me "good enough" results -->
 	<screen position="0,536" size="720,30" flags="wfNoBorder">

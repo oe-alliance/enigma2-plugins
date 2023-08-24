@@ -1,13 +1,19 @@
+# PYTHON IMPORTS
 from __future__ import print_function, absolute_import
-from . import _  # for localized messages
-from Screens.Screen import Screen
+
+# ENIGMA IMPORTS
+from Components.ActionMap import ActionMap
 from Components.config import config, ConfigSubsection, ConfigEnableDisable, ConfigText, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
-from Components.Sources.StaticText import StaticText
-from Components.ActionMap import ActionMap
-from Components.Sources.Boolean import Boolean
 from Components.Pixmap import Pixmap
+from Components.Sources.StaticText import StaticText
+from Components.Sources.Boolean import Boolean
+from Screens.MessageBox import MessageBox
+from Screens.Screen import Screen
 
+# PLUGIN IMPORTS
+from . import _  # for localized messages
+from . import RSSTickerView
 
 class RSSFeedEdit(ConfigListScreen, Screen):
 	"""Edit an RSS-Feed"""
@@ -15,15 +21,9 @@ class RSSFeedEdit(ConfigListScreen, Screen):
 	def __init__(self, session, id):
 		Screen.__init__(self, session)
 		self.skinName = ["RSSFeedEdit", "Setup"]
-
 		s = config.plugins.simpleRSS.feed[id]
-		list = [
-			getConfigListEntry(_("Autoupdate"), s.autoupdate),
-			getConfigListEntry(_("Feed URI"), s.uri)
-		]
-
+		list = [getConfigListEntry(_("Autoupdate"), s.autoupdate), getConfigListEntry(_("Feed URI"), s.uri)]
 		ConfigListScreen.__init__(self, list, session)
-
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
 
@@ -32,9 +32,7 @@ class RSSFeedEdit(ConfigListScreen, Screen):
 			"save": self.save,
 			"cancel": self.keyCancel
 		}, -1)
-
 		self.id = id
-
 		self.onLayoutFinish.append(self.setCustomTitle)
 
 	def setCustomTitle(self):
@@ -64,22 +62,17 @@ class RSSSetup(ConfigListScreen, Screen):
 	def __init__(self, session, rssPoller=None):
 		Screen.__init__(self, session)
 		self.rssPoller = rssPoller
-
 		self.createSetup()
 		config.plugins.simpleRSS.autostart.addNotifier(self.elementChanged, initial_call=False)
-		config.plugins.simpleRSS.enable_google_reader.addNotifier(self.elementChanged, initial_call=False)
-
 		# Initialize ConfigListScreen
 		ConfigListScreen.__init__(self, self.list, session)
 		self["HelpWindow"] = Pixmap()
 		self["HelpWindow"].hide()
 		self["VKeyIcon"] = Boolean(False)
-
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
 		self["key_yellow"] = StaticText(_("New"))
 		self["key_blue"] = StaticText(_("Delete"))
-
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
 			"blue": self.delete,
@@ -88,7 +81,6 @@ class RSSSetup(ConfigListScreen, Screen):
 			"cancel": self.keyCancel,
 			"ok": self.ok
 		}, -1)
-
 		self.onLayoutFinish.append(self.setCustomTitle)
 		self.onClose.append(self.abort)
 
@@ -99,31 +91,17 @@ class RSSSetup(ConfigListScreen, Screen):
 		simpleRSS = config.plugins.simpleRSS
 
 		# Create List of all Feeds
-		list = [
-			getConfigListEntry(_("Feed"), x.uri)
-				for x in simpleRSS.feed
-		]
-
+		list = [getConfigListEntry(_("Feed"), x.uri) for x in simpleRSS.feed]
 		list.append(getConfigListEntry(_("Start automatically with Enigma2"), simpleRSS.autostart))
-
 		# Save keep_running in instance as we want to dynamically add/remove it
 		self.keep_running = getConfigListEntry(_("Keep running in background"), simpleRSS.keep_running)
 		if not simpleRSS.autostart.value:
 			list.append(self.keep_running)
-
 		# Append Last two config Elements
 		list.extend((
 			getConfigListEntry(_("Show new Messages as"), simpleRSS.update_notification),
 			getConfigListEntry(_("Update Interval (min)"), simpleRSS.interval),
-			getConfigListEntry(_("Fetch feeds from Google Reader?"), simpleRSS.enable_google_reader),
 		))
-
-		if simpleRSS.enable_google_reader.value:
-			list.extend((
-				getConfigListEntry(_("Google Username"), simpleRSS.google_username),
-				getConfigListEntry(_("Google Password"), simpleRSS.google_password),
-			))
-
 		self.list = list
 
 	def elementChanged(self, instance):
@@ -131,18 +109,16 @@ class RSSSetup(ConfigListScreen, Screen):
 		self["config"].setList(self.list)
 
 	def notificationChanged(self, instance):
-		from . import RSSTickerView as tv
 		if instance and instance.value == "ticker":
-			if tv.tickerView is None:
+			if RSSTickerView.tickerView is None:
 				print("[SimpleRSS] Ticker instantiated on startup")
-				tv.tickerView = self.session.instantiateDialog(tv.RSSTickerView)
+				RSSTickerView.tickerView = self.session.instantiateDialog(RSSTickerView.RSSTickerView)
 		else:
-			if tv.tickerView is not None:
-				self.session.deleteDialog(tv.tickerView)
-				tv.tickerView = None
+			if RSSTickerView.tickerView is not None:
+				self.session.deleteDialog(RSSTickerView.tickerView)
+				RSSTickerView.tickerView = None
 
 	def delete(self):
-		from Screens.MessageBox import MessageBox
 		self.session.openWithCallback(self.deleteConfirm, MessageBox, _("Really delete this entry?\nIt cannot be recovered!"))
 
 	def deleteConfirm(self, result):
@@ -172,13 +148,11 @@ class RSSSetup(ConfigListScreen, Screen):
 		s.autoupdate = ConfigEnableDisable(default=True)
 		id = len(l)
 		l.append(s)
-
 		self.session.openWithCallback(self.conditionalNew, RSSFeedEdit, id)
 
 	def conditionalNew(self):
 		id = len(config.plugins.simpleRSS.feed) - 1
 		uri = config.plugins.simpleRSS.feed[id].uri
-
 		# Check if new feed differs from default
 		if uri.value == "http://":
 			del config.plugins.simpleRSS.feed[id]
@@ -195,14 +169,10 @@ class RSSSetup(ConfigListScreen, Screen):
 
 	def abort(self):
 		simpleRSS = config.plugins.simpleRSS
-
 		# Remove Notifier
 		simpleRSS.autostart.removeNotifier(self.elementChanged)
-		simpleRSS.enable_google_reader.removeNotifier(self.elementChanged)
-
 		# Handle ticker
 		self.notificationChanged(simpleRSS.update_notification)
-
 		# Keep feedcount sane
 		simpleRSS.feedcount.value = len(simpleRSS.feed)
 		simpleRSS.feedcount.save()
@@ -210,16 +180,13 @@ class RSSSetup(ConfigListScreen, Screen):
 
 def addFeed(address, auto=False):
 	l = config.plugins.simpleRSS.feed
-
 	# Create new Item
 	s = ConfigSubsection()
 	s.uri = ConfigText(default="http://", fixed_size=False)
 	s.autoupdate = ConfigEnableDisable(default=True)
-
 	# Set values
 	s.uri.value = address
 	s.autoupdate.value = auto
-
 	# Save
 	l.append(s)
 	l.save()

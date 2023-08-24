@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
+# PYTHON IMPORTS
 from six import PY3
+
+# ENIGMA IMPORTS
 from Components.Scanner import ScanFile
 from Plugins.SystemPlugins.Toolkit.TagStrip import strip, strip_readable
 
@@ -29,12 +32,7 @@ class RSSEntryWrapper(ElementWrapper):
 				length = elem.get("length")
 				if length:
 					length = int(length) / 1048576
-				myl.append(ScanFile(
-					elem.get("url"),
-					mimetype=elem.get("type"),
-					size=length,
-					autodetect=False)
-				)
+				myl.append(ScanFile(elem.get("url"), mimetype=elem.get("type"), size=length, autodetect=False))
 			return myl
 		elif tag == "id":
 			return self._element.findtext(self._ns + 'guid', self.title + self.link)
@@ -59,12 +57,7 @@ class PEAEntryWrapper(ElementWrapper):
 					length = elem.get("length")
 					if length:
 						length = int(length) / 1048576
-					myl.append(ScanFile(
-						elem.get("href"),
-						mimetype=elem.get("type"),
-						size=length,
-						autodetect=False
-					))
+					myl.append(ScanFile(elem.get("href"), mimetype=elem.get("type"), size=length, autodetect=False))
 			return myl
 		elif tag == "summary":
 			text = self._element.findtext(self._ns + 'summary')
@@ -148,7 +141,6 @@ class BaseFeed:
 			title = title.encode('utf-8')
 			description = description.encode('utf-8')
 		self.uri = uri
-
 		# Initialize
 		self.title = title or uri
 		self.description = description
@@ -164,13 +156,10 @@ class UniversalFeed(BaseFeed):
 
 	def __init__(self, uri, autoupdate, sync=False):
 		BaseFeed.__init__(self, uri)
-
 		# Set Autoupdate
 		self.autoupdate = autoupdate
-
 		# Is this a synced feed?
 		self.sync = sync
-
 		# Initialize
 		self.last_update = None
 		self.last_ids = set()
@@ -181,7 +170,6 @@ class UniversalFeed(BaseFeed):
 		updated = wrapper.updated
 		if updated and self.last_update == updated:
 			return []
-
 		idx = 0
 		ids = self.last_ids
 		for item in wrapper:
@@ -189,27 +177,20 @@ class UniversalFeed(BaseFeed):
 			title = strip(item.title if PY3 else item.title.encode('utf-8'))
 			if not title:
 				continue
-
 			# Try to read id, continue if none found (invalid feed or internal error) or to be excluded
 			id = item.id
 			if not id or id in ids:
 				continue
-
 			# Link
 			link = item.link if PY3 else item.link.encode('utf-8')
-
 			# Try to read summary, empty if none
 			summary = strip_readable(item.summary or "") if PY3 else strip_readable(item.summary or "").encode('utf-8')
-
 			# Update Lists
 			self.history.insert(idx, (title, link, summary, item.enclosures))
 			ids.add(id)
-
 			idx += 1
-
 		# Eventually cut history
 		del self.history[self.MAX_HISTORY_ELEMENTS:]
-
 		return self.history[:idx]
 
 	def gotFeed(self, feed):
@@ -231,11 +212,8 @@ class UniversalFeed(BaseFeed):
 				self.wrapper = PEAWrapper
 			else:
 				raise NotImplementedError('Unsupported Feed: %s' % feed.tag)
-
 			wrapper = self.wrapper(feed, self.ns)
-
 			self.title = strip(wrapper.title) if PY3 else strip(wrapper.title).encode('utf-8')
 			self.description = strip_readable(wrapper.description or "") if PY3 else strip_readable(wrapper.description or "").encode('utf-8')
 			self.logoUrl = wrapper.logo
-
 		return self.gotWrapper(wrapper)
