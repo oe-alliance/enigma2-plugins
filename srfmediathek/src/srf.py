@@ -6,6 +6,7 @@ import xml.etree.ElementTree as Et
 import re
 import threading
 import requests
+import skin
 from Components.ActionMap import ActionMap
 from Components.ConfigList import ConfigListScreen
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigDirectory, ConfigSelection, ConfigYesNo, configfile
@@ -51,16 +52,18 @@ def callInThread(func, *args, **kwargs):
 
 def readskin():
     cf = config.plugins.SRF.SkinColor.value.split(",")
-    skin = ""
+    s = ""
     try:
         with open(SKINFILE, "r") as f:
             root = Et.parse(f).getroot()
         for element in root:
             if element.tag == "screen" and element.attrib["name"] == cf[0]:
-                skin = ensure_str(Et.tostring(element))
+                s = ensure_str(Et.tostring(element))
+        if hasattr(skin.AttributeParser, "scrollbarForegroundColor"):
+            s = s.replace("scrollbarSliderForegroundColor", "scrollbarForegroundColor")
     except (IOError, Et.ParseError):
         return ""
-    return skin.strip().replace("{col1}", cf[1]).replace("{col2}", cf[2]).replace("{col3}", cf[3]).replace("{picpath}", PLUGINPATH + "img/")
+    return s.strip().replace("{col1}", cf[1]).replace("{col2}", cf[2]).replace("{col3}", cf[3]).replace("{picpath}", PLUGINPATH + "img/")
 
 
 def geturl(url, headers=None, data=None, timeout=10, verify=True):
@@ -96,8 +99,8 @@ def sortList(txt):
 
 class SRFMediathek(Screen):
     def __init__(self, session):
-        skin = readskin()
-        self.skin = skin
+        s = readskin()
+        self.skin = s
         Screen.__init__(self, session)
         self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "ChannelSelectBaseActions", "MenuActions"], {"menu": self.SRFSetup, "green": self.Download, "red": self.close, "blue": self.HauptMenu, "up": self.up, "down": self.down, "left": self.left, "right": self.right, "nextBouquet": self.p_up, "prevBouquet": self.p_down, "ok": self.ok, "cancel": self.exit}, -1)
         self["movielist"] = List()
@@ -403,6 +406,7 @@ class SRFMediathek(Screen):
             self.console.sendCtrlC()
         self["progress"].hide()
         self["DownloadLabel"].hide()
+        self.DL_File = None
 
     def Play(self):
         url = self["movielist"].getCurrent()[2]
@@ -436,6 +440,9 @@ class SRFMediathek(Screen):
                             liste.append(("MP4 | %s" % data.get("quality", ""), url))
                         elif ".mp3" in url:
                             liste.append(("MP3", url))
+            if not liste:
+                self.session.open(MessageBox, "DRM Geschützt kann nicht abgespielt werden", MessageBox.TYPE_INFO)
+                return
             liste = sortList(liste)
             if config.plugins.SRF.AUTOPLAY.value and liste:
                 self.Player(liste[0])
