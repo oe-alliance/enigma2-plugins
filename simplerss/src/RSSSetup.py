@@ -15,6 +15,7 @@ from Screens.Screen import Screen
 from . import _  # for localized messages
 from . import RSSTickerView
 
+
 class RSSFeedEdit(ConfigListScreen, Screen):
 	"""Edit an RSS-Feed"""
 
