@@ -104,6 +104,12 @@ def html2text(html):
 		if codepoint:
 			return six.PY2 and unichr(codepoint).encode("utf8") or chr(codepoint)
 		return match.group(0)
+	# A review of Blunt Talk (by drinkdrunkthedifferencei) had this,
+	# which seems to be CP1252 as UTF-8.
+	if isinstance(html, bytes):
+		html = html.replace(b"\xc2\x85", b"\xe2\x80\xa6")  # ellipsis
+	else:
+		html = html.replace(u"\x85", u"\u2026")  # ellipsis
 	return re.sub(r"&(?:([A-Za-z0-9]+)|#x([0-9A-Fa-f]+)|#(\d+));|<.*?>", sub, html)
 
 
@@ -811,8 +817,7 @@ class IMDB(Screen, HelpableScreen):
 				'writer': get(main, ('writers', 'category', 'text')),
 				'creator': get(main, ('creators', 'category', 'text')),
 				'episodes': get(i18n, 'title_main_episodes_title'),
-				# There's "Season" (no plural) or "{count} seasons" (no capital).
-				'seasons': get(i18n, 'title_main_episodes_seasons').replace("{count}", "").strip().capitalize(),
+				'seasons': get(i18n, 'common_seasons'),
 				'premiere': get(i18n, 'title_main_details_releaseDate'),
 				'country': LingUI(get(i18n, 'title_main_details_countriesOfOrigin'), countryCount=len(get(main, ('countriesOfOrigin', 'countries')))),
 				'alternativ': get(i18n, 'title_main_details_aka'),
@@ -822,7 +827,7 @@ class IMDB(Screen, HelpableScreen):
 				'keywords': get(i18n, 'title_main_hero_allTopics_plotKeywordsLink'),
 				'tagline': get(i18n, 'title_main_storyline_label_taglines'),
 				'cert': get(i18n, 'title_main_storyline_label_certificate'),
-				'trivia': get(i18n, 'title_subpage_trivia'),
+				'trivia': get(i18n, 'common_trivia'),
 				'goofs': get(i18n, 'title_subpage_goofs'),
 				'quotes': get(i18n, 'title_subpage_quotes'),
 				'connections': get(i18n, 'title_subpage_connections'),
