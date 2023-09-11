@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Enigma2 SimpleRSS Plugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-10 15:11+0200\n"
-"PO-Revision-Date: 2023-09-10 15:55+0200\n"
+"PO-Revision-Date: 2023-09-11 14:17+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
 "Language: sr\n"
@@ -194,28 +194,3 @@ msgstr "Jednostavan RSS čitač"
 #: ..\plugin.py:1210
 msgid "View RSS..."
 msgstr "Vidi RSS ..."
-
-#, python-format
-#~ msgid "%d Feed(s) were added to configuration."
-#~ msgstr "%d Fid(ova) su dodati u konfiguraciju."
-
-#~ msgid "Failed to get subscriptions from Google Reader."
-#~ msgstr "Neuspešno dobijanje odobrenja od Gugl Čitača."
-
-#~ msgid "Failed to login to Google Reader."
-#~ msgstr "Neuspelo registrovanje u Gugl Čitač."
-
-#~ msgid "Fetch feeds from Google Reader?"
-#~ msgstr "Dobavljati fidove sa Gugl Čitača?"
-
-#~ msgid "Found no Enclosure we can display."
-#~ msgstr "Nije nađen nijedan prilog koji se može prikazati."
-
-#~ msgid "Google Password"
-#~ msgstr "Gugl lozinka"
-
-#~ msgid "Google Username"
-#~ msgstr "Gugl korisničko ime"
-
-#~ msgid "Subscribe Newsfeed..."
-#~ msgstr "Pretplati se na fid vesti..."

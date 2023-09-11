@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: SimpleRSS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-10 15:11+0200\n"
-"PO-Revision-Date: 2023-09-10 15:53+0200\n"
+"PO-Revision-Date: 2023-09-11 14:17+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: Rob van der Does\n"
 "Language: nl_NL\n"
@@ -196,28 +196,3 @@ msgstr "Een simpel te gebruiken RSS reader"
 #: ..\plugin.py:1210
 msgid "View RSS..."
 msgstr "Bekijk RSS..."
-
-#, python-format
-#~ msgid "%d Feed(s) were added to configuration."
-#~ msgstr "%d Feed(s) zijn toegevoegd aan de configuratie."
-
-#~ msgid "Failed to get subscriptions from Google Reader."
-#~ msgstr "Verkrijgen van inschrijving bij Google Reader mislukt."
-
-#~ msgid "Failed to login to Google Reader."
-#~ msgstr "Login Google Reader mislukt."
-
-#~ msgid "Fetch feeds from Google Reader?"
-#~ msgstr "Verkrijg feeds van Google Reader?"
-
-#~ msgid "Found no Enclosure we can display."
-#~ msgstr "Geen bijlage gevonden die we kunnen laten zien."
-
-#~ msgid "Google Password"
-#~ msgstr "Google Wachtwoord"
-
-#~ msgid "Google Username"
-#~ msgstr "Google Gebruikersnaam"
-
-#~ msgid "Subscribe Newsfeed..."
-#~ msgstr "Inschrijven op Newsfeed..."

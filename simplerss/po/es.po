@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: enigma 2-plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-10 15:11+0200\n"
-"PO-Revision-Date: 2023-09-10 15:34+0200\n"
+"PO-Revision-Date: 2023-09-11 14:16+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
@@ -199,13 +199,3 @@ msgstr "Un lector simple de RSS"
 #: ..\plugin.py:1210
 msgid "View RSS..."
 msgstr "Ver RSS..."
-
-#~ msgid "unknown feedname"
-#~ msgstr "feedname desconocido"
-
-#, python-format
-#~ msgid "%d Feed(s) were added to configuration."
-#~ msgstr "%d Fuente(s) fueron añadidas a la configuración."
-
-#~ msgid "Found no Enclosure we can display."
-#~ msgstr "No he encontrado Anexos que pueda visualizar."

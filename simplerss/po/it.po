@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: enigma2 - simplerss\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-10 15:11+0200\n"
-"PO-Revision-Date: 2023-09-10 15:57+0200\n"
+"PO-Revision-Date: 2023-09-11 14:16+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
 "Language: it_IT\n"
@@ -194,31 +194,3 @@ msgstr "Un semplice lettore RSS"
 #: ..\plugin.py:1210
 msgid "View RSS..."
 msgstr "Vedi RSS..."
-
-#~ msgid "unknown feedname"
-#~ msgstr "nome del feed sconosciuto"
-
-#, python-format
-#~ msgid "%d Feed(s) were added to configuration."
-#~ msgstr "%d feed aggiunti alla configurazione. "
-
-#~ msgid "Failed to get subscriptions from Google Reader."
-#~ msgstr "Impossibile ottenere sottoscrizioni da Google Reader."
-
-#~ msgid "Failed to login to Google Reader."
-#~ msgstr "Connessione a GoogleReader fallita!"
-
-#~ msgid "Fetch feeds from Google Reader?"
-#~ msgstr "Ottenere feed da Google Reader?"
-
-#~ msgid "Found no Enclosure we can display."
-#~ msgstr "Nessun allegato visualizzabile trovato!"
-
-#~ msgid "Google Password"
-#~ msgstr "Password Google"
-
-#~ msgid "Google Username"
-#~ msgstr "Nome user Google"
-
-#~ msgid "Subscribe Newsfeed..."
-#~ msgstr "Sottoscrivere feed News"

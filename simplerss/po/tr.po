@@ -194,28 +194,3 @@ msgstr "Kolay kullanımlı RSS okuyucu"
 #: ..\plugin.py:1210
 msgid "View RSS..."
 msgstr "RSS'lere bak..."
-
-#, python-format
-#~ msgid "%d Feed(s) were added to configuration."
-#~ msgstr "%d besleme(leri) eklendi."
-
-#~ msgid "Failed to get subscriptions from Google Reader."
-#~ msgstr "Google Reader abonelik bilgileri alınamadı."
-
-#~ msgid "Failed to login to Google Reader."
-#~ msgstr "Google Reader oturumu açılamadı."
-
-#~ msgid "Fetch feeds from Google Reader?"
-#~ msgstr "Google Reader beslemeleri alınsın mı?"
-
-#~ msgid "Found no Enclosure we can display."
-#~ msgstr "Gösterilmek üzere ilişkili bildiri bulunamadı."
-
-#~ msgid "Google Password"
-#~ msgstr "Google parola"
-
-#~ msgid "Google Username"
-#~ msgstr "Google kullanıcı adı"
-
-#~ msgid "Subscribe Newsfeed..."
-#~ msgstr "Haber beslemesine abone ol..."

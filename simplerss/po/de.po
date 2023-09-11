@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Enigma2 SimpleRSS Plugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-10 15:11+0200\n"
-"PO-Revision-Date: 2023-09-10 15:12+0200\n"
+"PO-Revision-Date: 2023-09-11 14:15+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: german <de@li.org>\n"
 "Language: de\n"
@@ -197,31 +197,3 @@ msgstr "Ein einfacher Newsreader"
 #: ..\plugin.py:1210
 msgid "View RSS..."
 msgstr "RSS Nachrichten anzeigen..."
-
-#~ msgid "unknown feedname"
-#~ msgstr "unbekannter Feedname"
-
-#, python-format
-#~ msgid "%d Feed(s) were added to configuration."
-#~ msgstr "%d Kanäle wurden der Konfiguration hinzugefügt."
-
-#~ msgid "Failed to get subscriptions from Google Reader."
-#~ msgstr "Konnte Abonnements nicht von Google Reader auslesen."
-
-#~ msgid "Failed to login to Google Reader."
-#~ msgstr "Anmeldung bei Google Reader fehlgeschlagen."
-
-#~ msgid "Fetch feeds from Google Reader?"
-#~ msgstr "Abonnements bei Google Reader auslesen?"
-
-#~ msgid "Found no Enclosure we can display."
-#~ msgstr "Keine anzeigbaren Anhänge gefunden."
-
-#~ msgid "Google Password"
-#~ msgstr "Google Passwort"
-
-#~ msgid "Google Username"
-#~ msgstr "Google Benutzername"
-
-#~ msgid "Subscribe Newsfeed..."
-#~ msgstr "Nachrichtenkanal abonieren..."

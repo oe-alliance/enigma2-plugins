@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-10 15:11+0200\n"
-"PO-Revision-Date: 2023-09-10 15:33+0200\n"
+"PO-Revision-Date: 2023-09-11 14:16+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: none\n"
 "Language: en_GB\n"
@@ -199,31 +199,3 @@ msgstr "A simple to use RSS reader"
 #: ..\plugin.py:1210
 msgid "View RSS..."
 msgstr "View RSS..."
-
-#~ msgid "unknown feedname"
-#~ msgstr "unknown feedname"
-
-#, python-format
-#~ msgid "%d Feed(s) were added to configuration."
-#~ msgstr "%d Feed(s) were added to configuration."
-
-#~ msgid "Failed to get subscriptions from Google Reader."
-#~ msgstr "Failed to get subscriptions from Google Reader."
-
-#~ msgid "Failed to login to Google Reader."
-#~ msgstr "Failed to login to Google Reader."
-
-#~ msgid "Fetch feeds from Google Reader?"
-#~ msgstr "Fetch feeds from Google Reader?"
-
-#~ msgid "Found no Enclosure we can display."
-#~ msgstr "Found no Enclosure we can display."
-
-#~ msgid "Google Password"
-#~ msgstr "Google Password"
-
-#~ msgid "Google Username"
-#~ msgstr "Google Username"
-
-#~ msgid "Subscribe Newsfeed..."
-#~ msgstr "Subscribe Newsfeed..."
