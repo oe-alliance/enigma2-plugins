@@ -1,165 +1,184 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# Copyright (C) YEAR ORGANIZATION
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2023-09-10 15:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=cp1252\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
 
-#, python-format
-msgid "%d Feed(s) were added to configuration."
-msgstr ""
-
-msgid "A simple to use RSS reader"
-msgstr ""
-
-msgid "Autoupdate"
-msgstr ""
-
-msgid "Cancel"
-msgstr ""
-
-msgid "Close"
-msgstr ""
-
-msgid "Delete"
-msgstr ""
-
-msgid "Enclosures"
-msgstr ""
-
-msgid "Entries"
-msgstr ""
-
-#, python-format
-msgid "Entry %s/%s"
-msgstr ""
-
-msgid "Error while parsing Feed, this usually means there is something wrong with it."
-msgstr ""
-
-msgid "Failed to get subscriptions from Google Reader."
-msgstr ""
-
-msgid "Failed to login to Google Reader."
-msgstr ""
-
-msgid "Feed"
-msgstr ""
-
-#, python-format
-msgid "Feed %s/%s"
-msgstr ""
-
-msgid "Feed URI"
-msgstr ""
-
-msgid "Feed is empty."
-msgstr ""
-
-msgid "Fetch feeds from Google Reader?"
-msgstr ""
-
-msgid "Found no Enclosure we can display."
-msgstr ""
-
-msgid "Google Password"
-msgstr ""
-
-msgid "Google Username"
-msgstr ""
-
-msgid "Keep running in background"
-msgstr ""
-
-msgid "New"
-msgstr ""
-
-msgid "New Items"
-msgstr ""
-
-msgid "New Items since last Auto-Update"
-msgstr ""
-
-msgid "No such Item."
-msgstr ""
-
+#: ..\plugin.py:49
 msgid "Notification"
 msgstr ""
 
-msgid "OK"
-msgstr ""
-
+#: ..\plugin.py:49
 msgid "Preview"
 msgstr ""
 
+#: ..\plugin.py:49
+msgid "Ticker"
+msgstr ""
+
+#: ..\plugin.py:49
+msgid "none"
+msgstr ""
+
+#: ..\plugin.py:164 ..\plugin.py:799
+msgid "New Items"
+msgstr ""
+
+#: ..\plugin.py:180
+msgid "Autoupdate"
+msgstr ""
+
+#: ..\plugin.py:180
+msgid "Feed URI"
+msgstr ""
+
+#: ..\plugin.py:182 ..\plugin.py:223
+msgid "Cancel"
+msgstr ""
+
+#: ..\plugin.py:183 ..\plugin.py:224
+msgid "OK"
+msgstr ""
+
+#: ..\plugin.py:192 ..\plugin.py:242
+msgid "Simple RSS Reader Setup"
+msgstr ""
+
+#: ..\plugin.py:225
+msgid "New"
+msgstr ""
+
+#: ..\plugin.py:226
+msgid "Delete"
+msgstr ""
+
+#: ..\plugin.py:227
+msgid "Import from '%sfeeds.xml"
+msgstr ""
+
+#: ..\plugin.py:246
+msgid "Feed"
+msgstr ""
+
+#: ..\plugin.py:247
+msgid "Start automatically with Enigma2"
+msgstr ""
+
+#: ..\plugin.py:248
+msgid "Keep running in background"
+msgstr ""
+
+#: ..\plugin.py:251
+msgid "Show new Messages as"
+msgstr ""
+
+#: ..\plugin.py:251
+msgid "Update Interval (min)"
+msgstr ""
+
+#: ..\plugin.py:270
 msgid ""
 "Really delete this entry?\n"
 "It cannot be recovered!"
 msgstr ""
 
-#, python-format
-msgid "Received %d new news item(s)."
-msgstr ""
-
-msgid "Setup"
-msgstr ""
-
-msgid "Show new Messages as"
-msgstr ""
-
-msgid "Simple RSS Reader"
-msgstr ""
-
-msgid "Simple RSS Reader Setup"
-msgstr ""
-
-#, python-format
-msgid "Simple RSS Reader: %s"
-msgstr ""
-
-#, python-format
+#: ..\plugin.py:312
 msgid ""
-"Sorry, this type of feed is unsupported:\n"
-"%s"
+"Importing '%s'\n"
+"%s feeds were imported successfully\n"
+"%s feeds were double and not imported"
 msgstr ""
 
-msgid "Start automatically with Enigma2"
+#: ..\plugin.py:387
+msgid "Error while parsing Feed, this usually means there is something wrong with it."
 msgstr ""
 
-msgid "Subscribe Newsfeed..."
-msgstr ""
-
-msgid "Ticker"
-msgstr ""
-
-msgid "Update Feed"
-msgstr ""
-
-msgid "Update Interval (min)"
-msgstr ""
-
+#: ..\plugin.py:396
 msgid ""
 "Update is being done in Background.\n"
 "Contents will automatically be updated when it's done."
 msgstr ""
 
-msgid "View RSS..."
+#: ..\plugin.py:454 ..\plugin.py:522 ..\plugin.py:633
+msgid "Entry %s/%s"
 msgstr ""
 
+#: ..\plugin.py:455 ..\plugin.py:527
+msgid "Enclosures"
+msgstr ""
+
+#: ..\plugin.py:475 ..\plugin.py:625
+msgid "Simple RSS Reader: %s"
+msgstr ""
+
+#: ..\plugin.py:479 ..\plugin.py:529
+msgid "No such Item."
+msgstr ""
+
+#: ..\plugin.py:636 ..\plugin.py:638
+msgid "Feed is empty."
+msgstr ""
+
+#: ..\plugin.py:712 ..\plugin.py:743
+msgid "Entries"
+msgstr ""
+
+#: ..\plugin.py:713 ..\plugin.py:744
+msgid "Feed %s/%s"
+msgstr ""
+
+#: ..\plugin.py:720
+msgid "Simple RSS Reader"
+msgstr ""
+
+#: ..\plugin.py:751
+msgid "Close"
+msgstr ""
+
+#: ..\plugin.py:751
+msgid "Setup"
+msgstr ""
+
+#: ..\plugin.py:751
+msgid "Update Feed"
+msgstr ""
+
+#: ..\plugin.py:752
 msgid "What to do?"
 msgstr ""
 
-msgid "none"
+#: ..\plugin.py:799
+msgid "New Items since last Auto-Update"
+msgstr ""
+
+#: ..\plugin.py:828
+msgid ""
+"Sorry, this type of feed is unsupported:\n"
+"%s"
+msgstr ""
+
+#: ..\plugin.py:891
+msgid "Received %d new news item(s)."
+msgstr ""
+
+#: ..\plugin.py:1142
+msgid "trying to download the feed..."
+msgstr ""
+
+#: ..\plugin.py:1208
+msgid "A simple to use RSS reader"
+msgstr ""
+
+#: ..\plugin.py:1210
+msgid "View RSS..."
 msgstr ""

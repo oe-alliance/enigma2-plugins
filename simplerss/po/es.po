@@ -7,103 +7,90 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2-plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-26 12:31+0000\n"
-"PO-Revision-Date: 2009-01-09 13:40+0100\n"
-"Last-Translator: José Juan Zapater <josej@zapater.fdns.net>\n"
+"POT-Creation-Date: 2023-09-10 15:11+0200\n"
+"PO-Revision-Date: 2023-09-10 15:34+0200\n"
+"Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: none\n"
-"Language: \n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.3.2\n"
 
-#, python-format
-msgid "%d Feed(s) were added to configuration."
-msgstr "%d Fuente(s) fueron añadidas a la configuración."
-
-msgid "A simple to use RSS reader"
-msgstr "Un lector simple de RSS"
-
-msgid "Autoupdate"
-msgstr "Autoactualizar"
-
-msgid "Cancel"
-msgstr "Cancelar"
-
-msgid "Close"
-msgstr "Cerrar"
-
-msgid "Delete"
-msgstr "Borrar"
-
-msgid "Enclosures"
-msgstr "Anexos"
-
-msgid "Entries"
-msgstr "Entradas"
-
-#, python-format
-msgid "Entry %s/%s"
-msgstr "Entrada %s/%s"
-
-msgid "Error while parsing Feed, this usually means there is something wrong with it."
-msgstr "Error mientras analizaba la Fuente, esto significa normalmente que hay algo erróneo con él."
-
-msgid "Failed to get subscriptions from Google Reader."
-msgstr ""
-
-msgid "Failed to login to Google Reader."
-msgstr ""
-
-msgid "Feed"
-msgstr "Fuente"
-
-#, python-format
-msgid "Feed %s/%s"
-msgstr "Fuente %s/%s"
-
-msgid "Feed URI"
-msgstr "URI de la Fuente"
-
-msgid "Feed is empty."
-msgstr "La Fuente está vacía."
-
-msgid "Fetch feeds from Google Reader?"
-msgstr ""
-
-msgid "Found no Enclosure we can display."
-msgstr "No he encontrado Anexos que pueda visualizar."
-
-msgid "Google Password"
-msgstr ""
-
-msgid "Google Username"
-msgstr ""
-
-msgid "Keep running in background"
-msgstr "Sigue ejecutándolo en segundo plano"
-
-msgid "New"
-msgstr "Nuevo"
-
-msgid "New Items"
-msgstr "Nuevos Elementos"
-
-msgid "New Items since last Auto-Update"
-msgstr "Nuevos Elementos desde la última actualización"
-
-msgid "No such Item."
-msgstr "No hay ningún elemento."
-
+#: ..\plugin.py:49
 msgid "Notification"
 msgstr "Notificación"
 
-msgid "OK"
-msgstr "OK"
-
+#: ..\plugin.py:49
 msgid "Preview"
 msgstr "Previsualizar"
 
+#: ..\plugin.py:49
+msgid "Ticker"
+msgstr "Ticker"
+
+#: ..\plugin.py:49
+msgid "none"
+msgstr "ninguno"
+
+#: ..\plugin.py:164 ..\plugin.py:799
+msgid "New Items"
+msgstr "Nuevos Elementos"
+
+#: ..\plugin.py:180
+msgid "Autoupdate"
+msgstr "Autoactualizar"
+
+#: ..\plugin.py:180
+msgid "Feed URI"
+msgstr "URI de la Fuente"
+
+#: ..\plugin.py:182 ..\plugin.py:223
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: ..\plugin.py:183 ..\plugin.py:224
+msgid "OK"
+msgstr "OK"
+
+#: ..\plugin.py:192 ..\plugin.py:242
+msgid "Simple RSS Reader Setup"
+msgstr "Configuración Simple RSS Reader"
+
+#: ..\plugin.py:225
+msgid "New"
+msgstr "Nuevo"
+
+#: ..\plugin.py:226
+msgid "Delete"
+msgstr "Borrar"
+
+#: ..\plugin.py:227
+msgid "Import from '%sfeeds.xml"
+msgstr "Importar de '%sfeeds.xml"
+
+#: ..\plugin.py:246
+msgid "Feed"
+msgstr "Fuente"
+
+#: ..\plugin.py:247
+msgid "Start automatically with Enigma2"
+msgstr "Comenzar automáticamente con Enigma2"
+
+#: ..\plugin.py:248
+msgid "Keep running in background"
+msgstr "Sigue ejecutándolo en segundo plano"
+
+#: ..\plugin.py:251
+msgid "Show new Messages as"
+msgstr "Muestra nuevos Mensajes como"
+
+#: ..\plugin.py:251
+msgid "Update Interval (min)"
+msgstr "Intervalo de Actualización (min)"
+
+#: ..\plugin.py:270
 msgid ""
 "Really delete this entry?\n"
 "It cannot be recovered!"
@@ -111,49 +98,25 @@ msgstr ""
 "¿Seguro que quiere borrar esta entrada?\n"
 "¡No podrá ser recuperada!"
 
-#, python-format
-msgid "Received %d new news item(s)."
-msgstr "Recibí %d nuevos elementos de noticias."
-
-msgid "Setup"
-msgstr "Configurar"
-
-msgid "Show new Messages as"
-msgstr "Muestra nuevos Mensajes como"
-
-msgid "Simple RSS Reader"
-msgstr ""
-
-msgid "Simple RSS Reader Setup"
-msgstr ""
-
-#, python-format
-msgid "Simple RSS Reader: %s"
-msgstr ""
-
-#, python-format
+#: ..\plugin.py:312
 msgid ""
-"Sorry, this type of feed is unsupported:\n"
-"%s"
+"Importing '%s'\n"
+"%s feeds were imported successfully\n"
+"%s feeds were double and not imported"
 msgstr ""
-"Lo siento, este tipo de fuente no está soportada:\n"
-"%s"
+"Importando '%s\n"
+"%s feeds se importaron correctamente\n"
+"%s feeds eran dobles y no se importaron"
 
-msgid "Start automatically with Enigma2"
-msgstr "Comenzar automáticamente con Enigma2"
-
-msgid "Subscribe Newsfeed..."
+#: ..\plugin.py:387
+msgid ""
+"Error while parsing Feed, this usually means there is something wrong with "
+"it."
 msgstr ""
+"Error mientras analizaba la Fuente, esto significa normalmente que hay algo "
+"erróneo con él."
 
-msgid "Ticker"
-msgstr ""
-
-msgid "Update Feed"
-msgstr "Actualizar Fuente"
-
-msgid "Update Interval (min)"
-msgstr "Intervalo de Actualización (min)"
-
+#: ..\plugin.py:396
 msgid ""
 "Update is being done in Background.\n"
 "Contents will automatically be updated when it's done."
@@ -161,11 +124,88 @@ msgstr ""
 "La Actualización se está ejecutando en segundo plano.\n"
 "Los contenidos se actualizarán automáticamente cuando termine."
 
-msgid "View RSS..."
-msgstr ""
+#: ..\plugin.py:454 ..\plugin.py:522 ..\plugin.py:633
+msgid "Entry %s/%s"
+msgstr "Entrada %s/%s"
 
+#: ..\plugin.py:455 ..\plugin.py:527
+msgid "Enclosures"
+msgstr "Anexos"
+
+#: ..\plugin.py:475 ..\plugin.py:625
+msgid "Simple RSS Reader: %s"
+msgstr "Simple RSS Reader: %s"
+
+#: ..\plugin.py:479 ..\plugin.py:529
+msgid "No such Item."
+msgstr "No hay ningún elemento."
+
+#: ..\plugin.py:636 ..\plugin.py:638
+msgid "Feed is empty."
+msgstr "La Fuente está vacía."
+
+#: ..\plugin.py:712 ..\plugin.py:743
+msgid "Entries"
+msgstr "Entradas"
+
+#: ..\plugin.py:713 ..\plugin.py:744
+msgid "Feed %s/%s"
+msgstr "Fuente %s/%s"
+
+#: ..\plugin.py:720
+msgid "Simple RSS Reader"
+msgstr "Simple RSS Reader"
+
+#: ..\plugin.py:751
+msgid "Close"
+msgstr "Cerrar"
+
+#: ..\plugin.py:751
+msgid "Setup"
+msgstr "Configurar"
+
+#: ..\plugin.py:751
+msgid "Update Feed"
+msgstr "Actualizar Fuente"
+
+#: ..\plugin.py:752
 msgid "What to do?"
 msgstr "¿Que hago?"
 
-msgid "none"
-msgstr "ninguno"
+#: ..\plugin.py:799
+msgid "New Items since last Auto-Update"
+msgstr "Nuevos Elementos desde la última actualización"
+
+#: ..\plugin.py:828
+msgid ""
+"Sorry, this type of feed is unsupported:\n"
+"%s"
+msgstr ""
+"Lo siento, este tipo de fuente no está soportada:\n"
+"%s"
+
+#: ..\plugin.py:891
+msgid "Received %d new news item(s)."
+msgstr "Recibí %d nuevos elementos de noticias."
+
+#: ..\plugin.py:1142
+msgid "trying to download the feed..."
+msgstr "intentando descargar el feed..."
+
+#: ..\plugin.py:1208
+msgid "A simple to use RSS reader"
+msgstr "Un lector simple de RSS"
+
+#: ..\plugin.py:1210
+msgid "View RSS..."
+msgstr "Ver RSS..."
+
+#~ msgid "unknown feedname"
+#~ msgstr "feedname desconocido"
+
+#, python-format
+#~ msgid "%d Feed(s) were added to configuration."
+#~ msgstr "%d Fuente(s) fueron añadidas a la configuración."
+
+#~ msgid "Found no Enclosure we can display."
+#~ msgstr "No he encontrado Anexos que pueda visualizar."

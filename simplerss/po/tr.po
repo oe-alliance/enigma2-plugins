@@ -2,105 +2,90 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SimpleRSS Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-26 12:31+0000\n"
+"POT-Creation-Date: 2023-09-10 15:11+0200\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
+"Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
-"Language: \n"
+"Language: tr_TR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Turkish\n"
-"X-Poedit-Country: TURKEY\n"
 "X-Poedit-SourceCharset: utf-8\n"
+"X-Generator: Poedit 3.3.2\n"
 
-#, python-format
-msgid "%d Feed(s) were added to configuration."
-msgstr "%d besleme(leri) eklendi."
-
-msgid "A simple to use RSS reader"
-msgstr "Kolay kullanımlı RSS okuyucu"
-
-msgid "Autoupdate"
-msgstr "Otomatik güncelleme"
-
-msgid "Cancel"
-msgstr "Vazgeç"
-
-msgid "Close"
-msgstr "Kapat"
-
-msgid "Delete"
-msgstr "Sil"
-
-msgid "Enclosures"
-msgstr "İlişkili bildiri"
-
-msgid "Entries"
-msgstr "Bildirim"
-
-#, python-format
-msgid "Entry %s/%s"
-msgstr "Bildiri %s/%s"
-
-msgid "Error while parsing Feed, this usually means there is something wrong with it."
-msgstr "Besleme ayrıştırılırken hata oluştu, bu durum genellikle hatalı yapılandırmadan kaynaklanır."
-
-msgid "Failed to get subscriptions from Google Reader."
-msgstr "Google Reader abonelik bilgileri alınamadı."
-
-msgid "Failed to login to Google Reader."
-msgstr "Google Reader oturumu açılamadı."
-
-msgid "Feed"
-msgstr "Besleme"
-
-#, python-format
-msgid "Feed %s/%s"
-msgstr "Besleme %s/%s"
-
-msgid "Feed URI"
-msgstr "Besleme Adresi"
-
-msgid "Feed is empty."
-msgstr "Besleme boş."
-
-msgid "Fetch feeds from Google Reader?"
-msgstr "Google Reader beslemeleri alınsın mı?"
-
-msgid "Found no Enclosure we can display."
-msgstr "Gösterilmek üzere ilişkili bildiri bulunamadı."
-
-msgid "Google Password"
-msgstr "Google parola"
-
-msgid "Google Username"
-msgstr "Google kullanıcı adı"
-
-msgid "Keep running in background"
-msgstr "Arkaplanda çalışmaya devam et"
-
-msgid "New"
-msgstr "Yeni"
-
-msgid "New Items"
-msgstr "Yeni maddeler"
-
-msgid "New Items since last Auto-Update"
-msgstr "Son otomatik güncellemeden sonraki yeni bildirimler"
-
-msgid "No such Item."
-msgstr "Yeni bildirim yok."
-
+#: ..\plugin.py:49
 msgid "Notification"
 msgstr "Bilgilendirme"
 
-msgid "OK"
-msgstr "Tamam"
-
+#: ..\plugin.py:49
 msgid "Preview"
 msgstr "Önizleme"
 
+#: ..\plugin.py:49
+msgid "Ticker"
+msgstr "Ticker"
+
+#: ..\plugin.py:49
+msgid "none"
+msgstr "yok"
+
+#: ..\plugin.py:164 ..\plugin.py:799
+msgid "New Items"
+msgstr "Yeni maddeler"
+
+#: ..\plugin.py:180
+msgid "Autoupdate"
+msgstr "Otomatik güncelleme"
+
+#: ..\plugin.py:180
+msgid "Feed URI"
+msgstr "Besleme Adresi"
+
+#: ..\plugin.py:182 ..\plugin.py:223
+msgid "Cancel"
+msgstr "Vazgeç"
+
+#: ..\plugin.py:183 ..\plugin.py:224
+msgid "OK"
+msgstr "Tamam"
+
+#: ..\plugin.py:192 ..\plugin.py:242
+msgid "Simple RSS Reader Setup"
+msgstr "Kolay RSS Okuyucu Kurulumu"
+
+#: ..\plugin.py:225
+msgid "New"
+msgstr "Yeni"
+
+#: ..\plugin.py:226
+msgid "Delete"
+msgstr "Sil"
+
+#: ..\plugin.py:227
+msgid "Import from '%sfeeds.xml"
+msgstr "'%sfeeds.xml'den içe aktar"
+
+#: ..\plugin.py:246
+msgid "Feed"
+msgstr "Besleme"
+
+#: ..\plugin.py:247
+msgid "Start automatically with Enigma2"
+msgstr "Enigma2 ile birlikte otomatik başlat"
+
+#: ..\plugin.py:248
+msgid "Keep running in background"
+msgstr "Arkaplanda çalışmaya devam et"
+
+#: ..\plugin.py:251
+msgid "Show new Messages as"
+msgstr "Yeni mesajların gösterilme şekli"
+
+#: ..\plugin.py:251
+msgid "Update Interval (min)"
+msgstr "Güncelleme Aralığı (dk)"
+
+#: ..\plugin.py:270
 msgid ""
 "Really delete this entry?\n"
 "It cannot be recovered!"
@@ -108,49 +93,25 @@ msgstr ""
 "Bu bildirimi silmek istiyor musunuz?\n"
 "Silindiğinde geri getirilemez!"
 
-#, python-format
-msgid "Received %d new news item(s)."
-msgstr "%d yeni bildirim alındı."
-
-msgid "Setup"
-msgstr "Kurulum"
-
-msgid "Show new Messages as"
-msgstr "Yeni mesajların gösterilme şekli"
-
-msgid "Simple RSS Reader"
-msgstr "Kolay RSS Okuyucu"
-
-msgid "Simple RSS Reader Setup"
-msgstr "Kolay RSS Okuyucu Kurulumu"
-
-#, python-format
-msgid "Simple RSS Reader: %s"
-msgstr "Kolay RSS Okuyucu: %s"
-
-#, python-format
+#: ..\plugin.py:312
 msgid ""
-"Sorry, this type of feed is unsupported:\n"
-"%s"
+"Importing '%s'\n"
+"%s feeds were imported successfully\n"
+"%s feeds were double and not imported"
 msgstr ""
-"Üzgünüm, bu besleme tipi desteklenmiyor:\n"
-"%s"
+"'%s' içe aktarılıyor\n"
+"s beslemeleri başarıyla içe aktarıldı\n"
+"s beslemeleri çiftti ve içe aktarılmadı"
 
-msgid "Start automatically with Enigma2"
-msgstr "Enigma2 ile birlikte otomatik başlat"
-
-msgid "Subscribe Newsfeed..."
-msgstr "Haber beslemesine abone ol..."
-
-msgid "Ticker"
+#: ..\plugin.py:387
+msgid ""
+"Error while parsing Feed, this usually means there is something wrong with "
+"it."
 msgstr ""
+"Besleme ayrıştırılırken hata oluştu, bu durum genellikle hatalı "
+"yapılandırmadan kaynaklanır."
 
-msgid "Update Feed"
-msgstr "Beslemeyi Güncelle"
-
-msgid "Update Interval (min)"
-msgstr "Güncelleme Aralığı (dk)"
-
+#: ..\plugin.py:396
 msgid ""
 "Update is being done in Background.\n"
 "Contents will automatically be updated when it's done."
@@ -158,11 +119,103 @@ msgstr ""
 "Güncelleme arkaplanda yapılıyor.\n"
 "Tamamlandığında, içerik otomatik olarak güncellenecektir."
 
-msgid "View RSS..."
-msgstr "RSS'lere bak..."
+#: ..\plugin.py:454 ..\plugin.py:522 ..\plugin.py:633
+msgid "Entry %s/%s"
+msgstr "Bildiri %s/%s"
 
+#: ..\plugin.py:455 ..\plugin.py:527
+msgid "Enclosures"
+msgstr "İlişkili bildiri"
+
+#: ..\plugin.py:475 ..\plugin.py:625
+msgid "Simple RSS Reader: %s"
+msgstr "Kolay RSS Okuyucu: %s"
+
+#: ..\plugin.py:479 ..\plugin.py:529
+msgid "No such Item."
+msgstr "Yeni bildirim yok."
+
+#: ..\plugin.py:636 ..\plugin.py:638
+msgid "Feed is empty."
+msgstr "Besleme boş."
+
+#: ..\plugin.py:712 ..\plugin.py:743
+msgid "Entries"
+msgstr "Bildirim"
+
+#: ..\plugin.py:713 ..\plugin.py:744
+msgid "Feed %s/%s"
+msgstr "Besleme %s/%s"
+
+#: ..\plugin.py:720
+msgid "Simple RSS Reader"
+msgstr "Kolay RSS Okuyucu"
+
+#: ..\plugin.py:751
+msgid "Close"
+msgstr "Kapat"
+
+#: ..\plugin.py:751
+msgid "Setup"
+msgstr "Kurulum"
+
+#: ..\plugin.py:751
+msgid "Update Feed"
+msgstr "Beslemeyi Güncelle"
+
+#: ..\plugin.py:752
 msgid "What to do?"
 msgstr "Ne yapmak istiyorsunuz?"
 
-msgid "none"
-msgstr "yok"
+#: ..\plugin.py:799
+msgid "New Items since last Auto-Update"
+msgstr "Son otomatik güncellemeden sonraki yeni bildirimler"
+
+#: ..\plugin.py:828
+msgid ""
+"Sorry, this type of feed is unsupported:\n"
+"%s"
+msgstr ""
+"Üzgünüm, bu besleme tipi desteklenmiyor:\n"
+"%s"
+
+#: ..\plugin.py:891
+msgid "Received %d new news item(s)."
+msgstr "%d yeni bildirim alındı."
+
+#: ..\plugin.py:1142
+msgid "trying to download the feed..."
+msgstr "beslemeyi indirmeye çalışıyorum..."
+
+#: ..\plugin.py:1208
+msgid "A simple to use RSS reader"
+msgstr "Kolay kullanımlı RSS okuyucu"
+
+#: ..\plugin.py:1210
+msgid "View RSS..."
+msgstr "RSS'lere bak..."
+
+#, python-format
+#~ msgid "%d Feed(s) were added to configuration."
+#~ msgstr "%d besleme(leri) eklendi."
+
+#~ msgid "Failed to get subscriptions from Google Reader."
+#~ msgstr "Google Reader abonelik bilgileri alınamadı."
+
+#~ msgid "Failed to login to Google Reader."
+#~ msgstr "Google Reader oturumu açılamadı."
+
+#~ msgid "Fetch feeds from Google Reader?"
+#~ msgstr "Google Reader beslemeleri alınsın mı?"
+
+#~ msgid "Found no Enclosure we can display."
+#~ msgstr "Gösterilmek üzere ilişkili bildiri bulunamadı."
+
+#~ msgid "Google Password"
+#~ msgstr "Google parola"
+
+#~ msgid "Google Username"
+#~ msgstr "Google kullanıcı adı"
+
+#~ msgid "Subscribe Newsfeed..."
+#~ msgstr "Haber beslemesine abone ol..."

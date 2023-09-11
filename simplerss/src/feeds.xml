@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<feeds>
+	<feed>
+		<name>Tagesschau.de</name>
+		<url>http://www.tagesschau.de/infoservices/alle-meldungen-100~rdf.xml</url>
+	</feed>
+	<feed>
+		<name>TV Spielfilm.de - TV-Tipps des Tages</name>
+		<url>https://www.tvspielfilm.de/tv-programm/rss/tipps.xml</url>
+	</feed>
+	<feed>
+		<name>kicker Teamnews FC Schalke 04</name>
+		<url>https://newsfeed.kicker.de/team/fc-schalke-04</url>
+	</feed>
+	<feed>
+		<name>Der Westen.de</name>
+		<url>https://www.derwesten.de/feed</url>
+	</feed>
+	<feed>
+		<name>SAT: Digitalfernsehen</name>
+		<url>http://www.digitalfernsehen.de/rss/rss.xml</url>
+	</feed>
+	<feed>
+		<name>SAT: Satellifax</name>
+		<url>http://www.satellifax.de/satellifax-rss.xml</url>
+	</feed>
+</feeds>
