@@ -409,7 +409,7 @@ class RSSBaseView(Screen):  # Base Screen for all Screens used in SimpleRSS
 		filelist = []
 		index = 0
 		for enclosure in enclosures:
-			if enclosure[1] in ["image/jpg", "image/png", "image/gif"]:
+			if enclosure[1] in ["image/jpg", "image/jpeg", "image/png", "image/gif"]:
 				filename = enclosure[0][enclosure[0].rfind("/") + 1:].lower()
 				if self.pollEnclosure(enclosure[0], join(TEMPPATH, filename)):
 					filelist.append(((join(TEMPPATH, filename), False), None))
