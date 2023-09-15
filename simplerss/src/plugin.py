@@ -27,7 +27,7 @@ from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from skin import parseFont
 from Tools import Notifications
-from Tools.Notifications import AddPopup, RemovePopup, AddNotificationWithID
+from Tools.Notifications import AddPopup, RemovePopup  # , AddNotificationWithID
 
 # PLUGIN IMPORTS
 from . import _  # for localized messages
@@ -410,7 +410,10 @@ class RSSBaseView(Screen):  # Base Screen for all Screens used in SimpleRSS
 		index = 0
 		for enclosure in enclosures:
 			if enclosure[1] in ["image/jpg", "image/jpeg", "image/png", "image/gif"]:
-				filename = enclosure[0][enclosure[0].rfind("/") + 1:].lower()
+				filename = enclosure[0][enclosure[0].rfind("/") + 1:].lower()  # remove URL-part like 'https://www.derwesten.de/wp-content/uploads/sites/8/2023/09/'
+				for itype in [".jpg", ".jpeg", ".png", ".gif"]:
+					if itype in filename:
+						filename = filename[:filename.find(itype) + len(itype)]  # remove extensions like '?w=1200&h=800&crop=1'
 				if self.pollEnclosure(enclosure[0], join(TEMPPATH, filename)):
 					filelist.append(((join(TEMPPATH, filename), False), None))
 				index = len(filelist) - 1
@@ -619,7 +622,7 @@ class RSSFeedView(RSSBaseView):  # Shows a RSS-Feed
 
 	def pollCallback(self, ident=None):
 		print("[%s] SimpleRSSFeed called back" % MODULE_NAME)
-		if (ident is None or ident + 1 == self.ident) and self.feed:
+		if (ident is None or (isinstance(ident, int) and ident + 1 == self.feed)) and self.feed:
 			self["content"].updateList(self.feed.history)
 			self.setConditionalTitle()
 			self.updateInfo()
@@ -644,7 +647,7 @@ class RSSFeedView(RSSBaseView):  # Shows a RSS-Feed
 			x(summary_text)
 
 	def menu(self):
-		if self.ident and self.id > 0:
+		if self.ident and self.ident > 0:
 			self.singleUpdate(self.ident - 1)
 
 	def nextEntry(self):
