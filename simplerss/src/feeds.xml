@@ -9,9 +9,9 @@
 		<url>https://www.tvspielfilm.de/tv-programm/rss/tipps.xml</url>
 	</feed>
 	<feed>
-		<name>kicker Teamnews FC Schalke 04</name>
-		<url>https://newsfeed.kicker.de/team/fc-schalke-04</url>
-	</feed>
+		<name>Sportbild</name>
+			<url>https://sportbild.bild.de/rss/vw-bundesliga-artikel/vw-bundesliga-artikel-45028194,sort=1,view=rss2.sport.xml</url>
+		</feed>
 	<feed>
 		<name>Der Westen.de</name>
 		<url>https://www.derwesten.de/feed</url>
@@ -23,5 +23,9 @@
 	<feed>
 		<name>SAT: Satellifax</name>
 		<url>http://www.satellifax.de/satellifax-rss.xml</url>
+	</feed>
+	<feed>
+		<name>kicker Teamnews FC Schalke 04</name>
+		<url>https://newsfeed.kicker.de/team/fc-schalke-04</url>
 	</feed>
 </feeds>

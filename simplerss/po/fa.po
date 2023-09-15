@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simple rss Persian Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-10 15:11+0200\n"
-"PO-Revision-Date: 2023-09-11 14:17+0200\n"
+"POT-Creation-Date: 2023-09-15 08:58+0200\n"
+"PO-Revision-Date: 2023-09-15 09:08+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
 "Language: fa_IR\n"
@@ -23,17 +23,17 @@ msgstr "اخطار"
 
 #: ..\plugin.py:49
 msgid "Preview"
-msgstr "پیش نمایش "
+msgstr "پیش نمایش"
 
 #: ..\plugin.py:49
 msgid "Ticker"
-msgstr ""
+msgstr "تیک تیک"
 
 #: ..\plugin.py:49
 msgid "none"
 msgstr "هیچ چی"
 
-#: ..\plugin.py:164 ..\plugin.py:799
+#: ..\plugin.py:164 ..\plugin.py:810
 msgid "New Items"
 msgstr "گزینه جدید"
 
@@ -43,7 +43,7 @@ msgstr "بروزرسانی خودکار"
 
 #: ..\plugin.py:180
 msgid "Feed URI"
-msgstr ""
+msgstr "خوراندن نشانی اینترنتی"
 
 #: ..\plugin.py:182 ..\plugin.py:223
 msgid "Cancel"
@@ -66,12 +66,12 @@ msgid "Delete"
 msgstr "حذف کردن"
 
 #: ..\plugin.py:227
-msgid "Import from '%sfeeds.xml"
-msgstr ""
+msgid "Import from '%sfeeds.xml'"
+msgstr "وارد شده از ٪sfeeds.xml»"
 
 #: ..\plugin.py:246
 msgid "Feed"
-msgstr ""
+msgstr "خوراک"
 
 #: ..\plugin.py:247
 msgid "Start automatically with Enigma2"
@@ -83,7 +83,7 @@ msgstr "در حال اجرا پس زمینه"
 
 #: ..\plugin.py:251
 msgid "Show new Messages as"
-msgstr "نمایش پیام جدید به عنوان ..."
+msgstr "نمایش پیام جدید به عنوان"
 
 #: ..\plugin.py:251
 msgid "Update Interval (min)"
@@ -93,98 +93,102 @@ msgstr "به روز رسانی بازه ی زمانی بر حسب دقیقه"
 msgid ""
 "Really delete this entry?\n"
 "It cannot be recovered!"
-msgstr ""
+msgstr "واقعا این ورودی حذف می شود؟ نمی توان ان را بازیابی کرد!"
 
-#: ..\plugin.py:312
+#: ..\plugin.py:316
 msgid ""
 "Importing '%s'\n"
 "%s feeds were imported successfully\n"
 "%s feeds were double and not imported"
 msgstr ""
+"در حال وارد کردن ٪s» ٪s فیدها با موفقیت وارد شدند ٪s خوراندنها دو برابر "
+"شده و وارد نشده است"
 
-#: ..\plugin.py:387
+#: ..\plugin.py:391
 msgid ""
 "Error while parsing Feed, this usually means there is something wrong with "
 "it."
 msgstr ""
-"اشکال تجزیه و تحلیل خبر ، که معمولا به معنی این است که خطایی همراه آن است "
+"اشکال تجزیه و تحلیل خبر ، که معمولا به معنی این است که خطایی همراه آن اس."
 
-#: ..\plugin.py:396
+#: ..\plugin.py:400
 msgid ""
 "Update is being done in Background.\n"
 "Contents will automatically be updated when it's done."
 msgstr ""
+"Update در Background در حال انجام است. محتویات به طور خودکار به روز می شود "
+"زمانی که ان را انجام می شود."
 
-#: ..\plugin.py:454 ..\plugin.py:522 ..\plugin.py:633
+#: ..\plugin.py:458 ..\plugin.py:526 ..\plugin.py:637
 msgid "Entry %s/%s"
-msgstr ""
+msgstr "ورودی ٪s/٪s"
 
-#: ..\plugin.py:455 ..\plugin.py:527
+#: ..\plugin.py:459 ..\plugin.py:531
 msgid "Enclosures"
 msgstr "ضمائم"
 
-#: ..\plugin.py:475 ..\plugin.py:625
+#: ..\plugin.py:479 ..\plugin.py:629
 msgid "Simple RSS Reader: %s"
-msgstr ""
+msgstr "خواننده RSS ساده: ٪s"
 
-#: ..\plugin.py:479 ..\plugin.py:529
+#: ..\plugin.py:483 ..\plugin.py:533
 msgid "No such Item."
-msgstr "نبود گزینه های زیاد"
+msgstr "نبود گزینه های زیا."
 
-#: ..\plugin.py:636 ..\plugin.py:638
+#: ..\plugin.py:640 ..\plugin.py:642
 msgid "Feed is empty."
-msgstr ""
+msgstr "خوراک خالی است."
 
-#: ..\plugin.py:712 ..\plugin.py:743
+#: ..\plugin.py:718 ..\plugin.py:748
 msgid "Entries"
 msgstr "نوشته ها"
 
-#: ..\plugin.py:713 ..\plugin.py:744
+#: ..\plugin.py:719 ..\plugin.py:749
 msgid "Feed %s/%s"
-msgstr ""
+msgstr "در حال تغذیه ٪s/٪s"
 
-#: ..\plugin.py:720
+#: ..\plugin.py:726
 msgid "Simple RSS Reader"
 msgstr "یک آر اس اس ساده"
 
-#: ..\plugin.py:751
+#: ..\plugin.py:756
 msgid "Close"
 msgstr "بستن"
 
-#: ..\plugin.py:751
+#: ..\plugin.py:756
 msgid "Setup"
 msgstr "راه اندازی"
 
-#: ..\plugin.py:751
+#: ..\plugin.py:756
 msgid "Update Feed"
-msgstr "بروزرسانی اخبار سایت ..."
+msgstr "بروزرسانی اخبار سایت"
 
-#: ..\plugin.py:752
+#: ..\plugin.py:757
 msgid "What to do?"
 msgstr "چه کاری انجام دهید؟"
 
-#: ..\plugin.py:799
+#: ..\plugin.py:810
 msgid "New Items since last Auto-Update"
 msgstr "گزینه جدید از زمان آخرین بروزرسانی"
 
-#: ..\plugin.py:828
+#: ..\plugin.py:839
 msgid ""
 "Sorry, this type of feed is unsupported:\n"
 "%s"
-msgstr ""
+msgstr "با عرض پوزش، این نوع خوراک پشتیبانی نمی شود: % s"
 
-#: ..\plugin.py:891
+#: ..\plugin.py:902
 msgid "Received %d new news item(s)."
-msgstr ""
+msgstr "٪d مورد خبری جدید دریافت شد."
 
-#: ..\plugin.py:1142
+#: ..\plugin.py:1154
 msgid "trying to download the feed..."
-msgstr ""
+msgstr "در تلاش برای دانلود خوراک..."
 
-#: ..\plugin.py:1208
+#: ..\plugin.py:1220
 msgid "A simple to use RSS reader"
-msgstr ""
+msgstr "ساده برای استفاده از RSS خوان"
 
-#: ..\plugin.py:1210
+#: ..\plugin.py:1222
 msgid "View RSS..."
-msgstr "نمایش آر اس اس"
+msgstr "نمایش آر اس اس."
