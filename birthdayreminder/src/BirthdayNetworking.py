@@ -12,8 +12,7 @@ from Components.config import config
 from . import _
 
 
-# this class handles UDP broadcasts (send/receive)
-class BroadcastProtocol(DatagramProtocol):
+class BroadcastProtocol(DatagramProtocol):  # this class handles UDP broadcasts (send/receive)
 	def __init__(self, parent):
 		self.parent = parent
 		self.port = config.plugins.birthdayreminder.broadcastPort.value
@@ -46,8 +45,7 @@ class BroadcastProtocol(DatagramProtocol):
 		return str(urandom(16))
 
 
-# the server classes are used to send and receive birthday lists
-class TransferServerProtocol(Protocol):
+class TransferServerProtocol(Protocol):  # the server classes are used to send and receive birthday lists
 	def __init__(self, parent):
 		self.parent = parent
 
@@ -57,10 +55,8 @@ class TransferServerProtocol(Protocol):
 
 	def dataReceived(self, data):
 		peer = self.transport.getPeer().host if self.transport else None
-
 		if data == "requestingList":
 			print("[Birthday Reminder] sending birthday list to client %s" % peer)
-
 			data = self.parent.readRawFile()
 			if data and self.transport:
 				self.transport.write(data)
@@ -71,15 +67,12 @@ class TransferServerProtocol(Protocol):
 				print("[Birthday Reminder] received birthday list from %s" % peer)
 			except Exception as err:
 				print("[Birthday Reminder] received unknown package from %s" % peer)
-
 			if receivedList is None:
 				return
-
 			self.parent.writeRawFile(data)
 			self.parent.load()
 			self.parent.addAllTimers()
 			self.parent.showReceivedMessage(len(receivedList), peer)
-
 		if self.transport:
 			self.transport.loseConnection()
 
@@ -99,8 +92,7 @@ class TransferServerFactory(ServerFactory):
 		return TransferServerProtocol(self.parent)
 
 
-# the client classes are used to request and receive birthday lists
-class TransferClientProtocol(Protocol):
+class TransferClientProtocol(Protocol):  # the client classes are used to request and receive birthday lists
 	def __init__(self, parent, data):
 		self.parent = parent
 		self.data = data
@@ -113,12 +105,9 @@ class TransferClientProtocol(Protocol):
 			print("[Birthday Reminder] received birthday list from %s" % peer)
 		except Exception as err:
 			print("[Birthday Reminder] received unknown package from %s" % peer)
-
 		if receivedList is None:
 			return
-
-		# save and load the received list
-		self.parent.save(receivedList)
+		self.parent.save(receivedList)  # save and load the received list
 		self.parent.load()
 		self.parent.addAllTimers()
 		self.parent.showReceivedMessage(len(receivedList), peer)
