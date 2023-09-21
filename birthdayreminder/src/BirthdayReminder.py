@@ -19,7 +19,6 @@ from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from skin import parseColor
 from Tools import Notifications
-
 from Screens.LocationBox import defaultInhibitDirs, LocationBox
 from Screens.Setup import Setup
 
@@ -27,6 +26,7 @@ from Screens.Setup import Setup
 from . import _
 
 CSVFILE = "/tmp/birthdayreminder.csv"
+MODULE_NAME = __name__.split(".")[-1]
 
 
 class BirthdayStore:
@@ -38,92 +38,77 @@ class BirthdayStore:
 		fileName = config.plugins.birthdayreminder.file.value
 		if isfile(fileName):
 			try:
-				f = open(fileName, "r")
-				data = f.read()
-				f.close()
-			except IOError as xxx_todo_changeme:
-				(error_no, error_str) = xxx_todo_changeme.args
-				print("[Birthday Reminder] ERROR reading from file %s. Error: %s, %s" % (fileName, error_no, error_str))
+				with open(fileName, "r") as f:
+					data = f.read()
+			except IOError as err:
+				(error_no, error_str) = err.args
+				print("[%s] ERROR reading from file %s. Error: %s, %s" % (MODULE_NAME, fileName, error_no, error_str))
 				text = _("Error reading file %s.\n\nError: %s, %s") % (fileName, error_no, error_str)
-				Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_ERROR)
-
+				Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_ERROR, timeout=3)
 		return data
 
 	def writeRawFile(self, data):
 		fileName = config.plugins.birthdayreminder.file.value
 		try:
-			f = open(fileName, "w")
-			f.write(data)
-			f.close()
-		except IOError as xxx_todo_changeme2:
-			(error_no, error_str) = xxx_todo_changeme2.args
-			print("[Birthday Reminder] ERROR writing to file %s. Error: %s, %s" % (fileName, error_no, error_str))
+			with open(fileName, "w") as f:
+				f.write(data)
+		except IOError as err:
+			(error_no, error_str) = err.args
+			print("[%s] ERROR writing to file %s. Error: %s, %s" % (MODULE_NAME, fileName, error_no, error_str))
 			text = _("Error writing file %s.\n\nError: %s, %s") % (fileName, error_no, error_str)
-			Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_ERROR)
+			Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_ERROR, timeout=3)
 
-	# read the birthday information from file
-	def loadStore(self):
+	def loadStore(self):  # read the birthday information from file
 		fileName = config.plugins.birthdayreminder.file.value
-		print("[Birthday Reminder] reading from file %s" % fileName)
-
+		print("[%s] reading from file %s" % (MODULE_NAME, fileName))
 		tmpList = []
 		if isfile(fileName):
 			try:
 				with open(fileName, "rb") as f:
 					tmpList = load(f)
-			except IOError as xxx_todo_changeme1:
-				(error_no, error_str) = xxx_todo_changeme1.args
-				print("[Birthday Reminder] ERROR reading from file %s. Error: %s, %s" % (fileName, error_no, error_str))
+			except IOError as err:
+				(error_no, error_str) = err.args
+				print("[%s] ERROR reading from file %s. Error: %s, %s" % (MODULE_NAME, fileName, error_no, error_str))
 				text = _("Error reading file %s.\n\nError: %s, %s") % (fileName, error_no, error_str)
-				Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_ERROR)
-
-			print("[Birthday Reminder] read %s birthdays" % len(tmpList))
+				Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_ERROR, timeout=3)
+			print("[%s] read %s birthdays" % (MODULE_NAME, len(tmpList)))
 		else:
-			print("[Birthday Reminder] File %s not found." % fileName)
-
+			print("[%s] File %s not found." % (MODULE_NAME, fileName))
 		self.bDayList = tmpList
 
-	# write the birthday information to file
-	def saveStore(self, data=None):
+	def saveStore(self, data=None):  # write the birthday information to file
 		fileName = config.plugins.birthdayreminder.file.value
-		print("[Birthday Reminder] writing to file %s" % fileName)
-
+		print("[%s] writing to file %s" % (MODULE_NAME, fileName))
 		try:
 			with open(fileName, "wb") as f:
 				dump(data if data else self.getBirthdayList(), f)
-			print("[Birthday Reminder] wrote %s birthdays to %s" % (self.getSize(), fileName))
-		except IOError as xxx_todo_changeme3:
-			(error_no, error_str) = xxx_todo_changeme3.args
-			print("[Birthday Reminder] ERROR writing to file %s. Error: %s, %s" % (fileName, error_no, error_str))
-			text = _("Error writing file %s.\n\nError: %s, %s") % (fileName, error_no, error_str)
-			Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_ERROR)
+			print("[%s] wrote %s birthdays to %s" % (MODULE_NAME, self.getSize(), fileName))
+		except IOError as err:
+			(error_no, error_str) = err.args
+			print("[%s] ERROR writing to file %s. Error: %s, %s" % (MODULE_NAME, fileName, error_no, error_str))
+			text = _("Error writing file %s.\n\nError: %s, %s") % (MODULE_NAME, fileName, error_no, error_str)
+			Notifications.AddNotification(MessageBox, text, type=MessageBox.TYPE_ERROR, timeout=3)
 
-	# return the number of birthdays in list
-	def getSize(self):
+	def getSize(self):  # return the number of birthdays in list
 		return len(self.bDayList)
 
-	# return the list of birthdays
-	def getBirthdayList(self):
+	def getBirthdayList(self):  # return the list of birthdays
 		return self.bDayList
 
-	# add a new entry to the list
-	def addEntry(self, entry):
+	def addEntry(self, entry):  # add a new entry to the list
 		self.bDayList.append(entry)
 		self.saveStore()
 
-	# remove an entry from the list
-	def removeEntry(self, idx):
+	def removeEntry(self, idx):  # remove an entry from the list
 		self.bDayList.pop(idx)
 		self.saveStore()
 
-	# update a list entry
-	def updateEntry(self, oldEntry, newEntry):
+	def updateEntry(self, oldEntry, newEntry):  # update a list entry
 		idx = self.bDayList.index(oldEntry)
 		self.bDayList[idx] = newEntry
 		self.saveStore()
 
-	# get a list entry
-	def getEntry(self, idx):
+	def getEntry(self, idx):  # get a list entry
 		return self.bDayList[idx]
 
 
@@ -158,79 +143,60 @@ class BirthdayReminder(Screen, HelpableScreen):
 	def __init__(self, session, birthdaytimer):
 		self.session = session
 		self.birthdaytimer = birthdaytimer
-
 		Screen.__init__(self, session)
+		self["key_red"] = StaticText(_("Add"))
+		self["key_green"] = StaticText("")
+		self["key_yellow"] = StaticText("")
+		self["key_blue"] = StaticText(_("Extras"))
+		self["name"] = Label(_("Name"))
+		self["birthday"] = Label(_("Birthday"))
+		self["age"] = Label(_("Age"))
+		self["list"] = BirthdayList(self.birthdaytimer.getBirthdayList())
 		HelpableScreen.__init__(self)
-
 		self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions",
 		{
 			"cancel": (self.exit, _("Exit the plugin")),
 		}, -1)
-
 		self["BaseActions"] = HelpableActionMap(self, "ColorActions",
 		{
 			"red": (self.addBirthday, _("Add a birthday")),
 			"blue": (self.openExtras, _("Open the extras menu")),
 		}, -1)
-
 		# this ActionMap can be enabled/disabled depending on the number of list entries
 		self["EditActions"] = HelpableActionMap(self, "ColorActions",
 		{
 			"green": (self.editBirthday, _("Edit the selected entry")),
 			"yellow": (self.removeBirthday, _("Remove the selected entry")),
 		}, -1)
-
 		self["ChannelSelectBaseActions"] = HelpableActionMap(self, "ChannelSelectBaseActions",
 		{
 			"prevBouquet": (self.changeSortingUp, _("Sorting next")),
 			"nextBouquet": (self.changeSortingDown, _("Sorting previous")),
 		}, -1)
-
-		self["key_red"] = StaticText(_("Add"))
-		self["key_green"] = StaticText("")
-		self["key_yellow"] = StaticText("")
-		self["key_blue"] = StaticText(_("Extras"))
-
-		self["name"] = Label(_("Name"))
-		self["birthday"] = Label(_("Birthday"))
-		self["age"] = Label(_("Age"))
-
-		self["list"] = BirthdayList(self.birthdaytimer.getBirthdayList())
 		self.setButtonState()
-
 		self.onLayoutFinish.append(self.cbOnLayoutFinished)
 
 	def cbOnLayoutFinished(self):
 		self.setListSorted()
 
-	# exit the plugin
-	def exit(self):
+	def exit(self):  # exit the plugin
 		self.close()
 
-	# add a birthday
-	def addBirthday(self):
+	def addBirthday(self):  # add a birthday
 		self.session.openWithCallback(self.cbAddBirthday, EditBirthdaySetting)
 
-	# edit a birthday
-	def editBirthday(self):
+	def editBirthday(self):  # edit a birthday
 		selected = self["list"].getCurrent()
-
-		if config.plugins.birthdayreminder.dateFormat.value == "mmddyyyy":
-			t = strptime(selected[1], "%m/%d/%Y")
-		else:
-			t = strptime(selected[1], "%d.%m.%Y")
-
+		t = strptime(selected[1], "%m/%d/%Y") if config.plugins.birthdayreminder.dateFormat.value == "mmddyyyy" else strptime(selected[1], "%d.%m.%Y")
 		newDate = date(*t[:3])
 		self.bDayBeforeChange = (selected[0], newDate)
 		self.session.openWithCallback(self.cbEditBirthday, EditBirthdaySetting, self.bDayBeforeChange)
 
-	# remove a birthday?
-	def removeBirthday(self):
+	def removeBirthday(self):  # remove a birthday?
 		selected = self["list"].getCurrent()
 		self.session.openWithCallback(self.cbDeleteBirthday, MessageBox, _("Do you really want to delete the entry for %s?") % selected[0], MessageBox.TYPE_YESNO)
 
-	# set the state of the buttons depending on the list size
-	def setButtonState(self):
+	def setButtonState(self):  # set the state of the buttons depending on the list size
 		if not self.birthdaytimer.getSize():  # no entries in list
 			self["EditActions"].setEnabled(False)
 			self["key_green"].setText("")
@@ -240,8 +206,7 @@ class BirthdayReminder(Screen, HelpableScreen):
 			self["key_green"].setText(_("Edit"))
 			self["key_yellow"].setText(_("Remove"))
 
-	# open extras menu
-	def openExtras(self):
+	def openExtras(self):  # open extras menu
 		choiceList = [(_("Export CSV file"), "csvexport"), (_("Import CSV file"), "csvimport"), (_("Distribute birthdays to other Dreamboxes"), "sendListOffer")]
 		self.session.openWithCallback(self.cbOpenExtras, ChoiceBox, title=_("What do you want to do?"), list=choiceList)
 
@@ -255,11 +220,9 @@ class BirthdayReminder(Screen, HelpableScreen):
 		elif result[1] == "sendListOffer":
 			self.sendListOffer()
 
-	# this callback is called when a birthday was added
-	def cbAddBirthday(self, name, birthday):
+	def cbAddBirthday(self, name, birthday):  # this callback is called when a birthday was added
 		if name == None and birthday == None:
 			return
-
 		entry = (name, birthday)
 		self.birthdaytimer.addEntry(entry)
 		self["list"].setList(self.birthdaytimer.getBirthdayList())
@@ -267,77 +230,57 @@ class BirthdayReminder(Screen, HelpableScreen):
 		self.birthdaytimer.addTimer(entry)
 		if config.plugins.birthdayreminder.preremind.value != "-1":
 			self.birthdaytimer.addTimer(entry, preremind=True)
-
 		self.setListSorted(newEntry=entry)
 
-	# this callback is called when a birthday was edited
-	def cbEditBirthday(self, name, birthday):
+	def cbEditBirthday(self, name, birthday):  # this callback is called when a birthday was edited
 		(oldName, oldBirthday) = self.bDayBeforeChange
 		if (name == oldName and birthday == oldBirthday) or (name == None and birthday == None):
 			return
-
 		newEntry = (name, birthday)
 		self.birthdaytimer.updateEntry(self.bDayBeforeChange, newEntry)
 		self.birthdaytimer.updateTimer(self.bDayBeforeChange, newEntry)
 		self["list"].updateList(self.birthdaytimer.getBirthdayList())
-
 		self.setListSorted(newEntry=newEntry)
 
-	# really delete the selected birthday entry?
-	def cbDeleteBirthday(self, result):
+	def cbDeleteBirthday(self, result):  # really delete the selected birthday entry?
 		if not result:
 			return
-
 		selected = self["list"].getCurrent()
-
-		if config.plugins.birthdayreminder.dateFormat.value == "mmddyyyy":
-			t = strptime(selected[1], "%m/%d/%Y")
-		else:
-			t = strptime(selected[1], "%d.%m.%Y")
-
+		t = strptime(selected[1], "%m/%d/%Y") if config.plugins.birthdayreminder.dateFormat.value == "mmddyyyy" else strptime(selected[1], "%d.%m.%Y")
 		newDate = date(*t[:3])
 		entry = (selected[0], newDate)
 		self.birthdaytimer.removeTimersForEntry(entry)
 		idx = self["list"].getIndex()
 		self.birthdaytimer.removeEntry(idx)
 		self["list"].setList(self.birthdaytimer.getBirthdayList())
-
-		# set selection
-		size = self.birthdaytimer.getSize()
+		size = self.birthdaytimer.getSize()  # set selection
 		if size > 1 and idx < size:
 			self["list"].setIndex(idx)
 		elif size > 1 and idx >= size:
 			self["list"].setIndex(size - 1)
-
 		self.setButtonState()
 
-	# change direction of sorting upwards
-	def changeSortingUp(self):
+	def changeSortingUp(self):  # change direction of sorting upwards
 		if config.plugins.birthdayreminder.sortby.value == "1":
 			config.plugins.birthdayreminder.sortby.value = "3"
 		else:
 			val = int(config.plugins.birthdayreminder.sortby.value) - 1
 			config.plugins.birthdayreminder.sortby.value = str(val)
-
 		config.plugins.birthdayreminder.sortby.save()
 		self.setListSorted()
 
-	# change direction of sorting downwards
-	def changeSortingDown(self):
+	def changeSortingDown(self):  # change direction of sorting downwards
 		if config.plugins.birthdayreminder.sortby.value == "3":
 			config.plugins.birthdayreminder.sortby.value = "1"
 		else:
 			val = int(config.plugins.birthdayreminder.sortby.value) + 1
 			config.plugins.birthdayreminder.sortby.value = str(val)
-
 		config.plugins.birthdayreminder.sortby.save()
 		self.setListSorted()
 
-	# birthday list sorting
-	def setListSorted(self, newEntry=None):
+	def setListSorted(self, newEntry=None):  # birthday list sorting
 		if not self.birthdaytimer.getSize():
 			return
-
 		if config.plugins.birthdayreminder.sortby.value == "1":  # sort by name
 			self["name"].instance.setForegroundColor(parseColor("yellow"))
 			self["birthday"].instance.setForegroundColor(parseColor("white"))
@@ -353,9 +296,7 @@ class BirthdayReminder(Screen, HelpableScreen):
 			self["birthday"].instance.setForegroundColor(parseColor("white"))
 			self["age"].instance.setForegroundColor(parseColor("yellow"))
 			self.birthdaytimer.bDayList.sort(key=cmp_to_key(self.compareAges))
-
 		self["list"].setList(self.birthdaytimer.getBirthdayList())
-
 		if newEntry:
 			newIdx = self["list"].getIndexForEntry(newEntry)
 			self["list"].setIndex(newIdx)
@@ -364,31 +305,26 @@ class BirthdayReminder(Screen, HelpableScreen):
 		x = x[1]
 		y = y[1]
 		today = date.today()
-
 		try:
 			bDay1 = x.replace(year=today.year)
 		except ValueError:  # raised on feb 29th
 			bDay1 = x.replace(year=today.year, day=x.day - 1)
-
 		if bDay1 < today:  # next birthday in next year
 			try:
 				bDay1 = x.replace(year=today.year + 1)
 			except ValueError:  # raised on feb 29th
 				bDay1 = x.replace(year=today.year + 1, day=x.day - 1)
 		ts1 = int(mktime(bDay1.timetuple()))
-
 		try:
 			bDay2 = y.replace(year=today.year)
 		except ValueError:  # raised on feb 29th
 			bDay2 = y.replace(year=today.year, day=y.day - 1)
-
 		if bDay2 < today:  # next birthday in next year
 			try:
 				bDay2 = y.replace(year=today.year + 1)
 			except ValueError:  # raised on feb 29th
 				bDay2 = y.replace(year=today.year + 1, day=y.day - 1)
 		ts2 = int(mktime(bDay2.timetuple()))
-
 		return ts1 - ts2
 
 	def compareAges(self, x, y):
@@ -396,7 +332,6 @@ class BirthdayReminder(Screen, HelpableScreen):
 		y = y[1]
 		ageX = getAge(x)
 		ageY = getAge(y)
-
 		if ageX == ageY:  # ages are the same, sort by birthday
 			tX = int(mktime(x.timetuple()))
 			tY = int(mktime(y.timetuple()))
@@ -405,71 +340,54 @@ class BirthdayReminder(Screen, HelpableScreen):
 			return ageX - ageY
 
 	def saveCSV(self):
-		print("[Birthday Reminder] exporting CSV file %s" % CSVFILE)
+		print("[%s] exporting CSV file %s" % (MODULE_NAME, CSVFILE))
 		try:
-			csvFile = open(CSVFILE, "w")
-			writer = csv_writer(csvFile)
-			writer.writerows(self.birthdaytimer.getBirthdayList())
-			csvFile.close()
-			self.session.open(MessageBox, _("Wrote CSV file %s.") % CSVFILE, MessageBox.TYPE_INFO)
-		except:
-			self.session.open(MessageBox, _("Can't write CSV file %s.") % CSVFILE, MessageBox.TYPE_ERROR)
+			with open(CSVFILE, "w") as csvFile:
+				writer = csv_writer(csvFile)
+				writer.writerows(self.birthdaytimer.getBirthdayList())
+			self.session.open(MessageBox, _("Wrote CSV file %s.") % CSVFILE, MessageBox.TYPE_INFO, timeout=3)
+		except Exception as err:
+			self.session.open(MessageBox, _("Can't write CSV file '%s'. Error: %s") % (CSVFILE, str(err)), MessageBox.TYPE_ERROR, timeout=3)
 
 	def loadCSV(self):
-		print("[Birthday Reminder] importing CSV file %s" % CSVFILE)
-
+		print("[%s] importing CSV file %s" % (MODULE_NAME, CSVFILE))
 		if not isfile(CSVFILE):
 			text = _("Can't find CSV file %s!") % CSVFILE
-			self.session.open(MessageBox, text, MessageBox.TYPE_ERROR)
+			self.session.open(MessageBox, text, MessageBox.TYPE_ERROR, timeout=3)
 			return
-
-		try:
-			csvFile = open(CSVFILE, "r")
-		except IOError as xxx_todo_changeme4:
-			(error_no, error_str) = xxx_todo_changeme4.args
-			text = _("Error reading file %s.\n\nError: %s, %s") % (CSVFILE, error_no, error_str)
-			self.session.open(MessageBox, text, MessageBox.TYPE_ERROR)
-			return
-
 		csvList = []
 		try:
-			reader = csv_reader(csvFile)
-
-			for row in reader:
-				name = row[0]
-				bDay = row[1]
-				t = strptime(bDay, "%Y-%m-%d")
-				mt = int(mktime(t))
-				newDate = date.fromtimestamp(mt)
-				entry = (name, newDate)
-				csvList.append(entry)
-
-			csvFile.close()
-		except:
-			text = _("Can't import CSV data from file %s.") % CSVFILE
-			self.session.open(MessageBox, text, MessageBox.TYPE_ERROR)
+			with open(CSVFILE, "r") as csvFile:
+				reader = csv_reader(csvFile)
+				for row in reader:
+					name = row[0]
+					bDay = row[1]
+					if bDay[:4].isdigit() and int(bDay[:4]) < 1910:  # avoid crashes due to E2-problem with mktime() and dates < 1901-12-15'
+						bDay = "1910%s" % bDay[4:]
+					newDate = date.fromtimestamp(mktime(strptime(bDay, "%Y-%m-%d")))
+					entry = (name, newDate)
+					csvList.append(entry)
+		except IOError as err:
+			(error_no, error_str) = err.args
+			text = _("Error reading file %s.\n\nError: %s, %s") % (CSVFILE, error_no, error_str)
+			self.session.open(MessageBox, text, MessageBox.TYPE_ERROR, timeout=3)
 			return
-
-		# the critical part is done, now update the lists and timers
-
-		self.birthdaytimer.bDayList = copy(csvList)
+		self.birthdaytimer.bDayList = copy(csvList)  # the critical part is done, now update the lists and timers
 		self.birthdaytimer.saveStore()
 		self["list"].setList(self.birthdaytimer.getBirthdayList())
 		self.setListSorted()
 		self.setButtonState()
-
 		self.birthdaytimer.timer_list = []
 		self.birthdaytimer.start()
-
-		self.session.open(MessageBox, _("CSV import successful!"), MessageBox.TYPE_INFO)
+		self.session.open(MessageBox, _("CSV import successful!"), MessageBox.TYPE_INFO, timeout=3)
 
 	def sendListOffer(self):
-		print("[Birthday Reminder] broadcasting list offer")
+		print("[%s] broadcasting list offer" % MODULE_NAME)
 		self.birthdaytimer.broadcastProtocol.sendBroadcast("offeringList")
 
 
 class BirthdayList(List):
-	def __init__(self, list=[]):
+	def __init__(self, list=None):
 		List.__init__(self, list=[])
 		self.__list = list
 
@@ -477,28 +395,21 @@ class BirthdayList(List):
 		self.__list = list
 		self.changed((self.CHANGED_ALL,))
 
-	# some kind of buildFunc replacement :)
-	def getList(self):
-		if config.plugins.birthdayreminder.dateFormat.value == "mmddyyyy":
-			format = "%m/%d/%Y"
-		else:
-			format = "%d.%m.%Y"
-
+	def getList(self):  # some kind of buildFunc replacement :)
+		dformat = "%m/%d/%Y" if config.plugins.birthdayreminder.dateFormat.value == "mmddyyyy" else "%d.%m.%Y"
 		l = []
-		for entry in self.__list:
-			name = entry[0]
-			birthday = entry[1].strftime(format)
-			age = str(getAge(entry[1]))
-			l.append((name, birthday, age))
-		return l
-
+		if self.__list:
+			for entry in self.__list:
+				name = entry[0]
+				birthday = entry[1].strftime(dformat)
+				age = str(getAge(entry[1]))
+				l.append((name, birthday, age))
+			return l
 	list = property(getList, setList)
 
 	def getIndexForEntry(self, entry):
-		if self.master is not None:
-			return self.__list.index(entry)
-		else:
-			return None
+		if self.__list:
+			return self.__list.index(entry) if self.master is not None else None
 
 
 class EditBirthdaySetting(Setup):
@@ -560,7 +471,6 @@ class BirthdayReminderSettings(Setup):
 				config.plugins.birthdayreminder.preremindChanged.setValue(True)  # there are no preremind timers, add new timers
 			else:
 				config.plugins.birthdayreminder.preremindChanged.setValue(False)  # change existing preremind timers
-
 		if config.plugins.birthdayreminder.notificationTime.value != self.notificationTime:
 			config.plugins.birthdayreminder.notificationTimeChanged.setValue(True)
 		Setup.keySave(self)
@@ -573,27 +483,15 @@ class BirthdayReminderLocationBox(LocationBox):
 	def __init__(self, session, initDir):
 		inhibit = defaultInhibitDirs
 		inhibit.remove("/etc")
-		LocationBox.__init__(
-			self,
-			session,
-			text=_("Select a path for the birthday file"),
-			currDir=join(initDir, ""),
-			inhibitDirs=inhibit,
-		)
+		LocationBox.__init__(self, session, text=_("Select a path for the birthday file"), currDir=join(initDir, ""), inhibitDirs=inhibit,)
 		self.skinName = ["WeatherSettingsLocationBox", "LocationBox"]
 
 
 def getAge(birthday):
 	today = date.today()
-
-	# take care of feb 29th, use feb 28th if necessary
 	try:
-		bDay = birthday.replace(year=today.year)
+		bDay = birthday.replace(year=today.year)  # take care of feb 29th, use feb 28th if necessary
 	except ValueError:  # raised on feb 29th
 		bDay = birthday.replace(year=today.year, day=birthday.day - 1)
-
 	age = today.year - birthday.year
-	if bDay > today:
-		return age - 1
-	else:
-		return age
+	return age - 1 if bDay > today else age
