@@ -1,0 +1,22 @@
+<skin>
+  <screen name="EPGExportConfiguration" position="center,170" size="1200,870" title="EPGExport">
+    <widget name="logo" position="20,10" size="150,60" transparent="1" alphatest="on" />
+    <widget name="buttonred" position="190,10" size="230,60" backgroundColor="#9f1313" font="Regular;24" halign="center" valign="center" foregroundColor="white" shadowColor="black" shadowOffset="-2,-2" />
+    <widget name="buttongreen" position="440,10" size="230,60" backgroundColor="#1f771f" font="Regular;24" halign="center" valign="center" foregroundColor="white" shadowColor="black" shadowOffset="-2,-2" />
+    <widget name="buttonyellow" position="690,10" size="230,60" backgroundColor="#a08500" font="Regular;24" halign="center" valign="center" foregroundColor="white" shadowColor="black" shadowOffset="-2,-2" />
+    <widget name="buttonblue" position="940,10" size="230,60" backgroundColor="#18188b" font="Regular;24" halign="center" valign="center" foregroundColor="white" shadowColor="black" shadowOffset="-2,-2" />
+    <eLabel backgroundColor="grey" position="20,80" size="1160,1" />
+    <widget name="config" position="20,90" size="1160,680" itemHeight="39" valign="center" enableWrapAround="1" scrollbarMode="showOnDemand" />
+    <eLabel backgroundColor="grey" position="20,780" size="1160,1" />
+    <widget name="statustext" position="20,790" size="1160,70" font="Regular;36" halign="center" valign="center" foregroundColor="white"/>
+  </screen>
+  <screen name="EPGExportSelection" position="center,170" size="1200,710" title="EPGExport Selection">
+    <widget name="logo" position="20,10" size="150,60" transparent="1" alphatest="on" />
+    <widget name="buttonred" position="190,15" size="230,60" backgroundColor="#9f1313" font="Regular;24" halign="center" valign="center" foregroundColor="white" shadowColor="black" shadowOffset="-2,-2" />
+    <widget name="buttongreen" position="440,15" size="230,60" backgroundColor="#1f771f" font="Regular;24" halign="center" valign="center" foregroundColor="white" shadowColor="black" shadowOffset="-2,-2" />
+    <widget name="buttonyellow" position="690,15" size="230,60" backgroundColor="#a08500" font="Regular;24" halign="center" valign="center" foregroundColor="white" shadowColor="black" shadowOffset="-2,-2" />
+    <widget name="buttonblue" position="940,15" size="230,60" backgroundColor="#18188b" font="Regular;24" halign="center" valign="center" foregroundColor="white" shadowColor="black" shadowOffset="-2,-2" />
+    <eLabel backgroundColor="grey" position="20,80" size="1160,1" />
+    <widget name="config" position="20,90" size="1160,610" itemHeight="39" valign="center" enableWrapAround="1" scrollbarMode="showOnDemand" />
+  </screen>
+</skin>

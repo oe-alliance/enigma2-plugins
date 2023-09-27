@@ -872,5 +872,9 @@ Series2Folder/meta/Makefile
 Series2Folder/po/Makefile
 Series2Folder/src/Makefile
 
+epgexport/Makefile
+epgexport/po/Makefile
+epgexport/src/Makefile
+
 ])
 AC_OUTPUT
