@@ -1,0 +1,351 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2023-09-24 12:21+0200\n"
+"PO-Revision-Date: 2023-09-30 23:24+0200\n"
+"Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
+"Language-Team: \n"
+"Language: pn_PL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 3.3.2\n"
+
+#: ..\orgplugin.py:84 ..\plugin.py:344
+msgid "Export EPG as XML"
+msgstr "Eksportuj EPG jako XML"
+
+#: ..\orgplugin.py:85 ..\plugin.py:384
+msgid "%s plugin - ver. %s"
+msgstr "%s plugin - ver. %s"
+
+#: ..\orgplugin.py:86 ..\plugin.py:1007
+msgid "Bouquet"
+msgstr "Bukiet"
+
+#: ..\orgplugin.py:86 ..\plugin.py:1007
+msgid "EPG Selection"
+msgstr "Wybór EPG"
+
+#: ..\orgplugin.py:87 ..\plugin.py:549 ..\plugin.py:1051
+msgid ""
+"%s plugin ver. %s\n"
+"\n"
+"(c) gutemine 2019\n"
+"\n"
+"Special Thanks to Rytec for the XMLTV Format !"
+msgstr ""
+"%s plugin ver. %s\n"
+"\n"
+"(c) gutemine 2019\n"
+"\n"
+"Specjalne podziękowania dla Rytec za format XMLTV!"
+
+#: ..\orgplugin.py:95
+msgid "no"
+msgstr "nie"
+
+#: ..\orgplugin.py:95
+msgid "yes"
+msgstr "tak"
+
+#: ..\orgplugin.py:99
+msgid "None"
+msgstr "Brak"
+
+#: ..\orgplugin.py:100 ..\plugin.py:69
+msgid "xz"
+msgstr "xz"
+
+#: ..\orgplugin.py:101 ..\plugin.py:70
+msgid "gz"
+msgstr "gz"
+
+#: ..\orgplugin.py:118 ..\orgplugin.py:119 ..\orgplugin.py:120
+#: ..\orgplugin.py:124 ..\orgplugin.py:646 ..\plugin.py:84 ..\plugin.py:85
+#: ..\plugin.py:86 ..\plugin.py:90
+msgid "Channel"
+msgstr "Kanał"
+
+#: ..\orgplugin.py:118 ..\orgplugin.py:119 ..\orgplugin.py:120
+#: ..\orgplugin.py:131 ..\orgplugin.py:653 ..\plugin.py:84 ..\plugin.py:85
+#: ..\plugin.py:86 ..\plugin.py:94
+msgid "Name"
+msgstr "Nazwa"
+
+#: ..\orgplugin.py:122 ..\orgplugin.py:123 ..\plugin.py:88 ..\plugin.py:89
+msgid "Language"
+msgstr "Język"
+
+#: ..\orgplugin.py:124 ..\plugin.py:90
+msgid "Number"
+msgstr "Numer"
+
+#: ..\orgplugin.py:125 ..\orgplugin.py:135 ..\orgplugin.py:810
+#: ..\orgplugin.py:816 ..\plugin.py:91 ..\plugin.py:599 ..\plugin.py:605
+msgid "Custom (%s)"
+msgstr "Niestandardowe (%s)"
+
+#: ..\orgplugin.py:129 ..\orgplugin.py:138 ..\plugin.py:94
+msgid "disabled"
+msgstr "wyłączony"
+
+#: ..\orgplugin.py:130 ..\orgplugin.py:651 ..\plugin.py:94
+msgid "IP Address"
+msgstr "Adres IP"
+
+#: ..\orgplugin.py:131 ..\orgplugin.py:653 ..\orgplugin.py:657
+#: ..\orgplugin.py:675 ..\plugin.py:94 ..\plugin.py:483
+msgid "Server IP"
+msgstr "IP serwera"
+
+#: ..\orgplugin.py:140
+msgid "Standard"
+msgstr "Standard"
+
+#: ..\orgplugin.py:149 ..\plugin.py:104
+msgid "always"
+msgstr "zawsze"
+
+#: ..\orgplugin.py:164 ..\plugin.py:68 ..\plugin.py:111
+msgid "none"
+msgstr "brak"
+
+#: ..\orgplugin.py:180 ..\plugin.py:129
+msgid "Favorites"
+msgstr "Ulubione"
+
+#: ..\orgplugin.py:555 ..\orgplugin.py:1266 ..\plugin.py:358 ..\plugin.py:984
+msgid "Exit"
+msgstr "Wyjście"
+
+#: ..\orgplugin.py:556 ..\orgplugin.py:1267 ..\plugin.py:359 ..\plugin.py:985
+msgid "Save"
+msgstr "Zapisz"
+
+#: ..\orgplugin.py:557 ..\orgplugin.py:574 ..\orgplugin.py:576
+#: ..\orgplugin.py:578 ..\orgplugin.py:680 ..\orgplugin.py:682
+#: ..\orgplugin.py:684 ..\orgplugin.py:725 ..\orgplugin.py:733
+#: ..\orgplugin.py:742 ..\orgplugin.py:744 ..\orgplugin.py:746
+#: ..\orgplugin.py:810 ..\plugin.py:360 ..\plugin.py:379 ..\plugin.py:381
+#: ..\plugin.py:383 ..\plugin.py:488 ..\plugin.py:490 ..\plugin.py:492
+#: ..\plugin.py:531 ..\plugin.py:536 ..\plugin.py:546 ..\plugin.py:599
+msgid "Downloading"
+msgstr "Pobieranie"
+
+#: ..\orgplugin.py:558 ..\orgplugin.py:655 ..\plugin.py:361
+msgid "Select"
+msgstr "Wybierz"
+
+#: ..\orgplugin.py:558 ..\plugin.py:361
+msgid "Bouquets"
+msgstr "Bukiety"
+
+#: ..\orgplugin.py:582 ..\orgplugin.py:625 ..\orgplugin.py:733
+#: ..\orgplugin.py:810 ..\plugin.py:400 ..\plugin.py:436 ..\plugin.py:536
+#: ..\plugin.py:599
+msgid "..."
+msgstr "..."
+
+#: ..\orgplugin.py:582 ..\orgplugin.py:625 ..\plugin.py:400 ..\plugin.py:436
+msgid "Configuration"
+msgstr "Konfiguracja"
+
+#: ..\orgplugin.py:582 ..\plugin.py:400
+msgid "Saving"
+msgstr "Oszczędzanie"
+
+#: ..\orgplugin.py:625 ..\plugin.py:436
+msgid "Leaving"
+msgstr "Odejście"
+
+#: ..\orgplugin.py:637
+msgid "Electronic Program Guide"
+msgstr "Elektroniczny przewodnik po programach"
+
+#: ..\orgplugin.py:637 ..\orgplugin.py:648
+msgid "XML"
+msgstr "XML"
+
+#: ..\orgplugin.py:638
+msgid "Location"
+msgstr "Lokalizacja"
+
+#: ..\orgplugin.py:639 ..\orgplugin.py:640 ..\orgplugin.py:642
+#: ..\orgplugin.py:725 ..\orgplugin.py:733 ..\orgplugin.py:742
+#: ..\orgplugin.py:744 ..\orgplugin.py:746 ..\orgplugin.py:754
+#: ..\orgplugin.py:824 ..\orgplugin.py:1124 ..\plugin.py:531 ..\plugin.py:536
+#: ..\plugin.py:546 ..\plugin.py:554 ..\plugin.py:612 ..\plugin.py:882
+msgid "EPG"
+msgstr "EPG"
+
+#: ..\orgplugin.py:639 ..\orgplugin.py:641
+msgid "Days"
+msgstr "Dni"
+
+#: ..\orgplugin.py:639 ..\orgplugin.py:642 ..\orgplugin.py:754
+#: ..\orgplugin.py:824 ..\orgplugin.py:1124 ..\plugin.py:554 ..\plugin.py:612
+#: ..\plugin.py:882
+msgid "Download"
+msgstr "Pobierz"
+
+#: ..\orgplugin.py:640
+msgid "Update"
+msgstr "Aktualizacja"
+
+#: ..\orgplugin.py:640 ..\orgplugin.py:641
+msgid "hours"
+msgstr "godziny"
+
+#: ..\orgplugin.py:641
+msgid "Keep outdated EPG (in hours)"
+msgstr "Zachowaj nieaktualne EPG (w godzinach)"
+
+#: ..\orgplugin.py:642 ..\orgplugin.py:644
+msgid "daily"
+msgstr "codzienny"
+
+#: ..\orgplugin.py:644
+msgid "StartTime"
+msgstr "Czas rozpoczęcia"
+
+#: ..\orgplugin.py:645 ..\plugin.py:454
+msgid "Compression"
+msgstr "Kompresja"
+
+#: ..\orgplugin.py:646
+msgid "ID"
+msgstr "ID"
+
+#: ..\orgplugin.py:647
+msgid "Background"
+msgstr "Tło"
+
+#: ..\orgplugin.py:647
+msgid "Twisted"
+msgstr "Twisted"
+
+#: ..\orgplugin.py:648
+msgid "Source"
+msgstr "Źródło"
+
+#: ..\orgplugin.py:649
+msgid "OpenWebIf Picon Location"
+msgstr "Lokalizacja pikon OpenWebIf"
+
+#: ..\orgplugin.py:654
+msgid "Configuration for the Webinterface"
+msgstr "Konfiguracja Webinterface"
+
+#: ..\orgplugin.py:655
+msgid "Restart GUI"
+msgstr "Uruchom ponownie GUI"
+
+#: ..\orgplugin.py:657
+msgid "Port"
+msgstr "Port"
+
+#: ..\orgplugin.py:677 ..\plugin.py:485
+msgid "Hostname"
+msgstr "Nazwa hosta"
+
+#: ..\orgplugin.py:742 ..\orgplugin.py:744 ..\orgplugin.py:746 ..\plugin.py:546
+msgid "Execution finished!!"
+msgstr "Wykonywanie zakończone!!"
+
+#: ..\orgplugin.py:754 ..\orgplugin.py:1268 ..\plugin.py:554 ..\plugin.py:986
+msgid "Reset"
+msgstr "Resetowanie"
+
+#: ..\orgplugin.py:754 ..\plugin.py:554
+msgid "Cache"
+msgstr "Pamięć podręczna"
+
+#: ..\orgplugin.py:810 ..\orgplugin.py:1124 ..\plugin.py:599 ..\plugin.py:882
+msgid "Channels"
+msgstr "Kanały"
+
+#: ..\orgplugin.py:816 ..\plugin.py:605
+msgid "not found"
+msgstr "nie znaleziono"
+
+#: ..\orgplugin.py:824 ..\plugin.py:612
+msgid "Finished"
+msgstr "Skończone"
+
+#: ..\orgplugin.py:824 ..\plugin.py:612
+msgid "Reload"
+msgstr "Przeładuj"
+
+#: ..\orgplugin.py:1124 ..\plugin.py:882
+msgid "Details"
+msgstr "Szczegóły"
+
+#: ..\orgplugin.py:1124 ..\plugin.py:882
+msgid "Info"
+msgstr "Informacje"
+
+#: ..\orgplugin.py:1269 ..\plugin.py:987
+msgid "About"
+msgstr "O wtyczce"
+
+#: ..\plugin.py:447
+msgid "Destination directory"
+msgstr "Katalog docelowy"
+
+#: ..\plugin.py:448
+msgid "EPG Download (Days)"
+msgstr "Pobieranie EPG (dni)"
+
+#: ..\plugin.py:449
+msgid "EPG Update (Hours)"
+msgstr "Pobieranie EPG (godziny)"
+
+#: ..\plugin.py:450
+msgid "Keep outdated EPG (Days)"
+msgstr "Przechowywanie nieaktualnego EPG (dni)"
+
+#: ..\plugin.py:451
+msgid "Daily EPG Download"
+msgstr "Codzienne EPG do pobrania"
+
+#: ..\plugin.py:453
+msgid "Daily StartTime"
+msgstr "Dzienny czas rozpoczęcia"
+
+#: ..\plugin.py:455
+msgid "Channel ID"
+msgstr "ID kanału"
+
+#: ..\plugin.py:456
+msgid "OpenWebIf Picon Location (XML-Source)"
+msgstr "OpenWebIf Picon Location (źródło XML)"
+
+#: ..\plugin.py:458
+msgid "Server IP Address"
+msgstr "Adres IP serwera"
+
+#: ..\plugin.py:460
+msgid "Server Name"
+msgstr "Nazwa serwera"
+
+#: ..\plugin.py:461
+msgid "Enable Plugin's own WebInterface (GUI restart required)"
+msgstr "Włącz własny interfejs sieciowy wtyczki (wymagane ponowne uruchomienie GUI)"
+
+#: ..\plugin.py:463
+msgid "Server Port (4000-4999)"
+msgstr "Port serwera (4000-4999)"
+
+#: ..\plugin.py:464
+msgid "Enable 'twisted'-mode for WebInterface (recommended)"
+msgstr "Włącz tryb \"twisted\" dla WebInterface (zalecane)"
+
+#: ..\plugin.py:465
+msgid "HINT: >>> Test Plugin's own WebInterface with 'BoxIP:Port/LastUpdate.txt' <<<"
+msgstr "WSKAZÓWKA: >>> Przetestuj własny interfejs sieciowy wtyczki za pomocą \"BoxIP:Port/LastUpdate.txt\" <<<"
