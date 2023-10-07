@@ -1,17 +1,17 @@
-from __future__ import absolute_import
+from os import access, chmod, X_OK
+from os.path import getsize
+from enigma import eEnv, eServiceCenter, iServiceInformation, eTimer
+
+from Components.ActionMap import ActionMap
+from Components.config import config, getConfigListEntry, ConfigNothing, ConfigSelection, ConfigText
+from Components.ConfigList import ConfigListScreen
+from Components.Sources.StaticText import StaticText
+from Components.Task import Job, job_manager as JobManager, Task
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
 from Screens.LocationBox import MovieLocationBox
-from Components.config import config, ConfigText, ConfigSelection, ConfigNothing, getConfigListEntry
-from Components.ActionMap import ActionMap
-from Components.ConfigList import ConfigList, ConfigListScreen
-from Components.Sources.StaticText import StaticText
-from enigma import eTimer, eServiceCenter, iServiceInformation, eConsoleAppContainer, eEnv
-from Components.Task import Task, Job, job_manager as JobManager
-from os import access, chmod, X_OK
-from os.path import getsize
 from .__init__ import _
 
 mcut_path = eEnv.resolve("${libdir}/enigma2/python/Plugins/Extensions/MovieCut/bin/mcut")
@@ -50,7 +50,7 @@ def _getCutsLength(filename, len_sec):
 						in_pts = None
 			if in_pts is not None and len_sec:
 				len_pts += len_sec * 90000 - in_pts
-	except:
+	except Exception:
 		pass
 	return len_pts / 90000
 
@@ -62,7 +62,7 @@ class MovieCut(ChoiceBox):
 		self.path = self.service.getPath()
 		info = serviceHandler.info(self.service)
 		if not info:
-			self.name = path
+			self.name = self.path
 			self.len = 0
 		else:
 			self.name = info.getName(self.service)
@@ -80,7 +80,7 @@ class MovieCut(ChoiceBox):
 		self.close()
 
 	def confirmed1(self, arg):
-		self.cut(self.name, self.path, self.path[:-3] + '_.ts', self.len, _getCutsLength(self.path, self.len), ["-r", self.path])
+		self.cut(self.name, self.path, self.path[:-3] + '.tmpcut.ts', self.len, _getCutsLength(self.path, self.len), ["-r", self.path])
 
 	def confirmed2(self, arg):
 		self.cut(self.name, self.path, self.path[:-3] + ' cut.ts', self.len, _getCutsLength(self.path, self.len), [self.path])
@@ -98,21 +98,21 @@ class MovieCut(ChoiceBox):
 			self.close()
 			return
 		clist = []
-		if ret[1] == True:
+		if ret[1] is True:
 			clist.append("-r")
 		clist.append(self.path)
-		if ret[2] != False:
+		if ret[2] is not False:
 			clist += ["-o", ret[2]]
 			outpath = ret[2]
-		elif ret[1] == True:
-			outpath = self.path[:-3] + '_.ts'
+		elif ret[1] is True:
+			outpath = self.path[:-3] + '.tmpcut.ts'
 		else:
 			outpath = self.path[:-3] + ' cut.ts'
-		if ret[3] != False:
+		if ret[3] is not False:
 			clist += ["-n", ret[3]]
-		if ret[4] != False:
+		if ret[4] is not False:
 			clist += ["-d", ret[4]]
-		if ret[5] != False:
+		if ret[5] is not False:
 			clist.append("-c")
 			clist += ret[5]
 			cut_len = 0
@@ -136,7 +136,7 @@ class MovieCut(ChoiceBox):
 						in_t = None
 				if in_t or cut_len > self.len:
 					cut_len = 0
-			except:
+			except Exception:
 				cut_len = 0
 		else:
 			cut_len = _getCutsLength(self.path, self.len)
@@ -172,13 +172,13 @@ class CutTask(Task):
 				self.end = getsize(self.inpath) * self.outlen / self.inlen
 				self.end += self.end / 50  # add 2% for a bit of leeway
 				self.progressTimer.start(1000)
-			except:
+			except Exception:
 				pass
 
 	def progressUpdate(self):
 		try:
 			self.setProgress(getsize(self.outpath))
-		except:
+		except Exception:
 			pass
 
 	def afterRun(self):
@@ -223,7 +223,7 @@ class AdvancedCutInput(Screen, ConfigListScreen):
 		self.input_title = ConfigText(default=title, fixed_size=False, visible_width=45)
 		self.input_descr = ConfigText(default=descr, fixed_size=False, visible_width=45)
 		tmp = config.movielist.videodirs.value
-		if not dir in tmp:
+		if dir not in tmp:
 			tmp.append(dir)
 		self.input_dir = ConfigSelection(choices=tmp, default=dir)
 		self.input_manual = ConfigSelection(choices=[("no", _("Cutlist")), ("yes", _("Manual specification"))], default="no")
@@ -256,27 +256,27 @@ class AdvancedCutInput(Screen, ConfigListScreen):
 		self.setTitle(_("Cut Parameter Input"))
 
 	def createSetup(self, configlist):
-		list = [
+		items = [
 			self.entry_replace
 		]
 		if self.input_replace.value == "no":
-			list.extend((
+			items.extend((
 				self.entry_file,
 				self.entry_dir,
 			))
-		list.extend((
+		items.extend((
 			self.entry_title,
 			self.entry_descr,
 			self.entry_manual,
 		))
 		if self.input_manual.value == "yes":
-			list.extend((
+			items.extend((
 				self.entry_space,
 				self.entry_manualcuts,
 			))
-		self.list = list
-		configlist.list = list
-		configlist.l.setList(list)
+		self.list = items
+		configlist.list = items
+		configlist.l.setList(items)
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -325,8 +325,10 @@ class AdvancedCutInput(Screen, ConfigListScreen):
 
 	def baseName(self, str):
 		name = str.split('/')[-1]
-		if name.endswith(".ts") is True:
+		if name.endswith(".ts"):
 			return name[:-3]
+		elif name.endswith(".stream"):
+			return name[:-7]
 		else:
 			return name
 
@@ -335,7 +337,9 @@ class AdvancedCutInput(Screen, ConfigListScreen):
 
 	def rejoinName(self, dir, name):
 		name = name.strip()
-		if name.endswith(".ts") is True:
+		if name.endswith(".ts"):
 			return dir + name[:-3]
+		elif name.endswith(".stream"):
+			return dir + name[:-7]
 		else:
 			return dir + name
