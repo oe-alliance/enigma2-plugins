@@ -577,6 +577,12 @@ char* makefilename(const char* base, const char* pre, const char* ext, const cha
   return buf;
 }
 
+const char *getext(const char *filename) {
+    const char *dot = strrchr(filename, '.');
+    if(!dot || dot == filename) return "";
+    return dot;
+}
+
 void copymeta(int n, int f1, int f2, const char* title, const char* suff, const char* descr)
 { 
   int i, j, k;
@@ -660,6 +666,7 @@ int main(int argc, char* argv[])
   char* tmpname;
   const char* suff = 0;
   char* inname = 0;
+  char* innameext = 0;
   char* outname = 0;
   char* title = 0;
   char* descr = 0;
@@ -732,20 +739,23 @@ int main(int argc, char* argv[])
     outname = inname;
     suff = (replace ? ".tmpcut" : " cut");
   }
-  tmpname = makefilename(inname, 0, ".ts", 0);
+
+  innameext = getext(inname);
+
+  tmpname = makefilename(inname, 0, innameext, 0);
   f_ts = open(tmpname, O_RDONLY | O_LARGEFILE);
   if (f_ts == -1) {
     printf("Failed to open input stream file \"%s\"\n", tmpname);
     exit(2);
   }
-  tmpname = makefilename(inname, 0, ".ts", ".cuts");
+  tmpname = makefilename(inname, 0, innameext, ".cuts");
   f_cuts = open(tmpname, O_RDONLY);
   if (f_cuts == -1 && !cutarg) {
     printf("Failed to open input cuts file \"%s\"\n", tmpname);
     close(f_ts);
     exit(3);
   }
-  tmpname = makefilename(inname, 0, ".ts", ".ap");
+  tmpname = makefilename(inname, 0, innameext, ".ap");
   f_ap = open(tmpname, O_RDONLY);
   if (f_ap == -1) {
     printf("Failed to open input ap file \"%s\"\n", tmpname);
@@ -753,7 +763,7 @@ int main(int argc, char* argv[])
     if (f_cuts != -1) close(f_cuts);
     exit(4);
   }
-  tmpname = makefilename(inname, 0, ".ts", ".sc");
+  tmpname = makefilename(inname, 0, innameext, ".sc");
   f_sc = open(tmpname, O_RDONLY);
 
   if (fstat64(f_ts, &statbuf64)) {
@@ -764,7 +774,7 @@ int main(int argc, char* argv[])
     if (f_cuts != -1) close(f_cuts);
     exit(2);
   }
-  tmpname = makefilename(outname, suff, ".ts", 0);
+  tmpname = makefilename(outname, suff, innameext, 0);
   f_out = open(tmpname, O_WRONLY | O_CREAT | O_EXCL | O_LARGEFILE, statbuf64.st_mode & 0xfff);
   if (f_out == -1) {
     printf("Failed to open output stream file \"%s\"\n", tmpname);
@@ -782,7 +792,7 @@ int main(int argc, char* argv[])
       close(f_ap);
       if (f_sc != -1) close(f_sc);
       close(f_cuts);
-      unlink(makefilename(outname, suff, ".ts", 0));
+      unlink(makefilename(outname, suff, innameext, 0));
       exit(3);
     } else {
       close(f_cuts);
@@ -790,7 +800,7 @@ int main(int argc, char* argv[])
     }
   }
   if (f_cuts != -1) {
-    tmpname = makefilename(outname, suff, ".ts", ".cuts");
+    tmpname = makefilename(outname, suff, innameext, ".cuts");
     f_cutsout = open(tmpname, O_WRONLY | O_CREAT | O_TRUNC, statbuf.st_mode & 0xfff);
     if (f_cutsout == -1) {
       printf("Failed to open output cuts file \"%s\"\n", tmpname);
@@ -799,7 +809,7 @@ int main(int argc, char* argv[])
       close(f_ap);
       if (f_sc != -1) close(f_sc);
       close(f_cuts);
-      unlink(makefilename(outname, suff, ".ts", 0));
+      unlink(makefilename(outname, suff, innameext, 0));
       exit(6);
     }
   } else
@@ -813,12 +823,12 @@ int main(int argc, char* argv[])
     if (f_cuts != -1) {
       close(f_cuts);
       close(f_cutsout);
-      unlink(makefilename(outname, suff, ".ts", ".cuts"));
+      unlink(makefilename(outname, suff, innameext, ".cuts"));
     }
-    unlink(makefilename(outname, suff, ".ts", 0));
+    unlink(makefilename(outname, suff, innameext, 0));
     exit(4);
   }
-  tmpname = makefilename(outname, suff, ".ts", ".ap");
+  tmpname = makefilename(outname, suff, innameext, ".ap");
   f_apout = open(tmpname, O_WRONLY | O_CREAT | O_TRUNC, statbuf.st_mode & 0xfff);
   if (f_apout == -1) {
     printf("Failed to open output ap file \"%s\"\n", tmpname);
@@ -829,9 +839,9 @@ int main(int argc, char* argv[])
     if (f_cuts != -1) {
       close(f_cuts);
       close(f_cutsout);
-      unlink(makefilename(outname, suff, ".ts", ".cuts"));
+      unlink(makefilename(outname, suff, innameext, ".cuts"));
     }
-    unlink(makefilename(outname, suff, ".ts", 0));
+    unlink(makefilename(outname, suff, innameext, 0));
     exit(7);
   }
   if (f_sc != -1 && fstat(f_sc, &statbuf)) {
@@ -839,7 +849,7 @@ int main(int argc, char* argv[])
     f_sc = -1;
   }
   if (f_sc != -1) {
-    tmpname = makefilename(outname, suff, ".ts", ".sc");
+    tmpname = makefilename(outname, suff, innameext, ".sc");
     f_scout = open(tmpname, O_WRONLY | O_CREAT | O_TRUNC, statbuf.st_mode & 0xfff);
     if (f_scout == -1) {
       printf("Failed to open output sc file \"%s\"\n", tmpname);
@@ -851,10 +861,10 @@ int main(int argc, char* argv[])
       if (f_cuts != -1) {
         close(f_cuts);
         close(f_cutsout);
-        unlink(makefilename(outname, suff, ".ts", ".cuts"));
+        unlink(makefilename(outname, suff, innameext, ".cuts"));
       }
-      unlink(makefilename(outname, suff, ".ts", 0));
-      unlink(makefilename(outname, suff, ".ts", ".ap"));
+      unlink(makefilename(outname, suff, innameext, 0));
+      unlink(makefilename(outname, suff, innameext, ".ap"));
       exit(7);
     }
   }
@@ -871,15 +881,15 @@ int main(int argc, char* argv[])
     if (f_cuts != -1) {
       close(f_cuts);
       close(f_cutsout);
-      unlink(makefilename(outname, suff, ".ts", ".cuts"));
+      unlink(makefilename(outname, suff, innameext, ".cuts"));
     }
     if (f_sc != -1) {
       close(f_sc);
       close(f_scout);
-      unlink(makefilename(outname, suff, ".ts", ".sc"));
+      unlink(makefilename(outname, suff, innameext, ".sc"));
     }
-    unlink(makefilename(outname, suff, ".ts", 0));
-    unlink(makefilename(outname, suff, ".ts", ".ap"));
+    unlink(makefilename(outname, suff, innameext, 0));
+    unlink(makefilename(outname, suff, innameext, ".ap"));
     exit(9);
   }
 
@@ -903,24 +913,24 @@ int main(int argc, char* argv[])
     close(f_scout);
   }
   if (ok < 0) {
-    printf("Copying %s failed, read/write error.\n", makefilename(inname, 0, ".ts", 0));
-    unlink(makefilename(outname, suff, ".ts", 0));
-    unlink(makefilename(outname, suff, ".ts", ".ap"));
+    printf("Copying %s failed, read/write error.\n", makefilename(inname, 0, innameext, 0));
+    unlink(makefilename(outname, suff, innameext, 0));
+    unlink(makefilename(outname, suff, innameext, ".ap"));
     if (f_cuts != -1)
-      unlink(makefilename(outname, suff, ".ts", ".cuts"));
+      unlink(makefilename(outname, suff, innameext, ".cuts"));
     if (f_sc != -1)
-      unlink(makefilename(outname, suff, ".ts", ".sc"));
+      unlink(makefilename(outname, suff, innameext, ".sc"));
     exit(10);
   }
 
   if (!replace) {
-    tmpname = makefilename(inname, 0, ".ts", ".eit", 1);
+    tmpname = makefilename(inname, 0, innameext, ".eit", 1);
     f_eit = open(tmpname, O_RDONLY);
     if (f_eit != -1) {
       if (fstat(f_eit, &statbuf))
         close(f_eit);
       else {
-        tmpname = makefilename(outname, suff, ".ts", ".eit", 1);
+        tmpname = makefilename(outname, suff, innameext, ".eit", 1);
         f_eitout = open(tmpname, O_WRONLY | O_CREAT | O_TRUNC, statbuf.st_mode & 0xfff);
         if (f_eitout == -1)
           close(f_eit);
@@ -934,7 +944,7 @@ int main(int argc, char* argv[])
   }
 
   metafailed = 0;
-  tmpname = makefilename(inname, 0, ".ts", ".meta");
+  tmpname = makefilename(inname, 0, innameext, ".meta");
   f_meta = open(tmpname, O_RDONLY);
   if (f_meta == -1) {
     metafailed = 1;
@@ -942,7 +952,7 @@ int main(int argc, char* argv[])
     metafailed = 1;
     close(f_meta);
   } else {
-    tmpname = makefilename(outname, suff, ".ts", ".meta");
+    tmpname = makefilename(outname, suff, innameext, ".meta");
     f_metaout = open(tmpname, O_WRONLY | O_CREAT | O_TRUNC, statbuf.st_mode & 0xfff);
     if (f_metaout == -1) {
       metafailed = 1;
@@ -956,48 +966,48 @@ int main(int argc, char* argv[])
 
   if (replace) {
     if (suff) {
-      tmpname = makefilename(inname, 0, ".ts", 0);
+      tmpname = makefilename(inname, 0, innameext, 0);
       tmpname = strcpy(new char[strlen(tmpname)+1], tmpname);
       unlink(tmpname);
-      rename(makefilename(outname, suff, ".ts", 0), tmpname);
-      tmpname = makefilename(inname, 0, ".ts", ".ap");
+      rename(makefilename(outname, suff, innameext, 0), tmpname);
+      tmpname = makefilename(inname, 0, innameext, ".ap");
       tmpname = strcpy(new char[strlen(tmpname)+1], tmpname);
       unlink(tmpname);
-      rename(makefilename(outname, suff, ".ts", ".ap"), tmpname);
+      rename(makefilename(outname, suff, innameext, ".ap"), tmpname);
       if (f_sc != -1) {
-        tmpname = makefilename(inname, 0, ".ts", ".sc");
+        tmpname = makefilename(inname, 0, innameext, ".sc");
         tmpname = strcpy(new char[strlen(tmpname)+1], tmpname);
         unlink(tmpname);
-        rename(makefilename(outname, suff, ".ts", ".sc"), tmpname);
+        rename(makefilename(outname, suff, innameext, ".sc"), tmpname);
       }
       if (f_cuts != -1) {
-        tmpname = makefilename(inname, 0, ".ts", ".cuts");
+        tmpname = makefilename(inname, 0, innameext, ".cuts");
         tmpname = strcpy(new char[strlen(tmpname)+1], tmpname);
         unlink(tmpname);
-        rename(makefilename(outname, suff, ".ts", ".cuts"), tmpname);
+        rename(makefilename(outname, suff, innameext, ".cuts"), tmpname);
       }
       if (!metafailed) {
-        tmpname = makefilename(inname, 0, ".ts", ".meta");
+        tmpname = makefilename(inname, 0, innameext, ".meta");
         tmpname = strcpy(new char[strlen(tmpname)+1], tmpname);
         unlink(tmpname);
-        rename(makefilename(outname, suff, ".ts", ".meta"), tmpname);
+        rename(makefilename(outname, suff, innameext, ".meta"), tmpname);
       }
     } else {
-      unlink(makefilename(inname, 0, ".ts", 0));
-      unlink(makefilename(inname, 0, ".ts", ".ap"));
+      unlink(makefilename(inname, 0, innameext, 0));
+      unlink(makefilename(inname, 0, innameext, ".ap"));
       if (f_sc != -1)
-        unlink(makefilename(inname, 0, ".ts", ".sc"));
+        unlink(makefilename(inname, 0, innameext, ".sc"));
       if (f_cuts != -1)
-        unlink(makefilename(inname, 0, ".ts", ".cuts"));
-      tmpname = makefilename(inname, 0, ".ts", ".eit", 1);
+        unlink(makefilename(inname, 0, innameext, ".cuts"));
+      tmpname = makefilename(inname, 0, innameext, ".eit", 1);
       tmpname = strcpy(new char[strlen(tmpname)+1], tmpname);
-      rename(tmpname, makefilename(outname, 0, ".ts", ".eit", 1));
+      rename(tmpname, makefilename(outname, 0, innameext, ".eit", 1));
       if (!metafailed) 
-        unlink(makefilename(inname, 0, ".ts", ".meta"));
+        unlink(makefilename(inname, 0, innameext, ".meta"));
       else {
-        tmpname = makefilename(inname, 0, ".ts", ".meta");
+        tmpname = makefilename(inname, 0, innameext, ".meta");
         tmpname = strcpy(new char[strlen(tmpname)+1], tmpname);
-        rename(tmpname, makefilename(outname, 0, ".ts", ".meta"));
+        rename(tmpname, makefilename(outname, 0, innameext, ".meta"));
       }
     }
   }
