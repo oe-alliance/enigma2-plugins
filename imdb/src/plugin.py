@@ -635,7 +635,7 @@ class IMDB(Screen, HelpableScreen):
 
 		if self.eventName:
 			self["statusbar"].setText(_("Query IMDb: %s") % self.eventName)
-			fetchurl = "https://www.imdb.com/find?q=" + quoteEventName(self.eventName) + "&s=tt"
+			fetchurl = "https://www.imdb.com/find?s=tt&q=" + quoteEventName(self.eventName)
 #			print("[IMDB] getIMDB() Downloading Query", fetchurl)
 			download = getPage(fetchurl, cookies=self.cookie)
 			download.addCallback(self.IMDBquery).addErrback(self.http_failed)
