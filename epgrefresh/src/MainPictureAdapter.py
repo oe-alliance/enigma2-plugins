@@ -1,5 +1,3 @@
-from __future__ import print_function
-
 import Screens.Standby
 
 # MessageBox
@@ -22,12 +20,16 @@ class MainPictureAdapter:
 		if config.plugins.epgrefresh.enablemessage.value:
 			Notifications.AddPopup(_("EPG refresh starts scanning channels."), MessageBox.TYPE_INFO, 4, STARTNOTIFICATIONID)
 		self.previousService = self.navcore.getCurrentlyPlayingServiceReference()
-		print("[EPGRefresh] DEBUG prepare.previousService=" + str(self.previousService))
+		print(f"[EPGRefresh] DEBUG prepare.previousService={str(self.previousService)}")
 		return True
 
 	def play(self, service):
 		print("[EPGRefresh.MainPictureAdapter.play]")
-		return self.navcore.playService(service)
+		try:
+			res = self.navcore.playService(service, ignoreStreamRelay=True)
+		except:
+			res = self.navcore.playService(service)
+		return res
 
 	def stop(self):
 		if self.previousService is not None or Screens.Standby.inStandby:
