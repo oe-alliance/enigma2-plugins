@@ -557,10 +557,15 @@ class AutoTimer:
 				offsetEnd = timer.offset[1]
 			else:
 				# Apply E2 Offset
-				begin -= config.recording.margin_before.value * 60
-				end += config.recording.margin_after.value * 60
-				offsetBegin = config.recording.margin_before.value * 60
-				offsetEnd = config.recording.margin_after.value * 60
+				marginBefore = config.recording.margin_before.value * 60
+				marginAfter = config.recording.margin_after.value * 60
+				if timer.justplay and hasattr(config.recording, "zap_margin_before"):
+					marginBefore = config.recording.zap_margin_before.value * 60
+					marginAfter = config.recording.zap_margin_after.value * 60
+				begin -= marginBefore
+				end += marginAfter
+				offsetBegin = marginBefore
+				offsetEnd = marginAfter
 
 			# Overwrite endtime if requested
 			if timer.justplay and not timer.setEndtime:
