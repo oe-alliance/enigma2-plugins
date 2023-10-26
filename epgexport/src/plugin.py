@@ -13,12 +13,14 @@
 #    - https://github.com/leaskovski/EPGExport/blob/master/src/plugin.py #
 #  2023-03-29 edit by s3n0:                                              #
 #    - source code modified for Python3 support                          #
+#    - CONTROL file (inside the IPK file) dependencies changed to:       #
+#      python3-requests python3-backports-lzma                           #
 ##########################################################################
 
 # PYTHON IMPORTS
 from backports.lzma import open as lzmaopen
 from os import mkdir, rmdir, symlink, remove, listdir, readlink
-from os.path import join, exists, islink, basename
+from os.path import join, exists, islink, basename, dirname
 from gzip import open as gzipopen
 from time import time, localtime, mktime, strftime
 from datetime import datetime
@@ -55,8 +57,8 @@ from . import _  # for localized messages
 global WebTimer
 global WebTimer_conn
 global AutoStartTimer
-Servicelist = None
-epgexport_version = "1.5-r1"
+SERVICELIST = None
+VERSION = "1.5-r2"
 EXPORTPATH = resolveFilename(SCOPE_SYSETC, "epgexport")  # /etc/epgexport/
 CHANNELS = join(EXPORTPATH, "epgexport.channels")
 DESTINATION = {"volatile": "/tmp/epgexport", "data": "/data/epgexport", "hdd": "/media/hdd/epgexport", "usb": "/media/usb/epgexport", "sdcard": "/media/sdcard/epgexport"}
@@ -177,13 +179,13 @@ def exportLastUpdate():
 
 
 def startEPGExport(session, **kwargs):
-	global Servicelist
-	servicelist = kwargs.get("servicelist", None)
-	if servicelist is None and InfoBar is not None:
+	global SERVICELIST
+	SERVICELIST = kwargs.get("SERVICELIST", None)
+	if SERVICELIST is None and InfoBar is not None:
 		InfoBarInstance = InfoBar.instance
 		if InfoBarInstance is not None:
-			servicelist = InfoBarInstance.servicelist
-	Servicelist = servicelist
+			SERVICELIST = InfoBarInstance.servicelist
+	SERVICELIST = SERVICELIST
 	session.open(EPGExportConfiguration)
 
 
@@ -212,12 +214,12 @@ def fixepgexport():
 			if not exists(EXPORTPATH):
 				symlink(select, EXPORTPATH)
 			else:
-				source = readlink(EXPORTPATH[: -1])
+				source = readlink(dirname(EXPORTPATH))
 				if source != select:
 					remove(EXPORTPATH)
 					symlink(select, EXPORTPATH)
 			cprint("Exportpath is %s" % select)
-		else:  # none
+		else:
 			if islink(EXPORTPATH):
 				remove(EXPORTPATH)
 			else:
@@ -378,7 +380,7 @@ class EPGExportConfiguration(ConfigListScreen, Screen):
 			self["buttonyellow"].setText("%s (%s)" % (_("Downloading"), "gz"))
 		else:
 			self["buttonyellow"].setText("%s (%s)" % (_("Downloading"), "xml"))
-		self.setTitle(_("%s plugin - ver. %s") % ("EPG Export", epgexport_version))
+		self.setTitle(_("%s - ver. %s") % ("EPG Export", VERSION))
 		self.refreshLayout
 
 	def save(self):
@@ -544,7 +546,7 @@ class EPGExportConfiguration(ConfigListScreen, Screen):
 		self.session.open(MessageBox, "%s %s %s:\n\n %s\n%s" % (_("EPG"), _("Downloading"), ctype, loaded.upper(), _("Execution finished!!")), MessageBox.TYPE_INFO, timeout=3)
 
 	def about(self):
-		self.session.open(MessageBox, _("%s plugin ver. %s\n\n(c) gutemine 2019\n\nSpecial Thanks to Rytec for the XMLTV Format !") % ("EPG Export", epgexport_version), MessageBox.TYPE_INFO)
+		self.session.open(MessageBox, _("%s plugin ver. %s\n\n(c) gutemine 2019\n\nSpecial Thanks to Rytec for the XMLTV Format !") % ("EPG Export", VERSION), MessageBox.TYPE_INFO)
 
 	def getText(self):
 		cprint("CLEANING EXPORT")
@@ -582,12 +584,12 @@ class EPGExport(Screen):
 		self.time_epoch = int(config.plugins.epgexport.days.value) * 60 * 24
 		self.slist = None
 		self.tree = None
-		global Servicelist
-		if Servicelist is None:
+		global SERVICELIST
+		if SERVICELIST is None:
 			InfoBarInstance = InfoBar.instance
 			if InfoBarInstance is not None:
-				Servicelist = InfoBarInstance.servicelist
-		cprint("servicelist: %s" % Servicelist)
+				SERVICELIST = InfoBarInstance.servicelist
+		cprint("SERVICELIST: %s" % SERVICELIST)
 		new = checkLastUpdate()
 		if new:
 			if config.plugins.epgexport.channelid.value == "xml":
@@ -611,18 +613,18 @@ class EPGExport(Screen):
 
 	def startingEPGExport(self):
 		cprint("starting EPG export...")
-		global Servicelist
+		global SERVICELIST
 		lang = config.osd.language.value
 		sp = []
 		sp = lang.split("_")
 		self.language = sp[0].lower()
-		if Servicelist:  # use current bouquet if none is found...
-			bouquet = Servicelist.getRoot()
+		if SERVICELIST:  # use current bouquet if none is found...
+			bouquet = SERVICELIST.getRoot()
 			serviceHandler = eServiceCenter.getInstance()
 			info = serviceHandler.info(bouquet)
 			bouquet_name = info.getName(bouquet)
 			cprint("DEFAULT bouquet %s" % bouquet_name)
-			all_bouquets = Servicelist.getBouquetList()
+			all_bouquets = SERVICELIST.getBouquetList()
 			self.services = []
 			for bouquets in all_bouquets:
 				bt = tuple(bouquets)
@@ -643,10 +645,10 @@ class EPGExport(Screen):
 
 	def getBouquetServices(self, bouquet):
 		services = []
-		Servicelist = eServiceCenter.getInstance().list(bouquet)
-		if Servicelist is not None:
+		SERVICELIST = eServiceCenter.getInstance().list(bouquet)
+		if SERVICELIST is not None:
 			while True:
-				service = Servicelist.getNext()
+				service = SERVICELIST.getNext()
 				if not service.valid():  # check if end of list
 					break
 				if service.flags & (eServiceReference.isDirectory | eServiceReference.isMarker):  # ignore non playable services
@@ -1046,4 +1048,4 @@ class EPGExportSelection(Screen, ConfigListScreen):
 		self.createSetup()
 
 	def about(self):
-		self.session.open(MessageBox, _("%s plugin ver. %s\n\n(c) gutemine 2019\n\nSpecial Thanks to Rytec for the XMLTV Format !") % ("EPG Export", epgexport_version), MessageBox.TYPE_INFO)
+			self.session.open(MessageBox, _("%s plugin ver. %s\n\n(c) gutemine 2019\n\nSpecial Thanks to Rytec for the XMLTV Format !") % ("EPG Export", VERSION), MessageBox.TYPE_INFO)
