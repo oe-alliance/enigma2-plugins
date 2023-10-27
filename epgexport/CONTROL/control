@@ -1,2 +1,2 @@
 Description: EPGExport Plugin
-Depends: enigma2
+Depends: enigma2, python-backports-lzma
