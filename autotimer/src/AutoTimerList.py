@@ -77,6 +77,11 @@ class AutoTimerList(MenuList):
 		except:
 			png = resolveFilename(SCOPE_CURRENT_SKIN, "skin-default/icons/timer_zap.png")
 		self.iconZapped = LoadPixmap(cached=True, path=png)
+		try:
+			png = resolveFilename(SCOPE_ACTIVE_SKIN, "div-h.png")
+		except:
+			png = resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/div-h.png")
+		self.sepLinePixmap = LoadPixmap(cached=True, path=png)
 
 		self.ServiceNameFont = gFont("Regular", 20)
 		self.EventNameFont = gFont("Regular", 20)
@@ -90,7 +95,6 @@ class AutoTimerList(MenuList):
 		self.typeIconWidth = self.iconRecording.size().width()
 		self.typeIconHeight = self.iconRecording.size().height()
 		self.iconMargin = 2
-		self.sepLinePixmap = None
 
 	def applySkin(self, desktop, parent):
 		def itemHeight(value):
