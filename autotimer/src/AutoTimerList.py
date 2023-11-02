@@ -1,36 +1,17 @@
-from os import path
-
-# -*- coding: UTF-8 -*-
-# for localized messages
-from . import _
-
-# GUI (Components)
-from skin import parseFont
-try:
-	 from skin import parameters
-	 skinparms = True
-except:
-	 skinparms = False
+from time import localtime, mktime, strftime, time
+from enigma import gFont, eListboxPythonMultiContent, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_BOTTOM, RT_VALIGN_TOP
 from Components.MenuList import MenuList
-from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_TOP, RT_VALIGN_BOTTOM
-from Tools.LoadPixmap import LoadPixmap
 from ServiceReference import ServiceReference
-
+from Tools.Directories import resolveFilename, SCOPE_GUISKIN
 from Tools.FuzzyDate import FuzzyTime
-from time import localtime, time, strftime, mktime
-
-from Tools.Directories import resolveFilename
-try:
-	from Tools.Directories import SCOPE_ACTIVE_SKIN
-except:
-	from Tools.Directories import SCOPE_CURRENT_SKIN
-
-from skin import parseFont
+from Tools.LoadPixmap import LoadPixmap
+from skin import parameters, parseFont
 try:
 	from Tools.TextBoundary import getTextBoundarySize
 	TextBoundary = True
 except:
 	TextBoundary = False
+from . import _
 
 
 class DAYS:
@@ -41,47 +22,27 @@ class DAYS:
 	FRIDAY = 4
 	SATURDAY = 5
 	SUNDAY = 6
-	WEEKEND = 'weekend'
-	WEEKDAY = 'weekday'
+	WEEKEND = "weekend"
+	WEEKDAY = "weekday"
 
 
 class AutoTimerList(MenuList):
 	"""Defines a simple Component to show Timer name"""
 #
-#  | <timername>  <timespan> | line 'EventNameFont'
-#  | <timeframe>      <days> | line 'DayNameFont'
-#  | <servicename>           | line 'ServiceNameFont'
+#  | <timername>  <timespan> | line "EventNameFont"
+#  | <timeframe>      <days> | line "DayNameFont"
+#  | <servicename>           | line "ServiceNameFont"
 #
 
 	def __init__(self, entries):
 		MenuList.__init__(self, entries, False, content=eListboxPythonMultiContent)
 		self.l.setBuildFunc(self.buildListboxEntry)
-		try:
-			png = resolveFilename(SCOPE_ACTIVE_SKIN, "icons/lock_off.png")
-		except:
-			png = resolveFilename(SCOPE_CURRENT_SKIN, "skin-default/icons/lock_off.png")
-		self.iconDisabled = LoadPixmap(cached=True, path=png)
+		self.iconDisabled = LoadPixmap(cached=True, path=resolveFilename(SCOPE_GUISKIN, "icons/lock_off.png"))
 		#currently intended that all icons have the same size
-		try:
-			png = resolveFilename(SCOPE_ACTIVE_SKIN, "icons/lock_on.png")
-		except:
-			png = resolveFilename(SCOPE_CURRENT_SKIN, "skin-default/icons/lock_on.png")
-		self.iconEnabled = LoadPixmap(cached=True, path=png)
-		try:
-			png = resolveFilename(SCOPE_ACTIVE_SKIN, "icons/timer_rec.png")
-		except:
-			png = resolveFilename(SCOPE_CURRENT_SKIN, "skin-default/icons/timer_rec.png")
-		self.iconRecording = LoadPixmap(cached=True, path=png)
-		try:
-			png = resolveFilename(SCOPE_ACTIVE_SKIN, "icons/timer_zap.png")
-		except:
-			png = resolveFilename(SCOPE_CURRENT_SKIN, "skin-default/icons/timer_zap.png")
-		self.iconZapped = LoadPixmap(cached=True, path=png)
-		try:
-			png = resolveFilename(SCOPE_ACTIVE_SKIN, "div-h.png")
-		except:
-			png = resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/div-h.png")
-		self.sepLinePixmap = LoadPixmap(cached=True, path=png)
+		self.iconEnabled = LoadPixmap(cached=True, path=resolveFilename(SCOPE_GUISKIN, "icons/lock_on.png"))
+		self.iconRecording = LoadPixmap(cached=True, path=resolveFilename(SCOPE_GUISKIN, "icons/timer_rec.png"))
+		self.iconZapped = LoadPixmap(cached=True, path=resolveFilename(SCOPE_GUISKIN, "icons/timer_zap.png"))
+		self.sepLinePixmap = LoadPixmap(cached=True, path=resolveFilename(SCOPE_GUISKIN, "div-h.png"))
 
 		self.ServiceNameFont = gFont("Regular", 20)
 		self.EventNameFont = gFont("Regular", 20)
@@ -122,13 +83,13 @@ class AutoTimerList(MenuList):
 			self.iconMargin = int(value)
 
 		def sepLinePixmap(value):
-			self.sepLinePixmap = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, value))
+			self.sepLinePixmap = LoadPixmap(resolveFilename(SCOPE_GUISKIN, value))
 
 		for (attrib, value) in list(self.skinAttributes):
 			try:
 				locals().get(attrib)(value)
 				self.skinAttributes.remove((attrib, value))
-			except:
+			except Exception:
 				pass
 		self.l.setItemHeight(self.itemHeight)
 		self.l.setFont(0, self.ServiceNameFont)
@@ -137,14 +98,8 @@ class AutoTimerList(MenuList):
 		return MenuList.applySkin(self, desktop, parent)
 
 	def buildListboxEntry(self, timer):
-		if not timer.enabled:
-			icon = self.iconDisabled
-		else:
-			icon = self.iconEnabled
-		if timer.justplay:
-			rectypeicon = self.iconZapped
-		else:
-			rectypeicon = self.iconRecording
+		icon = self.iconEnabled if timer.enabled else self.iconDisabled
+		rectypeicon = self.iconZapped if timer.justplay else self.iconRecording
 
 		height = self.l.getItemSize().height()
 		width = self.l.getItemSize().width()
@@ -169,20 +124,14 @@ class AutoTimerList(MenuList):
 			channel = _("[B]  ")
 			channel += ", ".join(bouquets)
 		else:
-			channel = _('All channels')
+			channel = _("All channels")
 
 		res = [None]
 		if icon:
-			if skinparms:
-				x, y, w, h = parameters.get("AutotimerEnabledIcon", (iconMargin, 0, statusIconHeight, statusIconWidth))
-			else:
-				x, y, w, h = (iconMargin, 0, statusIconHeight, statusIconWidth)
+			x, y, w, h = parameters.get("AutotimerEnabledIcon", (iconMargin, 0, statusIconHeight, statusIconWidth))
 			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, x, y, w, h, icon))
 		if rectypeicon:
-			if skinparms:
-				x, y, w, h = parameters.get("AutotimerRecordIcon", (iconMargin + statusIconWidth + iconMargin, 3, statusIconHeight, typeIconWidth))
-			else:
-				x, y, w, h = (iconMargin + statusIconWidth + iconMargin, 3, statusIconHeight, typeIconWidth)
+			x, y, w, h = parameters.get("AutotimerRecordIcon", (iconMargin + statusIconWidth + iconMargin, 3, statusIconHeight, typeIconWidth))
 			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, x, y, w, h, rectypeicon))
 
 		if timer.hasTimespan():
@@ -195,10 +144,7 @@ class AutoTimerList(MenuList):
 			timespan = _("  Any time")
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, int(float(width) / 10 * 4.5) - iconMargin, 2, int(width - float(width) / 10 * 4.5), rowHeight, 1, RT_HALIGN_RIGHT | RT_VALIGN_BOTTOM, timespan))
 
-		if TextBoundary:
-			timespanWidth = getTextBoundarySize(self.instance, self.EventNameFont, self.l.getItemSize(), timespan).width()
-		else:
-			timespanWidth = float(width) / 10 * 2
+		timespanWidth = getTextBoundarySize(self.instance, self.EventNameFont, self.l.getItemSize(), timespan).width() if TextBoundary else float(width) / 10 * 2
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, int(statusIconWidth + typeIconWidth + iconMargin * 3), 2, int(width - statusIconWidth - typeIconWidth - iconMargin * 3 - timespanWidth), rowHeight, 1, RT_HALIGN_LEFT | RT_VALIGN_BOTTOM, timer.name))
 
 		if timer.hasTimeframe():
@@ -214,25 +160,24 @@ class AutoTimerList(MenuList):
 			while count + 1 <= total:
 				day = timer.include[3][count]
 				day = {
-					'0': _("Mon"),
-					'1': _("Tue"),
-					'2': _("Wed"),
-					'3': _("Thur"),
-					'4': _("Fri"),
-					'5': _("Sat"),
-					'6': _("Sun"),
+					"0": _("Mon"),
+					"1": _("Tue"),
+					"2": _("Wed"),
+					"3": _("Thur"),
+					"4": _("Fri"),
+					"5": _("Sat"),
+					"6": _("Sun"),
 					"weekend": _("Weekend"),
 					"weekday": _("Weekday")
 					}[day]
 				days.append(day)
 				count += 1
-			days = ', '.join(days)
+			days = ", ".join(days)
 		else:
 			days = _("Everyday")
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, int(float(width) / 10 * 5.5) - iconMargin, rowSplit1, int(width - float(width) / 10 * 5.5), rowHeight, 2, RT_HALIGN_RIGHT | RT_VALIGN_TOP, days))
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, iconMargin, rowSplit2, int(width - (iconMargin * 2)), rowHeight, 0, RT_HALIGN_LEFT | RT_VALIGN_TOP, channel))
-		if self.sepLinePixmap:
-			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, 0, height - 2, width, 2, self.sepLinePixmap))
+		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, 0, height - 2, width, 2, self.sepLinePixmap))
 		return res
 
 	def getCurrent(self):
@@ -240,12 +185,8 @@ class AutoTimerList(MenuList):
 		return cur and cur[0]
 
 	def moveToEntry(self, entry):
-		if entry is None:
-			return
-
-		idx = 0
-		for x in self.list:
-			if x[0] == entry:
-				self.instance.moveSelectionTo(idx)
-				break
-			idx += 1
+		if entry is not None:
+			for idx, item in enumerate(self.list):
+				if item[0] == entry:
+					self.instance.moveSelectionTo(idx)
+					break
