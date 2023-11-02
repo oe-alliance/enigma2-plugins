@@ -42,7 +42,7 @@ class AutoTimerList(MenuList):
 		self.iconEnabled = LoadPixmap(cached=True, path=resolveFilename(SCOPE_GUISKIN, "icons/lock_on.png"))
 		self.iconRecording = LoadPixmap(cached=True, path=resolveFilename(SCOPE_GUISKIN, "icons/timer_rec.png"))
 		self.iconZapped = LoadPixmap(cached=True, path=resolveFilename(SCOPE_GUISKIN, "icons/timer_zap.png"))
-		self.sepLinePixmap = LoadPixmap(cached=True, path=resolveFilename(SCOPE_GUISKIN, "div-h.png"))
+		self.sepLinePixmap = None
 
 		self.ServiceNameFont = gFont("Regular", 20)
 		self.EventNameFont = gFont("Regular", 20)
