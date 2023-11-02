@@ -90,6 +90,7 @@ class AutoTimerList(MenuList):
 		self.typeIconWidth = self.iconRecording.size().width()
 		self.typeIconHeight = self.iconRecording.size().height()
 		self.iconMargin = 2
+		self.sepLinePixmap = None
 
 	def applySkin(self, desktop, parent):
 		def itemHeight(value):
@@ -115,6 +116,10 @@ class AutoTimerList(MenuList):
 
 		def iconMargin(value):
 			self.iconMargin = int(value)
+
+		def sepLinePixmap(value):
+			self.sepLinePixmap = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, value))
+
 		for (attrib, value) in list(self.skinAttributes):
 			try:
 				locals().get(attrib)(value)
@@ -184,7 +189,7 @@ class AutoTimerList(MenuList):
 			timespan = (("  %s ... %s") % (FuzzyTime(begintime)[1], FuzzyTime(endtime)[1]))
 		else:
 			timespan = _("  Any time")
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, int(float(width) / 10 * 4.5), 2, int(width - float(width) / 10 * 4.5), rowHeight, 1, RT_HALIGN_RIGHT | RT_VALIGN_BOTTOM, timespan))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, int(float(width) / 10 * 4.5) - iconMargin, 2, int(width - float(width) / 10 * 4.5), rowHeight, 1, RT_HALIGN_RIGHT | RT_VALIGN_BOTTOM, timespan))
 
 		if TextBoundary:
 			timespanWidth = getTextBoundarySize(self.instance, self.EventNameFont, self.l.getItemSize(), timespan).width()
@@ -220,13 +225,10 @@ class AutoTimerList(MenuList):
 			days = ', '.join(days)
 		else:
 			days = _("Everyday")
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, int(float(width) / 10 * 5.5), rowSplit1, int(width - float(width) / 10 * 5.5), rowHeight, 2, RT_HALIGN_RIGHT | RT_VALIGN_TOP, days))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, int(float(width) / 10 * 5.5) - iconMargin, rowSplit1, int(width - float(width) / 10 * 5.5), rowHeight, 2, RT_HALIGN_RIGHT | RT_VALIGN_TOP, days))
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, iconMargin, rowSplit2, int(width - (iconMargin * 2)), rowHeight, 0, RT_HALIGN_LEFT | RT_VALIGN_TOP, channel))
-		try:
-			devide = LoadPixmap(resolveFilename(SCOPE_ACTIVE_SKIN, "div-h.png"))
-		except:
-			devide = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/div-h.png"))
-		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, 0, height - 2, width, 2, devide))
+		if self.sepLinePixmap:
+			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, 0, height - 2, width, 2, self.sepLinePixmap))
 		return res
 
 	def getCurrent(self):
