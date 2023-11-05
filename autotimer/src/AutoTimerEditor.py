@@ -261,8 +261,12 @@ class AutoTimerEditorBase:
 			end = timer.getOffsetEnd()
 		else:
 			default = False
-			begin = 5
-			end = 5
+			if hasattr(config.recording, "zap_margin_before"):  # add support for new timer margins by openatv
+				begin = getattr(config.recording, "zap_margin_before" if timer.justplay else "margin_before").value
+				end = getattr(config.recording, "zap_margin_after" if timer.justplay else "margin_after").value
+			else:
+				begin = 5
+				end = 5
 		self.offset = NoSave(ConfigEnableDisable(default=default))
 		self.offsetbegin = NoSave(ConfigNumber(default=begin))
 		self.offsetend = NoSave(ConfigNumber(default=end))
@@ -466,9 +470,11 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 		# Summary
 		self.setup_title = _("AutoTimer Editor")
 		self.onChangedEntry = []
+		self.initEndTime = True
 
 		# We might need to change shown items, so add some notifiers
 		self.justplay.addNotifier(self.reloadList, initial_call=False)
+		self.setEndtime.addNotifier(self.reloadList, initial_call=False)
 		self.timespan.addNotifier(self.reloadList, initial_call=False)
 		self.timeframe.addNotifier(self.reloadList, initial_call=False)
 		self.offset.addNotifier(self.reloadList, initial_call=False)
@@ -556,6 +562,20 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self["help"].text = self.helpDict.get(cur[1], "")
 
 	def changed(self):
+		# add support for new timer margins by openatv
+		if hasattr(config.recording, "zap_margin_before"):
+			zap = self.justplay.value == "zap"
+			def reset():
+				self.offsetbegin.value = getattr(config.recording, "zap_margin_before" if zap else "margin_before").value
+				self.offsetend.value = getattr(config.recording, "zap_margin_after" if zap else "margin_after").value
+
+			if self.initEndTime and self["config"].getCurrent()[1] == self.justplay and zap:
+				self.setEndtime.value = getattr(config.recording, "zap_has_endtime").value
+				self.initEndTime = False
+				reset()
+			elif self["config"].getCurrent()[1] == self.offset and self.offset.value:
+				reset()
+
 		for x in self.onChangedEntry:
 			try:
 				x()
@@ -656,10 +676,9 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 
 		# Only allow editing offsets when it's enabled
 		if self.offset.value:
-			list.extend((
-				getConfigListEntry(_("Offset before recording (in m)"), self.offsetbegin),
-				getConfigListEntry(_("Offset after recording (in m)"), self.offsetend)
-			))
+			list.append(getConfigListEntry(_("Offset before recording (in m)"), self.offsetbegin))
+			if not self.justplay.value == "zap" or self.justplay.value == "zap" and self.setEndtime.value:
+				list.append(getConfigListEntry(_("Offset after recording (in m)"), self.offsetend))
 
 		list.append(getConfigListEntry(_("Set maximum duration"), self.duration))
 
@@ -898,6 +917,8 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 
 		# Offset
 		if self.offset.value:
+			if not self.setEndtime.value:
+				self.offsetend.value = 0
 			self.timer.offset = (self.offsetbegin.value * 60, self.offsetend.value * 60)
 		else:
 			self.timer.offset = None
@@ -1028,6 +1049,8 @@ class AutoTimerEditorSilent(AutoTimerEditor):
 
 		# Offset
 		if self.offset.value:
+			if not self.setEndtime.value:
+				self.offsetend.value = 0
 			self.timer.offset = (self.offsetbegin.value * 60, self.offsetend.value * 60)
 		else:
 			self.timer.offset = None
