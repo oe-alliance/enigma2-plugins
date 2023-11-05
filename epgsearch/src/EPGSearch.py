@@ -29,6 +29,7 @@ from Components.EpgList import EPGList, Rect, EPG_TYPE_SINGLE, EPG_TYPE_MULTI
 from Components.TimerList import TimerList
 from Components.Sources.ServiceEvent import ServiceEvent
 from Components.Sources.Event import Event
+from Components.Sources.StaticText import StaticText
 
 from Tools.BoundFunction import boundFunction
 
@@ -250,6 +251,8 @@ class EPGSearch(EPGSelection):
 		self["key_green"] = Button(_("Add Timer"))
 		self.key_green_choice = self.ADD_TIMER
 		self.key_red_choice = self.EMPTY
+		self["key_menu"] = StaticText(_("MENU"))
+		self["key_info"] = StaticText(_("INFO"))
 		self["list"] = EPGSearchList(type=self.type, selChangedCB=self.onSelectionChanged, timer=session.nav.RecordTimer)
 
 		self["dialogactions"] = HelpableActionMap(self, "WizardActions", {
