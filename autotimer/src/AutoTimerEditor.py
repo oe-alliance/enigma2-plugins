@@ -565,6 +565,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 		# add support for new timer margins by openatv
 		if hasattr(config.recording, "zap_margin_before"):
 			zap = self.justplay.value == "zap"
+
 			def reset():
 				self.offsetbegin.value = getattr(config.recording, "zap_margin_before" if zap else "margin_before").value
 				self.offsetend.value = getattr(config.recording, "zap_margin_after" if zap else "margin_after").value
