@@ -72,7 +72,7 @@ def timeSimilarityPercent(rtimer, evtBegin, evtEnd, timer=None):
 		# remove E2 offset
 		rtimerBegin = rtimer.begin + config.recording.margin_before.value * 60
 		rtimerEnd = rtimer.end - config.recording.margin_after.value * 60
-	#print("trimer [",rtimerBegin,",",rtimerEnd,"] (",rtimerEnd-rtimerBegin," s) after removing offsets")
+	#print("rtimer [",rtimerBegin,",",rtimerEnd,"] (",rtimerEnd-rtimerBegin," s) after removing offsets")
 	if (rtimerBegin <= evtBegin) and (evtEnd <= rtimerEnd):
 		commonTime = evtEnd - evtBegin
 	elif (evtBegin <= rtimerBegin) and (rtimerEnd <= evtEnd):
@@ -570,6 +570,7 @@ class AutoTimer:
 			# Overwrite endtime if requested
 			if timer.justplay and not timer.setEndtime:
 				end = begin
+				offsetEnd = 0
 
 			# Eventually change service to alternative
 			if timer.overrideAlternatives:
@@ -695,6 +696,7 @@ class AutoTimer:
 
 			newEntry.dirname = timer.destination
 			newEntry.justplay = timer.justplay
+			newEntry.hasEndTime = timer.setEndtime
 			newEntry.vpsplugin_enabled = timer.vps_enabled
 			newEntry.vpsplugin_overwrite = timer.vps_overwrite
 
