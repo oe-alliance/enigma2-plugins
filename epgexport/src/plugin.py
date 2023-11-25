@@ -36,13 +36,13 @@ from xml.etree.ElementTree import tostring, parse
 
 # ENIGMA IMPORTS
 from enigma import getDesktop, eTimer, eEPGCache, eServiceCenter, eServiceReference
+from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import ActionMap
-from Components.config import config, ConfigText, ConfigYesNo, ConfigInteger, ConfigSelection, ConfigEnableDisable, ConfigSubsection, getConfigListEntry, ConfigIP, ConfigSubList, ConfigClock
-from Components.ConfigList import ConfigListScreen, ConfigList
-from Components.Label import Label
+from Components.config import config, ConfigText, ConfigYesNo, ConfigInteger, ConfigSelection, ConfigSubsection, getConfigListEntry, ConfigIP, ConfigSubList, ConfigClock
 from Components.Network import iNetwork
 from Components.Pixmap import Pixmap
 from Components.Renderer.Picon import getPiconName
+from Components.Sources.StaticText import StaticText
 from Screens.InfoBar import InfoBar
 from Plugins.Plugin import PluginDescriptor
 from Screens.MessageBox import MessageBox
@@ -58,8 +58,8 @@ global WebTimer
 global WebTimer_conn
 global AutoStartTimer
 SERVICELIST = None
-VERSION = "1.5-r2"
-EXPORTPATH = resolveFilename(SCOPE_SYSETC, "epgexport")  # /etc/epgexport/
+VERSION = "1.5-r3"
+EXPORTPATH = "%s%s" % (resolveFilename(SCOPE_SYSETC), "epgexport/")  # /etc/epgexport/
 CHANNELS = join(EXPORTPATH, "epgexport.channels")
 DESTINATION = {"volatile": "/tmp/epgexport", "data": "/data/epgexport", "hdd": "/media/hdd/epgexport", "usb": "/media/usb/epgexport", "sdcard": "/media/sdcard/epgexport"}
 
@@ -105,7 +105,7 @@ reload_options.append(("0", _("always")))
 for hours in range(1, 25):
 	reload_options.append((str(hours), str(hours)))
 config.plugins.epgexport.reload = ConfigSelection(default="0", choices=reload_options)
-config.plugins.epgexport.daily = ConfigEnableDisable(default=False)
+config.plugins.epgexport.hours = ConfigSelection(default=0, choices=[("0", _("disabled")), ("1", _("every hour")), ("2", _("every 2 hours")), ("6", _("every 6 hours")), ("12", _("every 12 hours")), ("24", _("daily"))])
 config.plugins.epgexport.wakeup = ConfigClock(default=((6 * 60) + 45) * 60)
 outdated_options = []
 outdated_options.append(("0", _("none")))
@@ -180,12 +180,12 @@ def exportLastUpdate():
 
 def startEPGExport(session, **kwargs):
 	global SERVICELIST
-	SERVICELIST = kwargs.get("SERVICELIST", None)
-	if SERVICELIST is None and InfoBar is not None:
+	slist = kwargs.get("SERVICELIST", None)
+	if slist is None and InfoBar is not None:
 		InfoBarInstance = InfoBar.instance
 		if InfoBarInstance is not None:
-			SERVICELIST = InfoBarInstance.servicelist
-	SERVICELIST = SERVICELIST
+			slist = InfoBarInstance.servicelist
+	SERVICELIST = slist
 	session.open(EPGExportConfiguration)
 
 
@@ -253,7 +253,7 @@ class EPGExportAutoStartTimer:  # class for Autostart of EPG Export
 		self.update()
 
 	def getWakeTime(self):
-		if config.plugins.epgexport.daily.value:
+		if int(config.plugins.epgexport.hours.value):
 			clock = config.plugins.epgexport.wakeup.value
 			nowt = time()
 			now = localtime(nowt)
@@ -268,7 +268,7 @@ class EPGExportAutoStartTimer:  # class for Autostart of EPG Export
 		now = int(time())
 		if wake > 0:
 			if wake < now + atLeast:
-				wake += 24 * 3600  # Tomorrow
+				wake += int(config.plugins.epgexport.wakeup.value) * 3600  # next in x hours
 			tnext = wake - now
 			self.EPGExportTimer.startLongTimer(tnext)
 			cprint("WakeUpTime now set to %d seconds (now=%d)" % (tnext, now))
@@ -324,7 +324,7 @@ def startingCustomEPGExternal():
 	root.putChild(b"epgexport.channels.xml", resourceChannels)
 	root.putChild(b"epgexport.channels.xml.gz", resourceChannels)
 	root.putChild(b"epgexport.channels.xml.xz", resourceChannels)
-	root.putChild(b"epgexport", resourcePrograms)
+	root.putChild(b"epgexport.xml", resourcePrograms)
 	root.putChild(b"epgexport.gz", resourcePrograms)
 	root.putChild(b"epgexport.xz", resourcePrograms)
 	factory = Site(root)
@@ -346,42 +346,64 @@ def Plugins(**kwargs):
 
 
 class EPGExportConfiguration(ConfigListScreen, Screen):
-	def __init__(self, session, args=0):
-		Screen.__init__(self, session)
-		self.session = session
-		self.skin = readSkin("EPGExportConfiguration")
-		self.list = []
-		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
+	def __init__(self, session):
+		skin = readSkin("EPGExportConfiguration")
+		self.skin = skin
 		self.onChangedEntry = []  # explicit check on every entry
-		self["statustext"] = Label("")
+		Screen.__init__(self, session, skin)
+		ConfigListScreen.__init__(self, [])
+		self["config"].onSelectionChanged.append(self.selectionChanged)
+		self["headline"] = StaticText()
+		self["statustext"] = StaticText()
 		self["logo"] = Pixmap()
-		self["buttonred"] = Label(_("Exit"))
-		self["buttongreen"] = Label(_("Save"))
-		self["buttonyellow"] = Label("")
-		self["buttonblue"] = Label(_("Select") + " " + _("Bouquets"))
-		self["actions"] = ActionMap(
-				["SetupActions", "ColorActions", "ChannelSelectEPGActions", "InfobarTeletextActions"], {
-					"exit": self.cancel,
-					"cancel": self.cancel,
-					"red": self.cancel,
-					"green": self.save,
-					"yellow": self.yellow_key,
-					"blue": self.blue_key,
-					"showEPGList": self.about,
-					"startTeletext": self.getText})
-		self.createSetup()
-		self.onLayoutFinish.append(self.setWindowTitle)
+		self["buttonred"] = StaticText(_("Exit"))
+		self["buttongreen"] = StaticText(_("Save"))
+		ftypes = {"xz": "xz", "gz": "gz", "none": "xml"}
+		ftype = ftypes.get(config.plugins.epgexport.compression.value, "{Error}")
+		self["buttonyellow"] = StaticText("%s (%s)" % (_("Downloading"), ftype))
+		self["buttonblue"] = StaticText(_("Select") + " " + _("Bouquets"))
+		self["actions"] = ActionMap(["ChannelSelectEPGActions",
+									"InfobarTeletextActions",
+									"SetupActions",
+									"ColorActions"], {"exit": self.cancel,
+														"cancel": self.cancel,
+														"red": self.cancel,
+														"green": self.save,
+														"yellow": self.yellow_key,
+														"blue": self.blue_key,
+														"showEPGList": self.about,
+														"startTeletext": self.getText})
+		self.refreshLayout()
+		self.onLayoutFinish.append(self.onLayoutFinished)
 
-	def setWindowTitle(self):
+	def onLayoutFinished(self):
+		self["headline"].setText(_("%s - ver. %s") % ("EPG Export", VERSION))
 		self["logo"].instance.setPixmapFromFile("%s/epgexport.png" % resolveFilename(SCOPE_PLUGINS, "Extensions/EPGExport"))
-		if config.plugins.epgexport.compression.value == "xz":
-			self["buttonyellow"].setText("%s (%s)" % (_("Downloading"), "xz"))
-		elif config.plugins.epgexport.compression.value == "gz":
-			self["buttonyellow"].setText("%s (%s)" % (_("Downloading"), "gz"))
-		else:
-			self["buttonyellow"].setText("%s (%s)" % (_("Downloading"), "xml"))
-		self.setTitle(_("%s - ver. %s") % ("EPG Export", VERSION))
-		self.refreshLayout
+		self.refreshLayout()
+
+	def refreshLayout(self):
+		clist = []
+		clist.append(getConfigListEntry(_("Destination directory"), config.plugins.epgexport.epgexport))
+		clist.append(getConfigListEntry(_("EPG Download (Days)"), config.plugins.epgexport.days))
+		clist.append(getConfigListEntry(_("EPG Update (Hours)"), config.plugins.epgexport.reload))
+		clist.append(getConfigListEntry(_("Keep outdated EPG (Days)"), config.plugins.epgexport.outdated))
+		clist.append(getConfigListEntry(_("Recurring EPG Download"), config.plugins.epgexport.hours))
+		if int(config.plugins.epgexport.hours.value):
+			clist.append(getConfigListEntry(_("StartTime"), config.plugins.epgexport.wakeup))
+		clist.append(getConfigListEntry(_("Compression"), config.plugins.epgexport.compression))
+		clist.append(getConfigListEntry(_("Channel ID"), config.plugins.epgexport.channelid))
+		clist.append(getConfigListEntry(_("OpenWebIf Picon Location (XML-Source)"), config.plugins.epgexport.server))
+		if config.plugins.epgexport.server.value == "ip":
+			clist.append(getConfigListEntry(_("Server IP Address"), config.plugins.epgexport.ip))
+		if config.plugins.epgexport.server.value == "name":
+			clist.append(getConfigListEntry(_("Server Name"), config.plugins.epgexport.hostname))
+		clist.append(getConfigListEntry(_("Enable Plugin's own WebInterface (GUI restart required)"), config.plugins.epgexport.webinterface))
+		if config.plugins.epgexport.webinterface.value:
+			clist.append(getConfigListEntry(_("Server Port (4000-4999)"), config.plugins.epgexport.port))
+			clist.append(getConfigListEntry(_("Enable 'twisted'-mode for WebInterface (recommended)"), config.plugins.epgexport.twisted))
+			clist.append(("\n",))
+			clist.append((_("HINT: >>> Test Plugin's own WebInterface with 'BoxIP:Port/LastUpdate.txt' <<<"),))
+		self["config"].setList(clist)
 
 	def save(self):
 		epgexport_string = """<?xml version="1.0" encoding="latin-1"?>
@@ -425,10 +447,12 @@ class EPGExportConfiguration(ConfigListScreen, Screen):
 			with open(join(resolveFilename(SCOPE_SYSETC, "epgexport"), "epgload/epgexport.sources.xml"), "w+") as f:
 				f.write(epg_string)
 		else:
-			if exists(join(resolveFilename(SCOPE_SYSETC, "epgexport"), "epgimport/epgexport.sources.xml")):
-				remove(join(resolveFilename(SCOPE_SYSETC, "epgexport"), "epgimport/epgexport.sources.xml"))
-			if exists(join(resolveFilename(SCOPE_SYSETC, "epgexport"), "epgload/epgexport.sources.xml")):
-				remove(join(resolveFilename(SCOPE_SYSETC, "epgexport"), "epgload/epgexport.sources.xml"))
+			file = join(resolveFilename(SCOPE_SYSETC, "epgexport"), "epgimport/epgexport.sources.xml")
+			if exists(file):
+				remove(file)
+			file = join(resolveFilename(SCOPE_SYSETC, "epgexport"), "epgload/epgexport.sources.xml")
+			if exists(file):
+				remove(file)
 		fixepgexport()
 		self.close(True)
 
@@ -438,41 +462,6 @@ class EPGExportConfiguration(ConfigListScreen, Screen):
 			if len(x) > 1:
 				x[1].cancel()
 		self.close(False)
-
-	def createSetup(self):  # init only on first run
-		self.refreshLayout(True)
-
-	def refreshLayout(self, first=False):
-		self.list = []
-		self.list.append(getConfigListEntry(_("Destination directory"), config.plugins.epgexport.epgexport))
-		self.list.append(getConfigListEntry(_("EPG Download (Days)"), config.plugins.epgexport.days))
-		self.list.append(getConfigListEntry(_("EPG Update (Hours)"), config.plugins.epgexport.reload))
-		self.list.append(getConfigListEntry(_("Keep outdated EPG (Days)"), config.plugins.epgexport.outdated))
-		self.list.append(getConfigListEntry(_("Daily EPG Download"), config.plugins.epgexport.daily))
-		if config.plugins.epgexport.daily.value:
-			self.list.append(getConfigListEntry(_("Daily StartTime"), config.plugins.epgexport.wakeup))
-		self.list.append(getConfigListEntry(_("Compression"), config.plugins.epgexport.compression))
-		self.list.append(getConfigListEntry(_("Channel ID"), config.plugins.epgexport.channelid))
-		self.list.append(getConfigListEntry(_("OpenWebIf Picon Location (XML-Source)"), config.plugins.epgexport.server))
-		if config.plugins.epgexport.server.value == "ip":
-			self.list.append(getConfigListEntry(_("Server IP Address"), config.plugins.epgexport.ip))
-		if config.plugins.epgexport.server.value == "name":
-			self.list.append(getConfigListEntry(_("Server Name"), config.plugins.epgexport.hostname))
-		self.list.append(getConfigListEntry(_("Enable Plugin's own WebInterface (GUI restart required)"), config.plugins.epgexport.webinterface))
-		if config.plugins.epgexport.webinterface.value:
-			self.list.append(getConfigListEntry(_("Server Port (4000-4999)"), config.plugins.epgexport.port))
-			self.list.append(getConfigListEntry(_("Enable 'twisted'-mode for WebInterface (recommended)"), config.plugins.epgexport.twisted))
-			self.list.append((_("HINT: >>> Test Plugin's own WebInterface with 'BoxIP:Port/LastUpdate.txt' <<<"),))
-
-		if first:
-			self.menuList = ConfigList(self.list)
-			self.menuList.list = self.list
-			self.menuList.l.setList(self.list)
-			self["config"] = self.menuList
-			self["config"].onSelectionChanged.append(self.selectionChanged)
-		else:
-			self.menuList.list = self.list
-			self.menuList.l.setList(self.list)
 
 	def selectionChanged(self):
 		choice = self["config"].getCurrent()
@@ -484,12 +473,9 @@ class EPGExportConfiguration(ConfigListScreen, Screen):
 		elif current == hostname:
 			self["buttonyellow"].setText(_("Hostname"))
 		else:
-			if config.plugins.epgexport.compression.value == "xz":
-				self["buttonyellow"].setText("%s (%s)" % (_("Downloading"), "xz"))
-			elif config.plugins.epgexport.compression.value == "gz":
-				self["buttonyellow"].setText("%s (%s)" % (_("Downloading"), "gz"))
-			else:
-				self["buttonyellow"].setText("%s (%s)" % (_("Downloading"), "xml"))
+			ftypes = {"xz": "xz", "gz": "gz", "none": "xml"}
+			ftype = ftypes.get(config.plugins.epgexport.compression.value, "{Error}")
+			self["buttonyellow"].setText("%s (%s)" % (_("Downloading"), ftype))
 
 	def changedEntry(self):
 		choice = self["config"].getCurrent()
@@ -660,8 +646,7 @@ class EPGExport(Screen):
 		self.cur_event = None
 		self.cur_service = None
 		test = [(service.ref.toString(), 0, self.time_base, self.time_epoch) for service in self.services]
-		test.insert(0, "XRnITBDSE")
-#		test.insert(0, ("XRnITBDSE", 0, self.time_base, self.time_epoch))  # N = ServiceName, n = short ServiceName
+		test.insert(0, ("XRnITBDSE", 0, self.time_base, self.time_epoch))  # N = ServiceName, n = short ServiceName
 		epg_data = self.queryEPG(test)
 		self.program = []
 		tmp_list = []
@@ -779,7 +764,7 @@ class EPGExport(Screen):
 					host = "%d.%d.%d.%d" % tuple(config.plugins.epgexport.ip.value)
 				else:
 					host = config.plugins.epgexport.hostname.value
-				picon_url = "http://" + host + ":80/picon/" + basename(picon_file)
+				picon_url = "http://%s:80/picon/%s" % (basename(picon_file), host)
 		return picon_url
 
 	def generateChannels(self):
@@ -972,27 +957,28 @@ class EPGExportPrograms(Resource):
 		return programs
 
 
-class EPGExportSelection(Screen, ConfigListScreen):
-	def __init__(self, session, args=0):
-		Screen.__init__(self, session)
+class EPGExportSelection(ConfigListScreen, Screen):
+	def __init__(self, session):
 		self.session = session
-		self.skin = readSkin("EPGExportSelection")
-		self.list = []
-		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
+		skin = readSkin("EPGExportSelection")
+		self.skin = skin
+		Screen.__init__(self, session, skin)
 		self.onChangedEntry = []  # explicit check on every entry
+		ConfigListScreen.__init__(self, [])
+		self["headline"] = StaticText()
 		self["logo"] = Pixmap()
-		self["buttonred"] = Label(_("Exit"))
-		self["buttongreen"] = Label(_("Save"))
-		self["buttonyellow"] = Label(_("Reset"))
-		self["buttonblue"] = Label(_("About"))
-		self["actions"] = ActionMap(["SetupActions", "ColorActions"], {
-						"ok": self.save,
-						"exit": self.cancel,
-						"cancel": self.cancel,
-						"red": self.cancel,
-						"green": self.save,
-						"yellow": self.resetting,
-						"blue": self.about})
+		self["buttonred"] = StaticText(_("Exit"))
+		self["buttongreen"] = StaticText(_("Save"))
+		self["buttonyellow"] = StaticText(_("Reset"))
+		self["buttonblue"] = StaticText(_("About"))
+		self["actions"] = ActionMap(["SetupActions",
+									"ColorActions"], {"ok": self.save,
+													"exit": self.cancel,
+													"cancel": self.cancel,
+													"red": self.cancel,
+													"green": self.save,
+													"yellow": self.resetting,
+													"blue": self.about})
 		selected = 0
 		for x in range(bouquet_length):
 			if config.plugins.epgexport.bouquets[x].export.value:
@@ -1000,11 +986,12 @@ class EPGExportSelection(Screen, ConfigListScreen):
 		if selected < 1:
 			self.resetting()
 		self.createSetup()
-		self.onShown.append(self.setWindowTitle)
+		self.onLayoutFinish.append(self.onLayoutFinished)
+#		self.onShown.append(self.onLayoutFinished)
 
-	def setWindowTitle(self):
+	def onLayoutFinished(self):
+		self["headline"].setText("%s %s" % (_("EPG Selection"), _("Bouquet")))
 		self["logo"].instance.setPixmapFromFile("%s/epgexport.png" % resolveFilename(SCOPE_PLUGINS, "Extensions/EPGExport"))
-		self.setTitle("%s %s" % (_("EPG Selection"), _("Bouquet")))
 
 	def save(self):
 		selected = 0
@@ -1025,11 +1012,10 @@ class EPGExportSelection(Screen, ConfigListScreen):
 		self.close(False)
 
 	def createSetup(self):
-		self.list = []
+		clist = []
 		for x in range(bouquet_length):
-			self.list.append(getConfigListEntry(bouquet_options[x][1], config.plugins.epgexport.bouquets[x].export))
-		self["config"].list = self.list
-		self["config"].l.setList(self.list)
+			clist.append(getConfigListEntry(bouquet_options[x][1], config.plugins.epgexport.bouquets[x].export))
+		self["config"].setList(clist)
 
 	def changedEntry(self):
 		choice = self["config"].getCurrent()

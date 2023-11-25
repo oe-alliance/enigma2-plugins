@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-09-24 12:21+0200\n"
+"POT-Creation-Date: 2023-11-25 14:31+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,23 +14,197 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
 
-#: ..\orgplugin.py:84 ..\plugin.py:344
+#: ..\plugin.py:69 ..\plugin.py:112
+msgid "none"
+msgstr ""
+
+#: ..\plugin.py:70
+msgid "xz"
+msgstr ""
+
+#: ..\plugin.py:71
+msgid "gz"
+msgstr ""
+
+#: ..\plugin.py:85 ..\plugin.py:86 ..\plugin.py:87 ..\plugin.py:91
+msgid "Channel"
+msgstr ""
+
+#: ..\plugin.py:85 ..\plugin.py:86 ..\plugin.py:87 ..\plugin.py:95
+msgid "Name"
+msgstr ""
+
+#: ..\plugin.py:89 ..\plugin.py:90
+msgid "Language"
+msgstr ""
+
+#: ..\plugin.py:91
+msgid "Number"
+msgstr ""
+
+#: ..\plugin.py:92 ..\plugin.py:592
+msgid "Custom (%s)"
+msgstr ""
+
+#: ..\plugin.py:95
+msgid "IP Address"
+msgstr ""
+
+#: ..\plugin.py:95 ..\plugin.py:109
+msgid "disabled"
+msgstr ""
+
+#: ..\plugin.py:95 ..\plugin.py:473
+msgid "Server IP"
+msgstr ""
+
+#: ..\plugin.py:105
+msgid "always"
+msgstr ""
+
+#: ..\plugin.py:109
+msgid "daily"
+msgstr ""
+
+#: ..\plugin.py:109
+msgid "every 12 hours"
+msgstr ""
+
+#: ..\plugin.py:109
+msgid "every 2 hours"
+msgstr ""
+
+#: ..\plugin.py:109
+msgid "every 6 hours"
+msgstr ""
+
+#: ..\plugin.py:109
+msgid "every hour"
+msgstr ""
+
+#: ..\plugin.py:130
+msgid "Favorites"
+msgstr ""
+
+#: ..\plugin.py:345
 msgid "Export EPG as XML"
 msgstr ""
 
-#: ..\orgplugin.py:85 ..\plugin.py:384
-msgid "%s plugin - ver. %s"
+#: ..\plugin.py:360 ..\plugin.py:971
+msgid "Exit"
 msgstr ""
 
-#: ..\orgplugin.py:86 ..\plugin.py:1007
-msgid "Bouquet"
+#: ..\plugin.py:361 ..\plugin.py:972
+msgid "Save"
 msgstr ""
 
-#: ..\orgplugin.py:86 ..\plugin.py:1007
-msgid "EPG Selection"
+#: ..\plugin.py:364 ..\plugin.py:479 ..\plugin.py:518 ..\plugin.py:523
+#: ..\plugin.py:533 ..\plugin.py:586
+msgid "Downloading"
 msgstr ""
 
-#: ..\orgplugin.py:87 ..\plugin.py:549 ..\plugin.py:1051
+#: ..\plugin.py:365
+msgid "Bouquets"
+msgstr ""
+
+#: ..\plugin.py:365
+msgid "Select"
+msgstr ""
+
+#: ..\plugin.py:381
+msgid "%s - ver. %s"
+msgstr ""
+
+#: ..\plugin.py:387
+msgid "Destination directory"
+msgstr ""
+
+#: ..\plugin.py:388
+msgid "EPG Download (Days)"
+msgstr ""
+
+#: ..\plugin.py:389
+msgid "EPG Update (Hours)"
+msgstr ""
+
+#: ..\plugin.py:390
+msgid "Keep outdated EPG (Days)"
+msgstr ""
+
+#: ..\plugin.py:391
+msgid "Recurring EPG Download"
+msgstr ""
+
+#: ..\plugin.py:393
+msgid "StartTime"
+msgstr ""
+
+#: ..\plugin.py:394
+msgid "Compression"
+msgstr ""
+
+#: ..\plugin.py:395
+msgid "Channel ID"
+msgstr ""
+
+#: ..\plugin.py:396
+msgid "OpenWebIf Picon Location (XML-Source)"
+msgstr ""
+
+#: ..\plugin.py:398
+msgid "Server IP Address"
+msgstr ""
+
+#: ..\plugin.py:400
+msgid "Server Name"
+msgstr ""
+
+#: ..\plugin.py:401
+msgid "Enable Plugin's own WebInterface (GUI restart required)"
+msgstr ""
+
+#: ..\plugin.py:403
+msgid "Server Port (4000-4999)"
+msgstr ""
+
+#: ..\plugin.py:404
+msgid "Enable 'twisted'-mode for WebInterface (recommended)"
+msgstr ""
+
+#: ..\plugin.py:406
+msgid "HINT: >>> Test Plugin's own WebInterface with 'BoxIP:Port/LastUpdate.txt' <<<"
+msgstr ""
+
+#: ..\plugin.py:423
+msgid "Saving"
+msgstr ""
+
+#: ..\plugin.py:423 ..\plugin.py:461
+msgid "..."
+msgstr ""
+
+#: ..\plugin.py:423 ..\plugin.py:461
+msgid "Configuration"
+msgstr ""
+
+#: ..\plugin.py:461
+msgid "Leaving"
+msgstr ""
+
+#: ..\plugin.py:475
+msgid "Hostname"
+msgstr ""
+
+#: ..\plugin.py:518 ..\plugin.py:523 ..\plugin.py:533 ..\plugin.py:541
+#: ..\plugin.py:599 ..\plugin.py:868
+msgid "EPG"
+msgstr ""
+
+#: ..\plugin.py:533
+msgid "Execution finished!!"
+msgstr ""
+
+#: ..\plugin.py:536 ..\plugin.py:1038
 msgid ""
 "%s plugin ver. %s\n"
 "\n"
@@ -39,307 +213,54 @@ msgid ""
 "Special Thanks to Rytec for the XMLTV Format !"
 msgstr ""
 
-#: ..\orgplugin.py:95
-msgid "no"
-msgstr ""
-
-#: ..\orgplugin.py:95
-msgid "yes"
-msgstr ""
-
-#: ..\orgplugin.py:99
-msgid "None"
-msgstr ""
-
-#: ..\orgplugin.py:100 ..\plugin.py:69
-msgid "xz"
-msgstr ""
-
-#: ..\orgplugin.py:101 ..\plugin.py:70
-msgid "gz"
-msgstr ""
-
-#: ..\orgplugin.py:118 ..\orgplugin.py:119 ..\orgplugin.py:120
-#: ..\orgplugin.py:124 ..\orgplugin.py:646 ..\plugin.py:84 ..\plugin.py:85
-#: ..\plugin.py:86 ..\plugin.py:90
-msgid "Channel"
-msgstr ""
-
-#: ..\orgplugin.py:118 ..\orgplugin.py:119 ..\orgplugin.py:120
-#: ..\orgplugin.py:131 ..\orgplugin.py:653 ..\plugin.py:84 ..\plugin.py:85
-#: ..\plugin.py:86 ..\plugin.py:94
-msgid "Name"
-msgstr ""
-
-#: ..\orgplugin.py:122 ..\orgplugin.py:123 ..\plugin.py:88 ..\plugin.py:89
-msgid "Language"
-msgstr ""
-
-#: ..\orgplugin.py:124 ..\plugin.py:90
-msgid "Number"
-msgstr ""
-
-#: ..\orgplugin.py:125 ..\orgplugin.py:135 ..\orgplugin.py:810
-#: ..\orgplugin.py:816 ..\plugin.py:91 ..\plugin.py:599 ..\plugin.py:605
-msgid "Custom (%s)"
-msgstr ""
-
-#: ..\orgplugin.py:129 ..\orgplugin.py:138 ..\plugin.py:94
-msgid "disabled"
-msgstr ""
-
-#: ..\orgplugin.py:130 ..\orgplugin.py:651 ..\plugin.py:94
-msgid "IP Address"
-msgstr ""
-
-#: ..\orgplugin.py:131 ..\orgplugin.py:653 ..\orgplugin.py:657
-#: ..\orgplugin.py:675 ..\plugin.py:94 ..\plugin.py:483
-msgid "Server IP"
-msgstr ""
-
-#: ..\orgplugin.py:140
-msgid "Standard"
-msgstr ""
-
-#: ..\orgplugin.py:149 ..\plugin.py:104
-msgid "always"
-msgstr ""
-
-#: ..\orgplugin.py:164 ..\plugin.py:68 ..\plugin.py:111
-msgid "none"
-msgstr ""
-
-#: ..\orgplugin.py:180 ..\plugin.py:129
-msgid "Favorites"
-msgstr ""
-
-#: ..\orgplugin.py:555 ..\orgplugin.py:1266 ..\plugin.py:358 ..\plugin.py:984
-msgid "Exit"
-msgstr ""
-
-#: ..\orgplugin.py:556 ..\orgplugin.py:1267 ..\plugin.py:359 ..\plugin.py:985
-msgid "Save"
-msgstr ""
-
-#: ..\orgplugin.py:557 ..\orgplugin.py:574 ..\orgplugin.py:576
-#: ..\orgplugin.py:578 ..\orgplugin.py:680 ..\orgplugin.py:682
-#: ..\orgplugin.py:684 ..\orgplugin.py:725 ..\orgplugin.py:733
-#: ..\orgplugin.py:742 ..\orgplugin.py:744 ..\orgplugin.py:746
-#: ..\orgplugin.py:810 ..\plugin.py:360 ..\plugin.py:379 ..\plugin.py:381
-#: ..\plugin.py:383 ..\plugin.py:488 ..\plugin.py:490 ..\plugin.py:492
-#: ..\plugin.py:531 ..\plugin.py:536 ..\plugin.py:546 ..\plugin.py:599
-msgid "Downloading"
-msgstr ""
-
-#: ..\orgplugin.py:558 ..\orgplugin.py:655 ..\plugin.py:361
-msgid "Select"
-msgstr ""
-
-#: ..\orgplugin.py:558 ..\plugin.py:361
-msgid "Bouquets"
-msgstr ""
-
-#: ..\orgplugin.py:582 ..\orgplugin.py:625 ..\orgplugin.py:733
-#: ..\orgplugin.py:810 ..\plugin.py:400 ..\plugin.py:436 ..\plugin.py:536
-#: ..\plugin.py:599
-msgid "..."
-msgstr ""
-
-#: ..\orgplugin.py:582 ..\orgplugin.py:625 ..\plugin.py:400 ..\plugin.py:436
-msgid "Configuration"
-msgstr ""
-
-#: ..\orgplugin.py:582 ..\plugin.py:400
-msgid "Saving"
-msgstr ""
-
-#: ..\orgplugin.py:625 ..\plugin.py:436
-msgid "Leaving"
-msgstr ""
-
-#: ..\orgplugin.py:637
-msgid "Electronic Program Guide"
-msgstr ""
-
-#: ..\orgplugin.py:637 ..\orgplugin.py:648
-msgid "XML"
-msgstr ""
-
-#: ..\orgplugin.py:638
-msgid "Location"
-msgstr ""
-
-#: ..\orgplugin.py:639 ..\orgplugin.py:640 ..\orgplugin.py:642
-#: ..\orgplugin.py:725 ..\orgplugin.py:733 ..\orgplugin.py:742
-#: ..\orgplugin.py:744 ..\orgplugin.py:746 ..\orgplugin.py:754
-#: ..\orgplugin.py:824 ..\orgplugin.py:1124 ..\plugin.py:531 ..\plugin.py:536
-#: ..\plugin.py:546 ..\plugin.py:554 ..\plugin.py:612 ..\plugin.py:882
-msgid "EPG"
-msgstr ""
-
-#: ..\orgplugin.py:639 ..\orgplugin.py:641
-msgid "Days"
-msgstr ""
-
-#: ..\orgplugin.py:639 ..\orgplugin.py:642 ..\orgplugin.py:754
-#: ..\orgplugin.py:824 ..\orgplugin.py:1124 ..\plugin.py:554 ..\plugin.py:612
-#: ..\plugin.py:882
-msgid "Download"
-msgstr ""
-
-#: ..\orgplugin.py:640
-msgid "Update"
-msgstr ""
-
-#: ..\orgplugin.py:640 ..\orgplugin.py:641
-msgid "hours"
-msgstr ""
-
-#: ..\orgplugin.py:641
-msgid "Keep outdated EPG (in hours)"
-msgstr ""
-
-#: ..\orgplugin.py:642 ..\orgplugin.py:644
-msgid "daily"
-msgstr ""
-
-#: ..\orgplugin.py:644
-msgid "StartTime"
-msgstr ""
-
-#: ..\orgplugin.py:645 ..\plugin.py:454
-msgid "Compression"
-msgstr ""
-
-#: ..\orgplugin.py:646
-msgid "ID"
-msgstr ""
-
-#: ..\orgplugin.py:647
-msgid "Background"
-msgstr ""
-
-#: ..\orgplugin.py:647
-msgid "Twisted"
-msgstr ""
-
-#: ..\orgplugin.py:648
-msgid "Source"
-msgstr ""
-
-#: ..\orgplugin.py:649
-msgid "OpenWebIf Picon Location"
-msgstr ""
-
-#: ..\orgplugin.py:654
-msgid "Configuration for the Webinterface"
-msgstr ""
-
-#: ..\orgplugin.py:655
-msgid "Restart GUI"
-msgstr ""
-
-#: ..\orgplugin.py:657
-msgid "Port"
-msgstr ""
-
-#: ..\orgplugin.py:677 ..\plugin.py:485
-msgid "Hostname"
-msgstr ""
-
-#: ..\orgplugin.py:742 ..\orgplugin.py:744 ..\orgplugin.py:746
-#: ..\plugin.py:546
-msgid "Execution finished!!"
-msgstr ""
-
-#: ..\orgplugin.py:754 ..\orgplugin.py:1268 ..\plugin.py:554 ..\plugin.py:986
-msgid "Reset"
-msgstr ""
-
-#: ..\orgplugin.py:754 ..\plugin.py:554
+#: ..\plugin.py:541
 msgid "Cache"
 msgstr ""
 
-#: ..\orgplugin.py:810 ..\orgplugin.py:1124 ..\plugin.py:599 ..\plugin.py:882
+#: ..\plugin.py:541 ..\plugin.py:599 ..\plugin.py:868
+msgid "Download"
+msgstr ""
+
+#: ..\plugin.py:541 ..\plugin.py:973
+msgid "Reset"
+msgstr ""
+
+#: ..\plugin.py:586
+msgid "Custom (xml %s %s...)"
+msgstr ""
+
+#: ..\plugin.py:586 ..\plugin.py:868
 msgid "Channels"
 msgstr ""
 
-#: ..\orgplugin.py:816 ..\plugin.py:605
+#: ..\plugin.py:592
 msgid "not found"
 msgstr ""
 
-#: ..\orgplugin.py:824 ..\plugin.py:612
+#: ..\plugin.py:599
 msgid "Finished"
 msgstr ""
 
-#: ..\orgplugin.py:824 ..\plugin.py:612
+#: ..\plugin.py:599
 msgid "Reload"
 msgstr ""
 
-#: ..\orgplugin.py:1124 ..\plugin.py:882
+#: ..\plugin.py:868
 msgid "Details"
 msgstr ""
 
-#: ..\orgplugin.py:1124 ..\plugin.py:882
+#: ..\plugin.py:868
 msgid "Info"
 msgstr ""
 
-#: ..\orgplugin.py:1269 ..\plugin.py:987
+#: ..\plugin.py:974
 msgid "About"
 msgstr ""
 
-#: ..\plugin.py:447
-msgid "Destination directory"
+#: ..\plugin.py:994
+msgid "Bouquet"
 msgstr ""
 
-#: ..\plugin.py:448
-msgid "EPG Download (Days)"
-msgstr ""
-
-#: ..\plugin.py:449
-msgid "EPG Update (Hours)"
-msgstr ""
-
-#: ..\plugin.py:450
-msgid "Keep outdated EPG (Days)"
-msgstr ""
-
-#: ..\plugin.py:451
-msgid "Daily EPG Download"
-msgstr ""
-
-#: ..\plugin.py:453
-msgid "Daily StartTime"
-msgstr ""
-
-#: ..\plugin.py:455
-msgid "Channel ID"
-msgstr ""
-
-#: ..\plugin.py:456
-msgid "OpenWebIf Picon Location (XML-Source)"
-msgstr ""
-
-#: ..\plugin.py:458
-msgid "Server IP Address"
-msgstr ""
-
-#: ..\plugin.py:460
-msgid "Server Name"
-msgstr ""
-
-#: ..\plugin.py:461
-msgid "Enable Plugin's own WebInterface (GUI restart required)"
-msgstr ""
-
-#: ..\plugin.py:463
-msgid "Server Port (4000-4999)"
-msgstr ""
-
-#: ..\plugin.py:464
-msgid "Enable 'twisted'-mode for WebInterface (recommended)"
-msgstr ""
-
-#: ..\plugin.py:465
-msgid "HINT: >>> Test Plugin's own WebInterface with 'BoxIP:Port/LastUpdate.txt' <<<"
+#: ..\plugin.py:994
+msgid "EPG Selection"
 msgstr ""
