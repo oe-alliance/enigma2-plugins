@@ -1,23 +1,26 @@
 <skin>
-  <screen name="EPGExportConfiguration" position="center,170" size="800,580" title="EPGExport">
-    <widget name="logo" position="13,6" size="100,40" transparent="1" alphatest="on" />
-    <widget name="buttonred" position="126,6" size="153,40" backgroundColor="#9f1313" font="Regular;16" halign="center" valign="center" foregroundColor="white" shadowColor="black" shadowOffset="-2,-2" />
-    <widget name="buttongreen" position="293,6" size="153,40" backgroundColor="#1f771f" font="Regular;16" halign="center" valign="center" foregroundColor="white" shadowColor="black" shadowOffset="-2,-2" />
-    <widget name="buttonyellow" position="460,6" size="153,40" backgroundColor="#a08500" font="Regular;16" halign="center" valign="center" foregroundColor="white" shadowColor="black" shadowOffset="-2,-2" />
-    <widget name="buttonblue" position="626,6" size="153,40" backgroundColor="#18188b" font="Regular;16" halign="center" valign="center" foregroundColor="white" shadowColor="black" shadowOffset="-2,-2" />
-    <eLabel backgroundColor="grey" position="13,53" size="773,0" />
-    <widget name="config" position="13,60" size="773,453" itemHeight="26" valign="center" enableWrapAround="1" scrollbarMode="showOnDemand" />
-    <eLabel backgroundColor="grey" position="13,520" size="773,0" />
-    <widget name="statustext" position="13,526" size="773,46" font="Regular;24" halign="center" valign="center" foregroundColor="white" />
+  <screen name="EPGExportConfiguration" position="center,170" size="800,580" backgroundColor="#20000000" title="" flags="wfNoBorder">
+    <widget source="headline" render="Label" position="13,0" size="600,40" font="Regular;30" foregroundColor="grey" transparent="1" alphatest="on" />
+    <widget name="logo" position="13,40" size="100,40" transparent="1" alphatest="on" />
+    <widget source="buttonred" render="Label" position="126,40" size="153,40" backgroundColor="#9f1313" font="Regular;16" halign="center" valign="center" foregroundColor="white" shadowColor="black" shadowOffset="-2,-2" />
+    <widget source="buttongreen" render="Label" position="293,40" size="153,40" backgroundColor="#1f771f" font="Regular;16" halign="center" valign="center" foregroundColor="white" shadowColor="black" shadowOffset="-2,-2" />
+    <widget source="buttonyellow" render="Label" position="460,40" size="153,40" backgroundColor="#a08500" font="Regular;16" halign="center" valign="center" foregroundColor="white" shadowColor="black" shadowOffset="-2,-2" />
+    <widget source="buttonblue" render="Label" position="626,40" size="153,40" backgroundColor="#18188b" font="Regular;16" halign="center" valign="center" foregroundColor="white" shadowColor="black" shadowOffset="-2,-2" />
+    <eLabel backgroundColor="grey" position="13,86" size="773,0" />
+    <widget name="config" position="13,93" size="773,453" itemHeight="26" font="Regular;18" valign="center" scrollbarMode="showOnDemand" enableWrapAround="1" />
+    <eLabel backgroundColor="grey" position="13,460" size="773,0" />
+    <widget source="statustext" render="Label" position="13,526" size="773,46" font="Regular;24" halign="center" valign="center" foregroundColor="white" />
   </screen>
-  <screen name="EPGExportSelection" position="center,170" size="800,473" title="EPGExport Selection">
-    <widget name="logo" position="13,6" size="100,40" transparent="1" alphatest="on" />
-    <widget name="buttonred" position="126,10" size="153,40" backgroundColor="#9f1313" font="Regular;16" halign="center" valign="center" foregroundColor="white" shadowColor="black" shadowOffset="-2,-2" />
-    <widget name="buttongreen" position="293,10" size="153,40" backgroundColor="#1f771f" font="Regular;16" halign="center" valign="center" foregroundColor="white" shadowColor="black" shadowOffset="-2,-2" />
-    <widget name="buttonyellow" position="460,10" size="153,40" backgroundColor="#a08500" font="Regular;16" halign="center" valign="center" foregroundColor="white" shadowColor="black" shadowOffset="-2,-2" />
-    <widget name="buttonblue" position="626,10" size="153,40" backgroundColor="#18188b" font="Regular;16" halign="center" valign="center" foregroundColor="white" shadowColor="black" shadowOffset="-2,-2" />
-    <eLabel backgroundColor="grey" position="13,53" size="773,0" />
-    <widget name="config" position="13,60" size="773,406" itemHeight="26" valign="center" enableWrapAround="1" scrollbarMode="showOnDemand" />
+  <screen name="EPGExportSelection" position="center,170" size="800,473" backgroundColor="#20000000" title="" flags="wfNoBorder">
+    <widget source="headline" render="Label" position="13,0" size="600,40" font="Regular;30" foregroundColor="grey" transparent="1" alphatest="on" />
+    <widget source="logo" position="13,40" size="100,40" transparent="1" alphatest="on" />
+    <widget source="buttonred" render="Label" position="126,40" size="153,40" backgroundColor="#9f1313" font="Regular;16" halign="center" valign="center" foregroundColor="white" shadowColor="black" shadowOffset="-2,-2" />
+    <widget source="buttongreen" render="Label" position="293,40" size="153,40" backgroundColor="#1f771f" font="Regular;16" halign="center" valign="center" foregroundColor="white" shadowColor="black" shadowOffset="-2,-2" />
+    <widget source="buttonyellow" render="Label" position="460,40" size="153,40" backgroundColor="#a08500" font="Regular;16" halign="center" valign="center" foregroundColor="white" shadowColor="black" shadowOffset="-2,-2" />
+    <widget source="buttonblue" render="Label" position="626,40" size="153,40" backgroundColor="#18188b" font="Regular;16" halign="center" valign="center" foregroundColor="white" shadowColor="black" shadowOffset="-2,-2" />
+    <eLabel backgroundColor="grey" position="13,86" size="773,0" />
+    <widget name="config" position="13,93" size="773,406" itemHeight="26" font="Regular;18" valign="center" scrollbarMode="showOnDemand" enableWrapAround="1" />
+    <eLabel backgroundColor="grey" position="13,413" size="773,0" />
   </screen>
 </skin>
 
