@@ -68,7 +68,6 @@ SUBDIRS = \
 	quickbutton \
 	reconstructapsc \
 	reftopiconname \
-	remotetimer \
 	rsdownloader \
 	seriesplugin \
 	setpasswd \
@@ -139,6 +138,12 @@ if PLI
 SUBDIRS += networkbrowserpli epgsearchpli
 else
 SUBDIRS += networkbrowser epgsearch
+endif
+
+if REMOTETIMER2
+SUBDIRS += 	remotetimer2
+else
+SUBDIRS += 	remotetimer
 endif
 
 SUBDIRS += tetris ardmediathek netzkino Series2Folder srfmediathek epgexport

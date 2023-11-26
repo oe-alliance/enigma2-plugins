@@ -1,0 +1,2 @@
+Description: add Timer remote on a another Dreambox with Enigma2
+Depends: enigma2, python-twisted-web

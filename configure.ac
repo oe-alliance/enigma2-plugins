@@ -96,6 +96,8 @@ AM_CONDITIONAL(VUDUO2, test "$BOXTYPE" == vuduo2)
 AM_CONDITIONAL(XC7346, test "$BOXTYPE" == xc7346)
 AM_CONDITIONAL(XP1000, test "$BOXTYPE" == xp1000)
 
+AM_CONDITIONAL(REMOTETIMER2, test `echo "$DISTRO" | cut -b 1-7` == "openatv")
+
 PKG_CHECK_MODULES(ENIGMA2, enigma2)
 PKG_CHECK_MODULES(LIBCRYPTO, libcrypto)
 
@@ -619,6 +621,10 @@ reftopiconname/src/Makefile
 remotetimer/Makefile
 remotetimer/meta/Makefile
 remotetimer/src/Makefile
+
+remotetimer2/Makefile
+remotetimer2/meta/Makefile
+remotetimer2/src/Makefile
 
 rsdownloader/Makefile
 rsdownloader/meta/Makefile
