@@ -33,7 +33,7 @@ from Components.Sources.StaticText import StaticText
 
 from Tools.BoundFunction import boundFunction
 
-from time import localtime, strftime
+from time import localtime, strftime, time
 from operator import itemgetter
 from collections import defaultdict
 
