@@ -671,6 +671,7 @@ simplerss/Makefile
 simplerss/meta/Makefile
 simplerss/po/Makefile
 simplerss/src/Makefile
+simplerss/src/icons/Makefile
 
 startuptostandby/Makefile
 startuptostandby/meta/Makefile
