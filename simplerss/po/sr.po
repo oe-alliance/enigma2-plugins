@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 SimpleRSS Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-15 08:58+0200\n"
-"PO-Revision-Date: 2023-09-15 09:22+0200\n"
+"POT-Creation-Date: 2023-11-30 11:10+0100\n"
+"PO-Revision-Date: 2023-11-30 11:37+0100\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
 "Language: sr\n"
@@ -15,81 +15,101 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.4.1\n"
 
-#: ..\plugin.py:49
+#: ..\plugin.py:61
 msgid "Notification"
 msgstr "Obaveštenje"
 
-#: ..\plugin.py:49
+#: ..\plugin.py:61
 msgid "Preview"
 msgstr "Pregled"
 
-#: ..\plugin.py:49
+#: ..\plugin.py:61
 msgid "Ticker"
 msgstr "Ticker"
 
-#: ..\plugin.py:49
+#: ..\plugin.py:61
 msgid "none"
 msgstr "nijedan"
 
-#: ..\plugin.py:164 ..\plugin.py:810
+#: ..\plugin.py:190 ..\plugin.py:560 ..\plugin.py:575 ..\plugin.py:615
+#: ..\plugin.py:708 ..\plugin.py:796 ..\plugin.py:810 ..\plugin.py:866
 msgid "New Items"
 msgstr "Novi artikli"
 
-#: ..\plugin.py:180
+#: ..\plugin.py:205
 msgid "Autoupdate"
 msgstr "Autoažuriranje"
 
-#: ..\plugin.py:180
+#: ..\plugin.py:205
 msgid "Feed URI"
 msgstr "Fid URI"
 
-#: ..\plugin.py:182 ..\plugin.py:223
+#: ..\plugin.py:207 ..\plugin.py:230
 msgid "Cancel"
 msgstr "Otkaži"
 
-#: ..\plugin.py:183 ..\plugin.py:224
+#: ..\plugin.py:208
 msgid "OK"
 msgstr "OK"
 
-#: ..\plugin.py:192 ..\plugin.py:242
+#: ..\plugin.py:213 ..\plugin.py:229 ..\plugin.py:250
 msgid "Simple RSS Reader Setup"
 msgstr "Podešavanje jednostavnog RSS Čitača"
 
-#: ..\plugin.py:225
+#: ..\plugin.py:231
+msgid "Save"
+msgstr "Sačuvaj"
+
+#: ..\plugin.py:232
 msgid "New"
 msgstr "Novi"
 
-#: ..\plugin.py:226
+#: ..\plugin.py:233
 msgid "Delete"
 msgstr "Obriši"
 
-#: ..\plugin.py:227
-msgid "Import from '%sfeeds.xml'"
-msgstr "Uvoz iz '%sfeeds.xml'"
-
-#: ..\plugin.py:246
+#: ..\plugin.py:254
 msgid "Feed"
 msgstr "Fid"
 
-#: ..\plugin.py:247
+#: ..\plugin.py:255
 msgid "Start automatically with Enigma2"
 msgstr "Pokreni automatski sa Enigmom2"
 
-#: ..\plugin.py:248
+#: ..\plugin.py:256
 msgid "Keep running in background"
 msgstr "Nastavi rad u pozadini"
 
-#: ..\plugin.py:251
+#: ..\plugin.py:259
+msgid "Update Interval [min]"
+msgstr "Ažuriraj interval [min]"
+
+#: ..\plugin.py:260
 msgid "Show new Messages as"
 msgstr "Pokaži nove poruke kao"
 
-#: ..\plugin.py:251
-msgid "Update Interval (min)"
-msgstr "Ažuriraj interval (min)"
+#: ..\plugin.py:262
+msgid " *Frequency of scrollsteps [ms] (low values slow down the box)"
+msgstr ""
+"*Učestalost koraka za pomeranje [ms] (niske vrednosti usporavaju polje)"
 
-#: ..\plugin.py:270
+#: ..\plugin.py:263
+msgid " *Scrollspeed [pixels per step] (high values lead to jerking)"
+msgstr "*Scrollspeed [pikseli po koraku] (visoke vrednosti dovode do drkanja)"
+
+#: ..\plugin.py:265
+msgid " *=please perform a GUI-restart for these changes to take effect"
+msgstr "*=izvršite GUI-restart da bi ove promene stupile na snagu"
+
+#: ..\plugin.py:267
+msgid ""
+"Note: If box becomes extremely slow, please reduce the quantity of feeds."
+msgstr ""
+"Napomena: Ako kutija postane izuzetno spora, smanjite količinu feedova."
+
+#: ..\plugin.py:285
 msgid ""
 "Really delete this entry?\n"
 "It cannot be recovered!"
@@ -97,7 +117,11 @@ msgstr ""
 "Stvarno obrisati ovaj unos?\n"
 "On ne može biti obnovljen!"
 
-#: ..\plugin.py:316
+#: ..\plugin.py:302
+msgid "Import feeds from:"
+msgstr "Uvezi feedove iz:"
+
+#: ..\plugin.py:337
 msgid ""
 "Importing '%s'\n"
 "%s feeds were imported successfully\n"
@@ -106,14 +130,18 @@ msgstr ""
 "Uvoz '%s' %s feedovi su uspešno uvezeni %s feedovi su bili dvostruki i nisu "
 "uvezeni"
 
-#: ..\plugin.py:391
+#: ..\plugin.py:341
+msgid "File '%s' was not found, import was aborted!"
+msgstr "Datoteka '%s' nije pronađena, uvoz je prekinut!"
+
+#: ..\plugin.py:374 ..\plugin.py:416
 msgid ""
 "Error while parsing Feed, this usually means there is something wrong with "
 "it."
 msgstr ""
 "Greška kod analiziranja fida.ovo obično znači da nešto s njim nije u redu."
 
-#: ..\plugin.py:400
+#: ..\plugin.py:425
 msgid ""
 "Update is being done in Background.\n"
 "Contents will automatically be updated when it's done."
@@ -121,59 +149,83 @@ msgstr ""
 "Ažuriranje se obavlja u pozadini.\n"
 "Sadržaj će automatski biti ažuriran kad se završi."
 
-#: ..\plugin.py:458 ..\plugin.py:526 ..\plugin.py:637
+#: ..\plugin.py:448
+msgid "Simple RSS Reader EntryView"
+msgstr "Simple RSS Reader EntryView"
+
+#: ..\plugin.py:449 ..\plugin.py:466
 msgid "Entry %s/%s"
 msgstr "Unos %s/%s"
 
-#: ..\plugin.py:459 ..\plugin.py:531
+#: ..\plugin.py:450 ..\plugin.py:468
 msgid "Enclosures"
 msgstr "Prilozi"
 
-#: ..\plugin.py:479 ..\plugin.py:629
+#: ..\plugin.py:465 ..\plugin.py:583
 msgid "Simple RSS Reader: %s"
 msgstr "Jednostavni RSS Čitač: %s"
 
-#: ..\plugin.py:483 ..\plugin.py:533
+#: ..\plugin.py:468 ..\plugin.py:477
 msgid "No such Item."
 msgstr "Nema takvog artikla."
 
-#: ..\plugin.py:640 ..\plugin.py:642
+#: ..\plugin.py:528
+msgid "Simple RSS Reader Feedview"
+msgstr "Simple RSS Reader Feedview"
+
+#: ..\plugin.py:533
+msgid "change feed"
+msgstr "promena feeda"
+
+#: ..\plugin.py:649
+msgid "Entry %s/%s - %s"
+msgstr "Stavka %s/%s - %s"
+
+#: ..\plugin.py:652 ..\plugin.py:654
 msgid "Feed is empty."
 msgstr "Fid je prazan."
 
-#: ..\plugin.py:718 ..\plugin.py:748
+#: ..\plugin.py:726
+msgid "Simple RSS Reader Overview"
+msgstr "Simple RSS Reader Overview"
+
+#: ..\plugin.py:728 ..\plugin.py:780
 msgid "Entries"
 msgstr "Unosi"
 
-#: ..\plugin.py:719 ..\plugin.py:749
-msgid "Feed %s/%s"
-msgstr "Fidl %s/%s"
+#: ..\plugin.py:729
+msgid "Feed 1/%s"
+msgstr "Ubacite 1/%s"
 
-#: ..\plugin.py:726
+#: ..\plugin.py:751
 msgid "Simple RSS Reader"
 msgstr "Jednostavni RSS Čitač"
 
-#: ..\plugin.py:756
+#: ..\plugin.py:779
+msgid "Feed %s/%s"
+msgstr "Fidl %s/%s"
+
+#: ..\plugin.py:817
 msgid "Close"
 msgstr "Zatvori"
 
-#: ..\plugin.py:756
-msgid "Setup"
-msgstr "Podešavanje"
+#: ..\plugin.py:817
+msgid "Settings"
+msgstr "Postavke"
 
-#: ..\plugin.py:756
+#: ..\plugin.py:817
 msgid "Update Feed"
 msgstr "Ažuriraj fid"
 
-#: ..\plugin.py:757
+#: ..\plugin.py:818
 msgid "What to do?"
 msgstr "Šta činiti?"
 
-#: ..\plugin.py:810
+#: ..\plugin.py:866
 msgid "New Items since last Auto-Update"
 msgstr "Novi artikli od zadnjeg autoažuriranja"
 
-#: ..\plugin.py:839
+#: ..\plugin.py:895
 msgid ""
 "Sorry, this type of feed is unsupported:\n"
 "%s"
@@ -181,18 +233,18 @@ msgstr ""
 "Žao mi je, ovaj tip fida nije podržant:\n"
 "%s"
 
-#: ..\plugin.py:902
+#: ..\plugin.py:956
 msgid "Received %d new news item(s)."
 msgstr "Primljeno %d novih artikala vest(i)."
 
-#: ..\plugin.py:1154
+#: ..\plugin.py:1148
 msgid "trying to download the feed..."
 msgstr "pokušaj preuzimanja feeda..."
 
-#: ..\plugin.py:1220
+#: ..\plugin.py:1219
 msgid "A simple to use RSS reader"
 msgstr "Jednostavan RSS čitač"
 
-#: ..\plugin.py:1222
+#: ..\plugin.py:1221
 msgid "View RSS..."
 msgstr "Vidi RSS ..."
