@@ -1,28 +1,24 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <feeds>
 	<feed>
-		<name>Tagesschau.de</name>
-		<url>http://www.tagesschau.de/infoservices/alle-meldungen-100~rdf.xml</url>
+		<name>Der Westen.de</name>
+		<url>https://www.derwesten.de/feed</url>
 	</feed>
 	<feed>
 		<name>TV Spielfilm.de - TV-Tipps des Tages</name>
 		<url>https://www.tvspielfilm.de/tv-programm/rss/tipps.xml</url>
 	</feed>
 	<feed>
+		<name>Tagesschau.de</name>
+		<url>http://www.tagesschau.de/infoservices/alle-meldungen-100~rdf.xml</url>
+	</feed>
+	<feed>
 		<name>Sportbild</name>
 			<url>https://sportbild.bild.de/rss/vw-bundesliga-artikel/vw-bundesliga-artikel-45028194,sort=1,view=rss2.sport.xml</url>
 		</feed>
 	<feed>
-		<name>Der Westen.de</name>
-		<url>https://www.derwesten.de/feed</url>
-	</feed>
-	<feed>
-		<name>SAT: Digitalfernsehen</name>
-		<url>http://www.digitalfernsehen.de/rss/rss.xml</url>
-	</feed>
-	<feed>
-		<name>SAT: Satellifax</name>
-		<url>http://www.satellifax.de/satellifax-rss.xml</url>
+		<name>DER SPIEGEL - Nachrichten</name>
+		<url>https://www.spiegel.de/schlagzeilen/rss/0,5291,,00.xml</url>
 	</feed>
 	<feed>
 		<name>kicker Teamnews FC Schalke 04</name>

@@ -1,0 +1,135 @@
+<skin>
+<!-- SimpleRSS HD skin.xml -->
+	<fonts>
+		<font filename="/usr/share/enigma2/MetrixHD/fonts/Roboto-Regular.ttf" name="Regular" scale="100" />
+		<font filename="/usr/share/enigma2/MetrixHD/fonts/OpenSans-Regular.ttf" name="Regular" scale="100" />
+	</fonts>
+
+	<screen name="RSS_Setup" position="0,0" size="1280,720" title="Simple RSS Reader Setup" flags="wfNoBorder" backgroundColor="transparent">
+		<eLabel name="line" position="40,24" zPosition="-10" size="1200,650" backgroundColor="#1A0F0F0F" />
+		<eLabel name="line" position="40,88" size="1200,0" backgroundColor="#00FFFFFF" zPosition="0" />
+		<widget source="global.CurrentTime" render="Label" position="1093,30" size="140,60" font="Regular;50" noWrap="1" halign="center" valign="bottom" foregroundColor="#00FFFFFF" backgroundColor="#1A0F0F0F" transparent="1">
+			<convert type="ClockToText">Default</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="933,30" size="160,26" font="Regular;16" noWrap="1" halign="right" valign="bottom" foregroundColor="#00FFFFFF" backgroundColor="#1A0F0F0F" transparent="1">
+			<convert type="ClockToText">Format:%A</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="933,54" size="160,26" font="Regular;16" noWrap="1" halign="right" valign="bottom" foregroundColor="#00FFFFFF" backgroundColor="#1A0F0F0F" transparent="1">
+			<convert type="ClockToText">Format:%e. %B</convert>
+		</widget>
+		<widget source="title" render="Label" position="58,36" size="524,50" valign="bottom" font="Regular;34" noWrap="1" foregroundColor="#00b3b3b3" backgroundColor="#1A0F0F0F" transparent="1" />
+		<widget name="config" position="70,120" size="700,600" font="Regular;20" itemHeight="30" scrollbarMode="showOnDemand" transparent="1" />
+		<ePixmap position="890,174" size="256,256" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SimpleRSS/icons/rss_HD.png" transparent="1" alphatest="blend" />
+		<eLabel text="Import" position="1046,632" size="180,38" zPosition="1" valign="center" font="Regular;20" halign="left" foregroundColor="#00b3b3b3" backgroundColor="#1A0F0F0F" transparent="1" />
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SimpleRSS/icons/key_red_HD.png" position="70,632" size="26,38" alphatest="blend" />
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SimpleRSS/icons/key_green_HD.png" position="300,632" size="26,38" alphatest="blend" />
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SimpleRSS/icons/key_yellow_HD.png" position="530,632" size="26,38" alphatest="blend" />
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SimpleRSS/icons/key_blue_HD.png" position="760,632" size="26,38" alphatest="blend" />
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SimpleRSS/icons/key_menu_HD.png" position="990,632" size="53,38" alphatest="blend" />
+		<widget source="key_red" render="Label" position="93,632" size="180,38" zPosition="1" valign="center" font="Regular;20" halign="left" foregroundColor="#00b3b3b3" backgroundColor="#1A0F0F0F" transparent="1" />
+		<widget source="key_green" render="Label" position="323,632" size="180,38" zPosition="1" valign="center" font="Regular;20" halign="left" foregroundColor="#00b3b3b3" backgroundColor="#1A0F0F0F" transparent="1" />
+		<widget source="key_yellow" render="Label" position="553,632" size="180,38" zPosition="1" valign="center" font="Regular;20" halign="left" foregroundColor="#00b3b3b3" backgroundColor="#1A0F0F0F" transparent="1" />
+		<widget source="key_blue" render="Label" position="783,632" size="180,38" zPosition="1" valign="center" font="Regular;20" halign="left" foregroundColor="#00b3b3b3" backgroundColor="#1A0F0F0F" transparent="1" />
+		<eLabel text="Autoren:moritz.venn@freaque.net, Mr.Servo, Skinned by stein17" position="840,520" size="356,50" zPosition="1" valign="center" font="Regular;20" halign="center" foregroundColor="#00666666" backgroundColor="#1A0F0F0F" transparent="1" />
+	</screen>
+
+	<screen name="RSS_EntryView" position="0,0" size="1280,720" title="Simple RSS Reader" flags="wfNoBorder" backgroundColor="transparent">
+		<eLabel name="line" position="40,24" zPosition="-10" size="1200,650" backgroundColor="#1A0F0F0F" />
+		<eLabel name="line" position="40,88" size="1200,0" backgroundColor="#00FFFFFF" zPosition="0" />
+		<widget source="global.CurrentTime" render="Label" position="1093,30" size="140,60" font="Regular;50" noWrap="1" halign="center" valign="bottom" foregroundColor="#00FFFFFF" backgroundColor="#1A0F0F0F" transparent="1">
+			<convert type="ClockToText">Default</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="933,30" size="160,26" font="Regular;16" noWrap="1" halign="right" valign="bottom" foregroundColor="#00FFFFFF" backgroundColor="#1A0F0F0F" transparent="1">
+			<convert type="ClockToText">Format:%A</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="933,54" size="160,26" font="Regular;16" noWrap="1" halign="right" valign="bottom" foregroundColor="#00FFFFFF" backgroundColor="#1A0F0F0F" transparent="1">
+			<convert type="ClockToText">Format:%e. %B</convert>
+		</widget>
+		<widget source="title" render="Label" position="58,36" size="524,50" valign="bottom" font="Regular;34" noWrap="1" foregroundColor="#00b3b3b3" backgroundColor="#1A0F0F0F" transparent="1" />
+		<widget source="info" render="Label" position="190,102" size="700,32" font="Regular;24" backgroundColor="#1A0F0F0F" foregroundColor="#00FFFFFF" transparent="1" />
+		<widget name="feedlogo" position="70,94" size="80,40" alphatest="blend" />
+		<eLabel position="64,140" size="1150,0" backgroundColor="#00FFFFFF" />
+		<widget name="content" position="350,150" size="600,470" font="Regular;22" backgroundColor="#1A0F0F0F" foregroundColor="#00FFFFFF" transparent="0" />
+		<widget name="picture" position="70,180" size="254,142" alphatest="blend" transparent="1" zPosition="1" />
+	</screen>
+
+	<screen name="RSS_FeedView" position="0,0" size="1280,720" title="Simple RSS Reader" flags="wfNoBorder" backgroundColor="transparent">
+		<eLabel name="line" position="40,24" zPosition="-10" size="1200,650" backgroundColor="#1A0F0F0F" />
+		<eLabel name="line" position="40,88" size="1200,0" backgroundColor="#00FFFFFF" zPosition="0" />
+		<widget source="global.CurrentTime" render="Label" position="1093,30" size="140,60" font="Regular;50" noWrap="1" halign="center" valign="bottom" foregroundColor="#00FFFFFF" backgroundColor="#1A0F0F0F" transparent="1">
+			<convert type="ClockToText">Default</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="933,30" size="160,26" font="Regular;16" noWrap="1" halign="right" valign="bottom" foregroundColor="#00FFFFFF" backgroundColor="#1A0F0F0F" transparent="1">
+			<convert type="ClockToText">Format:%A</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="933,54" size="160,26" font="Regular;16" noWrap="1" halign="right" valign="bottom" foregroundColor="#00FFFFFF" backgroundColor="#1A0F0F0F" transparent="1">
+			<convert type="ClockToText">Format:%e. %B</convert>
+		</widget>
+		<widget source="title" render="Label" position="58,36" size="524,50" valign="bottom" font="Regular;34" noWrap="1" foregroundColor="#00b3b3b3" backgroundColor="#1A0F0F0F" transparent="1" />
+		<widget source="info" render="Label" position="190,102" size="700,32" font="Regular;24" backgroundColor="#1A0F0F0F" foregroundColor="#00FFFFFF" transparent="1" />
+		<widget name="feedlogo" position="70,94" size="80,40" alphatest="blend" />
+		<eLabel position="64,140" size="1150,0" backgroundColor="#00FFFFFF" />
+		<widget source="content" render="Listbox" size="700,480" position="64,150" scrollbarMode="showOnDemand" backgroundColor="#1A0F0F0F" foregroundColor="#00FFFFFF" transparent="0">
+			<convert type="TemplatedMultiContent">
+				{"templates":
+					{"default": (80,[
+						MultiContentEntryPixmap(pos=(0,0), size=(700,6), png=1), # index 1 is the line separator
+						MultiContentEntryPixmapAlphaBlend(pos=(4,4), size=(150,70), flags=BT_SCALE|BT_KEEP_ASPECT_RATIO|BT_HALIGN_CENTER|BT_VALIGN_CENTER, png=2), # feedpicture
+						MultiContentEntryText(pos=(160,4), size=(530,70), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text=0)# feedtext
+					]),
+					"news": (80,[
+						MultiContentEntryPixmap(pos=(0,0), size=(700,6), png=1), # index 1 is the line separator
+						MultiContentEntryText(pos=(10,4), size=(660,70), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text=0)# feedtext
+					])
+					},
+					"fonts": [gFont("Regular",22)],
+					"itemHeight":80
+					}
+			</convert>
+		</widget>
+		<widget source="summary" render="Label" position="810,150" size="410,470" font="Regular;20" backgroundColor="#1A0F0F0F" foregroundColor="#00FFFFFF" transparent="1" />
+	</screen>
+
+	<screen name="RSS_Overview" position="0,0" size="1280,720" title="Simple RSS Reader" flags="wfNoBorder" backgroundColor="transparent">
+		<eLabel name="line" position="40,24" zPosition="-10" size="1200,650" backgroundColor="#1A0F0F0F" />
+		<eLabel name="line" position="40,88" size="1200,0" backgroundColor="#00FFFFFF" zPosition="0" />
+		<widget source="global.CurrentTime" render="Label" position="1093,30" size="140,60" font="Regular;50" noWrap="1" halign="center" valign="bottom" foregroundColor="#00FFFFFF" backgroundColor="#1A0F0F0F" transparent="1">
+			<convert type="ClockToText">Default</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="933,30" size="160,26" font="Regular;16" noWrap="1" halign="right" valign="bottom" foregroundColor="#00FFFFFF" backgroundColor="#1A0F0F0F" transparent="1">
+			<convert type="ClockToText">Format:%A</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="933,54" size="160,26" font="Regular;16" noWrap="1" halign="right" valign="bottom" foregroundColor="#00FFFFFF" backgroundColor="#1A0F0F0F" transparent="1">
+			<convert type="ClockToText">Format:%e. %B</convert>
+		</widget>
+		<widget source="title" render="Label" position="58,36" size="524,50" valign="bottom" font="Regular;34" noWrap="1" foregroundColor="#00b3b3b3" backgroundColor="#1A0F0F0F" transparent="1" />
+		<widget source="info" render="Label" position="64,100" size="470,32" font="Regular;24" backgroundColor="#1A0F0F0F" foregroundColor="#00FFFFFF" transparent="1" />
+		<widget source="summary" render="Label" position="540,100" size="230,32" font="Regular;24" backgroundColor="#1A0F0F0F" foregroundColor="#00FFFFFF" transparent="1" halign="right" />
+	<!-- 	<eLabel position="64,150" size="1148,1" backgroundColor="#00FFFFFF" />-->
+		<widget source="content" render="Listbox" size="1150,470" position="64,150" scrollbarMode="showOnDemand" backgroundColor="#1A0F0F0F" foregroundColor="#00FFFFFF" transparent="1">
+			<convert type="TemplatedMultiContent">
+				{"template": [
+					MultiContentEntryPixmap(pos=(0,0), size=(1150,6), png=2), # index 2 is the line separator
+					MultiContentEntryPixmapAlphaBlend(pos=(4,12), size=(150,70), flags=BT_SCALE|BT_KEEP_ASPECT_RATIO|BT_HALIGN_CENTER|BT_VALIGN_CENTER, png=3), # feedlogo
+					MultiContentEntryText(pos=(160,4), size=(530,30), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text=0), # title
+					MultiContentEntryText(pos=(160,40), size=(530,44), font=1, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text=1)# description
+					],
+				"fonts": [gFont("Regular",22), gFont("Regular",18)],
+				"itemHeight":94
+				}
+			</convert>
+		</widget>
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SimpleRSS/icons/key_menu_HD.png" position="990,632" size="53,38" alphatest="blend" />
+		<eLabel text="Settings" position="1046,632" size="233,38" zPosition="1" valign="center" font="Regular;20" halign="left" foregroundColor="#00b3b3b3" backgroundColor="#1A0F0F0F" transparent="1" />
+	</screen>
+
+<screen name="RSS_TickerView" position="34,684" size="1212,36" flags="wfNoBorder" backgroundColor="transparent">
+			<ePixmap position="0,0" size="1212,36" zPosition="0" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SimpleRSS/icons/ticker_bg_HD.png" transparent="1" alphatest="blend" backgroundColor="transparent" />
+			<ePixmap position="0,0" size="1212,36" zPosition="10" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SimpleRSS/icons/ticker_fg_HD.png" transparent="1" alphatest="blend" backgroundColor="transparent" />
+			<widget source="newsLabel" render="RunningText" options="movetype=running,step=4, steptime=70,direction=left,startpoint=1670,wrap=1, always=0, repeat=2, oneshot=1" position="80,0" size="1113,36" font="Regular;24" halign="right" valign="center" noWrap="1" zPosition="1" foregroundColor="white" transparent="1" />
+			<widget source="global.CurrentTime" render="Label" position="2,0" size="74,36" backgroundColor="#00FFFFFF" foregroundColor="black" transparent="1" zPosition="2" font="Regular;24" valign="center" halign="center">
+				<convert type="ClockToText">Format:%H:%M</convert>
+			</widget>
+		</screen>
+
+</skin>
