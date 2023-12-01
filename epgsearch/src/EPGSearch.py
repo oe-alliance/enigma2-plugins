@@ -681,10 +681,10 @@ class EPGSearch(EPGSelection):
 		# jump to entry neearest current time, copied from 
 		# https://github.com/openatv/enigma2/blob/628e1a712c59fca16793b225b393a59417072ba6/lib/python/Components/EpgList.py#L1460
 		t = time()
-		histminutes = 0
+		histhours = 0
 		if hasattr(config.epg, "histminutes"):
-			histminutes = config.epg.histminutes.value * 60
-		epg_time = t - histminutes
+			histhours = config.epg.histminutes.value * 60
+		epg_time = t - histhours
 		if t != epg_time:
 			idx = 0
 			for x in l.list:
