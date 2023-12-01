@@ -677,10 +677,14 @@ class EPGSearch(EPGSelection):
 		l.instance.setSelectionEnable(True)
 		l.list = ret
 		l.l.setList(ret)
-		# jump to entry nearest current time, copied from 
+
+		# jump to entry neearest current time, copied from 
 		# https://github.com/openatv/enigma2/blob/628e1a712c59fca16793b225b393a59417072ba6/lib/python/Components/EpgList.py#L1460
 		t = time()
-		epg_time = t - config.epg.histminutes.value * 60
+		histminutes = 0
+		if hasattr(config.epg, "histminutes"):
+			histminutes = config.epg.histminutes.value * 60
+		epg_time = t - histminutes
 		if t != epg_time:
 			idx = 0
 			for x in l.list:
@@ -690,6 +694,7 @@ class EPGSearch(EPGSelection):
 			l.instance.moveSelectionTo(idx - 1)
 		else:
 			l.instance.moveSelectionTo(1)
+
 		l.recalcEntrySize()
 
 	def _filteredSearchByName(self, args, maxRet, search_type, searchString, search_case, searchFilter):
