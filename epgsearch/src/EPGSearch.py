@@ -33,7 +33,7 @@ from Components.Sources.StaticText import StaticText
 
 from Tools.BoundFunction import boundFunction
 
-from time import localtime, strftime
+from time import localtime, strftime, time
 from operator import itemgetter
 from collections import defaultdict
 
@@ -677,6 +677,24 @@ class EPGSearch(EPGSelection):
 		l.instance.setSelectionEnable(True)
 		l.list = ret
 		l.l.setList(ret)
+
+		# jump to entry neearest current time, copied from 
+		# https://github.com/openatv/enigma2/blob/628e1a712c59fca16793b225b393a59417072ba6/lib/python/Components/EpgList.py#L1460
+		t = time()
+		histhours = 0
+		if hasattr(config.epg, "histminutes"):
+			histhours = config.epg.histminutes.value * 60
+		epg_time = t - histhours
+		if t != epg_time:
+			idx = 0
+			for x in l.list:
+				idx += 1
+				if t < x[2] + x[3]:
+					break
+			l.instance.moveSelectionTo(idx - 1)
+		else:
+			l.instance.moveSelectionTo(1)
+
 		l.recalcEntrySize()
 
 	def _filteredSearchByName(self, args, maxRet, search_type, searchString, search_case, searchFilter):
