@@ -27,7 +27,6 @@ from xml.etree.cElementTree import fromstring
 
 # ENIGMA IMPORTS
 from enigma import eEPGCache
-from boxbranding import getImageDistro
 from Components.ActionMap import ActionMap
 from Components.Button import Button
 from Components.config import getConfigListEntry, config, ConfigSubsection, ConfigText, ConfigIP, ConfigYesNo, ConfigPassword, ConfigNumber
@@ -451,10 +450,7 @@ def main(session, **kwargs):
 
 def Plugins(**kwargs):
 	plugin = []
-	if getImageDistro() in ("openvix", "openatv", "openxta"):
-		plugin.append(PluginDescriptor(name=_("Remote Timer"), description=_("Remote Timer Setup"), where=PluginDescriptor.WHERE_MENU, fnc=timermenu))
-	else:
-		plugin.append(PluginDescriptor(name="Remote Timer", description="Remote Timer Setup", where=[PluginDescriptor.WHERE_PLUGINMENU], icon="remotetimer.png", fnc=main))
+	plugin.append(PluginDescriptor(name=_("Remote Timer"), description=_("Remote Timer Setup"), where=PluginDescriptor.WHERE_MENU, fnc=timermenu))
 	plugin.append(PluginDescriptor(name="Remote Timer", where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main))
 	plugin.append(PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=autostart))
 	return plugin

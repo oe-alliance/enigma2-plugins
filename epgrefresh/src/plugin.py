@@ -9,7 +9,12 @@ from Components.config import config, ConfigYesNo, ConfigNumber, ConfigSelection
 from Screens.MessageBox import MessageBox
 from Screens.Standby import TryQuitMainloop
 from Tools.BoundFunction import boundFunction
-from boxbranding import getImageDistro
+try:
+	from Components.SystemInfo import BoxInfo
+	IMAGEDISTRO = BoxInfo.getItem("distro")
+except:
+	from boxbranding import getImageDistro
+	IMAGEDISTRO = getImageDistro()
 
 from Components.SystemInfo import SystemInfo
 from Components.NimManager import nimmanager
@@ -68,7 +73,7 @@ config.plugins.epgrefresh.adapter = ConfigSelection(choices=adapter_choices, def
 
 config.plugins.epgrefresh.show_in_extensionsmenu = ConfigYesNo(default=False)
 config.plugins.epgrefresh.show_run_in_extensionsmenu = ConfigYesNo(default=True)
-if getImageDistro() in ("openatv", "openvix",):
+if IMAGEDISTRO in ("openatv", "openvix",):
 	config.plugins.epgrefresh.show_in_plugins = ConfigYesNo(default=False)
 else:
 	config.plugins.epgrefresh.show_in_plugins = ConfigYesNo(default=True)
@@ -303,7 +308,7 @@ config.plugins.epgrefresh.show_run_in_extensionsmenu.addNotifier(housekeepingExt
 
 
 def menu_main(menuid, **kwargs):
-	if getImageDistro() in ("openvix", "openatv", "openspa", "openhdf"):
+	if IMAGEDISTRO in ("openvix", "openatv", "openspa", "openhdf"):
 		if menuid != "epg":
 			return []
 	else:

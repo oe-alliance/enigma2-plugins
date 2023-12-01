@@ -3,11 +3,17 @@ from __future__ import absolute_import
 from . import _
 
 from Components.config import config, ConfigSubsection, ConfigInteger, ConfigSubList
-from boxbranding import getImageDistro
 from Plugins.Plugin import PluginDescriptor
 from Screens.MessageBox import MessageBox
 from . import AC3main
 from . import AC3setup
+
+try:
+	from Components.SystemInfo import BoxInfo
+	IMAGEDISTRO = BoxInfo.getItem("distro")
+except:
+	from boxbranding import getImageDistro
+	IMAGEDISTRO = getImageDistro()
 
 from six.moves import reload_module
 
@@ -32,12 +38,12 @@ def main(session, **kwargs):
 
 
 def startSetup(menuid, **kwargs):
-	if getImageDistro() == "ventonsupport":
+	if IMAGEDISTRO == "ventonsupport":
 		if menuid == "expert":
 			return [(_("Audio Sync Setup"), setup, "audiosync_setup", 41)]
 		else:
 			return []
-	elif getImageDistro() in ("openatv", "openhdf"):
+	elif IMAGEDISTRO in ("openatv", "openhdf"):
 		if menuid == "audio_menu":
 			return [(_("Audio Sync Setup"), setup, "audiosync_setup", 41)]
 		else:

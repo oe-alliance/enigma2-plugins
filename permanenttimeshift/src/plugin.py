@@ -46,7 +46,12 @@ import gettext
 import Screens.InfoBar
 import Screens.Standby
 
-from boxbranding import getImageDistro
+try:
+	from Components.SystemInfo import BoxInfo
+	IMAGEDISTRO = BoxInfo.getItem("distro")
+except:
+	from boxbranding import getImageDistro
+	IMAGEDISTRO = getImageDistro()
 
 ##############################
 ###   Multilanguage Init   ###
@@ -1811,7 +1816,7 @@ class PermanentTimeShiftSetup(Screen, ConfigListScreen):
 
 
 def startSetup(menuid):
-	if getImageDistro() in ('openhdf'):
+	if IMAGEDISTRO in ('openhdf'):
 		if menuid != "record_menu":
 			return []
 	else:

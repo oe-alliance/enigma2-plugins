@@ -15,7 +15,12 @@ from Components.ConfigList import ConfigListScreen
 from time import localtime, mktime
 from Components.HdmiCec import hdmi_cec
 
-from boxbranding import getImageDistro
+try:
+	from Components.SystemInfo import BoxInfo
+	IMAGEDISTRO = BoxInfo.getItem("distro")
+except:
+	from boxbranding import getImageDistro
+	IMAGEDISTRO = getImageDistro()
 
 
 def _print(outtxt):
@@ -182,7 +187,7 @@ def main(session, **kwargs):
 
 
 def showinSetup(menuid):
-	if getImageDistro() in ('openhdf'):
+	if IMAGEDISTRO in ('openhdf'):
 		if menuid != "video_menu":
 			return []
 	else:

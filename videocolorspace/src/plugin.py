@@ -24,7 +24,12 @@ from .__init__ import _
 from Components.config import config
 from Plugins.Plugin import PluginDescriptor
 from .VideoColorSpace import VideoColorSpace, initializeConfig
-from boxbranding import getImageDistro
+try:
+	from Components.SystemInfo import BoxInfo
+	IMAGEDISTRO = BoxInfo.getItem("distro")
+except:
+	from boxbranding import getImageDistro
+	IMAGEDISTRO = getImageDistro()
 
 
 def autostart(reason, **kwargs):
@@ -38,7 +43,7 @@ def pluginOpen(session, **kwargs):
 
 
 def startSetup(menuid):
-    if getImageDistro() in ('openhdf'):
+    if IMAGEDISTRO in ('openhdf'):
         if menuid != "video_menu":
             return []
     else:

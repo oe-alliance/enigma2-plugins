@@ -12,7 +12,12 @@ from .PluginHiderSetup import PluginHiderSetup
 
 from operator import attrgetter
 
-from boxbranding import getImageDistro
+try:
+	from Components.SystemInfo import BoxInfo
+	IMAGEDISTRO = BoxInfo.getItem("distro")
+except:
+	from boxbranding import getImageDistro
+	IMAGEDISTRO = getImageDistro()
 
 config.plugins.pluginhider = ConfigSubsection()
 config.plugins.pluginhider.hideextensions = ConfigSet(choices=[])
@@ -83,7 +88,7 @@ def main(session, *args, **kwargs):
 
 
 def menu(menuid):
-	if getImageDistro() in ('teamblue'):
+	if IMAGEDISTRO in ('teamblue'):
 		if menuid != "general_menu":
 			return []
 	else:

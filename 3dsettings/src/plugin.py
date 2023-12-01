@@ -32,7 +32,12 @@ from Screens.Screen import Screen
 from enigma import iPlayableService, iServiceInformation, eServiceCenter, eServiceReference, eDBoxLCD
 from ServiceReference import ServiceReference
 from os.path import basename as os_basename
-from boxbranding import getImageDistro
+try:
+	from Components.SystemInfo import BoxInfo
+	IMAGEDISTRO = BoxInfo.getItem("distro")
+except:
+	from boxbranding import getImageDistro
+	IMAGEDISTRO = getImageDistro()
 import six
 
 # for localized messages
@@ -264,7 +269,7 @@ def opensettings(session, **kwargs):
 
 
 def settings(menuid, **kwargs):
-	if getImageDistro() in ('openhdf'):
+	if IMAGEDISTRO in ('openhdf'):
 		if menuid != "video_menu":
 			return []
 	else:

@@ -16,7 +16,12 @@ from Tools.Directories import fileExists
 from . import _
 import os
 
-from boxbranding import getImageDistro, getBoxType
+try:
+	from Components.SystemInfo import BoxInfo
+	IMAGEDISTRO = BoxInfo.getItem("distro")
+except:
+	from boxbranding import getImageDistro
+	IMAGEDISTRO = getImageDistro()
 
 try:
 	from Components.AVSwitch import iAVSwitch as video_hw
@@ -864,7 +869,7 @@ def autostart(reason, **kwargs):
 
 
 def startSetup(menuid):
-	if getImageDistro() in ('teamblue', 'openhdf'):
+	if IMAGEDISTRO in ('teamblue', 'openhdf'):
 		if menuid != "video_menu":
 			return []
 	else:

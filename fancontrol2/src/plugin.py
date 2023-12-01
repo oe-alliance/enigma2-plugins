@@ -43,7 +43,14 @@ from Components.Harddisk import harddiskmanager
 
 from threading import Thread, Lock
 
-from boxbranding import getBoxType, getImageDistro
+try:
+	from Components.SystemInfo import BoxInfo
+	IMAGEDISTRO = BoxInfo.getItem("distro")
+	MACHINE = BoxInfo.getItem("machinebuild")
+except:
+	from boxbranding import getImageDistro, getBoxType
+	IMAGEDISTRO = getImageDistro()
+	MACHINE = getBoxType()
 
 from six.moves import queue, range
 
@@ -163,7 +170,7 @@ def setPWM(fanid, value):
 #Configuration
 config.plugins.FanControl = ConfigSubsection()
 
-if getImageDistro() in ('openspa') and getBoxType() in ('vusolo2'):
+if IMAGEDISTRO in ('openspa') and MACHINE in ('vusolo2'):
 	config.plugins.FanControl.Fan = ConfigSelection(choices=[("disabled", _("disabled")), ("aus", _("Control disabled")), ("3pin", _("3Pin")), ("4pin", _("4Pin")), ("4pinREG", _("4Pin (PID)"))], default="3pin")
 	config.plugins.FanControl.StandbyOff = ConfigSelection(choices=[("false", _("no")), ("true", _("yes")), ("trueRec", _("yes, Except for Recording or HDD"))], default="true")
 	config.plugins.FanControl.minRPM = ConfigSlider(default=900, increment=50, limits=(0, 1500))
@@ -172,7 +179,7 @@ if getImageDistro() in ('openspa') and getBoxType() in ('vusolo2'):
 	config.plugins.FanControl.tempmax = ConfigSlider(default=50, increment=1, limits=(35, 55))
 	config.plugins.FanControl.pwm = ConfigSlider(default=30, increment=5, limits=(0, 255))
 	config.plugins.FanControl.vlt = ConfigSlider(default=30, increment=5, limits=(0, 255))
-elif getImageDistro() in ('openspa') and getBoxType() in ('vuduo2'):
+elif IMAGEDISTRO in ('openspa') and MACHINE in ('vuduo2'):
 	config.plugins.FanControl.Fan = ConfigSelection(choices=[("disabled", _("disabled")), ("aus", _("Control disabled")), ("3pin", _("3Pin")), ("4pin", _("4Pin")), ("4pinREG", _("4Pin (PID)"))], default="4pin")
 	config.plugins.FanControl.StandbyOff = ConfigSelection(choices=[("false", _("no")), ("true", _("yes")), ("trueRec", _("yes, Except for Recording or HDD"))], default="true")
 	config.plugins.FanControl.minRPM = ConfigSlider(default=750, increment=50, limits=(0, 1500))
@@ -1329,10 +1336,10 @@ def autostart(reason, **kwargs):
 
 
 def selSetup(menuid, **kwargs):
-	if getImageDistro() in ('openhdf'):
+	if IMAGEDISTRO in ('openhdf'):
 		if menuid != "devices_menu":
 			return []
-	elif getImageDistro() in ('openatv'):
+	elif IMAGEDISTRO in ('openatv'):
 		if menuid != "extended":
 			return []
 	else:

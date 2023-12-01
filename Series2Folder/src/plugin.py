@@ -32,7 +32,16 @@ from Tools.BoundFunction import boundFunction
 import NavigationInstance
 from enigma import eTimer, iRecordableService, iPlayableService, ePoint
 from time import time, localtime, strftime
-from boxbranding import getMachineBrand, getMachineName
+
+try:
+	from Components.SystemInfo import BoxInfo
+	DISPLAYMODEL = BoxInfo.getItem("displaymodel")
+	DISPLAYBRAND = BoxInfo.getItem("displaybrand")
+except:
+	from boxbranding import getMachineBrand, getMachineName
+	DISPLAYMODEL = getMachineName()
+	DISPLAYBRAND = getMachineBrand()
+
 from collections import defaultdict
 from os.path import isfile, isdir, splitext, join as joinpath, split as splitpath, lexists
 import os
@@ -433,11 +442,11 @@ class Series2FolderActions(Series2FolderActionsBase):
     def doMoves(self, service=None, selectedOnly=False, serviceList=None):
 
         if Screens.Standby.inTryQuitMainloop:
-            self.MsgBox(_("Your %s %s is trying to shut down. No recordings moved.") % (getMachineBrand(), getMachineName()), timeout=10)
+            self.MsgBox(_("Your %s %s is trying to shut down. No recordings moved.") % (DISPLAYBRAND, DISPLAYMODEL), timeout=10)
             return
 
         if JobManager.getPendingJobs():
-            self.MsgBox(_("Your %s %s is running tasks that may be accessing the recordings. No recordings moved.") % (getMachineBrand(), getMachineName()), timeout=10)
+            self.MsgBox(_("Your %s %s is running tasks that may be accessing the recordings. No recordings moved.") % (DISPLAYBRAND, DISPLAYMODEL), timeout=10)
             return
 
         if _autoSeries2Folder and _autoSeries2Folder.isActive():

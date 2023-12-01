@@ -18,8 +18,14 @@ from Screens.Screen import Screen
 from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
 import gettext
 from os import system, path
-from boxbranding import getImageDistro
 from sys import version_info
+
+try:
+	from Components.SystemInfo import BoxInfo
+	IMAGEDISTRO = BoxInfo.getItem("distro")
+except:
+	from boxbranding import getImageDistro
+	IMAGEDISTRO = getImageDistro()
 
 PY3 = version_info[0] == 3
 
@@ -583,10 +589,10 @@ def startConfig(session, **kwargs):
 
 
 def main(menuid):
-	if getImageDistro() in ('teamblue'):
+	if IMAGEDISTRO in ('teamblue'):
 		if menuid != "general_menu":
 			return []
-	elif getImageDistro() in ('openhdf'):
+	elif IMAGEDISTRO in ('openhdf'):
 		if menuid != "gui_menu":
 			return []
 	else:

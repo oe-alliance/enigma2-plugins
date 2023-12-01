@@ -5,7 +5,12 @@ from .Vps import vps_timers
 from .Vps_setup import VPS_Setup
 from .Modifications import register_vps
 from . import _
-from boxbranding import getImageDistro
+try:
+	from Components.SystemInfo import BoxInfo
+	IMAGEDISTRO = BoxInfo.getItem("distro")
+except:
+	from boxbranding import getImageDistro
+	IMAGEDISTRO = getImageDistro()
 
 # Config
 from Components.config import config, ConfigYesNo, ConfigSubsection, ConfigInteger, ConfigSelection
@@ -72,13 +77,13 @@ def doneConfig(session, **kwargs):
 
 
 def startSetup(menuid):
-	if getImageDistro() in ('teamblue'):
+	if IMAGEDISTRO in ('teamblue'):
 		if menuid != "general_menu":
 			return []
-	elif getImageDistro() in ('openhdf'):
+	elif IMAGEDISTRO in ('openhdf'):
 		if menuid != "record_menu":
 			return []
-	elif getImageDistro() in ('openvix'):
+	elif IMAGEDISTRO in ('openvix'):
 		if menuid != "rec":
 			return []
 	else:

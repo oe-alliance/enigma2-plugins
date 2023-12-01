@@ -1,7 +1,16 @@
 from __future__ import absolute_import
 from os import mkdir
 from six import ensure_str
-from boxbranding import getMachineBrand, getMachineName
+try:
+	from Components.SystemInfo import BoxInfo
+	DISPLAYMODEL = BoxInfo.getItem("displaymodel")
+	DISPLAYBRAND = BoxInfo.getItem("displaybrand")
+except:
+	from boxbranding import getMachineBrand, getMachineName
+	DISPLAYMODEL = getMachineName()
+	DISPLAYBRAND = getMachineBrand()
+
+
 from Components.Console import Console
 from Components.ConfigList import ConfigList
 from Components.config import KEY_LEFT, KEY_RIGHT, KEY_0
@@ -77,11 +86,11 @@ class MC_Settings(Screen):
 	def checkNetworkStateFinished(self, result, retval, extra_args=None):
 		result = ensure_str(result)
 		if result.find('bad address') != -1:
-			self.session.openWithCallback(self.InstallPackageFailed, MessageBox, _("Your %s %s is not connected to the internet, please check your network settings and try again.") % (getMachineBrand(), getMachineName()), type=MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
+			self.session.openWithCallback(self.InstallPackageFailed, MessageBox, _("Your %s %s is not connected to the internet, please check your network settings and try again.") % (DISPLAYBRAND, DISPLAYMODEL), type=MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
 		elif result.find('wget returned 1') != -1 or result.find('wget returned 255') != -1 or result.find('404 Not Found') != -1:
 			self.session.openWithCallback(self.InstallPackageFailed, MessageBox, _("Sorry feeds are down for maintenance, please try again later."), type=MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
 		else:
-			self.session.openWithCallback(self.InstallPackage, MessageBox, _('Your %s %s will be restarted after the installation of service\nReady to install %s ?') % (getMachineBrand(), getMachineName(), self.service_name), MessageBox.TYPE_YESNO)
+			self.session.openWithCallback(self.InstallPackage, MessageBox, _('Your %s %s will be restarted after the installation of service\nReady to install %s ?') % (DISPLAYBRAND, DISPLAYMODEL, self.service_name), MessageBox.TYPE_YESNO)
 
 	def InstallPackage(self, val):
 		if val:

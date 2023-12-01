@@ -25,7 +25,12 @@ import time
 from random import Random
 import six
 
-from boxbranding import getImageDistro
+try:
+	from Components.SystemInfo import BoxInfo
+	IMAGEDISTRO = BoxInfo.getItem("distro")
+except:
+	from boxbranding import getImageDistro
+	IMAGEDISTRO = getImageDistro()
 title = _("Change Root Password")
 
 
@@ -125,7 +130,7 @@ class ChangePasswdScreen(Screen):
 
 
 def startChange(menuid):
-	if getImageDistro() in ('teamblue'):
+	if IMAGEDISTRO in ('teamblue'):
 		if menuid != "general_menu":
 			return []
 	else:

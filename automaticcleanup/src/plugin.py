@@ -62,7 +62,12 @@ from Components.ConfigList import ConfigListScreen
 # GUI (Summary)
 from Screens.Setup import SetupSummary
 
-from boxbranding import getImageDistro
+try:
+	from Components.SystemInfo import BoxInfo
+	IMAGEDISTRO = BoxInfo.getItem("distro")
+except:
+	from boxbranding import getImageDistro
+	IMAGEDISTRO = getImageDistro()
 ###############################################################################
 VERSION = "0.1.9"
 # History:
@@ -490,7 +495,7 @@ def setup(session, **kwargs):
 
 
 def startSetup(menuid):
-	if getImageDistro() in ('teamblue'):
+	if IMAGEDISTRO in ('teamblue'):
 		if menuid != "general_menu":
 			return []
 	else:
