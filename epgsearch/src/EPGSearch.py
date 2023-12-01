@@ -678,7 +678,7 @@ class EPGSearch(EPGSelection):
 		l.list = ret
 		l.l.setList(ret)
 
-		# jump to entry neearest current time, copied from 
+		# jump to entry neearest current time, copied from
 		# https://github.com/openatv/enigma2/blob/628e1a712c59fca16793b225b393a59417072ba6/lib/python/Components/EpgList.py#L1460
 		t = time()
 		histhours = 0
