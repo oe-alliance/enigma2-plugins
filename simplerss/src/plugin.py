@@ -132,24 +132,33 @@ def readSkin(skin):
 	return skintext
 
 
-def downloadPicfile(url, picfile, resize=None, callback=None):
+def downloadPicfile(url, picfile, resize=None, fixedname=None, callback=None):
 	if picfile:
 		header = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/116.0", "Accept": "text/xml"}
 		if url:
 			try:
 				response = get(url.encode(), headers=header, timeout=(3.05, 6))
-				picdata = response.content[:]
+				picdata = response.content[:]  # make shallow copy
 				response.raise_for_status()
 				response.close()
+				picfile = picfile.replace("jpeg", ".jpg")
+				if fixedname:
+					picfile = fixedname
 				if not exists(picfile):
 					with open(picfile, "wb") as f:
 						f.write(picdata)
-				fileparts = picfile.split(".")
-				newfile = "%s.png" % fileparts[0]
-				img = Image.open(picfile)
-				if resize:
-					img.thumbnail(resize, Image.LANCZOS)  # resize, keeping aspect ratio and antialiasing
-				img.save(newfile, format="PNG")
+				isnotpng = not picfile.endswith(".png")
+				if resize or isnotpng:
+					img = Image.open(picfile)
+					if resize:
+						img.thumbnail(resize, Image.LANCZOS)  # resize, keeping aspect ratio and antialiasing
+					pngfile = "%s.png" % picfile.split(".")[0]
+					img.save(pngfile)  # forced save as PNG because some boxes (e.g. HD51) wrongly display JPGs transparently
+					img.close()
+					if isnotpng:
+						remove(picfile)
+				else:
+					pngfile = picfile
 				if callback:
 					callback()
 			except exceptions.RequestException as err:
@@ -162,10 +171,10 @@ def downloadPicfile(url, picfile, resize=None, callback=None):
 		print(errmsg)
 
 
-def url2filename(url):
+def url2filename(url, forcepng=False):
 	for itype in [".jpg", ".jpeg", ".png", ".gif"]:
 		if itype in url:
-			return "%s%s" % (hash(url), itype)
+			return "%s.png" % hash(url) if forcepng else ("%s%s" % (hash(url), itype)).replace(".jpeg", ".jpg")
 	return ""
 
 
@@ -434,14 +443,15 @@ class RSSBaseView(Screen):  # Base Screen for all Screens used in SimpleRSS
 
 
 class RSS_EntryView(RSSBaseView):  # Shows a RSS Item
-	def __init__(self, session, data, feedTitle="", cur_idx=None, entries=None, feedLogo=""):
+	def __init__(self, session, data, cur_idx=None, entries=None, feedTitle="", feedLogo=""):
 		RSSBaseView.__init__(self, session, None)
 		self.session = session
 		self.data = data
 		self.feedTitle = feedTitle
 		self.cur_idx = cur_idx
 		self.entries = entries
-		self.feedLogo = feedLogo
+		self.feedpng = feedLogo
+		self.pngfile = join(TEMPPATH, "entrypic.png")
 		self.picsize = (382, 214) if getDesktop(0).size().width() > 1300 else (255, 143)
 		self.skin = readSkin("RSS_EntryView")
 		Screen.__init__(self, session, self.skin)
@@ -454,10 +464,10 @@ class RSS_EntryView(RSSBaseView):  # Shows a RSS Item
 		self.onLayoutFinish.append(self.updateTitle)
 
 	def updateTitle(self):
-		feedlogo = self.feedLogo if self.feedLogo else join(TEMPPATH, NEWSLOGO)
-		if feedlogo and exists(feedlogo):
+		feedpng = self.feedpng or join(TEMPPATH, NEWSLOGO)
+		if exists(feedpng):
 			self["feedlogo"].instance.setPixmapScaleFlags(BT_SCALE | BT_KEEP_ASPECT_RATIO | BT_HALIGN_CENTER | BT_VALIGN_CENTER)
-			self["feedlogo"].instance.setPixmapFromFile(feedlogo)
+			self["feedlogo"].instance.setPixmapFromFile(feedpng)
 			self["feedlogo"].show()
 		else:
 			self["feedlogo"].hide()
@@ -466,11 +476,11 @@ class RSS_EntryView(RSSBaseView):  # Shows a RSS Item
 		self["info"].text = _("Entry %s/%s") % (self.cur_idx + 1, self.entries) if self.cur_idx is not None and self.entries else ""
 		data = self.data
 		self["content"].setText(''.join((data[0], '\n\n', data[2], '\n\n', str(len(data[3])), ' ', _("Enclosures"))) if data else _("No such Item."))
-		picfile = join(TEMPPATH, "entrypic.png")  # pictype doesn't matter due this will be changed if necessary
 		if data:
 			urllist = RSSBaseView.findEnclosure(self, data[3])
 			if urllist:
-				callInThread(downloadPicfile, urllist[0], picfile, resize=self.picsize, callback=self.refreshPic)
+				picfile = join(TEMPPATH, url2filename(urllist[0]))
+				callInThread(downloadPicfile, urllist[0], picfile, resize=self.picsize, fixedname=self.pngfile, callback=self.refreshPic)
 		self.updateInfo()
 
 	def updateInfo(self):
@@ -480,11 +490,10 @@ class RSS_EntryView(RSSBaseView):  # Shows a RSS Item
 		self.refreshPic()
 
 	def refreshPic(self):
-		picfile = join(TEMPPATH, "entrypic.png")
-		if exists(picfile):  # use first hit found
-			self["picture"].instance.setPixmapScaleFlags(BT_SCALE | BT_KEEP_ASPECT_RATIO | BT_HALIGN_CENTER | BT_VALIGN_CENTER)
-			self["picture"].instance.setPixmapFromFile(picfile)
-			self["picture"].show()
+		pngfile = self.pngfile if exists(self.pngfile) else join(TEMPPATH, NOPIC)
+		self["picture"].instance.setPixmapScaleFlags(BT_SCALE | BT_KEEP_ASPECT_RATIO | BT_HALIGN_CENTER | BT_VALIGN_CENTER)
+		self["picture"].instance.setPixmapFromFile(pngfile)
+		self["picture"].show()
 
 	def selectEnclosure(self):
 		if self.data:
@@ -498,17 +507,16 @@ class RSS_EntryView(RSSBaseView):  # Shows a RSS Item
 						callInThread(downloadPicfile, url, self.filename, callback=self.showFullpic)
 
 	def showFullpic(self):
-		picfile = join(TEMPPATH, "%s.png" % self.filename.split(".")[0])
+		pngfile = join(TEMPPATH, "%s.png" % self.filename.split(".")[0])
 		piclist = []
-		if exists(picfile):
-			piclist.append(((picfile, False), None))
+		if exists(pngfile):
+			piclist.append(((pngfile, False), None))
 		if piclist:
 			self.session.open(ui.Pic_Full_View, piclist, 0, TEMPPATH)
 
 	def __close(self):
-		picfile = join(TEMPPATH, "entrypic.png")
-		if exists(picfile):
-			remove(picfile)
+		if exists(self.pngfile):
+			remove(self.pngfile)
 		self.close()
 
 
@@ -523,6 +531,7 @@ class RSS_FeedView(RSSBaseView):  # Shows a RSS-Feed
 		self.newItems = newItems
 		self.parent = parent  # restore, because 'Screen.__init' will set self.parent = 'Screen of Skin'
 		self.ident = ident
+		self.nopic = join(TEMPPATH, NOPIC)
 		self.picsize = (225, 105) if getDesktop(0).size().width() > 1300 else (150, 70)
 		self["feedlogo"] = Pixmap()
 		self["title"] = StaticText(_("Simple RSS Reader Feedview"))
@@ -561,8 +570,12 @@ class RSS_FeedView(RSSBaseView):  # Shows a RSS-Feed
 			self["content"].style = "news"
 		else:
 			self["content"].style = "default"
-		self["button_bouquet"].instance.setPixmapFromFile(join(PLUGINPATH, "icons/bouquet_%s.png" % ("fHD" if getDesktop(0).size().width() > 1300 else "HD")))
-		self["button_bouquet"].show()
+		pngfile = join(PLUGINPATH, "icons/bouquet_%s.png" % ("fHD" if getDesktop(0).size().width() > 1300 else "HD"))
+		if exists(pngfile):
+			self["button_bouquet"].instance.setPixmapFromFile(pngfile)
+			self["button_bouquet"].show()
+		else:
+			self["button_bouquet"].hide()
 		self.updateTitle()
 
 	def updateTitle(self):
@@ -570,13 +583,15 @@ class RSS_FeedView(RSSBaseView):  # Shows a RSS-Feed
 		self.updateInfo()
 		if self.feed:
 			if self.feed.logoUrl:
-				filename = join(TEMPPATH, url2filename(self.feed.logoUrl))
+				logopng = join(TEMPPATH, url2filename(self.feed.logoUrl, forcepng=True))
 			else:
-				filename = join(TEMPPATH, NEWSLOGO) if self.feed.title == _("New Items") else join(TEMPPATH, NOLOGO)
-			if filename and exists(filename):
+				pngfile = join(TEMPPATH, NEWSLOGO) if self.feed.title == _("New Items") else join(TEMPPATH, NOLOGO)
+			if exists(logopng):
 				self["feedlogo"].instance.setPixmapScaleFlags(BT_SCALE | BT_KEEP_ASPECT_RATIO | BT_HALIGN_CENTER | BT_VALIGN_CENTER)
-				self["feedlogo"].instance.setPixmapFromFile(filename)
+				self["feedlogo"].instance.setPixmapFromFile(logopng)
 				self["feedlogo"].show()
+			else:
+				self["feedlogo"].hide()
 		else:
 			self["feedlogo"].hide()
 		if self.feed:
@@ -614,11 +629,13 @@ class RSS_FeedView(RSSBaseView):  # Shows a RSS-Feed
 				urllist = RSSBaseView.findEnclosure(self, content[3])
 				if urllist and self.feed and self.feed.title != _("New Items"):
 					picfile = join(TEMPPATH, url2filename(urllist[0]))
-					if not exists(picfile):
+					pngfile = "%s.png" % picfile.split(".")[0]
+					if not exists(pngfile):
 						callInThread(downloadPicfile, urllist[0], picfile, resize=self.picsize, callback=self.refreshPics)
+						pngfile = self.nopic
 				else:
-					picfile = join(TEMPPATH, NOPIC)
-				picpix = LoadPixmap(cached=True, path=picfile) if exists(picfile) else None
+					pngfile = self.nopic
+				picpix = LoadPixmap(cached=True, path=pngfile) if exists(pngfile) else None
 				skinlist.append((content[0], self.linepix, picpix))
 			self["content"].updateList(skinlist)
 
@@ -626,16 +643,9 @@ class RSS_FeedView(RSSBaseView):  # Shows a RSS-Feed
 		skinlist = []
 		if self.feed:
 			for content in self.feed.history:
-				picurl = ""
-				try:
-					if len(content[3]) > 0:
-						picurl = content[3][0][0]
-				except Exception:
-					pass
-				picpix = None
-				if picurl:
-					picfile = "%s.png" % join(TEMPPATH, url2filename(picurl)).split(".")[0] if picurl else join(TEMPPATH, NOPIC)
-					picpix = LoadPixmap(cached=True, path=picfile) if exists(picfile) else None
+				picurl = content[3][0][0] if len(content[3]) > 0 else ""
+				pngfile = join(TEMPPATH, url2filename(picurl, forcepng=True)) if picurl else self.nopic
+				picpix = LoadPixmap(cached=True, path=pngfile) if exists(pngfile) else None
 				skinlist.append((content[0], self.linepix, picpix))
 			self["content"].updateList(skinlist)
 
@@ -703,10 +713,10 @@ class RSS_FeedView(RSSBaseView):  # Shows a RSS-Feed
 			curr_entry = self.feed.history[cur_idx]
 			if curr_entry and self.feed:
 				if self.feed.logoUrl:
-					filename = join(TEMPPATH, url2filename(self.feed.logoUrl))
+					pngfile = join(TEMPPATH, url2filename(self.feed.logoUrl, forcepng=True))
 				else:
-					filename = join(TEMPPATH, NEWSLOGO) if self.feed.title == _("New Items") else join(TEMPPATH, NOLOGO)
-				self.session.openWithCallback(self.updateInfo, RSS_EntryView, curr_entry, cur_idx=cur_idx, entries=len(self.feed.history), feedTitle=self.feed.title, feedLogo=filename)
+					pngfile = join(TEMPPATH, NEWSLOGO) if self.feed.title == _("New Items") else join(TEMPPATH, NOLOGO)
+				self.session.openWithCallback(self.updateInfo, RSS_EntryView, curr_entry, cur_idx=cur_idx, entries=len(self.feed.history), feedTitle=self.feed.title, feedLogo=pngfile)
 
 	def keyPageUp(self):
 		self["content"].pageUp()
@@ -790,11 +800,13 @@ class RSS_Overview(RSSBaseView):  # Shows an Overview over all RSS-Feeds known t
 			logourl = feed[0].logoUrl
 			if logourl:
 				logofile = join(TEMPPATH, url2filename(logourl))
-				if not exists(logofile):
+				print("logofile: %s" % logofile)
+				logopng = "%s.png" % logofile.split(".")[0]
+				if not exists(logopng):
 					callInThread(downloadPicfile, logourl, logofile, resize=self.logosize, callback=self.refreshPics)
 			else:
-				logofile = join(TEMPPATH, NEWSLOGO) if title == _("New Items") else join(TEMPPATH, NOLOGO)
-			picpix = LoadPixmap(cached=True, path=logofile) if exists(logofile) else None
+				logopng = join(TEMPPATH, NEWSLOGO) if title == _("New Items") else join(TEMPPATH, NOLOGO)
+			picpix = LoadPixmap(cached=True, path=logopng) if exists(logopng) else None
 			skinlist.append((title, descr, self.linepix, picpix))
 		self["content"].updateList(skinlist)
 
@@ -805,7 +817,7 @@ class RSS_Overview(RSSBaseView):  # Shows an Overview over all RSS-Feeds known t
 			descr = feed[0].description
 			logourl = feed[0].logoUrl
 			if logourl:
-				logofile = "%s.png" % join(TEMPPATH, url2filename(logourl)).split(".")[0]
+				logofile = join(TEMPPATH, url2filename(logourl, forcepng=True))
 			else:
 				logofile = join(TEMPPATH, NEWSLOGO) if title == _("New Items") else join(TEMPPATH, NOLOGO)
 			picpix = LoadPixmap(cached=True, path=logofile) if exists(logofile) else None
@@ -986,7 +998,7 @@ class RSSPoller:  # Keeps all Feed and takes care of (automatic) updates
 							clearHistory = False
 							break
 			if clearHistory:
-				del self.newItemFeed.history[:]
+				del self.newItemFeed.history[:]  # make shallow copy
 			feed = self.feeds[self.current_feed]  # Feed supposed to autoupdate
 			if feed.autoupdate:
 				callInThread(self.pollXml, feed.uri, self.error)
