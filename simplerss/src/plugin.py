@@ -585,7 +585,7 @@ class RSS_FeedView(RSSBaseView):  # Shows a RSS-Feed
 			if self.feed.logoUrl:
 				logopng = join(TEMPPATH, url2filename(self.feed.logoUrl, forcepng=True))
 			else:
-				pngfile = join(TEMPPATH, NEWSLOGO) if self.feed.title == _("New Items") else join(TEMPPATH, NOLOGO)
+				logopng = join(TEMPPATH, NEWSLOGO) if self.feed.title == _("New Items") else join(TEMPPATH, NOLOGO)
 			if exists(logopng):
 				self["feedlogo"].instance.setPixmapScaleFlags(BT_SCALE | BT_KEEP_ASPECT_RATIO | BT_HALIGN_CENTER | BT_VALIGN_CENTER)
 				self["feedlogo"].instance.setPixmapFromFile(logopng)
