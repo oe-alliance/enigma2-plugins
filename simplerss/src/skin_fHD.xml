@@ -49,7 +49,7 @@
 		<widget source="info" render="Label" position="285,154" size="1050,48" font="Regular;36" backgroundColor="#1A0F0F0F" foregroundColor="#00FFFFFF" transparent="1" />
 		<widget name="feedlogo" position="105,142" size="120,60" alphatest="blend" />
 		<eLabel position="97,210" size="1725,1" backgroundColor="#00FFFFFF" />
-		<widget name="content" position="525,225" size="900,705" font="Regular;33" backgroundColor="#1A0F0F0F" foregroundColor="#00FFFFFF" transparent="0" />
+		<widget name="content" position="525,225" size="1340,705" font="Regular;33" backgroundColor="#1A0F0F0F" foregroundColor="#00FFFFFF" transparent="0" />
 		<widget name="picture" position="105,270" size="382,214" alphatest="blend" transparent="1" zPosition="1" />
 	</screen>
 
@@ -79,10 +79,10 @@
 					]),
 					"news": (120,[
 						MultiContentEntryPixmap(pos=(0,0), size=(1050,10), png=1), # index 1 is the line separator
-						MultiContentEntryText(pos=(15,7), size=(990,105), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text=0)# feedtext
+						MultiContentEntryText(pos=(15,7), size=(990,110), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text=0)# feedtext
 					])
 					},
-					"fonts": [gFont("Regular",33)],
+					"fonts": [gFont("Regular",30)],
 					"itemHeight":120
 					}
 			</convert>
@@ -111,10 +111,10 @@
 				{"template": [
 					MultiContentEntryPixmap(pos=(0,0), size=(1725,10), png=2), # index 2 is the line separator
 					MultiContentEntryPixmapAlphaBlend(pos=(7,18), size=(225,105), flags=BT_SCALE|BT_KEEP_ASPECT_RATIO|BT_HALIGN_CENTER|BT_VALIGN_CENTER, png=3), # feedlogo
-					MultiContentEntryText(pos=(240,7), size=(795,45), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text=0), # title
-					MultiContentEntryText(pos=(240,60), size=(795,67), font=1, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text=1)# description
+					MultiContentEntryText(pos=(240,7), size=(1467,45), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text=0), # title
+					MultiContentEntryText(pos=(240,54), size=(1467,80), font=1, flags=RT_HALIGN_LEFT|RT_VALIGN_TOP|RT_WRAP, text=1)# description
 					],
-				"fonts": [gFont("Regular",33), gFont("Regular",27)],
+				"fonts": [gFont("Regular",33), gFont("Regular",30)],
 				"itemHeight":141
 				}
 			</convert>
