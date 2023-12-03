@@ -58,7 +58,7 @@ global WebTimer
 global WebTimer_conn
 global AutoStartTimer
 SERVICELIST = None
-VERSION = "1.5-r3"
+VERSION = "1.5-r4"
 EXPORTPATH = "%s%s" % (resolveFilename(SCOPE_SYSETC), "epgexport/")  # /etc/epgexport/
 CHANNELS = join(EXPORTPATH, "epgexport.channels")
 DESTINATION = {"volatile": "/tmp/epgexport", "data": "/data/epgexport", "hdd": "/media/hdd/epgexport", "usb": "/media/usb/epgexport", "sdcard": "/media/sdcard/epgexport"}
