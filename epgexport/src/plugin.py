@@ -58,7 +58,7 @@ global WebTimer
 global WebTimer_conn
 global AutoStartTimer
 SERVICELIST = None
-VERSION = "1.5-r3"
+VERSION = "1.5-r4"
 EXPORTPATH = "%s%s" % (resolveFilename(SCOPE_SYSETC), "epgexport/")  # /etc/epgexport/
 CHANNELS = join(EXPORTPATH, "epgexport.channels")
 DESTINATION = {"volatile": "/tmp/epgexport", "data": "/data/epgexport", "hdd": "/media/hdd/epgexport", "usb": "/media/usb/epgexport", "sdcard": "/media/sdcard/epgexport"}
@@ -646,7 +646,8 @@ class EPGExport(Screen):
 		self.cur_event = None
 		self.cur_service = None
 		test = [(service.ref.toString(), 0, self.time_base, self.time_epoch) for service in self.services]
-		test.insert(0, ("XRnITBDSE", 0, self.time_base, self.time_epoch))  # N = ServiceName, n = short ServiceName
+		test.insert(0, "XRnITBDSE")
+#		test.insert(0, ("XRnITBDSE", 0, self.time_base, self.time_epoch))  # N = ServiceName, n = short ServiceName
 		epg_data = self.queryEPG(test)
 		self.program = []
 		tmp_list = []
