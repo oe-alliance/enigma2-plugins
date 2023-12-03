@@ -646,7 +646,8 @@ class EPGExport(Screen):
 		self.cur_event = None
 		self.cur_service = None
 		test = [(service.ref.toString(), 0, self.time_base, self.time_epoch) for service in self.services]
-		test.insert(0, ("XRnITBDSE", 0, self.time_base, self.time_epoch))  # N = ServiceName, n = short ServiceName
+		test.insert(0, "XRnITBDSE")
+#		test.insert(0, ("XRnITBDSE", 0, self.time_base, self.time_epoch))  # N = ServiceName, n = short ServiceName
 		epg_data = self.queryEPG(test)
 		self.program = []
 		tmp_list = []
