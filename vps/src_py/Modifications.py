@@ -31,7 +31,7 @@ else:
 # getargspec is deprecated in Py3 in favour of getfullargspec
 	__getargs = inspect.getfullargspec
 
-__vps_TimerEntry_createSetup_has_widget = len(__getargs(TimerEntry.createSetup).args) > 1
+__vps_TimerEntry_createSetup_has_widget = len(__getargs(TimerEntry.createSetup).args) > 1 and __getargs(TimerEntry.createSetup).args[1] != "appendItems"
 
 # We cater for any parameters thrown at us and pass it all on.
 #
