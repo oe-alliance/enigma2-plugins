@@ -83,7 +83,7 @@ def startSetup(menuid):
 	elif IMAGEDISTRO in ('openhdf'):
 		if menuid != "record_menu":
 			return []
-	elif IMAGEDISTRO in ('openvix'):
+	elif IMAGEDISTRO in ('openvix', 'openbh'):
 		if menuid != "rec":
 			return []
 	else:
