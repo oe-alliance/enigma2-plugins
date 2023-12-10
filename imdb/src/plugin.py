@@ -284,7 +284,7 @@ class IMDB(Screen, HelpableScreen):
 		self["actionsColor"] = HelpableActionMap(self, "ColorActions",
 		{
 			"red": (self.exit, _("Exit IMDb search")),
-			"green": (self.showMenu, _("Show list of matched movies an series")),
+			"green": (self.showMenu, _("Show list of matched movies and series")),
 			"yellow": (self.showDetails, _("Show movie and series basic details")),
 			"blue": (self.showExtras, _("Show movie and series extra details")),
 		}, -1)
