@@ -1000,7 +1000,7 @@ msgid ""
 "The Timer will not be added to the List.\n"
 "Please press OK to close this Wizard."
 msgstr ""
-"Il timer non verrà aggiunto all'elenco.\n\Premi OK per chiudere l'Assistente."
+"Il timer non verrà aggiunto all'elenco.\nPremi OK per chiudere l'Assistente."
 
 msgid ""
 "The Timespan of an AutoTimer is the first 'advanced' attribute. If a "
