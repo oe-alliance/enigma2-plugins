@@ -1,12 +1,12 @@
-# Massimo Pissarello <mapi68@gmail.com>, 2022.
+# SPDX-FileCopyrightText: 2022, 2023 Massimo Pissarello <mapi68@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - imdb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-16 19:06+0430\n"
-"PO-Revision-Date: 2022-08-31 05:46+0200\n"
+"PO-Revision-Date: 2023-12-14 19:05+0100\n"
 "Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
-"Language-Team: \n"
+"Language-Team: Italian <>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,10 +17,10 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-Basepath: .../enigma2-plugins/imdb\n"
 "X-Poedit-SearchPath-0: .../enigma2-plugins/imdb\n"
-"X-Generator: Lokalize 22.08.0\n"
+"X-Generator: Lokalize 23.08.3\n"
 
 msgid " as "
-msgstr " nel ruolo di "
+msgstr " è "
 
 msgid "* = Restart Required"
 msgstr "* = Riavvio richiesto"
@@ -54,18 +54,17 @@ msgid ""
 "Enable this to be able to access IMDb search setup from within the plugin"
 " browser."
 msgstr ""
-"Abilita per poter accedere alla configurazione della ricerca IMDb dal plugin"
-" del browser."
+"Abilita per poter accedere alla configurazione di Ricerca IMDb dal plugin del"
+" browser."
 
 msgid ""
 "Enable this to be able to access IMDb searches from within the movie list."
-msgstr "Abilita per poter accedere alle ricerche IMDb dall'elenco dei film.\""
+msgstr "Abilita per poter accedere a Ricerca IMDb dall'elenco dei film."
 
 msgid ""
 "Enable this to be able to access IMDb searches from within the plugin browser."
 msgstr ""
-"Abilita per poter accedere alle ricerche IMDb dall'interno del plugin del"
-" browser."
+"Abilita per poter accedere a ricerca IMDb dall'interno del plugin del browser."
 
 msgid "Enter search"
 msgstr "Inserisci ricerca"
@@ -77,10 +76,10 @@ msgid "Exit"
 msgstr "Esci"
 
 msgid "Exit IMDb search"
-msgstr "Esci dalla ricerca IMDb"
+msgstr "Esci da Ricerca IMDb"
 
 msgid "Extra Info"
-msgstr "Informazioni aggiuntivev"
+msgstr "Info aggiuntive"
 
 msgid "Genre:"
 msgstr "Genere:"
@@ -111,7 +110,7 @@ msgstr "Impostazioni IMDb"
 
 msgid "IMDb can not get Movie Information to write to .jpg and .txt files!"
 msgstr ""
-"IMDb non è in grado di ottenere le informazioni sul film per scrivere su file"
+"IMDb non è in grado di ottenere le informazioni sul film da scrivere nei file"
 " .jpg e .txt!"
 
 msgid "IMDb can not get Movie Information to write to .txt file!"
@@ -269,3 +268,4 @@ msgstr "Parole/frasi da ignorare"
 
 msgid "no user rating yet"
 msgstr "ancora nessuna valutazione utente"
+
