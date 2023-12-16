@@ -1,0 +1,9 @@
+<keymap>
+	<map context="IMDbActions">
+		<key id="KEY_PVR" mapto="poster" flags="m"/>
+		<key id="KEY_FILE" mapto="poster" flags="m"/>
+		<key id="KEY_MEDIA" mapto="poster" flags="m"/>
+		<key id="KEY_TEXT" mapto="synopsis" flags="m"/>
+		<key id="KEY_INFO" mapto="reviews" flags="m"/>
+	</map>
+</keymap>
