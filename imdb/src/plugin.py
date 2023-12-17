@@ -269,6 +269,7 @@ class IMDB(Screen, HelpableScreen):
 		# 1 = movie info page
 		# 2 = extra infos page
 		# 3 = synopsis page
+		# 4 = reviews page
 		self.Page = 0
 
 		self.cookie = {
@@ -284,19 +285,19 @@ class IMDB(Screen, HelpableScreen):
 		self["actionsColor"] = HelpableActionMap(self, "ColorActions",
 		{
 			"red": (self.exit, _("Exit IMDb search")),
-			"green": (self.showMenu, _("Show list of matched movies an series")),
+			"green": (self.showMenu, _("Show list of matched movies and series")),
 			"yellow": (self.showDetails, _("Show movie and series basic details")),
 			"blue": (self.showExtras, _("Show movie and series extra details")),
 		}, -1)
 		self["actionsMovieSel"] = HelpableActionMap(self, ["MenuActions", "InfoActions"],
 		{
 			"menu": (self.contextMenuPressed, _("Menu")),
-			"info": (self.showDetails, _("Show movie and series basic details")),
 		}, -1)
-		self["actionsInfobar"] = HelpableActionMap(self, ["InfobarActions", "InfobarTeletextActions"],
+		self["actionsIMDb"] = HelpableActionMap(self, "IMDbActions",
 		{
-			"showMovies": (self.bigPoster, _("Show a bigger poster")),
-			"startTeletext": (self.showSynopsis, _("Show movie and series synopsis")),
+			"poster": (self.bigPoster, _("Show a bigger poster")),
+			"reviews": (self.showReviews, _("Show first page of user reviews")),
+			"synopsis": (self.showSynopsis, _("Show movie and series synopsis")),
 		}, -1)
 		self["actionsDir"] = HelpableActionMap(self, "DirectionActions",
 		{
@@ -325,6 +326,8 @@ class IMDB(Screen, HelpableScreen):
 		self["titellabel"].setText("")
 		self["extralabel"].setText("")
 		self.ratingstars = -1
+		self.reviews = []
+		self.spoilers = False
 
 	def pageUp(self):
 		if self.hideBigPoster():
@@ -335,7 +338,7 @@ class IMDB(Screen, HelpableScreen):
 		elif self.Page == 1:
 			self["castlabel"].pageUp()
 			self["detailslabel"].pageUp()
-		else:  # self.Page in (2, 3):
+		else:  # self.Page in (2, 3, 4):
 			self["extralabel"].pageUp()
 
 	def pageDown(self):
@@ -347,7 +350,7 @@ class IMDB(Screen, HelpableScreen):
 		elif self.Page == 1:
 			self["castlabel"].pageDown()
 			self["detailslabel"].pageDown()
-		else:  # self.Page in (2, 3):
+		else:  # self.Page in (2, 3, 4):
 			self["extralabel"].pageDown()
 
 	def showMenu(self):
@@ -403,6 +406,41 @@ class IMDB(Screen, HelpableScreen):
 		download = getPage(fetchurl, cookies=self.cookie)
 		download.addCallback(self.IMDBquery2).addErrback(self.http_failed)
 
+	def gotReviews(self, response):
+		self["statusbar"].setText(_("Parsing reviews..."))
+		self.reviewsHTML = response.content
+		if six.PY3:
+			self.reviewsHTML = self.reviewsHTML.decode("utf8")
+
+		reviewsmask = re.compile(
+			'<span>(?P<rating>\d+)</span>.*?'
+			'class="title" > (?P<title>.*?)\n.*?'
+			'\n>(?P<author>.*?)</a></span><span class="review-date">(?P<date>.*?)</span>.*?'
+			'(?:spoiler-warning">(?P<spoiler>.*?)</.*?)?'
+			'"text show-more__control">(?P<review>.*?)</div>.*?'
+			'text-muted">\s+(?P<helpful>.*?)\s+<span'
+			, re.DOTALL)
+
+		for review in reviewsmask.finditer(self.reviewsHTML):
+			self.reviews.append({
+				'rating': review.group('rating'),
+				'title': html2text(review.group('title')),
+				'author': html2text(review.group('author')),
+				'date': html2text(review.group('date')),
+				'spoiler': html2text(review.group('spoiler') or ""),
+				'review': html2text(review.group('review')),
+				'helpful': html2text(review.group('helpful'))
+			})
+		self["statusbar"].setText(_("IMDb Reviews parsed"))
+		self.showExtras(reviews=True)
+
+	def downloadReviews(self):
+		self["statusbar"].setText(_("Downloading reviews..."))
+		fetchurl = "https://www.imdb.com/title/" + self.titleId + "/reviews/_ajax"
+#		print("[IMDB] downloadReviews()", fetchurl)
+		download = getPage(fetchurl, cookies=self.cookie)
+		download.addCallback(self.gotReviews).addErrback(self.http_failed)
+
 	def showDetails(self):
 		self.hideBigPoster()
 
@@ -418,7 +456,7 @@ class IMDB(Screen, HelpableScreen):
 			self.resetLabels()
 			self.Page = 1
 
-		if self.Page in (2, 3):
+		if self.Page in (2, 3, 4):
 			self["extralabel"].hide()
 			if self.ratingstars > 0:
 				self["starsbg"].show()
@@ -427,7 +465,7 @@ class IMDB(Screen, HelpableScreen):
 
 			self.Page = 1
 
-	def showExtras(self, synopsis=False):
+	def showExtras(self, synopsis=False, reviews=False):
 		self.hideBigPoster()
 
 		if self.Page == 0 or (not synopsis and not self.extra):
@@ -440,14 +478,50 @@ class IMDB(Screen, HelpableScreen):
 			self["stars"].hide()
 			self["starsbg"].hide()
 			self["ratinglabel"].hide()
-		self["extralabel"].setText(self.synopsis if synopsis else self.extra)
-		self.Page = synopsis and 3 or 2
+		if reviews:
+			if self.Page == 4:
+				self.spoilers = not self.spoilers
+				pos = self["extralabel"].curPos
+			else:
+				pos = 0
+			reviews = []
+			for review in self.reviews:
+				reviews.append(review['rating'] + "/10 | " + review['date'])
+				reviews.append(review['title'] + " [" + review['author'] + "]")
+				reviews.append("")
+				if review['spoiler']:
+					reviews.append("** " + review['spoiler'] + " **")
+					reviews.append("")
+				if self.spoilers or not review['spoiler']:
+					reviews.append(review['review'])
+					reviews.append("")
+				reviews.append(review['helpful'])
+				reviews.append("")
+				reviews.append("-"*72)
+				reviews.append("")
+			self.reviewsTxt = "\n".join(reviews[:-3])
+			self["extralabel"].setText(text2label(self.reviewsTxt))
+			self["extralabel"].setPos(pos)
+			self["extralabel"].updateScrollbar()
+			self.Page = 4
+		else:
+			self["extralabel"].setText(self.synopsis if synopsis else self.extra)
+			self.Page = synopsis and 3 or 2
 
 	def showSynopsis(self):
 		self.hideBigPoster()
 
 		if self.synopsis:
-			self.showExtras(True)
+			self.showExtras(synopsis=True)
+
+	def showReviews(self):
+		self.hideBigPoster()
+
+		if self.Page != 0 and self.extrainfos["commenttitle"]:
+			if not self.reviews:
+				self.downloadReviews()
+			else:
+				self.showExtras(reviews=True)
 
 	def contextMenuPressed(self):
 		self.hideBigPoster()
@@ -488,6 +562,8 @@ class IMDB(Screen, HelpableScreen):
 				open(isave + ".html", 'w').write(self.html)
 				if self.json:
 					open(isave + ".json", 'w').write(self.json)
+				if self.reviews:
+					open(isave + "-reviews.html", 'w').write(self.reviewsHTML)
 				try:
 					copy("/tmp/poster.jpg", isave + ".jpg")
 				except:
@@ -537,13 +613,15 @@ class IMDB(Screen, HelpableScreen):
 			"\n"
 			"%s\n"  # extra
 			"%s"    # newlines & synopsis, if present
+			"%s"    # newlines & reviews, if present
 		) % (
 			self.eventName,
 			self["ratinglabel"].getText(),
 			self.callbackData,
 			self.castTxt,
 			self.extraTxt,
-			self.synopsisTxt and "\n".join(("", _("Synopsis"), "", self.synopsisTxt, "")) or ""
+			self.synopsisTxt and "\n".join(("", _("Synopsis"), "", self.synopsisTxt, "")) or "",
+			self.reviewsTxt and "\n".join(("", _("User reviews"), "", self.reviewsTxt, "")) or ""
 		)
 
 	def openYttrailer(self):
@@ -594,8 +672,10 @@ class IMDB(Screen, HelpableScreen):
 		self.titleId = None
 		self.html = ""
 		self.json = self.generalinfos = None
-		self.castTxt = self.extraTxt = self.synopsisTxt = ""
+		self.castTxt = self.extraTxt = self.synopsisTxt = self.reviewsTxt = ""
 		self.extra = self.synopsis = ""
+		self.reviews = []
+		self.spoilers = False
 		safeRemove("/tmp/poster.jpg", "/tmp/poster-big.jpg")
 		if not isinstance(self.eventName, six.string_types):
 			self["statusbar"].setText("")
