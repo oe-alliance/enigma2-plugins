@@ -418,8 +418,7 @@ class IMDB(Screen, HelpableScreen):
 			'\n>(?P<author>.*?)</a></span><span class="review-date">(?P<date>.*?)</span>.*?'
 			'(?:spoiler-warning">(?P<spoiler>.*?)</.*?)?'
 			'"text show-more__control">(?P<review>.*?)</div>.*?'
-			'text-muted">\s+(?P<helpful>.*?)\s+<span'
-			, re.DOTALL)
+			'text-muted">\s+(?P<helpful>.*?)\s+<span', re.DOTALL)
 
 		for review in reviewsmask.finditer(self.reviewsHTML):
 			self.reviews.append({
