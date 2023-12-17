@@ -496,7 +496,7 @@ class IMDB(Screen, HelpableScreen):
 					reviews.append("")
 				reviews.append(review['helpful'])
 				reviews.append("")
-				reviews.append("-"*72)
+				reviews.append("-" * 72)
 				reviews.append("")
 			self.reviewsTxt = "\n".join(reviews[:-3])
 			self["extralabel"].setText(text2label(self.reviewsTxt))
