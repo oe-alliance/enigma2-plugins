@@ -1,10 +1,10 @@
 # -*- coding: UTF-8 -*-
 from Plugins.Plugin import PluginDescriptor
 from six.moves import reload_module
-from . import ard
 
 
 def main(session, **kwargs):
+    from . import ard
     reload_module(ard)
     session.open(ard.ArdMediathek)
 
