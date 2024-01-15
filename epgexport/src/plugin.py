@@ -19,12 +19,13 @@
 
 # PYTHON IMPORTS
 from backports.lzma import open as lzmaopen
-from os import mkdir, rmdir, symlink, remove, listdir, readlink
-from os.path import join, exists, islink, basename, dirname
+from os import mkdir, symlink, remove, listdir, readlink
+from os.path import join, exists, islink, basename
 from gzip import open as gzipopen
 from time import time, localtime, mktime, strftime
 from datetime import datetime
 import xml.etree.ElementTree as etree
+from shutil import rmtree
 from socket import gethostname, getfqdn
 from time import gmtime, strftime
 from twisted.internet.threads import deferToThread
@@ -58,10 +59,10 @@ global WebTimer
 global WebTimer_conn
 global AutoStartTimer
 SERVICELIST = None
-VERSION = "1.5-r4"
-EXPORTPATH = "%s%s" % (resolveFilename(SCOPE_SYSETC), "epgexport/")  # /etc/epgexport/
+VERSION = "1.5-r5"
+EXPORTPATH = "%s%s" % (resolveFilename(SCOPE_SYSETC), "epgexport")  # /etc/epgexport
 CHANNELS = join(EXPORTPATH, "epgexport.channels")
-DESTINATION = {"volatile": "/tmp/epgexport", "data": "/data/epgexport", "hdd": "/media/hdd/epgexport", "usb": "/media/usb/epgexport", "sdcard": "/media/sdcard/epgexport"}
+DESTINATION = {"etc": EXPORTPATH, "volatile": "/tmp/epgexport", "data": "/data/epgexport", "hdd": "/media/hdd/epgexport", "usb": "/media/usb/epgexport", "sdcard": "/media/sdcard/epgexport"}
 
 config.plugins.epgexport = ConfigSubsection()
 compr_opt = []
@@ -72,22 +73,24 @@ config.plugins.epgexport.compression = ConfigSelection(default="xz", choices=com
 with open("/proc/mounts", "r") as f:
 	mounts = f.read()
 save_opt = []
-save_opt.append(("etc", EXPORTPATH))
-for dest in ["volatile", "/data", "/media/hdd", "/media/usb", "/media/sdcard"]:
+save_opt.append(("etc", DESTINATION.get("etc", None)))
+save_opt.append(("volatile", DESTINATION.get("volatile", None)))
+for dest in ["/data", "/media/hdd", "/media/usb", "/media/sdcard"]:
 	if mounts.find(dest) != -1:
 		key = dest[dest.rfind("/") + 1:]
 		value = DESTINATION.get(key, None)
 		if value:
 			save_opt.append((key, value))
+print("save_opt: %s" % str(save_opt))
 config.plugins.epgexport.epgexport = ConfigSelection(default="volatile", choices=save_opt)
 channel_opt = []
-channel_opt.append(("name", _("Channel") + " " + _("Name")))
-channel_opt.append(("names", _("Channel") + _("Name")))
-cname = _("Channel") + _("Name")
+channel_opt.append(("name", "%s %s" % (_("Channel"), _("Name"))))
+channel_opt.append(("names", "%s%s" % (_("Channel"), _("Name"))))
+cname = "%s%s" % (_("Channel"), _("Name"))
 channel_opt.append(("nameslow", cname.lower()))
-channel_opt.append(("nameslang", cname + "." + _("Language").lower()))
-channel_opt.append(("nameslowlang", cname.lower() + "." + _("Language").lower()))
-channel_opt.append(("number", _("Channel") + " " + _("Number")))
+channel_opt.append(("nameslang", "%s.%s" % (cname, _("Language").lower())))
+channel_opt.append(("nameslowlang", "%s.%s" % (cname.lower(), _("Language").lower())))
+channel_opt.append(("number", "%s %s" % (_("Channel"), _("Number"))))
 channel_opt.append(("xml", _("Custom (%s)") % "xml"))
 config.plugins.epgexport.channelid = ConfigSelection(default="name", choices=channel_opt)
 config.plugins.epgexport.twisted = ConfigYesNo(default=True)
@@ -116,7 +119,7 @@ bouquet_options = []
 enigma2 = resolveFilename(SCOPE_SYSETC, "enigma2")  # /etc/enigma2
 for bouquet in listdir(enigma2):
 	if bouquet.startswith("userbouquet.") and bouquet.endswith(".tv"):
-		with open(join(enigma2, bouquet), "r") as f:
+		with open(join(enigma2, bouquet), encoding="utf8", errors='ignore') as f:
 			name = f.readline()
 		name = name.replace("#NAME ", "").replace(" (TV)", "").rstrip()
 		bouquet_options.append((name.lower(), name))
@@ -189,12 +192,13 @@ def startEPGExport(session, **kwargs):
 	session.open(EPGExportConfiguration)
 
 
-def cleanepgexport(keep=True):
-	for file in [join(EXPORTPATH, "LastUpdate.txt"), "%s.%s" % (CHANNELS, "xml"), "%s.%s" % (CHANNELS, "xml.gz"), "%s.%s" % (CHANNELS, "xml.xz"), join(EXPORTPATH, "epgexport.xml"), join(EXPORTPATH, "epgexport.xml.gz"), join(EXPORTPATH, "epgexport.xml.xz"), join(EXPORTPATH, "custom.channels.xml")]:
-		if exists(file):
-			remove(file)
-	if not keep and exists(EXPORTPATH):
-		rmdir(EXPORTPATH)
+def cleanepgexport(keep=False):
+	if keep:
+		for file in [join(EXPORTPATH, "LastUpdate.txt"), "%s.%s" % (CHANNELS, "xml"), "%s.%s" % (CHANNELS, "xml.gz"), "%s.%s" % (CHANNELS, "xml.xz"), join(EXPORTPATH, "epgexport.xml"), join(EXPORTPATH, "epgexport.xml.gz"), join(EXPORTPATH, "epgexport.xml.xz"), join(EXPORTPATH, "custom.channels.xml")]:
+			if exists(file):
+				remove(file)
+	elif exists(EXPORTPATH):
+		rmtree(EXPORTPATH)
 
 
 def fixepgexport():
@@ -203,22 +207,27 @@ def fixepgexport():
 		if islink(EXPORTPATH):
 			remove(EXPORTPATH)
 			mkdir(EXPORTPATH, mode=0o777)
+			cprint("old link '%s' removed, new directory '%s' created" % (EXPORTPATH, EXPORTPATH))
 		cprint("Exportpath is %s" % EXPORTPATH)
 	else:
-		select = DESTINATION.get(save_path, None)
-		if select:
-			if not islink(EXPORTPATH):
-				cleanepgexport()
-			if not exists(select):
-				mkdir(select, mode=0o777)
-			if not exists(EXPORTPATH):
-				symlink(select, EXPORTPATH)
+		dest = DESTINATION.get(save_path, None)
+		if dest:
+			if not exists(dest):
+				mkdir(dest, mode=0o777)
+			if exists(EXPORTPATH):  # it could be a directory or a link
+				if islink(EXPORTPATH):
+					if dest != readlink(EXPORTPATH):  # no longer valid?
+						remove(EXPORTPATH)
+						symlink(dest, EXPORTPATH)
+						cprint("old Link '%s' removed, new link '%s' for '%s' created" % (EXPORTPATH, EXPORTPATH, dest))
+				else:  # it's a directory
+					cleanepgexport()
+					symlink(dest, EXPORTPATH)
+					cprint("old directory '%s' removed, new link '%s' created" % (EXPORTPATH, EXPORTPATH))
 			else:
-				source = readlink(dirname(EXPORTPATH))
-				if source != select:
-					remove(EXPORTPATH)
-					symlink(select, EXPORTPATH)
-			cprint("Exportpath is %s" % select)
+				symlink(dest, EXPORTPATH)
+				cprint("nothing to remove, new link '%s' created" % EXPORTPATH)
+			cprint("Exportpath is %s" % dest)
 		else:
 			if islink(EXPORTPATH):
 				remove(EXPORTPATH)
@@ -268,7 +277,7 @@ class EPGExportAutoStartTimer:  # class for Autostart of EPG Export
 		now = int(time())
 		if wake > 0:
 			if wake < now + atLeast:
-				wake += int(config.plugins.epgexport.wakeup.value) * 3600  # next in x hours
+				wake += int(config.plugins.epgexport.hours.value) * 3600  # next in x hours
 			tnext = wake - now
 			self.EPGExportTimer.startLongTimer(tnext)
 			cprint("WakeUpTime now set to %d seconds (now=%d)" % (tnext, now))
@@ -361,7 +370,7 @@ class EPGExportConfiguration(ConfigListScreen, Screen):
 		ftypes = {"xz": "xz", "gz": "gz", "none": "xml"}
 		ftype = ftypes.get(config.plugins.epgexport.compression.value, "{Error}")
 		self["buttonyellow"] = StaticText("%s (%s)" % (_("Downloading"), ftype))
-		self["buttonblue"] = StaticText(_("Select") + " " + _("Bouquets"))
+		self["buttonblue"] = StaticText("%s %s" % (_("Select"), _("Bouquets")))
 		self["actions"] = ActionMap(["ChannelSelectEPGActions",
 									"InfobarTeletextActions",
 									"SetupActions",
@@ -419,7 +428,7 @@ class EPGExportConfiguration(ConfigListScreen, Screen):
 										</source>
 									</sourcecat>
 								</sources>"""
-		self["statustext"].setText(_("Saving") + " " + _("Configuration") + " " + _("..."))
+		self["statustext"].setText("%s %s %s" % (_("Saving"), _("Configuration"), _("...")))
 		if config.plugins.epgexport.channelid.value == "xml" and not exists(join(EXPORTPATH, "custom.channels.xml")):
 			config.plugins.epgexport.channelid.value = "name"
 		for x in self["config"].list:
@@ -457,7 +466,7 @@ class EPGExportConfiguration(ConfigListScreen, Screen):
 		self.close(True)
 
 	def cancel(self):
-		self["statustext"].setText(_("Leaving") + " " + _("Configuration") + " " + _("..."))
+		self["statustext"].setText("%s %s %s" % (_("Leaving"), _("Configuration"), _("...")))
 		for x in self["config"].list:
 			if len(x) > 1:
 				x[1].cancel()
@@ -537,7 +546,7 @@ class EPGExportConfiguration(ConfigListScreen, Screen):
 	def getText(self):
 		cprint("CLEANING EXPORT")
 		cleanepgexport(True)
-		self.session.open(MessageBox, _("EPG") + " " + _("Download") + " " + _("Cache") + " " + _("Reset"), MessageBox.TYPE_INFO)
+		self.session.open(MessageBox, "%s %s %s %s" (_("EPG"), _("Download"), _("Cache"), _("Reset")), MessageBox.TYPE_INFO)
 
 	def getIP(self):
 		ip = None
@@ -588,14 +597,14 @@ class EPGExport(Screen):
 				else:
 					cprint("custom.channels.xml not found")
 					if self.main is not None:
-						self.main["statustext"].setText(_("Custom (%s)") % ("xml" + " " + _("not found")))
+						self.main["statustext"].setText(_("Custom (%s)") % ("xml %s" % _("not found")))
 					return
 			cprint("extracting...")
 			self.startingEPGExport()
 		else:
 			cprint("still valid...")
 			if self.main is not None:
-				self.main["statustext"].setText(_("EPG") + " " + _("Download") + " " + _("Reload") + " " + _("Finished"))
+				self.main["statustext"].setText("%s %s %s" % (_("EPG"), _("Download"), _("Reload"), _("Finished")))
 
 	def startingEPGExport(self):
 		cprint("starting EPG export...")
@@ -620,7 +629,7 @@ class EPGExport(Screen):
 					if bouquet_name == config.plugins.epgexport.bouquets[x].name.value and config.plugins.epgexport.bouquets[x].export.value:
 						bouquet = bouquets[1]
 						cprint("FOUND bouquet %s" % bouquet_name)
-						self.services = self.services + self.getBouquetServices(bouquet)
+						self.services += self.getBouquetServices(bouquet)
 			if self.channels:
 				self.exportChannels()
 			if self.programs:
@@ -679,11 +688,11 @@ class EPGExport(Screen):
 		xmltv_string = self.generateChannels()
 		xml_file_name = "%s.%s" % (CHANNELS, "xml")
 		if self.compressed == "xz":
-			with lzmaopen(xml_file_name + ".xz", "wb") as f:
+			with lzmaopen("%s.xz" % xml_file_name, "wb") as f:
 				f.write(b'<?xml version="1.0" encoding="UTF-8"?>\n')
 				f.write(xmltv_string)
 		elif self.compressed == "gz":
-			with gzipopen(xml_file_name + ".gz", "wb") as f:
+			with gzipopen("%s.gz" % xml_file_name, "wb") as f:
 				f.write(b'<?xml version="1.0" encoding="UTF-8"?>\n')
 				f.write(xmltv_string)
 		else:
@@ -708,10 +717,10 @@ class EPGExport(Screen):
 				f.write(xmltv_string)
 
 	def indent(self, elem, level=0):
-		i = "\n" + level * "  "
+		i = "\n%s" % ("  " * level)
 		if len(elem):
 			if not elem.text or not elem.text.strip():
-				elem.text = i + "  "
+				elem.text = "%s  " % i
 			if not elem.tail or not elem.tail.strip():
 				elem.tail = i
 			for elem in elem:
@@ -737,7 +746,7 @@ class EPGExport(Screen):
 		service_ref = service.ref.toString()
 		service_num = self.channelNumber(service)
 		if self.tree is not None:  # fallback is nameslang
-			channel_id = service_id + "." + self.language
+			channel_id = "%s.%s" % (service_id, self.language)
 			for child in self.tree:
 				if child.text == service_ref and len(child.attrib["id"]) > 0:  # first find will win because good custom file has only one find
 					channel_id = child.attrib["id"]
@@ -745,11 +754,11 @@ class EPGExport(Screen):
 		elif config.plugins.epgexport.channelid.value == "names":
 			channel_id = service_id
 		elif config.plugins.epgexport.channelid.value == "nameslang":
-			channel_id = service_id + "." + self.language
+			channel_id = "%s.%s" % (service_id, self.language)
 		elif config.plugins.epgexport.channelid.value == "nameslow":
 			channel_id = service_id.lower()
 		elif config.plugins.epgexport.channelid.value == "nameslowlang":
-			channel_id = service_id.lower() + "." + self.language
+			channel_id = "%s.%s" % (service_id.lower(), self.language)
 		elif config.plugins.epgexport.channelid.value == "number" and service_num:
 			channel_id = str(service_num)
 		else:  # default = channel name
@@ -844,8 +853,8 @@ class EPGExport(Screen):
 						start_time = strftime('%Y%m%d%H%M00', localtime(start))
 						stop_time = strftime('%Y%m%d%H%M00', localtime(stop))
 						xmltv_program = etree.SubElement(root, 'programme')
-						xmltv_program.set('start', start_time + ' ' + local_time_offset)
-						xmltv_program.set('stop', stop_time + ' ' + local_time_offset)
+						xmltv_program.set('start', "%s %s" % (start_time, local_time_offset))
+						xmltv_program.set('stop', "%s %s" % (stop_time, local_time_offset))
 						xmltv_program.set('channel', service_id)
 						en += 1
 						if title != None:
@@ -865,7 +874,7 @@ class EPGExport(Screen):
 		cprint("event number: %d" % en)
 		self.indent(root)
 		if self.main is not None:  # etree.tostring has no pretty print to make indent in xml
-			self.main["statustext"].setText(_("EPG") + " " + _("Download") + " " + _("Channels") + ": %d " % cn + _("EPG") + " " + _("Info") + " " + _("Details") + ": %d" % en)
+			self.main["statustext"].setText("%s %s %s: %d %s %s %s: %d" % (_("EPG"), _("Download"), _("Channels"), cn, _("EPG"), _("Info"), _("Details"), en))
 		return etree.tostring(root, encoding='utf-8')
 
 	def b2s(self, s):  # converting data type 'bytes' to 'string'
