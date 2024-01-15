@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SimpleRSS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-30 11:10+0100\n"
-"PO-Revision-Date: 2023-11-30 11:31+0100\n"
+"POT-Creation-Date: 2024-01-15 11:06+0100\n"
+"PO-Revision-Date: 2024-01-15 11:09+0100\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
 "Language: lt\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "(n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: ..\plugin.py:61
 msgid "Notification"
@@ -30,83 +30,83 @@ msgstr "Ticker"
 msgid "none"
 msgstr "jokio"
 
-#: ..\plugin.py:190 ..\plugin.py:560 ..\plugin.py:575 ..\plugin.py:615
-#: ..\plugin.py:708 ..\plugin.py:796 ..\plugin.py:810 ..\plugin.py:866
+#: ..\plugin.py:196 ..\plugin.py:567 ..\plugin.py:586 ..\plugin.py:628
+#: ..\plugin.py:716 ..\plugin.py:805 ..\plugin.py:819 ..\plugin.py:875
 msgid "New Items"
 msgstr "Nauji elementai"
 
-#: ..\plugin.py:205
+#: ..\plugin.py:211
 msgid "Autoupdate"
 msgstr "Automatinis atnaujinimas"
 
-#: ..\plugin.py:205
+#: ..\plugin.py:211
 msgid "Feed URI"
 msgstr "Šaltinių internetinis adresas"
 
-#: ..\plugin.py:207 ..\plugin.py:230
+#: ..\plugin.py:213 ..\plugin.py:236
 msgid "Cancel"
 msgstr "Atšaukti"
 
-#: ..\plugin.py:208
+#: ..\plugin.py:214
 msgid "OK"
 msgstr "Gerai"
 
-#: ..\plugin.py:213 ..\plugin.py:229 ..\plugin.py:250
+#: ..\plugin.py:219 ..\plugin.py:235 ..\plugin.py:256
 msgid "Simple RSS Reader Setup"
 msgstr "RSS skaitytuvo sąranka"
 
-#: ..\plugin.py:231
+#: ..\plugin.py:237
 msgid "Save"
 msgstr "Išsaugoti"
 
-#: ..\plugin.py:232
+#: ..\plugin.py:238
 msgid "New"
 msgstr "Naujas"
 
-#: ..\plugin.py:233
+#: ..\plugin.py:239
 msgid "Delete"
 msgstr "Pašalinti"
 
-#: ..\plugin.py:254
+#: ..\plugin.py:260
 msgid "Feed"
 msgstr "Šaltinis"
 
-#: ..\plugin.py:255
+#: ..\plugin.py:261
 msgid "Start automatically with Enigma2"
 msgstr "Paleisti su Enigma2 automatiškai"
 
-#: ..\plugin.py:256
+#: ..\plugin.py:262
 msgid "Keep running in background"
 msgstr "Leisti ir fone"
 
-#: ..\plugin.py:259
+#: ..\plugin.py:265
 msgid "Update Interval [min]"
 msgstr "Atnaujinimo intervalas [min]"
 
-#: ..\plugin.py:260
+#: ..\plugin.py:266
 msgid "Show new Messages as"
 msgstr "Naujus pranešimus rodyti, kaip"
 
-#: ..\plugin.py:262
+#: ..\plugin.py:268
 msgid " *Frequency of scrollsteps [ms] (low values slow down the box)"
 msgstr " *Žingsnių slinkties dažnis [ms] (mažos vertės sulėtina langelį)"
 
-#: ..\plugin.py:263
+#: ..\plugin.py:269
 msgid " *Scrollspeed [pixels per step] (high values lead to jerking)"
 msgstr ""
 " *Scrollspeed [pikselių per žingsnį] (didelės vertės lemia trūkčiojimą)"
 
-#: ..\plugin.py:265
+#: ..\plugin.py:271
 msgid " *=please perform a GUI-restart for these changes to take effect"
 msgstr ""
 " *=prašome atlikti GUI paleidimą iš naujo, kad šie pakeitimai įsigaliotų"
 
-#: ..\plugin.py:267
+#: ..\plugin.py:273
 msgid ""
 "Note: If box becomes extremely slow, please reduce the quantity of feeds."
 msgstr "Pastaba: Jei dėžutė veikia labai lėtai, sumažinkite pašarų kiekį."
 
-#: ..\plugin.py:285
+#: ..\plugin.py:291
 msgid ""
 "Really delete this entry?\n"
 "It cannot be recovered!"
@@ -114,11 +114,11 @@ msgstr ""
 "Tikrai pašalinti šį įrašą?\n"
 "Tai neatstatoma!"
 
-#: ..\plugin.py:302
+#: ..\plugin.py:308
 msgid "Import feeds from:"
 msgstr "Importuoti kanalus iš:"
 
-#: ..\plugin.py:337
+#: ..\plugin.py:343
 msgid ""
 "Importing '%s'\n"
 "%s feeds were imported successfully\n"
@@ -128,11 +128,11 @@ msgstr ""
 "%s kanalai sėkmingai importuoti\n"
 "%s kanalai buvo dvigubi ir neimportuoti"
 
-#: ..\plugin.py:341
+#: ..\plugin.py:347
 msgid "File '%s' was not found, import was aborted!"
 msgstr "Failas '%s' nerastas, importas nutrauktas!"
 
-#: ..\plugin.py:374 ..\plugin.py:416
+#: ..\plugin.py:380 ..\plugin.py:422
 msgid ""
 "Error while parsing Feed, this usually means there is something wrong with "
 "it."
@@ -140,7 +140,7 @@ msgstr ""
 "Klaida, nuskaitant šaltinius. Dažniausiai tai reiškia, kad ten kažkas "
 "negerai."
 
-#: ..\plugin.py:425
+#: ..\plugin.py:431
 msgid ""
 "Update is being done in Background.\n"
 "Contents will automatically be updated when it's done."
@@ -148,83 +148,83 @@ msgstr ""
 "Fone vyksta atnaujinimas.\n"
 "Po to turinys atsinaujins automatiškai."
 
-#: ..\plugin.py:448
+#: ..\plugin.py:455
 msgid "Simple RSS Reader EntryView"
 msgstr "Simple RSS Reader EntryView"
 
-#: ..\plugin.py:449 ..\plugin.py:466
+#: ..\plugin.py:456 ..\plugin.py:473
 msgid "Entry %s/%s"
 msgstr "Įrašas %s/%s"
 
-#: ..\plugin.py:450 ..\plugin.py:468
+#: ..\plugin.py:457 ..\plugin.py:475
 msgid "Enclosures"
 msgstr "Priedų"
 
-#: ..\plugin.py:465 ..\plugin.py:583
+#: ..\plugin.py:472 ..\plugin.py:596
 msgid "Simple RSS Reader: %s"
 msgstr "Paprastas RSS skaitytuvas: %s"
 
-#: ..\plugin.py:468 ..\plugin.py:477
+#: ..\plugin.py:475 ..\plugin.py:485
 msgid "No such Item."
 msgstr "Tokio elemento nėra."
 
-#: ..\plugin.py:528
+#: ..\plugin.py:535
 msgid "Simple RSS Reader Feedview"
 msgstr "Simple RSS Reader Feedview"
 
-#: ..\plugin.py:533
+#: ..\plugin.py:540
 msgid "change feed"
-msgstr "Keisti pašarą"
+msgstr "keisti pašarą"
 
-#: ..\plugin.py:649
+#: ..\plugin.py:657
 msgid "Entry %s/%s - %s"
 msgstr "Įrašas %s/%s - %s"
 
-#: ..\plugin.py:652 ..\plugin.py:654
+#: ..\plugin.py:660 ..\plugin.py:662
 msgid "Feed is empty."
 msgstr "Šaltiniai tušti."
 
-#: ..\plugin.py:726
+#: ..\plugin.py:734
 msgid "Simple RSS Reader Overview"
 msgstr "Simple RSS Reader Overview"
 
-#: ..\plugin.py:728 ..\plugin.py:780
+#: ..\plugin.py:736 ..\plugin.py:788
 msgid "Entries"
 msgstr "Įrašai"
 
-#: ..\plugin.py:729
+#: ..\plugin.py:737
 msgid "Feed 1/%s"
 msgstr "Pašaras 1/%s"
 
-#: ..\plugin.py:751
+#: ..\plugin.py:759
 msgid "Simple RSS Reader"
 msgstr "Paprastas RSS skaitytuvas"
 
-#: ..\plugin.py:779
+#: ..\plugin.py:787
 msgid "Feed %s/%s"
 msgstr "Šaltinis %s/%s"
 
-#: ..\plugin.py:817
+#: ..\plugin.py:826
 msgid "Close"
 msgstr "Uždaryti"
 
-#: ..\plugin.py:817
+#: ..\plugin.py:826
 msgid "Settings"
 msgstr "Nustatymai"
 
-#: ..\plugin.py:817
+#: ..\plugin.py:826
 msgid "Update Feed"
 msgstr "Atnaujinti šaltinius"
 
-#: ..\plugin.py:818
+#: ..\plugin.py:827
 msgid "What to do?"
 msgstr "Ką daryti?"
 
-#: ..\plugin.py:866
+#: ..\plugin.py:875
 msgid "New Items since last Auto-Update"
 msgstr "Nauji elementai nuo paskutinio autoatnaujinimo"
 
-#: ..\plugin.py:895
+#: ..\plugin.py:904
 msgid ""
 "Sorry, this type of feed is unsupported:\n"
 "%s"
@@ -232,18 +232,24 @@ msgstr ""
 "Atleiskite, šis šaltinių tipas netinka:\n"
 "%s"
 
-#: ..\plugin.py:956
+#: ..\plugin.py:966
 msgid "Received %d new news item(s)."
 msgstr "Parsiųsta %d naujienų įrašų."
 
-#: ..\plugin.py:1148
+#: ..\plugin.py:1046
+msgid ""
+"Error when reading the feed. Does your address really refer to an RSS feed?"
+msgstr ""
+"Klaida skaitant kanalą. Ar jūsų adresas iš tikrųjų nurodo į RSS kanalą?"
+
+#: ..\plugin.py:1158
 msgid "trying to download the feed..."
 msgstr "bando atsisiųsti kanalą..."
 
-#: ..\plugin.py:1219
+#: ..\plugin.py:1229
 msgid "A simple to use RSS reader"
 msgstr "Naudotis RSS skaitytuvu paprasta"
 
-#: ..\plugin.py:1221
+#: ..\plugin.py:1231
 msgid "View RSS..."
 msgstr "Peržiūrėti RSS..."

@@ -10,7 +10,7 @@
 	</feed>
 	<feed>
 		<name>Tagesschau.de</name>
-		<url>http://www.tagesschau.de/infoservices/alle-meldungen-100~rdf.xml</url>
+		<url>https://www.tagesschau.de/infoservices/alle-meldungen-100~rss2.xml</url>
 	</feed>
 	<feed>
 		<name>Sportbild</name>

@@ -13,7 +13,7 @@ from xml.etree.ElementTree import tostring, parse, fromstring
 
 # current feed:
 # self.feed: <<class 'Plugins.Extensions.SimpleRSS.plugin.UniversalFeed'>, "Title", "Description", 5 items>
-# feed collection
+# feed collection:
 # self.feeds: [(<Plugins.Extensions.SimpleRSS.plugin.BaseFeed object at 0xa688def0>,), (<Plugins.Extensions.SimpleRSS.plugin.UniversalFeed object at 0xa6890030>,), (<Plugins.Extensions.SimpleRSS.plugin.UniversalFeed object at 0xa68900b0>,), (<Plugins.Extensions.SimpleRSS.plugin.UniversalFeed object at 0xa68900d0>,), (<Plugins.Extensions.SimpleRSS.plugin.UniversalFeed object at 0xa68900f0>,), (<Plugins.Extensions.SimpleRSS.plugin.UniversalFeed object at 0xa6890110>,)]
 
 # ENIGMA IMPORTS
@@ -45,7 +45,7 @@ rssPoller = None
 tickerView = None
 update_callbacks = []
 MODULE_NAME = __name__.split(".")[-2]
-TEMPPATH = join("/tmp/", MODULE_NAME)  # /tmp/SimpleRSS/
+TEMPPATH = join("/tmp/", MODULE_NAME.lower())  # /tmp/simplerss/
 PLUGINPATH = resolveFilename(SCOPE_PLUGINS, "Extensions/%s" % MODULE_NAME)  # /usr/lib/enigma2/python/Plugins/Extensions/SimpleRSS/
 NOLOGO = "no_logo.png"
 NOPIC = "no_pic.png"
@@ -133,46 +133,43 @@ def readSkin(skin):
 
 
 def downloadPicfile(url, picfile, resize=None, fixedname=None, callback=None):
-	if picfile:
-		header = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/116.0", "Accept": "text/xml"}
-		if url:
-			try:
-				response = get(url.encode(), headers=header, timeout=(3.05, 6))
-				picdata = response.content[:]  # make shallow copy
-				response.raise_for_status()
-				response.close()
-				picfile = picfile.replace("jpeg", ".jpg")
-				if fixedname:
-					picfile = fixedname
-				if not exists(picfile):
-					with open(picfile, "wb") as f:
-						f.write(picdata)
-				isnotpng = not picfile.endswith(".png")
-				if resize or isnotpng:
-					img = Image.open(picfile)
-					if resize:
-						img.thumbnail(resize, Image.LANCZOS)  # resize, keeping aspect ratio and antialiasing
-					pngfile = "%s.png" % picfile.split(".")[0]
-					img.save(pngfile)  # forced save as PNG because some boxes (e.g. HD51) wrongly display JPGs transparently
-					img.close()
-					if isnotpng:
-						remove(picfile)
-				else:
-					pngfile = picfile
-				if callback:
-					callback()
-			except exceptions.RequestException as err:
-				print("[%s] ERROR in module 'downloadPicfile': '%s" % (MODULE_NAME, str(err)))
+	if url and picfile:
+		try:
+			header = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/116.0", "Accept": "text/xml"}
+			url = url.encode("ascii", "xmlcharrefreplace").decode().replace(" ", "%20").replace("\n", "")
+			response = get(url, headers=header, timeout=(3.05, 6))
+			response.raise_for_status()
+			picfile = picfile.replace("jpeg", ".jpg")
+			if fixedname:
+				picfile = fixedname
+		except exceptions.RequestException as err:
+			print("[%s] ERROR in module 'downloadPicfile': '%s" % (MODULE_NAME, str(err)))
+		with open(picfile, "wb") as f:
+			f.write(response.content)
+		isnotpng = not picfile.endswith(".png")
+		if resize or isnotpng:
+			try:  # in case PIL cannot handle picture format
+				img = Image.open(picfile)
+				if resize:
+					img.thumbnail(resize, Image.LANCZOS)  # resize, keeping aspect ratio and antialiasing
+				pngfile = "%s.png" % picfile.split(".")[0]
+				img.save(pngfile, format="png", lossless=True)  # forced save as PNG because some boxes (e.g. HD51) wrongly display JPGs transparently
+				img.close()
+			except Exception as err:
+				pngfile = join(TEMPPATH, NOPIC)
+				print("[%s] ERROR in module 'downloadPicfile': unsupported or invalid picture format for '%s': %s" % (MODULE_NAME, str(err), pngfile))
+			if isnotpng:
+				remove(picfile)
 		else:
-			errmsg = "[%s] ERROR in module 'downloadPicfile': missing link." % MODULE_NAME
-			print(errmsg)
+			pngfile = picfile
+		if callback:
+			callback()
 	else:
-		errmsg = "[%s] ERROR in module 'downloadPicfile': unsupported picture fileformat: %s" % (picfile, MODULE_NAME)
-		print(errmsg)
+		print("[%s] ERROR in module 'downloadPicfile': missing link or picfile." % MODULE_NAME)
 
 
 def url2filename(url, forcepng=False):
-	for itype in [".jpg", ".jpeg", ".png", ".gif"]:
+	for itype in [".jpg", ".jpeg", ".png", ".gif", ".webp"]:
 		if itype in url:
 			return "%s.png" % hash(url) if forcepng else ("%s%s" % (hash(url), itype)).replace(".jpeg", ".jpg")
 	return ""
@@ -437,7 +434,7 @@ class RSSBaseView(Screen):  # Base Screen for all Screens used in SimpleRSS
 		if enclosures:
 			urllist = []
 			for enclosure in enclosures:
-				if enclosure[1] in ["image/jpg", "image/jpeg", "image/png", "image/gif"]:
+				if enclosure[1] in ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/webp"]:
 					urllist.append(enclosure[0].strip())
 			return urllist
 
@@ -480,7 +477,8 @@ class RSS_EntryView(RSSBaseView):  # Shows a RSS Item
 			urllist = RSSBaseView.findEnclosure(self, data[3])
 			if urllist:
 				picfile = join(TEMPPATH, url2filename(urllist[0]))
-				callInThread(downloadPicfile, urllist[0], picfile, resize=self.picsize, fixedname=self.pngfile, callback=self.refreshPic)
+				if not exists(self.pngfile):
+					callInThread(downloadPicfile, urllist[0], picfile, resize=self.picsize, fixedname=self.pngfile, callback=self.refreshPic)
 		self.updateInfo()
 
 	def updateInfo(self):
@@ -561,7 +559,7 @@ class RSS_FeedView(RSSBaseView):  # Shows a RSS-Feed
 			self.timer.callback.append(self.timerTick)
 			self.onExecBegin.append(self.startTimer)
 		linefile = join(PLUGINPATH, "icons/line_%s.png" % ("fHD" if getDesktop(0).size().width() > 1300 else "HD"))
-		self.linepix = LoadPixmap(cached=True, path=linefile) if exists(linefile) else None
+		self.linepix = LoadPixmap(cached=True, path=linefile if exists(linefile) else join(TEMPPATH, NOPIC))
 		self["content"].onSelectionChanged.append(self.updateInfo)
 		self.onLayoutFinish.append(self.onLayoutFinished)
 
@@ -635,7 +633,7 @@ class RSS_FeedView(RSSBaseView):  # Shows a RSS-Feed
 						pngfile = self.nopic
 				else:
 					pngfile = self.nopic
-				picpix = LoadPixmap(cached=True, path=pngfile) if exists(pngfile) else None
+				picpix = LoadPixmap(cached=True, path=pngfile if exists(pngfile) else join(TEMPPATH, NOPIC))
 				skinlist.append((content[0], self.linepix, picpix))
 			self["content"].updateList(skinlist)
 
@@ -645,12 +643,12 @@ class RSS_FeedView(RSSBaseView):  # Shows a RSS-Feed
 			for content in self.feed.history:
 				picurl = content[3][0][0] if len(content[3]) > 0 else ""
 				pngfile = join(TEMPPATH, url2filename(picurl, forcepng=True)) if picurl else self.nopic
-				picpix = LoadPixmap(cached=True, path=pngfile) if exists(pngfile) else None
+				picpix = LoadPixmap(cached=True, path=pngfile if exists(pngfile) else join(TEMPPATH, NOPIC))
 				skinlist.append((content[0], self.linepix, picpix))
 			self["content"].updateList(skinlist)
 
 	def updateInfo(self):
-		if self.feed:
+		if self.feed and self.feed.history:
 			cur_idx = self["content"].index % (len(self.feed.history) - 1)
 			curr_entry = self.feed.history[cur_idx]
 			if curr_entry:
@@ -800,13 +798,12 @@ class RSS_Overview(RSSBaseView):  # Shows an Overview over all RSS-Feeds known t
 			logourl = feed[0].logoUrl
 			if logourl:
 				logofile = join(TEMPPATH, url2filename(logourl))
-				print("logofile: %s" % logofile)
 				logopng = "%s.png" % logofile.split(".")[0]
 				if not exists(logopng):
 					callInThread(downloadPicfile, logourl, logofile, resize=self.logosize, callback=self.refreshPics)
 			else:
 				logopng = join(TEMPPATH, NEWSLOGO) if title == _("New Items") else join(TEMPPATH, NOLOGO)
-			picpix = LoadPixmap(cached=True, path=logopng) if exists(logopng) else None
+			picpix = LoadPixmap(cached=True, path=logopng if exists(logopng) else join(TEMPPATH, NOLOGO))
 			skinlist.append((title, descr, self.linepix, picpix))
 		self["content"].updateList(skinlist)
 
@@ -820,7 +817,7 @@ class RSS_Overview(RSSBaseView):  # Shows an Overview over all RSS-Feeds known t
 				logofile = join(TEMPPATH, url2filename(logourl, forcepng=True))
 			else:
 				logofile = join(TEMPPATH, NEWSLOGO) if title == _("New Items") else join(TEMPPATH, NOLOGO)
-			picpix = LoadPixmap(cached=True, path=logofile) if exists(logofile) else None
+			picpix = LoadPixmap(cached=True, path=logofile if exists(logofile) else join(TEMPPATH, NOLOGO))
 			skinlist.append((title, descr, self.linepix, picpix))
 		self["content"].updateList(skinlist)
 
@@ -921,7 +918,8 @@ class RSSPoller:  # Keeps all Feed and takes care of (automatic) updates
 		header = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/116.0", "Accept": "text/xml"}
 		if feeduri:
 			try:
-				response = get(feeduri.encode(), headers=header, timeout=(3.05, 6))
+				feeduri = feeduri.encode("ascii", "xmlcharrefreplace").decode().replace(" ", "%20").replace("\n", "")
+				response = get(feeduri, headers=header, timeout=(3.05, 6))
 				response.raise_for_status()
 				xmlData = response.content
 				response.close()
@@ -1045,7 +1043,7 @@ class ElementWrapper:  # based on http://effbot.org/zone/element-rss-wrapper.htm
 	def __getattr__(self, tag):
 		if tag.startswith('__'):
 			raise AttributeError(tag)
-		return self._element.findtext("%s%s" % (self._ns, tag))
+		return self._element.findtext("%s%s" % (self._ns, tag)) if self._element else _("Error when reading the feed. Does your address really refer to an RSS feed?")
 
 
 class RSSEntryWrapper(ElementWrapper):
@@ -1061,7 +1059,7 @@ class RSSEntryWrapper(ElementWrapper):
 				myl.append((elem.get("url"), elem.get("type"), elem.get("length")))
 			return myl
 		elif tag == "id":
-			return self._element.findtext("%sguid" % self._ns, self.title + self.link)
+			return self._element.findtext("%sguid" % self._ns, "%s%s" % (self.title, self.link))
 		elif tag == "updated":
 			tag = "lastBuildDate"
 		elif tag == "summary":
