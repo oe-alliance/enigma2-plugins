@@ -18,7 +18,7 @@
 			<convert type="ClockToText">Format:%e. %B</convert>
 		</widget>
 		<widget source="title" render="Label" position="58,36" size="524,50" valign="bottom" font="Regular;34" noWrap="1" foregroundColor="#00b3b3b3" backgroundColor="#1A0F0F0F" transparent="1" />
-		<widget name="config" position="70,120" size="700,600" font="Regular;20" itemHeight="30" scrollbarMode="showOnDemand" transparent="1" />
+		<widget name="config" position="70,120" size="700,510" font="Regular;20" itemHeight="30" scrollbarMode="showOnDemand" transparent="1" />
 		<ePixmap position="890,174" size="256,256" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SimpleRSS/icons/rss_HD.png" transparent="1" alphatest="blend" />
 		<eLabel text="Import" position="1046,632" size="180,38" zPosition="1" valign="center" font="Regular;20" halign="left" foregroundColor="#00b3b3b3" backgroundColor="#1A0F0F0F" transparent="1" />
 		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SimpleRSS/icons/key_red_HD.png" position="70,632" size="26,38" alphatest="blend" />
