@@ -49,8 +49,14 @@
 		<widget source="info" render="Label" position="190,102" size="700,32" font="Regular;24" backgroundColor="#1A0F0F0F" foregroundColor="#00FFFFFF" transparent="1" />
 		<widget name="feedlogo" position="70,94" size="80,40" alphatest="blend" />
 		<eLabel position="64,140" size="1150,0" backgroundColor="#00FFFFFF" />
-		<widget name="content" position="350,150" size="893,470" font="Regular;22" backgroundColor="#1A0F0F0F" foregroundColor="#00FFFFFF" transparent="0" />
-		<widget name="picture" position="70,180" size="254,142" alphatest="blend" transparent="1" zPosition="1" />
+		<widget name="picture" position="70,160" size="254,142" alphatest="blend" transparent="1" zPosition="1" />
+		<widget source="enctext" render="Label" position="70,310" size="254,32" font="Regular;22" halign="center" noWrap="1" foregroundColor="black" backgroundColor="grey" transparent="0" />
+		<widget source="enclist" render="Listbox" position="70,342" size="254,288" scrollbarMode="showOnDemand" backgroundColor="#1A202020" foregroundColor="#00FFFFFF" transparent="0">
+			<convert type="TemplatedMultiContent">
+				{"template": [MultiContentEntryText(pos=(0,0), size=(254,32), font=0, flags=RT_HALIGN_CENTER|RT_VALIGN_CENTER, text=0)], "fonts": [gFont("Regular",20)], "itemHeight":32}
+			</convert>
+		</widget>
+		<widget name="content" position="350,150" size="890,520" font="Regular;22" scrollbarMode="showOnDemand" backgroundColor="#1A0F0F0F" foregroundColor="#00FFFFFF" transparent="0" />
 	</screen>
 
 	<screen name="RSS_FeedView" position="0,0" size="1280,720" title="Simple RSS Reader" flags="wfNoBorder" backgroundColor="transparent">
@@ -74,12 +80,12 @@
 				{"templates":
 					{"default": (80,[
 						MultiContentEntryPixmap(pos=(0,0), size=(700,6), png=1), # index 1 is the line separator
-						MultiContentEntryPixmapAlphaBlend(pos=(4,4), size=(150,70), flags=BT_SCALE|BT_KEEP_ASPECT_RATIO|BT_HALIGN_CENTER|BT_VALIGN_CENTER, png=2), # feedpicture
-						MultiContentEntryText(pos=(160,4), size=(530,70), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text=0)# feedtext
+						MultiContentEntryPixmapAlphaBlend(pos=(4,4), size=(150,70), flags=BT_SCALE|BT_KEEP_ASPECT_RATIO|BT_HALIGN_CENTER|BT_VALIGN_CENTER, png=2),  # feedpicture
+						MultiContentEntryText(pos=(160,4), size=(530,70), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text=0)  # feedtext
 					]),
 					"news": (80,[
 						MultiContentEntryPixmap(pos=(0,0), size=(700,6), png=1), # index 1 is the line separator
-						MultiContentEntryText(pos=(10,4), size=(660,73), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text=0)# feedtext
+						MultiContentEntryText(pos=(10,4), size=(660,73), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text=0)  # feedtext
 					])
 					},
 					"fonts": [gFont("Regular",20)],
@@ -110,9 +116,9 @@
 			<convert type="TemplatedMultiContent">
 				{"template": [
 					MultiContentEntryPixmap(pos=(0,0), size=(1150,6), png=2), # index 2 is the line separator
-					MultiContentEntryPixmapAlphaBlend(pos=(4,12), size=(150,70), flags=BT_SCALE|BT_KEEP_ASPECT_RATIO|BT_HALIGN_CENTER|BT_VALIGN_CENTER, png=3), # feedlogo
-					MultiContentEntryText(pos=(160,4), size=(978,30), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text=0), # title
-					MultiContentEntryText(pos=(160,36), size=(978,53), font=1, flags=RT_HALIGN_LEFT|RT_VALIGN_TOP|RT_WRAP, text=1)# description
+					MultiContentEntryPixmapAlphaBlend(pos=(4,12), size=(150,70), flags=BT_SCALE|BT_KEEP_ASPECT_RATIO|BT_HALIGN_CENTER|BT_VALIGN_CENTER, png=3),  # feedlogo
+					MultiContentEntryText(pos=(160,4), size=(978,30), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text=0),  # title
+					MultiContentEntryText(pos=(160,36), size=(978,53), font=1, flags=RT_HALIGN_LEFT|RT_VALIGN_TOP|RT_WRAP, text=1)  # description
 					],
 				"fonts": [gFont("Regular",22), gFont("Regular",20)],
 				"itemHeight":94
