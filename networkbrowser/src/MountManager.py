@@ -22,12 +22,20 @@ from .MountEdit import AutoMountEdit
 from .AutoMount import iAutoMount, AutoMount
 from .UserManager import UserManager
 
+try:
+	from Components.SystemInfo import BoxInfo
+	IMAGEDISTRO = BoxInfo.getItem("distro")
+except:
+	from boxbranding import getImageDistro
+	IMAGEDISTRO = getImageDistro()
+
 
 class AutoMountManager(Screen):
 	skin = """
 		<screen name="AutoMountManager" position="center,center" size="560,400" title="AutoMountManager">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
+			<widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
 			<widget source="config" render="Listbox" position="5,50" size="540,300" scrollbarMode="showOnDemand" >
 				<convert type="TemplatedMultiContent">
 					{"template": [
@@ -59,6 +67,13 @@ class AutoMountManager(Screen):
 			"red": self.exit,
 		})
 		self["key_red"] = StaticText(_("Close"))
+		if IMAGEDISTRO in ("openatv",):
+			self["key_yellow"] = StaticText(_("Mount Again"))
+			self["mountactions"] = ActionMap(["ColorActions"],
+			{
+				"yellow": self.mountAgain,
+			})
+
 		self["introduction"] = StaticText(_("Press OK to select."))
 
 		self.list = []
@@ -169,6 +184,9 @@ class AutoMountManager(Screen):
 
 	def createSetup(self):
 		self.session.open(MountManagerMenu)
+
+	def mountAgain(self):
+		iAutoMount.getAutoMountPoints()
 
 
 config.networkbrowser = ConfigSubsection()
