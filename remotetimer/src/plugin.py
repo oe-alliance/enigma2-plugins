@@ -24,6 +24,8 @@ from requests import get
 from six import PY2, PY3
 from six.moves.urllib.parse import quote
 from xml.etree.cElementTree import fromstring
+import inspect
+__getargs = inspect.getfullargspec if PY3 else inspect.getargspec
 
 # ENIGMA IMPORTS
 from enigma import eEPGCache
@@ -68,7 +70,7 @@ def getPage(url, callback, errback):
 		authheader = {b"Authorization": b"Basic %s" % base64string}
 		print("[remotetimer] Headers=%s" % (authheader))
 		try:
-			r = get(url, headers=authheader)
+			r = get(url, headers=authheader, timeout=5)
 			print("[remotetimer] statuscode=%s" % (r.status_code))
 			if r.status_code == 200:
 				data = r.content.decode('utf-8') if PY3 else r.content
@@ -291,20 +293,23 @@ def timerInit():
 
 def createNewnigma2Setup(self, widget="config"):
 	print("[RemoteTimer] createNewnigma2Setup widget: %s" % widget)
-	try:
-		if baseTimerEntrySetup:
-			baseTimerEntrySetup(self, widget)
-	except TypeError:  # for distros that do not use the "widget" argument in Setup.createSetup
-		print("[RemoteTimer] createNewnigma2Setup no widget")
-		if baseTimerEntrySetup:
-			baseTimerEntrySetup(self)
-	try:
-		self.list.insert(0, getConfigListEntry(_("Remote Timer"), self.timerentry_remote))
-	except Exception:
+	args = __getargs(baseTimerEntrySetup).args
+	print("[RemoteTimer] createNewnigma2Setup setup args:" % args)
+	if not hasattr(self, "timerentry_remote"):  # sometimes this is set outside this plugin
 		self.timerentry_remote = ConfigYesNo(default=config.plugins.remoteTimer.default.value)
-		self.list.insert(0, getConfigListEntry(_("Remote Timer"), self.timerentry_remote))
-	# force re-reading the list
-	self[widget].list = self.list
+	timerEntryRemote = getConfigListEntry(_("Remote Timer"), self.timerentry_remote)
+	if baseTimerEntrySetup:
+		# if/elif/else clauses are a workaround for different kwargs in TimerEntry.createSetup in different distros
+		if "widget" in args:
+			baseTimerEntrySetup(self, widget)
+		elif "prependItems" in args:
+			baseTimerEntrySetup(self, prependItems=[timerEntryRemote])
+		else:
+			baseTimerEntrySetup(self)
+		if "prependItems" not in args:
+			self.list.insert(0, timerEntryRemote)
+			# force re-reading the list
+			self[widget].list = self.list
 
 
 def newnigma2SubserviceSelected(self, service):
@@ -355,6 +360,22 @@ def newnigma2KeyGo(self):
 			if colon_counter < 10:
 				clean_ref += char
 		service_ref = clean_ref
+
+		# start: workaround for variables that are only available in some distros
+		if not hasattr(self, "getTimeStamp"):
+			self.getTimeStamp = self.getTimestamp
+		if not hasattr(self, "timerStartDate"):
+			self.timerStartDate = self.timerentry_date
+		if not hasattr(self, "timerEndTime"):
+			self.timerStartTime = self.timerentry_starttime
+		if not hasattr(self, "timerEndTime"):
+			self.timerEndTime = self.timerentry_endtime
+		if not hasattr(self, "timerMarginBefore"):
+			self.timerMarginBefore = config.recording.margin_before
+		if not hasattr(self, "timerMarginAfter"):
+			self.timerMarginAfter = config.recording.margin_after
+		# end: workaround for variables that are only available in some distros
+
 		# XXX: this will - without any hassle - ignore the value of repeated
 		begin = self.getTimeStamp(self.timerStartDate.value, self.timerStartTime.value) - self.timerMarginBefore.value * 60
 		end = self.getTimeStamp(self.timerStartDate.value, self.timerEndTime.value) + self.timerMarginAfter.value * 60
