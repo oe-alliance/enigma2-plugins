@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SimpleRSS Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-17 19:38+0100\n"
+"POT-Creation-Date: 2024-01-22 14:23+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
@@ -13,100 +13,104 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: ..\plugin.py:65
+#: ..\plugin.py:66
 msgid "Notification"
 msgstr "Bilgilendirme"
 
-#: ..\plugin.py:65
+#: ..\plugin.py:66
 msgid "Preview"
 msgstr "Önizleme"
 
-#: ..\plugin.py:65
+#: ..\plugin.py:66
 msgid "Ticker"
 msgstr "Ticker"
 
-#: ..\plugin.py:65
+#: ..\plugin.py:66
 msgid "none"
 msgstr "yok"
 
-#: ..\plugin.py:203 ..\plugin.py:605 ..\plugin.py:621 ..\plugin.py:669
-#: ..\plugin.py:762 ..\plugin.py:851 ..\plugin.py:865 ..\plugin.py:921
+#: ..\plugin.py:213 ..\plugin.py:623 ..\plugin.py:638 ..\plugin.py:683
+#: ..\plugin.py:779 ..\plugin.py:865 ..\plugin.py:879 ..\plugin.py:935
 msgid "New Items"
 msgstr "Yeni maddeler"
 
-#: ..\plugin.py:218
+#: ..\plugin.py:228
 msgid "Autoupdate"
 msgstr "Otomatik güncelleme"
 
-#: ..\plugin.py:218
+#: ..\plugin.py:228
 msgid "Feed URI"
 msgstr "Besleme Adresi"
 
-#: ..\plugin.py:220 ..\plugin.py:243
+#: ..\plugin.py:230 ..\plugin.py:253
 msgid "Cancel"
 msgstr "Vazgeç"
 
-#: ..\plugin.py:221
+#: ..\plugin.py:231
 msgid "OK"
 msgstr "Tamam"
 
-#: ..\plugin.py:226 ..\plugin.py:242 ..\plugin.py:263
+#: ..\plugin.py:236 ..\plugin.py:252 ..\plugin.py:273
 msgid "Simple RSS Reader Setup"
 msgstr "Kolay RSS Okuyucu Kurulumu"
 
-#: ..\plugin.py:244
+#: ..\plugin.py:254
 msgid "Save"
 msgstr "Kaydet"
 
-#: ..\plugin.py:245
+#: ..\plugin.py:255
 msgid "New"
 msgstr "Yeni"
 
-#: ..\plugin.py:246
+#: ..\plugin.py:256
 msgid "Delete"
 msgstr "Sil"
 
-#: ..\plugin.py:267
+#: ..\plugin.py:277
 msgid "Feed"
 msgstr "Besleme"
 
-#: ..\plugin.py:268
+#: ..\plugin.py:278
 msgid "Start automatically with Enigma2"
 msgstr "Enigma2 ile birlikte otomatik başlat"
 
-#: ..\plugin.py:269
+#: ..\plugin.py:279
 msgid "Keep running in background"
 msgstr "Arkaplanda çalışmaya devam et"
 
-#: ..\plugin.py:272
+#: ..\plugin.py:282
 msgid "Update Interval [min]"
 msgstr "Güncelleme Aralığı [dak]"
 
-#: ..\plugin.py:273
+#: ..\plugin.py:283
 msgid "Show new Messages as"
 msgstr "Yeni mesajların gösterilme şekli"
 
-#: ..\plugin.py:275
+#: ..\plugin.py:285
+msgid " *Vertical position of ticker [%] (0% = top / 100% = bottom)"
+msgstr " *Ticker'ın dikey konumu [%] (%0 = üst / %100 = alt)"
+
+#: ..\plugin.py:286
 msgid " *Frequency of scrollsteps [ms] (low values slow down the box)"
 msgstr " *Kaydırma adımlarının sıklığı [ms] (düşük değerler kutuyu yavaşlatır)"
 
-#: ..\plugin.py:276
+#: ..\plugin.py:287
 msgid " *Scrollspeed [pixels per step] (high values lead to jerking)"
 msgstr ""
 " *Kaydırma hızı [adım başına piksel] (yüksek değerler sarsıntıya neden olur)"
 
-#: ..\plugin.py:278
+#: ..\plugin.py:289
 msgid " *=please perform a GUI-restart for these changes to take effect"
 msgstr ""
 " *=bu değişikliklerin etkili olması için lütfen bir GUI yeniden başlatması "
 "gerçekleştirin"
 
-#: ..\plugin.py:280
+#: ..\plugin.py:291
 msgid ""
 "Note: If box becomes extremely slow, please reduce the quantity of feeds."
 msgstr "Not: Kutu aşırı yavaşlarsa, lütfen besleme miktarını azaltın."
 
-#: ..\plugin.py:298
+#: ..\plugin.py:309
 msgid ""
 "Really delete this entry?\n"
 "It cannot be recovered!"
@@ -114,11 +118,11 @@ msgstr ""
 "Bu bildirimi silmek istiyor musunuz?\n"
 "Silindiğinde geri getirilemez!"
 
-#: ..\plugin.py:315
+#: ..\plugin.py:326
 msgid "Import feeds from:"
 msgstr "Beslemeleri şuradan içe aktarın:"
 
-#: ..\plugin.py:350
+#: ..\plugin.py:361
 msgid ""
 "Importing '%s'\n"
 "%s feeds were imported successfully\n"
@@ -128,11 +132,11 @@ msgstr ""
 "s beslemeleri başarıyla içe aktarıldı\n"
 "s beslemeleri çiftti ve içe aktarılmadı"
 
-#: ..\plugin.py:354
+#: ..\plugin.py:365
 msgid "File '%s' was not found, import was aborted!"
 msgstr "File '%s' was not found, import was aborted!"
 
-#: ..\plugin.py:387 ..\plugin.py:429
+#: ..\plugin.py:398 ..\plugin.py:440
 msgid ""
 "Error while parsing Feed, this usually means there is something wrong with "
 "it."
@@ -140,7 +144,7 @@ msgstr ""
 "Besleme ayrıştırılırken hata oluştu, bu durum genellikle hatalı "
 "yapılandırmadan kaynaklanır."
 
-#: ..\plugin.py:438
+#: ..\plugin.py:449
 msgid ""
 "Update is being done in Background.\n"
 "Contents will automatically be updated when it's done."
@@ -148,91 +152,91 @@ msgstr ""
 "Güncelleme arkaplanda yapılıyor.\n"
 "Tamamlandığında, içerik otomatik olarak güncellenecektir."
 
-#: ..\plugin.py:462
+#: ..\plugin.py:473
 msgid "Simple RSS Reader EntryView"
 msgstr "Simple RSS Reader EntryView"
 
-#: ..\plugin.py:463 ..\plugin.py:491
+#: ..\plugin.py:474 ..\plugin.py:502
 msgid "Entry %s/%s"
 msgstr "Bildiri %s/%s"
 
-#: ..\plugin.py:466 ..\plugin.py:468
+#: ..\plugin.py:477 ..\plugin.py:479
 msgid "Enclosures"
 msgstr "İlişkili bildiri"
 
-#: ..\plugin.py:490 ..\plugin.py:636
+#: ..\plugin.py:501 ..\plugin.py:650
 msgid "Simple RSS Reader: %s"
 msgstr "Kolay RSS Okuyucu: %s"
 
-#: ..\plugin.py:493 ..\plugin.py:508
+#: ..\plugin.py:504 ..\plugin.py:518
 msgid "No such Item."
 msgstr "Yeni bildirim yok."
 
-#: ..\plugin.py:502
+#: ..\plugin.py:512
 msgid "{no attachments found}"
 msgstr "{ek bulunamadı}"
 
-#: ..\plugin.py:531
+#: ..\plugin.py:541
 msgid "Sorry, this attachment cannot be opened: unsupported MIME type"
 msgstr "Üzgünüz, bu ek açılamıyor: desteklenmeyen MIME türü"
 
-#: ..\plugin.py:573
+#: ..\plugin.py:589
 msgid "Simple RSS Reader Feedview"
 msgstr "Simple RSS Reader Feedview"
 
-#: ..\plugin.py:578
+#: ..\plugin.py:594
 msgid "change feed"
 msgstr "beslemeyi değiştir"
 
-#: ..\plugin.py:703
+#: ..\plugin.py:720
 msgid "Entry %s/%s - %s"
 msgstr "Giriş %s/%s - %s"
 
-#: ..\plugin.py:706 ..\plugin.py:708
+#: ..\plugin.py:723 ..\plugin.py:725
 msgid "Feed is empty."
 msgstr "Besleme boş."
 
-#: ..\plugin.py:780
+#: ..\plugin.py:797
 msgid "Simple RSS Reader Overview"
 msgstr "Simple RSS Reader Overview"
 
-#: ..\plugin.py:782 ..\plugin.py:834
+#: ..\plugin.py:799 ..\plugin.py:848
 msgid "Entries"
 msgstr "Bildirim"
 
-#: ..\plugin.py:783
+#: ..\plugin.py:800
 msgid "Feed 1/%s"
 msgstr "Besleme 1/%s"
 
-#: ..\plugin.py:805
+#: ..\plugin.py:822
 msgid "Simple RSS Reader"
 msgstr "Kolay RSS Okuyucu"
 
-#: ..\plugin.py:833
+#: ..\plugin.py:847
 msgid "Feed %s/%s"
 msgstr "Besleme %s/%s"
 
-#: ..\plugin.py:872
+#: ..\plugin.py:886
 msgid "Close"
 msgstr "Kapat"
 
-#: ..\plugin.py:872
+#: ..\plugin.py:886
 msgid "Settings"
 msgstr "Ayarlar"
 
-#: ..\plugin.py:872
+#: ..\plugin.py:886
 msgid "Update Feed"
 msgstr "Beslemeyi Güncelle"
 
-#: ..\plugin.py:873
+#: ..\plugin.py:887
 msgid "What to do?"
 msgstr "Ne yapmak istiyorsunuz?"
 
-#: ..\plugin.py:921
+#: ..\plugin.py:935
 msgid "New Items since last Auto-Update"
 msgstr "Son otomatik güncellemeden sonraki yeni bildirimler"
 
-#: ..\plugin.py:950
+#: ..\plugin.py:964
 msgid ""
 "Sorry, this type of feed is unsupported:\n"
 "%s"
@@ -240,25 +244,25 @@ msgstr ""
 "Üzgünüm, bu besleme tipi desteklenmiyor:\n"
 "%s"
 
-#: ..\plugin.py:1013
+#: ..\plugin.py:1026
 msgid "Received %d new news item(s)."
 msgstr "%d yeni bildirim alındı."
 
-#: ..\plugin.py:1093
+#: ..\plugin.py:1106
 msgid ""
 "Error when reading the feed. Does your address really refer to an RSS feed?"
 msgstr ""
 "Beslemeyi okurken hata oluştu. Adresiniz gerçekten bir RSS beslemesine mi "
 "işaret ediyor?"
 
-#: ..\plugin.py:1210
+#: ..\plugin.py:1228
 msgid "trying to download the feed..."
 msgstr "beslemeyi indirmeye çalışıyorum..."
 
-#: ..\plugin.py:1279
+#: ..\plugin.py:1297
 msgid "A simple to use RSS reader"
 msgstr "Kolay kullanımlı RSS okuyucu"
 
-#: ..\plugin.py:1281
+#: ..\plugin.py:1299
 msgid "View RSS..."
 msgstr "RSS'lere bak..."

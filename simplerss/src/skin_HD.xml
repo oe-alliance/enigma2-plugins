@@ -79,12 +79,13 @@
 			<convert type="TemplatedMultiContent">
 				{"templates":
 					{"default": (80,[
-						MultiContentEntryPixmap(pos=(0,0), size=(700,6), png=1), # index 1 is the line separator
-						MultiContentEntryPixmapAlphaBlend(pos=(4,4), size=(150,70), flags=BT_SCALE|BT_KEEP_ASPECT_RATIO|BT_HALIGN_CENTER|BT_VALIGN_CENTER, png=2),  # feedpicture
+						MultiContentEntryPixmap(pos=(0,0), size=(700,6), png=1),  # index 1 is the line separator
+						MultiContentEntryPixmapAlphaBlend(pos=(4,4), size=(150,70), flags=BT_SCALE|BT_KEEP_ASPECT_RATIO|BT_HALIGN_CENTER|BT_VALIGN_CENTER, png=2),  # entrypicture
+						MultiContentEntryPixmapAlphaBlend(pos=(54,14), size=(50,50), png=3),  # streamicon
 						MultiContentEntryText(pos=(160,4), size=(530,70), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text=0)  # feedtext
 					]),
 					"news": (80,[
-						MultiContentEntryPixmap(pos=(0,0), size=(700,6), png=1), # index 1 is the line separator
+						MultiContentEntryPixmap(pos=(0,0), size=(700,6), png=1),  # index 1 is the line separator
 						MultiContentEntryText(pos=(10,4), size=(660,73), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text=0)  # feedtext
 					])
 					},
@@ -112,13 +113,13 @@
 		<widget source="info" render="Label" position="64,100" size="470,32" font="Regular;24" backgroundColor="#1A0F0F0F" foregroundColor="#00FFFFFF" transparent="1" />
 		<widget source="summary" render="Label" position="540,100" size="230,32" font="Regular;24" backgroundColor="#1A0F0F0F" foregroundColor="#00FFFFFF" transparent="1" halign="right" />
 	<!-- 	<eLabel position="64,150" size="1148,1" backgroundColor="#00FFFFFF" />-->
-		<widget source="content" render="Listbox" size="1150,470" position="64,150" scrollbarMode="showOnDemand" backgroundColor="#1A0F0F0F" foregroundColor="#00FFFFFF" transparent="1">
+		<widget source="content" render="Listbox" size="1160,470" position="64,150" scrollbarMode="showOnDemand" backgroundColor="#1A0F0F0F" foregroundColor="#00FFFFFF" transparent="1">
 			<convert type="TemplatedMultiContent">
 				{"template": [
-					MultiContentEntryPixmap(pos=(0,0), size=(1150,6), png=2), # index 2 is the line separator
+					MultiContentEntryPixmap(pos=(0,0), size=(1160,6), png=2),  # index 2 is the line separator
 					MultiContentEntryPixmapAlphaBlend(pos=(4,12), size=(150,70), flags=BT_SCALE|BT_KEEP_ASPECT_RATIO|BT_HALIGN_CENTER|BT_VALIGN_CENTER, png=3),  # feedlogo
-					MultiContentEntryText(pos=(160,4), size=(978,30), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text=0),  # title
-					MultiContentEntryText(pos=(160,36), size=(978,53), font=1, flags=RT_HALIGN_LEFT|RT_VALIGN_TOP|RT_WRAP, text=1)  # description
+					MultiContentEntryText(pos=(160,4), size=(988,30), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text=0),  # title
+					MultiContentEntryText(pos=(160,36), size=(988,53), font=1, flags=RT_HALIGN_LEFT|RT_VALIGN_TOP|RT_WRAP, text=1)  # description
 					],
 				"fonts": [gFont("Regular",22), gFont("Regular",20)],
 				"itemHeight":94
