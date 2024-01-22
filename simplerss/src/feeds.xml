@@ -1,27 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <feeds>
 	<feed>
-		<name>Der Westen.de</name>
-		<url>https://www.derwesten.de/feed</url>
-	</feed>
-	<feed>
-		<name>TV Spielfilm.de - TV-Tipps des Tages</name>
-		<url>https://www.tvspielfilm.de/tv-programm/rss/tipps.xml</url>
-	</feed>
-	<feed>
 		<name>Tagesschau.de</name>
 		<url>https://www.tagesschau.de/infoservices/alle-meldungen-100~rss2.xml</url>
 	</feed>
-	<feed>
-		<name>Sportbild</name>
-			<url>https://sportbild.bild.de/rss/vw-bundesliga-artikel/vw-bundesliga-artikel-45028194,sort=1,view=rss2.sport.xml</url>
-		</feed>
 	<feed>
 		<name>DER SPIEGEL - Nachrichten</name>
 		<url>https://www.spiegel.de/schlagzeilen/rss/0,5291,,00.xml</url>
 	</feed>
 	<feed>
-		<name>kicker Teamnews FC Schalke 04</name>
-		<url>https://newsfeed.kicker.de/team/fc-schalke-04</url>
+	<name>Sportbild</name>
+	<url>https://sportbild.bild.de/rss/vw-bundesliga-artikel/vw-bundesliga-artikel-45028194,sort=1,view=rss2.sport.xml</url>
+	</feed>
+	<feed>
+		<name>TV Spielfilm.de - TV-Tipps des Tages</name>
+		<url>https://www.tvspielfilm.de/tv-programm/rss/tipps.xml</url>
 	</feed>
 </feeds>

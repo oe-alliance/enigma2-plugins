@@ -79,13 +79,14 @@
 			<convert type="TemplatedMultiContent">
 				{"templates":
 					{"default": (120,[
-						MultiContentEntryPixmap(pos=(0,0), size=(1050,10), png=1), # index 1 is the line separator
-						MultiContentEntryPixmapAlphaBlend(pos=(7,7), size=(225,105), flags=BT_SCALE|BT_KEEP_ASPECT_RATIO|BT_HALIGN_CENTER|BT_VALIGN_CENTER, png=2), # feedpicture
-						MultiContentEntryText(pos=(240,7), size=(795,105), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text=0)# feedtext
+						MultiContentEntryPixmap(pos=(0,0), size=(1050,10), png=1),  # index 1 is the line separator
+						MultiContentEntryPixmapAlphaBlend(pos=(7,7), size=(225,105), flags=BT_SCALE|BT_KEEP_ASPECT_RATIO|BT_HALIGN_CENTER|BT_VALIGN_CENTER, png=2),  # entrypicture
+						MultiContentEntryPixmapAlphaBlend(pos=(82,22), size=(75,75), png=3),  # streamicon
+						MultiContentEntryText(pos=(240,7), size=(795,105), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text=0)  # feedtext
 					]),
 					"news": (120,[
-						MultiContentEntryPixmap(pos=(0,0), size=(1050,10), png=1), # index 1 is the line separator
-						MultiContentEntryText(pos=(15,7), size=(990,110), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text=0)# feedtext
+						MultiContentEntryPixmap(pos=(0,0), size=(1050,10), png=1),  # index 1 is the line separator
+						MultiContentEntryText(pos=(15,7), size=(990,110), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text=0)  # feedtext
 					])
 					},
 					"fonts": [gFont("Regular",30)],
@@ -112,13 +113,13 @@
 		<widget source="info" render="Label" position="97,150" size="705,48" font="Regular;36" backgroundColor="#1A0F0F0F" foregroundColor="#00FFFFFF" transparent="1" />
 		<widget source="summary" render="Label" position="810,150" size="345,48" font="Regular;36" backgroundColor="#1A0F0F0F" foregroundColor="#00FFFFFF" transparent="1" halign="right" />
 	<!-- 	<eLabel position="97,225" size="1723,2" backgroundColor="#00FFFFFF" /> -->
-		<widget source="content" render="Listbox" size="1725,705" position="97,225" scrollbarMode="showOnDemand" backgroundColor="#1A0F0F0F" foregroundColor="#00FFFFFF" transparent="1">
+		<widget source="content" render="Listbox" size="1740,705" position="97,225" scrollbarMode="showOnDemand" backgroundColor="#1A0F0F0F" foregroundColor="#00FFFFFF" transparent="1">
 			<convert type="TemplatedMultiContent">
 				{"template": [
-					MultiContentEntryPixmap(pos=(0,0), size=(1725,10), png=2), # index 2 is the line separator
-					MultiContentEntryPixmapAlphaBlend(pos=(7,18), size=(225,105), flags=BT_SCALE|BT_KEEP_ASPECT_RATIO|BT_HALIGN_CENTER|BT_VALIGN_CENTER, png=3), # feedlogo
-					MultiContentEntryText(pos=(240,7), size=(1467,45), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text=0), # title
-					MultiContentEntryText(pos=(240,54), size=(1467,80), font=1, flags=RT_HALIGN_LEFT|RT_VALIGN_TOP|RT_WRAP, text=1)# description
+					MultiContentEntryPixmap(pos=(0,0), size=(1740,10), png=2),  # index 2 is the line separator
+					MultiContentEntryPixmapAlphaBlend(pos=(7,18), size=(225,105), flags=BT_SCALE|BT_KEEP_ASPECT_RATIO|BT_HALIGN_CENTER|BT_VALIGN_CENTER, png=3),  # feedlogo
+					MultiContentEntryText(pos=(240,7), size=(1482,45), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text=0),  # title
+					MultiContentEntryText(pos=(240,54), size=(1482,80), font=1, flags=RT_HALIGN_LEFT|RT_VALIGN_TOP|RT_WRAP, text=1)  # description
 					],
 				"fonts": [gFont("Regular",33), gFont("Regular",30)],
 				"itemHeight":141
