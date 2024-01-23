@@ -12,7 +12,6 @@ from .NetworkBrowser import NetworkBrowser
 from Components.Network import iNetwork
 from .MountManager import AutoMountManager
 from .AutoMount import iAutoMount
-from Components.SystemInfo import BoxInfo
 
 try:
 	from Components.SystemInfo import BoxInfo
