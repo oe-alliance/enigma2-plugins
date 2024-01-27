@@ -453,6 +453,7 @@ class RSSBaseView(Screen):  # Base Screen for all Screens used in SimpleRSS
 		for enclosure in enclosures:
 			if enclosure[1] in MIMEIMAGES + MIMEVIDEOS + MIMEAUDIOS:
 				enclist.append((enclosure[0].strip(), enclosure[1]))
+		enclist = list(dict.fromkeys(enclist))  # remove dupes
 		return enclist
 
 
