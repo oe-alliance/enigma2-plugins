@@ -178,9 +178,14 @@ def downloadPicfile(url, picfile, resize=None, fixedname=None, callback=None):
 
 
 def url2filename(url, forcepng=False):
+	url = cleanupUrl(url)
+	return "%s.png" % hash(url) if forcepng else ("%s%s" % (hash(url), url[url.rfind("."):])).replace(".jpeg", ".jpg")
+
+
+def cleanupUrl(url):
 	if "?" in url:  # remove all stuff behind '?', e.g. 'pic.jpg?w=1200&h=675&crop=1'
 		url = url[:url.rfind("?")]
-	return "%s.png" % hash(url) if forcepng else ("%s%s" % (hash(url), url[url.rfind("."):])).replace(".jpeg", ".jpg")
+	return url
 
 
 def isExtensionSupported(name, supportlist=MIMEIMAGES):
@@ -1124,12 +1129,15 @@ class RSSEntryWrapper(ElementWrapper):
 				res = search(r'src="(.*?)"', elem.text)  # perhaps not the most elegant way but it works
 				if res:
 					url = res.group(1)
-					myl.append((url, EXT2MIME.get(url[url.rfind("."):], "unknown"), "0"))  # create missing MIME type
+					myl.append((url, EXT2MIME.get(cleanupUrl(url[url.rfind("."):]), "unknown"), "0"))  # create missing MIME type
 				else:  # alternative #2: search for enclosures. HINT: tag '<content:encoded>' can't be found by self._element.findall()
 					res = search(r'src="(.*?)"', tostring(self._element).decode())  # quick'n'dirty but it works
 					if res:
 						url = res.group(1)
-						myl.append((url, EXT2MIME.get(url[url.rfind("."):], "unknown"), "0"))
+						myl.append((url, EXT2MIME.get(cleanupUrl(url[url.rfind("."):]), "unknown"), "0"))
+			for elem in self._element.findall("%simage" % self._ns):  # alternative #3: search for enclosures
+				url = elem.text
+				myl.append((url, EXT2MIME.get(cleanupUrl(url[url.rfind("."):]), "unknown"), "0"))  # create missing MIME type
 			return myl
 		elif tag == "id":
 			return self._element.findtext("%sguid" % self._ns, "%s%s" % (self.title, self.link))
