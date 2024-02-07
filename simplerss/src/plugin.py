@@ -333,7 +333,7 @@ class RSS_Setup(ConfigListScreen, Screen):  # Setup for SimpleRSS, quick-edit fo
 	def importFeedlist(self, result):
 		if not result:
 			return
-		feedpath = PLUGINPATH if result[1] == "plugin" else TEMPPATH
+		feedpath = PLUGINPATH if result[1] == "plugin" else "/tmp/feeds.xml"
 		feedfile = join(feedpath, "feeds.xml")
 		if exists(feedfile):
 			success = 0
