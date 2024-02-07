@@ -333,7 +333,7 @@ class RSS_Setup(ConfigListScreen, Screen):  # Setup for SimpleRSS, quick-edit fo
 	def importFeedlist(self, result):
 		if not result:
 			return
-		feedpath = PLUGINPATH if result[1] == "plugin" else TEMPPATH
+		feedpath = PLUGINPATH if result[1] == "plugin" else "/tmp/feeds.xml"
 		feedfile = join(feedpath, "feeds.xml")
 		if exists(feedfile):
 			success = 0
@@ -720,7 +720,7 @@ class RSS_FeedView(RSSBaseView):  # Shows a RSS-Feed
 
 	def updateInfo(self):
 		if self.feed and self.feed.history:
-			cur_idx = self["content"].index % (len(self.feed.history) - 1)
+			cur_idx = self["content"].index % len(self.feed.history)
 			curr_entry = self.feed.history[cur_idx]
 			if curr_entry:
 				self["summary"].text = curr_entry[2]
@@ -741,13 +741,13 @@ class RSS_FeedView(RSSBaseView):  # Shows a RSS-Feed
 	def nextEntry(self):
 		self["content"].selectNext()
 		if self.feed:
-			cur_idx = self["content"].index % (len(self.feed.history) - 1)
+			cur_idx = self["content"].index % len(self.feed.history)
 			return (self.feed.history[cur_idx], cur_idx, len(self.feed.history))
 
 	def previousEntry(self):
 		self["content"].selectPrevious()
 		if self.feed:
-			cur_idx = self["content"].index % (len(self.feed.history) - 1)
+			cur_idx = self["content"].index % len(self.feed.history)
 			return (self.feed.history[cur_idx], cur_idx, len(self.feed.history))
 
 	def nextFeed(self):
@@ -778,7 +778,7 @@ class RSS_FeedView(RSSBaseView):  # Shows a RSS-Feed
 
 	def showCurrentEntry(self):
 		if self.feed:
-			cur_idx = self["content"].index % (len(self.feed.history) - 1)
+			cur_idx = self["content"].index % len(self.feed.history)
 			curr_entry = self.feed.history[cur_idx]
 			if curr_entry and self.feed:
 				if self.feed.logoUrl:
