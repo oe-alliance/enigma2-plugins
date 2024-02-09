@@ -24,8 +24,6 @@ from requests import get
 from six import PY2, PY3
 from six.moves.urllib.parse import quote
 from xml.etree.cElementTree import fromstring
-import inspect
-__getargs = inspect.getfullargspec if PY3 else inspect.getargspec
 
 # ENIGMA IMPORTS
 from enigma import eEPGCache
@@ -293,8 +291,7 @@ def timerInit():
 
 def createNewnigma2Setup(self, widget="config"):
 	print("[RemoteTimer] createNewnigma2Setup widget: %s" % widget)
-	args = __getargs(baseTimerEntrySetup).args
-	print("[RemoteTimer] createNewnigma2Setup setup args:" % args)
+	args = baseTimerEntrySetup.__code__.co_varnames[:baseTimerEntrySetup.__code__.co_argcount]
 	if not hasattr(self, "timerentry_remote"):  # sometimes this is set outside this plugin
 		self.timerentry_remote = ConfigYesNo(default=config.plugins.remoteTimer.default.value)
 	timerEntryRemote = getConfigListEntry(_("Remote Timer"), self.timerentry_remote)
