@@ -883,5 +883,9 @@ epgexport/Makefile
 epgexport/po/Makefile
 epgexport/src/Makefile
 
+mediathekviewweb/Makefile
+mediathekviewweb/src/Makefile
+mediathekviewweb/src/img/Makefile
+
 ])
 AC_OUTPUT

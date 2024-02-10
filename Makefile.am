@@ -146,7 +146,7 @@ else
 SUBDIRS += 	remotetimer
 endif
 
-SUBDIRS += tetris ardmediathek netzkino Series2Folder srfmediathek epgexport
+SUBDIRS += tetris ardmediathek netzkino Series2Folder srfmediathek epgexport mediathekviewweb
 
 metadir = $(datadir)/meta
 meta_DATA = index-enigma2-plugins.xml
