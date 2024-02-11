@@ -591,6 +591,12 @@ podcast/meta/Makefile
 podcast/po/Makefile
 podcast/src/Makefile
 
+porncenter/Makefile
+porncenter/meta/Makefile
+porncenter/po/Makefile
+porncenter/src/Makefile
+porncenter/src/Additions/Makefile
+
 pushservice/Makefile
 pushservice/meta/Makefile
 pushservice/po/Makefile
