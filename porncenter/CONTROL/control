@@ -1,0 +1,2 @@
+Description: Adult streaming plugins for dm800/dm8000
+Depends: enigma2, python-twisted-web

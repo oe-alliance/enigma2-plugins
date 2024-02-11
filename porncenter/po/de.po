@@ -1,0 +1,63 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PornCenter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: JuSt611 <Software@Strasdas.de>\n"
+"Language-Team: AliAbdul <aliabdul1978@hotmail.de>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ../src\n"
+
+msgid "Adult streaming plugins for dm800/dm8000"
+msgstr "Filme für Erwachsene auf der Receiver"
+
+msgid "Buffer device:"
+msgstr "Puffergerät:"
+
+msgid "Buffer file handling:"
+msgstr "Pufferdateihandhabung:"
+
+msgid "Buffer:"
+msgstr "Puffer:"
+
+msgid "Delete this movie?"
+msgstr "Diesen Film löschen?"
+
+msgid "Description:"
+msgstr "Beschreibung:"
+
+#, python-format
+msgid "Downloading movie: %s"
+msgstr "Filme herunterladen: %s"
+
+msgid "Error while getting video url!"
+msgstr "Fehler bei Ermittlung der Video URL!"
+
+msgid "Name:"
+msgstr "Name:"
+
+msgid "Porn Center"
+msgstr "Porn Center"
+
+msgid "Select"
+msgstr "Wählen"
+
+msgid "Stop playing this movie?"
+msgstr "Diesen Film stoppen?"
+
+msgid "ask me"
+msgstr "nachfragen"
+
+msgid "delete"
+msgstr "löschen"
+
+msgid "keep on device"
+msgstr "auf Datenträger behalten"

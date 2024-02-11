@@ -1,0 +1,63 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PornCenter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
+"Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 2.0.2\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SearchPath-0: /home/aliabdul/dream/ltteam/trunk/additions/plugins/porncenter/src\n"
+
+msgid "Adult streaming plugins for dm800/dm8000"
+msgstr "dm800/dm8000 transliacijų suaugusiems įskiepiai"
+
+msgid "Buffer device:"
+msgstr "Talpyklos įrenginys:"
+
+msgid "Buffer file handling:"
+msgstr "Talpyklos failo palaikymas:"
+
+msgid "Buffer:"
+msgstr "Talpykla:"
+
+msgid "Delete this movie?"
+msgstr "Pašalinti šį filmą?"
+
+msgid "Description:"
+msgstr "Aprašymas:"
+
+#, python-format
+msgid "Downloading movie: %s"
+msgstr "Parsisiunčiamas filmas: %s"
+
+msgid "Error while getting video url!"
+msgstr "Prisijungimo prie internetinio adreso klaida!"
+
+msgid "Name:"
+msgstr "Pavadinimas:"
+
+msgid "Porn Center"
+msgstr "Porno centras"
+
+msgid "Select"
+msgstr "Pasirinkti"
+
+msgid "Stop playing this movie?"
+msgstr "Sustabdyti šį filmą?"
+
+msgid "ask me"
+msgstr "klausti"
+
+msgid "delete"
+msgstr "šalinti"
+
+msgid "keep on device"
+msgstr "saugoti įrenginyje"
