@@ -63,7 +63,6 @@ SUBDIRS = \
 	permanentclock \
 	pipservicerelation \
 	podcast \
-	porncenter \
 	pushservice \
 	quickbutton \
 	reconstructapsc \
