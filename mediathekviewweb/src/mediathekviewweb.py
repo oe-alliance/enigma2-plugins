@@ -184,7 +184,7 @@ class Mediathekviewweb(Screen):
 				if js.get("url_video_low"):
 					urls.append(("Niedrig", js.get("url_video_low") + "##" + sub))
 				img = js.get("url_website", "")
-				liste.append(("MVW_PLAY", ensure_str("[%s] %s - %s" % (js.get("channel", ""), js.get("topic", ""), js.get("title", ""))), urls, ensure_str("%s%s\n%s" % ("UT\n" if sub else "" , timestamp, js.get("description", ""))), img, duration, ""))
+				liste.append(("MVW_PLAY", ensure_str("[%s] %s - %s" % (js.get("channel", ""), js.get("topic", ""), js.get("title", ""))), urls, ensure_str("%s%s\n%s" % ("UT\n" if sub else "", timestamp, js.get("description", ""))), img, duration, ""))
 			if totalResults > (page * size):
 				liste.append(("MVW_API", "Nextpage", (ensure_str(query), ensure_str(channel), (page + 1), size), "", PLUGINPATH + "/img/" + "nextpage.png", "", ""))
 		if liste:
