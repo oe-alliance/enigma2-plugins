@@ -5,9 +5,9 @@ import xml.etree.ElementTree as Et
 from datetime import datetime, timedelta
 from os import mkdir, path, unlink
 import requests
-import skin
+from skin import AttributeParser
 from Components.ActionMap import ActionMap
-from Components.config import ConfigDirectory, ConfigSelection, ConfigSubsection, ConfigYesNo, config, configfile, getConfigListEntry
+from Components.config import ConfigDirectory, ConfigSelection, ConfigSubsection, ConfigYesNo, config, configfile
 from Components.ConfigList import ConfigListScreen
 from Components.FileList import FileList
 from Components.Pixmap import Pixmap
@@ -42,6 +42,9 @@ config.plugins.MVW.UT_DL = ConfigYesNo(default=False)
 config.plugins.MVW.COVER_DL = ConfigYesNo(default=False)
 config.plugins.MVW.DESC = ConfigYesNo(default=False)
 config.plugins.MVW.AUTOPLAY = ConfigYesNo(default=False)
+config.plugins.MVW.FUTURE = ConfigYesNo(default=False)
+config.plugins.MVW.INTSKIN = ConfigYesNo(default=False)
+
 PLUGINPATH = "/usr/lib/enigma2/python/Plugins/Extensions/Mediathekviewweb/"
 FHD = getDesktop(0).size().height() > 720
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0"
@@ -65,7 +68,7 @@ def readskin(eskin=None):
 		for element in root:
 			if element.tag == "screen" and element.attrib["name"] == sn:
 				s = ensure_str(Et.tostring(element))
-		if hasattr(skin.AttributeParser, "scrollbarForegroundColor"):
+		if hasattr(AttributeParser, "scrollbarForegroundColor"):
 			s = s.replace("scrollbarSliderForegroundColor", "scrollbarForegroundColor")
 	except (OSError, IOError, Et.ParseError):
 		return ""
@@ -82,14 +85,13 @@ def vttxmltosrt(data):
 		return "{:02d}:{:02d}:{:02d},{:03d}".format(h, m, s, ms)
 
 	if "WEBVTT" in data:
-		data = re.sub(re.compile("<.*?>| align:middle|WEBVTT"), "", data)
+		data = re.sub(re.compile("<.*?>| align:middle"), "", data)
 	elif "<?xml version" in data:
 		data = Et.fromstring(data)
 		elm = data.find("{http://www.w3.org/ns/ttml}body").find("{http://www.w3.org/ns/ttml}div")
-
 		if elm is not None:
 			count = 0
-			tt = ""
+			tt = "WEBVTT\n\n"
 
 			for el in elm:
 				b = el.attrib.get("begin", "")
@@ -104,13 +106,12 @@ def vttxmltosrt(data):
 						txt = span.text
 				else:
 					txt = el.text
-
 				if txt and b and e:
-					txt = txt.replace("<br/>", "\n")
+					txt = txt.replace("<br/>", "")
 					count += 1
 					tt += str(count) + "\n"
 					tt += str(b.replace(".", ",") + " --> " + e.replace(".", ",")) + "\n"
-					tt += (txt) + "\n"
+					tt += (txt) + "\n\n"
 			return ensure_str(tt)
 	return ensure_str(data)
 
@@ -128,15 +129,16 @@ def geturl(url, headers=None, data=None, timeout=10, verify=True):
 class Mediathekviewweb(Screen):
 	def __init__(self, session):
 		s = readskin()
-		self.skin = s
 		Screen.__init__(self, session)
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "ChannelSelectBaseActions", "MenuActions"], {"menu": self.MVWSetup, "green": self.mvw_cdn, "red": self.close, "blue": self.HauptMenu, "up": self.up, "down": self.down, "left": self.left, "right": self.right, "nextBouquet": self.p_up, "prevBouquet": self.p_down, "ok": self.ok, "cancel": self.back}, -1)
 		self["movielist"] = List()
 		self["cover"] = Pixmap()
+		self.skin = s
+		self.skinName = "Mediathekviewweb_org" if config.plugins.MVW.INTSKIN.value else "Mediathekviewweb"
 		self["handlung"] = ScrollLabel()
 		self.HISTORY = [("MENU", "", "")]
 		self["DownloadLabel"] = ScrollLabel()
-		self["PluginName"] = ScrollLabel("MediathekViewWeb v1.0")
+		self["PluginName"] = ScrollLabel("MediathekViewWeb v1.1")
 		self["progress"] = ProgressBar()
 		self["progress"].hide()
 		self.dl_file = None
@@ -155,7 +157,7 @@ class Mediathekviewweb(Screen):
 	def mvw_api(self, query="", channel="", page=1, size=100, index="0"):
 		liste = []
 		offset = size * (page - 1)
-		data = {"sortBy": "timestamp", "sortOrder": "desc", "future": False, "offset": offset, "size": size}
+		data = {"sortBy": "timestamp", "sortOrder": "desc", "future": config.plugins.MVW.FUTURE.value, "offset": offset, "size": size}
 		if query or channel:
 			data["queries"] = []
 		if query:
@@ -174,9 +176,15 @@ class Mediathekviewweb(Screen):
 				duration = str(timedelta(seconds=int(js.get("duration")))) if str(js.get("duration")).isdigit() else ""
 				timestamp = datetime.fromtimestamp(int(js.get("timestamp"))).strftime("%d-%m-%Y %H:%M:%S") if str(js.get("timestamp")).isdigit() else ""
 				sub = js.get("url_subtitle", "")
-				urls = [("Hoch", js.get("url_video_hd", "") + "##" + sub), ("Mittel", js.get("url_video", "") + "##" + sub), ("Niedrig", js.get("url_video_low", "") + "##" + sub)]
+				urls = []
+				if js.get("url_video_hd"):
+					urls.append(("Hoch", js.get("url_video_hd") + "##" + sub))
+				if js.get("url_video"):
+					urls.append(("Mittel", js.get("url_video") + "##" + sub))
+				if js.get("url_video_low"):
+					urls.append(("Niedrig", js.get("url_video_low") + "##" + sub))
 				img = js.get("url_website", "")
-				liste.append(("MVW_PLAY", ensure_str("[%s] %s - %s" % (js.get("channel", ""), js.get("topic", ""), js.get("title", ""))), urls, ensure_str("%s\n%s" % (timestamp, js.get("description", ""))), img, duration, ""))
+				liste.append(("MVW_PLAY", ensure_str("[%s] %s - %s" % (js.get("channel", ""), js.get("topic", ""), js.get("title", ""))), urls, ensure_str("%s%s\n%s" % ("UT\n" if sub else "" , timestamp, js.get("description", ""))), img, duration, ""))
 			if totalResults > (page * size):
 				liste.append(("MVW_API", "Nextpage", (ensure_str(query), ensure_str(channel), (page + 1), size), "", PLUGINPATH + "/img/" + "nextpage.png", "", ""))
 		if liste:
@@ -188,35 +196,39 @@ class Mediathekviewweb(Screen):
 			self.session.open(MessageBox, "Kein Eintrag vorhanden", MessageBox.TYPE_INFO, timeout=5)
 
 	def HauptMenu(self, index="0"):
-		menu = [("MVW_API", "Alle", ("", "", 1, 100, False), "", PLUGINPATH + "img/" + "home.png", "", ""), ("MVW_SENDER", "Sender", ("", "", 1, 100, False), "", PLUGINPATH + "/img/" + "sender.png", "", ""), ("MVW_SUCHE", "Suche", ("", "", 1, 100, False), "", PLUGINPATH + "/img/" + "suche.png", "", "")]
+		menu = [("MVW_SUCHE", "Überall Suchen", ("", "", 1, 100, False), "", PLUGINPATH + "/img/" + "suche.png", "", ""), ("MVW_API", "Überall Stöbern", ("", "", 1, 100, False), "", PLUGINPATH + "img/" + "home.png", "", ""), ("MVW_SENDER_SUCHE", "Sender Suche", ("", "", 1, 100, False), "", PLUGINPATH + "/img/" + "suche.png", "", ""), ("MVW_SENDER", "Sender Stöbern", ("", "", 1, 100, False), "", PLUGINPATH + "/img/" + "sender.png", "", "")]
 		self["movielist"].setList(menu)
 		self["movielist"].setIndex(int(index))
 		self.infos()
 
-	def Sender(self, index="0"):
+	def Sender(self, index="0", action="MVW_CHANNEL"):
 		URL = "https://api.ardmediathek.de/image-service/images/urn:ard:image:"
-		sender = [("MVW_CHANNEL", "ARD", "", "", URL + "cddcfbc2887edfac?ch=bb94ade5984b3b54&w=360", "", ""), ("MVW_CHANNEL", "ZDF", "", "", "https://www.zdf.de/static/0.104.2262/img/appicons/zdf-152.png", "", ""), ("MVW_CHANNEL", "ZDF-tivi", "", "", "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/ZDFtivi_logo.svg/320px-ZDFtivi_logo.svg.png", "", ""), ("MVW_CHANNEL", "ARTE.DE", "", "", URL + "f9195b8bcbeaecc9?ch=fa42703f1b4c20bc&w=360", "", ""), ("MVW_CHANNEL", "SWR", "", "", URL + "aa24d7b7a46ac51c?ch=d6485202286d7033&w=360", "", ""), ("MVW_CHANNEL", "SRF", "", "", "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Schweizer_Radio_und_Fernsehen_Logo.svg/320px-Schweizer_Radio_und_Fernsehen_Logo.svg.png", "", ""), ("MVW_CHANNEL", "NDR", "", "", URL + "8d587d540cd01169?w=360", "", ""), ("MVW_CHANNEL", "3Sat", "", "", URL + "bdced2e15aab3c69?w=360&ch=b92f2ae35c4a1309", "", ""), ("MVW_CHANNEL", "KiKA", "", "", URL + "34a231a870f22c6d?w=360&ch=865612894cbd4d56", "", ""), ("MVW_CHANNEL", "BR", "", "", URL + "e73b862eee3232c4?ch=7560abc4cc794ac5&w=360", "", ""), ("MVW_CHANNEL", "SR", "", "", URL + "ff434ca6a62db52e?ch=542282531695b516&w=360", "", ""), ("MVW_CHANNEL", "Radio Bremen TV", "", "", URL + "7b4c72c6e85a6620?ch=468f72b78a0ed537&w=360", "", ""), ("MVW_CHANNEL", "DW", "", "", URL + "8d853ccf548a874f?ch=a285b4113c76fea4&w=360", "", ""), ("MVW_CHANNEL", "ORF", "", "", "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/ORF_logo.svg/320px-ORF_logo.svg.png", "", ""), ("MVW_CHANNEL", "HR", "", "", URL + "10f8968f47d2528e?w=360&ch=393ec00d9f489f74", "", ""), ("MVW_CHANNEL", "MDR", "", "", URL + "68c2d007353ffcea?ch=dfd3a69469855178&w=360", "", ""), ("MVW_CHANNEL", "WDR", "", "", URL + "7a4016b5348d0a80?ch=a04121766f1f3d82&w=360", "", ""), ("MVW_CHANNEL", "Funk.net", "", "", "https://www.funk.net/img/favicons/favicon-192x192.png", "", ""), ("MVW_CHANNEL", "RBB", "", "", URL + "0ed44c2fbb444e41?ch=a7ba657f549573d2&w=360", "", ""), ("MVW_CHANNEL", "PHOENIX", "", "", URL + "0740d8e76701b87c?ch=ac815bf512ad7d9b&w=360", "", ""), ("MVW_CHANNEL", "RBTV", "", "", "https://upload.wikimedia.org/wikipedia/commons/8/86/Rocket_Beans_RBTV_Logo.png", "", ""), ("MVW_CHANNEL", "ARTE.FR", "", "", URL + "f9195b8bcbeaecc9?ch=fa42703f1b4c20bc&w=360", "", ""), ("MVW_CHANNEL", "ARTE.EN", "", "", URL + "f9195b8bcbeaecc9?ch=fa42703f1b4c20bc&w=360", "", ""), ("MVW_CHANNEL", "ARTE.ES", "", "", URL + "f9195b8bcbeaecc9?ch=fa42703f1b4c20bc&w=360", "", ""), ("MVW_CHANNEL", "ARTE.PL", "", "", URL + "f9195b8bcbeaecc9?ch=fa42703f1b4c20bc&w=360", "", ""), ("MVW_CHANNEL", "ARTE.IT", "", "", URL + "f9195b8bcbeaecc9?ch=fa42703f1b4c20bc&w=360", "", "")]
+		sender = [(action, "ARD", "", "", URL + "cddcfbc2887edfac?ch=bb94ade5984b3b54&w=360", "", ""), (action, "ZDF", "", "", "https://www.zdf.de/static/0.104.2262/img/appicons/zdf-152.png", "", ""), (action, "ZDF-tivi", "", "", "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/ZDFtivi_logo.svg/320px-ZDFtivi_logo.svg.png", "", ""), (action, "ARTE.DE", "", "", URL + "f9195b8bcbeaecc9?ch=fa42703f1b4c20bc&w=360", "", ""), (action, "SWR", "", "", URL + "aa24d7b7a46ac51c?ch=d6485202286d7033&w=360", "", ""), (action, "NDR", "", "", URL + "8d587d540cd01169?w=360", "", ""), (action, "3Sat", "", "", URL + "bdced2e15aab3c69?w=360&ch=b92f2ae35c4a1309", "", ""), (action, "KiKA", "", "", URL + "34a231a870f22c6d?w=360&ch=865612894cbd4d56", "", ""), (action, "BR", "", "", URL + "e73b862eee3232c4?ch=7560abc4cc794ac5&w=360", "", ""), (action, "SR", "", "", URL + "ff434ca6a62db52e?ch=542282531695b516&w=360", "", ""), (action, "Radio Bremen TV", "", "", URL + "7b4c72c6e85a6620?ch=468f72b78a0ed537&w=360", "", ""), (action, "DW", "", "", URL + "8d853ccf548a874f?ch=a285b4113c76fea4&w=360", "", ""), (action, "HR", "", "", URL + "10f8968f47d2528e?w=360&ch=393ec00d9f489f74", "", ""), (action, "MDR", "", "", URL + "68c2d007353ffcea?ch=dfd3a69469855178&w=360", "", ""), (action, "WDR", "", "", URL + "7a4016b5348d0a80?ch=a04121766f1f3d82&w=360", "", ""), (action, "Funk.net", "", "", "https://www.funk.net/img/favicons/favicon-192x192.png", "", ""), (action, "RBB", "", "", URL + "0ed44c2fbb444e41?ch=a7ba657f549573d2&w=360", "", ""), (action, "PHOENIX", "", "", URL + "0740d8e76701b87c?ch=ac815bf512ad7d9b&w=360", "", ""), (action, "RBTV", "", "", "https://upload.wikimedia.org/wikipedia/commons/8/86/Rocket_Beans_RBTV_Logo.png", "", ""), (action, "ORF", "", "", "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/ORF_logo.svg/320px-ORF_logo.svg.png", "", ""), (action, "SRF", "", "", "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Schweizer_Radio_und_Fernsehen_Logo.svg/320px-Schweizer_Radio_und_Fernsehen_Logo.svg.png", "", ""), (action, "ARTE.FR", "", "", URL + "f9195b8bcbeaecc9?ch=fa42703f1b4c20bc&w=360", "", ""), (action, "ARTE.EN", "", "", URL + "f9195b8bcbeaecc9?ch=fa42703f1b4c20bc&w=360", "", ""), (action, "ARTE.ES", "", "", URL + "f9195b8bcbeaecc9?ch=fa42703f1b4c20bc&w=360", "", ""), (action, "ARTE.PL", "", "", URL + "f9195b8bcbeaecc9?ch=fa42703f1b4c20bc&w=360", "", ""), (action, "ARTE.IT", "", "", URL + "f9195b8bcbeaecc9?ch=fa42703f1b4c20bc&w=360", "", "")]
 		self["movielist"].setList(sender)
 		self["movielist"].setIndex(int(index))
 		self.infos()
 
-	def mvw_Suche(self, text):
+	def mvw_Suche(self, text, sender=""):
 		if text:
-			self.HISTORY.append(("MVW_API", (text, "", 1, 100, False), self["movielist"].getIndex()))
-			self.mvw_api(query=text)
+			if self["movielist"].getCurrent()[0] == "MVW_CHANNEL_SEARCH":
+				sender = self["movielist"].getCurrent()[1]
+			self.HISTORY.append(("MVW_API", (text, sender, 1, 100, False), self["movielist"].getIndex()))
+			self.mvw_api(query=text, channel=sender)
 
 	def ok(self):
 		current_item = self["movielist"].getCurrent()
 		action = current_item[0]
 		url = current_item[2]
 		index = self["movielist"].getIndex()
-		if action == "MVW_SUCHE":
+		if action in ("MVW_SUCHE", "MVW_CHANNEL_SEARCH"):
 			self.session.openWithCallback(self.mvw_Suche, VirtualKeyBoard, title="Mediathek Suche")
 		elif action == "MVW_PLAY":
 			self.mvw_cdn(True)
 		else:
 			if action == "MVW_API":
 				self.mvw_api(url[0], url[1], url[2], url[3])
+			elif action == "MVW_SENDER_SUCHE":
+				self.Sender(action="MVW_CHANNEL_SEARCH")
 			elif action == "MVW_SENDER":
 				self.Sender()
 			elif action == "MVW_CHANNEL":
@@ -230,6 +242,8 @@ class Mediathekviewweb(Screen):
 			action, url = self.HISTORY[-1][:2]
 			if action == "MVW_API":
 				self.mvw_api(url[0], url[1], url[2], url[3], index)
+			elif action == "MVW_SENDER_SUCHE":
+				self.Sender(index, "MVW_CHANNEL_SEARCH")
 			elif action == "MVW_SENDER":
 				self.Sender(index)
 			elif action == "MVW_CHANNEL":
@@ -262,6 +276,9 @@ class Mediathekviewweb(Screen):
 			self.session.open(Console, cmdlist=["opkg update && opkg install ffmpeg"])
 
 	def mvw_cdn(self, play=False):
+		if self.dl_file:
+			self.session.openWithCallback(self.dl_Stop, MessageBox, "möchten Sie den Download abbrechen?", default=True, type=MessageBox.TYPE_YESNO)
+			return
 		if isinstance(self["movielist"].getCurrent()[2], list):
 			url = self["movielist"].getCurrent()[2]
 			if play:
@@ -272,9 +289,6 @@ class Mediathekviewweb(Screen):
 			else:
 				if not path.exists("/usr/bin/ffmpeg"):
 					self.session.openWithCallback(self.ffmpegsetup, MessageBox, "Zum Download benötigen Sie ffmpeg installieren?")
-					return
-				if self.dl_file:
-					self.session.openWithCallback(self.dl_Stop, MessageBox, "möchten Sie den Download abbrechen?", default=True, type=MessageBox.TYPE_YESNO)
 					return
 				self.session.openWithCallback(self.dl_start, Choicebox, title="Download starten?", list=url)
 
@@ -479,13 +493,15 @@ class ConfigScreen(ConfigListScreen, Screen):
 		Screen.__init__(self, session)
 		ConfigListScreen.__init__(self, [])
 		self.skin = readskin("Filesetup").replace("{name}", "config")
+		self.skinName = "mvwConfigScreen_org" if config.plugins.MVW.INTSKIN.value else "mvwConfigScreen"
 		self["PluginName"] = ScrollLabel("Einstellungen")
 		self["key_red"] = StaticText("Abbrechen")
 		self["key_green"] = StaticText("Speichern")
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"], {"cancel": self.cancel, "red": self.cancel, "ok": self.ok, "green": self.save}, -2)
-		self.list = [getConfigListEntry("Skin", config.plugins.MVW.SkinColor), getConfigListEntry("Download-Verzeichnis:", config.plugins.MVW.savetopath), getConfigListEntry("Untertitle Downloaden", config.plugins.MVW.UT_DL), getConfigListEntry("Cover Downloaden", config.plugins.MVW.COVER_DL), getConfigListEntry("Handlung Downloaden", config.plugins.MVW.DESC), getConfigListEntry("AutoPlay Beste Qualität", config.plugins.MVW.AUTOPLAY)]
+		self.list = [("Skin", config.plugins.MVW.SkinColor), ("Download-Verzeichnis:", config.plugins.MVW.savetopath), ("Zukünftige Einträge anzeigen", config.plugins.MVW.FUTURE), ("Untertitel Downloaden", config.plugins.MVW.UT_DL), ("Cover Downloaden", config.plugins.MVW.COVER_DL), ("Handlung Downloaden", config.plugins.MVW.DESC), ("AutoPlay Beste Qualität", config.plugins.MVW.AUTOPLAY), ("Interne Skins benutzen", config.plugins.MVW.INTSKIN)]
+
 		if hasattr(InfoBarGenerics, "setResumePoint"):
-			self.list.append(getConfigListEntry("Letzte Abspielposition speichern", config.plugins.MVW.SaveResumePoint))
+			self.list.append(("Letzte Abspielposition speichern", config.plugins.MVW.SaveResumePoint))
 		self["config"].list = self.list
 
 	def save(self):
@@ -513,6 +529,7 @@ class Browser(Screen):
 		Screen.__init__(self, session)
 		self["PluginName"] = ScrollLabel("FileBrowser")
 		self.skin = readskin("Filesetup").replace("{name}", "filelist")
+		self.skinName = "mvwFileBrowser_org" if config.plugins.MVW.INTSKIN.value else "mvwFileBrowser"
 		self["key_red"] = StaticText("Abbrechen")
 		self["key_green"] = StaticText("Speichern")
 		if not path.exists(dldir):
@@ -539,7 +556,7 @@ class Choicebox(ChoiceBox):
 		ChoiceBox.__init__(self, session, title, list)
 		self["PluginName"] = ScrollLabel(title)
 		self.skin = readskin("Filesetup").replace("{name}", "list")
-		self.skinName = "Filesetup"
+		self.skinName = "mvwChoiceBox_org" if config.plugins.MVW.INTSKIN.value else "mvwChoiceBox"
 		self["key_red"] = StaticText("Abbrechen")
 		self["key_green"] = StaticText("Download" if "Dow" in title else "Play")
 
