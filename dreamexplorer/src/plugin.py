@@ -531,11 +531,11 @@ class DreamExplorerII(Screen):
 			return
 		if not (self["filelist"].canDescent()):
 			DELfilename = self["filelist"].getCurrentDirectory() + self["filelist"].getFilename()
-			dei = self.session.openWithCallback(self.callbackExecDelete, MessageBox, _("Do you realy want to DELETE:\n" + DELfilename), MessageBox.TYPE_YESNO)
+			dei = self.session.openWithCallback(self.callbackExecDelete, MessageBox, _("Do you really want to DELETE:\n" + DELfilename), MessageBox.TYPE_YESNO)
 			dei.setTitle(_("Dream-Explorer - DELETE file..."))
 		elif (self["filelist"].getSelectionIndex() != 0) and (self["filelist"].canDescent()):
 			DELDIR = self["filelist"].getSelection()[0]
-			dei = self.session.openWithCallback(self.callbackDelDir, MessageBox, _("Do you realy want to DELETE:\n" + DELDIR + '\n\nYou do it at your own risk!'), MessageBox.TYPE_YESNO)
+			dei = self.session.openWithCallback(self.callbackDelDir, MessageBox, _("Do you really want to DELETE:\n" + DELDIR + '\n\nYou do it at your own risk!'), MessageBox.TYPE_YESNO)
 			dei.setTitle(_("Dream-Explorer - DELETE DIRECTORY..."))
 
 	def callbackExecDelete(self, answer):
