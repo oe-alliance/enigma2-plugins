@@ -143,7 +143,6 @@ def downloadPicfile(url, picfile, resize=None, fixedname=None, callback=None):
 	if url and picfile:
 		try:
 			header = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/116.0", "Accept": "text/xml"}
-			url = url.encode("ascii", "xmlcharrefreplace").decode().replace(" ", "%20").replace("\n", "").replace("http://", "https://")
 			response = get(url, headers=header, timeout=(3.05, 6))
 			response.raise_for_status()
 			picfile = picfile.replace("jpeg", ".jpg")
@@ -642,7 +641,7 @@ class RSS_FeedView(RSSBaseView):  # Shows a RSS-Feed
 	def updateTitle(self):
 		self.buildSkinList()
 		self.updateInfo()
-		logopng = join(TEMPPATH, NEWSLOGO) if self.feed.title == _("New Items") else join(TEMPPATH, NOLOGO)
+		logopng = join(TEMPPATH, NEWSLOGO) if self.feed and self.feed.title == _("New Items") else join(TEMPPATH, NOLOGO)
 		if self.feed and self.feed.logoUrl:
 			logofile = url2filename(self.feed.logoUrl, forcepng=True)
 			if isExtensionSupported(logofile):
@@ -988,11 +987,11 @@ class RSSPoller:  # Keeps all Feed and takes care of (automatic) updates
 				feeduri = feeduri.encode("ascii", "xmlcharrefreplace").decode().replace(" ", "%20").replace("\n", "")
 				response = get(feeduri, headers=header, timeout=(3.05, 6))
 				response.raise_for_status()
-				xmlData = response.content
+				xmldata = response.content
 				response.close()
 				try:
-					if xmlData:
-						self.gotPage(xmlData)
+					if xmldata:
+						self.gotPage(xmldata)
 					else:
 						print("[%s] ERROR in module 'pollXml': server access failed, no xml-data found." % MODULE_NAME)
 				except Exception as err:
@@ -1125,15 +1124,16 @@ class RSSEntryWrapper(ElementWrapper):
 			for elem in self._element.findall("%senclosure" % self._ns):
 				myl.append((elem.get("url"), elem.get("type"), elem.get("length")))
 			for elem in self._element.findall("%sdescription" % self._ns):  # alternative #1: search for enclosures
-				res = search(r'src="(.*?)"', elem.text)  # perhaps not the most elegant way but it works
-				if res:
-					url = res.group(1)
-					myl.append((url, EXT2MIME.get(cleanupUrl(url[url.rfind("."):]), "unknown"), "0"))  # create missing MIME type
-				else:  # alternative #2: search for enclosures. HINT: tag '<content:encoded>' can't be found by self._element.findall()
-					res = search(r'src="(.*?)"', tostring(self._element).decode())  # quick'n'dirty but it works
+				if elem.text:
+					res = search(r'src="(.*?)"', elem.text)  # perhaps not the most elegant way but it works
 					if res:
 						url = res.group(1)
-						myl.append((url, EXT2MIME.get(cleanupUrl(url[url.rfind("."):]), "unknown"), "0"))
+						myl.append((url, EXT2MIME.get(cleanupUrl(url[url.rfind("."):]), "unknown"), "0"))  # create missing MIME type
+					else:  # alternative #2: search for enclosures. HINT: tag '<content:encoded>' can't be found by self._element.findall()
+						res = search(r'src="(.*?)"', tostring(self._element).decode())  # quick'n'dirty but it works
+						if res:
+							url = res.group(1)
+							myl.append((url, EXT2MIME.get(cleanupUrl(url[url.rfind("."):]), "unknown"), "0"))
 			for elem in self._element.findall("%simage" % self._ns):  # alternative #3: search for enclosures
 				url = elem.text
 				myl.append((url, EXT2MIME.get(cleanupUrl(url[url.rfind("."):]), "unknown"), "0"))  # create missing MIME type
