@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-06-25 08:17+0100\n"
-"PO-Revision-Date: 2022-12-01 12:43+0200\n"
+"PO-Revision-Date: 2024-03-31 22:23+0300\n"
 "Last-Translator: Orlandox\n"
 "Language-Team: Samzan/Kojo/Orlandox\n"
 "Language: fi\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 msgid " as "
 msgstr " roolissa "
@@ -77,7 +77,7 @@ msgid "Genre:"
 msgstr "Tyylilaji:"
 
 msgid "IMDb Details parsed"
-msgstr "Elokuvan IMDb tiedot"
+msgstr "IMDb tiedot jäsennettynä"
 
 msgid "IMDb Download completed"
 msgstr "IMDb lataus valmis"
@@ -204,11 +204,8 @@ msgstr "Näytä elokuvan tai sarjan koko nimi otsikkovalikossa"
 msgid "Show in movie list"
 msgstr "Näytä tallenne-hakemistossa"
 
-msgid "Show list of matched movies an series"
+msgid "Show list of matched movies and series"
 msgstr "Näytä osuvimmat elokuvat ja sarjat"
-
-msgid "Show movie and series basic details"
-msgstr "Näytä elokuvien ja sarjojen perustiedot"
 
 msgid "Show movie and series extra details"
 msgstr "Näytä elokuvien ja sarjojen lisätiedot"
@@ -260,3 +257,21 @@ msgstr "Näytä isompi juliste"
 
 msgid "Show movie and series synopsis"
 msgstr "Näytä elokuvan ja sarjan tiivistelmä"
+
+msgid "Show first page of user reviews"
+msgstr "Näytä käyttäjien arvostelujen ensimmäinen sivu"
+
+msgid "Parsing reviews..."
+msgstr "Jäsentää arvosteluja..."
+
+msgid "IMDb Reviews parsed"
+msgstr "IMDb-arvostelut jäsennetty"
+
+msgid "Downloading reviews..."
+msgstr "Ladataan arvosteluja..."
+
+msgid "Synopsis"
+msgstr "Tiivistelmä"
+
+msgid "User reviews"
+msgstr "Käyttäjäarvostelut"
