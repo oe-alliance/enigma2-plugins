@@ -770,11 +770,8 @@ class EPGExport(Screen):
 		if config.plugins.epgexport.server.value != "none":
 			picon_file = getPiconName(service)
 			if picon_file:
-				if config.plugins.epgexport.server.value == "ip":
-					host = "%d.%d.%d.%d" % tuple(config.plugins.epgexport.ip.value)
-				else:
-					host = config.plugins.epgexport.hostname.value
-				picon_url = "http://%s:80/picon/%s" % (basename(picon_file), host)
+				host = "%d.%d.%d.%d" % tuple(config.plugins.epgexport.ip.value) if config.plugins.epgexport.server.value == "ip" else config.plugins.epgexport.hostname.value
+				picon_url = "http://%s:80/picon/%s" % (host, basename(picon_file))
 		return picon_url
 
 	def generateChannels(self):
