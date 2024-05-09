@@ -1125,19 +1125,20 @@ class RSSEntryWrapper(ElementWrapper):
 				myl.append((elem.get("url"), elem.get("type"), elem.get("length")))
 			for elem in self._element.findall("%sdescription" % self._ns):  # alternative #1: search for enclosures
 				if elem.text:
-					res = search(r'src="(.*?)"', elem.text)  # perhaps not the most elegant way but it works
+					res = search(r'src="(.*?)"', elem.text)  # search for 'src=', perhaps not the most elegant way but it works
 					if res:
-						url = res.group(1)
+						url = res.group(1).replace("http://", "https://")
 						myl.append((url, EXT2MIME.get(cleanupUrl(url[url.rfind("."):]), "unknown"), "0"))  # create missing MIME type
 					else:  # alternative #2: search for enclosures. HINT: tag '<content:encoded>' can't be found by self._element.findall()
 						res = search(r'src="(.*?)"', tostring(self._element).decode())  # quick'n'dirty but it works
 						if res:
-							url = res.group(1)
+							url = res.group(1).replace("http://", "https://")
 							myl.append((url, EXT2MIME.get(cleanupUrl(url[url.rfind("."):]), "unknown"), "0"))
 			for elem in self._element.findall("%simage" % self._ns):  # alternative #3: search for enclosures
-				url = elem.text
+				url = elem.text.replace("http://", "https://")
 				myl.append((url, EXT2MIME.get(cleanupUrl(url[url.rfind("."):]), "unknown"), "0"))  # create missing MIME type
 			return myl
+
 		elif tag == "id":
 			return self._element.findtext("%sguid" % self._ns, "%s%s" % (self.title, self.link))
 		elif tag == "updated":
