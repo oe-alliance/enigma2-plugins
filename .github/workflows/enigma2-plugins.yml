@@ -39,8 +39,6 @@ jobs:
           pip3 install six
           sed -i '/PKG_CHECK_MODULES(ENIGMA2, enigma2)/d' ./configure.ac
           sed -i '/PKG_CHECK_MODULES(LIBCRYPTO, libcrypto)/d' ./configure.ac
-          sudo cp /usr/include/tirpc/rpc/* /usr/include/rpc/
-          sudo cp /usr/include/tirpc/netconfig.h /usr/include/
           autoreconf -i
           ./configure --without-debug --with-po
           make
