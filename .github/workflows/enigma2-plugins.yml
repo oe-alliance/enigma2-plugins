@@ -9,10 +9,10 @@ on:
 jobs:
   build:
     name: Build enigma2-plugins
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
-        gcc: [11,12,13]
+        gcc: [11,13]
         python: ['3.10','3.11','3.12']
     steps:
       - name: Install prerequisites
@@ -23,11 +23,11 @@ jobs:
           sudo apt remove -y libunwind-14-dev
           sudo apt-get install -y g++-${{ matrix.gcc }} build-essential autoconf autotools-dev gettext python${{ matrix.python }}-dev libntirpc-dev
           
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: 'master'
 
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
 
