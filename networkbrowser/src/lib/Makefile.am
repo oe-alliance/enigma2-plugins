@@ -8,7 +8,6 @@ netscan_la_SOURCES = \
 	errors.h \
 	list.c \
 	list.h \
-	main.c \
 	nbtscan.c \
 	nbtscan.h \
 	range.c \
@@ -20,7 +19,8 @@ netscan_la_SOURCES = \
 	smbinfo.h \
 	statusq.c \
 	statusq.h \
-	time_compat.h
+	time_compat.h \
+	main.c
 
 netscan_la_LDFLAGS = \
 	$(PLUGIN_LIBTOOL_FLAGS)
