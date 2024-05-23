@@ -39,8 +39,33 @@ jobs:
           pip3 install six
           sed -i '/PKG_CHECK_MODULES(ENIGMA2, enigma2)/d' ./configure.ac
           sed -i '/PKG_CHECK_MODULES(LIBCRYPTO, libcrypto)/d' ./configure.ac
-          sudo cp /usr/include/ntirpc/rpc/* /usr/include/rpc/
-          sudo cp /usr/include/ntirpc/netconfig.h /usr/include/
+          sudo ln -s /usr/include/ntirpc/rpc/rpc.h /usr/include/rpc
+          sudo ln -s /usr/include/ntirpc/misc/abstract_atomic.h /usr/include/misc/
+          sudo ln -s /usr/include/ntirpc/netconfig.h /usr/include/misc/
+          sudo ln -s /usr/include/ntirpc/misc/stdio.h /usr/include/misc
+          sudo ln -s /usr/include/ntirpc/intrinsic.h /usr/include
+          sudo ln -s /usr/include/ntirpc/rpc/tirpc_compat.h /usr/include/rpc
+          sudo ln -s /usr/include/ntirpc/rpc/auth.h /usr/include/rpc
+          sudo ln -s /usr/include/ntirpc/rpc/rpc_err.h /usr/include/rpc
+          sudo ln -s /usr/include/ntirpc/rpc/clnt_stat.h /usr/include/rpc
+          sudo ln -s /usr/include/ntirpc/rpc/auth_stat.h /usr/include/rpc
+          sudo ln -s /usr/include/ntirpc/rpc/clnt.h /usr/include/rpc
+          sudo ln -s /usr/include/ntirpc/misc/rbtree.h /usr/include/misc
+          sudo ln -s /usr/include/ntirpc/misc/opr.h /usr/include/misc
+          sudo ln -s /usr/include/ntirpc/misc/wait_queue.h /usr/include/misc
+          sudo ln -s /usr/include/ntirpc/misc/queue.h /usr/include/misc
+          sudo ln -s /usr/include/ntirpc/reentrant.h /usr/include
+          sudo ln -s /usr/include/ntirpc/rpc/svc.h /usr/include/rpc
+          sudo ln -s /usr/include/ntirpc/rpc/rpc_msg.h /usr/include/rpc
+          sudo ln -s /usr/include/ntirpc/rpc/work_pool.h /usr/include/rpc
+          sudo ln -s /usr/include/ntirpc/rpc/pool_queue.h /usr/include/rpc
+          sudo ln -s /usr/include/ntirpc/misc/portable.h /usr/include/misc
+          sudo ln -s /usr/include/ntirpc/misc/timespec.h /usr/include/misc
+          sudo ln -s /usr/include/ntirpc/misc/os_epoll.h /usr/include/misc
+          sudo ln -s /usr/include/ntirpc/rpc/auth_unix.h /usr/include/rpc
+          sudo ln -s /usr/include/ntirpc/rpc/rpcb_clnt.h /usr/include/rpc
+          sudo ln -s /usr/include/ntirpc/rpc/rpcb_prot.h /usr/include/rpc
+          sudo ln -s /usr/include/ntirpc/rpc/rpcent.h /usr/include/rpc
           autoreconf -i
           ./configure --without-debug --with-po
           make
