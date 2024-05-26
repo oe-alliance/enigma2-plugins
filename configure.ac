@@ -97,6 +97,7 @@ AM_CONDITIONAL(XC7346, test "$BOXTYPE" == xc7346)
 AM_CONDITIONAL(XP1000, test "$BOXTYPE" == xp1000)
 
 AM_CONDITIONAL(REMOTETIMER2, test `echo "$DISTRO" | cut -b 1-7` == "openatv")
+AM_CONDITIONAL(PARTNERBOX2, test `echo "$DISTRO" | cut -b 1-7` == "openatv")
 
 PKG_CHECK_MODULES(ENIGMA2, enigma2)
 PKG_CHECK_MODULES(LIBCRYPTO, libcrypto)
@@ -564,6 +565,10 @@ partnerbox/po/Makefile
 partnerbox/src/Makefile
 partnerbox/src/icons/Makefile
 partnerbox/src/buttons/Makefile
+
+partnerbox2/Makefile
+partnerbox2/po/Makefile
+partnerbox2/src/Makefile
 
 permanentclock/Makefile
 permanentclock/meta/Makefile

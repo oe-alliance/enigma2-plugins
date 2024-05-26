@@ -59,7 +59,6 @@ SUBDIRS = \
 	ofdb \
 	orfat \
 	orfteletext \
-	partnerbox \
 	permanentclock \
 	pipservicerelation \
 	podcast \
@@ -141,9 +140,15 @@ SUBDIRS += networkbrowser epgsearch
 endif
 
 if REMOTETIMER2
-SUBDIRS += 	remotetimer2
+SUBDIRS += remotetimer2
 else
-SUBDIRS += 	remotetimer
+SUBDIRS += remotetimer
+endif
+
+if PARTNERBOX2
+SUBDIRS += partnerbox2
+else
+SUBDIRS += partnerbox
 endif
 
 SUBDIRS += tetris ardmediathek netzkino Series2Folder srfmediathek epgexport mediathekviewweb

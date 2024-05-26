@@ -1,0 +1,432 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Partnerbox\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-26 16:56+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
+"Language-Team: Dr. Best <dr.best@dreambox-tools.info>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Generator: Poedit 3.4.4\n"
+
+#: plugin.py:81
+#, python-format
+msgid "%d Hour"
+msgid_plural "%d Hours"
+msgstr[0] "%d Stunde"
+msgstr[1] "%d Stunden"
+
+#: plugin.py:81
+#, python-format
+msgid "%d Minutes"
+msgstr "%d Minuten"
+
+#: plugin.py:1417
+msgid "Activate Picture in Picture"
+msgstr "Aktiviere Bild im Bild"
+
+#: plugin.py:1598
+msgid "Add"
+msgstr "Hinzufügen"
+
+#: plugin.py:2006
+msgid "Add Partnerbox Bouquets"
+msgstr "Partnerbox Bouquets hinzufügen"
+
+#: plugin.py:2002
+msgid "Add Partnerbox Channels"
+msgstr "Partnerbox Kanäle hinzufügen"
+
+#: plugin.py:2011
+msgid "Alternative bouquets/services are not supported!"
+msgstr "Alternative Bouquets/Kanäle werden nicht unterstützt!"
+
+#: plugin.py:969
+msgid "Attention, this is a repeated timer!\n"
+msgstr ""
+"Achtung, dies ist ein wiederholender Timer!\n"
+"\n"
+
+#: plugin.py:2062
+#, python-format
+msgid "Bouquet '%s' successfully added from '%s'."
+msgstr "Bouquet '%s' erfolgreich von '%s' hinzugefügt."
+
+#: plugin.py:1671
+msgid "Box was successfully removed!"
+msgstr "Die Box wurde erfolgreich entfernt!"
+
+#: plugin.py:1704 plugin.py:1707
+msgid "Boxsearch"
+msgstr "Boxsuche"
+
+#: plugin.py:1105
+#, python-format
+msgid "Channel list from: %s"
+msgstr "Kanalliste von: %s"
+
+#: plugin.py:1419
+msgid "Choose action:"
+msgstr "Wähle Aktion:"
+
+#: plugin.py:1006
+msgid "Clean up (delete) all completed timers?"
+msgstr "Alle abgeschlossenen Timer bereinigen (löschen)?"
+
+#: setup.xml
+msgid "Define the interval for downloading the RemoteTimer list."
+msgstr "Definiere das Intervall für die RemoteTimer-Liste."
+
+#: plugin.py:1600
+msgid "Delete"
+msgstr "Löschen"
+
+#: plugin.py:1414
+msgid "Disable Picture in Picture"
+msgstr "Deaktiviere Bild im Bild"
+
+#: plugin.py:1954
+msgid "Disable Timer"
+msgstr "Timer ausschalten"
+
+#: plugin.py:1659
+msgid "Do you really want to remove this partnerbox from list?"
+msgstr "Möchten Sie diese Partnerbox wirklich von der Liste entfernen?"
+
+#: plugin.py:1550 plugin.py:1558
+msgid "EPG refresh"
+msgstr "EPG-Aktualisierung"
+
+#: setup.xml
+msgid "Enable Debuglog *"
+msgstr "Debuglog einschalten *"
+
+#: setup.xml
+msgid "Enable Partnerbox in Channel Selection *"
+msgstr "Partnerbox in der Kanalauswahl aktivieren *"
+
+#: setup.xml
+msgid "Enable Partnerbox in EPG *"
+msgstr "Partnerbox im EPG aktivieren *"
+
+#: plugin.py:1954
+msgid "Enable Timer"
+msgstr "Timer einschalten"
+
+#: setup.xml
+msgid "Enables Partnerbox functions in Channel Selection."
+msgstr "Aktiviert die Partnerbox-Funktionen in der Kanalauswahl."
+
+#: setup.xml
+msgid "Enables Partnerbox functions in local Electronic Program Guide."
+msgstr ""
+"Aktiviert die Partnerbox-Funktionen im lokalen elektronischen Programmführer."
+
+#: plugin.py:1139
+msgid "Getting channel information..."
+msgstr "Kanalinformationen abrufen..."
+
+#: plugin.py:1154
+msgid "Give Enigma time to fill epg cache..."
+msgstr "Gebe Enigma Zeit um EPG zu füllen..."
+
+#: setup.xml
+msgid "IP"
+msgstr "IP"
+
+#: setup.xml
+msgid "IP address of the Remote Box to log in."
+msgstr "IP-Adresse der Remote Box zum Einloggen."
+
+#: setup.xml
+msgid "Load RemoteTimers *"
+msgstr "RemoteTimer laden *"
+
+#: plugin.py:1618
+msgid "Loading partnerboxes"
+msgstr "Partnerboxen laden"
+
+#: plugin.py:776
+msgid "Local box"
+msgstr "Lokale Box"
+
+#: plugin.py:2181
+msgid "Manage timer for other boxes in network"
+msgstr "Timer für andere Boxen im Netzwerk verwalten"
+
+#: plugin.py:1421
+msgid "Menu PiP"
+msgstr "Menü PiP"
+
+#: plugin.py:1412
+msgid "Move Picture in Picture"
+msgstr "Verschiebe Bild im Bild"
+
+#: setup.xml
+msgid "Name"
+msgstr "Name"
+
+#: setup.xml
+msgid "Name of the Remote Box (freely selectable)."
+msgstr "Name der Remote Box (frei wählbar)."
+
+#: plugin.py:645
+msgid "No description available"
+msgstr "Keine Beschreibung verfügbar"
+
+#: plugin.py:962 plugin.py:1836
+msgid "No message from box received."
+msgstr "Keine Nachricht von der Box erhalten."
+
+#: plugin.py:637
+msgid "No name available"
+msgstr "Kein Name verfügbar"
+
+#: plugin.py:654
+msgid "No servicename available"
+msgstr "Kein Servicename verfügbar"
+
+#: plugin.py:634
+msgid "No servicereference available"
+msgstr "Keine Servicereferenz verfügbar"
+
+#: plugin.py:2191
+msgid "Partnerbox"
+msgstr "Partnerbox"
+
+#: setup.xml
+msgid "Partnerbox Config"
+msgstr "Partnerbox-Konfiguration"
+
+#: plugin.py:1708
+msgid "Partnerbox Entry Actions"
+msgstr "Partnerbox Einträge"
+
+#: setup.xml
+msgid "Partnerbox Setup"
+msgstr "Partnerbox Setup"
+
+#: plugin.py:1551
+msgid "Partnerbox Setup Actions"
+msgstr "Partnerbox Einstellungen"
+
+#: plugin.py:1549
+msgid "Partnerbox entries"
+msgstr "Partnerbox-Einträge"
+
+#: plugin.py:2017
+msgid ""
+"Partnerbox is currently streaming from internet and this cannot be forwarded!"
+msgstr ""
+"Die Partnerbox streamt gerade aus dem Internet und das kann nicht "
+"weitergeleitet werden!"
+
+#: plugin.py:2014
+msgid ""
+"Partnerbox is currently streaming from media and this cannot be forwarded!"
+msgstr ""
+"Die Partnerbox streamt gerade von Medien und das kann nicht weitergeleitet "
+"werden!"
+
+#: plugin.py:1729
+msgid "Partnerbox: Boxes found in network"
+msgstr "Partnerbox: im Netz gefundene Boxen"
+
+#: plugin.py:1596 plugin.py:2026 plugin.py:2108
+msgid "Partnerbox: List of partnerboxes"
+msgstr "Partnerbox: Liste der Partnerboxen"
+
+#: plugin.py:1349
+msgid "Partnerbox: Remote player"
+msgstr "Partnerbox: Remote Player"
+
+#: plugin.py:2188
+msgid "Partnerbox: RemoteTV Player"
+msgstr "Partnerbox: RemoteTV Player"
+
+#: plugin.py:2181
+msgid "Partnerbox: RemoteTimer"
+msgstr "Partnerbox: RemoteTimer"
+
+#: plugin.py:501
+msgid "Partnerbox: Select Bouquet"
+msgstr "Partnerbox: Bouquet auswählen"
+
+#: plugin.py:552
+msgid "Partnerbox: Select Channel"
+msgstr "Partnerbox: Kanal auswählen"
+
+#: plugin.py:1544
+msgid "Partnerbox: Setup"
+msgstr "Partnerbox Setup"
+
+#: plugin.py:2190
+msgid "Partnerbox: Stream current RemoteChannel"
+msgstr "Partnerbox: Aktuellen Remote Kanal streamen"
+
+#: plugin.py:1545
+msgid "Partnerboxes"
+msgstr "Partnerboxen"
+
+#: setup.xml
+msgid "Password"
+msgstr "Passwort"
+
+#: setup.xml
+msgid "Password for the Remote Box to log in.."
+msgstr "Passwort für die Remote Box zum Einloggen."
+
+#: setup.xml
+msgid "Port"
+msgstr "Port"
+
+#: setup.xml
+msgid "Port of the Remote Box to log in."
+msgstr "Port der Remote Box zum Einloggen."
+
+#: plugin.py:957
+msgid "Record timer not added."
+msgstr "Aufnahme-Timer nicht hinzugefügt."
+
+#: plugin.py:995
+msgid "Record timer not updated."
+msgstr "Aufnahme-Timer nicht aktualisiert."
+
+#: setup.xml
+msgid "Refresh remote Electronic Program Guide."
+msgstr "Aktualisieren Sie den lokalen elektronischen Programmführer."
+
+#: setup.xml
+msgid "Refresh remote epg"
+msgstr "Remote-EPG aktualisieren"
+
+#: setup.xml
+msgid "Refresh time"
+msgstr "Aktualisierungszeit"
+
+#: setup.xml
+msgid "Refresh time for downloading the remote Electronic Program Guide."
+msgstr "Aktualisierungszeit für das Herunterladen des Remote EPGs."
+
+#: plugin.py:785
+msgid "Remote box:"
+msgstr "Remote Box:"
+
+#: plugin.py:1745
+msgid "Searching for active and standby boxes in peer-to-peer network..."
+msgstr "Suche nach aktiven und Standby-Boxen im Peer-to-Peer-Netzwerk..."
+
+#: setup.xml
+msgid "Select 'Yes' to enable add debug output to log."
+msgstr "Wählen Sie \"Ja\", um die Debug-Ausgabe in das Protokoll aufzunehmen."
+
+#: plugin.py:1684
+msgid "Select operation for"
+msgstr "Wählen Sie den Vorgang für"
+
+#: plugin.py:866
+msgid "Select the location in which to store the recording:"
+msgstr "Wählen Sie den Ort aus, an dem die Aufnahme gespeichert werden soll:"
+
+#: plugin.py:2052
+#, python-format
+msgid "Service '%s' from '%s' was already added."
+msgstr "Der Kanal '%s' von '%s' wurde bereits hinzugefügt."
+
+#: plugin.py:2050
+#, python-format
+msgid "Service '%s' successfully added from '%s'."
+msgstr "Kanal '%s' erfolgreich von '%s' hinzugefügt."
+
+#: plugin.py:2191
+msgid "Setup for Partnerbox"
+msgstr "Setup für Partnerbox"
+
+#: setup.xml
+msgid "Show 'RemoteTV player' in Extensions Menu *"
+msgstr "Zeige 'RemoteTV-Player' im Erweiterungsmenü *"
+
+#: setup.xml
+msgid "Show 'Stream current Service' in Extensions Menu *"
+msgstr "Zeige 'Aktuellen Remote Kanal streamen' im Erweiterungsmenü *"
+
+#: setup.xml
+msgid "Show Partnerbox function 'RemoteTV player' in Extensions Menu."
+msgstr ""
+"Zeigen Sie die Partnerbox-Funktion 'RemoteTV-Player' im Erweiterungsmenü an."
+
+#: setup.xml
+msgid "Show Partnerbox function 'Stream current service' in Extensions Menu."
+msgstr ""
+"Zeige die Partnerbox-Funktion 'Aktuellen Remote Kanal streamen' im "
+"Erweiterungsmenü an."
+
+#: plugin.py:2188
+msgid "Stream TV from your partnerbox"
+msgstr "TV-Sendung der Partnerbox streamen"
+
+#: plugin.py:2190
+msgid "Stream current channel from partnerbox"
+msgstr "Aktuelle Sendung der Partnerbox streamen"
+
+#: plugin.py:1732
+msgid "Take over"
+msgstr "Übernehmen"
+
+#: plugin.py:1778
+msgid "This box is already installed!"
+msgstr "Diese Box ist bereits installiert!"
+
+#: plugin.py:901
+#, python-format
+msgid "Timer overview from: %s"
+msgstr "Timerübersicht von: %s"
+
+#: plugin.py:1682
+msgid "Toggle Standby"
+msgstr "Umschalten auf Standby"
+
+#: plugin.py:52
+msgid "Unexpected error accessing WebIF"
+msgstr "Unerwarteter Fehler beim Zugriff auf WebIF"
+
+#: plugin.py:1731
+msgid "Upper/lower case"
+msgstr "Groß-/Kleinschreibung"
+
+#: plugin.py:1108
+msgid "Zap"
+msgstr "Umschalten"
+
+#: plugin.py:1410
+msgid "Zap focus to Picture in Picture"
+msgstr "Zap führt zu Bild im Bild"
+
+#: plugin.py:1410
+msgid "Zap focus to main screen"
+msgstr "Zap führt zum Hauptbildschirm"
+
+#: setup.xml
+msgid "Zap to service on Remote Box when streaming."
+msgstr "Beim Streamen auf Remote Box zum Service zappen."
+
+#: setup.xml
+msgid "Zap to service when streaming"
+msgstr "Beim Streaming zum Service zappen"
+
+#: plugin.py:1760
+msgid "already installed"
+msgstr "bereits installiert"
+
+#: plugin.py:184 plugin.py:508 plugin.py:509 plugin.py:520 plugin.py:521
+msgid "n/a"
+msgstr "n/v"
+
+#: plugin.py:1760
+msgid "not installed yet"
+msgstr "noch nicht installiert"

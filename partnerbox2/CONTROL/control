@@ -1,0 +1,6 @@
+Package: enigma2-plugin-extensions-partnerbox
+Version: 1.0
+Description: Partnerbox (Remote Bouquets, Channels, Timers and TV Player)
+Maintainer: OpenATV team <forum@opena.tv>
+Homepage: github.com/oe-alliance/enigma2-plugins
+Depends: enigma2, python-twisted-web

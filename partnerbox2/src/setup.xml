@@ -1,0 +1,20 @@
+<setupxml>
+	<setup key="partnerbox" title="Partnerbox Setup">
+		<item level="0" text="Show 'RemoteTV player' in Extensions Menu *" description="Show Partnerbox function 'RemoteTV player' in Extensions Menu.">config.plugins.Partnerbox.showremotetvinextensionsmenu</item>
+		<item level="0" text="Show 'Stream current Service' in Extensions Menu *" description="Show Partnerbox function 'Stream current service' in Extensions Menu.">config.plugins.Partnerbox.showcurrentstreaminextensionsmenu</item>
+		<item level="0" text="Enable Partnerbox in EPG *" description="Enables Partnerbox functions in local Electronic Program Guide.">config.plugins.Partnerbox.enablepartnerboxepglist</item>
+		<item level="0" text="Enable Partnerbox in Channel Selection *" description="Enables Partnerbox functions in Channel Selection.">config.plugins.Partnerbox.enablepartnerboxchannelselector</item>
+		<item level="0" text="Load RemoteTimers *" description="Define the interval for downloading the RemoteTimer list.">config.plugins.Partnerbox.refreshTimerList</item>
+		<item level="0" text="Enable Debuglog *" description="Select 'Yes' to enable add debug output to log.">config.plugins.Partnerbox.debuglog</item>
+	</setup>
+
+	<setup key="partnerboxconfig" title="Partnerbox Config">
+		<item level="0" text="Name" description="Name of the Remote Box (freely selectable).">self.entry.name</item>
+		<item level="0" text="IP" description="IP address of the Remote Box to log in.">self.entry.ip</item>
+		<item level="0" text="Port" description="Port of the Remote Box to log in.">self.entry.port</item>
+		<item level="0" text="Password" description="Password for the Remote Box to log in..">self.entry.password</item>
+		<item level="0" text="Zap to service when streaming" description="Zap to service on Remote Box when streaming.">self.entry.zaptoservicewhenstreaming</item>
+		<item level="0" text="Refresh remote epg" description="Refresh remote Electronic Program Guide.">self.entry.epg</item>
+		<item level="0" text="Refresh time" description="Refresh time for downloading the remote Electronic Program Guide." conditional="self.entry.epg.value">self.entry.epgtime</item>
+	</setup>
+</setupxml>
