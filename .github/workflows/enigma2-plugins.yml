@@ -39,7 +39,7 @@ jobs:
           pip3 install six
           sed -i '/PKG_CHECK_MODULES(ENIGMA2, enigma2)/d' ./configure.ac
           sed -i '/PKG_CHECK_MODULES(LIBCRYPTO, libcrypto)/d' ./configure.ac
-          sed -i '/networkbrowser/src/lib/Makefile/d' ./configure.ac
+          sed -i '/networkbrowser\/src\/lib\/Makefile/d' ./configure.ac
           sudo cp /usr/include/ntirpc/rpc/* /usr/include/rpc/
           sudo cp /usr/include/ntirpc/netconfig.h /usr/include/
           sudo cp /usr/include/ntirpc/intrinsic.h /usr/include/
