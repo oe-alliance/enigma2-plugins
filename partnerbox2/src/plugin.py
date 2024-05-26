@@ -1067,7 +1067,7 @@ class RemoteChannelList(Screen, PartnerboxGlobals):
 			</widget>
 			<widget source="menulist" render="Listbox" position="23,60" size="780,600" scrollbarMode="showOnDemand" foregroundColor="white" backgroundColor="#50a1232" zPosition="1" transparent="1">
   				<convert type="TemplatedMultiContent">
-					{"template": 
+					{"template":
 						[  # indexlist:rawdata, sname, title, progress, timeline, btimestr, etimestr, dtimestr, rest
 						MultiContentEntryText(pos=(5,2), size=(160,24), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=1), # servicename
 						MultiContentEntryText(pos=(180,2), size=(570,24), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_ELLIPSIS, text=2), # title
