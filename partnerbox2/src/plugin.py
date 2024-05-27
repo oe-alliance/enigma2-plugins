@@ -123,25 +123,35 @@ def logDebug(message):
 		print(f"[{MODULE_NAME}-DEBUG] {str(message)}")
 
 
+def getIPString(configentry):
+	return ".".join([str(x) for x in configentry.ip.value])
+
+
+def getBaseUrl(configentry):
+	return f"http://{getIPString(configentry)}:{configentry.port.value}"
+
+
 def getRefstrIpPort(sref):
 	ip = getIPfromSref(str(sref))
 	port = None
+	baseUrl = None
 	reflist = str(sref).split(':')[:11]
 	refstr = f"{':'.join(reflist[:10])}:"
 	if ip and "http" in reflist[10]:  # remote sref
 		for configentry in config.plugins.Partnerbox.Entries:
-			if ip == "%s.%s.%s.%s" % tuple(configentry.ip.value):
+			if ip == getIPString(configentry):
 				port = str(configentry.port.value)
+				baseUrl = f"http://{ip}:{port}"
 				break
 		if not port:
 			logError("getRefstrIpPort", f"IP ({ip}) is not listed in Partnerbox settings.")
-	return (refstr, ip, port)
+	return (refstr, ip, port, baseUrl)
 
 
 def getIndexFromSref(sref):
 	index = -1  # local box
 	if str(sref).split(":")[:11][10].lower().startswith("http"):
-		refstr, ip, port = getRefstrIpPort(sref)
+		refstr, ip, port, baseUrl = getRefstrIpPort(sref)
 		if port and ip:
 			index = getIndexFromIp(ip)
 	return index
@@ -161,7 +171,7 @@ def getIndexFromIp(ip):
 	if ip:
 		index = None
 		for idx, configentry in enumerate(config.plugins.Partnerbox.Entries):
-			if ip == "%s.%s.%s.%s" % tuple(configentry.ip.value):
+			if ip == getIPString(configentry):
 				index = idx
 				break
 		if index is None:
@@ -187,8 +197,8 @@ class PartnerboxGlobals:
 	def __init__(self, session):
 		self.session = session
 
-	def loadExternalEPGlist(self, sref, ipport, password, callback):
-		cmd = f"http://{ipport}/api/epgnow?bRef={sref}&showstreamrelay=1"
+	def loadExternalEPGlist(self, sref, baseUrl, password, callback):
+		cmd = f"{baseUrl}/api/epgnow?bRef={sref}&showstreamrelay=1"
 		sendAPIcommand(cmd, password).addCallback(self.loadExternalEPGlistCallback, callback).addErrback(self.loadExternalEPGlistError)
 
 	def loadExternalEPGlistCallback(self, jsondict, callback):
@@ -308,8 +318,7 @@ class TimerListTask(Task, PartnerboxGlobals):
 	def work(self):
 		configentry = config.plugins.Partnerbox.Entries[self.index]
 		password = configentry.password.value
-		ip = "%s.%s.%s.%s" % tuple(configentry.ip.value)
-		url = f"http://{ip}:{configentry.port.value}/api/timerlist"
+		url = f"{getBaseUrl(configentry)}/api/timerlist"
 		auth = ("root", password) if password else None
 		try:
 			response = get(url, headers={}, auth=auth, timeout=(3.05, 3), verify=False)
@@ -343,8 +352,7 @@ class EPGTask(Task):
 	def work(self):
 		configentry = config.plugins.Partnerbox.Entries[self.index]
 		password = configentry.password.value
-		ip = "%s.%s.%s.%s" % tuple(configentry.ip.value)
-		url = f"http://{ip}:{configentry.port.value}/api/epgservice?sRef={self.sref}&endTime=1440"
+		url = f"{getBaseUrl(configentry)}/api/epgservice?sRef={self.sref}&endTime=1440"
 		auth = ("root", password) if password else None
 		try:
 			response = get(url, headers={}, auth=auth, timeout=(3.05, 3), verify=False)
@@ -511,9 +519,8 @@ class BouquetChoiceBox(ChoiceBox, PartnerboxGlobals):
 		self.bouquetlist = []
 		self.servicelist = []
 		print(f"[BouquetChoiceBox] DEBUG ip='{configentry.ip.value}' port='{configentry.port.value}'")
-		ip = "%s.%s.%s.%s" % tuple(configentry.ip.value)
 		ChoiceBox.__init__(self, session, choiceList=[("", ""), ("", "")])
-		self.cmd = f"http://{ip}:{configentry.port.value}/api/getservices"
+		self.cmd = f"{getBaseUrl(configentry)}/api/getservices"
 
 	def layoutFinished(self):
 		ChoiceBox.layoutFinished(self)
@@ -579,7 +586,7 @@ class BouquetChoiceBox(ChoiceBox, PartnerboxGlobals):
 
 
 def setPartnerboxService(self, item, configentry):
-	ip = "%s.%s.%s.%s" % tuple(configentry.ip.value)
+	ip = getIPString(configentry)
 	service = eServiceReference(item.sref)
 	refstr = ":".join(item.sref.split(":")[:11])
 	streamPort = 17999 if item.streamrelay else 8001
@@ -728,10 +735,9 @@ class CurrentRemoteTV(Screen, PartnerboxGlobals):
 		Screen.__init__(self, session)
 		self.oldService = self.session.nav.getCurrentlyPlayingServiceReference()
 		self.password = configentry.password.value
-		ip = "%s.%s.%s.%s" % tuple(configentry.ip.value)
+		ip = getIPString(configentry)
 		self.streamurl = f"http://{ip}:8001/"
-		self.ipport = f"{ip}:{configentry.port.value}"
-		cmd = f"http://{self.ipport}/api/getcurrent"
+		cmd = f"{getBaseUrl(configentry)}/api/getcurrent"
 		sendAPIcommand(cmd, self.password).addCallback(self.remotePlayerCallback).addErrback(self.remotePlayerError)
 
 	def remotePlayerCallback(self, jsondict):
@@ -912,9 +918,8 @@ class RemoteTimerOverview(RecordTimerOverview, PartnerboxGlobals):  # subclass f
 		self.tags = []
 		self.default = None
 		self.password = configentry.password.value
-		ip = "%s.%s.%s.%s" % tuple(configentry.ip.value)
 		self.index = configentry.index.value
-		self.ipport = f"{ip}:{configentry.port.value}"
+		self.baseUrl = getBaseUrl(configentry)
 		RecordTimerOverview.__init__(self, session)
 		self["key_green"].setText("")
 		self["addActions"].setEnabled(False)
@@ -925,7 +930,7 @@ class RemoteTimerOverview(RecordTimerOverview, PartnerboxGlobals):  # subclass f
 
 ### UPDATE TIMERLIST ###
 	def updateTimerlist(self):
-		cmd = f"http://{self.ipport}/api/timerlist"
+		cmd = f"{self.baseUrl}/api/timerlist"
 		sendAPIcommand(cmd, self.password).addCallback(self.updateTimerlistCallback).addErrback(self.updateTimerlistError)
 
 	def updateTimerlistCallback(self, jsondict):
@@ -971,7 +976,7 @@ class RemoteTimerOverview(RecordTimerOverview, PartnerboxGlobals):  # subclass f
 		if answer and answer[0]:
 			edata = answer[1]
 			entry = PBtimer(timer=edata)
-			cmd = f"http://{self.ipport}/api/timeradd?sRef={entry.service_ref}{entry.timerurldata()}"
+			cmd = f"{self.baseUrl}/api/timeradd?sRef={entry.service_ref}{entry.timerurldata()}"
 			sendAPIcommand(cmd, self.password).addCallback(self.timerDownloadCallback).addErrback(self.timerDownloadError)
 		else:
 			logUserInfo(self.session, _("Record timer not added."), log=False)
@@ -993,7 +998,7 @@ class RemoteTimerOverview(RecordTimerOverview, PartnerboxGlobals):  # subclass f
 		if answer:
 			current = self["timerlist"].getCurrent()
 			if current:
-				cmd = f"http://{self.ipport}/api/timerdelete?sRef={current.service_ref}&begin={current.begin}&end={current.end}"
+				cmd = f"{self.baseUrl}/api/timerdelete?sRef={current.service_ref}&begin={current.begin}&end={current.end}"
 				sendAPIcommand(cmd, self.password).addCallback(self.timerDownloadCallback).addErrback(self.timerDownloadError)
 
 ### EDIT TIMER ###
@@ -1009,7 +1014,7 @@ class RemoteTimerOverview(RecordTimerOverview, PartnerboxGlobals):  # subclass f
 		if result and result[0]:
 			edata = result[1]
 			entry = PBtimer(timer=edata)
-			cmd = f"http://{self.ipport}/api/timerchange?sRef={entry.service_ref}{entry.timerurldata()}&channelOld={self.oldsref}&beginOld={self.oldbegin}&endOld={self.oldend}"
+			cmd = f"{self.baseUrl}/api/timerchange?sRef={entry.service_ref}{entry.timerurldata()}&channelOld={self.oldsref}&beginOld={self.oldbegin}&endOld={self.oldend}"
 			sendAPIcommand(cmd, self.password).addCallback(self.timerDownloadCallback).addErrback(self.timerDownloadError)
 		# else:
 		# 	logUserInfo(self.session, _("Record timer not updated."))
@@ -1018,7 +1023,7 @@ class RemoteTimerOverview(RecordTimerOverview, PartnerboxGlobals):  # subclass f
 	def toggleTimer(self):
 		current = self["timerlist"].getCurrent()
 		if current:
-			cmd = f"http://{self.ipport}/api/timertogglestatus?sRef={current.service_ref}&begin={current.begin}&end={current.end}"
+			cmd = f"{self.baseUrl}/api/timertogglestatus?sRef={current.service_ref}&begin={current.begin}&end={current.end}"
 			sendAPIcommand(cmd, self.password).addCallback(self.timerDownloadCallback).addErrback(self.timerDownloadError)
 
 ### CLEANUP TIMERS ###
@@ -1027,7 +1032,7 @@ class RemoteTimerOverview(RecordTimerOverview, PartnerboxGlobals):  # subclass f
 
 	def cleanupTimersCallback(self, answer):
 		if answer:
-			cmd = f"http://{self.ipport}/api/timercleanup?cleanup=true"
+			cmd = f"{self.baseUrl}/api/timercleanup?cleanup=true"
 			sendAPIcommand(cmd, self.password).addCallback(self.timerDownloadCallback).addErrback(self.timerDownloadError)
 
 	def timerDownloadError(self, error=None):
@@ -1138,10 +1143,9 @@ class RemoteChannelList(Screen, PartnerboxGlobals):
 			"prevBouquet": self.keyPageDown,
 		}, -1)
 		self.password = configentry.password.value
-		ip = "%s.%s.%s.%s" % tuple(configentry.ip.value)
+		ip = getIPString(configentry)
 		self.streamurl = f"http://{ip}:8001/"
-		self.ipport = f"{ip}:{configentry.port.value}"
-#		self.key_green_choice = self.ADD_TIMER # TODO: Soll das weg oder anders gemacht werden?
+		self.baseUrl = getBaseUrl(configentry)
 		self.epgcache = eEPGCache.getInstance()
 		self.mode = self.REMOTE_TIMER_MODE
 		self.oldService = self.session.nav.getCurrentlyPlayingServiceReference()
@@ -1157,7 +1161,7 @@ class RemoteChannelList(Screen, PartnerboxGlobals):
 
 	def updateChannellist(self):
 		self["footnote"].setText(_("Getting channel information..."))
-		self.loadExternalEPGlist(self.sref, self.ipport, self.password, self.loadRTepglistCallback)
+		self.loadExternalEPGlist(self.sref, self.baseUrl, self.password, self.loadRTepglistCallback)
 
 	def loadRTepglistCallback(self, result):
 		self["footnote"].setText("")
@@ -1182,7 +1186,7 @@ class RemoteChannelList(Screen, PartnerboxGlobals):
 			sref = self.zap.get("sref", "")
 			if sref:
 				self["footnote"].setText(f'{_("Zapping to")} {self.zap.get("sname", "")}')
-				cmd = f"http://{self.ipport}/api/zap?sRef={sref}"
+				cmd = f"{self.baseUrl}/api/zap?sRef={sref}"
 				sendAPIcommand(cmd, self.password).addCallback(zapTVCallback)
 
 	def zapTimerFinished(self):
@@ -1369,8 +1373,7 @@ class RemotePlayer(Screen, InfoBarAudioSelection, PartnerboxGlobals):
 		self.setTitle(_("Partnerbox: Remote player"))
 		InfoBarAudioSelection.__init__(self)
 		self.password = configentry.password.value
-		ip = "%s.%s.%s.%s" % tuple(configentry.ip.value)
-		self.ipport = f"{ip}:{configentry.port.value}"
+		self.baseUrl = getBaseUrl(configentry)
 		self["Name"] = StaticText(title)
 		self["Event_Now"] = PBServiceEvent()
 		self["Event_Next"] = PBServiceEvent()
@@ -1411,7 +1414,7 @@ class RemotePlayer(Screen, InfoBarAudioSelection, PartnerboxGlobals):
 		self.isVisible = True
 		idx = config.usage.infobar_timeout.index
 		self.playerBarTimer.start(idx * 1000 if idx else 6 * 1000)
-		cmd = f"http://{self.ipport}/api/epgservicenownext?sRef={self.sref}"
+		cmd = f"{self.baseUrl}/api/epgservicenownext?sRef={self.sref}"
 		sendAPIcommand(cmd, self.password).addCallback(updateEPGinfoCallback).addErrback(updateEPGinfoError)
 
 	def openServiceList(self):
@@ -1708,11 +1711,10 @@ class PartnerboxEntriesListConfigScreen(PartnerboxCommonScreen, PartnerboxGlobal
 			current = self["config"].getCurrent()
 			if current:
 				password = current[1].password.value
-				ip = "%s.%s.%s.%s" % tuple(current[1].ip.value)
-				port = current[1].port.value
+				baseUrl = getBaseUrl(current[1])
 				selection = {0: "4", 1: "5", 2: "3", 3: "2", 4: "0", 5: "1"}.get(choice[1], None)
 				if selection:
-					cmd = f"http://{ip}:{port}/api/powerstate?newstate={selection}"
+					cmd = f"{baseUrl}/api/powerstate?newstate={selection}"
 					sendAPIcommand(cmd, password)
 
 
@@ -1740,7 +1742,7 @@ class PartnerboxEntryConfig(Setup, PartnerboxGlobals):
 		boxname, boxip = result
 		if boxname and boxip:
 			self.entry.name.value = boxname
-			self.entry.ip.value = boxip.split(".")
+			self.entry.ip.value = boxip
 
 
 class PartnerboxBoxSearch(PartnerboxCommonScreen):
@@ -1774,7 +1776,7 @@ class PartnerboxBoxSearch(PartnerboxCommonScreen):
 			if ip and int(ip.split(".")[0]):
 				found = False
 				for configentry in config.plugins.Partnerbox.Entries:
-					if ip == "%s.%s.%s.%s" % tuple(configentry.ip.value):
+					if ip == getIPString(configentry):
 						found = True
 						break
 				foundmsg = _("already installed") if found else _("not installed yet")
@@ -1796,15 +1798,15 @@ class PartnerboxBoxSearch(PartnerboxCommonScreen):
 		current = self["config"].getCurrent()
 		if current[1]:
 			logUserInfo(self.session, _("This box is already installed!"))
-			result = [None, None]
+			result = (None, None)
 		else:
 			entry = current[0].split("\t")
 			iplist = [int(ip) for ip in entry[1].split(".") if ip.isdigit()]
-			result = [entry[0], "%d.%d.%d.%d" % tuple(iplist)] if len(iplist) == 4 else [None, None]
+			result = (entry[0], iplist) if len(iplist) == 4 else (None, None)
 		self.close(result)
 
 	def exit(self):
-		self.close([None, None])
+		self.close((None, None))
 
 
 # RecordTimer override functions
@@ -1889,21 +1891,21 @@ def partnerboxEPGSelectionRecordTimerQuestion(self, manual=False):
 	def actionRemoteTimerFinished(action, answer):
 		if answer and answer[0]:
 			entry = answer[1]
-			refstr, ip, port = getRefstrIpPort(sref)
+			refstr, ip, port, baseUrl = getRefstrIpPort(sref)
 			if ip and port:
 				configentry = config.plugins.Partnerbox.Entries[entry.index]
 				if action == ACTION_ADD:
-					cmd = f"http://{ip}:{port}/api/timeradd?sRef={refstr}{entry.timerurldata()}&returntimer=1"
+					cmd = f"{baseUrl}/api/timeradd?sRef={refstr}{entry.timerurldata()}&returntimer=1"
 					sendAPIcommand(cmd, configentry.password.value).addCallback(boundFunction(actionRemoteTimerEnd, entry, action)).addErrback(boundFunction(actionRemoteTimerError, action))
 				elif action == ACTION_EDIT:
 					entry = PBtimer(timer=entry)
-					cmd = f"http://{ip}:{port}/api/timerchange?sRef={refstr}{entry.timerurldata()}&channelOld={self.oldsref}&beginOld={self.oldbegin}&endOld={self.oldend}&returntimer=1"
+					cmd = f"{baseUrl}/api/timerchange?sRef={refstr}{entry.timerurldata()}&channelOld={self.oldsref}&beginOld={self.oldbegin}&endOld={self.oldend}&returntimer=1"
 					sendAPIcommand(cmd, configentry.password.value).addCallback(boundFunction(actionRemoteTimerEnd, entry, action)).addErrback(boundFunction(actionRemoteTimerError, action))
 				elif action == ACTION_REMOVE:
-					cmd = f"http://{ip}:{port}/api/timerdelete?sRef={refstr}&begin={entry.begin}&end={entry.end}"
+					cmd = f"{baseUrl}/api/timerdelete?sRef={refstr}&begin={entry.begin}&end={entry.end}"
 					sendAPIcommand(cmd, configentry.password.value).addCallback(boundFunction(actionRemoteTimerEnd, entry, action)).addErrback(boundFunction(actionRemoteTimerError, action))
 				elif action == ACTION_TOGGLE:
-					cmd = f"http://{ip}:{port}/api/timertogglestatus?sRef={refstr}&begin={timer.begin}&end={timer.end}"
+					cmd = f"{baseUrl}/api/timertogglestatus?sRef={refstr}&begin={timer.begin}&end={timer.end}"
 					sendAPIcommand(cmd, configentry.password.value).addCallback(boundFunction(actionRemoteTimerEnd, entry, action)).addErrback(boundFunction(actionRemoteTimerError, action))
 
 	def actionRemoteTimerError(action, error):
@@ -2101,7 +2103,7 @@ def getServicePB(service, excludeiptv):
 	if "%" in sref:
 		name = service.getName()
 		for configentry in config.plugins.Partnerbox.Entries:
-			if "%s.%s.%s.%s" % tuple(configentry.ip.value) in sref:
+			if getIPString(configentry) in sref:
 				name = name[:name.rfind("(")].strip()
 				break
 		fields = sref.split(':', 10)[:10]
