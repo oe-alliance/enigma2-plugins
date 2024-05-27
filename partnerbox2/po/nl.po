@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-26 16:56+0200\n"
+"POT-Creation-Date: 2024-05-27 11:34+0200\n"
 "PO-Revision-Date: 2022-03-13 20:23+0100\n"
 "Last-Translator: Snoete\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
@@ -18,69 +18,69 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: plugin.py:81
+#: plugin.py:102
 #, python-format
 msgid "%d Hour"
 msgid_plural "%d Hours"
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin.py:81
+#: plugin.py:102
 #, python-format
 msgid "%d Minutes"
 msgstr ""
 
-#: plugin.py:1417
+#: plugin.py:1437
 msgid "Activate Picture in Picture"
 msgstr "Activeer Picture in Picture"
 
-#: plugin.py:1598
+#: plugin.py:1618
 msgid "Add"
 msgstr "Toevoegen"
 
-#: plugin.py:2006
+#: plugin.py:2026
 #, fuzzy
 msgid "Add Partnerbox Bouquets"
 msgstr "Favorietenlijst van een Partnerbox toevoegen"
 
-#: plugin.py:2002
+#: plugin.py:2022
 #, fuzzy
 msgid "Add Partnerbox Channels"
 msgstr "Partnerbox ontvangers"
 
-#: plugin.py:2011
+#: plugin.py:2031
 #, fuzzy
 msgid "Alternative bouquets/services are not supported!"
 msgstr "Alternatieve zenders worden niet ondersteund!"
 
-#: plugin.py:969
+#: plugin.py:989
 #, fuzzy
 msgid "Attention, this is a repeated timer!\n"
 msgstr "Let op, dit is een herhalende timer!\n"
 
-#: plugin.py:2062
+#: plugin.py:2082
 #, python-format
 msgid "Bouquet '%s' successfully added from '%s'."
 msgstr ""
 
-#: plugin.py:1671
+#: plugin.py:1691
 msgid "Box was successfully removed!"
 msgstr ""
 
-#: plugin.py:1704 plugin.py:1707
+#: plugin.py:1724 plugin.py:1727
 msgid "Boxsearch"
 msgstr ""
 
-#: plugin.py:1105
+#: plugin.py:1125
 #, python-format
 msgid "Channel list from: %s"
 msgstr ""
 
-#: plugin.py:1419
+#: plugin.py:1439
 msgid "Choose action:"
 msgstr "Maak uw keuze:"
 
-#: plugin.py:1006
+#: plugin.py:1026
 msgid "Clean up (delete) all completed timers?"
 msgstr ""
 
@@ -88,19 +88,19 @@ msgstr ""
 msgid "Define the interval for downloading the RemoteTimer list."
 msgstr ""
 
-#: plugin.py:1600
+#: plugin.py:1620
 msgid "Delete"
 msgstr "Verwijder"
 
-#: plugin.py:1414
+#: plugin.py:1434
 msgid "Disable Picture in Picture"
 msgstr "Picture in Picture uitschakelen"
 
-#: plugin.py:1954
+#: plugin.py:1974
 msgid "Disable Timer"
 msgstr ""
 
-#: plugin.py:1659
+#: plugin.py:1679
 #, fuzzy
 msgid "Do you really want to remove this partnerbox from list?"
 msgstr ""
@@ -108,7 +108,7 @@ msgstr ""
 "%s  \n"
 "verwijderen?"
 
-#: plugin.py:1550 plugin.py:1558
+#: plugin.py:1570 plugin.py:1578
 msgid "EPG refresh"
 msgstr ""
 
@@ -126,7 +126,7 @@ msgstr "Partnerbox ontvangers"
 msgid "Enable Partnerbox in EPG *"
 msgstr "Partnerbox ontvangers"
 
-#: plugin.py:1954
+#: plugin.py:1974
 msgid "Enable Timer"
 msgstr ""
 
@@ -139,12 +139,12 @@ msgstr ""
 msgid "Enables Partnerbox functions in local Electronic Program Guide."
 msgstr "Partnerbox ontvangers"
 
-#: plugin.py:1139
+#: plugin.py:1159
 #, fuzzy
 msgid "Getting channel information..."
 msgstr "Bezig met het laden van zender informatie..."
 
-#: plugin.py:1154
+#: plugin.py:1174
 msgid "Give Enigma time to fill epg cache..."
 msgstr "Even geduld, bezig met het vullen van de EPG cache..."
 
@@ -161,24 +161,24 @@ msgstr ""
 msgid "Load RemoteTimers *"
 msgstr "Partnerbox: RemoteTimer"
 
-#: plugin.py:1618
+#: plugin.py:1638
 #, fuzzy
 msgid "Loading partnerboxes"
 msgstr "Favorietenlijst van een Partnerbox toevoegen"
 
-#: plugin.py:776
+#: plugin.py:798
 msgid "Local box"
 msgstr ""
 
-#: plugin.py:2181
+#: plugin.py:2201
 msgid "Manage timer for other boxes in network"
 msgstr "Beheer timers voor andere ontvangers in uw netwerk"
 
-#: plugin.py:1421
+#: plugin.py:1441
 msgid "Menu PiP"
 msgstr "Menu PiP"
 
-#: plugin.py:1412
+#: plugin.py:1432
 msgid "Move Picture in Picture"
 msgstr "Picture in Picture verplaatsen"
 
@@ -190,27 +190,27 @@ msgstr "Naam"
 msgid "Name of the Remote Box (freely selectable)."
 msgstr ""
 
-#: plugin.py:645
+#: plugin.py:667
 msgid "No description available"
 msgstr ""
 
-#: plugin.py:962 plugin.py:1836
+#: plugin.py:982 plugin.py:1856
 msgid "No message from box received."
 msgstr ""
 
-#: plugin.py:637
+#: plugin.py:659
 msgid "No name available"
 msgstr ""
 
-#: plugin.py:654
+#: plugin.py:676
 msgid "No servicename available"
 msgstr ""
 
-#: plugin.py:634
+#: plugin.py:656
 msgid "No servicereference available"
 msgstr ""
 
-#: plugin.py:2191
+#: plugin.py:2211
 msgid "Partnerbox"
 msgstr "Partnerbox"
 
@@ -219,7 +219,7 @@ msgstr "Partnerbox"
 msgid "Partnerbox Config"
 msgstr "Partnerbox ontvangers"
 
-#: plugin.py:1708
+#: plugin.py:1728
 #, fuzzy
 msgid "Partnerbox Entry Actions"
 msgstr "Partnerbox ontvangers"
@@ -228,68 +228,68 @@ msgstr "Partnerbox ontvangers"
 msgid "Partnerbox Setup"
 msgstr "Partnerbox Instellingen"
 
-#: plugin.py:1551
+#: plugin.py:1571
 #, fuzzy
 msgid "Partnerbox Setup Actions"
 msgstr "Partnerbox Instellingen"
 
-#: plugin.py:1549
+#: plugin.py:1569
 #, fuzzy
 msgid "Partnerbox entries"
 msgstr "Partnerbox ontvangers"
 
-#: plugin.py:2017
+#: plugin.py:2037
 msgid "Partnerbox is currently streaming from internet and this cannot be forwarded!"
 msgstr ""
 
-#: plugin.py:2014
+#: plugin.py:2034
 msgid "Partnerbox is currently streaming from media and this cannot be forwarded!"
 msgstr ""
 
-#: plugin.py:1729
+#: plugin.py:1749
 #, fuzzy
 msgid "Partnerbox: Boxes found in network"
 msgstr "Partnerbox ontvangers"
 
-#: plugin.py:1596 plugin.py:2026 plugin.py:2108
+#: plugin.py:1616 plugin.py:2046 plugin.py:2128
 #, fuzzy
 msgid "Partnerbox: List of partnerboxes"
 msgstr "Partnerbox: ontvanger overzicht"
 
-#: plugin.py:1349
+#: plugin.py:1369
 #, fuzzy
 msgid "Partnerbox: Remote player"
 msgstr "Partnerbox: RemoteTV Player"
 
-#: plugin.py:2188
+#: plugin.py:2208
 msgid "Partnerbox: RemoteTV Player"
 msgstr "Partnerbox: RemoteTV Player"
 
-#: plugin.py:2181
+#: plugin.py:2201
 msgid "Partnerbox: RemoteTimer"
 msgstr "Partnerbox: RemoteTimer"
 
-#: plugin.py:501
+#: plugin.py:523
 #, fuzzy
 msgid "Partnerbox: Select Bouquet"
 msgstr "Partnerbox Instellingen"
 
-#: plugin.py:552
+#: plugin.py:574
 #, fuzzy
 msgid "Partnerbox: Select Channel"
 msgstr "Partnerbox ontvangers"
 
-#: plugin.py:1544
+#: plugin.py:1564
 #, fuzzy
 msgid "Partnerbox: Setup"
 msgstr "Partnerbox Instellingen"
 
-#: plugin.py:2190
+#: plugin.py:2210
 #, fuzzy
 msgid "Partnerbox: Stream current RemoteChannel"
 msgstr "Partnerbox - RemotePlayer"
 
-#: plugin.py:1545
+#: plugin.py:1565
 #, fuzzy
 msgid "Partnerboxes"
 msgstr "Partnerbox"
@@ -310,14 +310,9 @@ msgstr "Poort"
 msgid "Port of the Remote Box to log in."
 msgstr ""
 
-#: plugin.py:957
+#: plugin.py:977
 #, fuzzy
 msgid "Record timer not added."
-msgstr "Herhalende timers worden niet ondersteund!"
-
-#: plugin.py:995
-#, fuzzy
-msgid "Record timer not updated."
 msgstr "Herhalende timers worden niet ondersteund!"
 
 #: setup.xml
@@ -336,12 +331,12 @@ msgstr ""
 msgid "Refresh time for downloading the remote Electronic Program Guide."
 msgstr ""
 
-#: plugin.py:785
+#: plugin.py:806
 #, fuzzy
 msgid "Remote box:"
 msgstr "Remote Timer"
 
-#: plugin.py:1745
+#: plugin.py:1765
 msgid "Searching for active and standby boxes in peer-to-peer network..."
 msgstr ""
 
@@ -349,26 +344,26 @@ msgstr ""
 msgid "Select 'Yes' to enable add debug output to log."
 msgstr ""
 
-#: plugin.py:1684
+#: plugin.py:1704
 #, fuzzy
 msgid "Select operation for"
 msgstr "Selecteer een functie voor Partnerbox"
 
-#: plugin.py:866
+#: plugin.py:884
 msgid "Select the location in which to store the recording:"
 msgstr ""
 
-#: plugin.py:2052
+#: plugin.py:2072
 #, python-format
 msgid "Service '%s' from '%s' was already added."
 msgstr ""
 
-#: plugin.py:2050
+#: plugin.py:2070
 #, python-format
 msgid "Service '%s' successfully added from '%s'."
 msgstr ""
 
-#: plugin.py:2191
+#: plugin.py:2211
 #, fuzzy
 msgid "Setup for Partnerbox"
 msgstr "Partnerbox instellingen"
@@ -389,50 +384,50 @@ msgstr ""
 msgid "Show Partnerbox function 'Stream current service' in Extensions Menu."
 msgstr ""
 
-#: plugin.py:2188
+#: plugin.py:2208
 #, fuzzy
 msgid "Stream TV from your partnerbox"
 msgstr "Stream TV van uw Partnerbox"
 
-#: plugin.py:2190
+#: plugin.py:2210
 #, fuzzy
 msgid "Stream current channel from partnerbox"
 msgstr "Stream de huidige zender van de Partnerbox"
 
-#: plugin.py:1732
+#: plugin.py:1752
 msgid "Take over"
 msgstr ""
 
-#: plugin.py:1778
+#: plugin.py:1798
 msgid "This box is already installed!"
 msgstr ""
 
-#: plugin.py:901
+#: plugin.py:921
 #, python-format
 msgid "Timer overview from: %s"
 msgstr ""
 
-#: plugin.py:1682
+#: plugin.py:1702
 msgid "Toggle Standby"
 msgstr "Standby In- of Uitschakelen"
 
-#: plugin.py:52
+#: plugin.py:73
 msgid "Unexpected error accessing WebIF"
 msgstr ""
 
-#: plugin.py:1731
+#: plugin.py:1751
 msgid "Upper/lower case"
 msgstr ""
 
-#: plugin.py:1108
+#: plugin.py:1128
 msgid "Zap"
 msgstr "Zap"
 
-#: plugin.py:1410
+#: plugin.py:1430
 msgid "Zap focus to Picture in Picture"
 msgstr "Naar Picture in Picture zappen"
 
-#: plugin.py:1410
+#: plugin.py:1430
 msgid "Zap focus to main screen"
 msgstr "Naar hoofdscherm zappen"
 
@@ -444,14 +439,14 @@ msgstr ""
 msgid "Zap to service when streaming"
 msgstr ""
 
-#: plugin.py:1760
+#: plugin.py:1780
 msgid "already installed"
 msgstr ""
 
-#: plugin.py:184 plugin.py:508 plugin.py:509 plugin.py:520 plugin.py:521
+#: plugin.py:205 plugin.py:530 plugin.py:531 plugin.py:542 plugin.py:543
 msgid "n/a"
 msgstr ""
 
-#: plugin.py:1760
+#: plugin.py:1780
 msgid "not installed yet"
 msgstr ""

@@ -5,5 +5,5 @@ plugin_PYTHON = \
 	plugin.py
 
 plugin_DATA = \
-	Setup_Partnerbox.png \
+	logo.png \
 	setup.xml

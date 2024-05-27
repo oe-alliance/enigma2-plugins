@@ -2208,5 +2208,5 @@ def Plugins(**kwargs):
 		clist.append(PluginDescriptor(name=_("Partnerbox: RemoteTV Player"), description=_("Stream TV from your partnerbox"), where=[PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=remotetvplayer))
 	if config.plugins.Partnerbox.showcurrentstreaminextensionsmenu.value:
 		clist.append(PluginDescriptor(name=_("Partnerbox: Stream current RemoteChannel"), description=_("Stream current channel from partnerbox"), where=[PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=currentremotetv))
-	clist.append(PluginDescriptor(name=_("Partnerbox"), description=_("Setup for Partnerbox"), where=[PluginDescriptor.WHERE_PLUGINMENU], icon="Setup_Partnerbox.png", fnc=setup))
+	clist.append(PluginDescriptor(name=_("Partnerbox"), description=_("Setup for Partnerbox"), where=[PluginDescriptor.WHERE_PLUGINMENU], icon="logo.png", fnc=setup))
 	return clist
