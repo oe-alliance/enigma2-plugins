@@ -872,6 +872,9 @@ def startSetup(menuid):
 	if IMAGEDISTRO in ('teamblue', 'openhdf'):
 		if menuid != "video_menu":
 			return []
+	elif IMAGEDISTRO in ('openbh'):
+		if menuid != "av":
+			return []
 	else:
 		if menuid != "system":
 			return []
