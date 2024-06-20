@@ -304,13 +304,13 @@ class AutoTimerImporter(Screen):
 				value = item[1]
 
 				myref = eServiceReference(value)
-				if not (myref.flags & eServiceReference.isGroup):
-					# strip all after last :
-					pos = value.rfind(':')
-					if pos != -1:
-						if value[pos - 1] == ':':
-							pos -= 1
-						value = value[:pos + 1]
+				#if not (myref.flags & eServiceReference.isGroup):
+				#	# strip all after last :
+				#	pos = value.rfind(':')
+				#	if pos != -1:
+				#		if value[pos - 1] == ':':
+				#			pos -= 1
+				#		value = value[:pos + 1]
 
 				autotimer.services = [value]
 			elif item[2] == 4:  # AfterEvent
@@ -337,13 +337,13 @@ class AutoTimerImporter(Screen):
 		if self.isIPTV:
 			value = str(self.sref)
 			myref = eServiceReference(value)
-			if not (myref.flags & eServiceReference.isGroup):
-				# strip all after last :
-				pos = value.rfind(':')
-				if pos != -1:
-					if value[pos - 1] == ':':
-						pos -= 1
-					value = value[:pos + 1]
+			#if not (myref.flags & eServiceReference.isGroup):
+			#	# strip all after last :
+			#	pos = value.rfind(':')
+			#	if pos != -1:
+			#		if value[pos - 1] == ':':
+			#			pos -= 1
+			#		value = value[:pos + 1]
 			autotimer.services = [value]
 
 		if autotimer.match == "":

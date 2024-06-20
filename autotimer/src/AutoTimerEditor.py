@@ -1536,13 +1536,13 @@ class AutoTimerServiceEditor(Screen, ConfigListScreen):
 			list = self["config"].getList()
 			sname = args[0].toString()
 
-			if self.typeSelection.value == "channels" and not (args[0].flags & eServiceReference.isGroup):
+			#if self.typeSelection.value == "channels" and not (args[0].flags & eServiceReference.isGroup):
 				# strip all after last : when adding a (non alternative) channel
-				pos = sname.rfind(':')
-				if pos != -1:
-					if sname[pos - 1] == ':':
-						pos -= 1
-					sname = sname[:pos + 1]
+				#pos = sname.rfind(':')
+				#if pos != -1:
+				#	if sname[pos - 1] == ':':
+				#		pos -= 1
+				#	sname = sname[:pos + 1]
 
 			list.append(getConfigListEntry(_("Record on"), NoSave(ConfigSelection(choices=[(sname, ServiceReference(args[0]).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''))]))))
 			self["config"].setList(list)
@@ -1612,13 +1612,13 @@ def addAutotimerFromEvent(session, evt=None, service=None):
 	if service is not None:
 		service = str(service)
 		myref = eServiceReference(service)
-		if not (myref.flags & eServiceReference.isGroup):
+		#if not (myref.flags & eServiceReference.isGroup):
 			# strip all after last :
-			pos = service.rfind(':')
-			if pos != -1:
-				if service[pos - 1] == ':':
-					pos -= 1
-				service = service[:pos + 1]
+			#pos = service.rfind(':')
+			#if pos != -1:
+			#	if service[pos - 1] == ':':
+			#		pos -= 1
+			#	service = service[:pos + 1]
 
 		sref = ServiceReference(myref)
 	if evt:
@@ -1704,11 +1704,11 @@ def addAutotimerFromService(session, service=None):
 	sref = info and info.getInfoString(service, iServiceInformation.sServiceref)
 	if sref:
 		# strip all after last :
-		pos = sref.rfind(':')
-		if pos != -1:
-			if sref[pos - 1] == ':':
-				pos -= 1
-			sref = sref[:pos + 1]
+		#pos = sref.rfind(':')
+		#if pos != -1:
+		#	if sref[pos - 1] == ':':
+		#		pos -= 1
+		#	sref = sref[:pos + 1]
 
 		sref = ServiceReference(sref)
 	if info:
@@ -1781,13 +1781,13 @@ def addAutotimerFromEventSilent(session, evt=None, service=None):
 	if service is not None:
 		service = str(service)
 		myref = eServiceReference(service)
-		if not (myref.flags & eServiceReference.isGroup):
-			# strip all after last :
-			pos = service.rfind(':')
-			if pos != -1:
-				if service[pos - 1] == ':':
-					pos -= 1
-				service = service[:pos + 1]
+		#if not (myref.flags & eServiceReference.isGroup):
+		#	# strip all after last :
+		#	pos = service.rfind(':')
+		#	if pos != -1:
+		#		if service[pos - 1] == ':':
+		#			pos -= 1
+		#		service = service[:pos + 1]
 
 	if evt:
 		# timespan defaults to +- 1h

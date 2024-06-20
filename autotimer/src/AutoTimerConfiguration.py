@@ -186,14 +186,14 @@ def parseEntry(element, baseTimer, defaults=False):
 		for service in l:
 			value = service.text
 			if value:
-				myref = eServiceReference(str(value))
-				if not (myref.flags & eServiceReference.isGroup):
-					# strip all after last :
-					pos = value.rfind(':')
-					if pos != -1:
-						if value[pos - 1] == ':':
-							pos -= 1
-						value = value[:pos + 1]
+				#myref = eServiceReference(str(value))
+				#if not (myref.flags & eServiceReference.isGroup):
+				#	# strip all after last :
+				#	pos = value.rfind(':')
+				#	if pos != -1:
+				#		if value[pos - 1] == ':':
+				#			pos -= 1
+				#		value = value[:pos + 1]
 
 				servicelist.append(value)
 		baseTimer.services = servicelist
@@ -369,14 +369,14 @@ def parseConfigOld(configuration, list, uniqueTimerId=0):
 			for service in elements:
 				value = service.text
 				if value:
-					myref = eServiceReference(str(value))
-					if not (myref.flags & eServiceReference.isGroup):
-						# strip all after last :
-						pos = value.rfind(':')
-						if pos != -1:
-							if value[pos - 1] == ':':
-								pos -= 1
-							value = value[:pos + 1]
+					#myref = eServiceReference(str(value))
+					#if not (myref.flags & eServiceReference.isGroup):
+					#	# strip all after last :
+					#	pos = value.rfind(':')
+					#	if pos != -1:
+					#		if value[pos - 1] == ':':
+					#			pos -= 1
+					#		value = value[:pos + 1]
 
 					servicelist.append(value)
 		else:
@@ -628,7 +628,7 @@ def buildConfig(defaultTimer, timers, webif=False):
 		# Services
 		for serviceref in defaultTimer.services:
 			ref = ServiceReference(str(serviceref))
-			extend(('  <serviceref>', serviceref, '</serviceref>',
+			extend(('  <serviceref>', serviceref.replace("&", "&amp;"), '</serviceref>',
 						' <!-- ', stringToXML(removeBad(ref.getServiceName())), ' -->\n',
 			))
 
@@ -785,7 +785,7 @@ def buildConfig(defaultTimer, timers, webif=False):
 			# Services
 			for serviceref in timer.services:
 				ref = ServiceReference(str(serviceref))
-				extend(('  <serviceref>', serviceref, '</serviceref>',
+				extend(('  <serviceref>', serviceref.replace("&", "&amp;"), '</serviceref>',
 							' <!-- ', stringToXML(removeBad(ref.getServiceName())), ' -->\n',
 				))
 

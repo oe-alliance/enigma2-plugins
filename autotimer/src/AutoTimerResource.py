@@ -329,13 +329,13 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 			appendlist = []
 			for value in servicelist:
 				myref = eServiceReference(str(value))
-				if not (myref.flags & eServiceReference.isGroup):
-					# strip all after last :
-					pos = value.rfind(':')
-					if pos != -1:
-						if value[pos - 1] == ':':
-							pos -= 1
-						value = value[:pos + 1]
+				#if not (myref.flags & eServiceReference.isGroup):
+				#	# strip all after last :
+				#	pos = value.rfind(':')
+				#	if pos != -1:
+				#		if value[pos - 1] == ':':
+				#			pos -= 1
+				#		value = value[:pos + 1]
 
 				if myref.valid():
 					appendlist.append(value)

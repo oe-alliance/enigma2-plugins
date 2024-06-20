@@ -440,11 +440,11 @@ class AutoTimerComponent(object):
 						if s.valid():
 							# strip all after last :
 							value = s.toString()
-							pos = value.rfind(':')
-							if pos != -1:
-								if value[pos - 1] == ':':
-									pos -= 1
-								value = value[:pos + 1]
+							#pos = value.rfind(':')
+							#if pos != -1:
+							#	if value[pos - 1] == ':':
+							#		pos -= 1
+							#	value = value[:pos + 1]
 
 							if value == check_service:
 								return False
@@ -477,11 +477,11 @@ class AutoTimerComponent(object):
 							if s.valid():
 								# strip all after last :
 								value = s.toString()
-								pos = value.rfind(':')
-								if pos != -1:
-									if value[pos - 1] == ':':
-										pos -= 1
-									value = value[:pos + 1]
+								#pos = value.rfind(':')
+								#if pos != -1:
+								#	if value[pos - 1] == ':':
+								#		pos -= 1
+								#	value = value[:pos + 1]
 
 								if value == override_service:
 									return service
@@ -691,11 +691,11 @@ class AutoTimerFastscanComponent(AutoTimerComponent):
 						if s.valid():
 							# strip all after last :
 							value = s.toString()
-							pos = value.rfind(':')
-							if pos != -1:
-								if value[pos - 1] == ':':
-									pos -= 1
-								value = value[:pos + 1]
+							#pos = value.rfind(':')
+							#if pos != -1:
+							#	if value[pos - 1] == ':':
+							#		pos -= 1
+							#	value = value[:pos + 1]
 
 							comp = value.split(':')
 							append(':'.join(value[3:]))
@@ -730,11 +730,11 @@ class AutoTimerFastscanComponent(AutoTimerComponent):
 							if s.valid():
 								# strip all after last :
 								value = s.toString()
-								pos = value.rfind(':')
-								if pos != -1:
-									if value[pos - 1] == ':':
-										pos -= 1
-									value = value[:pos + 1]
+								#pos = value.rfind(':')
+								#if pos != -1:
+								#	if value[pos - 1] == ':':
+								#		pos -= 1
+								#	value = value[:pos + 1]
 
 								if ':'.join(value.split(':')[3:]) == override:
 									return service
