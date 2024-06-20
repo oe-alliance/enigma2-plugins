@@ -263,7 +263,7 @@ class ExtendedEventDescriptor(Descriptor):
         descriptor.append(descr)
         return descr.descriptor_length + 2
 
-    @ staticmethod
+    @staticmethod
     def encode(data, item_description, language_code='DEU'):
         if language_code == 'rus':
             text = item_description.encode('iso8859_5', 'ignore')
@@ -305,7 +305,7 @@ class ComponentDescriptor:
         self.text = text.encode('cp1252', 'ignore')
         self.descriptor_length = 6 + len(self.text)
 
-    @ staticmethod
+    @staticmethod
     def decode(data, descriptor):
         descr = ComponentDescriptor('')
         descr.tag = ord(data[0])
@@ -319,7 +319,7 @@ class ComponentDescriptor:
         descriptor.append(descr)
         return descr.descriptor_length + 2
 
-    @ staticmethod
+    @staticmethod
     def encode(data, text, language_code='DEU'):
         descr = ComponentDescriptor(text, language_code)
         data.append(pack('B', descr.tag))
