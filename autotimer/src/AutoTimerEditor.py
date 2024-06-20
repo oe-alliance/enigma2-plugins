@@ -182,7 +182,7 @@ class AutoTimerEditorBase:
 		else:
 			self.serviceRestriction = False
 
-		self.isIPTV = bool([service for service in timer.services if ":http" in service])
+		self.isIPTV = bool([service for service in timer.services if "%3a//" in service])
 
 		self.createSetup(timer)
 
@@ -540,9 +540,7 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 		self.reloadList(True)
 
 	def renameServiceButton(self):
-		if self.isIPTV:
-			self["key_blue"].text = ""
-		elif self.serviceRestriction:
+		if self.serviceRestriction:
 			self["key_blue"].text = _("Edit services")
 		else:
 			self["key_blue"].text = _("Add services")
@@ -763,14 +761,13 @@ class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
 			self.renameFilterButton()
 
 	def editServices(self):
-		if not self.isIPTV:
-			self.session.openWithCallback(
-				self.editServicesCallback,
-				AutoTimerServiceEditor,
-				self.serviceRestriction,
-				self.services,
-				self.bouquets
-			)
+		self.session.openWithCallback(
+			self.editServicesCallback,
+			AutoTimerServiceEditor,
+			self.serviceRestriction,
+			self.services,
+			self.bouquets
+		)
 
 	def editServicesCallback(self, ret):
 		if ret:
@@ -1542,7 +1539,7 @@ class AutoTimerServiceEditor(Screen, ConfigListScreen):
 				if pos != -1:
 					if sname[pos - 1] == ':':
 						pos -= 1
-					sname = sname[:pos + 1]
+						sname = sname[:pos + 1]
 
 			list.append(getConfigListEntry(_("Record on"), NoSave(ConfigSelection(choices=[(sname, ServiceReference(args[0]).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''))]))))
 			self["config"].setList(list)
@@ -1708,7 +1705,7 @@ def addAutotimerFromService(session, service=None):
 		if pos != -1:
 			if sref[pos - 1] == ':':
 				pos -= 1
-			sref = sref[:pos + 1]
+				sref = sref[:pos + 1]
 
 		sref = ServiceReference(sref)
 	if info:

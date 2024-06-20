@@ -444,7 +444,7 @@ class AutoTimerComponent(object):
 							if pos != -1:
 								if value[pos - 1] == ':':
 									pos -= 1
-								value = value[:pos + 1]
+									value = value[:pos + 1]
 
 							if value == check_service:
 								return False
@@ -695,7 +695,7 @@ class AutoTimerFastscanComponent(AutoTimerComponent):
 							if pos != -1:
 								if value[pos - 1] == ':':
 									pos -= 1
-								value = value[:pos + 1]
+									value = value[:pos + 1]
 
 							comp = value.split(':')
 							append(':'.join(value[3:]))
