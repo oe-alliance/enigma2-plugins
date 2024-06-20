@@ -1542,7 +1542,7 @@ class AutoTimerServiceEditor(Screen, ConfigListScreen):
 				if pos != -1:
 					if sname[pos - 1] == ':':
 						pos -= 1
-					sname = sname[:pos + 1]
+						sname = sname[:pos + 1]
 
 			list.append(getConfigListEntry(_("Record on"), NoSave(ConfigSelection(choices=[(sname, ServiceReference(args[0]).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', ''))]))))
 			self["config"].setList(list)
@@ -1708,7 +1708,7 @@ def addAutotimerFromService(session, service=None):
 		if pos != -1:
 			if sref[pos - 1] == ':':
 				pos -= 1
-			sref = sref[:pos + 1]
+				sref = sref[:pos + 1]
 
 		sref = ServiceReference(sref)
 	if info:

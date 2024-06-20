@@ -310,7 +310,7 @@ class AutoTimerImporter(Screen):
 					if pos != -1:
 						if value[pos - 1] == ':':
 							pos -= 1
-						value = value[:pos + 1]
+							value = value[:pos + 1]
 
 				autotimer.services = [value]
 			elif item[2] == 4:  # AfterEvent
@@ -343,7 +343,7 @@ class AutoTimerImporter(Screen):
 				if pos != -1:
 					if value[pos - 1] == ':':
 						pos -= 1
-					value = value[:pos + 1]
+						value = value[:pos + 1]
 			autotimer.services = [value]
 
 		if autotimer.match == "":

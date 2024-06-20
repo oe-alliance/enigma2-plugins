@@ -335,7 +335,7 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 					if pos != -1:
 						if value[pos - 1] == ':':
 							pos -= 1
-						value = value[:pos + 1]
+							value = value[:pos + 1]
 
 				if myref.valid():
 					appendlist.append(value)

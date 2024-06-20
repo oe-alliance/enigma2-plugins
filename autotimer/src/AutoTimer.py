@@ -154,7 +154,8 @@ class AutoTimer:
 			# Parse Config
 			try:
 				configuration = cet_parse(XML_CONFIG).getroot()
-			except:
+			except Exception as error:
+				print("An exception occurred:", error)
 				try:
 					if os_path.exists(XML_CONFIG + "_old"):
 						os_rename(XML_CONFIG + "_old", XML_CONFIG + "_old(1)")
@@ -365,7 +366,7 @@ class AutoTimer:
 			except UnicodeDecodeError:
 				pass
 
-		self.isIPTV = bool([service for service in timer.services if ":http" in service])
+		self.isIPTV = bool([service for service in timer.services if "%3a//" in service])
 
 		# As well as description, also allow timers on individual IPTV streams
 		if timer.searchType == "description" or self.isIPTV:

@@ -193,7 +193,7 @@ def parseEntry(element, baseTimer, defaults=False):
 					if pos != -1:
 						if value[pos - 1] == ':':
 							pos -= 1
-						value = value[:pos + 1]
+							value = value[:pos + 1]
 
 				servicelist.append(value)
 		baseTimer.services = servicelist
@@ -376,7 +376,7 @@ def parseConfigOld(configuration, list, uniqueTimerId=0):
 						if pos != -1:
 							if value[pos - 1] == ':':
 								pos -= 1
-							value = value[:pos + 1]
+								value = value[:pos + 1]
 
 					servicelist.append(value)
 		else:
@@ -628,7 +628,7 @@ def buildConfig(defaultTimer, timers, webif=False):
 		# Services
 		for serviceref in defaultTimer.services:
 			ref = ServiceReference(str(serviceref))
-			extend(('  <serviceref>', serviceref, '</serviceref>',
+			extend(('  <serviceref>', serviceref.replace("&", "&amp;"), '</serviceref>',
 						' <!-- ', stringToXML(removeBad(ref.getServiceName())), ' -->\n',
 			))
 
@@ -785,7 +785,7 @@ def buildConfig(defaultTimer, timers, webif=False):
 			# Services
 			for serviceref in timer.services:
 				ref = ServiceReference(str(serviceref))
-				extend(('  <serviceref>', serviceref, '</serviceref>',
+				extend(('  <serviceref>', serviceref.replace("&", "&amp;"), '</serviceref>',
 							' <!-- ', stringToXML(removeBad(ref.getServiceName())), ' -->\n',
 				))
 
