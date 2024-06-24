@@ -147,7 +147,7 @@ class Ceparted(Screen):
 			"ok": self.Ok
 		}, -1)
 
-		self["list"] = MenuList(list=[])
+		self["list"] = MenuList([])
 		self.Console = Console()
 		global rereaddevices
 		rereaddevices = True
@@ -173,7 +173,7 @@ class Ceparted(Screen):
 	def __FinishedConsole(self, result, retval, extra_args=None):
 		result = six.ensure_str(result)
 		if retval == 0 and '\n' in result:
-			list = []
+			item = []
 			for x in parseCmd(result):
 				if x[0][LIST_TYPE] == LIST_TYPE_DEV:
 					name = x[0][DEV_NAME]
@@ -181,8 +181,8 @@ class Ceparted(Screen):
 						name = x[0][DEV_PATH]
 					tstr = name
 					tstr += "  (%s - %d %s %s)" % (x[0][DEV_SIZE], len(x) - 1, _("partition(s)"), x[0][DEV_PATH])
-					list.append((tstr, (name, x[0][DEV_PATH], x[0][DEV_SIZE])))
-			self["list"].setList(list)
+					item.append((tstr, (name, x[0][DEV_PATH], x[0][DEV_SIZE])))
+			self["list"].setList(item)
 
 #-------------------------------------------------------------------------------------
 
@@ -221,11 +221,11 @@ class AddPart(Screen, ConfigListScreen):
 		config.plugins.eparted.fs = NoSave(ConfigSelection(default=default, choices=menu))
 		config.plugins.eparted.size = NoSave(ConfigInteger(default=maxsize, limits=[1, maxsize]))
 
-		list = []
+		item = []
 		if countpart < 4:  # nur 4 parts möglich bei primary
-			list.append(getConfigListEntry(_("size in %s (max %d %s):") % (unit, maxsize, unit), config.plugins.eparted.size))
-		list.append(getConfigListEntry(_("filesystem:"), config.plugins.eparted.fs))
-		ConfigListScreen.__init__(self, list, session=session)
+			item.append(getConfigListEntry(_("size in %s (max %d %s):") % (unit, maxsize, unit), config.plugins.eparted.size))
+		item.append(getConfigListEntry(_("filesystem:"), config.plugins.eparted.fs))
+		ConfigListScreen.__init__(self, item, session=session)
 
 		self["key_red"] = StaticText(_("cancel"))
 		self["key_green"] = StaticText(_("ok"))
@@ -288,7 +288,7 @@ class Cpart(Screen):
 			"red": self.KeyRed
 		}, -1)
 
-		self["list"] = List(list=[])
+		self["list"] = List([])
 		self["list"].onSelectionChanged.append(self.__SetLabels)
 		self["PixmapRed"] = MultiPixmap()
 		self["PixmapGreen"] = MultiPixmap()
@@ -315,7 +315,7 @@ class Cpart(Screen):
 		self.Console.ePopen("parted -m %s unit %s print" % (self.__devpath, self.__unit), self.__FinishedConsole)
 
 	def __Filllist(self):
-		list = []
+		item = []
 		index = self["list"].getIndex()
 		for x in self.__new_part_list:
 			if x[LIST_TYPE] == LIST_TYPE_PAR:
@@ -325,8 +325,8 @@ class Cpart(Screen):
 				p2 = "%s: %d%s" % (_("End"), x[PA_END], self.__unit)
 				p3 = "%s: %d%s" % (_("Size"), x[PA_SIZE], self.__unit)
 				p4 = "%s: %s" % (_("Type"), x[PA_FS])
-				list.append((p0, p1, p2, p3, p4, x))
-			self["list"].setList(list)
+				item.append((p0, p1, p2, p3, p4, x))
+			self["list"].setList(item)
 		self["list"].setIndex(index)
 		self.__createCommandList()
 
@@ -433,13 +433,15 @@ class Cpart(Screen):
 						x[PA_TYPE] = self.PA_TYPE_USE
 			self.__Filllist()
 
-	def __addPart2Comlist(self, list, val, mkpart=True):
+	def __addPart2Comlist(self, item, val, mkpart=True):
 		#print(val)
 		partnr = val[PA_NR]
 		if mkpart:
 			fs = val[PA_FS]
+			com = "/bin/touch /dev/nomount.%s%s" % (self.__devpath.split('/')[-1],partnr)
+			item.append((com, _("disable hotplug for %s%s") % (self.__devpath.split('/')[-1], partnr), None))
 			com = "parted -s -a optimal %s mkpart primary %s %s%s %s%s" % (self.__devpath, fs, val[PA_START], self.__unit, val[PA_END], self.__unit)
-			list.append((com, _("create partition %s") % partnr, None))
+			item.append((com, _("create partition %s") % partnr, None))
 
 		mountdev = None
 		if val[PA_FS] == "linux-swap":
@@ -454,17 +456,17 @@ class Cpart(Screen):
 			if val[PA_FS] == "xfs":
 				mkfs += " -f"
 
-		com = "%s %s%s" % (mkfs, self.__devpath, partnr)
-		list.append((com, _("make filesystem '%s' on partition %s (%d %s)") % (val[PA_FS], partnr, val[PA_SIZE], self.__unit), mountdev))
+		com = "%s -F %s%s" % (mkfs, self.__devpath, partnr)
+		item.append((com, _("make filesystem '%s' on partition %s (%d %s)") % (val[PA_FS], partnr, val[PA_SIZE], self.__unit), mountdev))
 
-	def __delPart2Comlist(self, list, val):
+	def __delPart2Comlist(self, item, val):
 		partnr = val[PA_NR]
 		dev = "%s%s" % (self.__devpath, partnr)
 		mp = ismounted(dev)
 		if mp is not None:
 			if myExecute("umount %s" % mp, self.session):
 				return
-		list.insert(0, ("parted -s -a none %s rm %s" % (self.__devpath, partnr), _("delete partition %s") % partnr, None))
+		item.insert(0, ("parted -s -a none %s rm %s" % (self.__devpath, partnr), _("delete partition %s") % partnr, None))
 
 	def __createCommandList(self):
 		self.__comlist = []
@@ -534,13 +536,13 @@ class Cpartexe(Screen):
 		self["LabelButton"] = Label(_("Start") + " ?")
 
 		self.mountlist = []
-		list = []
+		item = []
 		for x in comlist:
 			print(x)
-			list.append((x[1], None, x[0]))
+			item.append((x[1], None, x[0]))
 			if x[2] is not None:
 				self.mountlist.append(x[2])
-		self["list"] = List(list)
+		self["list"] = List(item)
 
 		self.__Stimer = eTimer()
 		self.__Stimer.callback.append(self.__exeList)
