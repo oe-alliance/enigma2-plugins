@@ -438,7 +438,7 @@ class Cpart(Screen):
 		partnr = val[PA_NR]
 		if mkpart:
 			fs = val[PA_FS]
-			com = "/bin/touch /dev/nomount.%s%s" % (self.__devpath.split('/')[-1],partnr)
+			com = "/bin/touch /dev/nomount.%s%s" % (self.__devpath.split('/')[-1], partnr)
 			item.append((com, _("disable hotplug for %s%s") % (self.__devpath.split('/')[-1], partnr), None))
 			com = "parted -s -a optimal %s mkpart primary %s %s%s %s%s" % (self.__devpath, fs, val[PA_START], self.__unit, val[PA_END], self.__unit)
 			item.append((com, _("create partition %s") % partnr, None))
