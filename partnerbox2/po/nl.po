@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: enigma2-plugins 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-05-27 11:34+0200\n"
-"PO-Revision-Date: 2024-06-23 20:11+0200\n"
+"PO-Revision-Date: 2024-06-24 19:23+0200\n"
 "Last-Translator: Snoete\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
 "Language: nl\n"
@@ -65,7 +65,7 @@ msgstr "Ontvanger succesvol verwijderd!"
 
 #: plugin.py:1724 plugin.py:1727
 msgid "Boxsearch"
-msgstr "Zoeken naar ontvangers"
+msgstr "Ontvangers zoeken"
 
 #: plugin.py:1125
 #, python-format
@@ -230,7 +230,7 @@ msgstr "Partnerbox is bezig met het streamen van media, dit kan niet doorgestuur
 
 #: plugin.py:1749
 msgid "Partnerbox: Boxes found in network"
-msgstr "Partnerbox: Ontvangers gevonden in het netwerk"
+msgstr "Ontvangers gevonden in netwerk:"
 
 #: plugin.py:1616 plugin.py:2046 plugin.py:2128
 msgid "Partnerbox: List of partnerboxes"
@@ -385,7 +385,7 @@ msgstr "Onverwachte fout bij toegang tot WebIF"
 
 #: plugin.py:1751
 msgid "Upper/lower case"
-msgstr "Hoofdletters / kleine letters"
+msgstr "Hoofd / kleine letters"
 
 #: plugin.py:1128
 msgid "Zap"
