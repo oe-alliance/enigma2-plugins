@@ -132,13 +132,13 @@ def getInstance():
 		# Check dependencies
 		start = True
 		from imp import find_module
-		dependencies = ["difflib", "json", "re", "xml", "xmlrpclib"]
+		dependencies = ["difflib", "json", "re", "xml", "xmlrpc"]
 		for dependency in dependencies:
 			try:
 				find_module(dependency)
 			except ImportError:
 				start = False
-				log.error(_("Error missing dependency") + "\n" + "python-" + dependency + "\n\n" + _("Please install missing python paket manually"))
+				log.error(_("Error missing dependency") + "\n" + "python3-" + dependency + "\n\n" + _("Please install missing python paket manually"))
 		if start:
 			instance = SeriesPlugin()
 
@@ -405,10 +405,9 @@ class SeriesPlugin(Modules, ChannelsBase):
 
 		pattern = config.plugins.seriesplugin.pattern_title.value
 		pattern = pattern.replace("{org:s}", "(.+)")
-		pattern = re.sub('{season:?\d*d?}', '\d+', pattern)
-		pattern = re.sub('{episode:?\d*d?}', '\d+', pattern)
-		pattern = re.sub('{rawseason:s}', '.+', pattern)
-		pattern = re.sub('{rawseason:s}', '.+', pattern)
+		pattern = re.sub(r'{season:?\d*d?}', r'\\d+', pattern)
+		pattern = re.sub(r'{episode:?\d*d?}', r'\\d+', pattern)
+		pattern = re.sub(r'{rawseason:s}', r'.+', pattern)
 		pattern = pattern.replace("{title:s}", ".+")
 		self.compiledRegexpSeries = re.compile(pattern)
 

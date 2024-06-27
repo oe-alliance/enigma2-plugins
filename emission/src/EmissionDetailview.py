@@ -15,20 +15,21 @@ from Components.Sources.StaticText import StaticText
 from enigma import eTimer
 
 from . import EmissionBandwidth
+from transmission_rpc import TransmissionError
 
 from six.moves import reload_module
 
 
 class EmissionDetailview(Screen, HelpableScreen):
-	skin = """<screen name="EmissionDetailview" title="Torrent View" position="75,75" size="565,450">
+	skin = """<screen name="EmissionDetailview" title="Torrent View" position="75,75" size="765,450">
 		<ePixmap position="0,0" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 		<ePixmap position="140,0" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 		<ePixmap position="280,0" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
 		<ePixmap position="420,0" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-		<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<widget source="key_red" render="Label" position="5,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<widget source="key_green" render="Label" position="155,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
-		<widget source="key_blue" render="Label" position="420,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
+		<widget source="key_blue" render="Label" position="435,0" zPosition="1" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		<eLabel position="450,45" text="DL: " size="30,20" font="Regular;18" />
 		<widget source="downspeed" render="Label" position="480,45" size="85,20" halign="right" font="Regular;18" />
 		<eLabel position="450,67" text="UL: " size="30,20" font="Regular;18" transparent="1" />
@@ -43,7 +44,7 @@ class EmissionDetailview(Screen, HelpableScreen):
 		<widget source="ratio" render="Label" position="410,195" size="150,20" font="Regular;18" halign="right" />
 		<widget source="progress" render="Progress" position="5,220" size="555,6" />
 		<widget source="files_text" render="Label" position="5,230" size="100,20" font="Regular;18" />
-		<widget source="files" render="Listbox" position="0,255" size="566,185" scrollbarMode="showAlways">
+		<widget source="files" render="Listbox" position="0,255" size="766,185" scrollbarMode="showAlways">
 			<convert type="TemplatedMultiContent">
 				{"template": [
 						MultiContentEntryText(pos=(2,2), size=(560,22), text = 4, font = 0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER),
@@ -52,7 +53,7 @@ class EmissionDetailview(Screen, HelpableScreen):
 						MultiContentEntryText(pos=(365,26), size=(70,20), text = "Total", font = 1, flags = RT_HALIGN_RIGHT|RT_VALIGN_CENTER),
 						MultiContentEntryText(pos=(435,26), size=(100,20), text = 5, font = 1, flags = RT_HALIGN_RIGHT|RT_VALIGN_CENTER),
 						MultiContentEntryText(pos=(220,26), size=(160,20), text = 6, font = 1, flags = RT_VALIGN_CENTER),
-						(eListboxPythonMultiContent.TYPE_PROGRESS, 0, 47, 540, 6, -7),
+						MultiContentEntryProgress(pos = (0, 47), size = (740, 6), percent = -7), # progress
 					],
 				  "fonts": [gFont("Regular", 20),gFont("Regular", 18)],
 				  "itemHeight": 54
@@ -116,8 +117,8 @@ class EmissionDetailview(Screen, HelpableScreen):
 	def bandwidthCallback(self, ret=None):
 		if ret:
 			try:
-				self.transmission.change([self.torrentid], **ret)
-			except transmission.TransmissionError as te:
+				self.transmission.change_torrent([self.torrentid], **ret)
+			except TransmissionError as te:
 				self.session.open(
 					MessageBox,
 					_("Error communicating with transmission-daemon: %s.") % (te),
@@ -131,9 +132,9 @@ class EmissionDetailview(Screen, HelpableScreen):
 		self.timer.stop()
 		id = self.torrentid
 		try:
-			torrent = self.transmission.info([id])[id]
+			torrent = self.transmission.get_torrent(id)
 			rpc_version = self.transmission.rpc_version
-		except transmission.TransmissionError as te:
+		except TransmissionError as te:
 			self.session.open(
 				MessageBox,
 				_("Error communicating with transmission-daemon: %s.") % (te),
@@ -172,15 +173,15 @@ class EmissionDetailview(Screen, HelpableScreen):
 	def toggleStatus(self):
 		id = self.torrentid
 		try:
-			torrent = self.transmission.info([id])[id]
+			torrent = self.transmission.get_torrent(id)
 			status = torrent.status
 			if status == "stopped":
-				self.transmission.start([id])
+				self.transmission.start_torrent([id])
 				self["key_yellow"].text = _("pause")
 			elif status in ("downloading", "seeding"):
-				self.transmission.stop([id])
+				self.transmission.stop_torrent([id])
 				self["key_yellow"].text = _("start")
-		except transmission.TransmissionError as te:
+		except TransmissionError as te:
 			self.session.open(
 				MessageBox,
 				_("Error communicating with transmission-daemon: %s.") % (te),
@@ -203,12 +204,12 @@ class EmissionDetailview(Screen, HelpableScreen):
 			ret = ret[1]
 			try:
 				if ret == "yes":
-					self.transmission.remove([self.torrentid], delete_data=False)
+					self.transmission.remove_torrent([self.torrentid], delete_data=False)
 					self.close()
 				elif ret == "data":
-					self.transmission.remove([self.torrentid], delete_data=True)
+					self.transmission.remove_torrent([self.torrentid], delete_data=True)
 					self.close()
-			except transmission.TransmissionError as te:
+			except TransmissionError as te:
 				self.session.open(
 					MessageBox,
 					_("Error communicating with transmission-daemon: %s.") % (te),
@@ -219,8 +220,8 @@ class EmissionDetailview(Screen, HelpableScreen):
 	def updateList(self, *args, **kwargs):
 		id = self.torrentid
 		try:
-			torrent = self.transmission.info([id])[id]
-		except transmission.TransmissionError:
+			torrent = self.transmission.get_torrent(id)
+		except TransmissionError as te:
 			self["upspeed"].text = ""
 			self["downspeed"].text = ""
 			self["peers"].text = ""
@@ -231,8 +232,8 @@ class EmissionDetailview(Screen, HelpableScreen):
 			self["private"].text = ""
 			self["files"].setList([])
 		else:
-			self["upspeed"].text = _("%d kb/s") % (torrent.rateUpload / 1024)
-			self["downspeed"].text = _("%d kb/s") % (torrent.rateDownload / 1024)
+			self["upspeed"].text = _("%d kb/s") % (torrent.rate_upload // 1024)
+			self["downspeed"].text = _("%d kb/s") % (torrent.rate_download // 1024)
 			self["progress"].setValue(int(torrent.progress))
 
 			status = torrent.status
@@ -241,16 +242,16 @@ class EmissionDetailview(Screen, HelpableScreen):
 				peerText = _("check pending")  # ???
 			elif status == 'checking':
 				peerText = _("checking")
-				progressText = str(torrent.recheckProgress)  # XXX: what is this? :D
+				progressText = str(torrent.recheck_progress)  # XXX: what is this? :D
 			elif status == 'downloading':
-				peerText = _("Downloading from %d of %d peers") % (torrent.peersSendingToUs, torrent.peersConnected)
-				progressText = _("Downloaded %d of %d MB (%d%%)") % (torrent.downloadedEver / 1048576, torrent.sizeWhenDone / 1048576, torrent.progress)
+				peerText = _("Downloading from %d of %d peers") % (torrent.peers_sending_to_us, torrent.peers_connected)
+				progressText = _("Downloaded %d of %d MB (%d%%)") % (torrent.downloaded_ever // 1048576, torrent.size_when_done // 1048576, torrent.progress)
 			elif status == 'seeding':
-				peerText = _("Seeding to %d of %d peers") % (torrent.peersGettingFromUs, torrent.peersConnected)
-				progressText = _("Downloaded %d and uploaded %d MB") % (torrent.downloadedEver / 1048576, torrent.uploadedEver / 1048576)
+				peerText = _("Seeding to %d of %d peers") % (torrent.peers_getting_from_us, torrent.peers_connected)
+				progressText = _("Downloaded %d and uploaded %d MB") % (torrent.downloaded_ever // 1048576, torrent.uploaded_ever // 1048576)
 			elif status == 'stopped':
 				peerText = _("stopped")
-				progressText = _("Downloaded %d and uploaded %d MB") % (torrent.downloadedEver / 1048576, torrent.uploadedEver / 1048576)
+				progressText = _("Downloaded %d and uploaded %d MB") % (torrent.downloaded_ever // 1048576, torrent.uploaded_ever // 1048576)
 			self["peers"].text = peerText
 			self["progress_text"].text = progressText
 			self["ratio"].text = _("Ratio: %.2f") % (torrent.ratio)
@@ -259,17 +260,22 @@ class EmissionDetailview(Screen, HelpableScreen):
 			# XXX: we should not need to set this all the time but when we enter this screen we just don't have this piece of information
 			trackers = torrent.trackers
 			if trackers:
-				self["tracker"].text = str(_("Tracker: %s") % (trackers[0]['announce']))
-			self["private"].text = _("Private: %s") % (torrent.isPrivate and _("yes") or _("no"))
+				self["tracker"].text = str(_("Tracker: %s") % (trackers[0].announce))
+			self["private"].text = _("Private: %s") % (torrent.is_private and _("yes") or _("no"))
 
 			l = []
-			files = torrent.files()
-			for id, x in list(files.items()):
-				completed = x['completed']
-				size = x['size'] or 1  # to avoid division by zero ;-)
-				l.append((id, x['priority'], str(completed / 1048576) + " MB",
-					x['selected'], str(x['name']), str(size / 1048576) + " MB",
-					x['selected'] and _("downloading") or _("skipping"),
+			if hasattr(torrent, 'files'):
+				for file_id, file_info in torrent.files().items():
+					completed = file_info['completed']
+					size = file_info['size'] or 1  # Avoid division by zero
+					l.append((
+						file_id,
+						file_info['priority'],
+						f"{completed // 1048576} MB",
+						file_info['selected'],
+						str(file_info['name']),
+						f"{size // 1048576} MB",
+						_("downloading") if file_info['selected'] else _("skipping"),
 					int(100 * (completed / float(size)))
 				))
 
@@ -284,7 +290,7 @@ class EmissionDetailview(Screen, HelpableScreen):
 			self.timer.stop()
 			id = self.torrentid
 			try:
-				torrent = self.transmission.info([id])[id]
+				torrent = self.transmission.get_torrent(id)
 				files = torrent.files()
 
 				# XXX: we need to make sure that at least one file is selected for
@@ -308,8 +314,8 @@ class EmissionDetailview(Screen, HelpableScreen):
 				else:
 					files[cur[0]]['selected'] = True
 
-				self.transmission.set_files({self.torrentid: files})
-			except transmission.TransmissionError as te:
+				self.transmission.set_torrent_files({self.torrentid: files})
+			except TransmissionError as te:
 				self.session.open(
 					MessageBox,
 					_("Error communicating with transmission-daemon: %s.") % (te),

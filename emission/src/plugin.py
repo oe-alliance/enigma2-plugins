@@ -9,7 +9,7 @@ from . import EmissionOverview
 from .EmissionOverview import LIST_TYPE_ALL, SORT_TYPE_ADDED
 
 config.plugins.emission = ConfigSubsection()
-config.plugins.emission.hostname = ConfigText(default="localhost", fixed_size=False)
+config.plugins.emission.hostname = ConfigText(default="127.0.0.1", fixed_size=False)
 config.plugins.emission.username = ConfigText(default="", fixed_size=False)
 config.plugins.emission.password = ConfigText(default="", fixed_size=False)
 config.plugins.emission.port = ConfigNumber(default=9091)
@@ -24,7 +24,7 @@ config.plugins.emission.last_sort = ConfigNumber(default=SORT_TYPE_ADDED)
 import socket
 socket.setdefaulttimeout(10)
 
-from transmissionrpc import Client, TransmissionError
+from transmission_rpc import Client, TransmissionError
 
 NOTIFICATIONID = 'EmissionAutodownloadError'
 
@@ -44,9 +44,9 @@ def simplerss_update_callback(id=None):
 					if file.mimetype == "application/x-bittorrent":
 						if client is None:
 							client = Client(
-								address=config.plugins.emission.hostname.value,
+								host=config.plugins.emission.hostname.value,
 								port=config.plugins.emission.port.value,
-								user=config.plugins.emission.username.value,
+								username=config.plugins.emission.username.value,
 								password=config.plugins.emission.password.value
 							)
 						try:

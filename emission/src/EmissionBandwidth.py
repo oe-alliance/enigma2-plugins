@@ -9,7 +9,7 @@ from Screens.Setup import SetupSummary
 # GUI (Components)
 from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
-
+from Components.Label import Label
 # Configuration
 from Components.config import config, getConfigListEntry, \
 	ConfigNumber, ConfigSelection, ConfigText, ConfigYesNo, NoSave
@@ -28,29 +28,19 @@ class EmissionBandwidth(Screen, ConfigListScreen):
 
 		self.isTorrent = isTorrent
 		if isTorrent:
-			if rpc_version < 5:
-				downloadLimitMode = val.downloadLimitMode
-				uploadLimitMode = val.uploadLimitMode
-				modelist = [(0, _("Global Setting")), (2, _("Unlimited")), (1, _("Limit"))]
-			else:
-				downloadLimitMode = val.downloadLimited
-				uploadLimitMode = val.uploadLimited
-				modelist = [(0, _("Global Setting")), (1, _("Limit"))]  # XXX: this is a pure guess...
+			downloadLimitMode = val.download_limited
+			uploadLimitMode = val.upload_limited
+			modelist = [(0, _("Global Setting")), (1, _("Limit"))]  # XXX: this is a pure guess...
 
 			self.downloadLimitMode = NoSave(ConfigSelection(choices=modelist, default=downloadLimitMode))
-			self.downloadLimit = NoSave(ConfigNumber(default=val.downloadLimit))
+			self.downloadLimit = NoSave(ConfigNumber(default=val.download_limit))
 			self.uploadLimitMode = NoSave(ConfigSelection(choices=modelist, default=uploadLimitMode))
-			self.uploadLimit = NoSave(ConfigNumber(default=val.uploadLimit))
-			self.maxConnectedPeers = NoSave(ConfigNumber(default=val.maxConnectedPeers))
+			self.uploadLimit = NoSave(ConfigNumber(default=val.upload_limit))
+			self.maxConnectedPeers = NoSave(ConfigNumber(default=val.max_connected_peers))
 		else:  # if not isTorrent:
-			if rpc_version < 5:
-				peerLimit = val.peer_limit
-				port = val.port
-				pex_allowed = val.pex_allowed
-			else:
-				peerLimit = val.peer_limit_global
-				port = val.peer_port
-				pex_allowed = val.pex_enabled
+			peerLimit = val.peer_limit_global
+			port = val.peer_port
+			pex_allowed = val.pex_enabled
 
 			self.downloadLimitMode = NoSave(ConfigSelection(choices=[(0, _("Unlimited")), (1, _("Limit"))], default=val.speed_limit_down_enabled))
 			self.downloadLimit = NoSave(ConfigNumber(default=val.speed_limit_down))
@@ -72,7 +62,7 @@ class EmissionBandwidth(Screen, ConfigListScreen):
 		self["key_green"] = StaticText(_("OK"))
 		self["key_red"] = StaticText(_("Cancel"))
 		self.full_title = _("%s bandwidth settings") % (isTorrent and str(val.name) or "eMission")
-
+		self["footnote"] = Label()
 		# Define Actions
 		self["actions"] = ActionMap(["SetupActions"],
 			{
