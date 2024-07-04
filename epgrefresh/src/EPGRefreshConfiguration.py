@@ -67,7 +67,7 @@ class EPGFunctionMenu(FixedMenu):
 		self.skinName = ["EPGRefreshConfigurationFunctionContextMenu", "Menu"]
 
 
-class EPGRefreshConfiguration(Screen, HelpableScreen, ConfigListScreen):
+class EPGRefreshConfiguration(Screen, HelpableConfigListScreen, Screen):
 	"""Configuration of EPGRefresh"""
 
 	skin = """<screen name="EPGRefreshConfiguration" position="center,center" size="700,450">

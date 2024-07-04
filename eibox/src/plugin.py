@@ -299,7 +299,7 @@ class EIBObjects(object):
 		return iter(sorted(list, key=lambda EIBObject: EIBObject.order))
 
 
-class EIBoxZoneScreen(Screen, ConfigListScreen):
+class EIBoxZoneScreen(ConfigListScreen, Screen):
 
 	def __init__(self, session, EIB_objects):
 		skin = """
@@ -538,7 +538,7 @@ class EIBoxZoneScreen(Screen, ConfigListScreen):
 		self.close(gotoZone)
 
 
-class EIBox(Screen, ConfigListScreen):
+class EIBox(ConfigListScreen, Screen):
 	skin = """
 		<screen position="center,center" size="570,420" title="E.I.B.ox" >
 		</screen>"""

@@ -82,7 +82,7 @@ if growlee.hostcount.value == 0:
 del i, growlee
 
 
-class GrowleeConfiguration(Screen, ConfigListScreen):
+class GrowleeConfiguration(ConfigListScreen, Screen):
 	skin = """
 		<screen name="GrowleeConfiguration" position="center,center" size="560,400" title="Growlee Setup" >
 			<ePixmap position="0,0" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />

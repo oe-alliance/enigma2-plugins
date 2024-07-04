@@ -37,7 +37,7 @@ from .Source.MovieConfig import MovieConfig
 from .Source.Globals import SkinTools, printStackTrace
 
 
-class MovieRetitle(Screen, ConfigListScreen):
+class MovieRetitle(ConfigListScreen, Screen):
     def __init__(self, session, service):
         Screen.__init__(self, session)
         self.skinName = SkinTools.appendResolution("AdvancedMovieSelection_Rename_")

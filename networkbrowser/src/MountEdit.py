@@ -25,7 +25,7 @@ except:
 	IMAGEDISTRO = getImageDistro()
 
 
-class AutoMountEdit(Screen, ConfigListScreen):
+class AutoMountEdit(ConfigListScreen, Screen):
 	skin = """
 		<screen name="AutoMountEdit" position="center,center" size="560,450" title="MountEdit">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />

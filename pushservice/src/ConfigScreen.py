@@ -56,7 +56,7 @@ from .ControllerBase import ControllerBase
 
 #######################################################
 # Configuration screen
-class ConfigScreen(Screen, ConfigListScreen, HelpableScreen, PushServiceBase):
+class ConfigScreen(ConfigListScreen, Screen, HelpableScreen, PushServiceBase):
 
 	skinfile = os.path.join(resolveFilename(SCOPE_PLUGINS), "Extensions/PushService/skin.xml")
 	skin = open(skinfile).read()

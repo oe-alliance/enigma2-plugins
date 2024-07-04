@@ -58,7 +58,7 @@ def Plugins(**kwargs):
 		PluginDescriptor(name="Babelzapper", description=_("Mute button remote control"), where=PluginDescriptor.WHERE_PLUGINMENU, icon="babelzapper.png", fnc=main)]
 
 
-class BabelzapperConfiguration(Screen, ConfigListScreen):
+class BabelzapperConfiguration(ConfigListScreen, Screen):
 	skin = """
 		<screen position="center,center" size="450,240" title="Babelzapper Plugin" >
 		<widget name="config" position="0,0" size="450,200" scrollbarMode="showOnDemand" />

@@ -587,7 +587,7 @@ class MC_VLCFavoriteFolders(Screen):
 #------------------------------------------------------------------------------------------
 
 
-class FavoriteFolderAdd(Screen, ConfigListScreen):
+class FavoriteFolderAdd(ConfigListScreen, Screen):
 	skin = """
 		<screen position="160,220" size="400,120" title="Media Center - Add VLC Favorite" >
 			<widget name="config" position="10,10" size="380,100" />
@@ -632,7 +632,7 @@ class FavoriteFolderAdd(Screen, ConfigListScreen):
 #------------------------------------------------------------------------------------------
 
 
-class FavoriteFolderEdit(Screen, ConfigListScreen):
+class FavoriteFolderEdit(ConfigListScreen, Screen):
 	skin = """
 		<screen position="160,220" size="400,120" title="Media Center - Edit VLC Favorite" >
 			<widget name="config" position="10,10" size="380,100" />

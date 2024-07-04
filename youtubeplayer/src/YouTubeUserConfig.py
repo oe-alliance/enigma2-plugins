@@ -123,7 +123,7 @@ class __YouTubeUserConfig():
 youTubeUserConfig = __YouTubeUserConfig()
 
 
-class YouTubeUserConfigScreen(Screen, ConfigListScreen):
+class YouTubeUserConfigScreen(ConfigListScreen, Screen):
 	def __init__(self, session, user):
 		Screen.__init__(self, session)
 		self.user = user

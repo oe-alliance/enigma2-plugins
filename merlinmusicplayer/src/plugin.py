@@ -2801,7 +2801,7 @@ class MerlinMusicPlayerLCDScreenText(Screen):
             self["text4"].setText(text)
 
 
-class MerlinMusicPlayerSetup(Screen, ConfigListScreen):
+class MerlinMusicPlayerSetup(ConfigListScreen, Screen):
 
     def __init__(self, session, databasePath):
         Screen.__init__(self, session)

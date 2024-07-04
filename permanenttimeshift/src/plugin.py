@@ -1735,7 +1735,7 @@ InfoBarInstantRecord.recordQuestionCallback = recordQuestionCallback
 ############################
 
 
-class PermanentTimeShiftSetup(Screen, ConfigListScreen):
+class PermanentTimeShiftSetup(ConfigListScreen, Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.skinName = ["PTSSetup", "Setup"]

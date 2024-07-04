@@ -91,7 +91,7 @@ class EPGSearchSetup(Setup):
 		Setup.keySave(self)
 
 
-class _EPGSearchSetup(Screen, ConfigListScreen):
+class _EPGSearchSetup(ConfigListScreen, Screen):
 	skin = """<screen name="EPGSearchSetup" position="center,center" size="565,370">
 		<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 		<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />

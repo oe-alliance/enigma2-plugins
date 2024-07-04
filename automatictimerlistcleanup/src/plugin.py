@@ -37,7 +37,7 @@ config.plugins.automatictimerlistcleanup = ConfigSubsection()
 config.plugins.automatictimerlistcleanup.type = ConfigSelection(default="-1", choices=[("-1", _("disabled")), ("0", _("immediately after recording")), ("1", _("older than 1 day")), ("3", _("older than 3 days")), ("7", _("older than 1 week")), ("14", _("older than 2 weeks")), ("28", _("older than 4 weeks")), ("42", _("older than 6 weeks"))])
 
 
-class AutomaticTimerlistCleanUpSetup(Screen, ConfigListScreen):  # config
+class AutomaticTimerlistCleanUpSetup(ConfigListScreen, Screen):  # config
 
 	skin = """
 		<screen position="center,center" size="560,400" title="%s" >

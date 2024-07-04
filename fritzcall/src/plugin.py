@@ -1866,7 +1866,7 @@ class FritzCallPhonebook(object):
 				self.session.open(MessageBox, _("No entry selected"), MessageBox.TYPE_INFO)
 
 		def add(self, parent=None, number="", name=""):
-			class AddScreen(Screen, ConfigListScreen):
+			class AddScreen(ConfigListScreen, Screen):
 				'''ConfiglistScreen with two ConfigTexts for Name and Number'''
 
 				def __init__(self, session, parent, number="", name=""):
@@ -2022,7 +2022,7 @@ class FritzCallPhonebook(object):
 phonebook = FritzCallPhonebook()
 
 
-class FritzCallSetup(Screen, ConfigListScreen, HelpableScreen):
+class FritzCallSetup(ConfigListScreen, Screen, HelpableScreen):
 
 	def __init__(self, session, args=None):  # @UnusedVariable # pylint: disable=W0613
 		if DESKTOP_WIDTH <= 720:

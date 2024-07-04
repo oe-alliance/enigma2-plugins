@@ -387,7 +387,7 @@ class TVChartsMain(Screen):
 ############################
 
 
-class TVChartsSetup(Screen, ConfigListScreen):
+class TVChartsSetup(ConfigListScreen, Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.skinName = ["TVChartsSetup", "Setup"]

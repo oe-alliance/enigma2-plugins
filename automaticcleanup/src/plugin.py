@@ -106,7 +106,7 @@ config.plugins.AutomaticCleanup.deleteTimersOlderThan = ConfigSelection(default=
 config.plugins.AutomaticCleanup.deleteOrphanedMovieFiles = ConfigYesNo(default=False)
 
 
-class AutomaticCleanupSetup(Screen, ConfigListScreen):  # config
+class AutomaticCleanupSetup(ConfigListScreen, Screen):  # config
 
 	skin = """
 		<screen name="SystemCleanup" position="center,center" size="630,315" title="Automatic System Cleanup Setup" >

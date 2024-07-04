@@ -484,7 +484,7 @@ class MC_VideoPlayer(Screen, HelpableScreen, TMDB):
 		self.close()
 
 
-class VideoPlayerSettings(Screen, ConfigListScreen):
+class VideoPlayerSettings(ConfigListScreen, Screen):
 	if getDesktop(0).size().width() == 1920:
 		skin = """
 			<screen position="160,220" size="800,240" title="Media Center - VideoPlayer Settings" >

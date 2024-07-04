@@ -611,7 +611,7 @@ class NetworkBrowser(Screen):
 			self.updateNetworkList()
 
 
-class ScanIP(Screen, ConfigListScreen):
+class ScanIP(ConfigListScreen, Screen):
 	skin = """
 		<screen name="ScanIP" position="center,center" size="560,80" title="Scan IP" >
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />

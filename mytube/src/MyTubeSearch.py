@@ -288,7 +288,7 @@ class MyTubeSuggestionsListScreen(Screen):
 		self["suggestionslist"].selectionEnabled(value)
 
 
-class MyTubeSettingsScreen(Screen, ConfigListScreen):
+class MyTubeSettingsScreen(ConfigListScreen, Screen):
 	skin = """
 		<screen name="MyTubeSettingsScreen" flags="wfNoBorder" position="0,0" size="720,576" title="MyTube - Settings" >
 			<ePixmap position="0,0" zPosition="-1" size="720,576" pixmap="~/mytubemain_bg.png" alphatest="on" transparent="1" backgroundColor="transparent"/>

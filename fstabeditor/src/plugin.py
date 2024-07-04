@@ -176,7 +176,7 @@ class fstabViewerScreen(Screen, HelpableScreen):
 		self.buildScreen()
 
 
-class fstabEditorScreen(Screen, ConfigListScreen, HelpableScreen):
+class fstabEditorScreen(ConfigListScreen, Screen, HelpableScreen):
 	skin = """
 		<screen position="center,center" size="600,380" title="fstab-Editor" >
 			<widget itemHeight="28" name="config" position="0,40" size="600,224" scrollbarMode="showOnDemand"/>

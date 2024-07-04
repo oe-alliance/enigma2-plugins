@@ -39,7 +39,7 @@ playlistContext.description = ConfigText(_("Description"), False)
 playlistContext.private = ConfigYesNo()
 
 
-class YouTubeAddPlaylistDialog(Screen, ConfigListScreen):
+class YouTubeAddPlaylistDialog(ConfigListScreen, Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 

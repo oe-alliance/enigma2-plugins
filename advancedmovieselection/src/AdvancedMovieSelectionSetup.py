@@ -609,7 +609,7 @@ class AdvancedMovieSelectionSetup(ConfigListScreen, Screen):
         self.session.open(RecordPathsSettings)
 
 
-class AdvancedMovieSelectionButtonSetup(Screen, ConfigListScreen):
+class AdvancedMovieSelectionButtonSetup(ConfigListScreen, Screen):
     def __init__(self, session, csel=None):
         Screen.__init__(self, session)
         self.csel = csel
@@ -1030,7 +1030,7 @@ class AdvancedMovieSelectionButtonSetup(Screen, ConfigListScreen):
         self.session.openWithCallback(self.createConfig, AdvancedMovieSelectionOwnButtonName)
 
 
-class AdvancedMovieSelectionOwnButtonName(Screen, ConfigListScreen):
+class AdvancedMovieSelectionOwnButtonName(ConfigListScreen, Screen):
     def __init__(self, session):
         Screen.__init__(self, session)
         self.skinName = SkinTools.appendResolution("AdvancedMovieSelectionOwnButtonName")

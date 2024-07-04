@@ -197,7 +197,7 @@ config.networkbrowser.automountpolltimer = ConfigSelection(default="1", choices=
 	("21", "21"), ("22", "22"), ("23", "23"), ("24", "24")])
 
 
-class MountManagerMenu(Screen, ConfigListScreen):
+class MountManagerMenu(ConfigListScreen, Screen):
 	def __init__(self, session):
 		from Components.Sources.StaticText import StaticText
 		Screen.__init__(self, session)

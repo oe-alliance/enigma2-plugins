@@ -25,7 +25,7 @@ def Plugins(**kwargs):
 	return PluginDescriptor(name="MovieRetitle", description=_("change name..."), where=PluginDescriptor.WHERE_MOVIELIST, fnc=main)
 
 
-class MovieRetitle(Screen, ConfigListScreen):
+class MovieRetitle(ConfigListScreen, Screen):
 	def __init__(self, session, service, parent, args=0):
 		Screen.__init__(self, session, parent=parent)
 		self.skinName = ["MovieRetitle", "Setup"]

@@ -533,7 +533,7 @@ class ResolutionLabel(Screen):
 		self.hideTimer.start(config.usage.infobar_timeout.index * 2000, True)
 
 
-class AutoResSetupMenu(Screen, ConfigListScreen):
+class AutoResSetupMenu(ConfigListScreen, Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.skinName = ["AutoResSetupMenu", "Setup"]

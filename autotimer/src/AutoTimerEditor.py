@@ -431,7 +431,7 @@ if getDesktop(0).size().width() >= 1280:
 	HD = True
 
 
-class AutoTimerEditor(Screen, ConfigListScreen, AutoTimerEditorBase):
+class AutoTimerEditor(ConfigListScreen, Screen, AutoTimerEditorBase):
 	"""Edit AutoTimer"""
 	if HD:
 		skin = """<screen name="AutoTimerEditor" title="Edit AutoTimer" position="center,center" size="700,572">
@@ -1174,7 +1174,7 @@ class ConfigRegex(ConfigText):
 		ConfigText.setValue(self, val)
 
 
-class AutoTimerFilterEditor(Screen, ConfigListScreen):
+class AutoTimerFilterEditor(ConfigListScreen, Screen):
 	"""Edit AutoTimer Filter"""
 
 	skin = """<screen name="AutoTimerFilterEditor" title="Edit AutoTimer Filters" position="center,center" size="565,280">
@@ -1396,7 +1396,7 @@ class AutoTimerFilterEditor(Screen, ConfigListScreen):
 		))
 
 
-class AutoTimerServiceEditor(Screen, ConfigListScreen):
+class AutoTimerServiceEditor(ConfigListScreen, Screen):
 	"""Edit allowed Services of a AutoTimer"""
 
 	skin = """<screen name="AutoTimerServiceEditor" title="Edit AutoTimer Services" position="center,center" size="565,280">

@@ -717,7 +717,7 @@ class VirtualZap(Screen):
 			})
 
 
-class VirtualZapConfig(Screen, ConfigListScreen):
+class VirtualZapConfig(ConfigListScreen, Screen):
 
 	skin = """
 		<screen position="center,center" size="560,180" title="Virtual Zap Config" >

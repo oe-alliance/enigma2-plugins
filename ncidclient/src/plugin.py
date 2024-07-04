@@ -563,7 +563,7 @@ class NcidClientPhonebook:
 				self.session.open(MessageBox, _("No entry selected"), MessageBox.TYPE_INFO)
 
 		def add(self, parent=None, number="", name=""):
-			class AddScreen(Screen, ConfigListScreen):
+			class AddScreen(ConfigListScreen, Screen):
 				'''ConfiglistScreen with two ConfigTexts for Name and Number'''
 
 				def __init__(self, session, parent, number="", name=""):
@@ -679,7 +679,7 @@ class NcidClientPhonebook:
 phonebook = NcidClientPhonebook()
 
 
-class NcidClientSetup(Screen, ConfigListScreen):
+class NcidClientSetup(ConfigListScreen, Screen):
 
 	def __init__(self, session, args=None):  # @UnusedVariable # pylint: disable=W0613
 		self.width = scaleH(20 + 4 * (140 + 90) + 2 * (35 + 40) + 20, 4 * 140 + 2 * 35)

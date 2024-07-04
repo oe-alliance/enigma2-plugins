@@ -204,7 +204,7 @@ class CutTask(Task):
 		self.session.open(MessageBox, msg % self.name, type=MessageBox.TYPE_ERROR if self.returncode else MessageBox.TYPE_INFO, timeout=10)
 
 
-class AdvancedCutInput(Screen, ConfigListScreen):
+class AdvancedCutInput(ConfigListScreen, Screen):
 	def __init__(self, session, name, path, descr):
 		Screen.__init__(self, session)
 		self.skinName = ["AdvancedCutInput", "Setup"]

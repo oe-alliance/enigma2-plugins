@@ -234,7 +234,7 @@ class E2Timer:
 		self.hasEndTime = timeend != 0
 
 
-class RemoteTimerSetup(Screen, ConfigListScreen):
+class RemoteTimerSetup(ConfigListScreen, Screen):
 	skin = """
 		<screen position="center,center" size="560,410" title="Settings" >
 			<widget name="config" position="5,40" size="480,335" scrollbarMode="showOnDemand" />

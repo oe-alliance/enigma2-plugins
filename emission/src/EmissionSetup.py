@@ -13,7 +13,7 @@ from Components.Label import Label
 from Components.config import config, getConfigListEntry
 
 
-class EmissionSetup(Screen, ConfigListScreen):
+class EmissionSetup(ConfigListScreen, Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.skinName = ["EmissionSetup", "Setup"]

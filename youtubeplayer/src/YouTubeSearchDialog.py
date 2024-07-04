@@ -244,7 +244,7 @@ FAVORITES = 4
 CANCEL = 5
 
 
-class YouTubeSearchDialog(Screen, ConfigListScreen):
+class YouTubeSearchDialog(ConfigListScreen, Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 

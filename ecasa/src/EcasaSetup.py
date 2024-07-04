@@ -13,7 +13,7 @@ from Components.Sources.StaticText import StaticText
 from Components.config import config, getConfigListEntry
 
 
-class EcasaSetup(Screen, ConfigListScreen):
+class EcasaSetup(ConfigListScreen, Screen):
 	skin = """<screen name="EcasaSetup" position="center,center" size="565,370">
 		<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 		<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />

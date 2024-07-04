@@ -15,7 +15,7 @@ from Components.config import config, getConfigListEntry, \
 	ConfigNumber, ConfigSelection, ConfigText, ConfigYesNo, NoSave
 
 
-class EmissionBandwidth(Screen, ConfigListScreen):
+class EmissionBandwidth(ConfigListScreen, Screen):
 	def __init__(self, session, val, isTorrent, rpc_version):
 		Screen.__init__(self, session)
 		self.skinName = ["EmissionBandwith", "Setup"]

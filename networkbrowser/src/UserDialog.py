@@ -54,7 +54,7 @@ def load_cache(cache_file):
 	return cache_data
 
 
-class UserDialog(Screen, ConfigListScreen):
+class UserDialog(ConfigListScreen, Screen):
 	skin = """
 		<screen name="UserDialog" position="center,center" size="560,300" title="UserDialog">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />

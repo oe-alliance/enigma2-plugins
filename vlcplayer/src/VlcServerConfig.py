@@ -390,7 +390,7 @@ class __VlcServerConfig():
 vlcServerConfig = __VlcServerConfig()
 
 
-class VlcServerConfigScreen(Screen, ConfigListScreen):
+class VlcServerConfigScreen(ConfigListScreen, Screen):
 	skin = """
 		<screen name="VlcServerConfigScreen" position="80,100" size="560,320" title="Edit VLC Server">
 			<widget name="config" position="10,10" size="540,250" scrollbarMode="showOnDemand" />

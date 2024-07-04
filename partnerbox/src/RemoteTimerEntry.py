@@ -40,7 +40,7 @@ from xml.etree.cElementTree import fromstring, tostring, parse
 from .PartnerboxFunctions import PlaylistEntry, SetPartnerboxTimerlist, sendPartnerBoxWebCommand, getServiceRef, CurrentIP, readSkin, applySkinVars, FHD, SCALE, SKINFILE, PLUGINPATH
 
 
-class RemoteTimerEntry(Screen, ConfigListScreen):
+class RemoteTimerEntry(ConfigListScreen, Screen):
 	skin = readSkin("RemoteTimerEntry")
 
 	def __init__(self, session, timer, Locations):

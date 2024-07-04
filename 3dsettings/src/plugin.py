@@ -171,7 +171,7 @@ class AutoThreeD(Screen):
 		self.lastmode = mode
 
 
-class ThreeDSettings(Screen, ConfigListScreen):
+class ThreeDSettings(ConfigListScreen, Screen):
 	skin = """
 		<screen position="center,center" size="570,420" title="3D settings" >
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />

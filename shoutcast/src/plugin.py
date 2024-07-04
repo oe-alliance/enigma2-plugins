@@ -1251,7 +1251,7 @@ class SHOUTcastLCDScreen(Screen):
 		self["text2"].setText(text[0:39])
 
 
-class SHOUTcastSetup(Screen, ConfigListScreen):
+class SHOUTcastSetup(ConfigListScreen, Screen):
 
 	skin = """
 		<screen position="center,center" size="600,400" title="SHOUTcast Setup" >

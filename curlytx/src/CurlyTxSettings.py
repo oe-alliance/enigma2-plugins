@@ -202,7 +202,7 @@ class CurlyTxSettings(ConfigListScreen, HelpableScreen, Screen):
             cfg.pages.append(createPage())
 
 
-class CurlyTxPageEdit(Screen, ConfigListScreen):
+class CurlyTxPageEdit(ConfigListScreen, Screen):
     def __init__(self, session, page, new=False):
         Screen.__init__(self, session)
         self.skinName = ["CurlyTxPageEdit", "Setup"]

@@ -54,7 +54,7 @@ def initializeConfig():
         setColorSpace(value)
 
 
-class VideoColorSpace(Screen, ConfigListScreen):
+class VideoColorSpace(ConfigListScreen, Screen):
     skin = """
         <screen name="VideoColorSpace" position="center,center" size="560,440" title="Video color space setup">
             <ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />

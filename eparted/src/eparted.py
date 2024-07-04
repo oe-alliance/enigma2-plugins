@@ -187,7 +187,7 @@ class Ceparted(Screen):
 #-------------------------------------------------------------------------------------
 
 
-class AddPart(Screen, ConfigListScreen):
+class AddPart(ConfigListScreen, Screen):
 	skin = """<screen name="AddPart" position="center,center" size="600,190" title="add Partition" >
 			<ePixmap pixmap="skin_default/buttons/red.png" position="5,5" zPosition="0" size="140,40" transparent="1" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="155,5" zPosition="0" size="140,40" transparent="1" alphatest="on" />

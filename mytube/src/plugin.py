@@ -198,7 +198,7 @@ class downloadTask(Task):
 			Task.processFinished(self, 1)
 
 
-class MyTubePlayerMainScreen(Screen, ConfigListScreen):
+class MyTubePlayerMainScreen(ConfigListScreen, Screen):
 	BASE_STD_FEEDURL = "http://gdata.youtube.com/feeds/api/standardfeeds/"
 	Details = {}
 	#(entry, Title, Description, TubeID, thumbnail, PublishedDate,Views,duration,ratings )

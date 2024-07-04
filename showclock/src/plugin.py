@@ -87,7 +87,7 @@ if debug:
 ##############################################################################
 
 
-class ShowClockSetup(Screen, ConfigListScreen):  # config
+class ShowClockSetup(ConfigListScreen, Screen):  # config
 
 	skin = """
 		<screen name="ShowClock" position="center,center" size="600,290" title="Show Clock Setup" >

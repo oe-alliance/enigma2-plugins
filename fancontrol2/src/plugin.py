@@ -342,7 +342,7 @@ class ControllerPI:
 # the PI controller class -end
 
 
-class FanControl2Test(Screen, ConfigListScreen):
+class FanControl2Test(ConfigListScreen, Screen):
 	skin = """
 		<screen position="center,center" size="630,300" title="Fan Control 2 - Test" >
 			<widget source="TextTest1" render="Label" position="5,20" size="620,30" zPosition="10" font="Regular;20" halign="left" valign="center" backgroundColor="#25062748" transparent="1" />
@@ -471,7 +471,7 @@ class FanControl2Test(Screen, ConfigListScreen):
 		self.close(False, self.session)
 
 
-class FanControl2Monitor(Screen, ConfigListScreen):
+class FanControl2Monitor(ConfigListScreen, Screen):
 	skin = """
 		<screen position="center,center" size="600,260" title="Fan Control 2 - Monitor">
 
@@ -561,7 +561,7 @@ class FanControl2Monitor(Screen, ConfigListScreen):
 						(stat, wert) = getstatusoutput("hdparm -y %s" % hdd[1].getDeviceName())
 
 
-class FanControl2SpezialSetup(Screen, ConfigListScreen):
+class FanControl2SpezialSetup(ConfigListScreen, Screen):
 	skin = """
 		<screen position="center,center" size="600,380" title="Fan Control 2 - Setup" >
 			<widget name="config" position="10,20" size="580,350" scrollbarMode="showOnDemand" />

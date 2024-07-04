@@ -40,7 +40,7 @@ class SimpleBouquetSelection(SimpleChannelSelection):
 			self.close(self.servicePath[-1])
 
 
-class EPGRefreshServiceEditor(Screen, ConfigListScreen):
+class EPGRefreshServiceEditor(ConfigListScreen, Screen):
 	"""Edit Services to be refreshed by EPGRefresh"""
 
 	skin = """<screen name="EPGRefreshServiceEditor" title="Edit Services to refresh" position="center,center" size="565,280">
