@@ -29,7 +29,7 @@ from .plugin import gUserScriptExists
 from .plugin import epgbackup
 
 
-class EPGBackupConfig(Screen, HelpableConfigListScreen, Screen):
+class EPGBackupConfig(ConfigListScreen, Screen, HelpableScreen):
 	skin = """
 		<screen name="EPGBackupSetup" position="center,center" size="700,520" >
 			<ePixmap position="0,0" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
