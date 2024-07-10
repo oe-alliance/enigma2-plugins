@@ -659,6 +659,7 @@ class PBtimer:  # for details see JSON-result from {box-ip}/api/timerlist
 			self.tags = timer.tags
 			self.dirname = timer.dirname or ""
 			self.always_zap = timer.always_zap
+			self.external = timer.external
 		else:
 			self.service_ref = kwargs.get("service_ref", _("No servicereference available"))
 			self.begin = kwargs.get("begin", 0)  # NOTE: begin = eventBegin - marginBefore
@@ -679,6 +680,7 @@ class PBtimer:  # for details see JSON-result from {box-ip}/api/timerlist
 			self.tags = kwargs.get("tags", [])
 			self.dirname = kwargs.get("dirname", "None")
 			self.always_zap = kwargs.get("always_zap", 0)
+			self.external = kwargs.get("external", False)
 
 		self.service_name = kwargs.get("service_name", _("No servicename available"))
 		self.disabled = kwargs.get("disabled", 0)
