@@ -25,7 +25,7 @@ import traceback
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
 # Plugin framework
-import imp
+import importlib.util
 import inspect
 
 # Plugin internal
@@ -61,7 +61,7 @@ class Modules(object):
 		files = [fname[:-3] for fname in os.listdir(path) if fname.endswith(".py") and not fname.startswith("__")]  # FIXME pyc
 		log.debug(files)
 		if not files:
-			files = [fname[:-4] for fname in os.listdir(path) if fname.endswith(".pyo")]
+			files = [fname[:-4] for fname in os.listdir(path) if fname.endswith(".pyc")]
 			log.debug(files)
 
 		# Import modules
@@ -71,24 +71,21 @@ class Modules(object):
 			if name == "__init__":
 				continue
 
+			spec = None
 			try:
-				fp, pathname, description = imp.find_module(name, [path])
+				spec = importlib.util.find_spec(name, [path])
 			except Exception as e:
 				log.debug("[SP Modules] Find module exception: " + str(e))
-				fp = None
 
-			if not fp:
+			if spec is None:
 				log.debug("[SP Modules] No module found: " + str(name))
 				continue
 
 			try:
-				module = imp.load_module(name, fp, pathname, description)
+				module = importlib.util.module_from_spec(spec)
+				spec.loader.exec_module(module)
 			except Exception as e:
 				log.debug("[SP Modules] Load exception: " + str(e))
-			finally:
-				# Since we may exit via an exception, close fp explicitly.
-				if fp:
-					fp.close()
 
 			if not module:
 				log.debug("[SP Modules] No module available: " + str(name))

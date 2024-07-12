@@ -131,14 +131,16 @@ def getInstance():
 
 		# Check dependencies
 		start = True
-		from imp import find_module
+		import importlib.util
 		dependencies = ["difflib", "json", "re", "xml", "xmlrpc"]
 		for dependency in dependencies:
 			try:
-				find_module(dependency)
+				spec = importlib.util.find_spec(dependency)
+				if spec is None:
+					log.error(f"Module {dependency} not found")
 			except ImportError:
 				start = False
-				log.error(_("Error missing dependency") + "\n" + "python3-" + dependency + "\n\n" + _("Please install missing python paket manually"))
+				log.error("Error missing dependency\npython3-" + dependency + "\n\nPlease install the missing python package manually")
 		if start:
 			instance = SeriesPlugin()
 
