@@ -23,7 +23,7 @@ import sys
 import traceback
 
 # Plugin framework
-import imp
+import importlib.util
 import inspect
 
 # Plugin internal
@@ -59,24 +59,21 @@ class Modules(object):
 			if name == "__init__":
 				continue
 
+			spec = None
 			try:
-				fp, pathname, description = imp.find_module(name, [path])
+				spec = importlib.util.find_spec(name, [path])
 			except Exception as e:
-				print(_("PushService Find module exception: ") + str(e))
-				fp = None
+				print("PushService Find module exception: " + str(e))
 
-			if not fp:
-				print(_("PushService No module found: ") + str(name))
+			if spec is None:
+				print("PushService No module found: " + str(name))
 				continue
 
 			try:
-				module = imp.load_module(name, fp, pathname, description)
+				module = importlib.util.module_from_spec(spec)
+				spec.loader.exec_module(module)
 			except Exception as e:
-				print(_("PushService Load exception: ") + str(e))
-			finally:
-				# Since we may exit via an exception, close fp explicitly.
-				if fp:
-					fp.close()
+				print("PushService Load exception: " + str(e))
 
 			if not module:
 				print(_("PushService No module available: ") + str(name))
