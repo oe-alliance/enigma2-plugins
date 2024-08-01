@@ -43,7 +43,7 @@ class MSNWeatherPixmap(Renderer):
 				break
 		sc = AVSwitch().getFramebufferScale()
 		self._aspectRatio = eSize(sc[0], sc[1])
-		self.picload.setPara((self._scaleSize.width(), self._scaleSize.height(), sc[0], sc[1], True, 2, '#ff000000'))
+		self.picload.setPara((self._scaleSize.width(), self._scaleSize.height(), sc[0], sc[1], True, 2, '#00111111'))
 
 	def disconnectAll(self):
 		self.picload.PictureData.get().remove(self.paintIconPixmapCB)

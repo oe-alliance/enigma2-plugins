@@ -268,7 +268,7 @@ class WeatherIcon(Pixmap):
 		sc = AVSwitch().getFramebufferScale()
 		self._aspectRatio = eSize(sc[0], sc[1])
 		self._scaleSize = self.instance.size()
-		self.picload.setPara((self._scaleSize.width(), self._scaleSize.height(), sc[0], sc[1], True, 2, '#ff000000'))
+		self.picload.setPara((self._scaleSize.width(), self._scaleSize.height(), sc[0], sc[1], True, 2, '#00111111'))
 
 	def paintIconPixmapCB(self, picInfo=None):
 		ptr = self.picload.getData()
