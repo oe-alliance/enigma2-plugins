@@ -168,6 +168,7 @@ class MSNWeather:
 
 	def xmlCallback(self, xmlstring):
 		IconDownloadList = []
+		xmlstring = (str(xmlstring.decode())).replace("utf-16", "utf-8")
 		root = cet_fromstring(xmlstring)
 		index = 0
 		self.degreetype = "C"
