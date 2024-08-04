@@ -24,6 +24,7 @@ from Components.Renderer.Renderer import Renderer
 from enigma import ePixmap
 from Components.AVSwitch import AVSwitch
 from enigma import eEnv, ePicLoad, eRect, eSize, gPixmapPtr
+from skin import parseColor
 
 
 class MSNWeatherPixmap(Renderer):
@@ -32,6 +33,7 @@ class MSNWeatherPixmap(Renderer):
 		self.picload = ePicLoad()
 		self.picload.PictureData.get().append(self.paintIconPixmapCB)
 		self.iconFileName = ""
+		self.backgroundColor = 0x000000
 
 	GUI_WIDGET = ePixmap
 
@@ -41,9 +43,13 @@ class MSNWeatherPixmap(Renderer):
 				x, y = value.split(',')
 				self._scaleSize = eSize(int(x), int(y))
 				break
+		for (attrib, value) in self.skinAttributes:
+			if attrib == "backgroundColor":
+				self.backgroundColor = parseColor(value).argb()
+				break
 		sc = AVSwitch().getFramebufferScale()
 		self._aspectRatio = eSize(sc[0], sc[1])
-		self.picload.setPara((self._scaleSize.width(), self._scaleSize.height(), sc[0], sc[1], True, 2, '#00111111'))
+		self.picload.setPara((self._scaleSize.width(), self._scaleSize.height(), sc[0], sc[1], True, 2, "#%08x" % self.backgroundColor))
 
 	def disconnectAll(self):
 		self.picload.PictureData.get().remove(self.paintIconPixmapCB)
