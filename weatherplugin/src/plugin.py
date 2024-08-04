@@ -34,6 +34,7 @@ from Components.AVSwitch import AVSwitch
 from Components.config import ConfigSubsection, ConfigSubList, ConfigInteger, config
 from .setup import initConfig, MSNWeatherPluginEntriesListConfigScreen
 from .MSNWeather import MSNWeather
+from skin import parseColor
 import time
 
 try:
@@ -262,13 +263,14 @@ class WeatherIcon(Pixmap):
 		self.IconFileName = ""
 		self.picload = ePicLoad()
 		self.picload.PictureData.get().append(self.paintIconPixmapCB)
+		self.backgroundColor = 0x000000
 
 	def onShow(self):
 		Pixmap.onShow(self)
 		sc = AVSwitch().getFramebufferScale()
 		self._aspectRatio = eSize(sc[0], sc[1])
 		self._scaleSize = self.instance.size()
-		self.picload.setPara((self._scaleSize.width(), self._scaleSize.height(), sc[0], sc[1], True, 2, '#00111111'))
+		self.picload.setPara((self._scaleSize.width(), self._scaleSize.height(), sc[0], sc[1], True, 2, "#%08x" % self.backgroundColor))
 
 	def paintIconPixmapCB(self, picInfo=None):
 		ptr = self.picload.getData()
@@ -298,3 +300,15 @@ class WeatherIcon(Pixmap):
 		if (self.IconFileName != new_IconFileName):
 			self.IconFileName = new_IconFileName
 			self.picload.startDecode(self.IconFileName)
+
+	def applySkin(self, desktop, screen):
+		self.desktop = desktop
+		attribs = []
+		for (attrib, value) in self.skinAttributes[:]:
+			if attrib == "backgroundColor":
+				self.backgroundColor = parseColor(value).argb()
+			else:
+				attribs.append((attrib, value))
+		self.skinAttributes = attribs
+		return Pixmap.applySkin(self, desktop, screen)
+
