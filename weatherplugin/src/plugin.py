@@ -311,4 +311,3 @@ class WeatherIcon(Pixmap):
 				attribs.append((attrib, value))
 		self.skinAttributes = attribs
 		return Pixmap.applySkin(self, desktop, screen)
-
