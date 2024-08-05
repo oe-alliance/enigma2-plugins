@@ -51,7 +51,10 @@ class MSNWeatherPixmap(Renderer):
 		if (self.iconFileName != new_IconFileName):
 			self.iconFileName = new_IconFileName
 			self.pix = LoadPixmap(self.iconFileName)
-			self.instance.setPixmapScale(BT_SCALE | BT_KEEP_ASPECT_RATIO)
+			try:
+				self.instance.setPixmapScale(BT_SCALE | BT_KEEP_ASPECT_RATIO)
+			except:
+				self.instance.setScale(1)
 			self.instance.setPixmap(self.pix)
 
 	def changed(self, what):

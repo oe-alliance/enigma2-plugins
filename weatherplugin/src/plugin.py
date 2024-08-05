@@ -270,5 +270,8 @@ class WeatherIcon(Pixmap):
 		if (self.IconFileName != new_IconFileName):
 			self.IconFileName = new_IconFileName
 			self.pix = LoadPixmap(self.IconFileName)
-			self.instance.setPixmapScale(BT_SCALE | BT_KEEP_ASPECT_RATIO)
+			try:
+				self.instance.setPixmapScale(BT_SCALE | BT_KEEP_ASPECT_RATIO)
+			except:
+				self.instance.setScale(1)
 			self.instance.setPixmap(self.pix)
