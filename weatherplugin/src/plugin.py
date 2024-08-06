@@ -209,12 +209,8 @@ class MSNWeatherPlugin(Screen):
 					self["condition"].text = item.skytext
 					self["humidity"].text = _("Humidity: %s %%") % item.humidity
 					self["wind_condition"].text = item.winddisplay
-					try:
-						c = time.strptime(item.observationtime, "%H:%M:%S")
-						self["observationtime"].text = _("Observation time: %s") % time.strftime("%H:%M", c)
-					except:
-						c = time.strptime(item.observationtime, "%H.%M.%S")
-						self["observationtime"].text = _("Observation time: %s") % time.strftime("%H.%M", c)
+					c = time.strptime(item.observationtime, "%X")
+					self["observationtime"].text = _("Observation time: %s") % time.strftime("%X", c)[:5]
 					self["observationpoint"].text = _("Observation point: %s") % item.observationpoint
 					self["feelsliketemp"].text = _("Feels like %s") % item.feelslike + "°" + self.weatherData.degreetype
 				else:
