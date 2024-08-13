@@ -130,12 +130,8 @@ class ChangePasswdScreen(Screen):
 
 
 def startChange(menuid):
-	if IMAGEDISTRO in ('teamblue'):
-		if menuid != "general_menu":
-			return []
-	else:
-		if menuid != "system":
-			return []
+	if menuid != "system":
+		return []
 	return [(title, main, "change_root_passwd", 50)]
 
 

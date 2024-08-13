@@ -869,8 +869,11 @@ def autostart(reason, **kwargs):
 
 
 def startSetup(menuid):
-	if IMAGEDISTRO in ('teamblue', 'openhdf'):
+	if IMAGEDISTRO in ('openhdf'):
 		if menuid != "video_menu":
+			return []
+	elif IMAGEDISTRO in ('teamblue'):
+		if menuid != "video":
 			return []
 	elif IMAGEDISTRO in ('openbh', 'openvix'):
 		if menuid != "av":
