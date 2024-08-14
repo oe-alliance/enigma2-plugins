@@ -596,7 +596,6 @@ class RSS_FeedView(RSSBaseView):  # Shows a RSS-Feed
 		self["content"] = List([])
 		self["summary"] = StaticText()
 		self["info"] = StaticText()
-		self["button_bouquet"] = Pixmap()
 		self["key_bouquet"] = StaticText(_("change feed"))
 		if not newItems:
 			self["actions"] = ActionMap(["ColorActions",
@@ -626,16 +625,7 @@ class RSS_FeedView(RSSBaseView):  # Shows a RSS-Feed
 		self.onLayoutFinish.append(self.onLayoutFinished)
 
 	def onLayoutFinished(self):
-		if self.feed and self.feed.title == _("New Items"):
-			self["content"].style = "news"
-		else:
-			self["content"].style = "default"
-		pngfile = join(PLUGINPATH, "icons/bouquet_%s.png" % ("fHD" if getDesktop(0).size().width() > 1300 else "HD"))
-		if exists(pngfile):
-			self["button_bouquet"].instance.setPixmapFromFile(pngfile)
-			self["button_bouquet"].show()
-		else:
-			self["button_bouquet"].hide()
+		self["content"].style = "news" if self.feed and self.feed.title == _("New Items") else "default"
 		self.updateTitle()
 
 	def updateTitle(self):
