@@ -30,7 +30,7 @@ from socket import gethostname, getfqdn
 from time import gmtime, strftime
 from twisted.internet.threads import deferToThread
 from twisted.internet.reactor import listenTCP, run
-from twisted.web import http
+from twisted.web import http, static
 from twisted.web.resource import Resource
 from twisted.web.server import Site
 from xml.etree.ElementTree import tostring, parse
@@ -336,6 +336,7 @@ def startingCustomEPGExternal():
 	root.putChild(b"epgexport.xml", resourcePrograms)
 	root.putChild(b"epgexport.gz", resourcePrograms)
 	root.putChild(b"epgexport.xz", resourcePrograms)
+	root.putChild(b"picon", static.File("/picon"))
 	factory = Site(root)
 	port = int(config.plugins.epgexport.port.value)
 	listenTCP(port, factory)
