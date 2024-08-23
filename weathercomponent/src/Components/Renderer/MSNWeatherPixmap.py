@@ -63,4 +63,4 @@ class MSNWeatherPixmap(Renderer):
 				self.updateIcon(self.source.iconfilename)
 		else:
 			if self.instance:
-				self.updateIcon(None)
+				self.updateIcon("")
