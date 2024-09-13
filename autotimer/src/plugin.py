@@ -240,7 +240,7 @@ def Plugins(**kwargs):
 
 
 def timermenu(menuid):
-	if menuid == "timermenu":
+	if menuid in ("timermenu", "timer"):
 		if IMAGEDISTRO in ('openhdf'):
 			return [(_("Auto Timer"), main, "autotimer_setup", None)]
 		else:
