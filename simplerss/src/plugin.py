@@ -105,12 +105,14 @@ def main(session, **kwargs):  # Main Function
 	else:  # Show Setup otherwise
 		session.openWithCallback(closed, RSS_Setup, rssPoller)  # Plugin window has been closed
 
+
 def closed():  # If SimpleRSS should not run in Background: shutdown
 	if not (config.plugins.simpleRSS.autostart.value or config.plugins.simpleRSS.keep_running.value):
 		global rssPoller  # Get Global rssPoller-Object
 		if rssPoller:
 			rssPoller.shutdown()
 		rssPoller = None
+
 
 def autostart(reason, **kwargs):  # Autostart
 	global rssPoller, tickerView
@@ -188,6 +190,7 @@ class RSS_TickerView(Screen):
 			<convert type="ClockToText">Format:%H:%M</convert>
 		</widget>
 	</screen>"""
+
 	def __init__(self, session):
 		oldpos = search(r'<screen name="(.*?)".*?position="(.*?)"', self.skin)
 		if oldpos:
@@ -268,6 +271,7 @@ class RSS_Setup(ConfigListScreen, Screen):  # Setup for SimpleRSS, quick-edit fo
 		<widget source="key_blue" render="Label" position="1175,949" size="270,57" zPosition="1" valign="center" font="Regular;30" halign="left" foregroundColor="#00b3b3b3" backgroundColor="#1A0F0F0F" transparent="1" />
 		<eLabel text="Autoren: moritz.venn@freaque.net, Mr.Servo, Skinned by stein17" position="1260,780" size="534,75" zPosition="1" valign="center" font="Regular;30" halign="center" foregroundColor="#00666666" backgroundColor="#1A0F0F0F" transparent="1" />
 	</screen>"""
+
 	def __init__(self, session, rssPoller=None):
 		self.session = session
 		if RESOLUTION == "HD":
@@ -445,6 +449,7 @@ class RSS_Summary(Screen):
 			<convert type="ClockToText">WithSeconds</convert>
 		</widget>
 	</screen>"""
+
 	def __init__(self, session, parent):
 		self.session = session
 		Screen.__init__(self, session, parent)
@@ -518,6 +523,7 @@ class RSS_EntryView(RSSBaseView):  # Shows a RSS Item
 		</widget>
 		<widget name="content" position="525,225" size="1335,780" font="Regular;33" scrollbarMode="showOnDemand" backgroundColor="#1A0F0F0F" foregroundColor="#00FFFFFF" transparent="0" />
 	</screen>"""
+
 	def __init__(self, session, data, cur_idx=None, entries=None, feedTitle="", feedLogo=""):
 		RSSBaseView.__init__(self, session, None)
 		self.session = session
@@ -676,6 +682,7 @@ class RSS_FeedView(RSSBaseView):  # Shows a RSS-Feed
 		</widget>
 		<widget source="summary" render="Label" position="1215,225" size="615,705" font="Regular;31" backgroundColor="#1A0F0F0F" foregroundColor="#00FFFFFF" transparent="1" />
 	</screen>"""
+
 	def __init__(self, session, feed=None, newItems=False, rssPoller=None, parent=None, ident=None):
 		# structure of feed.history: ["titletext", "homepage-URL", "summarytext", "picture-URL"]
 		RSSBaseView.__init__(self, session, rssPoller)
@@ -912,6 +919,7 @@ class RSS_Overview(RSSBaseView):  # Shows an Overview over all RSS-Feeds known t
 		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SimpleRSS/icons/key_menu_fHD.png" position="1485,949" size="80,57" alphatest="blend" />
 		<eLabel text="Settings" position="1570,949" size="350,57" zPosition="1" valign="center" font="Regular;30" halign="left" foregroundColor="#00b3b3b3" backgroundColor="#1A0F0F0F" transparent="1" />
 	</screen>"""
+
 	def __init__(self, session, poller):
 		self.session = session
 		RSSBaseView.__init__(self, session, poller)
