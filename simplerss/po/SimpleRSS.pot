@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2024-01-17 19:38+0100\n"
+"POT-Creation-Date: 2024-09-30 17:35+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,232 +14,243 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
 
-#: ..\plugin.py:65
+#: ..\plugin.py:72
 msgid "Notification"
 msgstr ""
 
-#: ..\plugin.py:65
+#: ..\plugin.py:72
 msgid "Preview"
 msgstr ""
 
-#: ..\plugin.py:65
+#: ..\plugin.py:72
 msgid "Ticker"
 msgstr ""
 
-#: ..\plugin.py:65
+#: ..\plugin.py:72
 msgid "none"
 msgstr ""
 
-#: ..\plugin.py:203 ..\plugin.py:605 ..\plugin.py:621 ..\plugin.py:669
-#: ..\plugin.py:762 ..\plugin.py:851 ..\plugin.py:865 ..\plugin.py:921
+#: ..\plugin.py:214 ..\plugin.py:731 ..\plugin.py:737 ..\plugin.py:782
+#: ..\plugin.py:878 ..\plugin.py:999 ..\plugin.py:1013 ..\plugin.py:1069
 msgid "New Items"
 msgstr ""
 
-#: ..\plugin.py:218
+#: ..\plugin.py:229
 msgid "Autoupdate"
 msgstr ""
 
-#: ..\plugin.py:218
+#: ..\plugin.py:229
 msgid "Feed URI"
 msgstr ""
 
-#: ..\plugin.py:220 ..\plugin.py:243
+#: ..\plugin.py:231 ..\plugin.py:284
 msgid "Cancel"
 msgstr ""
 
-#: ..\plugin.py:221
+#: ..\plugin.py:232
 msgid "OK"
 msgstr ""
 
-#: ..\plugin.py:226 ..\plugin.py:242 ..\plugin.py:263
+#: ..\plugin.py:237 ..\plugin.py:283 ..\plugin.py:304
 msgid "Simple RSS Reader Setup"
 msgstr ""
 
-#: ..\plugin.py:244
+#: ..\plugin.py:285
 msgid "Save"
 msgstr ""
 
-#: ..\plugin.py:245
+#: ..\plugin.py:286
 msgid "New"
 msgstr ""
 
-#: ..\plugin.py:246
+#: ..\plugin.py:287
 msgid "Delete"
 msgstr ""
 
-#: ..\plugin.py:267
+#: ..\plugin.py:308
 msgid "Feed"
 msgstr ""
 
-#: ..\plugin.py:268
+#: ..\plugin.py:309
 msgid "Start automatically with Enigma2"
 msgstr ""
 
-#: ..\plugin.py:269
+#: ..\plugin.py:310
 msgid "Keep running in background"
 msgstr ""
 
-#: ..\plugin.py:272
+#: ..\plugin.py:313
 msgid "Update Interval [min]"
 msgstr ""
 
-#: ..\plugin.py:273
+#: ..\plugin.py:314
 msgid "Show new Messages as"
 msgstr ""
 
-#: ..\plugin.py:275
+#: ..\plugin.py:316
+msgid " *Vertical position of ticker [%] (0% = top / 100% = bottom)"
+msgstr ""
+
+#: ..\plugin.py:317
 msgid " *Frequency of scrollsteps [ms] (low values slow down the box)"
 msgstr ""
 
-#: ..\plugin.py:276
+#: ..\plugin.py:318
 msgid " *Scrollspeed [pixels per step] (high values lead to jerking)"
 msgstr ""
 
-#: ..\plugin.py:278
+#: ..\plugin.py:320
 msgid " *=please perform a GUI-restart for these changes to take effect"
 msgstr ""
 
-#: ..\plugin.py:280
+#: ..\plugin.py:322
 msgid "Note: If box becomes extremely slow, please reduce the quantity of feeds."
 msgstr ""
 
-#: ..\plugin.py:298
+#: ..\plugin.py:341
 msgid ""
 "Really delete this entry?\n"
 "It cannot be recovered!"
 msgstr ""
 
-#: ..\plugin.py:315
+#: ..\plugin.py:358
 msgid "Import feeds from:"
 msgstr ""
 
-#: ..\plugin.py:350
+#: ..\plugin.py:392
 msgid ""
 "Importing '%s'\n"
 "%s feeds were imported successfully\n"
 "%s feeds were double and not imported"
 msgstr ""
 
-#: ..\plugin.py:354
+#: ..\plugin.py:396
 msgid "File '%s' was not found, import was aborted!"
 msgstr ""
 
-#: ..\plugin.py:387 ..\plugin.py:429
+#: ..\plugin.py:429 ..\plugin.py:479
 msgid "Error while parsing Feed, this usually means there is something wrong with it."
 msgstr ""
 
-#: ..\plugin.py:438
+#: ..\plugin.py:488
 msgid ""
 "Update is being done in Background.\n"
 "Contents will automatically be updated when it's done."
 msgstr ""
 
-#: ..\plugin.py:462
+#: ..\plugin.py:539
 msgid "Simple RSS Reader EntryView"
 msgstr ""
 
-#: ..\plugin.py:463 ..\plugin.py:491
+#: ..\plugin.py:540 ..\plugin.py:568
 msgid "Entry %s/%s"
 msgstr ""
 
-#: ..\plugin.py:466 ..\plugin.py:468
+#: ..\plugin.py:543 ..\plugin.py:545
 msgid "Enclosures"
 msgstr ""
 
-#: ..\plugin.py:490 ..\plugin.py:636
+#: ..\plugin.py:567 ..\plugin.py:749
 msgid "Simple RSS Reader: %s"
 msgstr ""
 
-#: ..\plugin.py:493 ..\plugin.py:508
+#: ..\plugin.py:570 ..\plugin.py:584
 msgid "No such Item."
 msgstr ""
 
-#: ..\plugin.py:502
+#: ..\plugin.py:578
 msgid "{no attachments found}"
 msgstr ""
 
-#: ..\plugin.py:531
+#: ..\plugin.py:609
 msgid "Sorry, this attachment cannot be opened: unsupported MIME type"
 msgstr ""
 
-#: ..\plugin.py:573
+#: ..\plugin.py:620
+msgid ""
+"Plugin 'PicturePlayer' not found!\n"
+"\n"
+"In order to view pictures, please install it from plugin feed"
+msgstr ""
+
+#: ..\plugin.py:698
 msgid "Simple RSS Reader Feedview"
 msgstr ""
 
-#: ..\plugin.py:578
+#: ..\plugin.py:702
 msgid "change feed"
 msgstr ""
 
-#: ..\plugin.py:703
+#: ..\plugin.py:819
 msgid "Entry %s/%s - %s"
 msgstr ""
 
-#: ..\plugin.py:706 ..\plugin.py:708
+#: ..\plugin.py:822 ..\plugin.py:824
 msgid "Feed is empty."
 msgstr ""
 
-#: ..\plugin.py:780
+#: ..\plugin.py:931
 msgid "Simple RSS Reader Overview"
 msgstr ""
 
-#: ..\plugin.py:782 ..\plugin.py:834
+#: ..\plugin.py:933 ..\plugin.py:982
 msgid "Entries"
 msgstr ""
 
-#: ..\plugin.py:783
+#: ..\plugin.py:934
 msgid "Feed 1/%s"
 msgstr ""
 
-#: ..\plugin.py:805
+#: ..\plugin.py:956
 msgid "Simple RSS Reader"
 msgstr ""
 
-#: ..\plugin.py:833
+#: ..\plugin.py:981
 msgid "Feed %s/%s"
 msgstr ""
 
-#: ..\plugin.py:872
+#: ..\plugin.py:1020
 msgid "Close"
 msgstr ""
 
-#: ..\plugin.py:872
+#: ..\plugin.py:1020
 msgid "Settings"
 msgstr ""
 
-#: ..\plugin.py:872
+#: ..\plugin.py:1020
 msgid "Update Feed"
 msgstr ""
 
-#: ..\plugin.py:873
+#: ..\plugin.py:1021
 msgid "What to do?"
 msgstr ""
 
-#: ..\plugin.py:921
+#: ..\plugin.py:1069
 msgid "New Items since last Auto-Update"
 msgstr ""
 
-#: ..\plugin.py:950
+#: ..\plugin.py:1098
 msgid ""
 "Sorry, this type of feed is unsupported:\n"
 "%s"
 msgstr ""
 
-#: ..\plugin.py:1013
+#: ..\plugin.py:1160
 msgid "Received %d new news item(s)."
 msgstr ""
 
-#: ..\plugin.py:1093
+#: ..\plugin.py:1240
 msgid "Error when reading the feed. Does your address really refer to an RSS feed?"
 msgstr ""
 
-#: ..\plugin.py:1210
+#: ..\plugin.py:1367
 msgid "trying to download the feed..."
 msgstr ""
 
-#: ..\plugin.py:1279
+#: ..\plugin.py:1436
 msgid "A simple to use RSS reader"
 msgstr ""
 
-#: ..\plugin.py:1281
+#: ..\plugin.py:1438
 msgid "View RSS..."
 msgstr ""
