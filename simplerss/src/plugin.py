@@ -9,7 +9,7 @@ from requests import get, exceptions
 from shutil import copy, rmtree
 from traceback import print_exc
 from twisted.internet.reactor import callInThread
-from xml.etree.ElementTree import tostring, parse, fromstring
+from xml.etree.ElementTree import tostring, fromstring
 
 # current feed:
 # self.feed: <<class 'Plugins.Extensions.SimpleRSS.plugin.UniversalFeed'>, "Title", "Description", 5 items>
@@ -26,7 +26,6 @@ from Components.PluginComponent import plugins
 from Components.ScrollLabel import ScrollLabel
 from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText
-from Plugins.Extensions.PicturePlayer import ui
 from Plugins.Plugin import PluginDescriptor
 from Plugins.SystemPlugins.Toolkit.TagStrip import strip, strip_readable
 from Screens.ChoiceBox import ChoiceBox
@@ -42,10 +41,18 @@ from Tools.Notifications import AddPopup, RemovePopup, AddNotificationWithID
 from . import _  # for localized messages
 
 # GLOBALS
+MODULE_NAME = __name__.split(".")[-2]
+try:
+	from Plugins.Extensions.PicturePlayer import ui
+	PICTUREPLAYER = True
+except ImportError as err:
+	PICTUREPLAYER = False
+	print(f"[{MODULE_NAME}] Import WARNING: Plugin 'PicturePlayer' was not found.")
+
 rssPoller = None
 tickerView = None
 update_callbacks = []
-MODULE_NAME = __name__.split(".")[-2]
+RESOLUTION = "fHD" if getDesktop(0).size().width() > 1300 else "HD"
 TEMPPATH = join("/tmp/", MODULE_NAME.lower())  # /tmp/simplerss/
 PLUGINPATH = resolveFilename(SCOPE_PLUGINS, "Extensions/%s" % MODULE_NAME)  # /usr/lib/enigma2/python/Plugins/Extensions/SimpleRSS/
 NOLOGO = "no_logo.png"
@@ -98,14 +105,12 @@ def main(session, **kwargs):  # Main Function
 	else:  # Show Setup otherwise
 		session.openWithCallback(closed, RSS_Setup, rssPoller)  # Plugin window has been closed
 
-
 def closed():  # If SimpleRSS should not run in Background: shutdown
 	if not (config.plugins.simpleRSS.autostart.value or config.plugins.simpleRSS.keep_running.value):
 		global rssPoller  # Get Global rssPoller-Object
 		if rssPoller:
 			rssPoller.shutdown()
 		rssPoller = None
-
 
 def autostart(reason, **kwargs):  # Autostart
 	global rssPoller, tickerView
@@ -119,24 +124,6 @@ def autostart(reason, **kwargs):  # Autostart
 	elif reason == 1 and rssPoller:
 		rssPoller.shutdown()
 		rssPoller = None
-
-
-def readSkin(skin):
-	skintext = ""
-	skinfile = join(PLUGINPATH, "skin_%s.xml" % ("fHD" if getDesktop(0).size().width() > 1300 else "HD"))
-	try:
-		with open(skinfile, "r") as file:
-			try:
-				domskin = parse(file).getroot()
-				for element in domskin:
-					if element.tag == "screen" and element.attrib["name"] == skin:
-						skintext = tostring(element).decode()
-						break
-			except Exception as error:
-				print("[Skin] Error: Unable to parse skin data in '%s' - '%s'!" % (skinfile, error))
-	except OSError as error:
-		print("[Skin] Error: Unexpected error opening skin file '%s'! (%s)" % (skinfile, error))
-	return skintext
 
 
 def downloadPicfile(url, picfile, resize=None, fixedname=None, callback=None):
@@ -188,28 +175,36 @@ def cleanupUrl(url):
 
 
 def isExtensionSupported(name, supportlist=MIMEIMAGES):
-    return name[name.rfind("."):] in [".%s" % type[type.rfind("/") + 1:] for type in supportlist]  # extension supported?
+	return name[name.rfind("."):] in [".%s" % type[type.rfind("/") + 1:] for type in supportlist]  # extension supported?
 
 
 class RSS_TickerView(Screen):
+	skin = """
+	<screen name="RSS_TickerView" position="51,1026" size="1818,54" resolution="1920,1080" flags="wfNoBorder" backgroundColor="transparent">
+		<ePixmap position="0,0" size="1818,54" zPosition="0" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SimpleRSS/icons/ticker_bg_fHD.png" transparent="1" alphatest="blend" backgroundColor="transparent"/>
+		<ePixmap position="0,0" size="1818,54" zPosition="10" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SimpleRSS/icons/ticker_fg_fHD.png" transparent="1" alphatest="blend" backgroundColor="transparent"/>
+		<widget source="newsLabel" render="RunningText" options="movetype=running,step=4,steptime=70,direction=left,startpoint=1670,wrap=1,always=0,repeat=2,oneshot=1" position="120,0" size="1670,54" font="Regular;36" halign="right" valign="center" noWrap="1" zPosition="1" foregroundColor="white" transparent="1" />
+		<widget source="global.CurrentTime" render="Label" position="4,0" size="111,54" backgroundColor="#00FFFFFF" foregroundColor="black" transparent="1" zPosition="2" font="Regular;36" valign="center" halign="center">
+			<convert type="ClockToText">Format:%H:%M</convert>
+		</widget>
+	</screen>"""
 	def __init__(self, session):
-		self.session = session
-		skin = readSkin("RSS_TickerView")
-		oldpos = search(r'<screen name="(.*?)".*?position="(.*?)"', skin)
+		oldpos = search(r'<screen name="(.*?)".*?position="(.*?)"', self.skin)
 		if oldpos:
-			newpos = "%s,%s" % (oldpos.group(2).split(",")[0], int((10.26 if getDesktop(0).size().width() > 1300 else 6.84) * int(config.plugins.simpleRSS.ticker_ypos.value)))
-			skin = skin.replace('position="%s"' % oldpos. group(2), 'position="%s"' % newpos)
+			newpos = "%s,%s" % (oldpos.group(2).split(",")[0], int(10.26 * int(config.plugins.simpleRSS.ticker_ypos.value)))
+			self.skin = self.skin.replace('position="%s"' % oldpos. group(2), 'position="%s"' % newpos)
 		newoptions = ["steptime=%d,step=%d" % (config.plugins.simpleRSS.ticker_frequency.value, config.plugins.simpleRSS.ticker_scrollspeed.value)]
-		options = search(r'options\s*="(.*?)"', skin)
+		options = search(r'options\s*="(.*?)"', self.skin)
 		if options:
 			options = options.group(1)
 			for option in options.split(","):
 				if "step" not in option:  # remove entries 'steptime=' and 'step='…
 					newoptions.append(option)
 			newoptions = ",".join(newoptions)
-			skin = skin.replace(options, newoptions)  # …and add/replace it with own entries
-		self.skin = skin
-		Screen.__init__(self, session, skin)
+			self.skin = self.skin.replace(options, newoptions)  # …and add/replace it with own entries
+		if RESOLUTION == "HD":
+			self.skin = self.skin.replace("_fHD.png", "_HD.png")
+		Screen.__init__(self, session)
 		self["newsLabel"] = StaticText()
 
 	def updateText(self, feed):
@@ -245,10 +240,39 @@ class RSSFeedEdit(ConfigListScreen, Screen):  # Edit an RSS-Feed
 
 
 class RSS_Setup(ConfigListScreen, Screen):  # Setup for SimpleRSS, quick-edit for Feed-URIs and settings present.
+	skin = """
+	<screen name="RSS_Setup" position="0,0" size="1920,1080" resolution="1920,1080" title="Simple RSS Reader Setup" flags="wfNoBorder" backgroundColor="transparent">
+		<eLabel name="line" position="60,37" zPosition="-10" size="1800,975" backgroundColor="#1A0F0F0F" />
+		<eLabel name="line" position="60,132" size="1800,1" backgroundColor="#00FFFFFF" zPosition="0" />
+		<widget source="global.CurrentTime" render="Label" position="1640,45" size="210,90" font="Regular;75" noWrap="1" halign="center" valign="bottom" foregroundColor="#00FFFFFF" backgroundColor="#1A0F0F0F" transparent="1">
+			<convert type="ClockToText">Default</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="1400,45" size="240,40" font="Regular;24" noWrap="1" halign="right" valign="bottom" foregroundColor="#00FFFFFF" backgroundColor="#1A0F0F0F" transparent="1">
+			<convert type="ClockToText">Format:%A</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="1400,81" size="240,40" font="Regular;24" noWrap="1" halign="right" valign="bottom" foregroundColor="#00FFFFFF" backgroundColor="#1A0F0F0F" transparent="1">
+			<convert type="ClockToText">Format:%e. %B</convert>
+		</widget>
+		<widget source="title" render="Label" position="87,54" size="787,75" valign="bottom" font="Regular;51" noWrap="1" foregroundColor="#00b3b3b3" backgroundColor="#1A0F0F0F" transparent="1" />
+		<widget name="config" position="105,180" size="1050,765" font="Regular;30" itemHeight="45" scrollbarMode="showOnDemand" transparent="1" />
+		<ePixmap position="1335,262" size="384,384" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SimpleRSS/icons/rss_fHD.png" transparent="1" alphatest="blend" />
+		<eLabel text="Import" position="1570,949" size="270,57" zPosition="1" valign="center" font="Regular;30" halign="left" foregroundColor="#00b3b3b3" backgroundColor="#1A0F0F0F" transparent="1" />
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SimpleRSS/icons/key_red_fHD.png" position="105,949" size="39,57" alphatest="blend" />
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SimpleRSS/icons/key_green_fHD.png" position="450,949" size="39,57" alphatest="blend" />
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SimpleRSS/icons/key_yellow_fHD.png" position="795,949" size="39,57" alphatest="blend" />
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SimpleRSS/icons/key_blue_fHD.png" position="1140,949" size="39,57" alphatest="blend" />
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SimpleRSS/icons/key_menu_fHD.png" position="1485,949" size="80,57" alphatest="blend" />
+		<widget source="key_red" render="Label" position="140,949" size="270,57" zPosition="1" valign="center" font="Regular;30" halign="left" foregroundColor="#00b3b3b3" backgroundColor="#1A0F0F0F" transparent="1" />
+		<widget source="key_green" render="Label" position="485,949" size="270,57" zPosition="1" valign="center" font="Regular;30" halign="left" foregroundColor="#00b3b3b3" backgroundColor="#1A0F0F0F" transparent="1" />
+		<widget source="key_yellow" render="Label" position="830,949" size="270,57" zPosition="1" valign="center" font="Regular;30" halign="left" foregroundColor="#00b3b3b3" backgroundColor="#1A0F0F0F" transparent="1" />
+		<widget source="key_blue" render="Label" position="1175,949" size="270,57" zPosition="1" valign="center" font="Regular;30" halign="left" foregroundColor="#00b3b3b3" backgroundColor="#1A0F0F0F" transparent="1" />
+		<eLabel text="Autoren: moritz.venn@freaque.net, Mr.Servo, Skinned by stein17" position="1260,780" size="534,75" zPosition="1" valign="center" font="Regular;30" halign="center" foregroundColor="#00666666" backgroundColor="#1A0F0F0F" transparent="1" />
+	</screen>"""
 	def __init__(self, session, rssPoller=None):
 		self.session = session
-		self.skin = readSkin("RSS_Setup")
-		Screen.__init__(self, session, self.skin)
+		if RESOLUTION == "HD":
+			self.skin = self.skin.replace("_fHD.png", "_HD.png")
+		Screen.__init__(self, session)
 		self.rssPoller = rssPoller
 		config.plugins.simpleRSS.autostart.addNotifier(self.elementChanged, initial_call=False)
 		ConfigListScreen.__init__(self, self.getSetupList(), on_change=self.elementChanged)
@@ -412,11 +436,18 @@ class RSS_Setup(ConfigListScreen, Screen):  # Setup for SimpleRSS, quick-edit fo
 		self.close()
 
 
-class RSSSummary(Screen):
+class RSS_Summary(Screen):
+	skin = """
+	<screen name="RSS_Summary" position="0,0" size="198,96" resolution="1920,1080" title="Simple RSS Reader Summary" flags="wfNoBorder" backgroundColor="transparent">
+		<widget source="parent.Title" render="Label" position="9,6" size="180,32" font="Regular;27" />
+		<widget source="entry" render="Label" position="9,38" size="180,32" font="Regular;24" />
+		<widget source="global.CurrentTime" render="Label" position="84,69" size="123,27" font="Regular;24" >
+			<convert type="ClockToText">WithSeconds</convert>
+		</widget>
+	</screen>"""
 	def __init__(self, session, parent):
 		self.session = session
-		self.skin = readSkin("RSSSummary")
-		Screen.__init__(self, session, parent, self.skin)
+		Screen.__init__(self, session, parent)
 		self["entry"] = StaticText("")
 		parent.onChangedEntry.append(self.selectionChanged)
 		self.onShow.append(parent.updateInfo)
@@ -437,7 +468,7 @@ class RSSBaseView(Screen):  # Base Screen for all Screens used in SimpleRSS
 		self.pollDialog = None
 
 	def createSummary(self):
-		return RSSSummary
+		return RSS_Summary
 
 	def errorPolling(self, errmsg=""):  # An error occured while polling
 		self.session.open(MessageBox, _("Error while parsing Feed, this usually means there is something wrong with it."), type=MessageBox.TYPE_ERROR, timeout=3)
@@ -461,6 +492,32 @@ class RSSBaseView(Screen):  # Base Screen for all Screens used in SimpleRSS
 
 
 class RSS_EntryView(RSSBaseView):  # Shows a RSS Item
+	skin = """
+	<screen name="RSS_EntryView" position="0,0" size="1920,1080" resolution="1920,1080" title="Simple RSS Reader" flags="wfNoBorder" backgroundColor="transparent">
+		<eLabel name="line" position="60,37" zPosition="-10" size="1800,975" backgroundColor="#1A0F0F0F" />
+		<eLabel name="line" position="60,132" size="1800,1" backgroundColor="#00FFFFFF" zPosition="0" />
+		<widget source="global.CurrentTime" render="Label" position="1640,45" size="210,90" font="Regular;75" noWrap="1" halign="center" valign="bottom" foregroundColor="#00FFFFFF" backgroundColor="#1A0F0F0F" transparent="1">
+			<convert type="ClockToText">Default</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="1400,45" size="240,40" font="Regular;24" noWrap="1" halign="right" valign="bottom" foregroundColor="#00FFFFFF" backgroundColor="#1A0F0F0F" transparent="1">
+			<convert type="ClockToText">Format:%A</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="1400,81" size="240,40" font="Regular;24" noWrap="1" halign="right" valign="bottom" foregroundColor="#00FFFFFF" backgroundColor="#1A0F0F0F" transparent="1">
+			<convert type="ClockToText">Format:%e. %B</convert>
+		</widget>
+		<widget source="title" render="Label" position="87,54" size="787,75" valign="bottom" font="Regular;51" noWrap="1" foregroundColor="#00b3b3b3" backgroundColor="#1A0F0F0F" transparent="1" />
+		<widget source="info" render="Label" position="285,154" size="1050,48" font="Regular;36" backgroundColor="#1A0F0F0F" foregroundColor="#00FFFFFF" transparent="1" />
+		<widget name="feedlogo" position="105,142" size="120,60" alphatest="blend" />
+		<eLabel position="97,210" size="1725,1" backgroundColor="#00FFFFFF" />
+		<widget name="picture" position="105,240" size="382,214" alphatest="blend" transparent="1" zPosition="1" />
+		<widget source="enctext" render="Label" position="105,465" size="381,48" font="Regular;33" halign="center" noWrap="1" foregroundColor="black" backgroundColor="grey" transparent="0" />
+		<widget source="enclist" render="Listbox" position="105,513" size="381,432" scrollbarMode="showOnDemand" backgroundColor="#1A202020" foregroundColor="#00FFFFFF" transparent="0">
+			<convert type="TemplatedMultiContent">
+				{"template": [MultiContentEntryText(pos=(0,0), size=(381,48), font=0, flags=RT_HALIGN_CENTER|RT_VALIGN_CENTER, text=0)], "fonts": [gFont("Regular",30)], "itemHeight":48}
+			</convert>
+		</widget>
+		<widget name="content" position="525,225" size="1335,780" font="Regular;33" scrollbarMode="showOnDemand" backgroundColor="#1A0F0F0F" foregroundColor="#00FFFFFF" transparent="0" />
+	</screen>"""
 	def __init__(self, session, data, cur_idx=None, entries=None, feedTitle="", feedLogo=""):
 		RSSBaseView.__init__(self, session, None)
 		self.session = session
@@ -471,9 +528,8 @@ class RSS_EntryView(RSSBaseView):  # Shows a RSS Item
 		self.feedpng = feedLogo
 		self.enclist = []
 		self.pngfile = join(TEMPPATH, "entrypic.png")
-		self.picsize = (382, 214) if getDesktop(0).size().width() > 1300 else (255, 143)
-		self.skin = readSkin("RSS_EntryView")
-		Screen.__init__(self, session, self.skin)
+		self.picsize = (382, 214) if RESOLUTION == "fHD" else (255, 143)
+		Screen.__init__(self, session)
 		self["title"] = StaticText(_("Simple RSS Reader EntryView"))
 		self["info"] = StaticText(_("Entry %s/%s") % (cur_idx + 1, entries)) if cur_idx is not None and entries is not None else StaticText()
 		self["feedlogo"] = Pixmap()
@@ -552,7 +608,10 @@ class RSS_EntryView(RSSBaseView):  # Shows a RSS Item
 		if exists(pngfile):
 			piclist.append(((pngfile, False), None))
 		if piclist:
-			self.session.open(ui.Pic_Full_View, piclist, 0, TEMPPATH)
+			if PICTUREPLAYER:
+				self.session.open(ui.Pic_Full_View, piclist, 0, TEMPPATH)
+			else:
+				self.session.open(MessageBox, _("Plugin 'PicturePlayer' not found!\n\nIn order to view pictures, please install it from plugin feed"), type=MessageBox.TYPE_ERROR, timeout=5)
 
 	def keyUp(self):
 		if self.enclist:
@@ -579,18 +638,55 @@ class RSS_EntryView(RSSBaseView):  # Shows a RSS Item
 
 
 class RSS_FeedView(RSSBaseView):  # Shows a RSS-Feed
+	skin = """
+<screen name="RSS_FeedView" position="0,0" size="1920,1080" resolution="1920,1080" title="Simple RSS Reader" flags="wfNoBorder" backgroundColor="transparent">
+		<eLabel name="line" position="60,37" zPosition="-10" size="1800,975" backgroundColor="#1A0F0F0F" />
+		<eLabel name="line" position="60,132" size="1800,1" backgroundColor="#00FFFFFF" zPosition="0" />
+		<widget source="global.CurrentTime" render="Label" position="1640,45" size="210,90" font="Regular;75" noWrap="1" halign="center" valign="bottom" foregroundColor="#00FFFFFF" backgroundColor="#1A0F0F0F" transparent="1">
+			<convert type="ClockToText">Default</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="1400,45" size="240,40" font="Regular;24" noWrap="1" halign="right" valign="bottom" foregroundColor="#00FFFFFF" backgroundColor="#1A0F0F0F" transparent="1">
+			<convert type="ClockToText">Format:%A</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="1400,81" size="240,40" font="Regular;24" noWrap="1" halign="right" valign="bottom" foregroundColor="#00FFFFFF" backgroundColor="#1A0F0F0F" transparent="1">
+			<convert type="ClockToText">Format:%e. %B</convert>
+		</widget>
+		<widget source="title" render="Label" position="87,54" size="787,75" valign="bottom" font="Regular;51" noWrap="1" foregroundColor="#00b3b3b3" backgroundColor="#1A0F0F0F" transparent="1" />
+		<widget source="info" render="Label" position="285,154" size="1050,48" font="Regular;36" backgroundColor="#1A0F0F0F" foregroundColor="#00FFFFFF" transparent="1" />
+		<widget name="feedlogo" position="105,142" size="120,60" alphatest="blend" />
+		<eLabel position="97,210" size="1725,1" backgroundColor="#00FFFFFF" />
+		<widget source="content" render="Listbox" size="1050,720" position="97,225" scrollbarMode="showOnDemand" backgroundColor="#1A0F0F0F" foregroundColor="#00FFFFFF" transparent="0">
+			<convert type="TemplatedMultiContent">
+				{"templates":
+					{"default": (120,[
+						MultiContentEntryPixmap(pos=(0,0), size=(1050,10), png=1),  # line separator
+						MultiContentEntryPixmapAlphaBlend(pos=(7,7), size=(225,105), flags=BT_SCALE|BT_KEEP_ASPECT_RATIO|BT_HALIGN_CENTER|BT_VALIGN_CENTER, png=2),  # entrypicture
+						MultiContentEntryPixmapAlphaBlend(pos=(82,22), size=(75,75), png=3),  # streamicon
+						MultiContentEntryText(pos=(240,7), size=(795,105), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text=0)  # feedtext
+					]),
+					"news": (120,[
+						MultiContentEntryPixmap(pos=(0,0), size=(1050,10), png=1),  # line separator
+						MultiContentEntryText(pos=(15,7), size=(990,110), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text=0)  # feedtext
+					])
+					},
+					"fonts": [gFont("Regular",30)],
+					"itemHeight":120
+					}
+			</convert>
+		</widget>
+		<widget source="summary" render="Label" position="1215,225" size="615,705" font="Regular;31" backgroundColor="#1A0F0F0F" foregroundColor="#00FFFFFF" transparent="1" />
+	</screen>"""
 	def __init__(self, session, feed=None, newItems=False, rssPoller=None, parent=None, ident=None):
 		# structure of feed.history: ["titletext", "homepage-URL", "summarytext", "picture-URL"]
 		RSSBaseView.__init__(self, session, rssPoller)
 		self.session = session
-		self.skin = readSkin("RSS_FeedView")
-		Screen.__init__(self, session, self.skin)
+		Screen.__init__(self, session)
 		self.feed = feed
 		self.newItems = newItems
 		self.parent = parent  # restore, because 'Screen.__init' will set self.parent = 'Screen of Skin'
 		self.ident = ident
 		self.nopic = join(TEMPPATH, NOPIC)
-		self.picsize = (225, 105) if getDesktop(0).size().width() > 1300 else (150, 70)
+		self.picsize = (225, 105) if RESOLUTION == "fHD" else (150, 70)
 		self["feedlogo"] = Pixmap()
 		self["title"] = StaticText(_("Simple RSS Reader Feedview"))
 		self["content"] = List([])
@@ -617,9 +713,9 @@ class RSS_FeedView(RSSBaseView):  # Shows a RSS-Feed
 			self.timer = eTimer()
 			self.timer.callback.append(self.timerTick)
 			self.onExecBegin.append(self.startTimer)
-		linefile = join(PLUGINPATH, "icons/line_%s.png" % ("fHD" if getDesktop(0).size().width() > 1300 else "HD"))
+		linefile = join(PLUGINPATH, "icons/line_%s.png" % RESOLUTION)
 		self.linepix = LoadPixmap(cached=True, path=linefile if exists(linefile) else join(TEMPPATH, NOPIC))
-		streamfile = join(PLUGINPATH, "icons/streamicon_%s.png" % ("fHD" if getDesktop(0).size().width() > 1300 else "HD"))
+		streamfile = join(PLUGINPATH, "icons/streamicon_%s.png" % RESOLUTION)
 		self.streampix = LoadPixmap(cached=True, path=streamfile) if exists(streamfile) else None
 		self["content"].onSelectionChanged.append(self.updateInfo)
 		self.onLayoutFinish.append(self.onLayoutFinished)
@@ -783,12 +879,46 @@ class RSS_FeedView(RSSBaseView):  # Shows a RSS-Feed
 
 
 class RSS_Overview(RSSBaseView):  # Shows an Overview over all RSS-Feeds known to rssPoller
+	skin = """
+	<screen name="RSS_Overview" position="0,0" size="1920,1080" resolution="1920,1080" title="Simple RSS Reader" flags="wfNoBorder" backgroundColor="transparent">
+		<eLabel name="line" position="60,37" zPosition="-10" size="1800,975" backgroundColor="#1A0F0F0F" />
+		<eLabel name="line" position="60,132" size="1800,2" backgroundColor="#00FFFFFF" zPosition="0" />
+		<widget source="global.CurrentTime" render="Label" position="1640,45" size="210,90" font="Regular;75" noWrap="1" halign="center" valign="bottom" foregroundColor="#00FFFFFF" backgroundColor="#1A0F0F0F" transparent="1">
+			<convert type="ClockToText">Default</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="1400,45" size="240,40" font="Regular;24" noWrap="1" halign="right" valign="bottom" foregroundColor="#00FFFFFF" backgroundColor="#1A0F0F0F" transparent="1">
+			<convert type="ClockToText">Format:%A</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="1400,81" size="240,40" font="Regular;24" noWrap="1" halign="right" valign="bottom" foregroundColor="#00FFFFFF" backgroundColor="#1A0F0F0F" transparent="1">
+			<convert type="ClockToText">Format:%e. %B</convert>
+		</widget>
+		<widget source="title" render="Label" position="87,54" size="787,75" valign="bottom" font="Regular;51" noWrap="1" foregroundColor="#00b3b3b3" backgroundColor="#1A0F0F0F" transparent="1" />
+		<widget source="info" render="Label" position="97,150" size="705,48" font="Regular;36" backgroundColor="#1A0F0F0F" foregroundColor="#00FFFFFF" transparent="1" />
+		<widget source="summary" render="Label" position="810,150" size="345,48" font="Regular;36" backgroundColor="#1A0F0F0F" foregroundColor="#00FFFFFF" transparent="1" halign="right" />
+		<!-- <eLabel position="97,225" size="1723,2" backgroundColor="#00FFFFFF" /> -->
+		<widget source="content" render="Listbox" size="1740,705" position="97,225" scrollbarMode="showOnDemand" backgroundColor="#1A0F0F0F" foregroundColor="#00FFFFFF" transparent="1">
+			<convert type="TemplatedMultiContent">
+				{"template": [
+					MultiContentEntryPixmap(pos=(0,0), size=(1740,10), png=2),  # line separator
+					MultiContentEntryPixmapAlphaBlend(pos=(7,18), size=(225,105), flags=BT_SCALE|BT_KEEP_ASPECT_RATIO|BT_HALIGN_CENTER|BT_VALIGN_CENTER, png=3),  # feedlogo
+					MultiContentEntryText(pos=(240,7), size=(1482,45), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text=0),  # title
+					MultiContentEntryText(pos=(240,54), size=(1482,80), font=1, flags=RT_HALIGN_LEFT|RT_VALIGN_TOP|RT_WRAP, text=1)  # description
+					],
+				"fonts": [gFont("Regular",33), gFont("Regular",30)],
+				"itemHeight":141
+				}
+			</convert>
+		</widget>
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/SimpleRSS/icons/key_menu_fHD.png" position="1485,949" size="80,57" alphatest="blend" />
+		<eLabel text="Settings" position="1570,949" size="350,57" zPosition="1" valign="center" font="Regular;30" halign="left" foregroundColor="#00b3b3b3" backgroundColor="#1A0F0F0F" transparent="1" />
+	</screen>"""
 	def __init__(self, session, poller):
 		self.session = session
 		RSSBaseView.__init__(self, session, poller)
-		self.skin = readSkin("RSS_Overview")
-		Screen.__init__(self, session, self.skin)
-		self.logosize = (225, 105) if getDesktop(0).size().width() > 1300 else (150, 70)
+		if RESOLUTION == "HD":
+			self.skin = self.skin.replace("_fHD.png", "_HD.png")
+		Screen.__init__(self, session)
+		self.logosize = (225, 105) if RESOLUTION == "fHD" else (150, 70)
 		self.fillFeeds()
 		self["title"] = StaticText(_("Simple RSS Reader Overview"))
 		self["content"] = List([])
@@ -807,7 +937,7 @@ class RSS_Overview(RSSBaseView):  # Shows an Overview over all RSS-Feeds known t
 													"chminus": self.keyPageDown,
 													"chplus": self.keyPageUp
 													}, -1)
-		linefile = join(PLUGINPATH, "icons/line_%s.png" % ("fHD" if getDesktop(0).size().width() > 1300 else "HD"))
+		linefile = join(PLUGINPATH, "icons/line_%s.png" % RESOLUTION)
 		self.linepix = LoadPixmap(cached=True, path=linefile) if exists(linefile) else None
 		self.onLayoutFinish.append(self.__show)
 		self.onClose.append(self.__close)
@@ -1142,7 +1272,7 @@ class PEAEntryWrapper(ElementWrapper):
 	def __getattr__(self, tag):
 		if tag == "link":
 			for elem in self._element.findall("%s%s" % (self._ns, tag)):
-				if not elem.get("rel") == "enclosure":
+				if elem.get("rel") != "enclosure":
 					return elem.get("href")
 			return ''
 		elif tag == "enclosures":
