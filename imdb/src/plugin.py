@@ -398,7 +398,7 @@ class IMDB(Screen, HelpableScreen):
 		params = {
 			"operationName": 'TMD_Storyline',
 			"variables": '{"titleId":"%s"}' % titleId,
-			"extensions": '{"persistedQuery":{"sha256Hash":"87f41463a48af95ebba3129889d17181402622bfd30c8dc9216d99ac984f0091","version":1}}'
+			"extensions": '{"persistedQuery":{"sha256Hash":"78f137c28457417c10cf92a79976e54a65f8707bfc4fd1ad035da881ee5eaac6","version":1}}'
 		}
 		self.haveTMD = self.haveHTML = False
 		tmd = getPage("https://caching.graphql.imdb.com/", params=params, headers={"content-type": "application/json"}, cookies=self.cookie)
@@ -413,7 +413,7 @@ class IMDB(Screen, HelpableScreen):
 			self.reviewsHTML = self.reviewsHTML.decode("utf8")
 
 		reviewsmask = re.compile(
-			'<span>(?P<rating>\d+)</span>.*?'
+			'(?:<span>(?P<rating>\d+)</span>.*?)?'
 			'class="title" > (?P<title>.*?)\n.*?'
 			'\n>(?P<author>.*?)</a></span><span class="review-date">(?P<date>.*?)</span>.*?'
 			'(?:spoiler-warning">(?P<spoiler>.*?)</.*?)?'
@@ -485,7 +485,7 @@ class IMDB(Screen, HelpableScreen):
 				pos = 0
 			reviews = []
 			for review in self.reviews:
-				reviews.append(review['rating'] + "/10 | " + review['date'])
+				reviews.append((review['rating'] and review['rating'] + "/10 | " or "") + review['date'])
 				reviews.append(review['title'] + " [" + review['author'] + "]")
 				reviews.append("")
 				if review['spoiler']:
@@ -925,7 +925,7 @@ class IMDB(Screen, HelpableScreen):
 				'creator': ", ".join(get(name, ('name', 'nameText', 'text')) for name in get(main, ('creators', 'credits'))),
 				'episodes': get(main, ('episodes', 'totalEpisodes', 'total')),
 				'seasons': len(get(main, ('episodes', 'seasons'))),
-				'writer': ", ".join(get(name, ('name', 'nameText', 'text')) + (name['attributes'] and " (" + name['attributes'][0]['text'] + ")" or "") for name in get(main, ('writers', 'credits'))),
+				'writer': ", ".join(get(name, ('name', 'nameText', 'text')) + (name.get('attributes') and " (" + name['attributes'][0]['text'] + ")" or "") for name in get(main, ('writers', 'credits'))),
 				'country': ', '.join(get(country, 'text') for country in get(main, ('countriesOfOrigin', 'countries'))),
 				'premiere': main['releaseDate'] and "%s (%s)" % (makedate(main['releaseDate']), get(main, ('releaseDate', 'country', 'text'))),
 				# there's also main['releaseYear']['year']
