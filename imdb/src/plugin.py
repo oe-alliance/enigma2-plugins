@@ -4,11 +4,12 @@ from __future__ import print_function
 from . import _
 
 from Plugins.Plugin import PluginDescriptor
-from enigma import ePicLoad, eServiceCenter
+from enigma import ePicLoad, eServiceCenter, eServiceReference
 from Screens.Screen import Screen
 from Screens.Setup import Setup
 from Screens.HelpMenu import HelpableScreen
 from Screens.ChoiceBox import ChoiceBox
+from Screens.InfoBar import MoviePlayer
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Components.ActionMap import HelpableActionMap
 from Components.Pixmap import Pixmap
@@ -649,6 +650,9 @@ class IMDB(Screen, HelpableScreen):
 				(_("Search Trailer"), self.searchYttrailer),
 			))
 
+		for video in self.videos:
+			list.append((video[0], self.playVideo, video[1], video[2]))
+
 		self.session.openWithCallback(
 			self.menuCallback,
 			ChoiceBox,
@@ -657,7 +661,13 @@ class IMDB(Screen, HelpableScreen):
 		)
 
 	def menuCallback(self, ret=None):
-		ret and ret[1]()
+		if ret:
+			ret[1]() if len(ret) == 2 else ret[1](ret[2], ret[3])
+
+	def playVideo(self, name, url):
+		ref = eServiceReference(4097, 0, url)
+		ref.setName(name)
+		self.session.open(IMDbPlayer, ref)
 
 	def saveHtmlDetails(self):
 		try:
@@ -778,6 +788,7 @@ class IMDB(Screen, HelpableScreen):
 		self.json = self.generalinfos = None
 		self.castTxt = self.extraTxt = self.synopsisTxt = self.reviewsTxt = ""
 		self.extra = self.synopsis = ""
+		self.videos = []
 		self.reviews = []
 		self.spoilers = False
 		safeRemove("/tmp/poster.jpg", "/tmp/poster-big.jpg")
@@ -1289,6 +1300,29 @@ class IMDB(Screen, HelpableScreen):
 			self.synopsisTxt = html2text(get(tmd, ('synopses', 'edges', 'node', 'plotText', 'plaidHtml')))
 			self.synopsis = text2label(self.synopsisTxt)
 
+			for video in get(fold, ('primaryVideos', 'edges')):
+				video = video['node']
+				typ = get(video, ('contentType', 'displayName', 'value'))
+				desc = get(video, ('description', 'value'))
+				name = get(video, ('name', 'value'))
+				# If the name is the same as the title, use the description if
+				# it appears to be a name, otherwise just use the content type.
+				if name == self.eventName:
+					name = desc if desc and len(desc) < 70 and desc != name else typ
+				runtime = video['runtime']['value']
+				# Assume the first video is the best.
+				url = get(video, ('playbackURLs', 'url'))
+				if self.eventName.lower() in name.lower():
+					title = name
+				else:
+					title = "%s - %s" % (self.eventName, name)
+				self.videos.append(("%s (%d:%02d)" % (name, runtime // 60, runtime % 60), title, url))
+				for subt in get(video, 'timedTextTracks'):
+					self.videos.append(("   " + (get(subt, ('displayName', 'value'))
+												 or get(subt, ('displayName', 'language'))
+												 or get(subt, 'language')),
+										title, url + "&suburi=" + get(subt, 'url')))
+
 		self.callbackData = Detailstext
 		Detailstext = text2label(Detailstext)
 		self["detailslabel"].setText(Detailstext)
@@ -1351,6 +1385,21 @@ class IMDB(Screen, HelpableScreen):
 
 	def createSummary(self):
 		return IMDbLCDScreen
+
+
+class IMDbPlayer(MoviePlayer):
+	def __init__(self, session, service):
+		MoviePlayer.__init__(self, session, service)
+		self.skinName = "MoviePlayer"
+
+	def leavePlayer(self):
+		self.close()
+
+	def doEofInternal(self, playing):
+		self.close()
+
+	def showMovies(self):
+		pass
 
 
 class IMDbLCDScreen(Screen):
