@@ -55,10 +55,10 @@ config.plugins.imdb.showepisoderesults = ConfigYesNo(default=False)
 config.plugins.imdb.showepisodeinfo = ConfigYesNo(default=False)
 
 
-def getPage(url, params=None, headers=None, cookies=None):
+def getPage(url, params=None, data=None, headers=None, cookies=None):
 	headers = headers or {}
 	headers["user-agent"] = "Mozilla/5.0 Gecko/20100101 Firefox/100.0"
-	return deferToThread(requests.get, url, params=params, headers=headers, cookies=cookies, timeout=30.05)
+	return deferToThread(requests.post if data else requests.get, url, params=params, data=data, headers=headers, cookies=cookies, timeout=30.05)
 
 
 def savePage(response, filename):
@@ -386,6 +386,110 @@ class IMDB(Screen, HelpableScreen):
 			self.json = response.content
 			if six.PY3:
 				self.json = self.json.decode("utf8")
+			if self.json.startswith('{"errors'):
+				if not self.tmdTitleId:
+					print("[IMDb] error getting TMD", self.json)
+				else:
+					print("[IMDb] getting TMD via POST")
+					query = (
+						'{"query":"'
+						'query TMD_Storyline($titleId: ID!) {\\n'
+						'  title(id: $titleId) {\\n'
+						'    id\\n'
+						'    ...TMD_Storyline_PlotSection\\n'
+						'    ...TMD_Storyline_Taglines\\n'
+						'    ...TMD_Storyline_Genres\\n'
+						'    ...TMD_Storyline_Certificate\\n'
+						'    ...TMD_Storyline_ParentsGuide\\n'
+						'  }\\n'
+						'}\\n'
+						'\\n'
+						'fragment TMD_Storyline_PlotSection on Title {\\n'
+						'  summaries: plots(first: 1, filter: {type: SUMMARY}) {\\n'
+						'    edges {\\n'
+						'      node {\\n'
+						'        ...PlotData\\n'
+						'        author\\n'
+						'      }\\n'
+						'    }\\n'
+						'  }\\n'
+						'  outlines: plots(first: 1, filter: {type: OUTLINE}) {\\n'
+						'    edges {\\n'
+						'      node {\\n'
+						'        ...PlotData\\n'
+						'      }\\n'
+						'    }\\n'
+						'  }\\n'
+						'  synopses: plots(first: 1, filter: {type: SYNOPSIS}) {\\n'
+						'    edges {\\n'
+						'      node {\\n'
+						'        ...PlotData\\n'
+						'      }\\n'
+						'    }\\n'
+						'  }\\n'
+						'  storylineKeywords: keywords(first: 5) {\\n'
+						'    edges {\\n'
+						'      node {\\n'
+						'        legacyId\\n'
+						'        text\\n'
+						'      }\\n'
+						'    }\\n'
+						'    total\\n'
+						'  }\\n'
+						'}\\n'
+						'\\n'
+						'fragment PlotData on Plot {\\n'
+						'  plotText {\\n'
+						'    plaidHtml\\n'
+						'  }\\n'
+						'}\\n'
+						'\\n'
+						'fragment TMD_Storyline_Taglines on Title {\\n'
+						'  taglines(first: 1) {\\n'
+						'    edges {\\n'
+						'      node {\\n'
+						'        text\\n'
+						'      }\\n'
+						'    }\\n'
+						'    total\\n'
+						'  }\\n'
+						'}\\n'
+						'\\n'
+						'fragment TMD_Storyline_Genres on Title {\\n'
+						'  genres {\\n'
+						'    genres {\\n'
+						'      id\\n'
+						'      text\\n'
+						'    }\\n'
+						'  }\\n'
+						'}\\n'
+						'\\n'
+						'fragment TMD_Storyline_Certificate onTitle {\\n'
+						'  certificate {\\n'
+						'    rating\\n'
+						'    ratingReason\\n'
+						'    ratingsBody {\\n'
+						'      id\\n'
+						'    }\\n'
+						'  }\\n'
+						'}\\n'
+						'\\n'
+						'fragment TMD_Storyline_ParentsGuide on Title {\\n'
+						'  parentsGuide {\\n'
+						'    guideItems(first: 0) {\\n'
+						'      total\\n'
+						'    }\\n'
+						'  }\\n'
+						'}",'
+						'"operationName":"TMD_Storyline",'
+						'"variables":{"titleId":"%s"},'
+						'"extensions":{"persistedQuery":{"version":1,'
+						'"sha256Hash":"78f137c28457417c10cf92a79976e54a65f8707bfc4fd1ad035da881ee5eaac6"}}}'
+					) % self.tmdTitleId
+					self.tmdTitleId = None
+					tmd = getPage("https://caching.graphql.imdb.com/", data=query, headers={"content-type": "application/json"}, cookies=self.cookie)
+					tmd.addBoth(self.gotTMD)
+					return
 		if self.haveHTML:
 			self.IMDBparse()
 		else:
@@ -401,6 +505,7 @@ class IMDB(Screen, HelpableScreen):
 			"extensions": '{"persistedQuery":{"sha256Hash":"78f137c28457417c10cf92a79976e54a65f8707bfc4fd1ad035da881ee5eaac6","version":1}}'
 		}
 		self.haveTMD = self.haveHTML = False
+		self.tmdTitleId = titleId
 		tmd = getPage("https://caching.graphql.imdb.com/", params=params, headers={"content-type": "application/json"}, cookies=self.cookie)
 		tmd.addBoth(self.gotTMD)
 		download = getPage(fetchurl, cookies=self.cookie)
