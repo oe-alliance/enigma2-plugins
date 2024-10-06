@@ -650,6 +650,9 @@ class IMDB(Screen, HelpableScreen):
 				(_("Search Trailer"), self.searchYttrailer),
 			))
 
+		if isPluginInstalled("SubsSupport"):
+			list.append((_("SubsSupport search"), self.searchSubsSupport))
+
 		for video in self.videos:
 			list.append((video[0], self.playVideo, video[1], video[2]))
 
@@ -758,6 +761,19 @@ class IMDB(Screen, HelpableScreen):
 			return
 
 		self.session.open(YTTrailerList, self.eventName)
+
+	def searchSubsSupport(self):
+		try:
+			from Plugins.Extensions.SubsSupport.subtitles import E2SubsSeeker, SubsSearch, initSubsSettings
+		except ImportError as ie:
+			self["statusbar"].setText(_("SubsSupport import failed"))
+			return
+
+		settings = initSubsSettings().search
+		titles = [self.eventName]
+		if self.originalName != self.eventName:
+			titles.append(self.originalName)
+		self.session.open(SubsSearch, E2SubsSeeker(self.session, settings), settings, searchTitles=titles, standAlone=True)
 
 	def openVirtualKeyBoard(self):
 		self.session.openWithCallback(
@@ -974,6 +990,7 @@ class IMDB(Screen, HelpableScreen):
 				tmd = {}
 
 			self.eventName = get(fold, ('titleText', 'text'))
+			self.originalName = get(fold, ('originalTitleText', 'text'))
 			self.titleId = get(fold, 'id')
 
 			self["key_yellow"].setText(_("Details"))
