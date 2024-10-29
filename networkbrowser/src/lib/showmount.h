@@ -2,10 +2,10 @@
 #
 # http://newnigma2.to
 #
-# $Id$ 
+# $Id$
 #
 # Copyright (C) 2008 by nixkoenner <nixkoenner@newnigma2.to>
-# 
+#
 # License: GPL
 #
 # This program is free software; you can redistribute it and/or modify
@@ -27,14 +27,14 @@
 #ifndef SHOWMOUNT_H
 #define SHOWMOUNT_H
 
-typedef struct {
+typedef struct
+{
 	char share[256];
 	char ip[41];
 } nfsinfo;
 
-nfsinfo * newNfsInfo();
+nfsinfo *newNfsInfo();
 void freeNfsInfo(nfsinfo *nfsInfo);
-
+int showNfsShare(char *pythonIp, nfsinfo *nfsInfo);
 
 #endif
-
