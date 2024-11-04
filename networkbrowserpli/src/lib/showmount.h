@@ -34,6 +34,7 @@ typedef struct {
 
 nfsinfo * newNfsInfo();
 void freeNfsInfo(nfsinfo *nfsInfo);
+int showNfsShare(char *pythonIp, nfsinfo *nfsInfo);
 
 
 #endif
