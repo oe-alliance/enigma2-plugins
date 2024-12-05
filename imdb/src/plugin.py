@@ -28,7 +28,7 @@ import os
 import re
 import requests
 import six
-from time import strftime
+from time import strftime, strptime
 from twisted.internet.threads import deferToThread
 from shutil import copy
 
@@ -514,36 +514,53 @@ class IMDB(Screen, HelpableScreen):
 
 	def gotReviews(self, response):
 		self["statusbar"].setText(_("Parsing reviews..."))
-		self.reviewsHTML = response.content
+		self.reviewsJSON = response.content
 		if six.PY3:
-			self.reviewsHTML = self.reviewsHTML.decode("utf8")
+			self.reviewsJSON = self.reviewsJSON.decode("utf8")
+		try:
+			reviews = json.loads(self.reviewsJSON)['data']['title']['reviews']['edges']
+		except Exception as e:
+			self["statusbar"].setText(_("IMDb Reviews failed"))
+			print("[IMDB] reviews failed:", str(e))
+			return
 
-		reviewsmask = re.compile(
-			'(?:<span>(?P<rating>\d+)</span>.*?)?'
-			'class="title" > (?P<title>.*?)\n.*?'
-			'\n>(?P<author>.*?)</a></span><span class="review-date">(?P<date>.*?)</span>.*?'
-			'(?:spoiler-warning">(?P<spoiler>.*?)</.*?)?'
-			'"text show-more__control">(?P<review>.*?)</div>.*?'
-			'text-muted">\s+(?P<helpful>.*?)\s+<span', re.DOTALL)
+		def makedate(date):
+			try:
+				return strftime(config.usage.date.full.value, strptime(date, "%Y-%m-%d"))
+			except:
+				return date
 
-		for review in reviewsmask.finditer(self.reviewsHTML):
+		for review in reviews:
+			review = review['node']
+			try:
+				helpful = review['helpfulness']['upVotes']
+				total = helpful + review['helpfulness']['downVotes']
+				if total:
+					helpful = _("%d out of %d found this helpful.") % (helpful, total)
+				else:
+					helpful = ""
+			except:
+				helpful = ""
 			self.reviews.append({
-				'rating': review.group('rating'),
-				'title': html2text(review.group('title')),
-				'author': html2text(review.group('author')),
-				'date': html2text(review.group('date')),
-				'spoiler': html2text(review.group('spoiler') or ""),
-				'review': html2text(review.group('review')),
-				'helpful': html2text(review.group('helpful'))
+				'rating': str(get(review, 'authorRating')),
+				'title': html2text(get(review, ('summary', 'originalText'))),
+				'author': html2text(get(review, ('author', 'nickName'))),
+				'date': makedate(get(review, 'submissionDate')),
+				'spoiler': get(review, 'spoiler') and self.spoiler_i18n,
+				'review': html2text(get(review, ('text', 'originalText', 'plaidHtml'))),
+				'helpful': helpful
 			})
 		self["statusbar"].setText(_("IMDb Reviews parsed"))
 		self.showExtras(reviews=True)
 
 	def downloadReviews(self):
 		self["statusbar"].setText(_("Downloading reviews..."))
-		fetchurl = "https://www.imdb.com/title/" + self.titleId + "/reviews/_ajax"
-#		print("[IMDB] downloadReviews()", fetchurl)
-		download = getPage(fetchurl, cookies=self.cookie)
+		params = {
+			"operationName": 'TitleReviewsRefine',
+			"variables": '{"const":"%s","first":25}' % self.titleId,
+			"extensions": '{"persistedQuery":{"sha256Hash":"89aff4cd7503e060ff1dd5aba91885d8bac0f7a21aa1e1f781848a786a5bdc19","version":1}}'
+		}
+		download = getPage("https://caching.graphql.imdb.com/", params=params, headers={"content-type": "application/json"}, cookies=self.cookie)
 		download.addCallback(self.gotReviews).addErrback(self.http_failed)
 
 	def showDetails(self):
@@ -600,8 +617,9 @@ class IMDB(Screen, HelpableScreen):
 				if self.spoilers or not review['spoiler']:
 					reviews.append(review['review'])
 					reviews.append("")
-				reviews.append(review['helpful'])
-				reviews.append("")
+				if review['helpful']:
+					reviews.append(review['helpful'])
+					reviews.append("")
 				reviews.append("-" * 72)
 				reviews.append("")
 			self.reviewsTxt = "\n".join(reviews[:-3])
@@ -679,8 +697,8 @@ class IMDB(Screen, HelpableScreen):
 				open(isave + ".html", 'w').write(self.html)
 				if self.json:
 					open(isave + ".json", 'w').write(self.json)
-				if self.reviews:
-					open(isave + "-reviews.html", 'w').write(self.reviewsHTML)
+				if self.reviewsJSON:
+					open(isave + "-reviews.json", 'w').write(self.reviewsJSON)
 				try:
 					copy("/tmp/poster.jpg", isave + ".jpg")
 				except:
@@ -1052,6 +1070,7 @@ class IMDB(Screen, HelpableScreen):
 				'sound': get(i18n, 'title_main_techspec_soundmix'),
 				'aspect': get(i18n, 'title_main_techspec_aspectratio'),
 			}
+			self.spoiler_i18n = get(i18n, 'common_label_spoiler', _("Spoiler"))
 
 			self.generalinfos = {
 				'director': ", ".join(get(name, ('name', 'nameText', 'text')) for name in get(main, ('directors', 'credits'))),
