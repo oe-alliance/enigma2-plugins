@@ -1,44 +1,43 @@
 # -*- coding: UTF-8 -*-
-from os import mkdir, unlink, path
+import re
+import time
+import xml.etree.ElementTree as Et
 from datetime import datetime, timedelta
 from json import loads
-import xml.etree.ElementTree as Et
-import time
-import re
+from os import mkdir, path, unlink
 import requests
 import skin
 from Components.ActionMap import ActionMap
+from Components.config import ConfigDirectory, ConfigSelection, ConfigSubsection, ConfigYesNo, config, configfile, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
-from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigDirectory, ConfigSelection, ConfigYesNo, configfile
 from Components.FileList import FileList
 from Components.Pixmap import Pixmap
 from Components.ProgressBar import ProgressBar
 from Components.ScrollLabel import ScrollLabel
-from Components.Sources.StaticText import StaticText
 from Components.Sources.List import List
-from enigma import addFont, ePicLoad, eServiceReference, getDesktop, gPixmapPtr
+from Components.Sources.StaticText import StaticText
+from enigma import addFont, eConsoleAppContainer, ePicLoad, eServiceReference, getDesktop, gPixmapPtr
 from Screens import InfoBarGenerics
-from Screens.InfoBar import MoviePlayer
 from Screens.ChoiceBox import ChoiceBox
+from Screens.InfoBar import MoviePlayer
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from six import ensure_str
 from six.moves.urllib.parse import quote_plus
-from twisted.internet.reactor import callInThread
 from Tools.Downloader import downloadWithProgress
+from twisted.internet.reactor import callInThread
 
 config.plugins.ARD = ConfigSubsection()
 config.plugins.ARD.savetopath = ConfigDirectory(default="/media/hdd/movie/")
 config.plugins.ARD.SaveResumePoint = ConfigYesNo(default=False)
 config.plugins.ARD.UT_DL = ConfigYesNo(default=False)
-config.plugins.ARD.COVER_DL = ConfigYesNo(default=False)
+config.plugins.ARD.COVER_DL = ConfigSelection(default="nein", choices=[("nein", "Nein"), (".jpg", "jpg"), (".bdp.jpg", "bdp.jpg")])
 config.plugins.ARD.DESC = ConfigYesNo(default=False)
-config.plugins.ARD.AUTOPLAY = ConfigYesNo(default=False)
 PLUGINPATH = "/usr/lib/enigma2/python/Plugins/Extensions/ArdMediathek/"
 RegionList = [("bw", ("Baden-Württemberg (SWR)")), ("by", ("Bayern (BR)")), ("be", ("Berlin (rbb)")), ("bb", ("Brandenburg (rbb)")), ("hb", ("Bremen (radiobremen)")), ("hh", ("Hamburg (NDR)")), ("he", ("Hessen (hr)")), ("mv", ("Mecklenburg-Vorpommern (NDR)")), ("ni", ("Niedersachsen (NDR)")), ("nw", ("Nordrhein-Westfalen (WDR)")), ("rp", ("Rheinland-Pfalz (SWR)")), ("sl", ("Saarland (SR)")), ("sn", ("Sachsen (mdr)")), ("st", ("Sachsen-Anhalt (mdr)")), ("sh", ("Schleswig-Holstein (NDR)")), ("th", ("Thüringen (mdr)"))]
 config.plugins.ARD.Region = ConfigSelection(default="nw", choices=RegionList)
-UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0"
+UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:129.0) Gecko/20100101 Firefox/129.0"
 TMPIC = "/tmp/cover/bild.jpg"
 SKINFILE = PLUGINPATH + "skin_FHD.xml" if getDesktop(0).size().height() > 720 else PLUGINPATH + "skin_HD.xml"
 FONT = "/usr/share/fonts/LiberationSans-Regular.ttf"
@@ -111,7 +110,7 @@ class ArdMediathek(Screen):
         self["handlung"] = ScrollLabel()
         self.HISTORY = [("MENU", "")]
         self["DownloadLabel"] = ScrollLabel()
-        self["PluginName"] = ScrollLabel("ARD Mediathek v1.6")
+        self["PluginName"] = ScrollLabel("ARD Mediathek v1.8")
         self["progress"] = ProgressBar()
         self["progress"].hide()
         self.PROGRAMM = "ard"
@@ -120,8 +119,12 @@ class ArdMediathek(Screen):
             mkdir("/tmp/cover/")
         self.onLayoutFinish.append(self.HauptMenu)
 
+    def reload_skin(self):
+        self.session.open(ArdMediathek)
+        self.close()
+
     def ARDSetup(self):
-        self.session.open(ARDConfigScreen)
+        self.session.openWithCallback(self.reload_skin, ARDConfigScreen)
 
     def HauptMenu(self, index="0"):
         self.searchtxt = ""
@@ -139,6 +142,11 @@ class ArdMediathek(Screen):
             self.session.openWithCallback(self.search, VirtualKeyBoard, title="ARD Mediathek Suche")
         elif item_type == "PLAY":
             self.cdn(download=False)
+        elif item_type == "LIVE":
+            if path.exists("/usr/bin/exteplayer3"):
+                self.cdn(download=False, live=True)
+            else:
+                self.session.open(MessageBox, "Bitte installieren Sie exteplayer3, um den Livestream abspielen zu können.", MessageBox.TYPE_INFO)
         else:
             index = self["movielist"].getIndex()
             if item_type in ["MENU", "WEITER"]:
@@ -184,6 +192,7 @@ class ArdMediathek(Screen):
             if path.exists(TMPIC):
                 unlink(TMPIC)
             self.close()
+
 
     def SenderMenu(self, index="0", mt=""):
         URL = "https://images.ardmediathek.de/vrwifdtrtsys/"
@@ -255,7 +264,7 @@ class ArdMediathek(Screen):
             liste.append(("WEITER", "Videos", API_URL + "widgets/%s/search/vod?searchString=%s&pageNumber=0&pageSize=200" % (self.PROGRAMM, quote_plus(self.searchtxt)), "", "", ""))
 
         for js in data2:
-            if js.get("type") in ("external"):
+            if js.get("type", "") in ("external", "top_navigation") or "LOGGED" in js.get("userVisibility", ""):
                 continue
             plot = ""
             title = js.get("title") if js.get("title") else js.get("longTitle", "")
@@ -298,8 +307,10 @@ class ArdMediathek(Screen):
                     li = li.get("self")
                 if li.get("href"):
                     url2 = li.get("href")
-            if js.get("duration") or js.get("type") in ("live", "event", "broadcastMainClip"):
+            if js.get("duration") or js.get("type") in ("event", "broadcastMainClip"):
                 liste.append(("PLAY", ensure_str(title), ensure_str(url2), ensure_str(plot), ensure_str(img), duration))
+            elif js.get("type") in ("live"):
+                liste.append(("LIVE", ensure_str(title), ensure_str(url2), ensure_str(plot), ensure_str(img), duration))
             elif js.get("type") == "region_gridlist":
                 liste.append(("WEITER", ensure_str(title) + " " + config.plugins.ARD.Region.value.upper(), ensure_str(url2.replace("{regionId}", config.plugins.ARD.Region.value)), ensure_str(plot), img, duration))
             else:
@@ -328,14 +339,17 @@ class ArdMediathek(Screen):
     def Download(self):
         self.cdn(download=True)
 
-    def cdn(self, download=False):
+    def Live(self):
+        self.cdn(live=True)
+
+    def cdn(self, download=False, live=False):
         if self.DL_File and download is True:
             self.session.openWithCallback(self.DL_Stop, MessageBox, "Möchten Sie den Download abbrechen?", default=True, type=MessageBox.TYPE_YESNO)
         else:
+            liste = []
+            UT = ""
             url = self["movielist"].getCurrent()[2]
-            data = ensure_str(geturl(url))
-            UT = re.compile(r'(http[^"]+.vtt)', re.DOTALL).findall(data)
-            UT = UT[0] if UT else ""
+            data = ensure_str(geturl(url + "&mcV6=true"))
             if data and "widgets" in data:
                 js = loads(data)
                 js = js.get("widgets")[0] if js.get("widgets") else {}
@@ -345,35 +359,46 @@ class ArdMediathek(Screen):
                     title = "%s(%s)" % (title, js.get("broadcastedOn")[:10])
                 filename = "".join(i for i in ensure_str(title) if i not in r'\/":*?<>|')
                 if 'blockedByFsk":true' in data:
-                    data = ensure_str(geturl(API_URL + "mediacollection/" + js.get("id", "") + "?devicetype=pc"))
-            liste = []
-            mp4 = re.compile(r'_height":(\d+).*?_stream":"([^"]+).*?width":(\d+)', re.DOTALL).findall(data)
-            if not mp4:
-                m3u8 = re.compile('_quality":"([^"]+)","_stream":"([http|//][^"]+m3u8)', re.DOTALL).findall(data)
-                for res, url in m3u8:
-                    url = "https:" + url if url.startswith("//") else url
-                    liste.append(("m3u8 | %s" % res, url))
-            else:
-                for h, url, w in mp4:
-                    url = "https:" + url if url.startswith("//") else url
-                    if download is True:
-                        liste.append(("%s (%sx%s).mp4" % (filename, w, h), url + "##" + UT))
-                    else:
-                        bit = " | %s" % re.compile(r"(\d+kbit)", re.DOTALL).findall(url)[0] if re.compile(r"(\d+kbit)", re.DOTALL).findall(url) and "m3u8" not in url else ""
-                        liste.append(("MP4 | %sx%s%s" % (w, h, bit), url))
-            liste = sortList(liste)
-            if download is True:
-                if len(liste) > 1:
-                    self.session.openWithCallback(self.DL_Start, ChoiceBox, title="Download starten?", list=liste)
-            else:
-                if config.plugins.ARD.AUTOPLAY.value and liste:
-                    self.Player(liste[0])
-                elif len(liste) > 1:
-                    self.session.openWithCallback(self.Player, ChoiceBox, title="Wiedergabe starten?", list=liste)
-                elif liste:
-                    self.Player(liste[0])
+                    data = ensure_str(geturl("%smediacollectionv6/%s?isTv=false" % (API_URL, js.get("id", ""))))
+                    if data:
+                        data = loads(data)
                 else:
-                    self.session.open(MessageBox, "Kein Eintrag vorhanden", MessageBox.TYPE_INFO)
+                    js = js.get("mediaCollection") if js.get("mediaCollection") else {}
+                    data = js.get("embedded") if js.get("embedded") else {}
+            data = data or {}
+            UT = next((media.get("url", "") for sub in data.get("subtitles", []) for media in sub.get("sources", []) if media.get("kind", "") == "webvtt"), "")
+
+            for stream in data.get("streams", []):
+                kind_name = "(%s)" % stream.get("kindName") if stream.get("kindName") and stream.get("kindName") != "Normal" else ""
+                for media in stream.get("media", []):
+                    url = str(media.get("url", ""))
+                    if not url:
+                        continue
+                    res = "%sx%s%s" % (media.get("maxHResolutionPx", "0"), media.get("maxVResolutionPx", "0"), kind_name)
+                    audios = media.get("audios", [{}])[0]
+                    language_code = audios.get("languageCode", "")
+                    if "desc" in str(audios.get("kind", "")):
+                        res += "(AD)"
+                    if language_code and "deu" not in language_code:
+                        res += "(%s)" % language_code.upper()
+                    if download is True:
+                        if ".m3u8" in url:
+                            continue
+                        liste.append(("%s_%s.mp4" % (filename, res), url + "##" + UT))
+                    elif "m3u8" in url:
+                        if live:
+                            liste.append(("M3U8 | %s" % (res), url))
+                    else:
+                        liste.append(("MP4 | %s" % (res), url))
+            liste = sortList(liste)
+            if download is True and len(liste) > 1:
+                self.session.openWithCallback(self.DL_Start, ChoiceBox, title="Download starten?", list=liste)
+            elif liste and live:
+                self.session.open(LivePlayer, liste[0][1])
+            elif len(liste) > 1:
+                self.session.openWithCallback(self.Player, ChoiceBox, title="Wiedergabe starten?", list=liste)
+            else:
+                self.session.open(MessageBox, "Kein Eintrag vorhanden", MessageBox.TYPE_INFO)
 
     def DL_Start(self, answer):
         if answer:
@@ -387,11 +412,12 @@ class ArdMediathek(Screen):
                     i += 1
                     n = "%s_(%i)%s" % (root, i, ext)
                 self.DL_File = n
-            if config.plugins.ARD.COVER_DL.value:
-                downloader = downloadWithProgress(str(self["movielist"].getCurrent()[4].replace("w=360", "w=1080")), self.DL_File[:-3] + "jpg")
+            if not config.plugins.ARD.COVER_DL.value == "nein":
+                downloader = downloadWithProgress(str(self["movielist"].getCurrent()[4].replace("w=360", "w=1080")), self.DL_File[:-4] + str(config.plugins.ARD.COVER_DL.value))
                 if hasattr(downloadWithProgress, "setAgent"):
                     downloader.setAgent(UA)
                 downloader.start()
+
             if config.plugins.ARD.UT_DL.value and url[1]:
                 txt = ensure_str(geturl(url[1]))
                 if txt:
@@ -419,7 +445,7 @@ class ArdMediathek(Screen):
 
     def fileClean(self):
         filename = self.DL_File.rsplit(".", 1)[0]
-        for ext in [".srt", ".jpg", ".txt"]:
+        for ext in (".srt", ".jpg", ".bdp.jpg", ".txt"):
             fileext = filename + ext
             if path.exists(fileext):
                 unlink(fileext)
@@ -458,7 +484,7 @@ class ArdMediathek(Screen):
         if url:
             sref = eServiceReference(4097, 0, ensure_str(url))
             sref.setName(self["movielist"].getCurrent()[1])
-            self.session.open(MoviePlayer2, sref)
+            self.session.open(Player, sref)
 
     def up(self):
         if self["movielist"]:
@@ -525,7 +551,41 @@ class ArdMediathek(Screen):
                 self["cover"].show()
 
 
-class MoviePlayer2(MoviePlayer):
+class LivePlayer(Screen):
+    def __init__(self, session, url):
+        self.url = url
+        self.skin = """<screen name="Player" position="0,0" size="0, 0" flags="wfNoBorder"> </screen>"""
+        Screen.__init__(self, session)
+        self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.ok, "cancel": self.exit}, -1)
+        self.oldService = self.session.nav.getCurrentlyPlayingServiceReference()
+        self.console = eConsoleAppContainer()
+        self.console.dataAvail.append(self.avail)
+        self.onLayoutFinish.append(self.layoutFinished)
+
+    def avail(self, txt):
+        if txt:
+            pass
+
+    def ok(self):
+        pass
+
+    def exit(self):
+        self.session.nav.playService(self.oldService)
+        self.console.sendCtrlC()
+        self.close()
+
+    def layoutFinished(self):
+        self.session.nav.stopService()
+        parameter = "-l"
+        if "###" in self.url:
+            video, audio = self.url.split("###")
+            cmd = "exteplayer3 %s -x %s %s" % (video, audio, parameter)
+        else:
+            cmd = "exteplayer3 %s %s" % (self.url, parameter)
+        self.console.execute(cmd)
+
+
+class Player(MoviePlayer):
     ENABLE_RESUME_SUPPORT = True
 
     def __init__(self, session, service):
@@ -565,7 +625,7 @@ class ARDConfigScreen(ConfigListScreen, Screen):
         self.ConfigList()
 
     def ConfigList(self):
-        self.list = [getConfigListEntry("Skin (Neustart des Plugins erforderlich)", config.plugins.ARD.SkinColor), getConfigListEntry("Download-Verzeichnis:", config.plugins.ARD.savetopath), getConfigListEntry("Untertitle Downloaden", config.plugins.ARD.UT_DL), getConfigListEntry("Cover Downloaden", config.plugins.ARD.COVER_DL), getConfigListEntry("Handlung Downloaden", config.plugins.ARD.DESC), getConfigListEntry("Unsere Region", config.plugins.ARD.Region), getConfigListEntry("AutoPlay Beste Qualität", config.plugins.ARD.AUTOPLAY)]
+        self.list = [getConfigListEntry("Skin", config.plugins.ARD.SkinColor), getConfigListEntry("Download-Verzeichnis:", config.plugins.ARD.savetopath), getConfigListEntry("Untertitle Downloaden", config.plugins.ARD.UT_DL), getConfigListEntry("Cover Downloaden", config.plugins.ARD.COVER_DL), getConfigListEntry("Handlung Downloaden", config.plugins.ARD.DESC), getConfigListEntry("Unsere Region", config.plugins.ARD.Region)]
         if hasattr(InfoBarGenerics, "setResumePoint"):
             self.list.append(getConfigListEntry("Letzte Abspielposition speichern", config.plugins.ARD.SaveResumePoint))
         self["config"].list = self.list
@@ -576,12 +636,13 @@ class ARDConfigScreen(ConfigListScreen, Screen):
         self.close()
 
     def cancel(self):
+        for x in self["config"].list:
+            x[1].cancel()
         self.close()
 
     def ok(self):
         if self["config"].getCurrent()[1] == config.plugins.ARD.savetopath:
-            DLdir = config.plugins.ARD.savetopath.value
-            self.session.openWithCallback(self.DL_Path, DirBrowser, DLdir)
+            self.session.openWithCallback(self.DL_Path, DirBrowser, config.plugins.ARD.savetopath.value)
 
     def DL_Path(self, res):
         self["config"].setCurrentIndex(0)
@@ -590,14 +651,14 @@ class ARDConfigScreen(ConfigListScreen, Screen):
 
 
 class DirBrowser(Screen):
-    def __init__(self, session, DLdir):
+    def __init__(self, session, ddir):
         Screen.__init__(self, session)
         self.skinName = ["FileBrowser"]
         self["key_red"] = StaticText("Abbrechen")
         self["key_green"] = StaticText("Speichern")
-        if not path.exists(DLdir):
-            DLdir = "/"
-        self.filelist = FileList(DLdir, showFiles=False)
+        if not path.exists(ddir):
+            ddir = "/"
+        self.filelist = FileList(ddir, showFiles=False)
         self["filelist"] = self.filelist
         self["FilelistActions"] = ActionMap(["SetupActions", "ColorActions"], {"cancel": self.cancel, "red": self.cancel, "ok": self.ok, "green": self.save}, -2)
 
