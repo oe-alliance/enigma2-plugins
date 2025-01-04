@@ -71,8 +71,8 @@ class ConfigMutable(ConfigElement):
 		self.currentConfig.saved_value = self.saved_value
 		self.currentConfig.load()
 
-	def tostring(self, value):
-		return self.currentConfig.tostring(value)
+	def toString(self, value):
+		return self.currentConfig.toString(value)
 
 	def save(self):
 		self.currentConfig.save()

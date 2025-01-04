@@ -62,7 +62,7 @@ class VlcServer:
 		return self.cfg.addressType
 
 	def getHost(self):
-		return self.cfg.hostip.tostring(self.cfg.hostip.value)
+		return self.cfg.hostip.toString(self.cfg.hostip.value)
 
 	def host(self):
 		return self.cfg.hostip
