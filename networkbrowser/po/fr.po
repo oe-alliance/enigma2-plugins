@@ -145,7 +145,7 @@ msgid "Local share name"
 msgstr "Nom partage local"
 
 msgid "Manage network shares"
-msgstr "Netzwerkfreigaben verwalten"
+msgstr "Gérer les partages réseau"
 
 msgid "Manage your network shares..."
 msgstr "Gestion partages de votre réseau..."
@@ -189,7 +189,7 @@ msgstr ""
 
 #, fuzzy
 msgid "Mounting network shares..."
-msgstr "Netzwerkfreigaben verwalten"
+msgstr "Monter des partages réseau"
 
 msgid "Mountpoints management"
 msgstr "Gestionnaire points montage"
