@@ -108,7 +108,7 @@ class SRFMediathek(Screen):
         self["handlung"] = ScrollLabel()
         self.HISTORY = [("MENU", "")]
         self["DownloadLabel"] = ScrollLabel()
-        self["PluginName"] = ScrollLabel("SRF Mediathek v0.7")
+        self["PluginName"] = ScrollLabel("SRF Mediathek v0.8")
         self["progress"] = ProgressBar()
         self["progress"].hide()
         self.PROGRAMM = "srf"
@@ -244,7 +244,7 @@ class SRFMediathek(Screen):
                 if "video" in url or "audio" in url:
                     url = "%s/2.1/mediaComposition/byUrn/%s?onlyChapters=false&vector=APPPLAY" % (API_URL, url)
                 elif "show" in url:
-                    url = "%s/2.0/mediaList/latest/byShowUrn/urn:srf:%s?pageSize=40&vector=APPPLAY" % (API_URL, url)
+                    url = "%s/2.0/mediaList/latest/byShowUrn/%s?pageSize=40&vector=APPPLAY" % (API_URL, url)
                 elif "topic" in url:
                     url = "%s/2.0/%s/page/byTopicUrn/%s?isPublished=true&vector=APPPLAY" % (API_URL, self.PROGRAMM, url)
             elif js.get("id"):
