@@ -845,9 +845,9 @@ class SHOUTcastWidget(Screen):
 			self["statustext"].setText(_("Searching SHOUTcast for %s...") % searchstring)
 			self["list"].hide()
 			if len(devid) > 8:
-			   self.stationListURL = self.SC + "/station/advancedsearch&f=xml&k=%s&search=%s" % (devid, searchstring)
+				self.stationListURL = self.SC + "/station/advancedsearch&f=xml&k=%s&search=%s" % (devid, searchstring)
 			else:
-			   self.stationListURL = "http://207.200.98.1/sbin/newxml.phtml?search=%s" % searchstring
+				self.stationListURL = "http://207.200.98.1/sbin/newxml.phtml?search=%s" % searchstring
 			self.mode = self.SEARCHLIST
 			self.searchSHOUTcastString = searchstring
 			self.stationListIndex = 0
@@ -997,16 +997,17 @@ class SHOUTcastWidget(Screen):
 			self["cover"].updateIcon(coverfile)
 			self["cover"].doShow()
 
+	# TODO : this needs to be refactored
 	def __event(self, ev):
 		if ev != 17 and ev != 18:
 			print("[SHOUTcast] EVENT ==>", ev)
-		if ev == 1 or ev == 4:
+		if ev == 1:  # or ev == 4:
 			print("[SHOUTcast] Tuned in, playing now!")
 		elif ev == 3 or ev == 7:
 			self["statustext"].setText(_("Stream stopped playing, playback of stream stopped!"))
 			print("[SHOUTcast] Stream stopped playing, playback of stream stopped!")
 			self.session.nav.stopService()
-		elif ev == 5:
+		elif ev == 271 or ev == 4:
 			if not self.currPlay:
 				return
 			sTitle = self.currPlay.info().getInfoString(iServiceInformation.sTagTitle)
