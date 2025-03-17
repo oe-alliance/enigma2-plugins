@@ -23,7 +23,7 @@ from os import mkdir, symlink, remove, listdir, readlink
 from os.path import join, exists, islink, basename
 from gzip import open as gzipopen
 from time import time, localtime, mktime, strftime
-from datetime import datetime
+from datetime import datetime, timezone
 import xml.etree.ElementTree as etree
 from shutil import rmtree
 from socket import gethostname, getfqdn
@@ -59,7 +59,7 @@ global WebTimer
 global WebTimer_conn
 global AutoStartTimer
 SERVICELIST = None
-VERSION = "1.5-r5"
+VERSION = "1.5-r6"
 EXPORTPATH = "%s%s" % (resolveFilename(SCOPE_SYSETC), "epgexport")  # /etc/epgexport
 CHANNELS = join(EXPORTPATH, "epgexport.channels")
 DESTINATION = {"etc": EXPORTPATH, "volatile": "/tmp/epgexport", "data": "/data/epgexport", "hdd": "/media/hdd/epgexport", "usb": "/media/usb/epgexport", "sdcard": "/media/sdcard/epgexport"}
@@ -547,7 +547,7 @@ class EPGExportConfiguration(ConfigListScreen, Screen):
 	def getText(self):
 		cprint("CLEANING EXPORT")
 		cleanepgexport(True)
-		self.session.open(MessageBox, "%s %s %s %s" (_("EPG"), _("Download"), _("Cache"), _("Reset")), MessageBox.TYPE_INFO)
+		self.session.open(MessageBox, "%s %s %s %s" % (_("EPG"), _("Download"), _("Cache"), _("Reset")), MessageBox.TYPE_INFO)
 
 	def getIP(self):
 		ip = None
@@ -605,7 +605,7 @@ class EPGExport(Screen):
 		else:
 			cprint("still valid...")
 			if self.main is not None:
-				self.main["statustext"].setText("%s %s %s" % (_("EPG"), _("Download"), _("Reload"), _("Finished")))
+				self.main["statustext"].setText("%s %s %s %s" % (_("EPG"), _("Download"), _("Reload"), _("Finished")))
 
 	def startingEPGExport(self):
 		cprint("starting EPG export...")
@@ -799,7 +799,7 @@ class EPGExport(Screen):
 #       td = timedelta(minutes=int(tl.tm_isdst)*60) # summertime is not needed...
 #       cprint("summer time delta %s" % td)
 #       offset = datetime.fromtimestamp(ts) - datetime.utcfromtimestamp(ts) - td
-		offset = datetime.fromtimestamp(ts) - datetime.utcfromtimestamp(ts)
+		offset = datetime.fromtimestamp(ts) - datetime.fromtimestamp(ts, tz=timezone.utc)
 		delta = str(offset).rstrip("0").replace(":", "")  # make nice string form XMLTV local time offset...
 		if abs(int(delta)) < 1000:
 			local_offset = '+0%s' % delta if int(delta) > 0 else '-0%s' % delta
