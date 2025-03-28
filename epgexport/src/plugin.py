@@ -59,7 +59,7 @@ global WebTimer
 global WebTimer_conn
 global AutoStartTimer
 SERVICELIST = None
-VERSION = "1.5-r6"
+VERSION = "1.5-r7"
 EXPORTPATH = "%s%s" % (resolveFilename(SCOPE_SYSETC), "epgexport")  # /etc/epgexport
 CHANNELS = join(EXPORTPATH, "epgexport.channels")
 DESTINATION = {"etc": EXPORTPATH, "volatile": "/tmp/epgexport", "data": "/data/epgexport", "hdd": "/media/hdd/epgexport", "usb": "/media/usb/epgexport", "sdcard": "/media/sdcard/epgexport"}
@@ -799,7 +799,7 @@ class EPGExport(Screen):
 #       td = timedelta(minutes=int(tl.tm_isdst)*60) # summertime is not needed...
 #       cprint("summer time delta %s" % td)
 #       offset = datetime.fromtimestamp(ts) - datetime.utcfromtimestamp(ts) - td
-		offset = datetime.fromtimestamp(ts) - datetime.fromtimestamp(ts, tz=timezone.utc)
+		offset = datetime.fromtimestamp(ts).astimezone() - datetime.fromtimestamp(ts, tz=timezone.utc)
 		delta = str(offset).rstrip("0").replace(":", "")  # make nice string form XMLTV local time offset...
 		if abs(int(delta)) < 1000:
 			local_offset = '+0%s' % delta if int(delta) > 0 else '-0%s' % delta
