@@ -799,7 +799,7 @@ class EPGExport(Screen):
 #       td = timedelta(minutes=int(tl.tm_isdst)*60) # summertime is not needed...
 #       cprint("summer time delta %s" % td)
 #       offset = datetime.fromtimestamp(ts) - datetime.utcfromtimestamp(ts) - td
-		offset = datetime.fromtimestamp(ts).astimezone() - datetime.fromtimestamp(ts, tz=timezone.utc)
+		offset = datetime.fromtimestamp(ts, tz=timezone.utc) - datetime.fromtimestamp(ts, tz=timezone.utc)
 		delta = str(offset).rstrip("0").replace(":", "")  # make nice string form XMLTV local time offset...
 		if abs(int(delta)) < 1000:
 			local_offset = '+0%s' % delta if int(delta) > 0 else '-0%s' % delta
