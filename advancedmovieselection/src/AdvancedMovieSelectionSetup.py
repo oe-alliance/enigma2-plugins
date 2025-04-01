@@ -107,7 +107,7 @@ class ConfigListScreen(eConfigList.ConfigListScreen):
         else:
             self.__changed = lambda: None
 
-        if not self.handleInputHelpers in self["config"].onSelectionChanged:
+        if self.handleInputHelpers not in self["config"].onSelectionChanged:
             self["config"].onSelectionChanged.append(self.handleInputHelpers)
 
 
@@ -218,7 +218,7 @@ class AdvancedMovieSelectionSetup(ConfigListScreen, Screen):
         }, -2)
         self.list = []
         ConfigListScreen.__init__(self, self.list, session=self.session)
-        if not self.showHelp in self["config"].onSelectionChanged:
+        if self.showHelp not in self["config"].onSelectionChanged:
             self["config"].onSelectionChanged.append(self.showHelp)
         self.createSetup()
         self["key_red"] = StaticText(_("Close"))
@@ -543,7 +543,7 @@ class AdvancedMovieSelectionSetup(ConfigListScreen, Screen):
             self.needsRestartFlag = True
         if config.AdvancedMovieSelection.overwrite_left_right.isChanged():
             self.needsRestartFlag = True
-        if config.usage.load_length_of_movies_in_moviellist.isChanged() and config.usage.load_length_of_movies_in_moviellist.value == False:
+        if config.usage.load_length_of_movies_in_moviellist.isChanged() and config.usage.load_length_of_movies_in_moviellist.value is False:
             config.AdvancedMovieSelection.showprogessbarinmovielist.value = False
             config.AdvancedMovieSelection.showiconstatusinmovielist.value = False
             config.AdvancedMovieSelection.showcolorstatusinmovielist.value = False
@@ -566,12 +566,12 @@ class AdvancedMovieSelectionSetup(ConfigListScreen, Screen):
 
         if self.csel:
             self.csel.updateSettings()
-        if self.needsRestartFlag == True:
+        if self.needsRestartFlag is True:
             self.session.openWithCallback(self.exitAnswer, MessageBoxEx, _("Some settings changes require a restart to take effect.\nIf you  use a skin without PiG (Picture in Graphic) you have to restart the box (not only Enigma 2)!\nWith YES only Enigma 2 starts new, with NO the box make a restart."), type=MessageBox.TYPE_YESNO)
-        elif self.needsE2restartFlag == True:
+        elif self.needsE2restartFlag is True:
             self.session.openWithCallback(self.exitAnswer2, MessageBoxEx, _("Some settings changes require a Enigma 2 restart to take effect.\n\nWould you restart Enigma2 now?"), type=MessageBox.TYPE_YESNO)
         else:
-            if self.needsReopenFlag == True:
+            if self.needsReopenFlag is True:
                 self.session.openWithCallback(self.save, MessageBox, _("Some settings changes require close/reopen the movielist to take effect."), type=MessageBox.TYPE_INFO)
             else:
                 self.save()
@@ -684,7 +684,7 @@ class AdvancedMovieSelectionButtonSetup(ConfigListScreen, Screen):
         self.entryguilist.append(("Show Timer", _("Show Timer")))
         self.entryguilist.append(("Show up to VSR-X", _("Show up to VSR-X")))
         self.entryguilist.append(("Filter by description", _("Filter by description")))
-        if pluginPresent.YTTrailer == True:
+        if pluginPresent.YTTrailer is True:
             self.entryguilist.append(("Trailer search", _("Trailer search")))
         self.entryguilist2 = []
         self.entryguilist2.append(("Nothing", _("Nothing")))
@@ -741,10 +741,10 @@ class AdvancedMovieSelectionButtonSetup(ConfigListScreen, Screen):
 
     def checkOwnButtonText(self, l, text, own_text):
         l1 = [descr[0] for descr in l]
-        if own_text and not own_text in l1:
+        if own_text and own_text not in l1:
             l.append((own_text, own_text))
             l1.append(own_text)
-        if not text in l1:
+        if text not in l1:
             l.append((text, text))
         return text
 
@@ -857,7 +857,7 @@ class AdvancedMovieSelectionButtonSetup(ConfigListScreen, Screen):
         self.bookmark7 = getConfigListEntry(_("Bookmark 7 path"), self.bookmark7_dirname)
         self.list.append(self.bookmark7)
         self["config"].setList(self.list)
-        if not self.selectionChanged in self["config"].onSelectionChanged:
+        if self.selectionChanged not in self["config"].onSelectionChanged:
             self["config"].onSelectionChanged.append(self.selectionChanged)
 
     def selectionChanged(self):
@@ -1151,7 +1151,7 @@ class AdvancedMovieSelectionOwnButtonName(ConfigListScreen, Screen):
         self.list.append(self.bookmark7button)
         self["config"].list = self.list
         self["config"].l.setList(self.list)
-        if not self.selectionChanged in self["config"].onSelectionChanged:
+        if self.selectionChanged not in self["config"].onSelectionChanged:
             self["config"].onSelectionChanged.append(self.selectionChanged)
 
     def selectionChanged(self):

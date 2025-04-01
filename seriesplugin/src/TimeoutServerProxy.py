@@ -47,7 +47,7 @@ class TimeoutServerProxy(xmlrpc_client.ServerProxy):
 	def getSeasonEpisode(self, name, webChannel, unixtime, max_time_drift):
 		result = None
 
-		if self.stopped == True:
+		if self.stopped is True:
 			return result
 		skipped = self.skip.get(name, None)
 		if skipped:
@@ -61,7 +61,7 @@ class TimeoutServerProxy(xmlrpc_client.ServerProxy):
 			result = self.sp.cache.getSeasonEpisode(name, webChannel, unixtime, max_time_drift)
 			log.debug("SerienServer getSeasonEpisode result:", result)
 		except xmlrpc_client.ProtocolError as e:
-			if config.plugins.seriesplugin.stop_on_protocol_error.value == True:
+			if config.plugins.seriesplugin.stop_on_protocol_error.value is True:
 				self.stopped = True
 				log.info(_("ProtocolError:") + "\n" + _("Stop is enabled. To reactivate SeriesPlugin, just open the setup"))
 			else:

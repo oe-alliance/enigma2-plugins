@@ -112,7 +112,7 @@ class _GNTPBase(object):
 			self.info['encryptionAlgorithmID'] = None
 			self.info['keyHashAlgorithm'] = None
 			return
-		if not self.encryptAlgo in list(hash.keys()):
+		if self.encryptAlgo not in list(hash.keys()):
 			raise UnsupportedError('INVALID HASH "%s"' % self.encryptAlgo)
 
 		hashfunction = hash.get(self.encryptAlgo)
@@ -154,7 +154,7 @@ class _GNTPBase(object):
 	def _validate_password(self, password):
 		"""Validate GNTP Message against stored password"""
 		self.password = password
-		if password == None:
+		if password is None:
 			raise AuthError('Missing password')
 		keyHash = self.info.get('keyHash', None)
 		if keyHash is None and self.password is None:

@@ -234,7 +234,7 @@ class EPGBackupConfig(ConfigListScreen, Screen, HelpableScreen):
 	def _updateHelp(self):
 		cur = self["config"].getCurrent()
 		if cur:
-			if cur[2] == None:
+			if cur[2] is None:
 				self.updateVariableHelpText(cur[1])
 			else:
 				self["help"].text = cur[2]

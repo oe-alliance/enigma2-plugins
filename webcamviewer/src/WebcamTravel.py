@@ -128,13 +128,13 @@ class TravelWebcamviewer(Screen):
 		self.session.openWithCallback(self.onSearchkeyEntered, InputBox, title=_("Please enter a searchkey:"), text="Search Webcams", maxSize=False, type=Input.TEXT)
 
 	def onSearchkeyEntered(self, value):
-		if value is not None and self.finish_loading != False:
+		if value is not None and self.finish_loading is not False:
  			self.timer_status.start(1)
  			WebcamTravelerAPI().search(self.onDataLoaded, value)
  			self.finish_loading = False
 
 	def loadData(self):
-		if self.finish_loading != False:
+		if self.finish_loading is not False:
 			self.timer_status.start(1)
 			WebcamTravelerAPI().list_popular(self.onDataLoaded)
 			self.finish_loading = False
@@ -178,7 +178,7 @@ class TravelWebcamviewer(Screen):
 		print("fetchFinished", x, webcamid)
 		self.pixmaps_to_load.remove(webcamid)
 
-		if (os_path_exists("/tmp/" + str(webcamid) + "_thumb.jpg") == True):
+		if (os_path_exists("/tmp/" + str(webcamid) + "_thumb.jpg") is True):
 			self.picloads[webcamid] = ePicLoad()
 			self.picloads[webcamid].PictureData.get().append(boundFunction(self.finish_decode, webcamid))
 			self.picloads[webcamid].setPara((self["thumbnail"].instance.size().width(), self["thumbnail"].instance.size().height(), 1, 1, False, 1, "#00000000"))
@@ -189,7 +189,7 @@ class TravelWebcamviewer(Screen):
 	def finish_decode(self, webcamid, info):
 		print("finish_decode - of webcamid", webcamid, info)
 		ptr = self.picloads[webcamid].getData()
-		if ptr != None:
+		if ptr is not None:
 			self.thumbnails[webcamid] = ptr
 			print("removing file")
 			os_remove("/tmp/" + str(webcamid) + "_thumb.jpg")
@@ -282,7 +282,7 @@ class WebcamTravelerAPI:
 		print(url)
 #		cb = getPage(six.ensure_binary(url)).addCallback(callback)
 		cb = callInThread(self.threadGetPage, url, callback)
-		if errorback != None:
+		if errorback is not None:
 			cb.addErrback(errorback)
 		else:
 			cb.addErrback(self.loadingFailed)

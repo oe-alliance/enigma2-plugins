@@ -772,7 +772,7 @@ class EPGSearch(EPGSelection):
 					tmbdsearch = config.plugins.tmbd.profile.value
 				except:
 					tmbdsearch = None
-				if tmbdsearch != None:
+				if tmbdsearch is not None:
 					if config.plugins.tmbd.profile.value == "0":
 						self.session.open(TMBD, eventname, False)
 					else:
@@ -1024,7 +1024,7 @@ class EPGSearch(EPGSelection):
 			bqrootstr = '%s FROM BOUQUET "userbouquet.favourites.tv" ORDER BY bouquet' % (service_types_tv)
 			bouquet = eServiceReference(bqrootstr)
 			servicelist = serviceHandler.list(bouquet)
-			if not servicelist is None:
+			if servicelist is not None:
 				while True:
 					service = servicelist.getNext()
 					if not service.valid():
@@ -1035,14 +1035,14 @@ class EPGSearch(EPGSelection):
 			bqrootstr = '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "bouquets.tv" ORDER BY bouquet'
 			bouquet = eServiceReference(bqrootstr)
 			bouquetlist = serviceHandler.list(bouquet)
-			if not bouquetlist is None:
+			if bouquetlist is not None:
 				while True:
 					bouquet = bouquetlist.getNext()
 					if not bouquet.valid():
 						break
 					if bouquet.flags & eServiceReference.isDirectory and not bouquet.flags & eServiceReference.isInvisible:
 						servicelist = serviceHandler.list(bouquet)
-						if not servicelist is None:
+						if servicelist is not None:
 							while True:
 								service = servicelist.getNext()
 								if not service.valid():

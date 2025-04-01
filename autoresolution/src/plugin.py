@@ -270,7 +270,7 @@ class AutoRes(Screen):
 			port = config.av.videoport.value
 			if port in config.av.videomode:
 				config.av.videomode[port].addNotifier(self.defaultModeChanged)
-			usable = config.plugins.autoresolution.enable.value and not port in ('DVI-PC', 'Scart')
+			usable = config.plugins.autoresolution.enable.value and port not in ('DVI-PC', 'Scart')
 		else:  # videomode changed in normal av setup
 			global videoresolution_dictionary
 			print("[AutoRes] mode changed to", configEntry.value)
@@ -322,7 +322,7 @@ class AutoRes(Screen):
 	def enableChanged(self, configElement):
 		global usable
 		if configElement.value:
-			usable = not port in ('DVI-PC', 'Scart')
+			usable = port not in ('DVI-PC', 'Scart')
 			self.determineContent()
 		else:
 			usable = False

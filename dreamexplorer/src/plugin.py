@@ -224,7 +224,7 @@ class DreamExplorerII(Screen):
 			filename = self["filelist"].getCurrentDirectory() + self["filelist"].getFilename()
 			testFileName = self["filelist"].getFilename()
 			testFileName = testFileName.lower()
-			if filename != None:
+			if filename is not None:
 				if testFileName.endswith(".ts"):
 					fileRef = eServiceReference("1:0:0:0:0:0:0:0:0:0:" + filename)
 					self.session.open(MoviePlayer, fileRef)
@@ -404,7 +404,7 @@ class DreamExplorerII(Screen):
 		elif answer == "DELLINK":
 			temp_book = []
 			for bidx in range(len(self.booklines) - 1):
-				if not (self.selectedDir in self.booklines[bidx]):
+				if self.selectedDir not in self.booklines[bidx]:
 					temp_book.append(self.booklines[bidx])
 			self.booklines = []
 			self.booklines = temp_book

@@ -132,7 +132,7 @@ class CurlyTx(Screen, HelpableScreen):
         self["text"].pageDown()
 
     def prevPage(self):
-        if self.currentPage == None:
+        if self.currentPage is None:
             return
 
         pageId = self.currentPage - 1
@@ -141,7 +141,7 @@ class CurlyTx(Screen, HelpableScreen):
         self.loadUrl(pageId)
 
     def nextPage(self):
-        if self.currentPage == None:
+        if self.currentPage is None:
             return
 
         pageId = self.currentPage + 1
@@ -150,13 +150,13 @@ class CurlyTx(Screen, HelpableScreen):
         self.loadUrl(pageId)
 
     def reload(self):
-        if self.currentPage == None:
+        if self.currentPage is None:
             return
 
         self.loadUrl(self.currentPage)
 
     def loadUrl(self, pageId):
-        if pageId == None:
+        if pageId is None:
             self.loadNoPage()
             return
 
@@ -225,7 +225,7 @@ class CurlyTx(Screen, HelpableScreen):
         if len(config.plugins.CurlyTx.pages) == 0:
             self.currentPage = None
             self.loadUrl(self.currentPage)
-        elif self.currentPage == None:
+        elif self.currentPage is None:
             self.currentPage = 0
             self.loadUrl(self.currentPage)
 

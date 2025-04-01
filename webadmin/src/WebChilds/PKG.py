@@ -46,7 +46,7 @@ class PKGConsoleStream(IPKGConsoleStream):
 	def cmdFinished(self, data):
 		if self.stillAlive:
 			print("[PKGConsoleStream].self.cmd ", self.cmd)
-			if "/usr/bin/opkg" in self.cmd and not "update" in self.cmd:
+			if "/usr/bin/opkg" in self.cmd and "update" not in self.cmd:
 				html = """</p>
 						<hr>
 						<form>

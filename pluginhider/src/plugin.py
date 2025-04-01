@@ -30,7 +30,7 @@ hasPluginWeight = True
 def hidePlugin(plugin):
 	"""Convenience function for external code to hide a plugin."""
 	hide = config.plugins.pluginhider.hideplugins.value
-	if not plugin.name in hide:
+	if plugin.name not in hide:
 		hide.append(plugin.name)
 		config.plugins.pluginhider.hideplugins.save()
 

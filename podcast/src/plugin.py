@@ -241,7 +241,7 @@ class PodcastMovies(Screen):
 		self.onLayoutFinish.append(self.downloadMovies)
 
 	def ok(self):
-		if self.working == False:
+		if self.working is False:
 			if len(self.list) > 0:
 				idx = self["list"].getSelectionIndex()
 				(url, length, type) = self.movies[idx][1]
@@ -274,7 +274,7 @@ class PodcastMovies(Screen):
 			remove(self.file)
 
 	def exit(self):
-		if self.working == False:
+		if self.working is False:
 			self.close()
 
 	def downloadMovies(self):

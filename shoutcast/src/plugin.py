@@ -109,7 +109,7 @@ class myHTTPClientFactory(HTTPClientFactory):
 
 	def clientConnectionLost(self, connector, reason):
 		lostreason = (b"Connection was closed cleanly" in vars(reason))
-		if lostreason == None:
+		if lostreason is None:
 			print("[SHOUTcast] Lost connection, reason: %s ,trying to reconnect!" % reason)
 			connector.connect()
 
@@ -587,7 +587,7 @@ class SHOUTcastWidget(Screen):
 		except:
 			return []
 		data = root.find("data")
-		if data == None:
+		if data is None:
 			print("[SHOUTcast] could not find data tag, assume flat listing\n")
 			return [SHOUTcastGenre(name=childs.get("name")) for childs in root.findall("genre")]
 		for glist in data.findall("genrelist"):
@@ -736,7 +736,7 @@ class SHOUTcastWidget(Screen):
 			return []
 		config_bitrate = int(config.plugins.shoutcast.streamingrate.value)
 		data = root.find("data")
-		if data == None:
+		if data is None:
 			print("[SHOUTcast] could not find data tag\n")
 			return []
 		for slist in data.findall("stationlist"):
@@ -1114,7 +1114,7 @@ class Cover(Pixmap):
 
 	def paintIconPixmapCB(self, picInfo=None):
 		ptr = self.picload.getData()
-		if ptr != None:
+		if ptr is not None:
 			self.instance.setPixmap(ptr.__deref__())
 			if self.visible:
 				self.doShow()
@@ -1184,7 +1184,7 @@ class SHOUTcastList(GUIComponent, object):
 			self.l.setItemHeight(self.favlist)
 
 	def connectSelChanged(self, fnc):
-		if not fnc in self.onSelectionChanged:
+		if fnc not in self.onSelectionChanged:
 			self.onSelectionChanged.append(fnc)
 
 	def disconnectSelChanged(self, fnc):

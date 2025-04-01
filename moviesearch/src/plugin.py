@@ -82,7 +82,7 @@ def main(session, service, **kwargs):
 	cur_dialog = session.current_dialog
 	if hasattr(cur_dialog, 'csel'):
 		csel = session.current_dialog.csel
-		if not "list" in csel:
+		if "list" not in csel:
 			print("[MovieSearch] No list, goodbye!")
 			csel = None
 	elif hasattr(cur_dialog, 'mlist'):

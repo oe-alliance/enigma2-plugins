@@ -26,7 +26,7 @@ class SleepTimer(Source):
 
 		from Screens.Standby import inStandby
 
-		if inStandby == None:
+		if inStandby is None:
 			if cmd['cmd'] is None or cmd['cmd'] == "get":
 				if self.session.nav.SleepTimer.isActive():
 					return (self.session.nav.SleepTimer.isActive(),

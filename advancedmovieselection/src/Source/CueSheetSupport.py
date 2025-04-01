@@ -169,7 +169,7 @@ class CutListSupportBase:
                 self.ENABLE_RESUME_SUPPORT = False
             else:
                 self.ENABLE_RESUME_SUPPORT = True
-        if config.AdvancedMovieSelection.jump_first_mark.value == True:
+        if config.AdvancedMovieSelection.jump_first_mark.value is True:
             first = self.getFirstMark()
             if first and length > 0 and first / 90000 < length / 2:
                 self.jump_first_play_last = first
@@ -326,7 +326,7 @@ class DVDCutListSupport(CutListSupportBase):
             self.cut_list = CueSheet(self.currentService).getCutList()
             self.jump_relative = True
         self.checkResumeSupport()
-        if self.ENABLE_RESUME_SUPPORT == False:
+        if self.ENABLE_RESUME_SUPPORT is False:
             if self.jump_first_mark:
                 eDVDPlayer.playLastCB(self, True)
             else:
@@ -355,7 +355,7 @@ class DVDCutListSupport(CutListSupportBase):
         if not self.jump_relative:
             eDVDPlayer.playLastCB(self, answer)
         else:
-            if answer == True:
+            if answer is True:
                 eDVDPlayer.doSeekRelative(self, self.resume_point)
             eDVDPlayer.playLastCB(self, False)
 
@@ -366,7 +366,7 @@ class CutListSupport(CutListSupportBase):
         CutListSupportBase.__init__(self, service)
 
     def playLastCB(self, answer):
-        if answer == False and self.jump_first_play_last:
+        if answer is False and self.jump_first_play_last:
             self.resume_point = self.jump_first_play_last
             answer = True
         InfoBarCueSheetSupport.playLastCB(self, answer)

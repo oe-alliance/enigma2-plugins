@@ -92,7 +92,7 @@ class ProgressList(GUIComponent):
         self.onSelectionChanged = []
 
     def connectSelChanged(self, fnc):
-        if not fnc in self.onSelectionChanged:
+        if fnc not in self.onSelectionChanged:
             self.onSelectionChanged.append(fnc)
 
     def disconnectSelChanged(self, fnc):
@@ -312,7 +312,7 @@ class MoveCopyProgress(Screen, HelpableScreen, SkinResolutionHelper):
         self.session.openWithCallback(self.abortCallback, MessageBox, text, MessageBox.TYPE_YESNO)
 
     def abortCallback(self, result):
-        if result == True:
+        if result is True:
             job = self["list"].getCurrent()
             if job:
                 job.cancel()

@@ -160,7 +160,7 @@ class ORFMain(Screen):
 		return ret
 
 	def okClicked(self):
-		if self.working == False:
+		if self.working is False:
 			if len(self.movies) > 0:
 				if self.cacheDialog.Shown:
 					self.playCachedFile()
@@ -294,11 +294,11 @@ class ORFMain(Screen):
 		self.selectionChanged(0)
 
 	def up(self):
-		if self.working == False:
+		if self.working is False:
 			self.selectionChanged(-1)
 
 	def down(self):
-		if self.working == False:
+		if self.working is False:
 			self.selectionChanged(1)
 
 	def selectionChanged(self, direction):

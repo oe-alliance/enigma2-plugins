@@ -37,7 +37,7 @@ class zip_extractor():
      def zipped_file_list(self, zip_file_temp_list, extraction_filter=None):
           zip_file_list = []
           for x in zip_file_temp_list:
-               if extraction_filter != None:
+               if extraction_filter is not None:
                     if x.rsplit(".", 1)[1] in extraction_filter:
                          zip_file_list.append(x)
                else:
@@ -45,7 +45,7 @@ class zip_extractor():
           return zip_file_list
 
      def extract_zipped_file(self):
-          if self.__destination_dir == None:
+          if self.__destination_dir is None:
                destination_dir = (self.__zip__path.rsplit("/", 1))[0]
           else:
                destination_dir = self.__destination_dir

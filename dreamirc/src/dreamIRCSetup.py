@@ -243,7 +243,7 @@ class dreamIRCConfig:
 			except:
 				print("unable to resolve hostname %s..." % self.server1)
 
-		if self.status1 == False and self.status2 == False and self.status3 == False:
+		if self.status1 is False and self.status2 is False and self.status3 is False:
 			self.pipe.add("ERROR!!! no irc server was valid... please check settings...")
 			return False
 		else:

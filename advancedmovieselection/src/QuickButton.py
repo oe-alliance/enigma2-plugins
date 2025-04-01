@@ -445,7 +445,7 @@ class QuickButton:
                     continue
                 serviceref = movie_info.serviceref
                 description = (info.getInfoString(serviceref, iServiceInformation.sDescription),)
-                if description[0] != "" and not description in descr:
+                if description[0] != "" and description not in descr:
                     descr.append(description)
         else:
             l = serviceHandler.list(self.list.root)
@@ -469,7 +469,7 @@ class QuickButton:
                 if not info:
                     continue
                 description = (info.getInfoString(serviceref, iServiceInformation.sDescription),)
-                if description[0] != "" and not description in descr:
+                if description[0] != "" and description not in descr:
                     descr.append(description)
 
         descr = sorted(descr)

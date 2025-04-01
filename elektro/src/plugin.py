@@ -169,10 +169,10 @@ def NASpowerdown(Nname, Nuser, Npass, Ncommand, Nport):
 		tn.write('%s\r' % Ncommand)
 		l = l + tn.expect(['#', ">"], 20)[2]
 		l = l + tn.read_very_lazy()
-		if config.plugins.elektro.NASwait.value == True:
+		if config.plugins.elektro.NASwait.value is True:
 			tt = time() + 90
 			l = l + "\n waiting...\n"
-			while tt > time() and ping.doOne(Nname, 1) != None:
+			while tt > time() and ping.doOne(Nname, 1) is not None:
 				sleep(2)
 		tn.write('exit\r')
 		l = l + tn.expect(['#', ">"], 5)[2]
@@ -219,9 +219,9 @@ def setNextWakeuptime():
 	#  - Elektro isn't enabled
 	#  - Elektro shouldn't wake up
 	#  - Holiday mode is turned on
-	if ((config.plugins.elektro.enable.value == False)
-				or (config.plugins.elektro.dontwakeup.value == True)
-				or config.plugins.elektro.holiday.value == True):
+	if ((config.plugins.elektro.enable.value is False)
+				or (config.plugins.elektro.dontwakeup.value is True)
+				or config.plugins.elektro.holiday.value is True):
 		global ElektroWakeUpTime
 		ElektroWakeUpTime = -1
 		print(pluginPrintname, "ElektroWakeUpTime is now", ElektroWakeUpTime)
@@ -724,14 +724,14 @@ class DoElektro(Screen):
 		print(pluginPrintname, "Woken Up by a Timer?", timerWakeup)
 
 		# If the was a manual wakeup: Don't go to sleep
-		if timerWakeup == False:
+		if timerWakeup is False:
 			self.dontsleep = True
 
 		#Check whether we should try to sleep:
 		trysleep = config.plugins.elektro.standbyOnBoot.value
 
 		#Don't go to sleep when this was a manual wakeup and the box shouldn't go to standby
-		if timerWakeup == False and config.plugins.elektro.standbyOnManualBoot.value == False:
+		if timerWakeup is False and config.plugins.elektro.standbyOnManualBoot.value is False:
 			trysleep = False
 
 		#if waken up by timer and configured ask whether to go to sleep.
@@ -822,7 +822,7 @@ class DoElektro(Screen):
 		if debug:
 			print(pluginPrintname, "(1) trysleep:", trysleep)
 		# We are not tying to go to sleep anymore -> maybe go to sleep again the next time
-		if trysleep == False:
+		if trysleep is False:
 			self.dontsleep = False
 			if debug:
 				print(pluginPrintname, "setting dontsleep to false")
@@ -845,7 +845,7 @@ class DoElektro(Screen):
 		# We are not enabled -> Dont go to sleep (This could have been catched earlier!)
 		if debug:
 			print(pluginPrintname, "(4) trysleep:", trysleep)
-		if config.plugins.elektro.enable.value == False:
+		if config.plugins.elektro.enable.value is False:
 			print(pluginPrintname, "plugin not enabled, setting trysleep to false")
 			trysleep = False
 
@@ -854,7 +854,7 @@ class DoElektro(Screen):
 			print(pluginPrintname, "(5) trysleep:", trysleep)
 			print(pluginPrintname, "in standby returns", Standby.inStandby)
 			print(pluginPrintname, "forecesleep is", config.plugins.elektro.force.value)
-		if not ((Standby.inStandby) or (config.plugins.elektro.force.value == True)):
+		if not ((Standby.inStandby) or (config.plugins.elektro.force.value is True)):
 			print(pluginPrintname, "not in standby and not enforcing to sleep, so setting trysleep to false")
 			trysleep = False
 
@@ -876,7 +876,7 @@ class DoElektro(Screen):
 		if debug:
 			print(pluginPrintname, "(8) trysleep:", trysleep)
 		# No Sleep on HDD running - joergm6
-		if (trysleep == True) and (config.plugins.elektro.hddsleep.value == True) and (harddiskmanager.HDDCount() > 0):
+		if (trysleep is True) and (config.plugins.elektro.hddsleep.value is True) and (harddiskmanager.HDDCount() > 0):
 			hddlist = harddiskmanager.HDDList()
 			if hddlist[0][1].model().startswith("ATA"):
 				if not hddlist[0][1].isSleeping():
@@ -886,11 +886,11 @@ class DoElektro(Screen):
 		if debug:
 			print(pluginPrintname, "(9) trysleep:", trysleep)
 		# No Sleep on Online IPs - joergm6
-		if (trysleep == True) and (config.plugins.elektro.IPenable.value == True):
+		if (trysleep is True) and (config.plugins.elektro.IPenable.value is True):
 			for i in range(10):
 				ip = "%d.%d.%d.%d" % tuple(config.plugins.elektro.ip[i].value)
 				if ip != "0.0.0.0":
-					if ping.doOne(ip, 0.1) != None:
+					if ping.doOne(ip, 0.1) is not None:
 						print(pluginPrintname, ip, "online -> don't sleep")
 						trysleep = False
 						break
@@ -910,7 +910,7 @@ class DoElektro(Screen):
 
 	def DoElektroSleep(self, retval):
 		config_NASenable = True if config.plugins.elektro.NASenable.value == config.plugins.elektro.profile.value else False
-		if config.plugins.elektro.profileShift.value == True:
+		if config.plugins.elektro.profileShift.value is True:
 			config.plugins.elektro.profile.value = "1" if config.plugins.elektro.profile.value == "2" else "2"
 			config.plugins.elektro.profile.save()
 			setNextWakeuptime()
@@ -920,7 +920,7 @@ class DoElektro(Screen):
 			# 1 = Deep Standby -> enigma2:/doc/RETURNCODES
 
 			global inTryQuitMainloop
-			if Standby.inTryQuitMainloop == False:
+			if Standby.inTryQuitMainloop is False:
 				if config.plugins.elektro.NASenable.value == "true" or config_NASenable:
 					ret = NASpowerdown(config.plugins.elektro.NASname.value, config.plugins.elektro.NASuser.value, config.plugins.elektro.NASpass.value, config.plugins.elektro.NAScommand.value, config.plugins.elektro.NASport.value)
 				configfile.save()

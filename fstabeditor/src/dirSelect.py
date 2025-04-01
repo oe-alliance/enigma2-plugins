@@ -86,7 +86,7 @@ class dirSelectDlg(Screen):  # 90,140
 		self.instance.setTitle(self.CurrentDirectory)
 
 	def setPathName(self):
-		if self.showFilesBoolean and self["filelist"].canDescent() == False:
+		if self.showFilesBoolean and self["filelist"].canDescent() is False:
 			self.epath = self.CurrentDirectory + self["filelist"].getFilename()
 		else:
 			self.epath = self["filelist"].getFilename()

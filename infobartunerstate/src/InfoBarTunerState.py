@@ -604,7 +604,7 @@ class InfoBarTunerState(object):
 			for id, win in sorted(list(self.entries.items()), key=lambda x: (x[1].end), reverse=True):
 				if win.type == FINISHED:
 					numberfinished += 1
-				if win.toberemoved == True \
+				if win.toberemoved is True \
 					or win.type == FINISHED and numberfinished > int(config.infobartunerstate.number_finished_records.value):
 					# Delete Stopped Timers
 					self.session.deleteDialog(win)
@@ -1376,7 +1376,7 @@ def getNumber(actservice):
 				break
 			if bouquet.flags & eServiceReference.isDirectory:
 				servicelist = serviceHandler.list(bouquet)
-				if not servicelist is None:
+				if servicelist is not None:
 					while True:
 						service = servicelist.getNext()
 						if not service.valid():  # check end of list

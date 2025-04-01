@@ -490,7 +490,7 @@ class SeriesPlugin(Modules, ChannelsBase):
 				serviceref = str(service)
 			serviceref = re.sub('::.*', ':', serviceref)
 
-			if block == False:
+			if block is False:
 
 				self.thread.add(ThreadItem(identifier, callback, name, begin, end, serviceref))
 

@@ -396,7 +396,7 @@ class GetPidWebScreen(WebScreen):
 		from Components.Sources.StaticText import StaticText
 		from enigma import iServiceInformation
 		pids = self.session.nav.getCurrentService()
-		if pids != None:
+		if pids is not None:
 			pidinfo = pids.info()
 			VPID = hex(pidinfo.getInfo(iServiceInformation.sVideoPID))
 			APID = hex(pidinfo.getInfo(iServiceInformation.sAudioPID))

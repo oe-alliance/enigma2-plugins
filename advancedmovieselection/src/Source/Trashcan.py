@@ -223,7 +223,7 @@ class Trashcan:
                     if not offline.deleteFromDisk(0):
                         result = True
 
-                if result == False:
+                if result is False:
                     print("Error")
             else:
                 print("[erase dir]", filename)
@@ -235,7 +235,7 @@ class Trashcan:
 
     @staticmethod
     def isCurrentlyDeleting():
-        return async_trash != None
+        return async_trash is not None
 
     @staticmethod
     def getTrashCount():

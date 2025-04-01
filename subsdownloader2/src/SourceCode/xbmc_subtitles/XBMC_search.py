@@ -9,7 +9,7 @@ import os
 def list_XBMC_Periscope_plugins(XBMC_periscope_plugin_path):
     plugin_list = []
     for x in os.listdir(XBMC_periscope_plugin_path):
-        if os.path.isdir(XBMC_periscope_plugin_path + x) == True:
+        if os.path.isdir(XBMC_periscope_plugin_path + x) is True:
             plugin_list.append(x)
     return plugin_list
 
@@ -17,7 +17,7 @@ def list_XBMC_Periscope_plugins(XBMC_periscope_plugin_path):
 def list_directory_files(dir_path):
     file_list = []
     for x in os.listdir(dir_path):
-        if os.path.isdir(dir_path + x) == False:
+        if os.path.isdir(dir_path + x) is False:
             file_list.append(dir_path + x)
     return file_list
 

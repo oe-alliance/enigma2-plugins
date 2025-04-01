@@ -84,7 +84,7 @@ def rename(servicepath, name, short, data):
 
 	if config.plugins.seriesplugin.pattern_title.value and not config.plugins.seriesplugin.pattern_title.value == "Off":
 
-		if config.plugins.seriesplugin.rename_file.value == True:
+		if config.plugins.seriesplugin.rename_file.value is True:
 
 			try:
 				renameFiles(servicepath, name, data)

@@ -31,7 +31,7 @@ class SleepTimer(Converter):
         elif self.type is self.CONFIRMED:
             return str(timer[3])
         elif self.type is self.TEXT:
-            if not timer[4] is None:
+            if timer[4] is not None:
                 return str(timer[4])
             else:
                 return ""

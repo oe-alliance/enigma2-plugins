@@ -119,7 +119,7 @@ class EPGBackupSupport:
 
 	def startStopBackupTimer(self, configentry=None):
 		try:
-			if configentry == None:
+			if configentry is None:
 				configentry = config.plugins.epgbackup.backupSaveInterval
 			self.timerInterval = int(configentry.value) * 60  # minutes
 			if self.timerInterval > 0:

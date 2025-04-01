@@ -36,7 +36,7 @@ savedBuildSimilarEntry = EPGList.buildSimilarEntry
 def getPixmapForEntry(self, service, eventId, beginTime, duration):
     pixmap = savedPixmapForEntry(self, service, eventId, beginTime, duration)
     icon_index = epgListExtension.isMovieRecorded()
-    if pixmap[0] == None and icon_index > 0:
+    if pixmap[0] is None and icon_index > 0:
         if icon_index == 2:
             return (av2_pixmap, 1)
         return (av1_pixmap, 1)

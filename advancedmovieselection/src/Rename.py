@@ -193,7 +193,7 @@ class MovieRetitle(ConfigListScreen, Screen):
 
     def renameVDir(self, dir_name, name):
         try:
-            if not dir_name + "\t" + self.original_name in self.movieConfig.rename:
+            if dir_name + "\t" + self.original_name not in self.movieConfig.rename:
                 self.movieConfig.rename.append(dir_name + "\t" + name)
             elif name == "":
                 for index, item in enumerate(self.movieConfig.rename):

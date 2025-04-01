@@ -113,19 +113,19 @@ class GrabStream:
 		print('[Screengrab.py] cmdFinished')
 		if self.stillAlive:
 			self.request.setResponseCode(http.OK)
-			if int(data) == 0 and self.target != None:
+			if int(data) == 0 and self.target is not None:
 				try:
 					self.request.setHeader('Content-Length', '%i' % os_path_getsize(self.target))
 					with open(self.target) as fp:
 						self.request.write(fp.read())
-					if self.save == False:
+					if self.save is False:
 						os_remove(self.target)
 						print('[Screengrab.py] %s removed' % self.target)
 				except Exception as e:
 					self.request.write('Internal error while reading target file')
 					self.request.setResponseCode(http.INTERNAL_SERVER_ERROR)
 
-			elif int(data) == 0 and self.target == None:
+			elif int(data) == 0 and self.target is None:
 				self.request.write(self.output)
 			elif int(data) == 1:
 				self.request.write(self.output)

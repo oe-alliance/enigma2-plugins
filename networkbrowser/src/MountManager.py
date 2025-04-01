@@ -82,7 +82,7 @@ class AutoMountManager(Screen):
 		self.onClose.append(self.cleanup)
 		self.onShown.append(self.setWindowTitle)
 
-		if not self.selectionChanged in self["config"].onSelectionChanged:
+		if self.selectionChanged not in self["config"].onSelectionChanged:
 			self["config"].onSelectionChanged.append(self.selectionChanged)
 		self.selectionChanged()
 
@@ -127,7 +127,7 @@ class AutoMountManager(Screen):
 		self.close()
 
 	def keyOK(self, returnValue=None):
-		if returnValue == None:
+		if returnValue is None:
 			returnValue = self["config"].getCurrent()[1]
 			if returnValue == "add":
 				self.addMount()

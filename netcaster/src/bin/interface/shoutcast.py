@@ -167,7 +167,7 @@ class GenreParse(ContentHandler):
         if name == 'genrelist':
             self.isGenreList = True
         if name == 'genre':
-            self.isGenre == True
+            self.isGenre is True
             self.genre_name = attrs.get('name', None)
 
     def endElement(self, name):

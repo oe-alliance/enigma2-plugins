@@ -152,7 +152,7 @@ class Query:
 				elif albuminfo.tagName.upper() == 'GENRE':
 					genre = self.getText(albuminfo.childNodes)
 					self.albuminfo["genre"] = genre
-				elif albuminfo.tagName == 'category' and not "GENRE" in self.albuminfo:
+				elif albuminfo.tagName == 'category' and "GENRE" not in self.albuminfo:
 					category = self.getText(albuminfo.childNodes)
 					self.albuminfo["genre"] = category
 

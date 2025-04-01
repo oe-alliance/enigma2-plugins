@@ -340,7 +340,7 @@ class ZDFMediathek(Screen):
         plot += " UT" if sta.get("ut", {}).get("enabled") is True else ""
         plot += " AD" if sta.get("ad", {}).get("enabled") is True else ""
         plot += " DGS" if sta.get("dgs", {}).get("enabled") is True else ""
-        plot += " " + js.get("fsk", "").upper() if not js.get("fsk", "") in "none" else ""
+        plot += " " + js.get("fsk", "").upper() if js.get("fsk", "") not in "none" else ""
         if not js.get("beschreibung", "") == js.get("textLong", "") and js.get("beschreibung") and js.get("textLong"):
             plot += "\n\n" + js.get("beschreibung") + "\n\n" + js.get("textLong")
         else:

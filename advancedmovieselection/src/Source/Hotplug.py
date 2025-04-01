@@ -41,7 +41,7 @@ class Hotplug():
 
     def addHotplugNotifier(self):
         from Plugins.SystemPlugins.Hotplug.plugin import hotplugNotifier
-        if not self.hotplugNotifier in hotplugNotifier:
+        if self.hotplugNotifier not in hotplugNotifier:
             print("add hotplugNotifier")
             hotplugNotifier.append(self.hotplugNotifier)
 

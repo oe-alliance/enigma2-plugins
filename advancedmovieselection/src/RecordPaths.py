@@ -51,7 +51,7 @@ class RecordPathsSettings(eRecordPathsSettings):
         self.movecopy_entry = getConfigListEntry(_("Move/copy location:"), self.movecopy_dirname)
         self.list.append(self.movecopy_entry)
         self["config"].setList(self.list)
-        if not self.selectionChanged in self["config"].onSelectionChanged:
+        if self.selectionChanged not in self["config"].onSelectionChanged:
             self["config"].onSelectionChanged.append(self.selectionChanged)
 
     def selectionChanged(self):

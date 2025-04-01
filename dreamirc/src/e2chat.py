@@ -63,7 +63,7 @@ class ContactsList:
 
         @type client: L{Client<interfaces.IClient>}
         """
-        if not client in self.clients:
+        if client not in self.clients:
             self.clients.append(client)
 
     def unregisterAccountClient(self, client):
@@ -233,7 +233,7 @@ class GroupConversation:
 
         @type member: string (XXX: Not Person?)
         """
-        if not member in self.members:
+        if member not in self.members:
             self.members.append(member)
         self.pipe.add("-!- %s joined %s" % (member, self.group.name))
         self.refreshMemberList()

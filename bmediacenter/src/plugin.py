@@ -135,7 +135,7 @@ class DMC_MainMenu(Screen):
 			elif selection[1] == "MC_WebRadio":
 				self.session.open(MC_WebRadio)
 			elif selection[1] == "MC_VLCPlayer":
-				if pathExists("/usr/lib/enigma2/python/Plugins/Extensions/VlcPlayer/") == True:
+				if pathExists("/usr/lib/enigma2/python/Plugins/Extensions/VlcPlayer/") is True:
 					self.session.open(MC_VLCServerlist)
 				else:
 					self.session.open(MessageBox, "Error: VLC-Player Plugin not installed ...", MessageBox.TYPE_INFO)

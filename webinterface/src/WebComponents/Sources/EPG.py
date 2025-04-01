@@ -31,7 +31,7 @@ class EPG(Source):
 		self.command = cmd
 
 	def do_func(self):
-		if not self.command is None:
+		if self.command is not None:
 			self.isBouquet = False
 			if self.func is self.SEARCHSIMILAR:
 				func = self.searchSimilarEvent
@@ -118,13 +118,13 @@ class EPG(Source):
 		endtime = -1
 
 		if "time" in param:
-			if not param["time"] is None:
+			if param["time"] is not None:
 				time = int(float(param["time"]))
 				if time < 0:
 					time = -1
 
 		if "endTime" in param:
-			if not param["endTime"] is None:
+			if param["endTime"] is not None:
 				endtime = int(float(param["endTime"]))
 				if endtime < 0:
 					endtime = -1
@@ -166,13 +166,13 @@ class EPG(Source):
 		time = -1
 		endtime = -1
 		if "time" in param:
-			if not param["time"] is None:
+			if param["time"] is not None:
 				time = int(float(param["time"]))
 				if time < 0:
 					time = -1
 
 		if "endTime" in param:
-			if not param["endTime"] is None:
+			if param["endTime"] is not None:
 				endtime = int(float(param["endTime"]))
 				if endtime < 0:
 					endtime = -1

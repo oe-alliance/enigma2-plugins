@@ -20,8 +20,8 @@ class SwitchService(Source):
 		print("[SwitchService] ref=%s" % cmd["sRef"])
 		if config.plugins.Webinterface.allowzapping.value:
 			from Screens.Standby import inStandby
-			if inStandby == None:
-				if cmd["sRef"] != None:
+			if inStandby is None:
+				if cmd["sRef"] is not None:
 					pc = config.ParentalControl.servicepinactive.value
 					if pc:
 						config.ParentalControl.servicepinactive.value = False
@@ -58,7 +58,7 @@ class SwitchService(Source):
 							info = service and service.info()
 							ref = None
 
-						if info != None:
+						if info is not None:
 							name = ref and info.getName(ref)
 							if name is None:
 								name = info.getName()

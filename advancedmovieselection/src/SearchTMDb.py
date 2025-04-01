@@ -435,7 +435,7 @@ class TMDbMain(Screen, HelpableScreen, InfoLoadChoice):
 
     def paintCoverPixmapCB(self, picInfo=None):
         ptr = self.picload.getData()
-        if ptr != None:
+        if ptr is not None:
             self['cover'].instance.setPixmap(ptr)
             self['cover'].show()
 
@@ -517,7 +517,7 @@ class TMDbMain(Screen, HelpableScreen, InfoLoadChoice):
         self.checkExistEnce(self.service.getPath())
 
     def callback_green_pressed(self, answer=None):
-        if self.checkConnection() == False or not self['list'].getCurrent():
+        if self.checkConnection() is False or not self['list'].getCurrent():
             return
         overwrite_eit, overwrite_jpg = answer and answer[1] or (False, False)
         from Source.EventInformationTable import createEIT

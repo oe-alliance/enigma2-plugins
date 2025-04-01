@@ -278,7 +278,7 @@ class DVDBackupProgress(Screen):
 		self.onLayoutFinish.append(self.refreshList)
 
 	def exit(self):
-		if self.working == False:
+		if self.working is False:
 			self.refreshTimer.stop()
 			self.close()
 
@@ -302,7 +302,7 @@ class DVDBackupProgress(Screen):
 		self.refreshTimer.start(3000, 1)
 
 	def abort(self):
-		if self.working == False and dvdbackup.working:
+		if self.working is False and dvdbackup.working:
 			self.working = True
 			if not self.console:
 				self.console = eConsole()
@@ -367,18 +367,18 @@ class DVDBackupScreen(ConfigListScreen, Screen):
 		self.onLayoutFinish.append(self.getName)
 
 	def progress(self):
-		if self.working == False:
+		if self.working is False:
 			self.session.open(DVDBackupProgress)
 
 	def backup(self):
-		if self.working == False:
+		if self.working is False:
 			for x in self["config"].list:
 				x[1].save()
 			dvdbackup.backup()
 			self.session.openWithCallback(self.close, DVDBackupProgress)
 
 	def exit(self):
-		if self.working == False:
+		if self.working is False:
 			for x in self["config"].list:
 				x[1].cancel()
 			self.close()
@@ -392,7 +392,7 @@ class DVDBackupScreen(ConfigListScreen, Screen):
 			self["key_yellow"].hide()
 
 	def keyboard(self):
-		if self.working == False:
+		if self.working is False:
 			current = self["config"].getCurrent()
 			self.toChange = current and current[1]
 			if isinstance(self.toChange, ConfigText):

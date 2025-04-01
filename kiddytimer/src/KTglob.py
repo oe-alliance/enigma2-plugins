@@ -62,7 +62,7 @@ def getTimeFromSeconds(iSecondsLeft, bReturnSeconds):
         iHours = int(iSecondsLeft // 3600)
         iHourRest = iSecondsLeft - (iHours * 3600)
         iMinutes = int(iHourRest // 60)
-        if bReturnSeconds == False:
+        if bReturnSeconds is False:
             return (("00" + str(iHours))[-2:] + ":" + ("00" + str(iMinutes))[-2:])
         else:
             iSeconds = int(iHourRest - (iMinutes * 60))

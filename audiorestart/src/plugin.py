@@ -46,7 +46,7 @@ class AudioRestart():
 
     def restartAudio(self):
         self.activateTimer.stop()
-        if self.audioIsAC3() and SystemInfo["CanDownmixAC3"] and (config.av.downmix_ac3.value == False):
+        if self.audioIsAC3() and SystemInfo["CanDownmixAC3"] and (config.av.downmix_ac3.value is False):
             config.av.downmix_ac3.value = True
             config.av.downmix_ac3.save()
             config.av.downmix_ac3.value = False

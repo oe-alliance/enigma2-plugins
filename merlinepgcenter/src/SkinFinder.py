@@ -91,7 +91,7 @@ class SkinFinder(object):
 		# try to find additional skins and add them to our list
 		path = resolveFilename(SCOPE_CURRENT_PLUGIN, ''.join([skinDir, "*.xml"]))
 		for fileName in iglob(path):
-			if not fileName in skinListFiles:
+			if fileName not in skinListFiles:
 				baseName = path_basename(fileName)
 				SkinFinder.skinList.append((fileName, baseName))
 				if not firstRun:

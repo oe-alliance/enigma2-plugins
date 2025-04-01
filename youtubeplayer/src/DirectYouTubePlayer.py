@@ -210,7 +210,7 @@ class DirectYouTubePlayer(Screen, InfoBarNotifications):
 
 	def playNextFile(self):
 		print("[YTB] playNextFile")
-		if self.currentList != None:
+		if self.currentList is not None:
 			media, name = self.currentList.getNextFile()
 			if media is None:
 				self.session.open(
@@ -223,7 +223,7 @@ class DirectYouTubePlayer(Screen, InfoBarNotifications):
 
 	def playPrevFile(self):
 		print("[YTB] playPrevFile")
-		if self.currentList != None:
+		if self.currentList is not None:
 			media, name = self.currentList.getPrevFile()
 			if media is None:
 				self.session.open(

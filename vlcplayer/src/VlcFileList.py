@@ -116,7 +116,7 @@ class VlcFileList(MenuList):
 
 	def isVideoTS(self):
 		for e in self.list:
-			if e[1] == True and e[0].upper().endswith("VIDEO_TS"):
+			if e[1] is True and e[0].upper().endswith("VIDEO_TS"):
 				return True
 		return False
 
@@ -163,7 +163,7 @@ class VlcFileList(MenuList):
 		Len = len(self.list)
 		while i < Len:
 			cur = self.list[i]
-			if cur[1] == False:
+			if cur[1] is False:
 				self.moveToIndex(i)
 				return cur[0], cur[2]
 			i = i + 1
@@ -173,7 +173,7 @@ class VlcFileList(MenuList):
 		i = self.getSelectedIndex() - 1
 		while i > -1:
 			cur = self.list[i]
-			if cur[1] == False:
+			if cur[1] is False:
 				self.moveToIndex(i)
 				return cur[0], cur[2]
 			i = i - 1

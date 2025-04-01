@@ -126,7 +126,7 @@ def getPlugins():
 		files = []
 	plugins = []
 	for file in files:
-		if file.endswith(".py") and not file in ["__init__.py", "Plugin.py", "Podcast.py"]:  # FIXME pyc/pyo
+		if file.endswith(".py") and file not in ["__init__.py", "Plugin.py", "Podcast.py"]:  # FIXME pyc/pyo
 			try:
 				plugin = my_import('.'.join(["Plugins", "Extensions", "PornCenter", "Additions", file[:-3]]))
 				if "getPlugin" not in plugin.__dict__:

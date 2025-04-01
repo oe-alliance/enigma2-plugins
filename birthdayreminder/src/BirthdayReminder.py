@@ -211,7 +211,7 @@ class BirthdayReminder(Screen, HelpableScreen):
 		self.session.openWithCallback(self.cbOpenExtras, ChoiceBox, title=_("What do you want to do?"), list=choiceList)
 
 	def cbOpenExtras(self, result):
-		if result == None:
+		if result is None:
 			return
 		elif result[1] == "csvexport":
 			self.saveCSV()
@@ -221,7 +221,7 @@ class BirthdayReminder(Screen, HelpableScreen):
 			self.sendListOffer()
 
 	def cbAddBirthday(self, name, birthday):  # this callback is called when a birthday was added
-		if name == None and birthday == None:
+		if name is None and birthday is None:
 			return
 		entry = (name, birthday)
 		self.birthdaytimer.addEntry(entry)
@@ -234,7 +234,7 @@ class BirthdayReminder(Screen, HelpableScreen):
 
 	def cbEditBirthday(self, name, birthday):  # this callback is called when a birthday was edited
 		(oldName, oldBirthday) = self.bDayBeforeChange
-		if (name == oldName and birthday == oldBirthday) or (name == None and birthday == None):
+		if (name == oldName and birthday == oldBirthday) or (name is None and birthday is None):
 			return
 		newEntry = (name, birthday)
 		self.birthdaytimer.updateEntry(self.bDayBeforeChange, newEntry)

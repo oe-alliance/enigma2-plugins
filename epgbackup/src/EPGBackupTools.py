@@ -18,7 +18,7 @@ def debugOut(outtxt, outfile=None, fmode="aw", forced=False, outPrefix="[EPGBack
 			headerstr = "[%04d%02d%02d %02d:%02d:%02d V%s] " % (ltim[0], ltim[1], ltim[2], ltim[3], ltim[4], ltim[5], PLUGIN_VERSION)
 			outtxt = headerstr + outtxt
 			outfile = _getLogFilename(outfile)
-			if outfile != None:
+			if outfile is not None:
 				deb = open(outfile, fmode)
 				deb.write("%s %s\n" % (outPrefix, outtxt))
 			print("%s %s" % (outPrefix, outtxt))
@@ -27,7 +27,7 @@ def debugOut(outtxt, outfile=None, fmode="aw", forced=False, outPrefix="[EPGBack
 
 
 def _getLogFilename(outfile=None):
-	if outfile == None:
+	if outfile is None:
 		if config.plugins.epgbackup.plugin_debug_in_file.value:
 			if config.plugins.epgbackup.enable_debug.value:
 				ltim = localtime()

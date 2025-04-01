@@ -141,7 +141,7 @@ class EpgSingleTab(EpgBaseTab):
 
 	def getFirstServiceRef(self, bouquet):
 		servicelist = eServiceCenter.getInstance().list(bouquet[1])
-		if not servicelist is None:
+		if servicelist is not None:
 			while True:
 				service = servicelist.getNext()
 				if service.valid():
@@ -153,7 +153,7 @@ class EpgSingleTab(EpgBaseTab):
 
 	def getServiceRef(self, oldMode, bouquet):
 		# set the marker to the currently running service on plugin start
-		if config.plugins.merlinEpgCenter.selectRunningService.value and oldMode == None:
+		if config.plugins.merlinEpgCenter.selectRunningService.value and oldMode is None:
 			sRef = NavigationInstance.instance.getCurrentlyPlayingServiceReference().toString()
 		else:
 			if oldMode == TIMERLIST:
@@ -182,12 +182,12 @@ class EpgSingleTab(EpgBaseTab):
 
 		if timerListMode == LIST_MODE_AUTOTIMER:  # we don't have a service ref from autotimers, let's get the first one in bouquets
 			self.__sRef = self.getFirstServiceRef(firstBouquet)
-		elif sRef == None:
+		elif sRef is None:
 			self.__sRef = self.getServiceRef(oldMode, firstBouquet)
 		else:
 			self.__sRef = sRef
 
-		if self.__sRef == None:
+		if self.__sRef is None:
 			self.__sRef = self.getFirstServiceRef(firstBouquet)
 		if self.__sRef != "":
 			self.__shown = True
@@ -216,7 +216,7 @@ class EpgSingleTab(EpgBaseTab):
 
 		self.tabList.fillSingleEPG(self.__currentBouquet, self.__currentBouquetIndex, self.__currentMode, self.__sRef, self.__showOutdated)
 
-		if eventId != None:
+		if eventId is not None:
 			self.sort(eventId)
 		else:
 			self.tabList.l.invalidate()
@@ -232,7 +232,7 @@ class EpgSingleTab(EpgBaseTab):
 		else:
 			changeBouquet = None
 
-		if changeBouquet != None:
+		if changeBouquet is not None:
 			numBouquets = len(EpgCenterList.bouquetServices)
 
 			self.__currentBouquetIndex += direction
@@ -262,7 +262,7 @@ class EpgSingleTab(EpgBaseTab):
 		self.parentInstance.lastMultiEpgIndex = self.serviceIndex
 
 	def sort(self, eventId=None):
-		if eventId == None:
+		if eventId is None:
 			cur = self.tabList.getCurrent()
 			eventId = cur[1]
 

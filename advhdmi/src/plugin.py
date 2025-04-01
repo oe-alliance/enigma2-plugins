@@ -309,7 +309,7 @@ def Cec__receivedStandby(self):
 def Cec__receivedNowActive(self):
 	if config.cec.receivepower.value:
 		from Screens.Standby import inStandby
-		if inStandby != None:
+		if inStandby is not None:
 			if callHook(ADVHDMI_BEFORE_RECEIVED_NOWACTIVE):
 				inStandby.Power()
 				callHook(ADVHDMI_AFTER_RECEIVED_NOWACTIVE)

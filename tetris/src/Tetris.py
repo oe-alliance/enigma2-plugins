@@ -166,7 +166,7 @@ class TetrisBoard(object):
 			start = line * 12
 			end = start + 12
 			segment = self.board[start:end]
-			if not " " in segment:
+			if " " not in segment:
 				tmp = "WWWWWWWWWWWWW          W" + self.board[12:start] + self.board[end:]
 				self.board = tmp
 				self.lines += 1

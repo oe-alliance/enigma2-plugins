@@ -138,7 +138,7 @@ class MC_VLCServerlist(Screen):
 			self.session.open(MC_VLCMedialist, self.serverlist.getSelection()).update()
 
 	def Exit(self):
-		if self.isVisible == False:
+		if self.isVisible is False:
 			self.visibility()
 			return
 
@@ -449,7 +449,7 @@ class MC_VLCMedialist(Screen):
 			self.session.open(MessageBox, _("Error switching directory:\n%s" % (e)), MessageBox.TYPE_ERROR)
 
 	def visibility(self, force=1):
-		if self.isVisible == True:
+		if self.isVisible is True:
 			self.isVisible = False
 			self.hide()
 		else:
@@ -461,12 +461,12 @@ class MC_VLCMedialist(Screen):
 		self.session.nav.stopService()
 		self["currentmedia"].setText("")
 
-		if self.isVisible == False:
+		if self.isVisible is False:
 			self.show()
 			self.isVisible = True
 
 	def Exit(self):
-		if self.isVisible == False:
+		if self.isVisible is False:
 			self.visibility()
 			return
 

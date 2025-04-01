@@ -70,7 +70,7 @@ class XML_to_Dict():
 
 class Napisy24_pl(XML_to_Dict, zip_extractor):
     def __init__(self, moviePath, movieNameString=None):
-        if movieNameString == None:
+        if movieNameString is None:
             self.MovieName = ((moviePath.rsplit("/", 1))[-1]).rsplit(".", 1)[0]
         else:
             self.MovieName = (movieNameString)
@@ -145,7 +145,7 @@ class Napisy24_pl(XML_to_Dict, zip_extractor):
             request_subtitle_list = "/libs/webapi.php?title=%s" % quote(self.MovieName)
         elif subtitle_list_reuest_type == "downloada_subtitle_list_by_IMDB":
             IMDB_search_answer = self.IMDB_idenifier_search()
-            if IMDB_search_answer != False:
+            if IMDB_search_answer is not False:
                 request_subtitle_list = "/libs/webapi.php?imdb=%s" % IMDB_search_answer
             else:
                 repeat = 0
@@ -178,7 +178,7 @@ class Napisy24_pl(XML_to_Dict, zip_extractor):
             if r1_status != 200 or self.XML_String == 'brak wynikow' or self.XML_String == "" or self.XML_String is None:
                 return False
             else:
-                if self.return_xml_dict() == True:
+                if self.return_xml_dict() is True:
                     return True
                 else:
                     return False
@@ -223,7 +223,7 @@ class Napisy24_pl(XML_to_Dict, zip_extractor):
     def save_downloaded_zip(self, dict_entry_to_download):
         """Function saves downloaded zip string on given path and destroy
         self.zip_string if saveing is succesfull."""
-        if self.download_subtitle_zip(dict_entry_to_download) == True:
+        if self.download_subtitle_zip(dict_entry_to_download) is True:
             try:
                 zip_file = open(self.ZipFilePath, "wb")
                 zip_file.write(self.zip_string)
@@ -252,7 +252,7 @@ class Napisy24_pl(XML_to_Dict, zip_extractor):
             else:
                 repeat = 0
 
-            if self.zip_string == None:
+            if self.zip_string is None:
                 print("Subtitle NOT DOWNLOADED")
                 repeat = 0
                 continue
@@ -434,7 +434,7 @@ class CompareMovie_and_Subtite_FileData(GuessFileData_from_FileName):
                     final_propability = y['propability']
             final_movie_subtitle_list.append(best_entry)
 
-        if matching_movie == True:
+        if matching_movie is True:
             return final_movie_subtitle_list
         else:
             return []

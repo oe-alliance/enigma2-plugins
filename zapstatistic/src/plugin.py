@@ -404,7 +404,7 @@ class ZapStatisticCombinedScreen(Screen):
 						y.addDuration(x)
 						added = True
 						break
-				if added == False:
+				if added is False:
 					self.list.append(CombinedZapEntry(x))
 		self.sortList(self.list)
 		for x in self.list:

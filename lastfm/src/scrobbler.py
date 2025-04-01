@@ -190,7 +190,7 @@ class EventListener:
         elif currPlay is not None:
             tracklength = -1
             seek = currPlay and currPlay.seek()
-            if seek != None:
+            if seek is not None:
                 r = seek.getLength()
                 if not r[0]:
                     tracklength = r[1] / 90000

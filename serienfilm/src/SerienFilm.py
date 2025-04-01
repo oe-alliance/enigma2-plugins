@@ -148,7 +148,7 @@ class EpiSepCfg(Screen):
 		self.setSeparator(self.newsep[:len].ljust(len))
 
 	def setSeparator(self, sep):
-		if sep == None:
+		if sep is None:
 			sep = ""
 #		print "[SF-Plugin] EpiSepCfg.setSeparator >%s< to >%s<" % (self.newsep, sep)
 		self.newsep = sep

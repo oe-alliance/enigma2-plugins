@@ -44,7 +44,7 @@ class MessageQueue:
             request = HardwareInfo().get_device_name()
         elif data == "inStandby":
             import Screens
-            request = str(Screens.Standby.inStandby != None)
+            request = str(Screens.Standby.inStandby is not None)
         elif data.startswith("setPort"):
             try:
                 from Components.config import config

@@ -64,10 +64,10 @@ def getmode():
 
 def toggleDisplay(configElement):
 	from Components.Lcd import LCD
-	if configElement.value == False:  # turn display on
+	if configElement.value is False:  # turn display on
 		print("[3D Settings] turning display on")
 		LCD().setBright(config.lcd.bright.value)
-	elif (config.plugins.threed.disableDisplay.value == True) and (getmode() != THREE_D_OFF):  # turn display off
+	elif (config.plugins.threed.disableDisplay.value is True) and (getmode() != THREE_D_OFF):  # turn display off
 		print("[3D Settings] turning display off")
 		LCD().setBright(0)
 	eDBoxLCD.getInstance().update()

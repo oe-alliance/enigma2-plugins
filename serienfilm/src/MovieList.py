@@ -81,7 +81,7 @@ class MovieList(GUIComponent):
 		self.onSelectionChanged = []
 
 	def connectSelChanged(self, fnc):
-		if not fnc in self.onSelectionChanged:
+		if fnc not in self.onSelectionChanged:
 			self.onSelectionChanged.append(fnc)
 
 	def disconnectSelChanged(self, fnc):

@@ -53,7 +53,7 @@ class BonjourScreen(Screen):
 	def buildMenu(self):
 		list = []
 		for key in sorted(self.files):
-			if self.files[key] != None:
+			if self.files[key] is not None:
 				list.append(self.__buildMenuEntry(self.services[self.files[key]]))
 
 		self["menuList"].l.setList(list)

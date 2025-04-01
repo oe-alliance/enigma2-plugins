@@ -301,7 +301,7 @@ class MovieContextMenu(Screen):
             menu.append((_("Filter by Tags"), boundFunction(self.filterbytags)))
         if config.AdvancedMovieSelection.showmenu.value and config.AdvancedMovieSelection.show_infobar_position.value:
             menu.append((_("Setup Moviebar position"), self.moviebarsetup))
-        if pluginPresent.YTTrailer == True and config.AdvancedMovieSelection.showtrailer.value and not (self.service.flags & eServiceReference.mustDescent):
+        if pluginPresent.YTTrailer is True and config.AdvancedMovieSelection.showtrailer.value and not (self.service.flags & eServiceReference.mustDescent):
             menu.append((_("Search Trailer on web"), boundFunction(self.showTrailer)))
         if config.AdvancedMovieSelection.show_remote_setup.value:
             menu.append((_("Clientbox setup"), boundFunction(self.serversetup)))
@@ -356,7 +356,7 @@ class MovieContextMenu(Screen):
         self.session.openWithCallback(self.closeafterfinish, Wastebasket)
 
     def showTrailer(self):
-        if pluginPresent.YTTrailer == True:
+        if pluginPresent.YTTrailer is True:
             eventname = ServiceCenter.getInstance().info(self.service).getName(self.service)
             self.session.open(YTTrailerList, eventname)
         else:
@@ -375,7 +375,7 @@ class MovieContextMenu(Screen):
             return False
 
     def downloadMovieInfo(self):
-        if self.checkConnection() == False:
+        if self.checkConnection() is False:
             return
         if len(self.csel.list.multiSelection) == 0:
             self.session.openWithCallback(self.closeafterfinish, DownloadMovies, self.csel.list.list, self.service)
@@ -388,7 +388,7 @@ class MovieContextMenu(Screen):
         self.close()
 
     def downloadMovieInfoAll(self):
-        if self.checkConnection() == False:
+        if self.checkConnection() is False:
             return
         if len(self.csel.list.multiSelection) == 0:
             self.session.openWithCallback(self.closeafterfinish, DownloadMovies, self.csel.list.list)
@@ -1198,7 +1198,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
         config.AdvancedMovieSelection.last_selected_service.save()
 
     def showTrailer(self):
-        if pluginPresent.YTTrailer == True:
+        if pluginPresent.YTTrailer is True:
             event = self["list"].getCurrentEvent()
             if event is not None:
                 eventname = event.getEventName()
@@ -1399,7 +1399,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
     def showTagsN(self, tagele):
         if not self.tags:
             self.showTagWarning()
-        elif not tagele or (self.selected_tags and tagele.value in self.selected_tags) or not tagele.value in self.tags:
+        elif not tagele or (self.selected_tags and tagele.value in self.selected_tags) or tagele.value not in self.tags:
             self.showTagsMenu(tagele)
         else:
             self.selected_tags_ele = tagele

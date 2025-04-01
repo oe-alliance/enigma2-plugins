@@ -211,9 +211,9 @@ class genuineDreambox(Screen):
 		return (self.parseResult(self.udsSend(typ, daten, len(daten))))
 
 	def stepSecond(self, typ, daten):
-		if (self.parseResult(self.udsSend(typ, daten, len(daten))) == False):
+		if (self.parseResult(self.udsSend(typ, daten, len(daten))) is False):
 			return False
-		if (self.parseSignature(self.udsSend(TPMD_CMD_COMPUTE_SIGNATURE, self.random, 8)) == False):
+		if (self.parseSignature(self.udsSend(TPMD_CMD_COMPUTE_SIGNATURE, self.random, 8)) is False):
 			return False
 		return True
 

@@ -167,7 +167,7 @@ class TimeSpanEntryList(MenuList):
 	def buildList(self, entryselect=None):
 		from Plugins.SystemPlugins.AdvHdmi.plugin import TimeSpanPresenter
 		self.list = []
-		if entryselect == None:
+		if entryselect is None:
 			try:
 				aktidx = self.l.getCurrentSelectionIndex()
 			except:

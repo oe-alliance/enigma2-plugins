@@ -27,7 +27,7 @@ class AccountManager:
 		self.pipe = dreamIRCTools.MessagePipe()
 
 	def startConnect(self):
-		if self.accounts == False:
+		if self.accounts is False:
 			self.pipe.debug("You have defined no valid accounts.")
 		else:
 			for acct in self.accounts:
@@ -49,7 +49,7 @@ class AccountManager:
 		return len(self.accounts) == 0
 
 	def getConnectionInfo(self):
-		if self.accounts == False:
+		if self.accounts is False:
 			self.pipe.debug("You have defined no valid accounts.")
 			return [0]
 		else:

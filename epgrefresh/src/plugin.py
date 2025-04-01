@@ -289,7 +289,7 @@ def AdjustExtensionsmenu(enable, PlugDescriptor):
 
 
 def housekeepingExtensionsmenu(configentry, force=False):
-	if force or (epgrefresh != None and not epgrefresh.isRunning()):
+	if force or (epgrefresh is not None and not epgrefresh.isRunning()):
 		PlugDescriptor = None
 		if configentry == config.plugins.epgrefresh.show_in_plugins:
 			PlugDescriptor = extPluginDescriptor

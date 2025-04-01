@@ -199,7 +199,7 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 		self.standardInfoBar = False
 		self.ac3ON = False
 		try:
-			if config.av.downmix_ac3.value == False:
+			if config.av.downmix_ac3.value is False:
 				config.av.downmix_ac3.value = True
 				config.av.downmix_ac3.save()
 				self.ac3ON = True
@@ -384,7 +384,7 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 				self.PlayService()
 
 	def visibility(self, force=1):
-		if self.isVisible == True:
+		if self.isVisible is True:
 			self.isVisible = False
 			self.hide()
 		else:
@@ -438,7 +438,7 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 		#self["coverArt"].updateCoverArt(path)
 
 	def StopPlayback(self):
-		if self.isVisible == False:
+		if self.isVisible is False:
 			self.show()
 			self.isVisible = True
 		if self.session.nav.getCurrentService() is None:
@@ -495,7 +495,7 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 			return
 		filelist = FileList(directory, useServiceRef=True, showMountpoints=False, isTop=True)
 		for x in filelist.getFileList():
-			if x[0][1] == True:  # isDir
+			if x[0][1] is True:  # isDir
 				#if recursive:
 				#	if x[0][0] != directory:
 				#		self.playlist.addFile(x[0][1])
@@ -635,7 +635,7 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 		self.session.openWithCallback(self.updd, AudioPlayerSettings)
 
 	def Exit(self):
-		if self.isVisible == False:
+		if self.isVisible is False:
 			self.visibility()
 			return
 		if self.filelist.getCurrentDirectory() is None:
@@ -677,7 +677,7 @@ class MC_WebRadio(Screen, HelpableScreen):
 		self["fileinfo"] = Label()
 		self.ac3ON = False
 		try:
-			if config.av.downmix_ac3.value == False:
+			if config.av.downmix_ac3.value is False:
 				config.av.downmix_ac3.value = True
 				config.av.downmix_ac3.save()
 				self.ac3ON = True
@@ -795,7 +795,7 @@ class MC_WebRadio(Screen, HelpableScreen):
 			self.KeyOK()
 
 	def visibility(self, force=1):
-		if self.isVisible == True:
+		if self.isVisible is True:
 			self.isVisible = False
 			self.hide()
 		else:
@@ -832,7 +832,7 @@ class MC_WebRadio(Screen, HelpableScreen):
 		self.playlist.clear()
 
 	def StopPlayback(self):
-		if self.isVisible == False:
+		if self.isVisible is False:
 			self.show()
 			self.isVisible = True
 		if self.session.nav.getCurrentService() is None:
@@ -923,7 +923,7 @@ class MC_WebRadio(Screen, HelpableScreen):
 		self.session.openWithCallback(self.updd, AudioPlayerSettings)
 
 	def Exit(self):
-		if self.isVisible == False:
+		if self.isVisible is False:
 			self.visibility()
 			return
 		self.FileInfoTimer.stop()
@@ -1242,7 +1242,7 @@ class MC_AudioPlaylist(Screen, InfoBarSeek):
 	#	self["coverArt"].updateCoverArt(path)
 
 	def StopPlayback(self):
-		if self.isVisible == False:
+		if self.isVisible is False:
 			self.show()
 			self.isVisible = True
 		if self.session.nav.getCurrentService() is None:
@@ -1256,7 +1256,7 @@ class MC_AudioPlaylist(Screen, InfoBarSeek):
 				self["screensaver"].showDefaultCover()
 
 	def visibility(self, force=1):
-		if self.isVisible == True:
+		if self.isVisible is True:
 			self.isVisible = False
 			self.hide()
 		else:
@@ -1578,7 +1578,7 @@ class MediaPixmap(Pixmap):
 
 	def paintCoverArtPixmapCB(self, picInfo=None):
 		ptr = self.picload.getData()
-		if ptr != None:
+		if ptr is not None:
 			self.instance.setPixmap(ptr.__deref__())
 
 	def updateCoverArt(self, path):

@@ -191,11 +191,11 @@ class SatloaderBouquet(Screen):
 		self.close(None)
 
 	def btnOK(self):
-		if self["list"].l.getCurrentSelection() != None:
+		if self["list"].l.getCurrentSelection() is not None:
 			self.list.toggleSelection()
 
 	def btnGreen(self):
-		if self["list"].l.getCurrentSelection() != None:
+		if self["list"].l.getCurrentSelection() is not None:
 			list = self.list.getSelectionsList()
 			if len(list) != 0:
 				for item in list:
@@ -507,7 +507,7 @@ class SatloaderList(MenuList):
 
 
 def SatListEntry(description, value, index, selected):
-	if selected == None:
+	if selected is None:
 		res = [
 			(description, value, index, selected),
 			(eListboxPythonMultiContent.TYPE_TEXT, 10, 0, 760, 25, 0, RT_HALIGN_LEFT, description)
@@ -518,9 +518,9 @@ def SatListEntry(description, value, index, selected):
 			(description, value, index, selected),
 			(eListboxPythonMultiContent.TYPE_TEXT, 40, 0, 730, 25, 0, RT_HALIGN_LEFT, description)
 		]
-		if selected == True:
+		if selected is True:
 			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 10, 0, 25, 24, LoadPixmap(cached=True, path="/usr/share/enigma2/skin_default/icons/lock_on.png")))
-		elif selected == False:
+		elif selected is False:
 			res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 10, 0, 25, 24, LoadPixmap(cached=True, path="/usr/share/enigma2/skin_default/icons/lock_off.png")))
 		return res
 

@@ -182,7 +182,7 @@ class PartnerboxEntriesListConfigScreen(Screen):
 		except:
 			sel = None
 		nr = int(config.plugins.Partnerbox.entriescount.value)
-		if nr > 1 and self.what == 2 or nr >= 1 and self.what == None:
+		if nr > 1 and self.what == 2 or nr >= 1 and self.what is None:
 			from .plugin import RemoteTimer
 			self.session.open(RemoteTimer, sel)
 		else:

@@ -70,7 +70,7 @@ class dreamMediathekStationsScreen(Screen):
 		Screen.__init__(self, session)
 		self.session = session
 		self.skin_path = skin_path
-		if self.skin_path == None:
+		if self.skin_path is None:
 			self.skin_path = resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/dreamMediathek")
 
 		self.lastservice = session.nav.getCurrentlyPlayingServiceReference()

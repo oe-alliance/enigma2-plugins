@@ -103,7 +103,7 @@ class MC_PictureViewer(Screen, HelpableScreen):
 
 	def showPic(self, picInfo=""):
 		ptr = self.picload.getData()
-		if ptr != None:
+		if ptr is not None:
 			self["thumbnail"].instance.setPixmap(ptr.__deref__())
 			self["thumbnail"].show()
 
@@ -116,7 +116,7 @@ class MC_PictureViewer(Screen, HelpableScreen):
 				ptr = None
 
 			#ptr = loadPic(self.filelist.getPath(), 180, 160, self.aspect, int(config.plugins.mc_pp.resize.value), 0, 0, cachefile)
-			if ptr != None:
+			if ptr is not None:
 				self["thumbnail"].instance.setPixmap(ptr.__deref__())
 				self["thumbnail"].show()
 		else:
@@ -141,7 +141,7 @@ class MC_PictureViewer(Screen, HelpableScreen):
 	def returnVal(self, val=0):
 		if val > 0:
 			for x in self.filelist.getFileList():
-				if x[0][1] == True:
+				if x[0][1] is True:
 					val += 1
 			self.filelist.moveToIndex(val)
 
@@ -254,7 +254,7 @@ class MC_PicThumbViewer(Screen, HelpableScreen):
 		framePos = 0
 		Page = 0
 		for x in piclist:
-			if x[0][1] == False:
+			if x[0][1] is False:
 				self.filelist.append((index, framePos, Page, x[0][4], x[0][0]))
 				index += 1
 				framePos += 1
@@ -317,7 +317,7 @@ class MC_PicThumbViewer(Screen, HelpableScreen):
 			elif self.Thumbnaillist[x][0] == 1:
 				self.Thumbnaillist[x][0] = 2
 				ptr = self.picload.getData()
-				if ptr != None:
+				if ptr is not None:
 					self["thumb" + str(self.Thumbnaillist[x][1])].instance.setPixmap(ptr.__deref__())
 					self["thumb" + str(self.Thumbnaillist[x][1])].show()
 
@@ -419,7 +419,7 @@ class MC_PicView(Screen, InfoBarBase, InfoBarSeek, InfoBarNotifications, Helpabl
 
 		for x in filelist:
 			if len(filelist[0]) == 3:  # orig. filelist
-				if x[0][1] == False:
+				if x[0][1] is False:
 					self.filelist.append(x[0][0])
 				else:
 					self.dirlistcount += 1
@@ -442,9 +442,9 @@ class MC_PicView(Screen, InfoBarBase, InfoBarSeek, InfoBarNotifications, Helpabl
 		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evEOF: self.doEOF,
 			})
-		if startslide == True:
+		if startslide is True:
 			self.PlayPause()
-			if config.plugins.mc_pp.musicenable.value == True and config.plugins.mc_pp.music.value != "none":
+			if config.plugins.mc_pp.musicenable.value is True and config.plugins.mc_pp.music.value != "none":
 				if pathExists(config.plugins.mc_pp.music.value):
 					self.session.nav.playService(eServiceReference(4097, 0, config.plugins.mc_pp.music.value))
 
@@ -452,7 +452,7 @@ class MC_PicView(Screen, InfoBarBase, InfoBarSeek, InfoBarNotifications, Helpabl
 		sc = getScale()
 		self.picload.setPara([self["pic"].instance.size().width(), self["pic"].instance.size().height(), sc[0], sc[1], 0, int(config.plugins.mc_pp.resize.value), self.bgcolor])
 		self["play_icon"].hide()
-		if config.plugins.mc_pp.infoline.value == False:
+		if config.plugins.mc_pp.infoline.value is False:
 			self["file"].hide()
 		self.start_decode()
 
@@ -472,7 +472,7 @@ class MC_PicView(Screen, InfoBarBase, InfoBarSeek, InfoBarNotifications, Helpabl
 
 	def doEOF(self):
 		self.session.nav.stopService()
-		if config.plugins.mc_pp.musicenable.value == True and config.plugins.mc_pp.music.value != "none":
+		if config.plugins.mc_pp.musicenable.value is True and config.plugins.mc_pp.music.value != "none":
 			if pathExists(config.plugins.mc_pp.music.value):
 				self.session.nav.playService(eServiceReference(4097, 0, config.plugins.mc_pp.music.value))
 
@@ -489,7 +489,7 @@ class MC_PicView(Screen, InfoBarBase, InfoBarSeek, InfoBarNotifications, Helpabl
 	def finish_decode(self, picInfo=""):
 		self["point"].hide()
 		ptr = self.picload.getData()
-		if ptr != None:
+		if ptr is not None:
 			text = ""
 			try:
 				text = picInfo.split('\n', 1)
@@ -518,7 +518,7 @@ class MC_PicView(Screen, InfoBarBase, InfoBarSeek, InfoBarNotifications, Helpabl
 
 	def slidePic(self):
 		print("slide to next Picture index=" + str(self.lastindex))
-		if config.plugins.mc_pp.loop.value == False and self.lastindex == self.maxentry:
+		if config.plugins.mc_pp.loop.value is False and self.lastindex == self.maxentry:
 			self.PlayPause()
 		self.shownow = True
 		self.ShowPicture()

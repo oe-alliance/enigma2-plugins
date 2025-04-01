@@ -42,7 +42,7 @@ class SatellitesList(Source):
 				refstr = '%s FROM SATELLITES ORDER BY satellitePosition' % (service_types_tv_hd)
 				ref = eServiceReference(refstr)
 			servicelist = serviceHandler.list(ref)
-			if not servicelist is None:
+			if servicelist is not None:
 				while True:
 					service = servicelist.getNext()
 					if not service.valid():  # check if end of list

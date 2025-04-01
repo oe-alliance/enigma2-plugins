@@ -103,7 +103,7 @@ class MessagePipe():
 		global BuddyList
 		self.logger = MessageLogger(open("/var/log/dreamIRC.log", "a"))
 		self.debug_state = debug()
-		if self.debug_state == True:
+		if self.debug_state is True:
 			self.debuglogger = MessageLogger(open("/var/log/dreamIRC_debug.log", "a"))
 
 	def updateBuddyWindow(self):
@@ -141,11 +141,11 @@ class MessagePipe():
 		ChatText = ChatText + "%s %s\n" % (timestamp, text)
 		NewMsg = "%s %s" % (timestamp, text)
 		self.logger.log("%s %s" % (timestamp, text))
-		if self.debug_state == True:
+		if self.debug_state is True:
 			self.debuglogger.log("%s %s" % (timestamp, text))
 
 	def debug(self, text):
-		if self.debug_state == True:
+		if self.debug_state is True:
 			timestamp = time.strftime("[%H:%M:%S]", time.localtime(time.time()))
 			self.debuglogger.log("%s %s" % (timestamp, text))
 		else:
@@ -157,7 +157,7 @@ class MessagePipe():
 
 	def close(self):
 		self.logger.close()
-		if self.debug_state == True:
+		if self.debug_state is True:
 			self.debuglogger.close()
 
 	def buildBuddyList(self, text):

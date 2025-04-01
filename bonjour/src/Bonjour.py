@@ -97,7 +97,7 @@ class Bonjour:
 		port = service.find('port').text
 		text = service.findall('txt-record')
 		textList = []
-		if text != None:
+		if text is not None:
 			for txt in text:
 				textList.append(txt.text)
 

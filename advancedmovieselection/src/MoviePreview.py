@@ -108,7 +108,7 @@ class MoviePreview():
     def showPreviewCallback(self, picInfo=None):
         if picInfo:
             ptr = self.picload.getData()
-            if ptr != None and self.working:
+            if ptr is not None and self.working:
                 self["CoverPreview"].instance.setPixmap(ptr)
         self.working = False
 
@@ -271,7 +271,7 @@ class VideoPreview():
         print("playLastDVD", self.resume_point)
         service = self.session.nav.getCurrentService()
         if service:
-            if answer == True:
+            if answer is True:
                 seekable = self.getSeek()
                 if seekable:
                     seekable.seekTo(self.resume_point)

@@ -348,7 +348,7 @@ class PornCenterList(MenuList):
 class PornCenterSub(Screen, ProtectedScreen):
 	def __init__(self, session, plugin=None):
 		Screen.__init__(self, session)
-		if pinchecker.pin_entered == False:
+		if pinchecker.pin_entered is False:
 			ProtectedScreen.__init__(self)
 
 		self.session = session

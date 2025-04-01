@@ -88,7 +88,7 @@ class WAPfunctions(Source):
 		key = ""
 		for i in param:
 			p = str(i)
-			if p != "sRef" and param[p] != None:
+			if p != "sRef" and param[p] is not None:
 				key = p
 
 		if key == "smin" or key == "emin":
@@ -276,7 +276,7 @@ class WAPfunctions(Source):
 		lst = config.movielist.videodirs.value
 		if not dirname:
 			dirname = resolveFilename(SCOPE_HDD)
-		if not dirname in lst:
+		if dirname not in lst:
 			lst = [dirname] + lst
 		returnList = [[lst[i], i, dirname == lst[i] and "selected" or ""] for i in range(len(lst))]
 		return returnList
@@ -292,9 +292,9 @@ class WAPfunctions(Source):
 			file.close()
 		except IOError as ioe:
 			taglist = []
-		if not tag in taglist:
+		if tag not in taglist:
 			taglist = [tag] + taglist
-		if not "" in taglist:
+		if "" not in taglist:
 			taglist.append("")
 		returnList = [[taglist[i], i, tag == taglist[i] and "selected" or ""] for i in range(len(taglist))]
 		return returnList

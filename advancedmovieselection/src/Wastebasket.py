@@ -71,7 +71,7 @@ class TrashMovieList(GUIComponent):
         self.onSelectionChanged = []
 
     def connectSelChanged(self, fnc):
-        if not fnc in self.onSelectionChanged:
+        if fnc not in self.onSelectionChanged:
             self.onSelectionChanged.append(fnc)
 
     def disconnectSelChanged(self, fnc):
@@ -425,7 +425,7 @@ class WastebasketTimer():
         if value != -1:
             nowSec = int(time())
             nextUpdateSeconds = 0
-            if cfgNext != None:
+            if cfgNext is not None:
                 # Saved timestamp found
                 # No slack necessary here - we will not reach this code path
                 # from autoDeleteAllMovies() as configChange() made sure to get

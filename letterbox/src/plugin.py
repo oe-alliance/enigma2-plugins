@@ -34,7 +34,7 @@ class LetterBox(Screen):
 
 	def toggle(self):
 		mode = get_mode()
-		if not mode in MODE_CHOICES:
+		if mode not in MODE_CHOICES:
 			MODE_CHOICES.append(mode)
 		modeidx = MODE_CHOICES.index(mode)
 		modeidx = (modeidx + 1) % len(MODE_CHOICES)

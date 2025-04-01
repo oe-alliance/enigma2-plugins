@@ -78,7 +78,7 @@ class Network():
                 rfile = open(self.AUTO_NETORK, 'r')
                 for x in rfile.readlines():
                     val = x.strip().split(' ')
-                    if len(val) >= 2 and not '#' in val[0]:
+                    if len(val) >= 2 and '#' not in val[0]:
                         val[2] = val[2].replace('://', '').replace(':/', '/', 1)  # only for cifs mount
                         dest_addr = val[2].split('/')[0]
                         self.auto_network.append((os.path.join(self.mount_path, val[0]), dest_addr))

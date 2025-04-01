@@ -27,7 +27,7 @@ class AtomFeed:
         for entry in xml.findall("{0}entry".format(self.ns)):
             titleE = entry.find("{0}title".format(self.ns))
             url = self.bestLink(entry.findall("{0}link".format(self.ns)))
-            if titleE != None and titleE.text != "" and url != None:
+            if titleE is not None and titleE.text != "" and url is not None:
                 pages.append({"title": titleE.text, "url": url})
 
         callback(pages)

@@ -493,7 +493,7 @@ class EPGExportConfiguration(ConfigListScreen, Screen):
 		hostname = config.plugins.epgexport.hostname
 		if config.plugins.epgexport.channelid.value == "xml" and not exists(join(EXPORTPATH, "custom.channels.xml")):
 			config.plugins.epgexport.channelid.value = "name"
-		if choice != None and current != hostname:
+		if choice is not None and current != hostname:
 			self.refreshLayout()
 
 	def yellow_key(self):
@@ -855,7 +855,7 @@ class EPGExport(Screen):
 						xmltv_program.set('stop', "%s %s" % (stop_time, local_time_offset))
 						xmltv_program.set('channel', service_id)
 						en += 1
-						if title != None:
+						if title is not None:
 							title_text = self.b2s(title).split('. ')
 							title = etree.SubElement(xmltv_program, 'title', lang=self.language)
 							title.text = self.b2s(title_text[0]).strip()
@@ -866,7 +866,7 @@ class EPGExport(Screen):
 								if len(title_text) > 1:
 									subtitle = etree.SubElement(xmltv_program, 'sub-title', lang=self.language)
 									subtitle.text = self.b2s(title_text[1]).strip()
-						if description != None and len(description) > 1:
+						if description is not None and len(description) > 1:
 							desc = etree.SubElement(xmltv_program, 'desc', lang=self.language)
 							desc.text = self.b2s(description)
 		cprint("event number: %d" % en)
@@ -1028,7 +1028,7 @@ class EPGExportSelection(ConfigListScreen, Screen):
 	def changedEntry(self):
 		choice = self["config"].getCurrent()
 		current = choice[1]
-		if choice != None:
+		if choice is not None:
 			self.createSetup()
 
 	def resetting(self):

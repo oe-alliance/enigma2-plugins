@@ -137,7 +137,7 @@ class MovieSearch():
         for movie_tuple in self["list"].list:
             mi = movie_tuple[0]
             if search.lower() in mi.name.lower():
-                if not movie_tuple in newList:
+                if movie_tuple not in newList:
                     newList.append(movie_tuple)
         #if len(newList) == 0:
         #    return

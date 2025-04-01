@@ -375,7 +375,7 @@ class SeriesPluginInfoScreen(Screen):
 	def loadPixmapCallback(self, widget, picInfo=None):
 		if self.picload and picInfo:
 			ptr = self.picload.getData()
-			if ptr != None:
+			if ptr is not None:
 				self[widget].instance.setPixmap(ptr)
 				self[widget].show()
 			del self.picload

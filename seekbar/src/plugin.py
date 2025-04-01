@@ -148,7 +148,7 @@ class Seekbar(ConfigListScreen, Screen):
 				self.exit()
 		elif sel == self.minuteInput:
 			pts = self.minuteInput.value * 60 * 90000
-			if self.fwd == False:
+			if self.fwd is False:
 				pts = -1 * pts
 			if self.dvd:
 				DVDPlayer.doSeekRelative(self.infobarInstance, pts)

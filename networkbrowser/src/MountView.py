@@ -120,12 +120,12 @@ class AutoMountView(Screen):
 		sharename = entry["sharename"]
 		IPdescription = _("IP:") + " " + str(entry["ip"])
 		DIRdescription = _("Dir:") + " " + str(entry["sharedir"])
-		if entry["active"] == 'True' or entry["active"] == True:
+		if entry["active"] == 'True' or entry["active"] is True:
 			if fileExists(resolveFilename(SCOPE_ACTIVE_SKIN, "icons/lock_on.png")):
 				activepng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "icons/lock_on.png"))
 			else:
 				activepng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/icons/lock_on.png"))
-		if entry["active"] == 'False' or entry["active"] == False:
+		if entry["active"] == 'False' or entry["active"] is False:
 			if fileExists(resolveFilename(SCOPE_ACTIVE_SKIN, "icons/lock_error.png")):
 				activepng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_ACTIVE_SKIN, "icons/lock_error.png"))
 			else:
@@ -152,7 +152,7 @@ class AutoMountView(Screen):
 			self.session.openWithCallback(self.MountEditClosed, AutoMountEdit, self.skin_path, iAutoMount.automounts[returnValue], False)
 
 	def MountEditClosed(self, returnValue=None):
-		if returnValue == None:
+		if returnValue is None:
 			self.showMountsList()
 
 	def delete(self, returnValue=None):

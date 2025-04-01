@@ -226,13 +226,13 @@ class Mosaic(Screen):
 			self.close()
 
 	def play(self):
-		if self.working == False and self.state == self.PAUSE:
+		if self.working is False and self.state == self.PAUSE:
 			self.state = self.PLAY
 			self.updateTimer.start(1000, 1)
 			self["playState"].instance.setPixmap(playingIcon)
 
 	def pause(self):
-		if self.working == False and self.state == self.PLAY:
+		if self.working is False and self.state == self.PLAY:
 			self.state = self.PAUSE
 			self.updateTimer.stop()
 			self["playState"].instance.setPixmap(pausedIcon)
@@ -244,7 +244,7 @@ class Mosaic(Screen):
 		self.changeCountdown(-1)
 
 	def changeCountdown(self, direction):
-		if self.working == False:
+		if self.working is False:
 			configNow = config.plugins.Mosaic.countdown.value
 			configNow += direction
 

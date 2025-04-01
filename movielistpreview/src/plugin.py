@@ -104,7 +104,7 @@ class MovielistPreview():
 		config.plugins.MovielistPreview.enabled.save()
 
 	def showPreview(self, movie):
-		if self.working == False:
+		if self.working is False:
 			self.dialog.hide()
 			if movie and self.mayShow and config.plugins.MovielistPreview.enabled.value:
 				png = movie + "_mp.jpg"
@@ -118,7 +118,7 @@ class MovielistPreview():
 
 	def showPreviewCallback(self, picInfo=None):
 		ptr = self.picload.getData()
-		if ptr != None:
+		if ptr is not None:
 			self.dialog["preview"].instance.setPixmap(ptr)
 			self.dialog.show()
 		self.working = False
@@ -395,7 +395,7 @@ class MovielistPreviewAutoCreator(Screen):
 		self.onLayoutFinish.append(self.createPreviews)
 
 	def exit(self):
-		if self.working == False:
+		if self.working is False:
 			self.session.nav.playService(self.oldService)
 			self.close()
 		else:

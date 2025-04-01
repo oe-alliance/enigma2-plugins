@@ -754,7 +754,7 @@ class FanControl2Plugin(ConfigListScreen, Screen):
 			"info": self.monitor
 		}, -1)
 
-		if not self.selectionChanged in self["config"].onSelectionChanged:
+		if self.selectionChanged not in self["config"].onSelectionChanged:
 			self["config"].onSelectionChanged.append(self.selectionChanged)
 		self.selectionChanged()
 		self.onLayoutFinish.append(self.updateFanStatus)
@@ -844,7 +844,7 @@ class FanControl2Plugin(ConfigListScreen, Screen):
 
 
 def DeleteData():
-	if config.plugins.FanControl.DeleteData.value == "0" or config.plugins.FanControl.EnableDataLog.value == False:
+	if config.plugins.FanControl.DeleteData.value == "0" or config.plugins.FanControl.EnableDataLog.value is False:
 		return
 	try:
 		FClog("Auto-Delete Data")
@@ -929,12 +929,12 @@ def ReadHDDtemp(D):
 def GetHDDtemp(OneTime):
 	global AktHDD
 	AktHDD = []
-	if harddiskmanager.HDDCount() > 0 and config.plugins.FanControl.CheckHDDTemp.value != "never" or OneTime == True:
+	if harddiskmanager.HDDCount() > 0 and config.plugins.FanControl.CheckHDDTemp.value != "never" or OneTime is True:
 		for hdd in harddiskmanager.HDDList():
 			if hdd[1].model().startswith("ATA") and hdd[1].getDeviceName() not in FC2HDDignore:
 				sleeptime = int((time.time() - hdd[1].last_access))
 #				FClog("HDD Temp reading %s %s %ds %s" % (config.plugins.FanControl.CheckHDDTemp.value, disableHDDread, sleeptime, hdd[1].isSleeping()))
-				if config.plugins.FanControl.CheckHDDTemp.value == "true" or (config.plugins.FanControl.CheckHDDTemp.value == "auto" and not disableHDDread) or ((not hdd[1].isSleeping()) and sleeptime < 120) or OneTime == True:
+				if config.plugins.FanControl.CheckHDDTemp.value == "true" or (config.plugins.FanControl.CheckHDDTemp.value == "auto" and not disableHDDread) or ((not hdd[1].isSleeping()) and sleeptime < 120) or OneTime is True:
 					(stat, wert) = ReadHDDtemp(hdd[1].getDeviceName())
 					if stat == 0:
 						try:
@@ -1045,7 +1045,7 @@ class FanControl2(Screen):
 
 	def FC2DoShutdown(self, retval):
 		if (retval):
-			if Standby.inTryQuitMainloop == False:
+			if Standby.inTryQuitMainloop is False:
 				self.session.open(Standby.TryQuitMainloop, 1)
 
 	def stop(self):
@@ -1093,7 +1093,7 @@ class FanControl2(Screen):
 				self.HDDidle = HDDsSleeping()
 				if strftime("%M")[-1:] == "0":
 					GetHDDtemp(False)
-			if config.plugins.FanControl.EnableThread.value == True:
+			if config.plugins.FanControl.EnableThread.value is True:
 				if Briefkasten.qsize() <= 3:
 					Briefkasten.put(1)
 				else:
@@ -1197,7 +1197,7 @@ class FanControl2(Screen):
 				self.FanMax = config.plugins.FanControl.maxRPM.value - RPMdiff
 				if self.inStandby != istStandbySave or AktVLT != AktVLTtmp or AktPWM != AktPWMtmp:
 					istStandbySave = self.inStandby
-					if istStandbySave == True:
+					if istStandbySave is True:
 						Standby.inStandby.onClose.append(FC2fanReset)
 					FC2fanReset()
 					AktVLTtmp = AktVLT
@@ -1209,7 +1209,7 @@ class FanControl2(Screen):
 						FC2fanReset()
 				if (AktVLT + AktPWM) == 0:
 					FirstStart = True
-				if FirstStart == True:
+				if FirstStart is True:
 					FirstStart = False
 					AktVLTtmp = self.Vlt
 					setVoltage(id, self.Vlt)
@@ -1217,7 +1217,7 @@ class FanControl2(Screen):
 				AktRPMtmp = GetFanRPM()
 				if RPMread > 0 and RPMread < 3:
 					FClog("Reread")
-					if config.plugins.FanControl.EnableThread.value == True:
+					if config.plugins.FanControl.EnableThread.value is True:
 						if Briefkasten.qsize() <= 2:
 							time.sleep(0.4)
 							Briefkasten.put(1)

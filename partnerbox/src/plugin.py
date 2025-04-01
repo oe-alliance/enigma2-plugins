@@ -618,7 +618,7 @@ class RemoteTimerChannelList(Screen):
 		if self.playeronly == 1:
 			if self.mode == self.REMOTE_TIMER_MODE:
 				self.mode = self.REMOTE_TV_MODE
-				if self.zaptoservicewhenstreaming == False and self.enigma_type == 0:
+				if self.zaptoservicewhenstreaming is False and self.enigma_type == 0:
 					self.GetStreamInfosCallback()
 				else:
 					self.Zap()
@@ -2087,7 +2087,7 @@ def callbackPartnerboxServiceList(self, result):
 				return
 			current_root = self.csel.getRoot()
 			mutableList = self.csel.getMutableList(current_root)
-			if not mutableList is None:
+			if mutableList is not None:
 				service = self.setPartnerboxService(item, partnerboxentry)
 				if not mutableList.addService(service):
 					self.csel.bouquetNumOffsetCache = {}

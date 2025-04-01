@@ -138,7 +138,7 @@ class KiddyTimer():
                 self.enabled = True
             else:
                 self.enabled = config.plugins.KiddyTimer.enabled.value
-            if (self.enabled == True and self.timerHasToRun()) or bForceStart:
+            if (self.enabled is True and self.timerHasToRun()) or bForceStart:
                 # This command may be double, just made to be sure, the observer is stopped when the real timer starts
                 self.stopObserve()
                 # Date of the current day
@@ -167,7 +167,7 @@ class KiddyTimer():
                 else:
                     self.startLoop()
             else:
-                if (self.enabled == True):
+                if (self.enabled is True):
                     self.startObserve()
 
     def gotTime(self):
@@ -324,13 +324,13 @@ class KiddyTimer():
 
     def toggleActiveState(self, bStatus):
         # Initialize dialog
-        if self.dialog == None and bStatus:
+        if self.dialog is None and bStatus:
             self.dialog = self.session.instantiateDialog(KiddyTimerScreen)
         self.active = bStatus
-        if bStatus == True:
+        if bStatus is True:
             self.dialog.show()
         else:
-            if self.dialog != None:
+            if self.dialog is not None:
                 self.dialog.hide()
 
     def toggleEnabledState(self, bStatus):
@@ -345,7 +345,7 @@ class KiddyTimer():
 
     def calculateTimes(self):
         self.stopLoop()
-        if self.active == True and self.timerHasToRun():
+        if self.active is True and self.timerHasToRun():
             odtEnd = time.mktime(time.localtime())
             iDiff = odtEnd - time.mktime(self.sessionStartTime)
             iRemaining = self.sessionTime - iDiff

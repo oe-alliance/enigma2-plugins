@@ -183,7 +183,7 @@ class MoviePlayerExtended(CutListSupport, MoviePlayer, PlayerBase):
                 {
                     "back": (self.close, _("Leave movie player"))
                 })
-        if config.AdvancedMovieSelection.use_original_movieplayer_summary.value == True:
+        if config.AdvancedMovieSelection.use_original_movieplayer_summary.value is True:
             self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
                         iPlayableService.evUpdatedInfo: self.__updateInfo
                 })
@@ -191,7 +191,7 @@ class MoviePlayerExtended(CutListSupport, MoviePlayer, PlayerBase):
         self.onExecBegin.append(self.__onExecBegin)
 
     def createSummary(self):
-        if config.AdvancedMovieSelection.use_original_movieplayer_summary.value == True:
+        if config.AdvancedMovieSelection.use_original_movieplayer_summary.value is True:
             return MoviePlayerExtended_summary
         return MoviePlayer.createSummary(self)
 

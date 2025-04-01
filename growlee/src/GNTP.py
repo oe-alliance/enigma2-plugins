@@ -71,7 +71,7 @@ class GNTPPacket:
 		}
 		hashAlgorithm = hashAlgorithm.upper()
 
-		if not hashAlgorithm in hashes:
+		if hashAlgorithm not in hashes:
 			raise Exception('Unsupported hash algorithm: %s' % hashAlgorithm)
 		if encryptionAlgorithm is not None:
 			raise Exception('Unsupported encryption algorithm: %s' % encryptionAlgorithm)

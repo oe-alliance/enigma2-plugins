@@ -823,7 +823,7 @@ class IRCClient(basic.LineReceiver):
         # << TOPIC #xtestx :fff
         if channel[0] not in '&#!+':
             channel = '#' + channel
-        if topic != None:
+        if topic is not None:
             self.sendLine("TOPIC %s :%s" % (channel, topic))
         else:
             self.sendLine("TOPIC %s" % (channel,))
@@ -956,7 +956,7 @@ class IRCClient(basic.LineReceiver):
 
         args = ['SEND', name, my_address, str(port)]
 
-        if not (size is None):
+        if size is not None:
             args.append(size)
 
         args = args.join(' ')

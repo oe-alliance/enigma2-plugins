@@ -367,7 +367,7 @@ class MyTubeSettingsScreen(ConfigListScreen, Screen):
 
 		self["config"].list = self.searchContextEntries
 		self["config"].l.setList(self.searchContextEntries)
-		if not self.selectionChanged in self["config"].onSelectionChanged:
+		if self.selectionChanged not in self["config"].onSelectionChanged:
 			self["config"].onSelectionChanged.append(self.selectionChanged)
 
 	def selectionChanged(self):

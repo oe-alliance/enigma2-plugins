@@ -531,7 +531,7 @@ class AutoTimer:
 # the programme).
 #
 				tdow = timestamp.tm_wday
-				if (timer.timespan[0] != None) and timer.timespan[2]:
+				if (timer.timespan[0] is not None) and timer.timespan[2]:
 					begin_offset = 60 * timestamp.tm_hour + timestamp.tm_min
 					timer_offset = 60 * timer.timespan[0][0] + timer.timespan[0][1]
 					if begin_offset < timer_offset:
@@ -814,7 +814,7 @@ class AutoTimer:
 
 	def JobMessage(self):
 		if self.callback is not None:
-			if self.simulateOnly == True:
+			if self.simulateOnly is True:
 				self.callback(self.autotimers, self.skipped)
 			else:
 				total = (self.new + self.modified + len(self.conflicting) + len(self.existing) + len(self.similars))

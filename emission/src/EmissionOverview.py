@@ -65,7 +65,7 @@ class TorrentLocationBox(LocationBox):
 			cur = self["filelist"].getSelection()
 			ret = dir and cur and dir + cur[0]
 			if self.realBookmarks:
-				if self.autoAdd and not ret in self.bookmarks:
+				if self.autoAdd and ret not in self.bookmarks:
 					self.bookmarks.append(self.getPreferredFolder())
 					self.bookmarks.sort()
 

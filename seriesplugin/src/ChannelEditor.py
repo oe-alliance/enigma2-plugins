@@ -316,7 +316,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 
 	def keyAdd(self):
 		check = self['list'].getCurrent()
-		if check == None:
+		if check is None:
 			log.debug("list empty")
 			return
 		else:
@@ -374,7 +374,7 @@ class ChannelEditor(Screen, HelpableScreen, ChannelsBase, WebChannels):
 
 	def keyRemove(self):
 		check = self['list'].getCurrent()
-		if check == None:
+		if check is None:
 			log.debug("keyRemove list empty")
 			return
 		else:

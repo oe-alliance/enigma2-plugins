@@ -456,7 +456,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 		else:
 			self["tabbar"].setPixmapNum(self.currentMode)
 
-		if self.oldMode != None:
+		if self.oldMode is not None:
 			if self.oldMode >= numTabs:
 				self["tab_text_%d" % numTabs].instance.setForegroundColor(parseColor("#ffffff"))  # inactive
 			else:
@@ -489,7 +489,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 		self.setMutePixmap()
 
 	def unsetVolumeControl(self):
-		if self.savedVolUp == None:
+		if self.savedVolUp is None:
 			return
 		global globalActionMap
 		globalActionMap.actions["volumeUp"] = self.savedVolUp
@@ -511,7 +511,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 		elif config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_PIXMAP_BAR or config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_PIXMAP_BAR_LIST_OFF:
 			self["eventProgressImage"].hide()
 			self["eventProgressText"].hide()
-			if self.progressPixmap == None:
+			if self.progressPixmap is None:
 				pixmapPath = resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/MerlinEPGCenter/images/EventProgress.png")
 				self.progressPixmap = LoadPixmap(cached=False, path=pixmapPath)
 			self["eventProgress"].instance.setPixmap(self.progressPixmap)
@@ -538,7 +538,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 		# get the selected entry
 		cur = self["list"].getCurrent()
 		# cur[1] = eventId, cur[2] = sRef
-		if cur != None and cur[2] != "" and cur[1] != None:
+		if cur is not None and cur[2] != "" and cur[1] is not None:
 			serviceList = self.epgcache.search(('R', 100, eEPGCache.SIMILAR_BROADCASTINGS_SEARCH, cur[2], cur[1]))
 			knownSimilar = False
 			if serviceList is not None and config.plugins.merlinEpgCenter.limitSearchToBouquetServices.value:
@@ -566,14 +566,14 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 
 		upcomingEvents = []
 		cur = self["list"].getCurrent()
-		if cur == None:
+		if cur is None:
 			return
 
 		sRef = cur[2]
 		begin = cur[3]
 		duration = cur[4]
 
-		if sRef == None or begin == None or duration == None:
+		if sRef is None or begin is None or duration is None:
 			nextEvent = -1
 		else:
 			nextEvent = self.epgcache.startTimeQuery(eServiceReference(sRef), begin + duration)
@@ -803,7 +803,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 
 	def addTimerEntry(self):
 		cur = self["list"].getCurrent()
-		if cur == None or cur[1] == None or cur[2] == "":
+		if cur is None or cur[1] is None or cur[2] == "":
 			return
 
 		# cur = ignoreMe, eventid, sRef, begin, duration, title, short, desc
@@ -833,7 +833,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 		elif result[1] == TIMER_TYPE_AUTOTIMER:
 			# cur = ignoreMe, eventid, sRef, begin, duration, title, short, desc
 			cur = self["list"].getCurrent()
-			if cur == None or cur[1] == None or cur[2] == "":
+			if cur is None or cur[1] is None or cur[2] == "":
 				return
 
 			self.addAutotimerFromString(cur[5], addNewTimer=True, begin=cur[3], end=cur[3] + cur[4], sRef=ServiceReference(cur[2]))
@@ -1107,7 +1107,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 			serviceName = ServiceReference(sRef).getServiceName()
 		self["serviceName"].setText(serviceName)
 
-		if begin != None and duration != None:
+		if begin is not None and duration is not None:
 			beginString = strftime("%H:%M", localtime(begin))
 			endString = strftime("%H:%M", localtime(begin + duration))
 
@@ -1219,12 +1219,12 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 		if config.plugins.merlinEpgCenter.showShortDescInEventInfo.value:
 			newDescription = ""
 
-			if shortDesc != None and shortDesc != "" and shortDesc != title:
+			if shortDesc is not None and shortDesc != "" and shortDesc != title:
 				if newDescription == "":
 					newDescription = shortDesc
 				else:
 					newDescription = ''.join([newDescription, "\n\n", shortDesc])
-			if description != None and description != "":
+			if description is not None and description != "":
 				if newDescription == "":
 					newDescription = description
 				else:
@@ -1457,7 +1457,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 		newTimer.match = ''
 		newTimer.enabled = True
 
-		if begin != None and end != None:
+		if begin is not None and end is not None:
 			begin -= 3600
 			end += 3600
 
@@ -1535,7 +1535,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 			self.blinkTimer.reset()
 
 		# TODO only hide if the plugin wasn't just started
-		if not historySearch and self.oldMode != None:
+		if not historySearch and self.oldMode is not None:
 			self.epgTabObjectList[self.oldMode].hide()
 
 		if doSearch:
@@ -1660,7 +1660,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 	# KEY HANDLING
 
 	def keyEditMode(self):
-		if self.configEditMode == False:
+		if self.configEditMode is False:
 			self.configEditMode = True
 			self["key_yellow"].setText(_("Edit Off"))
 		else:
@@ -1697,7 +1697,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 			self.keyOk()
 		else:
 			cur = self["list"].getCurrent()
-			if cur == None or cur[1] == None or cur[2] == "":
+			if cur is None or cur[1] is None or cur[2] == "":
 				return
 
 			addTimer = True
@@ -1728,7 +1728,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 	def keyBlue(self):
 		if self.currentMode == EPGSEARCH_RESULT:
 			cur = self["list"].getCurrent()
-			if cur == None or cur[5] == None:
+			if cur is None or cur[5] is None:
 				return
 			self.epgTabObjectList[self.currentMode].updateEpgSearchHistory(cur[5])  # save the searchString in the search history
 			# remove possibility to add the service name to the list of epg search terms
@@ -1928,7 +1928,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 			self.setMode(historySearch=True)
 		elif self.currentMode == MULTI_EPG_NOW or self.currentMode == MULTI_EPG_NEXT or self.currentMode == SINGLE_EPG or self.currentMode == MULTI_EPG_PRIMETIME:
 			cur = self["list"].getCurrent()
-			if cur != None:
+			if cur is not None:
 				# update the infobar servicelist...
 				self.infoBarInstance.epg_bouquet = self.bouquetList[self.currentBouquetIndex][1]
 				self.infoBarInstance.zapToService(eServiceReference(cur[2]))
@@ -1997,17 +1997,17 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 					shortDesc = cur[6]
 					description = cur[7]
 
-				if title != None and title != "":
+				if title is not None and title != "":
 					infoText = title
 				else:
 					infoText = ""
 
-				if shortDesc != None and shortDesc != "" and shortDesc != title:
+				if shortDesc is not None and shortDesc != "" and shortDesc != title:
 					if infoText == "":
 						infoText = shortDesc
 					else:
 						infoText = ''.join([infoText, "\n\n", shortDesc])
-				if description != None and description != "":
+				if description is not None and description != "":
 					if infoText == "":
 						infoText = description
 					else:

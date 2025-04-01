@@ -81,11 +81,11 @@ class FlashExpander(Screen):
 		self["list"] = MenuList(list=_list)
 
 	def Ok(self):
-		if self.__foundFE == False:
+		if self.__foundFE is False:
 			self.session.openWithCallback(self.__confCallback, FEconf)
 
 	def __confCallback(self, data):
-		if data == False:
+		if data is False:
 			self.Exit()
 		else:
 			self.close()
@@ -120,7 +120,7 @@ class FEconf(Screen):
 				devices = Harddisk(x)
 				for y in range(devices.numPartitions()):
 					fstype = self.__getPartitionType(devices.partitionPath(str(y + 1)))
-					if fstype == False:
+					if fstype is False:
 						fstype = self.__getPartitionType(devices.partitionPath(str(y + 1)))
 					try:
 						bustype = devices.bus_type()
@@ -207,14 +207,14 @@ class FEconf(Screen):
 			fstype = val[2]
 			print("[FlashExpander]", partitionPath, uuidPath, fstype)
 
-			if uuidPath == None:
+			if uuidPath is None:
 				self.session.open(MessageBox, _("read UUID"), MessageBox.TYPE_ERROR, timeout=5)
 				return
 
 			mountpoint = ismounted(uuidPath, "")
-			if mountpoint == False:
+			if mountpoint is False:
 				mountpoint = ismounted(partitionPath, "")
-				if mountpoint == False:
+				if mountpoint is False:
 					if self.__mount(uuidPath, "/media/FEtmp") == 0:
 						mountpoint = "/media/FEtmp"
 
@@ -244,7 +244,7 @@ class FEconf(Screen):
 			self.__message = self.session.openWithCallback(boundFunction(self.__EndCB, data), MessageBox, _("Please wait, Flash memory will be copied."), MessageBox.TYPE_INFO, enable_input=False)
 
 	def __mount(self, dev, mp):
-		if path.exists(mp) == False:
+		if path.exists(mp) is False:
 			createDir(mp, True)
 		cmd = "mount " + dev + " " + mp
 		#print("[FlashExpander]",cmd)
@@ -252,7 +252,7 @@ class FEconf(Screen):
 		return (res >> 8)
 
 	def __checkMountPoint(self, mp):
-		if mp == False:
+		if mp is False:
 			self.session.open(MessageBox, _("Mount failed (%s)") % fstype, MessageBox.TYPE_ERROR, timeout=5)
 			return False
 		if getFreeSize(mp) < 180:
@@ -267,7 +267,7 @@ class FEconf(Screen):
 			self.__message.close(False)
 
 	def __EndCB(self, val, retval):
-		if retval == True:
+		if retval is True:
 			try:
 				devPath = val[0]
 				if PY3:

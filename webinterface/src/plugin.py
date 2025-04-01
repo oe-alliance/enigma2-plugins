@@ -207,7 +207,7 @@ def startWebserver(session, l2k):
 		#HTTP
 		if config.plugins.Webinterface.http.enabled.value is True:
 			ret = startServerInstance(session, ip, config.plugins.Webinterface.http.port.value, config.plugins.Webinterface.http.auth.value, l2k)
-			if ret == False:
+			if ret is False:
 				errors = "%s%s:%i\n" % (errors, ip, config.plugins.Webinterface.http.port.value)
 			else:
 				registerBonjourService('http', config.plugins.Webinterface.http.port.value)
@@ -225,7 +225,7 @@ def startWebserver(session, l2k):
 		#HTTPS
 		if config.plugins.Webinterface.https.enabled.value is True:
 			ret = startServerInstance(session, ip, config.plugins.Webinterface.https.port.value, config.plugins.Webinterface.https.auth.value, l2k, True)
-			if ret == False:
+			if ret is False:
 				errors = "%s%s:%i\n" % (errors, ip, config.plugins.Webinterface.https.port.value)
 			else:
 				registerBonjourService('https', config.plugins.Webinterface.https.port.value)
@@ -256,7 +256,7 @@ def stopWebserver(session):
 
 
 def startServerInstance(session, ipaddress, port, useauth=False, l2k=None, usessl=False):
-	if hw.get_device_name().lower() != "dm7025" and tpm != None:
+	if hw.get_device_name().lower() != "dm7025" and tpm is not None:
 		l3k = None
 		l3c = tpm.getData(eTPM.DT_LEVEL3_CERT)
 
@@ -392,7 +392,7 @@ class HTTPRootResource(resource.Resource):
 
 		request.enigma2_session = session
 
-		if config.plugins.Webinterface.extended_security.value and not request.path in self.SESSION_EXCEPTIONS:
+		if config.plugins.Webinterface.extended_security.value and request.path not in self.SESSION_EXCEPTIONS:
 			protected = False
 			for path in self.SESSION_PROTECTED_PATHS:
 				if request.path.startswith(path):
@@ -575,7 +575,7 @@ def checkBonjour():
 def networkstart(reason, session):
 	l2r = False
 	l2k = None
-	if hw.get_device_name().lower() != "dm7025" and tpm != None:
+	if hw.get_device_name().lower() != "dm7025" and tpm is not None:
 		l2c = tpm.getData(eTPM.DT_LEVEL2_CERT)
 
 		if l2c is None:
@@ -606,7 +606,7 @@ def openconfig(session, **kwargs):
 def configCB(result, session):
 	l2r = False
 	l2k = None
-	if hw.get_device_name().lower() != "dm7025" and tpm != None:
+	if hw.get_device_name().lower() != "dm7025" and tpm is not None:
 		l2c = tpm.getData(eTPM.DT_LEVEL2_CERT)
 
 		if l2c is None:

@@ -46,7 +46,7 @@ class PortScanner(object):
 		f_args = shlex.split(arguments)
 
 		# Launch scan
-		args = ['nmap', '-oX', '-', hosts] + ['-p', ports] * (ports != None) + f_args
+		args = ['nmap', '-oX', '-', hosts] + ['-p', ports] * (ports is not None) + f_args
 
 		p = subprocess.Popen(args, bufsize=100000, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 

@@ -53,7 +53,7 @@ class MerlinEPGCenterStarter(object):
 			MerlinEPGCenterStarter.merlinEPGCenter = self.session.instantiateDialog(MerlinEPGCenter, servicelist, currentBouquet, bouquetList, currentIndex, startTab, doSearch)
 		else:
 			MerlinEPGCenterStarter.merlinEPGCenter.resume()
-			if startTab != None:
+			if startTab is not None:
 				MerlinEPGCenterStarter.merlinEPGCenter.setStartTab(startTab, doSearch)
 			elif config.plugins.merlinEpgCenter.rememberLastTab.value:
 				MerlinEPGCenterStarter.merlinEPGCenter.setStartTab(config.plugins.merlinEpgCenter.lastUsedTab.value, doSearch)

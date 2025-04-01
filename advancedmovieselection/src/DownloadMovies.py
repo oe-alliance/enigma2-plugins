@@ -124,7 +124,7 @@ class DownloadMovies(Screen):
 
     def paintPosterPixmap(self, picInfo=None):
         ptr = self.picload.getData()
-        if ptr != None:
+        if ptr is not None:
             self["poster"].instance.setPixmap(ptr)
             self["poster"].show()
 
@@ -268,6 +268,6 @@ class FetchingMovies(Thread):
         fetchingMovies = None
         current = total
         #print("Movie download finished")
-        if is_hidden == True:
+        if is_hidden is True:
             this_session.open(MessageBox, (_("Download and save from movie infos and covers complete.")), MessageBox.TYPE_INFO)  # Topfi: removed last parameter
             this_session = None

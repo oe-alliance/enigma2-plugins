@@ -340,7 +340,7 @@ class Cpart(Screen):
 				self["LabelGreen"].setText(_("add"))
 			else:
 				self["PixmapGreen"].setPixmapNum(0)
-			if sel[5][PA_TYPE] & self.PA_TYPE_LAST and bool(sel[5][PA_TYPE] & self.PA_TYPE_FREE) == False:
+			if sel[5][PA_TYPE] & self.PA_TYPE_LAST and bool(sel[5][PA_TYPE] & self.PA_TYPE_FREE) is False:
 				self["PixmapRed"].setPixmapNum(1)
 				self["LabelRed"].setText(_("delete"))
 			else:
@@ -387,7 +387,7 @@ class Cpart(Screen):
 
 	def KeyRed(self):
 		sel = self["list"].getCurrent()
-		if sel and sel[1] and sel[5][PA_TYPE] & self.PA_TYPE_LAST and bool(sel[5][PA_TYPE] & self.PA_TYPE_FREE) == False:
+		if sel and sel[1] and sel[5][PA_TYPE] & self.PA_TYPE_LAST and bool(sel[5][PA_TYPE] & self.PA_TYPE_FREE) is False:
 			try:
 				self.__new_part_list.remove(sel[5])  # aktuelle part löschen
 				for x in self.__new_part_list:
@@ -473,7 +473,7 @@ class Cpart(Screen):
 		#welche parts sollen gelöscht werden
 		for x in range(len(self.__old_part_list)):
 			if self.__old_part_list[x][LIST_TYPE] == LIST_TYPE_PAR:
-				if bool(self.__old_part_list[x][PA_TYPE] & self.PA_TYPE_FREE) == False:
+				if bool(self.__old_part_list[x][PA_TYPE] & self.PA_TYPE_FREE) is False:
 					if len(self.__new_part_list) > x:
 						if self.__old_part_list[x][PA_SIZE] != self.__new_part_list[x][PA_SIZE]:
 							#print self.__old_part_list[x], self.__new_part_list[x]
@@ -484,8 +484,8 @@ class Cpart(Screen):
 		#welche parts sollen erstellt werden
 		for x in range(len(self.__new_part_list)):
 			if self.__new_part_list[x][LIST_TYPE] == LIST_TYPE_PAR:
-				if bool(self.__new_part_list[x][PA_TYPE] & self.PA_TYPE_FREE) == False:
-					if len(self.__old_part_list) > x and bool(self.__old_part_list[x][PA_TYPE] & self.PA_TYPE_FREE) == False:
+				if bool(self.__new_part_list[x][PA_TYPE] & self.PA_TYPE_FREE) is False:
+					if len(self.__old_part_list) > x and bool(self.__old_part_list[x][PA_TYPE] & self.PA_TYPE_FREE) is False:
 						if self.__new_part_list[x][PA_SIZE] != self.__old_part_list[x][PA_SIZE]:
 							#print self.__new_part_list[x], self.__old_part_list[x]
 							self.__addPart2Comlist(self.__comlist, self.__new_part_list[x])
@@ -566,7 +566,7 @@ class Cpartexe(Screen):
 		for x in self.mountlist:
 			dev = self.__getPartitionUUID(x)
 			if dev is not None:
-				if os_path.exists("/media/" + dev[1]) == False:
+				if os_path.exists("/media/" + dev[1]) is False:
 					createDir("/media/" + dev[1], True)
 				cmd = "mount %s /media/%s" % (dev[0], dev[1])
 				myExecute(cmd, None)

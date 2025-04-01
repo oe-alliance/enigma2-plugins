@@ -86,7 +86,7 @@ class AutoMountManager(Screen):
 		self.close()
 
 	def keyOK(self, returnValue=None):
-		if returnValue == None:
+		if returnValue is None:
 			returnValue = self["config"].getCurrent()[1]
 			if returnValue == "add":
 				self.addMount()

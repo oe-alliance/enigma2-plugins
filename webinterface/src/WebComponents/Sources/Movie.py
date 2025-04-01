@@ -59,7 +59,7 @@ class Movie(Source):
 				if not offline.deleteFromDisk(0):
 					result = True
 
-			if result == False:
+			if result is False:
 				return (result, _("Could not delete Movie '%s'") % name)
 			else:
 				return (result, _("Movie '%s' deleted") % name)

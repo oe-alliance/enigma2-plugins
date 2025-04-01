@@ -146,9 +146,9 @@ class EIBObject(object):
 	def setValue(self, val):
 		if self.config_element:
 			if self.object_type == EIB_SWITCH:
-				if val == "off" or val == "down" or val == 0 or val == False:
+				if val == "off" or val == "down" or val == 0 or val is False:
 					self.config_element.setValue(False)
-				if val == "on" or val == "up" or val == 1 or val == True:
+				if val == "on" or val == "up" or val == 1 or val is True:
 					self.config_element.setValue(True)
 			else:
 				try:
@@ -174,9 +174,9 @@ class EIBObject(object):
 
 	def getKNXvalue(self):
 		value = self.value
-		if isinstance(value, bool) and value == True:
+		if isinstance(value, bool) and value is True:
 			return "on"
-		elif isinstance(value, bool) and value == False:
+		elif isinstance(value, bool) and value is False:
 			return "off"
 		else:
 			return str(value)
@@ -284,7 +284,7 @@ class EIBObjects(object):
 										elif key == "value":
 											value = item.nodeValue
 											i += 1
-										if object_id and value != None and object_id in self.ids:
+										if object_id and value is not None and object_id in self.ids:
 											EIBObject = self.ids[object_id]
 											EIBObject.value = value
 										if config.eib.debug.value:
@@ -445,7 +445,7 @@ class EIBoxZoneScreen(ConfigListScreen, Screen):
 			return None
 
 	def moveBorder(self, direction=None):
-		if direction != None:
+		if direction is not None:
 			for EIB_object in self.EIB_objects:
 				if EIB_object.object_type in (EIB_SWITCH, EIB_DIMMER, EIB_GOTO, EIB_MULTISWITCH):
 					self[EIB_object.object_id].instance.setBorderWidth(0)
@@ -468,7 +468,7 @@ class EIBoxZoneScreen(ConfigListScreen, Screen):
 
 	def setWindowTitle(self, status):
 		self.setup_title = "E.I.B.ox %s " % self.EIB_objects.zone_name
-		if status == True:
+		if status is True:
 			self.setup_title += _("(online)")
 		else:
 			self.setup_title += _("(offline!)")
@@ -602,7 +602,7 @@ class EIBox(ConfigListScreen, Screen):
 								if config.eib.debug.value:
 									print("[loadXML] new EIB_zone", zone_id, zone_name, zone_img, self.EIB_zones[zone_id])
 									self.xmlGetZoneNode(subnode, zone_id)
-								if self.gotoZone == None:
+								if self.gotoZone is None:
 									self.gotoZone = zone_id
 									#self.EIB_zones[zone_id].EIBreadAll()
 								if node.tagName == 'settings':

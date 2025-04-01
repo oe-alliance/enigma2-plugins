@@ -296,7 +296,7 @@ class MovieList(GUIComponent):
         return res
 
     def connectSelChanged(self, fnc):
-        if not fnc in self.onSelectionChanged:
+        if fnc not in self.onSelectionChanged:
             self.onSelectionChanged.append(fnc)
 
     def disconnectSelChanged(self, fnc):
@@ -923,7 +923,7 @@ class MovieList(GUIComponent):
 
             if self.filter_description:
                 descr = info.getInfoString(serviceref, iServiceInformation.sDescription)
-                if not self.filter_description.lower() in str(descr).lower():
+                if self.filter_description.lower() not in str(descr).lower():
                     continue
 
             # convert space-seperated list of tags into a set
@@ -1203,7 +1203,7 @@ class MovieList(GUIComponent):
     def setAccessRestriction(self, access=None):
         service = self.getCurrent()
         if service:
-            clear = access == None
+            clear = access is None
             if len(self.multiSelection) > 0:
                 for service in self.multiSelection:
                     accessRestriction.setToService(service.getPath(), access, clear)

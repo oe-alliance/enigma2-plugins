@@ -460,7 +460,7 @@ class Merlin_PGII(Screen):
 		return self["prg_list"].getSelectionIndex() + (self.ActiveEPG - 1)
 
 	def ZapTo(self):
-		if (self.getActivePrg() > self.chCount) or (self.srvList == None):
+		if (self.getActivePrg() > self.chCount) or (self.srvList is None):
 			return
 		CurrentPrg = self.myServices[self.getActivePrg()]
 		CurrentBqt = self.myBqts[self.getActivePrg()]
@@ -475,7 +475,7 @@ class Merlin_PGII(Screen):
 		self.close()
 
 	def ZapForRefresh(self):
-		if (self.getActivePrg() > self.chCount) or (self.srvList == None):
+		if (self.getActivePrg() > self.chCount) or (self.srvList is None):
 			return
 		CurrentPrg = self.myServices[self.getActivePrg()]
 		myService = ServiceReference(CurrentPrg[0])
@@ -851,7 +851,7 @@ class Merlin_PGd(Screen):
 			self.session.open(EventViewSimple, event, service)
 
 	def ZapTo(self):
-		if self.srvList == None:
+		if self.srvList is None:
 			return
 		CurrentPrg = self.myServices[self["prg_list"].getSelectionIndex()]
 		CurrentBqt = self.myBqts[self["prg_list"].getSelectionIndex()]
@@ -866,7 +866,7 @@ class Merlin_PGd(Screen):
 		self.close()
 
 	def ZapForRefresh(self):
-		if self.srvList == None:
+		if self.srvList is None:
 			return
 		CurrentPrg = self.myServices[self["prg_list"].getSelectionIndex()]
 		myService = ServiceReference(CurrentPrg[0])

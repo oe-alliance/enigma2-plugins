@@ -209,7 +209,7 @@ class EpgCenterList(GUIComponent):
 		border = int(config.plugins.merlinEpgCenter.listItemHeight.value) / 2
 		percent = 0
 
-		if begin != None and duration != None:
+		if begin is not None and duration is not None:
 			timeString = strftime("%H:%M", localtime(begin)) + "-" + strftime("%H:%M", localtime(begin + duration))
 			now = int(time())
 			if now > begin:
@@ -296,7 +296,7 @@ class EpgCenterList(GUIComponent):
 
 		if outdated:
 			textColor = progColor
-		elif self.epgList != None:
+		elif self.epgList is not None:
 			textColor = self.epgList.getColorEventAvailable(sRef, begin, duration)
 		else:
 			textColor = None
@@ -415,7 +415,7 @@ class EpgCenterList(GUIComponent):
 				res.append((eListboxPythonMultiContent.TYPE_TEXT, offsetLeft, 0, width, self.itemHeight, 1, RT_HALIGN_CENTER | RT_VALIGN_CENTER, timeString, textColor))
 			offsetLeft = offsetLeft + width + columnSpace
 
-		if begin != None and duration != None:
+		if begin is not None and duration is not None:
 			(timerPixmaps, zapPixmaps, isRunning) = self.getTimerPixmapsForEntry(sRef, eventid, begin, duration)
 		else:
 			timerPixmaps = 0
@@ -675,7 +675,7 @@ class EpgCenterList(GUIComponent):
 		if self.list is not None:
 			if config.plugins.merlinEpgCenter.limitSearchToBouquetServices.value:
 				for item in self.list[:]:
-					if not item[2] in EpgCenterList.allServicesNameDict:
+					if item[2] not in EpgCenterList.allServicesNameDict:
 						self.list.remove(item)
 
 			if self.listStyle == STYLE_SINGLE_LINE:
@@ -688,14 +688,14 @@ class EpgCenterList(GUIComponent):
 		self.mode = mode
 		self.similarShown = False
 
-		if searchString == None:
+		if searchString is None:
 			self.list = []
 		else:
 			searchString = searchString.decode('utf-8').encode("iso-8859-1", "replace")
 			self.list = self.epgcache.search(('0IRBDTSE', 1024, eEPGCache.PARTIAL_TITLE_SEARCH, searchString, eEPGCache.NO_CASE_CHECK)) or []
 			if config.plugins.merlinEpgCenter.limitSearchToBouquetServices.value:
 				for item in self.list[:]:
-					if not item[2] in EpgCenterList.allServicesNameDict:
+					if item[2] not in EpgCenterList.allServicesNameDict:
 						self.list.remove(item)
 			self.list.sort(key=lambda x: x[3])  # sort by time
 
@@ -707,7 +707,7 @@ class EpgCenterList(GUIComponent):
 	def getServiceList(bouquet, stime=-1, sRefOnly=False):
 		services = []
 		servicelist = eServiceCenter.getInstance().list(bouquet)
-		if not servicelist is None:
+		if servicelist is not None:
 			while True:
 				service = servicelist.getNext()
 				if not service.valid():  # check if end of list
@@ -741,7 +741,7 @@ class EpgCenterList(GUIComponent):
 		totalServices = 0  # the number of services in all bouquets
 		for bouquetEntry in EpgCenterList.bouquetList:
 			servicelist = eServiceCenter.getInstance().list(bouquetEntry[1])
-			if not servicelist is None:
+			if servicelist is not None:
 				numServices = 0
 				while True:
 					service = servicelist.getNext()

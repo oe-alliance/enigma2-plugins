@@ -81,7 +81,7 @@ class AutoMount():
 						data['mountusing'] = enc('autofs')
 						data['mounttype'] = enc('nfs')
 						data['active'] = getValue(mount.findall("active"), False)
-						if data["active"] == 'True' or data["active"] == True:
+						if data["active"] == 'True' or data["active"] is True:
 							self.activeMountsCounter += 1
 						data['hdd_replacement'] = getValue(mount.findall("hdd_replacement"), "False")
 						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0")
@@ -98,7 +98,7 @@ class AutoMount():
 						data['mountusing'] = enc('autofs')
 						data['mounttype'] = enc('cifs')
 						data['active'] = getValue(mount.findall("active"), False)
-						if data["active"] == 'True' or data["active"] == True:
+						if data["active"] == 'True' or data["active"] is True:
 							self.activeMountsCounter += 1
 						data['hdd_replacement'] = getValue(mount.findall("hdd_replacement"), "False")
 						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0")
@@ -120,7 +120,7 @@ class AutoMount():
 						data['mountusing'] = enc('fstab')
 						data['mounttype'] = enc('nfs')
 						data['active'] = getValue(mount.findall("active"), False)
-						if data["active"] == 'True' or data["active"] == True:
+						if data["active"] == 'True' or data["active"] is True:
 							self.activeMountsCounter += 1
 						data['hdd_replacement'] = getValue(mount.findall("hdd_replacement"), "False")
 						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0")
@@ -137,7 +137,7 @@ class AutoMount():
 						data['mountusing'] = enc('fstab')
 						data['mounttype'] = enc('cifs')
 						data['active'] = getValue(mount.findall("active"), False)
-						if data["active"] == 'True' or data["active"] == True:
+						if data["active"] == 'True' or data["active"] is True:
 							self.activeMountsCounter += 1
 						data['hdd_replacement'] = getValue(mount.findall("hdd_replacement"), "False")
 						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0")
@@ -159,7 +159,7 @@ class AutoMount():
 						data['mountusing'] = enc('enigma2')
 						data['mounttype'] = enc('nfs')
 						data['active'] = getValue(mount.findall("active"), False)
-						if data["active"] == 'True' or data["active"] == True:
+						if data["active"] == 'True' or data["active"] is True:
 							self.activeMountsCounter += 1
 						data['hdd_replacement'] = getValue(mount.findall("hdd_replacement"), "False")
 						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0")
@@ -177,7 +177,7 @@ class AutoMount():
 						data['mountusing'] = enc('enigma2')
 						data['mounttype'] = enc('cifs')
 						data['active'] = getValue(mount.findall("active"), False)
-						if data["active"] == 'True' or data["active"] == True:
+						if data["active"] == 'True' or data["active"] is True:
 							self.activeMountsCounter += 1
 						data['hdd_replacement'] = getValue(mount.findall("hdd_replacement"), "False")
 						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0")
@@ -198,7 +198,7 @@ class AutoMount():
 						data['mountusing'] = enc('old_enigma2')
 						data['mounttype'] = enc('nfs')
 						data['active'] = getValue(mount.findall("active"), False)
-						if data["active"] == 'True' or data["active"] == True:
+						if data["active"] == 'True' or data["active"] is True:
 							self.activeMountsCounter += 1
 						data['hdd_replacement'] = getValue(mount.findall("hdd_replacement"), "False")
 						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0")
@@ -215,7 +215,7 @@ class AutoMount():
 						data['mountusing'] = enc('old_enigma2')
 						data['mounttype'] = enc('cifs')
 						data['active'] = getValue(mount.findall("active"), False)
-						if data["active"] == 'True' or data["active"] == True:
+						if data["active"] == 'True' or data["active"] is True:
 							self.activeMountsCounter += 1
 						data['hdd_replacement'] = getValue(mount.findall("hdd_replacement"), "False")
 						data['ip'] = getValue(mount.findall("ip"), "192.168.0.0")
@@ -483,7 +483,7 @@ class AutoMount():
 
 			_list += self.generateMountXML(sharedata)
 			if mountusing == 'autofs':
-				if sharedata['active'] == True or sharedata['active'] == 'True':
+				if sharedata['active'] is True or sharedata['active'] == 'True':
 					out = open('/etc/auto.network', 'a')
 					if mounttype == 'nfs':
 						line = sharedata['sharename'] + ' -fstype=' + mounttype + ',' + self.sanitizeOptions(sharedata['options'], autofs=True) + ' ' + sharedata['ip'] + ':/' + sharedata['sharedir'] + '\n'
@@ -495,7 +495,7 @@ class AutoMount():
 					out.write(line)
 					out.close()
 			elif mountusing == 'fstab':
-				if sharedata['active'] == True or sharedata['active'] == 'True':
+				if sharedata['active'] is True or sharedata['active'] == 'True':
 					out = open('/etc/fstab', 'a')
 					if sharedata['mounttype'] == 'nfs':
 						line = sharedata['ip'] + ':/' + sharedata['sharedir'] + '\t' + path + '\tnfs\t_netdev,' + self.sanitizeOptions(sharedata['options'], fstab=True) + '\t0 0\n'

@@ -60,9 +60,9 @@ class AC3delay:
         # DM800, DM8000 and DM500HD directly activate the delay after using "setAC3Delay" and "setPCMDelay", they don't need the service restart
         if self.activateTimer.isActive:
             self.activateTimer.stop()
-        if self.bHasToRestartService == True:
+        if self.bHasToRestartService is True:
             bInitialized = False
-            if self.iService == None:
+            if self.iService is None:
                 self.initAudio()
                 bInitialized = True
             if self.iServiceReference is not None:
@@ -98,7 +98,7 @@ class AC3delay:
 
     def getSystemDelay(self, sAudio):
         bInitialized = False
-        if self.iService == None:
+        if self.iService is None:
             self.initAudio()
             bInitialized = True
         iDelay = 0
@@ -111,7 +111,7 @@ class AC3delay:
                 iDelay = config.av.generalAC3delay.getValue()
             else:
                 iDelay = config.av.generalPCMdelay.getValue()
-        if bInitialized == True:
+        if bInitialized is True:
             self.deleteAudio()
         if iDelay == -1:
             iDelay = 0
@@ -119,7 +119,7 @@ class AC3delay:
 
     def setSystemDelay(self, sAudio, iDelay, bDelayStart):
         bInitialized = False
-        if self.iService == None:
+        if self.iService is None:
             self.initAudio()
             bInitialized = True
         if self.iAudioDelay is not None:
@@ -140,16 +140,16 @@ class AC3delay:
                 config.av.generalPCMdelay.save()
                 #Setting the global delay does not activate it, so now we call setPCMDelay to activate the new delay..
                 self.iAudioDelay.setPCMDelay(self.systemDelay[PCM])
-        if bInitialized == True:
+        if bInitialized is True:
             self.deleteAudio()
-        if bDelayStart == True:
+        if bDelayStart is True:
             self.delayedActivateDelay()
         else:
             self.activateDelay()
 
     def getAudioInformation(self):
         bInitialized = False
-        if self.iService == None:
+        if self.iService is None:
             self.initAudio()
             bInitialized = True
 
@@ -197,5 +197,5 @@ class AC3delay:
         for sAudio in AC3PCM:
             self.systemDelay[sAudio] = self.getSystemDelay(sAudio)
         del oAudioTracks
-        if bInitialized == True:
+        if bInitialized is True:
             self.deleteAudio()

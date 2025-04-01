@@ -179,7 +179,7 @@ class MovieLibrary(dict, SortProvider):
                         continue
                     if filter_description:
                         descr = i.info.getInfoString(i.serviceref, iServiceInformation.sDescription)
-                        if not filter_description.lower() in str(descr).lower():
+                        if filter_description.lower() not in str(descr).lower():
                             continue
                     l1.append((i,))
                     movie_count += 1
@@ -216,7 +216,7 @@ class MovieLibrary(dict, SortProvider):
                     continue
                 if filter_description:
                     descr = i.info.getInfoString(i.serviceref, iServiceInformation.sDescription)
-                    if not filter_description.lower() in str(descr).lower():
+                    if filter_description.lower() not in str(descr).lower():
                         continue
                 l1.append((i,))
 

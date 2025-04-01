@@ -395,7 +395,7 @@ class PictureViewer(Screen):
 				self.setTitle(selection[0])
 				self.filelist.descent()
 			else:
-				if selection[1] == True:  # isDir
+				if selection[1] is True:  # isDir
 					pass
 				else:
 					print("[" + myname + "] file selected ", selection[0])

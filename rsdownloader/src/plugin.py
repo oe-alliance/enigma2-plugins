@@ -420,7 +420,7 @@ class RSDownload:
 		self.checkTimer.start(10000, 1)
 
 	def doCheckTimer(self):
-		if (self.size == 0) or (self.progress < 100) or ((config.plugins.RSDownloader.mark_small_as_failed.value == True) and (self.size < 1)):
+		if (self.size == 0) or (self.progress < 100) or ((config.plugins.RSDownloader.mark_small_as_failed.value is True) and (self.size < 1)):
 			self.status = _("Failed")
 			if config.plugins.RSDownloader.autorestart_failed.value:
 				self.restartFailedTimer = eTimer()
@@ -515,7 +515,7 @@ class RS:
 		self.checkTimer.start(5000 * 60, False)
 
 	def mayDownload(self):
-		if config.plugins.RSDownloader.onoff.value == False:
+		if config.plugins.RSDownloader.onoff.value is False:
 			writeLog("RS Downloader is turned off...")
 			return False
 		elif config.plugins.RSDownloader.ignore_time.value:
@@ -525,19 +525,19 @@ class RS:
 			end = config.plugins.RSDownloader.end_time.value
 			t = localtime()
 			weekday = t[6]
-			if weekday == 0 and config.plugins.RSDownloader.download_monday.value == False:
+			if weekday == 0 and config.plugins.RSDownloader.download_monday.value is False:
 				return False
-			elif weekday == 1 and config.plugins.RSDownloader.download_tuesday.value == False:
+			elif weekday == 1 and config.plugins.RSDownloader.download_tuesday.value is False:
 				return False
-			elif weekday == 2 and config.plugins.RSDownloader.download_wednesday.value == False:
+			elif weekday == 2 and config.plugins.RSDownloader.download_wednesday.value is False:
 				return False
-			elif weekday == 3 and config.plugins.RSDownloader.download_thursday.value == False:
+			elif weekday == 3 and config.plugins.RSDownloader.download_thursday.value is False:
 				return False
-			elif weekday == 4 and config.plugins.RSDownloader.download_friday.value == False:
+			elif weekday == 4 and config.plugins.RSDownloader.download_friday.value is False:
 				return False
-			elif weekday == 5 and config.plugins.RSDownloader.download_saturday.value == False:
+			elif weekday == 5 and config.plugins.RSDownloader.download_saturday.value is False:
 				return False
-			elif weekday == 6 and config.plugins.RSDownloader.download_sunday.value == False:
+			elif weekday == 6 and config.plugins.RSDownloader.download_sunday.value is False:
 				return False
 			else:
 				hour_now = t[3]
@@ -575,17 +575,17 @@ class RS:
 		return allDone
 
 	def startDownloading(self):
-		if self.mayDownload() == True:
-			if self.allDownloadsFinished() == True:
+		if self.mayDownload() is True:
+			if self.allDownloadsFinished() is True:
 				self.readLists()
 			downloadCount = 0
 			for download in self.downloads:
-				if download.downloading == True:
+				if download.downloading is True:
 					downloadCount += 1  # Count the downloaded files
 			# Get next download
 			download = None
 			for next in self.downloads:
-				if next.downloading == False and next.status.startswith(_("Waiting")):
+				if next.downloading is False and next.status.startswith(_("Waiting")):
 					download = next
 					break
 			if download:
@@ -602,10 +602,10 @@ class RS:
 						onlyOneAllowed = False
 				if onlyOneAllowed and downloadCount == 0:
 					download.start()  # Start only first download in the list
-				elif onlyOneAllowed == False:
+				elif onlyOneAllowed is False:
 					mayDownloadCount = config.plugins.RSDownloader.count_downloads.value - downloadCount
 					for download in self.downloads:
-						if download.downloading == False:
+						if download.downloading is False:
 							if mayDownloadCount > 0 and download.status == _("Waiting"):
 								download.start()
 								mayDownloadCount -= 1
@@ -647,7 +647,7 @@ class RS:
 					for l in f:
 						if l.startswith("http://"):
 							if added_downloads < config.plugins.RSDownloader.count_maximal_downloads.value:
-								if (self.addDownload(l.replace("\n", "").replace("\r", ""))) == True:
+								if (self.addDownload(l.replace("\n", "").replace("\r", ""))) is True:
 									count += 1
 									added_downloads += 1
 							else:
@@ -1173,14 +1173,14 @@ class Unrar:
 	def getFirstEmptyList(self):
 		entry = None
 		for x in self.list:
-			if (x.allDownloaded() == True):
+			if (x.allDownloaded() is True):
 				entry = x
 				break
 		return entry
 
 	def startUnrar(self):
 		ret = self.isWorking()
-		if ret == False:
+		if ret is False:
 			entry = self.getFirstEmptyList()
 			if entry:
 				if entry.command:
@@ -1270,7 +1270,7 @@ class UnrarPackageSelector(ChangedScreen):
 				for x in unrar.list:
 					if x.name == name:
 						added = True
-				if added == False:
+				if added is False:
 					list.append(name)
 		list.sort()
 		self["list"].setList(list)

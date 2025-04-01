@@ -39,7 +39,7 @@ config.movielist.sftitle_episode_separator = ConfigText(default=_x(": "))
 def setPreferredTagEditor(te):
 	global preferredTagEditor
 	try:
-		if preferredTagEditor == None:
+		if preferredTagEditor is None:
 			preferredTagEditor = te
 			print("Preferred tag editor changed to ", preferredTagEditor)
 		else:
@@ -162,7 +162,7 @@ class MovieContextMenu(Screen):
 			# simulate first
 			if not offline.deleteFromDisk(1):
 				result = True
-		if result == True:
+		if result is True:
 			self.session.openWithCallback(self.deleteConfirmed, MessageBox, _("Do you really want to delete %s\n%s?") % (name, dsc or ""))
 		else:
 			self.session.openWithCallback(self.close, MessageBox, _("You cannot delete this!"), MessageBox.TYPE_ERROR)
@@ -190,7 +190,7 @@ class MovieContextMenu(Screen):
 			if not offline.deleteFromDisk(0):
 				result = True
 
-		if result == False:
+		if result is False:
 			self.session.openWithCallback(self.close, MessageBox, _("Delete failed!"), MessageBox.TYPE_ERROR)
 		else:
 			self.csel["list"].removeService(self.service)
@@ -489,7 +489,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo):
 	def showTagsN(self, tagele):
 		if not self.tags:
 			self.showTagWarning()
-		elif not tagele or (self.selected_tags and tagele.value in self.selected_tags) or not tagele.value in self.tags:
+		elif not tagele or (self.selected_tags and tagele.value in self.selected_tags) or tagele.value not in self.tags:
 			self.showTagsMenu(tagele)
 		else:
 			self.selected_tags_ele = tagele

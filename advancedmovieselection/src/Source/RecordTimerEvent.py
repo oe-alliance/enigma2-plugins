@@ -31,11 +31,11 @@ class RecordTimerEvent():
     def __init__(self):
         self.on_state_changed = []
         import NavigationInstance
-        if not self.timerStateChanged in NavigationInstance.instance.RecordTimer.on_state_change:
+        if self.timerStateChanged not in NavigationInstance.instance.RecordTimer.on_state_change:
             NavigationInstance.instance.RecordTimer.on_state_change.append(self.timerStateChanged)
 
     def appendCallback(self, callback):
-        if not callback in self.on_state_changed:
+        if callback not in self.on_state_changed:
             self.on_state_changed.append(callback)
 
     def removeCallback(self, callback):

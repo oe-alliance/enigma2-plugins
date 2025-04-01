@@ -258,7 +258,7 @@ class MC_VideoPlayer(Screen, HelpableScreen, TMDB):
 
 	def up(self):
 		self["filelist"].up()
-		if self.mvion == True:
+		if self.mvion is True:
 			self.showiframe.finishStillPicture()
 		if self["filelist"].canDescent():
 			return
@@ -267,7 +267,7 @@ class MC_VideoPlayer(Screen, HelpableScreen, TMDB):
 
 	def down(self):
 		self["filelist"].down()
-		if self.mvion == True:
+		if self.mvion is True:
 			self.showiframe.finishStillPicture()
 		if self["filelist"].canDescent():
 			return
@@ -276,21 +276,21 @@ class MC_VideoPlayer(Screen, HelpableScreen, TMDB):
 
 	def leftUp(self):
 		self["filelist"].pageUp()
-		if self.mvion == True:
+		if self.mvion is True:
 			self.showiframe.finishStillPicture()
 		if self["filelist"].canDescent():
 			return
 		else:
-			if self.mvion == True:
+			if self.mvion is True:
 				self.showiframe.finishStillPicture()
 			self.cover()
 
 	def rightDown(self):
 		self["filelist"].pageDown()
-		if self.mvion == True:
+		if self.mvion is True:
 			self.showiframe.finishStillPicture()
 		if self["filelist"].canDescent():
-			if self.mvion == True:
+			if self.mvion is True:
 				self.showiframe.finishStillPicture()
 		else:
 			self.cover()
@@ -450,7 +450,7 @@ class MC_VideoPlayer(Screen, HelpableScreen, TMDB):
 			self.showiframe.showStillpicture(covername)
 			self.mvion = True
 		else:
-			if self.mvion == True:
+			if self.mvion is True:
 				self.showiframe.showStillpicture("/usr/share/enigma2/black.mvi")
 				self.mvion = False
 

@@ -53,7 +53,7 @@ class ClientSetupList(GUIComponent):
         self.staticIP = ip_address
 
     def connectSelChanged(self, fnc):
-        if not fnc in self.onSelectionChanged:
+        if fnc not in self.onSelectionChanged:
             self.onSelectionChanged.append(fnc)
 
     def disconnectSelChanged(self, fnc):
@@ -186,7 +186,7 @@ class ClientSetup(ConfigListScreen, Screen):
         self.list.reload()
         self.configList = []
         ConfigListScreen.__init__(self, self.configList, session=self.session)
-        if not self.showHelp in self["config"].onSelectionChanged:
+        if self.showHelp not in self["config"].onSelectionChanged:
             self["config"].onSelectionChanged.append(self.showHelp)
         self.onShown.append(self.setWindowTitle)
 

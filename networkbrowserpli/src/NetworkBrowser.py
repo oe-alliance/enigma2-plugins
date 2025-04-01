@@ -187,7 +187,7 @@ class NetworkBrowser(Screen):
 		self.session.open(AutoMountManager, None, self.skin_path)
 
 	def keyYellow(self):
-		if (os_path.exists(self.cache_file) == True):
+		if (os_path.exists(self.cache_file) is True):
 			remove(self.cache_file)
 		self.startRun()
 
@@ -517,7 +517,7 @@ class NetworkBrowser(Screen):
 		sel = self["list"].getCurrent()
 		selectedhost = sel[0][2]
 		selectedhostname = sel[0][1]
-		if (ret == True):
+		if (ret is True):
 			self.session.openWithCallback(self.UserDialogClosed, UserDialog, self.skin_path, selectedhostname.strip())
 		else:
 			if sel[0][0] == 'host':  # host entry selected
@@ -584,7 +584,7 @@ class NetworkBrowser(Screen):
 				self.session.openWithCallback(self.MountEditClosed, AutoMountEdit, self.skin_path, data)
 
 	def MountEditClosed(self, returnValue=None):
-		if returnValue == None:
+		if returnValue is None:
 			self.updateNetworkList()
 
 

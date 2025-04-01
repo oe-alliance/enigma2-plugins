@@ -668,7 +668,7 @@ class TeleText(Screen):
     bottom = pos[3]
     mode = config.plugins.TeleText.splitting_mode.value
 
-    if config.plugins.TeleText.textOnly.value == True:
+    if config.plugins.TeleText.textOnly.value is True:
       left = pos[0]
       width = right - left
       top = pos[1]
@@ -929,7 +929,7 @@ class TeleText(Screen):
 
   def readTxtPids(self):
     log("reading data(%s)" % self.read_data)
-    if self.read_data == False:
+    if self.read_data is False:
       return
 
     # read all txtpids and channels from transponder
@@ -979,7 +979,7 @@ class TeleText(Screen):
           self.fav_list.append(page)
           if page == 100:
             hasStart = True
-    if hasStart == False:
+    if hasStart is False:
       self.fav_list.append(100)
     log("favorites: %s" % self.fav_list)
 
@@ -1282,7 +1282,7 @@ class TeleTextMenu(ConfigListScreen, Screen):
 
   def __layoutFinished(self):
     self.isInitialized = True
-    if not self.selectionChanged in self["config"].onSelectionChanged:
+    if self.selectionChanged not in self["config"].onSelectionChanged:
       self["config"].onSelectionChanged.append(self.selectionChanged)
     self.selectionChanged()
 

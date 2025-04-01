@@ -125,7 +125,7 @@ class TagEditor(Screen):
 
     def joinTags(self, taglist, newtags):
         for tag in newtags:
-            if not tag in taglist:
+            if tag not in taglist:
                 taglist.append(tag)
 
     def setTimerTags(self, timer, tags):
@@ -223,7 +223,7 @@ class TagEditor(Screen):
     def listReplace(self, lst, fr, to=None):
         if fr in lst:
             lst.remove(fr)
-            if to != None and not to in lst:
+            if to is not None and to not in lst:
                 lst.append(to)
                 lst.sort()
         return lst

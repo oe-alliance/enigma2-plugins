@@ -51,7 +51,7 @@ def getDirectories(l, root, hidden=False):
     if not os.path.exists(root):
         print("path not exists:", root)
         return
-    if not root in l:
+    if root not in l:
         l.append(root)
     for entry in os.listdir(root):
         try:
@@ -69,7 +69,7 @@ def getDirectories(l, root, hidden=False):
             bludisc = detectBludiscStructure(dir_path)
             if dvd or bludisc:
                 continue
-            if not dir_path in l:
+            if dir_path not in l:
                 l.append(dir_path)
             getDirectories(l, dir_path, hidden)
         except:
@@ -346,7 +346,7 @@ class MovieScanner():
             print(movie_info)
 
     def addHotplugNotifier(self):
-        if not self.checkAllAvailable in hotplug.notifier:
+        if self.checkAllAvailable not in hotplug.notifier:
             print("add hotplugNotifier")
             hotplug.notifier.append(self.checkAllAvailable)
             hotplug.hotplugChanged()

@@ -220,7 +220,7 @@ def verbose_ping(dest_addr, timeout=2, count=4):
             print("failed. (socket error: '%s')" % e[1])
             break
 
-        if delay == None:
+        if delay is None:
             print("failed. (timeout within %ssec.)" % timeout)
         else:
             delay = delay * 1000

@@ -601,7 +601,7 @@ class VirtualZap(Screen):
 
 	def searchNumberHelper(self, serviceHandler, num, bouquet):
 		servicelist = serviceHandler.list(bouquet)
-		if not servicelist is None:
+		if servicelist is not None:
 			while num:
 				serviceIterator = servicelist.getNext()
 				if not serviceIterator.valid():  # check end of list
@@ -618,14 +618,14 @@ class VirtualZap(Screen):
 		service = None
 		serviceHandler = eServiceCenter.getInstance()
 		bouquetlist = serviceHandler.list(bouquet)
-		if not bouquetlist is None:
+		if bouquetlist is not None:
 			while number:
 				bouquet = bouquetlist.getNext()
 				if not bouquet.valid():  # check end of list
 					break
 				if bouquet.flags & eServiceReference.isDirectory:
 					service, number = self.searchNumberHelper(serviceHandler, number, bouquet)
-		if not service is None:
+		if service is not None:
 			self.setServicelistSelection(bouquet, service)
 		# update infos, no matter if service is none or not
 		self.updateInfos()

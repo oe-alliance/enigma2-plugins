@@ -56,7 +56,7 @@ class MovieInfo():
         return self.name + "\t" + self.path
 
     def createService(self):
-        if self.serviceref == None:
+        if self.serviceref is None:
             self.serviceref = self.s_type(self.type, self.flags, self.path)
             if self.flags & eServiceReference.mustDescent:
                 self.serviceref.setName(self.name)
