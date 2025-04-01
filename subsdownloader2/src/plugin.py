@@ -133,41 +133,41 @@ class SubsDownloaderApplication(Screen):
 		font_size = int(int(0.0174 * Skin_width))
 
 		self.skin = "<screen position=\"center," + str(int(0.078 * Skin_height)) + "\" size=\"" + str(Skin_width) + "," + str(Skin_height) + "\" title= \"Subtitle downloader\" > \
-	        <widget name=\"fileList\" position=\"" + str(widget_name_x_position) + "," + str(1 * widget_name_y_position) + "\" size=\"" + str(widget_name_width) + "," + str(widget_name_height) + "\" scrollbarMode=\"showOnDemand\" /> \
-	        <widget name=\"subsList\" position=\"" + str(widget_name_x_position) + "," + str(2 * widget_name_y_position + 1 * widget_name_height) + "\" size=\"" + str(widget_name_width) + "," + str(widget_name_height) + "\" scrollbarMode=\"showOnDemand\" /> \
-	        <widget name=\"commertialPicture\" position=\"" + str(widget_name_x_position) + "," + str(3 * widget_name_y_position + 2 * widget_name_height) + "\" size=\"" + str(int(0.98 * Skin_width)) + "," + str(widget_name_height) + "\" zPosition=\"1\" alphatest=\"on\" /> \
-	        <widget name=\"serverPicture\" position=\"" + str(widget_source_x_position) + "," + str(widget_name_x_position) + "\" size=\"" + str(int(0.252 * Skin_width)) + "," + str(int(0.0849 * Skin_height)) + "\" zPosition=\"1\" alphatest=\"on\" /> \
-	        <ePixmap pixmap=\"/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/buttons/HD/key_menu.png\" position=\"" + str(widget_source_x_position) + "," + str(widget_source_y_position) + "\" size=\"36,26\" zPosition=\"1\" alphatest=\"on\" /> \
-	        <widget source=\"key_menu\" render=\"Label\" position=\"" + str(widget_source_x_position + 43) + "," + str(widget_source_y_position) + "\" zPosition=\"1\" size=\"" + str(widget_source_x_size) + "," + str(widget_source_y_size) + "\" font=\"Regular;" + str(font_size) + "\" halign=\"left\" valign=\"center\" transparent=\"1\" /> \
-	        <ePixmap pixmap=\"/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/buttons/HD/key_help.png\" position=\"" + str(widget_source_x_position) + "," + str(widget_source_y_position + widget_source_y_size) + "\" size=\"36," + str(widget_source_y_size) + "\" zPosition=\"1\" alphatest=\"on\" /> \
-	        <widget source=\"key_help\" render=\"Label\" position=\"" + str(widget_source_x_position + 43) + "," + str(widget_source_y_position + widget_source_y_size) + "\" zPosition=\"1\" size=\"" + str(widget_source_x_size) + "," + str(widget_source_y_size) + "\" font=\"Regular;" + str(font_size) + "\" halign=\"left\" valign=\"center\" transparent=\"1\" /> \
-	        <ePixmap pixmap=\"/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/buttons/HD/key_text.png\" position=\"" + str(widget_source_x_position) + "," + str(widget_source_y_position + widget_source_y_size * 2) + "\" size=\"36," + str(widget_source_y_size) + "\" zPosition=\"1\" alphatest=\"on\" /> \
-	        <widget source=\"key_text\" render=\"Label\" position=\"" + str(widget_source_x_position + 43) + "," + str(widget_source_y_position + widget_source_y_size * 2) + "\" zPosition=\"1\" size=\"" + str(widget_source_x_size) + "," + str(widget_source_y_size) + "\" font=\"Regular;" + str(font_size) + "\" halign=\"left\" valign=\"center\" transparent=\"1\" /> \
-	        <ePixmap pixmap=\"/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/buttons/HD/key_next.png\" position=\"" + str(widget_source_x_position) + "," + str(widget_source_y_position + widget_source_y_size * 3) + "\" size=\"36," + str(widget_source_y_size) + "\" zPosition=\"1\" alphatest=\"on\" /> \
-	        <widget source=\"key_next\" render=\"Label\" position=\"" + str(widget_source_x_position + 43) + "," + str(widget_source_y_position + widget_source_y_size * 3) + "\" zPosition=\"1\" size=\"" + str(widget_source_x_size) + "," + str(widget_source_y_size) + "\" font=\"Regular;" + str(font_size) + "\" halign=\"left\" valign=\"center\" transparent=\"1\" /> \
-	        <ePixmap pixmap=\"/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/buttons/HD/key_last.png\" position=\"" + str(widget_source_x_position) + "," + str(widget_source_y_position + widget_source_y_size * 4) + "\" size=\"36," + str(widget_source_y_size) + "\" zPosition=\"1\" alphatest=\"on\" /> \
-	        <widget source=\"key_last\" render=\"Label\" position=\"" + str(widget_source_x_position + 43) + "," + str(widget_source_y_position + widget_source_y_size * 4) + "\" zPosition=\"1\" size=\"" + str(widget_source_x_size) + "," + str(widget_source_y_size) + "\" font=\"Regular;" + str(font_size) + "\" halign=\"left\" valign=\"center\" transparent=\"1\" /> \
-	        <ePixmap pixmap=\"/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/buttons/HD/key_info.png\" position=\"" + str(widget_source_x_position) + "," + str(widget_source_y_position + widget_source_y_size * 5) + "\" size=\"36," + str(widget_source_y_size) + "\" zPosition=\"1\" alphatest=\"on\" /> \
-	        <widget source=\"key_info\" render=\"Label\" position=\"" + str(widget_source_x_position + 43) + "," + str(widget_source_y_position + widget_source_y_size * 5) + "\" zPosition=\"1\" size=\"" + str(widget_source_x_size) + "," + str(widget_source_y_size) + "\" font=\"Regular;" + str(font_size) + "\" halign=\"left\" valign=\"center\" transparent=\"1\" /> \
-	        <ePixmap pixmap=\"/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/buttons/HD/key_0.png\" position=\"" + str(widget_source_x_position) + "," + str(widget_source_y_position + widget_source_y_size * 6) + "\" size=\"36," + str(widget_source_y_size) + "\" zPosition=\"1\" alphatest=\"on\" /> \
-	        <widget source=\"key_0\" render=\"Label\" position=\"" + str(widget_source_x_position + 43) + "," + str(widget_source_y_position + widget_source_y_size * 6) + "\" zPosition=\"1\" size=\"" + str(widget_source_x_size) + "," + str(widget_source_y_size) + "\" font=\"Regular;" + str(font_size) + "\" halign=\"left\" valign=\"center\" transparent=\"1\" /> \
-	        <ePixmap pixmap=\"/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/buttons/HD/key_blue.png\" position=\"" + str(widget_source_x_position) + "," + str(widget_source_y_position + widget_source_y_size * 7) + "\" size=\"36," + str(widget_source_y_size) + "\" zPosition=\"1\" alphatest=\"on\" /> \
-		<widget source=\"key_blue\" render=\"Label\" position=\"" + str(widget_source_x_position + 43) + "," + str(widget_source_y_position + widget_source_y_size * 7) + "\" zPosition=\"1\" size=\"" + str(widget_source_x_size) + "," + str(widget_source_y_size) + "\" font=\"Regular;" + str(font_size) + "\" halign=\"left\" valign=\"center\" transparent=\"1\" /> \
-	        </screen>"
+			<widget name=\"fileList\" position=\"" + str(widget_name_x_position) + "," + str(1 * widget_name_y_position) + "\" size=\"" + str(widget_name_width) + "," + str(widget_name_height) + "\" scrollbarMode=\"showOnDemand\" /> \
+			<widget name=\"subsList\" position=\"" + str(widget_name_x_position) + "," + str(2 * widget_name_y_position + 1 * widget_name_height) + "\" size=\"" + str(widget_name_width) + "," + str(widget_name_height) + "\" scrollbarMode=\"showOnDemand\" /> \
+			<widget name=\"commertialPicture\" position=\"" + str(widget_name_x_position) + "," + str(3 * widget_name_y_position + 2 * widget_name_height) + "\" size=\"" + str(int(0.98 * Skin_width)) + "," + str(widget_name_height) + "\" zPosition=\"1\" alphatest=\"on\" /> \
+			<widget name=\"serverPicture\" position=\"" + str(widget_source_x_position) + "," + str(widget_name_x_position) + "\" size=\"" + str(int(0.252 * Skin_width)) + "," + str(int(0.0849 * Skin_height)) + "\" zPosition=\"1\" alphatest=\"on\" /> \
+			<ePixmap pixmap=\"/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/buttons/HD/key_menu.png\" position=\"" + str(widget_source_x_position) + "," + str(widget_source_y_position) + "\" size=\"36,26\" zPosition=\"1\" alphatest=\"on\" /> \
+			<widget source=\"key_menu\" render=\"Label\" position=\"" + str(widget_source_x_position + 43) + "," + str(widget_source_y_position) + "\" zPosition=\"1\" size=\"" + str(widget_source_x_size) + "," + str(widget_source_y_size) + "\" font=\"Regular;" + str(font_size) + "\" halign=\"left\" valign=\"center\" transparent=\"1\" /> \
+			<ePixmap pixmap=\"/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/buttons/HD/key_help.png\" position=\"" + str(widget_source_x_position) + "," + str(widget_source_y_position + widget_source_y_size) + "\" size=\"36," + str(widget_source_y_size) + "\" zPosition=\"1\" alphatest=\"on\" /> \
+			<widget source=\"key_help\" render=\"Label\" position=\"" + str(widget_source_x_position + 43) + "," + str(widget_source_y_position + widget_source_y_size) + "\" zPosition=\"1\" size=\"" + str(widget_source_x_size) + "," + str(widget_source_y_size) + "\" font=\"Regular;" + str(font_size) + "\" halign=\"left\" valign=\"center\" transparent=\"1\" /> \
+			<ePixmap pixmap=\"/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/buttons/HD/key_text.png\" position=\"" + str(widget_source_x_position) + "," + str(widget_source_y_position + widget_source_y_size * 2) + "\" size=\"36," + str(widget_source_y_size) + "\" zPosition=\"1\" alphatest=\"on\" /> \
+			<widget source=\"key_text\" render=\"Label\" position=\"" + str(widget_source_x_position + 43) + "," + str(widget_source_y_position + widget_source_y_size * 2) + "\" zPosition=\"1\" size=\"" + str(widget_source_x_size) + "," + str(widget_source_y_size) + "\" font=\"Regular;" + str(font_size) + "\" halign=\"left\" valign=\"center\" transparent=\"1\" /> \
+			<ePixmap pixmap=\"/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/buttons/HD/key_next.png\" position=\"" + str(widget_source_x_position) + "," + str(widget_source_y_position + widget_source_y_size * 3) + "\" size=\"36," + str(widget_source_y_size) + "\" zPosition=\"1\" alphatest=\"on\" /> \
+			<widget source=\"key_next\" render=\"Label\" position=\"" + str(widget_source_x_position + 43) + "," + str(widget_source_y_position + widget_source_y_size * 3) + "\" zPosition=\"1\" size=\"" + str(widget_source_x_size) + "," + str(widget_source_y_size) + "\" font=\"Regular;" + str(font_size) + "\" halign=\"left\" valign=\"center\" transparent=\"1\" /> \
+			<ePixmap pixmap=\"/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/buttons/HD/key_last.png\" position=\"" + str(widget_source_x_position) + "," + str(widget_source_y_position + widget_source_y_size * 4) + "\" size=\"36," + str(widget_source_y_size) + "\" zPosition=\"1\" alphatest=\"on\" /> \
+			<widget source=\"key_last\" render=\"Label\" position=\"" + str(widget_source_x_position + 43) + "," + str(widget_source_y_position + widget_source_y_size * 4) + "\" zPosition=\"1\" size=\"" + str(widget_source_x_size) + "," + str(widget_source_y_size) + "\" font=\"Regular;" + str(font_size) + "\" halign=\"left\" valign=\"center\" transparent=\"1\" /> \
+			<ePixmap pixmap=\"/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/buttons/HD/key_info.png\" position=\"" + str(widget_source_x_position) + "," + str(widget_source_y_position + widget_source_y_size * 5) + "\" size=\"36," + str(widget_source_y_size) + "\" zPosition=\"1\" alphatest=\"on\" /> \
+			<widget source=\"key_info\" render=\"Label\" position=\"" + str(widget_source_x_position + 43) + "," + str(widget_source_y_position + widget_source_y_size * 5) + "\" zPosition=\"1\" size=\"" + str(widget_source_x_size) + "," + str(widget_source_y_size) + "\" font=\"Regular;" + str(font_size) + "\" halign=\"left\" valign=\"center\" transparent=\"1\" /> \
+			<ePixmap pixmap=\"/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/buttons/HD/key_0.png\" position=\"" + str(widget_source_x_position) + "," + str(widget_source_y_position + widget_source_y_size * 6) + "\" size=\"36," + str(widget_source_y_size) + "\" zPosition=\"1\" alphatest=\"on\" /> \
+			<widget source=\"key_0\" render=\"Label\" position=\"" + str(widget_source_x_position + 43) + "," + str(widget_source_y_position + widget_source_y_size * 6) + "\" zPosition=\"1\" size=\"" + str(widget_source_x_size) + "," + str(widget_source_y_size) + "\" font=\"Regular;" + str(font_size) + "\" halign=\"left\" valign=\"center\" transparent=\"1\" /> \
+			<ePixmap pixmap=\"/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/buttons/HD/key_blue.png\" position=\"" + str(widget_source_x_position) + "," + str(widget_source_y_position + widget_source_y_size * 7) + "\" size=\"36," + str(widget_source_y_size) + "\" zPosition=\"1\" alphatest=\"on\" /> \
+			<widget source=\"key_blue\" render=\"Label\" position=\"" + str(widget_source_x_position + 43) + "," + str(widget_source_y_position + widget_source_y_size * 7) + "\" zPosition=\"1\" size=\"" + str(widget_source_x_size) + "," + str(widget_source_y_size) + "\" font=\"Regular;" + str(font_size) + "\" halign=\"left\" valign=\"center\" transparent=\"1\" /> \
+		</screen>"
 
 		os.system('mkdir /tmp/SubsDownloader_cache')
 		self.subsListDownloaded = 0
 		self.localConvertion = False
 		self.MyBox = HardwareInfo().get_device_name()
 		self.textEXTENSIONS = {
-		        "srt": "text",
-		        "txt": "text",
-		        "sub": "text",
-		        "nfo": "text",
-		        "cuts": "movie_timer",
-		        "zip": "package",
-		        "rar": "package"
-		        }
+			"srt": "text",
+			"txt": "text",
+			"sub": "text",
+			"nfo": "text",
+			"cuts": "movie_timer",
+			"zip": "package",
+			"rar": "package"
+		}
 		#TODO OBSLUGA PLIKOW BZIP, ZIP, RAR
 		#TODO File manager (delete, copy, move, rename
 		self["key_menu"] = StaticText("Config menu")
@@ -203,31 +203,29 @@ class SubsDownloaderApplication(Screen):
 		self.isVisible = True
 		#self.fileManager_orders = []
 
-		self["myActionMap_showned"] = ActionMap(["ChannelSelectBaseActions", "WizardActions", "DirectionActions", "MenuActions", "NumberActions", "ColorActions", "SubsDownloaderApplication_actions"],
-	        {
-	                "ok": self.ok,
-	                "back": self.closeApplication,
-	                "about": self.showAboutScreen,
-	                "subSelect": self.downloadSubtitle,
-	                "menu": self.showConfigScreen,
-	                "nextMarker": self.set_listSubs_enabled,
-	                "prevMarker": self.set_listFile_enabled,
-	                "up": self.goUp,
-	                "down": self.goDown,
-	                "left": self.goLeft,
-	                "right": self.goRight,
-	                "info": self.showFilemanagerScreen_file_info_on_screen_title,  # self.FM_file_Info,
-	                "localConv": self.localConvertionSublist,
-	                "0": self.skinVisibility,
-	                #"red": self.goRed,
-	                #"green": self.goGreen,
-	                #"yellow": self.goYellow,
-	                "blue": self.showFilemanagerScreen_without_callback,
-	        }, -1)
+		self["myActionMap_showned"] = ActionMap(["ChannelSelectBaseActions", "WizardActions", "DirectionActions", "MenuActions", "NumberActions", "ColorActions", "SubsDownloaderApplication_actions"], {
+			"ok": self.ok,
+			"back": self.closeApplication,
+			"about": self.showAboutScreen,
+			"subSelect": self.downloadSubtitle,
+			"menu": self.showConfigScreen,
+			"nextMarker": self.set_listSubs_enabled,
+			"prevMarker": self.set_listFile_enabled,
+			"up": self.goUp,
+			"down": self.goDown,
+			"left": self.goLeft,
+			"right": self.goRight,
+			"info": self.showFilemanagerScreen_file_info_on_screen_title,  # self.FM_file_Info,
+			"localConv": self.localConvertionSublist,
+			"0": self.skinVisibility,
+			#"red": self.goRed,
+			#"green": self.goGreen,
+			#"yellow": self.goYellow,
+			"blue": self.showFilemanagerScreen_without_callback,
+		}, -1)
 
-		self["myActionMap_hidded"] = ActionMap(["ChannelSelectBaseActions", "WizardActions", "DirectionActions", "MenuActions", "NumberActions", "ColorActions", "SubsDownloaderApplication_actions"],
-		{
-		        "0": self.skinVisibility,
+		self["myActionMap_hidded"] = ActionMap(["ChannelSelectBaseActions", "WizardActions", "DirectionActions", "MenuActions", "NumberActions", "ColorActions", "SubsDownloaderApplication_actions"], {
+			"0": self.skinVisibility,
 		}, -1)
 		self["myActionMap_showned"].setEnabled(True)
 		self["myActionMap_hidded"].setEnabled(False)
@@ -424,7 +422,6 @@ class SubsDownloaderApplication(Screen):
 
 # !!!!!!!!!!!! PICTURE FUNCTIONS !!!!!!!!!!!!!!
 
-
 	def display_Server_Picture(self):
 		"""Function display suittalbe picture in ["serverPicture"] (based on subtitle server)"""
 		self.serverPicturePath = "/usr/lib/enigma2/python/Plugins/Extensions/SubsDownloader2/pic/%s.jpg" % config.plugins.subsdownloader.subtitleserver.value
@@ -536,10 +533,7 @@ class SubsDownloaderApplication(Screen):
 		self.serverAvailableSubtitles = []
 		position = 0
 		for x in serverList:
-			self.serverAvailableSubtitles.append((str(x['language']).replace("u'", "").replace("'", "") + "_"
-			                                      + str(x['cd']).replace("u'", "").replace("'", "") + "cd__"
-			                                      + str(x['title']).replace("u'", "").replace("'", "") + " "
-			                                      + str(x['release']).replace("u'", "").replace("'", ""), position))  # makes list of subtitles
+			self.serverAvailableSubtitles.append((str(x['language']).replace("u'", "").replace("'", "") + "_" + str(x['cd']).replace("u'", "").replace("'", "") + "cd__" + str(x['title']).replace("u'", "").replace("'", "") + " " + str(x['release']).replace("u'", "").replace("'", ""), position))  # makes list of subtitles
 			position = position + 1
 		self.subsListDownloaded = 1
 		self["subsList"].setList(self.serverAvailableSubtitles)
@@ -1055,9 +1049,8 @@ class FileManagerCommands(Screen):
 		Screen.__init__(self, session)
 		self.list = []
 		self["myCommands"] = MenuList(self.list)
-		self["setupActions"] = ActionMap(["SetupActions", "DirectionActions", "WizardActions", "SubsDownloaderConfig_actions"],
-		{
-		        "ok": self.ExitWithDoingSomething,
+		self["setupActions"] = ActionMap(["SetupActions", "DirectionActions", "WizardActions", "SubsDownloaderConfig_actions"], {
+			"ok": self.ExitWithDoingSomething,
 			"cancel": self.ExitWithoutDoingNothing
 		}, -1)
 		self.createCommandsMenu()
@@ -1114,11 +1107,10 @@ class SubsDownloaderConfig(ConfigListScreen, Screen):
 			self["extendLibMediaInfo"].setText("")
 		self.list = []
 		ConfigListScreen.__init__(self, self.list, session)
-		self["setupActions"] = ActionMap(["SetupActions", "DirectionActions", "WizardActions", "SubsDownloaderConfig_actions"],
-		{
-		        "left": self.keyLeft,
-		        "right": self.keyRight,
-		        "ok": self.saveConfig,
+		self["setupActions"] = ActionMap(["SetupActions", "DirectionActions", "WizardActions", "SubsDownloaderConfig_actions"], {
+			"left": self.keyLeft,
+			"right": self.keyRight,
+			"ok": self.saveConfig,
 			"cancel": self.cancelWithoutSave  # add the RC Command "cancel" to close your Screen
 		}, -1)
 		self.createConfigMenu()

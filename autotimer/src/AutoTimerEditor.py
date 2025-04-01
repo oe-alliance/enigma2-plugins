@@ -350,8 +350,7 @@ class AutoTimerEditorBase:
 				("0", _("Title")),
 				("1", _("Title and Short description")),
 				("2", _("Title and all descriptions")),
-			],
-		    default=str(timer.searchForDuplicateDescription)
+			], default=str(timer.searchForDuplicateDescription)
 		))
 
 		# Custom Location
@@ -1141,8 +1140,7 @@ def CheckREList(re_list):
 			_("%s is not valid.") % val +
 			"\n\n" + str(ex) + "\n\n" +
 			_("See: ") +
-			"https://docs.python.org/%d.%d/library/re.html" % (pv_info.major, pv_info.minor)
-		       )
+			"https://docs.python.org/%d.%d/library/re.html" % (pv_info.major, pv_info.minor))
 		return errm
 	return ""
 

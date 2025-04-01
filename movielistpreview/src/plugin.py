@@ -160,11 +160,10 @@ class MovielistPreviewPositionerCoordinateEdit(ConfigListScreen, Screen):
 			getConfigListEntry("x position:", self.xEntry),
 			getConfigListEntry("y position:", self.yEntry)])
 
-		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
-			{
-				"green": self.ok,
-				 "cancel": self.close
-			}, -1)
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"], {
+			"green": self.ok,
+			"cancel": self.close
+		}, -1)
 
 	def ok(self):
 		self.close([self.xEntry.value, self.yEntry.value])

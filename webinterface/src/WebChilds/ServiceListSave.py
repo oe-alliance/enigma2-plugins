@@ -111,8 +111,7 @@ class ServiceListSave(resource.Resource):
 						<e2simplexmlresult>\n
 							<e2state>False</e2state>
 							<e2statetext>found string 'undefined' in XML DATA... a copy was saved to '/tmp/savedlist'.</e2statetext>
-						</e2simplexmlresult>\n
-					 """
+						</e2simplexmlresult>\n"""
 				request.setResponseCode(http.OK)
 				request.write(result)
 
@@ -146,8 +145,7 @@ class ServiceListSave(resource.Resource):
 						<e2simplexmlresult>\n
 							<e2state>True</e2state>
 							<e2statetext>servicelist saved with %i TV und %i Radio Bouquets and was reloaded</e2statetext>
-						</e2simplexmlresult>\n
-					 """ % (len(bouquets_tv), len(bouquets_radio))
+						</e2simplexmlresult>\n""" % (len(bouquets_tv), len(bouquets_radio))
 
 			request.setResponseCode(http.OK)
 			request.write(result)
@@ -158,8 +156,7 @@ class ServiceListSave(resource.Resource):
 						<e2simplexmlresult>\n
 							<e2state>False</e2state>
 							<e2statetext>%s</e2statetext>
-						</e2simplexmlresult>\n
-					 """ % e
+						</e2simplexmlresult>\n""" % e
 
 			request.setResponseCode(http.OK)
 			request.write(result)

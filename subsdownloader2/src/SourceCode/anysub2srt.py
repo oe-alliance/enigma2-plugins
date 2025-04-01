@@ -31,7 +31,7 @@ class SubConv():
         re_tmp = re.compile("^(\d+):(\d+):(\d+):(.*)")
         re_sub2 = re.compile("^(\d+):(\d+):(\d+)\.\d+\s*\,.*")
         re_mpl2 = re.compile("\[(?P<start>\d+)\]\[(?P<stop>\d+)\](?P<line>.*)", re.S)
-        #for line in list:
+        # for line in list:
         while len(list) > 0:
             line = list.pop(0)
             if re_mdvd.match(line):
@@ -44,10 +44,10 @@ class SubConv():
                 return "sub2"
             elif re_mpl2.match(line):
                 return "mpl2"
-	    #becouse file is saved as mdvd returns mdvd value
+        # becouse file is saved as mdvd returns mdvd value
         print("Unsupported subtitle format appears. Please send this subtitle to developer.")
         ####################################################
-        #"""KOMUNIKAT message box"""
+        # """KOMUNIKAT message box"""
         ####################################################
         return "None"
 

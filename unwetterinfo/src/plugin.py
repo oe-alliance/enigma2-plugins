@@ -218,14 +218,14 @@ class UnwetterMain(Screen):
 				self.downloadWeatherReport()
 
 	def go(self):
-	 c = self["hmenu"].getCurrent()
-	 if c is not None and self.menueintrag:
-		 x = self.menueintrag.index(c)
-		 if x != 0:  # Wetterlagebericht ist Index 0
-			 url = self.link[x]
-			 self["statuslabel"].setText("Loading Data")
-			 self.downloadPicUrl(url)
-		 self.ThumbTimer.start(1500, True)
+		c = self["hmenu"].getCurrent()
+		if c is not None and self.menueintrag:
+			x = self.menueintrag.index(c)
+			if x != 0:  # Wetterlagebericht ist Index 0
+				url = self.link[x]
+				self["statuslabel"].setText("Loading Data")
+				self.downloadPicUrl(url)
+			self.ThumbTimer.start(1500, True)
 
 	def up(self):
 		self["hmenu"].up()

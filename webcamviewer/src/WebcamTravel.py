@@ -88,14 +88,13 @@ class TravelWebcamviewer(Screen):
 
 		self["key_blue"].hide()  # not used at the moment
 
-		self["actions"] = ActionMap(["WizardActions", "MenuActions", "DirectionActions", "ShortcutActions"],
-			{
-			 "ok": self.onOK,
-			 "red": self.onRed,
-			 "green": self.onGreen,
-			 "yellow": self.onYellow,
-			 "back": self.close
-			 }, -1)
+		self["actions"] = ActionMap(["WizardActions", "MenuActions", "DirectionActions", "ShortcutActions"], {
+			"ok": self.onOK,
+			"red": self.onRed,
+			"green": self.onGreen,
+			"yellow": self.onYellow,
+			"back": self.close
+		}, -1)
 		self.finish_loading = True
 		self.timer_default = eTimer()
 		self.timer_default.timeout.callback.append(self.buildCamList)
@@ -129,9 +128,9 @@ class TravelWebcamviewer(Screen):
 
 	def onSearchkeyEntered(self, value):
 		if value is not None and self.finish_loading is not False:
- 			self.timer_status.start(1)
- 			WebcamTravelerAPI().search(self.onDataLoaded, value)
- 			self.finish_loading = False
+			self.timer_status.start(1)
+			WebcamTravelerAPI().search(self.onDataLoaded, value)
+			self.finish_loading = False
 
 	def loadData(self):
 		if self.finish_loading is not False:

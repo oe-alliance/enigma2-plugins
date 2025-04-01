@@ -79,7 +79,7 @@ class genuineDreambox(Screen):
 		{
 			"green": self.restart,
 			"cancel": self.exit,
-		 }, -1)
+		}, -1)
 		self["kGreen"] = Button(_("Test again"))
 		self["kRed"] = Button(_("Cancel"))
 		self["infotext"] = Label("With this plugin you can verify the authenticity of your Dreambox.\nFor additional information, \nplease visit our website \nhttps://www.dream-multimedia-tv.de.")

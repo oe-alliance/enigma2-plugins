@@ -116,21 +116,21 @@ def mainCB():
 
 def Plugins(path, **kwargs):
 	p = [
-			PluginDescriptor(
-							name="PictureViewer",
-							description="browse your local pictures",
-							where=PluginDescriptor.WHERE_PLUGINMENU,
-							fnc=startPictureviewer,
-							icon="pictureviewer.png"
-			  ),
-			PluginDescriptor(
-							name="WebcamViewer",
-							description="view webcams around the world",
-							where=PluginDescriptor.WHERE_PLUGINMENU,
-							fnc=startWebcamviewer,
-							icon="webcamviewer.png"
-			)
-		 ]
+		PluginDescriptor(
+			name="PictureViewer",
+			description="browse your local pictures",
+			where=PluginDescriptor.WHERE_PLUGINMENU,
+			fnc=startPictureviewer,
+			icon="pictureviewer.png"
+		),
+		PluginDescriptor(
+			name="WebcamViewer",
+			description="view webcams around the world",
+			where=PluginDescriptor.WHERE_PLUGINMENU,
+			fnc=startWebcamviewer,
+			icon="webcamviewer.png"
+		)
+	]
 	return p
 
 ###################
@@ -149,11 +149,10 @@ class ViewerSelectScreen(Screen):
 		self.slideshowfiles.append((_("WebcamViewer"), STARTWEBCAMVIEWER))
 		self.slideshowfiles.append((_("online webcam.travel"), STARTWEBCAMTRAVEL))
 		self["list"] = MenuList(self.slideshowfiles)
-		self["actions"] = ActionMap(["WizardActions", "MenuActions", "DirectionActions", "ShortcutActions"],
-			{
-			 "ok": self.go,
-			 "back": self.close
-			 }, -1)
+		self["actions"] = ActionMap(["WizardActions", "MenuActions", "DirectionActions", "ShortcutActions"], {
+			"ok": self.go,
+			"back": self.close
+		}, -1)
 
 	def go(self):
 		selection = self["list"].getCurrent()
@@ -182,7 +181,7 @@ class Slideshow:
 	def nextSlideshowItem(self, prev=False):
 		currentslideshowitem = self.currentslideshowitem
 		if prev:
-   			currentslideshowitem -= 2
+			currentslideshowitem -= 2
 		if currentslideshowitem < 0:
 			currentslideshowitem = -1
 		if currentslideshowitem is not (len(self.filelist) - 1):
@@ -248,20 +247,19 @@ class PictureViewer(Screen):
 		self["key_yellow"] = Label("")
 		self["key_blue"] = Label("")
 
-		self["actions"] = ActionMap(["WizardActions", "MenuActions", "DirectionActions", "ShortcutActions"],
-			{
-			 "ok": self.go,
-			 "back": self.close,
-			 "menu": self.openMenu,
-			 "up": self.up,
-			 "down": self.down,
-			 "left": self.leftUp,
-			 "right": self.rightUp,
-			 "red": self.KeyRed,
-			 "green": self.KeyGreen,
-			 "yellow": self.KeyYellow,
-			 "blue": self.switchList,
-			 }, -1)
+		self["actions"] = ActionMap(["WizardActions", "MenuActions", "DirectionActions", "ShortcutActions"], {
+			"ok": self.go,
+			"back": self.close,
+			"menu": self.openMenu,
+			"up": self.up,
+			"down": self.down,
+			"left": self.leftUp,
+			"right": self.rightUp,
+			"red": self.KeyRed,
+			"green": self.KeyGreen,
+			"yellow": self.KeyYellow,
+			"blue": self.switchList,
+		}, -1)
 
 		self.onLayoutFinish.append(self.switchList)
 		self.onLayoutFinish.append(self.updateInfoPanel)
@@ -319,23 +317,23 @@ class PictureViewer(Screen):
 
 	def fileToLoadFilelistEntered(self, fileselection):
 		if fileselection is not None:
-			   try:
-				   filename = fileselection[1]
-				   fp = open(config.plugins.pictureviewer.slideshowdir.value + filename)
-				   list = []
-				   for x in fp.readlines():
-					   file = x.replace("\n", "")
-					   if x.startswith("#"):
-						   pass
-					   elif not exists(file):
-						   print("[" + myname + "] loaded file from filelist isnt avaible! ignoreing ->", file)
-					   else:
-						   list.append((_(file.split("/")[-1]), file))
-				   self.slideshowfiles = list
-				   self["slist"].l.setList(self.slideshowfiles)
-				   self.loadedslideshowlistlistname = filename.replace(config.plugins.pictureviewer.slideshowext.value, "")
-			   except IOError as e:
-				   print("[" + myname + "] error:", e)
+			try:
+				filename = fileselection[1]
+				fp = open(config.plugins.pictureviewer.slideshowdir.value + filename)
+				list = []
+				for x in fp.readlines():
+					file = x.replace("\n", "")
+					if x.startswith("#"):
+						pass
+					elif not exists(file):
+						print("[" + myname + "] loaded file from filelist isnt avaible! ignoreing ->", file)
+					else:
+						list.append((_(file.split("/")[-1]), file))
+				self.slideshowfiles = list
+				self["slist"].l.setList(self.slideshowfiles)
+				self.loadedslideshowlistlistname = filename.replace(config.plugins.pictureviewer.slideshowext.value, "")
+			except IOError as e:
+				print("[" + myname + "] error:", e)
 
 	def fileToSaveFilelistEntered(self, filename):
 		if filename is not None:
@@ -407,32 +405,32 @@ class PictureViewer(Screen):
 			self.updateInfoPanel()
 
 	def up(self):
-		 if self.currList == "filelist":
-			 self.filelist.up()
-			 self.updateInfoPanel()
-		 else:
-			 self.slideshowlist.up()
+		if self.currList == "filelist":
+			self.filelist.up()
+			self.updateInfoPanel()
+		else:
+			self.slideshowlist.up()
 
 	def leftUp(self):
-		 if self.currList == "filelist":
-			 self.filelist.pageUp()
-			 self.updateInfoPanel()
-		 else:
-			 self.slideshowlist.pageUp()
+		if self.currList == "filelist":
+			self.filelist.pageUp()
+			self.updateInfoPanel()
+		else:
+			self.slideshowlist.pageUp()
 
 	def rightUp(self):
 		if self.currList == "filelist":
-			 self.filelist.pageDown()
-			 self.updateInfoPanel()
+			self.filelist.pageDown()
+			self.updateInfoPanel()
 		else:
-			 self.slideshowlist.pageDown()
+			self.slideshowlist.pageDown()
 
 	def down(self):
-		 if self.currList == "filelist":
-			 self.filelist.down()
-			 self.updateInfoPanel()
-		 else:
-			 self.slideshowlist.down()
+		if self.currList == "filelist":
+			self.filelist.down()
+			self.updateInfoPanel()
+		else:
+			self.slideshowlist.down()
 
 	def updateInfoPanel(self):
 		if self.currList == "filelist":
@@ -481,11 +479,10 @@ class WebcamViewer(Screen, InfoBarNotifications):
 
 		self.filelist = MenuList(self.getMenuData())
 		self["menu"] = self.filelist
-		self["actions"] = ActionMap(["WizardActions", "DirectionActions"],
-			{
-			 "ok": self.go,
-			 "back": self.close,
-			 }, -1)
+		self["actions"] = ActionMap(["WizardActions", "DirectionActions"], {
+			"ok": self.go,
+			"back": self.close,
+		}, -1)
 		self.onLayoutFinish.append(self.settingTitle)
 
 	def settingTitle(self):
@@ -625,10 +622,10 @@ class PictureList(MenuList):
 ##################
 class XMLloader:
 	DEFAULT_NAMESPACES = (
-		  None,  # RSS 0.91, 0.92, 0.93, 0.94, 2.0
-		  'http://purl.org/rss/1.0/',  # RSS 1.0
-		  'http://my.netscape.com/rdf/simple/0.9/'  # RSS 0.90
-		)
+		None,  # RSS 0.91, 0.92, 0.93, 0.94, 2.0
+		'http://purl.org/rss/1.0/',  # RSS 1.0
+		'http://my.netscape.com/rdf/simple/0.9/'  # RSS 0.90
+	)
 	DUBLIN_CORE = ('http://purl.org/dc/elements/1.1/',)
 
 	def getElementsByTagName(self, node, tagName, possibleNamespaces=DEFAULT_NAMESPACES):

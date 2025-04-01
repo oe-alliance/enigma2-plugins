@@ -41,8 +41,8 @@ class Backup(Source):
 
 	def getCompressionMode(self, tarname):
 		"""
-		  This basically guesses which compression to use.
-		  No real intelligence here, just keeps some ugliness out of sight.
+			This basically guesses which compression to use.
+			No real intelligence here, just keeps some ugliness out of sight.
 		"""
 		isGz = tarname.endswith((".tar.gz", ".tgz"))
 		isBz2 = tarname.endswith((".tar.bz2", ".tbz2"))
@@ -53,7 +53,7 @@ class Backup(Source):
 
 	def writeTarFile(self, destfile, filenames):
 		"""
-		  Create a new tar file, either with the tarfile library module or using popen.
+			Create a new tar file, either with the tarfile library module or using popen.
 		"""
 		compression = self.getCompressionMode(destfile)
 		if tarfile:
@@ -80,7 +80,7 @@ class Backup(Source):
 
 	def unpackTarFile(self, filename, destination="/"):
 		"""
-		  Unpack existing tar file to destination folder.
+			Unpack existing tar file to destination folder.
 		"""
 		compression = self.getCompressionMode(filename)
 		if tarfile:

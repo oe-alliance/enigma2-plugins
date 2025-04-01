@@ -129,14 +129,14 @@ def startUpService__init__(self, session, csel):
 def startUpServiceContextMenuCallback(self, add):
 	if add:
 		options = [
-				(_("set as startup service after booting..."), boundFunction(self.setStartUpService, config.startupservice)),
-				(_("set as startup service after leaving standby mode..."), boundFunction(self.setStartUpService, config.startupserviceleavingstandbymode)),
-			]
+			(_("set as startup service after booting..."), boundFunction(self.setStartUpService, config.startupservice)),
+			(_("set as startup service after leaving standby mode..."), boundFunction(self.setStartUpService, config.startupserviceleavingstandbymode)),
+		]
 	else:
 		options = [
-				(_("reset startup service for booting..."), boundFunction(self.resetStartUpService, config.startupservice)),
-				(_("reset startup service for leaving standby mode..."), boundFunction(self.resetStartUpService, config.startupserviceleavingstandbymode)),
-			]
+			(_("reset startup service for booting..."), boundFunction(self.resetStartUpService, config.startupservice)),
+			(_("reset startup service for leaving standby mode..."), boundFunction(self.resetStartUpService, config.startupserviceleavingstandbymode)),
+		]
 	self.session.openWithCallback(self.startUpServiceMenuCallback, ChoiceBox, list=options)
 
 
@@ -148,8 +148,8 @@ def setStartUpService(self, configElement):
 	current = self.csel.getCurrentSelection()
 	path = ''
 	for i in self.csel.servicePath:
-		 path += i.toString()
-		 path += ';'
+		path += i.toString()
+		path += ';'
 	if path:
 		if current.type == eServiceReference.idDVB and current.getData(0) in (2, 10):
 			configElement.lastroot.value = path
@@ -161,7 +161,7 @@ def setStartUpService(self, configElement):
 		configElement.save()
 		self.close()
 	else:
-		 self.session.openWithCallback(self.close, MessageBox, _("If you see this message, please switch to the service you want to mark as startservice and try again."), MessageBox.TYPE_ERROR)
+		self.session.openWithCallback(self.close, MessageBox, _("If you see this message, please switch to the service you want to mark as startservice and try again."), MessageBox.TYPE_ERROR)
 
 
 def resetStartUpService(self, configElement):

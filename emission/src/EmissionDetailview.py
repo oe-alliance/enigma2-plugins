@@ -55,9 +55,9 @@ class EmissionDetailview(Screen, HelpableScreen):
 						MultiContentEntryText(pos=(220,26), size=(160,20), text = 6, font = 1, flags = RT_VALIGN_CENTER),
 						MultiContentEntryProgress(pos = (0, 47), size = (740, 6), percent = -7), # progress
 					],
-				  "fonts": [gFont("Regular", 20),gFont("Regular", 18)],
-				  "itemHeight": 54
-				 }
+					"fonts": [gFont("Regular", 20),gFont("Regular", 18)],
+					"itemHeight": 54
+				}
 			</convert>
 		</widget>
 	</screen>"""

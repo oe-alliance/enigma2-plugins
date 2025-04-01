@@ -19,41 +19,26 @@ from Components.Language import language
 class AutoTimerComponent(object):
 	"""AutoTimer Component which also handles validity checks"""
 
-	"""
-	 Initiate
-	"""
-
+	# Initiate
 	def __init__(self, id, name, match, enabled, *args, **kwargs):
 		self.id = id
 		self._afterevent = []
 		self.setValues(name, match, enabled, *args, **kwargs)
 
-	"""
-	 Unsets all Attributes
-	"""
-
+	# Unsets all Attributes
 	def clear(self, id=-1, enabled=False):
 		self.id = id
 		self.setValues('', '', enabled)
 
-	"""
-	 Create a deep copy of this instance
-	"""
-
+	# Create a deep copy of this instance
 	def clone(self):
 		return self.__deepcopy__({})
 
-	"""
-	 Hook needed for WebIf
-	"""
-
+	# Hook needed for WebIf
 	def getEntry(self):
 		return self
 
-	"""
-	 Keeps init small and helps setting many values at once
-	"""
-
+	# Keeps init small and helps setting many values at once
 	def setValues(self, name, match, enabled, timespan=None, services=None,
 			offset=None, afterevent=[], exclude=None, maxduration=None,
 			destination=None, include=None, matchCount=0, matchLeft=0,
@@ -219,20 +204,14 @@ class AutoTimerComponent(object):
 
 ### Helper
 
-	"""
-	 Returns a tulple of (input begin, input end, end earlier than begin)
-	"""
-
+	# Returns a tulple of (input begin, input end, end earlier than begin)
 	def calculateDayspan(self, begin, end, ignore=None):
 		if end[0] < begin[0] or (end[0] == begin[0] and end[1] <= begin[1]):
 			return (begin, end, True)
 		else:
 			return (begin, end, False)
 
-	"""
-	 Returns if a given timestruct is in a timespan
-	"""
-
+	# Returns if a given timestruct is in a timespan
 	def checkAnyTimespan(self, time, begin=None, end=None, haveDayspan=False):
 		if begin is None:
 			return False
@@ -259,10 +238,7 @@ class AutoTimerComponent(object):
 				return True
 			return False
 
-	"""
-	 Called when a timer based on this component was added
-	"""
-
+	# Called when a timer based on this component was added
 	def update(self, begin, timestamp):
 		# Only update limit when we have new begin
 		if begin > self.lastBegin:
@@ -644,8 +620,7 @@ class AutoTimerComponent(object):
 					str(self.vps_enabled),
 					str(self.vps_overwrite),
 					str(self.series_labeling),
-			 )),
-			 ")>"
+				)), ")>"
 		))
 
 

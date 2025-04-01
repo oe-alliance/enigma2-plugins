@@ -91,15 +91,14 @@ class PipServiceRelationSetup(Screen):
 		self["key_yellow"] = StaticText(_("Add"))
 		self["key_blue"] = StaticText(_("Edit"))
 		self["entrylist"] = PipServiceRelationEntryList([])
-		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions"],
-			{
-			 "ok": self.keyBlue,
-			 "back": self.keyClose,
-			 "red": self.keyDelete,
-			 "green": self.keyClose,
-			 "yellow": self.keyYellow,
-			 "blue": self.keyBlue,
-			 }, -1)
+		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions"], {
+			"ok": self.keyBlue,
+			"back": self.keyClose,
+			"red": self.keyDelete,
+			"green": self.keyClose,
+			"yellow": self.keyYellow,
+			"blue": self.keyBlue,
+		}, -1)
 		self["entrylist"].setConfig(getRelationDict())
 		self.updateList()
 

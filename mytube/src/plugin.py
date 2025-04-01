@@ -42,103 +42,96 @@ config.plugins.mytube.search = ConfigSubsection()
 
 
 config.plugins.mytube.search.searchTerm = ConfigTextWithGoogleSuggestions("", False)
-config.plugins.mytube.search.orderBy = ConfigSelection(
-				[
-				 ("relevance", _("Relevance")),
-				 ("viewCount", _("View Count")),
-				 ("published", _("Published")),
-				 ("rating", _("Rating"))
-				], "relevance")
-config.plugins.mytube.search.time = ConfigSelection(
-				[
-				 ("all_time", _("All Time")),
-				 ("this_month", _("This Month")),
-				 ("this_week", _("This Week")),
-				 ("today", _("Today"))
-				], "all_time")
-config.plugins.mytube.search.racy = ConfigSelection(
-				[
-				 ("include", _("Yes")),
-				 ("exclude", _("No"))
-				], "include")
-config.plugins.mytube.search.categories = ConfigSelection(
-				[
-				 (None, _("All")),
-				 ("Film", _("Film & Animation")),
-				 ("Autos", _("Autos & Vehicles")),
-				 ("Music", _("Music")),
-				 ("Animals", _("Pets & Animals")),
-				 ("Sports", _("Sports")),
-				 ("Travel", _("Travel & Events")),
-				 ("Shortmov", _("Short Movies")),
-				 ("Games", _("Gaming")),
-				 ("Comedy", _("Comedy")),
-				 ("People", _("People & Blogs")),
-				 ("News", _("News & Politics")),
-				 ("Entertainment", _("Entertainment")),
-				 ("Education", _("Education")),
-				 ("Howto", _("Howto & Style")),
-				 ("Nonprofit", _("Nonprofits & Activism")),
-				 ("Tech", _("Science & Technology"))
-				], None)
-config.plugins.mytube.search.lr = ConfigSelection(
-				[
-				 (None, _("All")),
-				 ("au", _("Australia")),
-				 ("br", _("Brazil")),
-				 ("ca", _("Canada")),
-				 ("cz", _("Czech Republic")),
-				 ("fr", _("France")),
-				 ("de", _("Germany")),
-				 ("gb", _("Great Britain")),
-				 ("au", _("Australia")),
-				 ("nl", _("Holland")),
-				 ("hk", _("Hong Kong")),
-				 ("in", _("India")),
-				 ("ie", _("Ireland")),
-				 ("il", _("Israel")),
-				 ("it", _("Italy")),
-				 ("jp", _("Japan")),
-				 ("mx", _("Mexico")),
-				 ("nz", _("New Zealand")),
-				 ("pl", _("Poland")),
-				 ("ru", _("Russia")),
-				 ("kr", _("South Korea")),
-				 ("es", _("Spain")),
-				 ("se", _("Sweden")),
-				 ("tw", _("Taiwan")),
-				 ("us", _("United States"))
-				], None)
-config.plugins.mytube.search.sortOrder = ConfigSelection(
-				[
-				 ("ascending", _("Ascending")),
-				 ("descending", _("Descending"))
-				], "ascending")
+config.plugins.mytube.search.orderBy = ConfigSelection([
+	("relevance", _("Relevance")),
+	("viewCount", _("View Count")),
+	("published", _("Published")),
+	("rating", _("Rating"))
+], "relevance")
+config.plugins.mytube.search.time = ConfigSelection([
+	("all_time", _("All Time")),
+	("this_month", _("This Month")),
+	("this_week", _("This Week")),
+	("today", _("Today"))
+], "all_time")
+config.plugins.mytube.search.racy = ConfigSelection([
+	("include", _("Yes")),
+	("exclude", _("No"))
+], "include")
+config.plugins.mytube.search.categories = ConfigSelection([
+	(None, _("All")),
+	("Film", _("Film & Animation")),
+	("Autos", _("Autos & Vehicles")),
+	("Music", _("Music")),
+	("Animals", _("Pets & Animals")),
+	("Sports", _("Sports")),
+	("Travel", _("Travel & Events")),
+	("Shortmov", _("Short Movies")),
+	("Games", _("Gaming")),
+	("Comedy", _("Comedy")),
+	("People", _("People & Blogs")),
+	("News", _("News & Politics")),
+	("Entertainment", _("Entertainment")),
+	("Education", _("Education")),
+	("Howto", _("Howto & Style")),
+	("Nonprofit", _("Nonprofits & Activism")),
+	("Tech", _("Science & Technology"))
+], None)
+config.plugins.mytube.search.lr = ConfigSelection([
+	(None, _("All")),
+	("au", _("Australia")),
+	("br", _("Brazil")),
+	("ca", _("Canada")),
+	("cz", _("Czech Republic")),
+	("fr", _("France")),
+	("de", _("Germany")),
+	("gb", _("Great Britain")),
+	("au", _("Australia")),
+	("nl", _("Holland")),
+	("hk", _("Hong Kong")),
+	("in", _("India")),
+	("ie", _("Ireland")),
+	("il", _("Israel")),
+	("it", _("Italy")),
+	("jp", _("Japan")),
+	("mx", _("Mexico")),
+	("nz", _("New Zealand")),
+	("pl", _("Poland")),
+	("ru", _("Russia")),
+	("kr", _("South Korea")),
+	("es", _("Spain")),
+	("se", _("Sweden")),
+	("tw", _("Taiwan")),
+	("us", _("United States"))
+], None)
+config.plugins.mytube.search.sortOrder = ConfigSelection([
+	("ascending", _("Ascending")),
+	("descending", _("Descending"))
+], "ascending")
 
 config.plugins.mytube.general = ConfigSubsection()
 config.plugins.mytube.general.showHelpOnOpen = ConfigYesNo(default=True)
 config.plugins.mytube.general.loadFeedOnOpen = ConfigYesNo(default=True)
-config.plugins.mytube.general.startFeed = ConfigSelection(
-				[
-				 ("hd", _("HD videos")),
-				 ("most_viewed", _("Most viewed")),
-				 ("top_rated", _("Top rated")),
-				 ("recently_featured", _("Recently featured")),
-				 ("most_discussed", _("Most discussed")),
-				 ("top_favorites", _("Top favorites")),
-				 ("most_linked", _("Most linked")),
-				 ("most_responded", _("Most responded")),
-				 ("most_recent", _("Most recent")),
-				 ("most_popular", _("Most popular")),
-				 ("most_shared", _("Most shared")),
-				 ("on_the_web", _("Trending videos")),
-				 ("my_subscriptions", _("My Subscriptions")),
-				 ("my_favorites", _("My Favorites")),
-				 ("my_history", _("My History")),
-				 ("my_watch_later", _("My Watch Later")),
-				 ("my_recommendations", _("My Recommendations")),
-				 ("my_uploads", _("My Uploads")),
-				], "top_rated")
+config.plugins.mytube.general.startFeed = ConfigSelection([
+	("hd", _("HD videos")),
+	("most_viewed", _("Most viewed")),
+	("top_rated", _("Top rated")),
+	("recently_featured", _("Recently featured")),
+	("most_discussed", _("Most discussed")),
+	("top_favorites", _("Top favorites")),
+	("most_linked", _("Most linked")),
+	("most_responded", _("Most responded")),
+	("most_recent", _("Most recent")),
+	("most_popular", _("Most popular")),
+	("most_shared", _("Most shared")),
+	("on_the_web", _("Trending videos")),
+	("my_subscriptions", _("My Subscriptions")),
+	("my_favorites", _("My Favorites")),
+	("my_history", _("My History")),
+	("my_watch_later", _("My Watch Later")),
+	("my_recommendations", _("My Recommendations")),
+	("my_uploads", _("My Uploads")),
+], "top_rated")
 config.plugins.mytube.general.on_movie_stop = ConfigSelection(default="ask", choices=[
 	("ask", _("Ask user")), ("quit", _("Return to movie list")), ("playnext", _("Play next video")), ("playagain", _("Play video again"))])
 

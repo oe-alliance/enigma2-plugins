@@ -8,21 +8,27 @@ from Components.Label import Label
 from Components.config import *
 from os import path
 
-CONFIGS = [("1", _("layer 1")),
-	   ("2", _("layer 2")),
-	   ("4", _("layer 3")),
-	   ("8", _("layer 4")),
-	   ("f", _("any RC"))]
+CONFIGS = [
+	("1", _("layer 1")),
+	("2", _("layer 2")),
+	("4", _("layer 3")),
+	("8", _("layer 4")),
+	("f", _("any RC"))
+]
 
-CONFIGS1 = [("100", _("DM8000-RC layer 1")),
-	     ("200", _("DM8000-RC layer 2")),
-	     ("400", _("DM8000-RC layer 3")),
-	     ("800", _("DM8000-RC layer 4"))]
+CONFIGS1 = [
+	("100", _("DM8000-RC layer 1")),
+	("200", _("DM8000-RC layer 2")),
+	("400", _("DM8000-RC layer 3")),
+	("800", _("DM8000-RC layer 4"))
+]
 
-CONFIGS2 = [("10000", _("Illuminated RC layer 1")),
-	    ("20000", _("Illuminated RC layer 2")),
-	    ("40000", _("Illuminated RC layer 3")),
-	    ("80000", _("Illuminated RC layer 4"))]
+CONFIGS2 = [
+	("10000", _("Illuminated RC layer 1")),
+	("20000", _("Illuminated RC layer 2")),
+	("40000", _("Illuminated RC layer 3")),
+	("80000", _("Illuminated RC layer 4"))
+]
 
 # config file for IR mask, default is DM7025 or later, fallback to DM500/600
 # new-gen boxes also support DM8000 RCs via mask1

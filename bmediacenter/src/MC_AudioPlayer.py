@@ -1141,7 +1141,6 @@ class MC_AudioPlaylist(Screen, InfoBarSeek):
 				"next": (self.KeyNext, "Next song"),
 				"previous": (self.KeyPrevious, "Previous song"),
 				"playpause": (self.PlayPause, "Play / Pause"),
-				"stop": (self.StopPlayback, "Stop"),
 			}, -2)
 		self.JpgTimer = eTimer()
 		self.JpgTimer.callback.append(self.showBackgroundJPG)

@@ -1,5 +1,3 @@
-# -*- coding: iso-8859-1 -*-
-
 #
 # Meoteo Italia da
 # www.google.it
@@ -237,12 +235,12 @@ class meteoitMain(Screen):
 
 # Make text safe for xml parser (Google old xml format without the character set declaration)
 	def checkXmlSanity(self, content):
-		content = content.replace('à', 'a')
-		content = content.replace('è', 'e')
-		content = content.replace('é', 'e')
-		content = content.replace('ì', 'i')
-		content = content.replace('ò', 'o')
-		content = content.replace('ù', 'u')
+		content = content.replace('Ã ', 'a')
+		content = content.replace('Ã¨', 'e')
+		content = content.replace('Ã©', 'e')
+		content = content.replace('Ã¬', 'i')
+		content = content.replace('Ã²', 'o')
+		content = content.replace('Ã¹', 'u')
 		return content
 
 	def get_Url(self):

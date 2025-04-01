@@ -251,7 +251,7 @@ class ShoutcastFeed:
             try:
                 self.station_list = load_cache(self.cache_file)
             except:
-            	print("Failed to load cache.")
+                print("Failed to load cache.")
         if not ct or (time.time() - ct) > self.cache_ttl:
             try:
                 parseXML = StationParser(self.min_bitrate)
@@ -260,5 +260,5 @@ class ShoutcastFeed:
                 self.station_list = parseXML.station_list
                 write_cache(self.cache_file, self.station_list)
             except:
-            	print("Failed to get a new station list, sorry.")
+                print("Failed to get a new station list, sorry.")
         return self.station_list

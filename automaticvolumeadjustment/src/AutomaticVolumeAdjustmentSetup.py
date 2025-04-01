@@ -145,15 +145,14 @@ class AutomaticVolumeAdjustmentEntriesListConfigScreen(Screen):
 		self["key_yellow"] = StaticText(_("Edit"))
 		self["key_blue"] = StaticText(_("Delete"))
 		self["entrylist"] = AutomaticVolumeAdjustmentEntryList([])
-		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions"],
-			{
-			 "ok": self.keyOK,
-			 "back": self.keyClose,
-			 "red": self.keyRed,
-			 "green": self.keyClose,
-			 "yellow": self.keyYellow,
-			 "blue": self.keyDelete,
-			 }, -1)
+		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions"], {
+			"ok": self.keyOK,
+			"back": self.keyClose,
+			"red": self.keyRed,
+			"green": self.keyClose,
+			"yellow": self.keyYellow,
+			"blue": self.keyDelete,
+		}, -1)
 		self.automaticVolumeAdjustmentInstance = AutomaticVolumeAdjustment.instance
 		self["entrylist"].setConfig(configVA)
 		self.updateList()

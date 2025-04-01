@@ -125,8 +125,6 @@ class AboutDetails(Screen):
             "red": self.close,
             "back": self.close,
             "nextBouquet": self.pageUp,
-            "nextBouquet": self.pageUp,
-            "prevBouquet": self.pageDown,
             "prevBouquet": self.pageDown,
         }, -1)
         self["key_red"] = StaticText()

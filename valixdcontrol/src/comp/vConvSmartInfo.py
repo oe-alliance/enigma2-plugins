@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 #
 #    SmartInfo-Converter for Dreambox/Enigma-2
 #    Coded by Vali (c)2009-2011
@@ -24,7 +23,7 @@ from Components.Element import cached
 from Components.Sensors import sensors
 from Poll import Poll
 import six
-SIGN = '°' if six.PY3 else str('\xc2\xb0')
+SIGN = 'Â°' if six.PY3 else str('\xc2\xb0')
 
 
 class vConvSmartInfo(Poll, Converter, object):

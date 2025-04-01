@@ -68,8 +68,7 @@ class WerbeZapperChoiceBox(ChoiceBox):
 
 
 class WerbeZapper(Screen):
-	"""Simple Plugin to automatically zap back to a Service after a given amount
-	   of time."""
+	"""Simple Plugin to automatically zap back to a Service after a given amount of time."""
 
 	def __init__(self, session, servicelist, cleanupfnc=None):
 		Screen.__init__(self, session)

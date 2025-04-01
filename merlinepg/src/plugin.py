@@ -431,7 +431,7 @@ class Merlin_PGII(Screen):
 				self["currCh5"].setText(str(" "))
 				self["epg_list5"].hide()
 		if config.plugins.MerlinEPG.AutoPT.value:
-			 self.AutoPrime.start(500)
+			self.AutoPrime.start(500)
 
 	def onSelectionChanged(self):
 		curEV = self["epg_list" + str(self.ActiveEPG)].getCurrent()

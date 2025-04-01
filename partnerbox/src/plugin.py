@@ -352,10 +352,8 @@ class RemoteTimer(Screen):
 					action = ""
 				tstart = time.localtime(entry.timebegin)
 				tend = time.localtime(entry.timeend)
-				ref_time_start = "&sday=" + ("%s" % (tstart.tm_mday)) + "&smonth=" + ("%s" % (tstart.tm_mon)) + "&syear=" + ("%s" %
-																															 (tstart.tm_year)) + "&shour=" + ("%s" % (tstart.tm_hour)) + "&smin=" + ("%s" % (tstart.tm_min))
-				ref_time_end = "&eday=" + ("%s" % (tend.tm_mday)) + "&emonth=" + ("%s" % (tend.tm_mon)) + "&eyear=" + ("%s" %
-																													   (tend.tm_year)) + "&ehour=" + ("%s" % (tend.tm_hour)) + "&emin=" + ("%s" % (tend.tm_min))
+				ref_time_start = "&sday=" + ("%s" % (tstart.tm_mday)) + "&smonth=" + ("%s" % (tstart.tm_mon)) + "&syear=" + ("%s" % (tstart.tm_year)) + "&shour=" + ("%s" % (tstart.tm_hour)) + "&smin=" + ("%s" % (tstart.tm_min))
+				ref_time_end = "&eday=" + ("%s" % (tend.tm_mday)) + "&emonth=" + ("%s" % (tend.tm_mon)) + "&eyear=" + ("%s" % (tend.tm_year)) + "&ehour=" + ("%s" % (tend.tm_hour)) + "&emin=" + ("%s" % (tend.tm_min))
 				ref_old = "&old_type=" + ("%s" % (self.oldtype)) + "&old_stime=" + ("%s" % (self.oldstart)) + "&force=yes"
 				ref = quote(entry.servicereference) + "&descr=" + quote(entry.description) + "&channel=" + \
 					quote(entry.servicename) + "&after_event=" + ("%s" % (entry.afterevent)) + "&action=" + ("%s" % (action))
@@ -758,8 +756,7 @@ class RemoteTimerChannelList(Screen):
 					f = urlopen(url.encode('utf-8'))
 					sxml = f.read()
 					eventstart, eventduration, eventtitle, eventdescriptionextended, eventdescription, eventid = self.XMLReadEPGDataE1(sxml)
-					self.E2ChannelList.append(E2EPGListAllData(servicereference=servicereference, servicename=servicename, eventstart=eventstart, eventduration=eventduration,
-															   eventtitle=eventtitle, eventid=eventid, eventdescription=eventdescription, eventdescriptionextended=eventdescriptionextended))
+					self.E2ChannelList.append(E2EPGListAllData(servicereference=servicereference, servicename=servicename, eventstart=eventstart, eventduration=eventduration, eventtitle=eventtitle, eventid=eventid, eventdescription=eventdescription, eventdescriptionextended=eventdescriptionextended))
 		self["channellist"].buildList(self.E2ChannelList)
 
 	def XMLReadEPGDataE1(self, xmlstring):
@@ -827,8 +824,7 @@ class RemoteTimerChannelList(Screen):
 				eventdescriptionextended = str(events.findtext("e2eventdescriptionextended", ''))
 			except:
 				eventdescriptionextended = ""
-			self.E2ChannelList.append(E2EPGListAllData(servicereference=servicereference, servicename=servicename, eventstart=eventstart, eventduration=eventduration,
-													   eventtitle=eventtitle, eventid=eventid, eventdescription=eventdescription, eventdescriptionextended=eventdescriptionextended))
+			self.E2ChannelList.append(E2EPGListAllData(servicereference=servicereference, servicename=servicename, eventstart=eventstart, eventduration=eventduration, eventtitle=eventtitle, eventid=eventid, eventdescription=eventdescription, eventdescriptionextended=eventdescriptionextended))
 		self["channellist"].buildList(self.E2ChannelList)
 
 	def EPGSelection(self):
@@ -1294,8 +1290,7 @@ class RemoteTimerEPGList(Screen):
 				eventdescriptionextended = str(events.findtext("e2eventdescriptionextended", ''))
 			except:
 				eventdescriptionextended = ""
-			E2ListEPG.append(E2EPGListAllData(servicereference=servicereference, servicename=servicename, eventid=eventid, eventstart=eventstart,
-											  eventduration=eventduration, eventtitle=eventtitle, eventdescription=eventdescription, eventdescriptionextended=eventdescriptionextended))
+			E2ListEPG.append(E2EPGListAllData(servicereference=servicereference, servicename=servicename, eventid=eventid, eventstart=eventstart, eventduration=eventduration, eventtitle=eventtitle, eventdescription=eventdescription, eventdescriptionextended=eventdescriptionextended))
 		self["epglist"].buildList(E2ListEPG, self.E2TimerList)
 		if self.ListCurrentIndex != 0:
 			sel = self["epglist"].moveSelectionTo(self.ListCurrentIndex)
@@ -1338,8 +1333,7 @@ class RemoteTimerEPGList(Screen):
 			dirname = ""
 			type = PlaylistEntry.RecTimerEntry | PlaylistEntry.recDVR
 			description = cur[0].eventtitle
-		timerentry = E2Timer(servicereference=cur[0].servicereference, servicename=cur[0].servicename, name=cur[0].eventtitle, disabled=0, timebegin=cur[0].eventstart, timeend=cur[0].eventstart +
-							 cur[0].eventduration, duration=cur[0].eventduration, startprepare=0, state=0, repeated=0, justplay=0, eventId=cur_eventId, afterevent=3, dirname=dirname, description=description, type=type)
+		timerentry = E2Timer(servicereference=cur[0].servicereference, servicename=cur[0].servicename, name=cur[0].eventtitle, disabled=0, timebegin=cur[0].eventstart, timeend=cur[0].eventstart + cur[0].eventduration, duration=cur[0].eventduration, startprepare=0, state=0, repeated=0, justplay=0, eventId=cur_eventId, afterevent=3, dirname=dirname, description=description, type=type)
 		self.session.openWithCallback(self.RemoteTimerEntryFinished, RemoteTimerEntry, timerentry, self.Locations)
 
 	def RemoteTimerEntryFinished(self, answer):
@@ -1542,15 +1536,12 @@ class E2TimerMenu(GUIComponent, object):
 			if timer.type & PlaylistEntry.SwitchTimerEntry:
 				res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width - w, h, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, repeatedtext + ((" %s " + _("(ZAP)")) % (FuzzyTime(timer.timebegin)[1]))))
 			elif timer.type & PlaylistEntry.RecTimerEntry:
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width - w, h, int(20 * SCALE), 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, repeatedtext +
-							((" %s ... %s (%d " + _("mins") + ")") % (FuzzyTime(timer.timebegin)[1], FuzzyTime(timer.timeend)[1], (timer.timeend - timer.timebegin) / 60))))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width - w, h, int(20 * SCALE), 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, repeatedtext + ((" %s ... %s (%d " + _("mins") + ")") % (FuzzyTime(timer.timebegin)[1], FuzzyTime(timer.timeend)[1], (timer.timeend - timer.timebegin) / 60))))
 		else:
 			if timer.type & PlaylistEntry.SwitchTimerEntry:
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width - w, h, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, repeatedtext + (("%s, %s ... %s (%d " + _("mins") + ") ") %
-						   (FuzzyTime(timer.timebegin) + FuzzyTime(timer.timeend)[1:] + ((timer.timeend - timer.timebegin) / 60,))) + _("(ZAP)")))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width - w, h, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, repeatedtext + (("%s, %s ... %s (%d " + _("mins") + ") ") % (FuzzyTime(timer.timebegin) + FuzzyTime(timer.timeend)[1:] + ((timer.timeend - timer.timebegin) / 60,))) + _("(ZAP)")))
 			elif timer.type & PlaylistEntry.RecTimerEntry:
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width - w, h, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, repeatedtext +
-						   (("%s, %s ... %s (%d " + _("mins") + ")") % (FuzzyTime(timer.timebegin) + FuzzyTime(timer.timeend)[1:] + ((timer.timeend - timer.timebegin) / 60,)))))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, width - w, h, 1, RT_HALIGN_LEFT | RT_VALIGN_CENTER, repeatedtext + (("%s, %s ... %s (%d " + _("mins") + ")") % (FuzzyTime(timer.timebegin) + FuzzyTime(timer.timeend)[1:] + ((timer.timeend - timer.timebegin) / 60,)))))
 
 		if timer.type & PlaylistEntry.stateWaiting:
 			state = _("waiting")

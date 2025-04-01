@@ -60,8 +60,8 @@ class AutoTimerPreview(Screen):
 							MultiContentEntryText(pos=(2,50), size=(400,20), text = 4, font = 1, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER),
 							MultiContentEntryText(pos=(290,50), size=(233,20), text = 2, font = 1, flags = RT_HALIGN_RIGHT|RT_VALIGN_CENTER),
 						],
-					 "fonts": [gFont("Regular", 20),gFont("Regular", 18)],
-					 "itemHeight": 72
+						"fonts": [gFont("Regular", 20),gFont("Regular", 18)],
+						"itemHeight": 72
 					}
 				</convert>
 			</widget>

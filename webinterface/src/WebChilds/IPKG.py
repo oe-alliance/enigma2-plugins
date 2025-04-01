@@ -46,7 +46,7 @@ class IPKGResource(resource.Resource):
 		return server.NOT_DONE_YET
 
 	def execSimpleCmd(self, request):
-		 return self.execCmd(request)
+		return self.execCmd(request)
 
 	def execPackageCmd(self, request):
 		package = self.getArg("package")

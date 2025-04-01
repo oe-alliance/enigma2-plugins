@@ -247,9 +247,9 @@ class FTPServerManager(Screen):
 					{"template": [
 							MultiContentEntryText(pos=(1,1), size=(540,22), text = 0, font = 0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER),
 						],
-					  "fonts": [gFont("Regular", 20)],
-					  "itemHeight": 24
-					 }
+						"fonts": [gFont("Regular", 20)],
+						"itemHeight": 24
+					}
 				</convert>
 			</widget>
 		</screen>"""
@@ -264,15 +264,14 @@ class FTPServerManager(Screen):
 		self["key_blue"] = StaticText(_("Save"))
 		self["list"] = List([])
 
-		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
-			{
-				"cancel": self.exit,
-				"ok": self.okClicked,
-				"red": self.delete,
-				"green": self.add,
-				"yellow": self.edit,
-				"blue": self.save
-			}, -1)
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"], {
+			"cancel": self.exit,
+			"ok": self.okClicked,
+			"red": self.delete,
+			"green": self.add,
+			"yellow": self.edit,
+			"blue": self.save
+		}, -1)
 
 		self.onLayoutFinish.extend((
 			self.updateServerList,

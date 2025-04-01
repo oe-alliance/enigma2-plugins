@@ -24,15 +24,15 @@ config.plugins.CDInfo.CDDB_cache = ConfigYesNo(default=True)
 class CDInfo(ConfigListScreen, Screen):
 	skin = """
 		<screen position="90,95" size="560,430" title="CDInfo" >
-		    <ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
-		    <ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
-		    <ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
-		    <widget name="key_red" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
-		    <widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
-		    <widget name="key_blue" position="420,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" transparent="1" />
-		    <widget name="info" position="20,50" size="520,40" font="Regular;20" transparent="1" />
-		    <widget name="config" position="20,120" size="520,200" scrollbarMode="showOnDemand" />
-		    <widget name="info2" position="20,340" size="520,80" font="Regular;20" transparent="1" />
+			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
+			<widget name="key_red" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
+			<widget name="key_green" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+			<widget name="key_blue" position="420,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" transparent="1" />
+			<widget name="info" position="20,50" size="520,40" font="Regular;20" transparent="1" />
+			<widget name="config" position="20,120" size="520,200" scrollbarMode="showOnDemand" />
+			<widget name="info2" position="20,340" size="520,80" font="Regular;20" transparent="1" />
 		</screen>
 		"""
 
@@ -59,14 +59,13 @@ class CDInfo(ConfigListScreen, Screen):
 		self["key_green"] = Button(_("ok"))
 		self["key_blue"] = Button(_("defaults"))
 
-		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
-		{
-		    "green": self.save,
-		    "red": self.cancel,
-		    "blue": self.defaults,
-		    "save": self.save,
-		    "cancel": self.cancel,
-		    "ok": self.save,
+		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"], {
+			"green": self.save,
+			"red": self.cancel,
+			"blue": self.defaults,
+			"save": self.save,
+			"cancel": self.cancel,
+			"ok": self.save,
 		}, -2)
 
 	def save(self):

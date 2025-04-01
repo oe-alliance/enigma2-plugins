@@ -106,9 +106,9 @@ class EmissionOverview(Screen, HelpableScreen):
 						MultiContentEntryText(pos=(2,26), size=(555,18), text = 2, font = 1, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER),
 						MultiContentEntryProgress(pos = (0, 44), size = (737, 6), percent = -3), # progress
 					],
-				  "fonts": [gFont("Regular", 20),gFont("Regular", 16)],
-				  "itemHeight": 51
-				 }
+					"fonts": [gFont("Regular", 20),gFont("Regular", 16)],
+					"itemHeight": 51
+				}
 			</convert>
 		</widget>
 		<widget source="upspeed" render="Label" size="150,20" position="5,300" halign="left" font="Regular;18" />

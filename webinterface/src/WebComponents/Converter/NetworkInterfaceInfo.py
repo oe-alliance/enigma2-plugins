@@ -13,13 +13,13 @@ class NetworkInfo(Converter):
 	def __init__(self, type):
 		Converter.___init__(self)
 		self.type = {
-					 "Mac": self.MAC,
-					 "Dhcp": self.DHCP,
-					 "Ip": self.IP,
-					 "Gateway": self.GATEWAY,
-					 "Nameserver": self.NAMESERVER,
-					 "Ipv6": self.IPV6,
-					 }[type]
+			"Mac": self.MAC,
+			"Dhcp": self.DHCP,
+			"Ip": self.IP,
+			"Gateway": self.GATEWAY,
+			"Nameserver": self.NAMESERVER,
+			"Ipv6": self.IPV6,
+		}[type]
 
 	@cached
 	def getText(self):

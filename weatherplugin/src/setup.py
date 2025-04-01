@@ -90,15 +90,14 @@ class MSNWeatherPluginEntriesListConfigScreen(Screen):
 		self["key_yellow"] = StaticText(_("Edit"))
 		self["key_blue"] = StaticText(_("Delete"))
 		self["entrylist"] = WeatherPluginEntryList([])
-		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions"],
-			{
-			 "ok": self.keyOK,
-			 "back": self.keyClose,
-			 "red": self.keyClose,
-			 "green": self.keyGreen,
-			 "yellow": self.keyYellow,
-			 "blue": self.keyDelete,
-			 }, -1)
+		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions"], {
+			"ok": self.keyOK,
+			"back": self.keyClose,
+			"red": self.keyClose,
+			"green": self.keyGreen,
+			"yellow": self.keyYellow,
+			"blue": self.keyDelete,
+		}, -1)
 		self.updateList()
 
 	def updateList(self):
@@ -344,13 +343,12 @@ class MSNWeatherPluginSearch(Screen):
 		self["key_red"] = StaticText(_("Back"))
 		self["key_green"] = StaticText(_("OK"))
 		self["entrylist"] = MSNWeatherPluginSearchResultList([])
-		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions"],
-			{
-			 "ok": self.keyOK,
-			 "green": self.keyOK,
-			 "back": self.keyClose,
-			 "red": self.keyClose,
-			 }, -1)
+		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions"], {
+			"ok": self.keyOK,
+			"green": self.keyOK,
+			"back": self.keyClose,
+			"red": self.keyClose,
+		}, -1)
 		self.updateList(xmlstring)
 
 	def updateList(self, xmlstring):

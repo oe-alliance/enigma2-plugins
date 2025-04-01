@@ -65,21 +65,20 @@ class VlcMediaListScreen(Screen):
 		self["server_name"] = Label(server.getName())
 		self["current_dir"] = Label()
 
-		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions", "MoviePlayerActions", "EPGSelectActions"],
-			{
-			 "back": self.close,
-			 "red": self.keyToggleFilter,
-			 "green": self.keyUpdate,
-			 "yellow": self.keyOpenServerlist,
-			 "blue": self.keyDvd,
-			 "up": self.up,
-			 "down": self.down,
-			 "left": self.left,
-			 "right": self.right,
-			 "ok": self.ok,
-			 "prevBouquet": self.switchToFileList,
-			 "nextBouquet": self.switchToPlayList,
-			 }, -1)
+		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions", "MoviePlayerActions", "EPGSelectActions"], {
+			"back": self.close,
+			"red": self.keyToggleFilter,
+			"green": self.keyUpdate,
+			"yellow": self.keyOpenServerlist,
+			"blue": self.keyDvd,
+			"up": self.up,
+			"down": self.down,
+			"left": self.left,
+			"right": self.right,
+			"ok": self.ok,
+			"prevBouquet": self.switchToFileList,
+			"nextBouquet": self.switchToPlayList,
+		}, -1)
 		self.currentList = None
 		self.playlistIds = []
 

@@ -113,11 +113,11 @@ class Network(Source):
 	list = property(getList)
 
 	lut = {
-			"Name": 0,
-			"Mac": 1,
-			"Dhcp": 2,
-			"Ip": 3,
-			"Netmask": 4,
-			"Gateway": 5,
-			"Ipv6": 6,
-		   }
+		"Name": 0,
+		"Mac": 1,
+		"Dhcp": 2,
+		"Ip": 3,
+		"Netmask": 4,
+		"Gateway": 5,
+		"Ipv6": 6,
+	}

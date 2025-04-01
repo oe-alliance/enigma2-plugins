@@ -45,9 +45,9 @@ class FTPQueueManager(Screen):
 							MultiContentEntryText(pos=(35,20), size=(510,18), text = 1, font = 0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER),
 							MultiContentEntryPixmapAlphaTest(pos=(2,2), size=(32,32), png = 2),
 						],
-					  "fonts": [gFont("Regular", 18)],
-					  "itemHeight": 37
-					 }
+						"fonts": [gFont("Regular", 18)],
+						"itemHeight": 37
+					}
 				</convert>
 			</widget>
 		</screen>"""

@@ -90,9 +90,7 @@ def getMountedDevices():
 		desc = loc[1]
 		return (mp, desc + " (" + mp + ")")
 
-	mountedDevs = [(resolveFilename(SCOPE_CONFIG), _("Flash")),
-				   (resolveFilename(SCOPE_MEDIA, "cf"), _("Compact Flash")),
-				   (resolveFilename(SCOPE_MEDIA, "usb"), _("USB Device"))]
+	mountedDevs = [(resolveFilename(SCOPE_CONFIG), _("Flash")), (resolveFilename(SCOPE_MEDIA, "cf"), _("Compact Flash")), (resolveFilename(SCOPE_MEDIA, "usb"), _("USB Device"))]
 	mountedDevs += [(p.mountpoint, (_(p.description) if p.description else "")) for p in harddiskmanager.getMountedPartitions(True)]
 	mediaDir = resolveFilename(SCOPE_MEDIA)
 	for p in os.listdir(mediaDir):

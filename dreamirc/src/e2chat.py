@@ -189,14 +189,14 @@ class GroupConversation:
 
     def sendOutPipe(self):
         if len(str(self.pipe.getOutText())) > 0:
-         	if (self.pipe.getOutText() == "/QUIT"):
-         		self.pipe.debug("/quit detected....")
-         		self.pipe.clearOutText()
-         		self.group.bye()
-         	else:
-         		self.pipe.debug("sending group chat : %s" % str(self.pipe.getOutText()))
-         		self.sendText(str(self.pipe.getOutText()))
-         		self.pipe.clearOutText()
+            if (self.pipe.getOutText() == "/QUIT"):
+                self.pipe.debug("/quit detected....")
+                self.pipe.clearOutText()
+                self.group.bye()
+            else:
+                self.pipe.debug("sending group chat : %s" % str(self.pipe.getOutText()))
+                self.sendText(str(self.pipe.getOutText()))
+                self.pipe.clearOutText()
 
     def showGroupMessage(self, sender, text, metadata=None):
         """Displays to the user a message sent to this group from the given sender

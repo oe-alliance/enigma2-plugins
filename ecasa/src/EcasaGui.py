@@ -377,7 +377,7 @@ class EcasaPictureWall(Screen, HelpableScreen, InfoBarNotifications):
 			ret[1]()
 
 	def openSetup(self):
-		 self.session.openWithCallback(self.setupClosed, EcasaSetup)
+		self.session.openWithCallback(self.setupClosed, EcasaSetup)
 
 	def openHistory(self):
 		options = [(x, x) for x in config.plugins.ecasa.searchhistory.value]
@@ -454,7 +454,7 @@ class EcasaOverview(EcasaPictureWall):
 		self.onClose.append(self.__onClose)
 
 	def openSetup(self):
-		 self.session.openWithCallback(self.setupClosed, EcasaSetup, allowApiChange=True)
+		self.session.openWithCallback(self.setupClosed, EcasaSetup, allowApiChange=True)
 
 	def setupClosed(self):
 		api = self.api
@@ -514,9 +514,9 @@ class EcasaAlbumview(Screen, HelpableScreen, InfoBarNotifications):
 				{"template": [
 						MultiContentEntryText(pos=(1,1), size=(540,22), text = 0, font = 0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER),
 					],
-				  "fonts": [gFont("Regular", 20)],
-				  "itemHeight": 24
-				 }
+					"fonts": [gFont("Regular", 20)],
+					"itemHeight": 24
+				}
 			</convert>
 		</widget>
 	</screen>"""

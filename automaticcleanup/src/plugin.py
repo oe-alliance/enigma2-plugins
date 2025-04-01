@@ -478,9 +478,9 @@ class AutomaticCleanup:
 
 	def cleanupEnabled(self):
 		if int(config.plugins.AutomaticCleanup.deleteTimersOlderThan.value) > -1 or \
-		   int(config.plugins.AutomaticCleanup.keepSettings.value) > -1 or \
-		   int(config.plugins.AutomaticCleanup.deleteSettingsOlderThan.value) > -1 or \
-		   config.plugins.AutomaticCleanup.deleteOrphanedMovieFiles.value:
+			int(config.plugins.AutomaticCleanup.keepSettings.value) > -1 or \
+			int(config.plugins.AutomaticCleanup.deleteSettingsOlderThan.value) > -1 or \
+			config.plugins.AutomaticCleanup.deleteOrphanedMovieFiles.value:
 			return True
 		else:
 			return False

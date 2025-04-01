@@ -1355,8 +1355,8 @@ class IMDB(Screen, HelpableScreen):
 				self.videos.append(("%s (%d:%02d)" % (name, runtime // 60, runtime % 60), title, url))
 				for subt in get(video, 'timedTextTracks'):
 					self.videos.append(("   " + (get(subt, ('displayName', 'value'))
-												 or get(subt, ('displayName', 'language'))
-												 or get(subt, 'language')),
+												or get(subt, ('displayName', 'language'))
+												or get(subt, 'language')),
 										title, url + "&suburi=" + get(subt, 'url')))
 
 		self.callbackData = Detailstext

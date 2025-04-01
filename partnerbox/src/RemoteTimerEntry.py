@@ -57,8 +57,7 @@ class RemoteTimerEntry(ConfigListScreen, Screen):
 		self["ok"] = Pixmap()
 		self["cancel"] = Pixmap()
 		self.createConfig()
-		self["actions"] = NumberActionMap(["SetupActions", "GlobalActions", "PiPSetupActions"],
-										  {
+		self["actions"] = NumberActionMap(["SetupActions", "GlobalActions", "PiPSetupActions"], {
 			"save": self.keyGo,
 			"cancel": self.keyCancel,
 			"volumeUp": self.incrementStart,
@@ -108,14 +107,12 @@ class RemoteTimerEntry(ConfigListScreen, Screen):
 		description = self.timer.description
 		if self.timer.type == 0:
 			self.timerentry_justplay = ConfigSelection(choices=[("1", _("zap")), ("0", _("record"))], default=str(justplay))
-			self.timerentry_afterevent = ConfigSelection(choices=[("nothing", _("do nothing")), ("standby", _("go to standby")),
-																  ("deepstandby", _("go to deep standby")), ("auto", _("auto"))], default=afterevent)
+			self.timerentry_afterevent = ConfigSelection(choices=[("nothing", _("do nothing")), ("standby", _("go to standby")), ("deepstandby", _("go to deep standby")), ("auto", _("auto"))], default=afterevent)
 			self.timerentry_name = ConfigText(default=name, visible_width=50, fixed_size=False)
 		else:
 			self.timerentry_justplay = ConfigSelection(choices=[(str(PlaylistEntry.SwitchTimerEntry), _("zap")), (str(
 				PlaylistEntry.recNgrab), _("NGRAB")), (str(PlaylistEntry.recDVR), _("DVR"))], default=str(justplay))
-			self.timerentry_afterevent = ConfigSelection(choices=[("0", _("do nothing")), (str(PlaylistEntry.doGoSleep), _("go to standby")),
-																  (str(PlaylistEntry.doShutdown), _("go to deep standby"))], default=str(afterevent))
+			self.timerentry_afterevent = ConfigSelection(choices=[("0", _("do nothing")), (str(PlaylistEntry.doGoSleep), _("go to standby")), (str(PlaylistEntry.doShutdown), _("go to deep standby"))], default=str(afterevent))
 		self.timerentry_description = ConfigText(default=description, visible_width=50, fixed_size=False)
 		self.timerentry_date = ConfigDateTime(default=begin, formatstring=_("%d.%B %Y"), increment=86400)
 		self.timerentry_starttime = ConfigClock(default=begin)
@@ -130,8 +127,7 @@ class RemoteTimerEntry(ConfigListScreen, Screen):
 			if default not in self.Locations:
 				self.Locations.append(default)
 			self.timerentry_dirname = ConfigSelection(default=default, choices=self.Locations)
-		self.timerentry_weekday = ConfigSelection(default=weekday_table[weekday], choices=[("mon", _("Monday")), ("tue", _("Tuesday")),
-																						   ("wed", _("Wednesday")), ("thu", _("Thursday")), ("fri", _("Friday")), ("sat", _("Saturday")), ("sun", _("Sunday"))])
+		self.timerentry_weekday = ConfigSelection(default=weekday_table[weekday], choices=[("mon", _("Monday")), ("tue", _("Tuesday")), ("wed", _("Wednesday")), ("thu", _("Thursday")), ("fri", _("Friday")), ("sat", _("Saturday")), ("sun", _("Sunday"))])
 		self.timerentry_day = ConfigSubList()
 		for x in (0, 1, 2, 3, 4, 5, 6):
 			self.timerentry_day.append(ConfigYesNo(default=day[x]))
@@ -450,15 +446,13 @@ def RemoteTimercreateConfig(self):
 		name = self.timer.name
 		description = self.timer.description
 		self.timerentry_justplay = ConfigSelection(choices=[("zap", _("zap")), ("record", _("record"))], default={0: "record", 1: "zap"}[justplay])
-		self.timerentry_afterevent = ConfigSelection(choices=[("nothing", _("do nothing")), ("standby", _("go to standby")),
-															  ("deepstandby", _("go to deep standby")), ("auto", _("auto"))], default=afterevent)
+		self.timerentry_afterevent = ConfigSelection(choices=[("nothing", _("do nothing")), ("standby", _("go to standby")), ("deepstandby", _("go to deep standby")), ("auto", _("auto"))], default=afterevent)
 		self.timerentry_name = ConfigText(default=name, visible_width=50, fixed_size=False)
 	else:
 		description = self.timer.name
 		self.timerentry_justplay = ConfigSelection(choices=[(str(PlaylistEntry.SwitchTimerEntry), _("zap")), (str(
 			PlaylistEntry.recNgrab), _("NGRAB")), (str(PlaylistEntry.recDVR), _("DVR"))], default=str(justplay))
-		self.timerentry_afterevent = ConfigSelection(choices=[("0", _("do nothing")), (str(PlaylistEntry.doGoSleep), _("go to standby")),
-															  (str(PlaylistEntry.doShutdown), _("go to deep standby"))], default=str(afterevent))
+		self.timerentry_afterevent = ConfigSelection(choices=[("0", _("do nothing")), (str(PlaylistEntry.doGoSleep), _("go to standby")), (str(PlaylistEntry.doShutdown), _("go to deep standby"))], default=str(afterevent))
 	self.timerentry_description = ConfigText(default=description, visible_width=50, fixed_size=False)
 	self.timerentry_date = ConfigDateTime(default=begin, formatstring=_("%d.%B %Y"), increment=86400)
 	self.timerentry_starttime = ConfigClock(default=begin)
@@ -471,8 +465,7 @@ def RemoteTimercreateConfig(self):
 		if default not in self.Locations:
 			self.Locations.append(default)
 		self.timerentry_dirname = ConfigSelection(default=default, choices=self.Locations)
-	self.timerentry_weekday = ConfigSelection(default=weekday_table[weekday], choices=[("mon", _("Monday")), ("tue", _("Tuesday")),
-																					   ("wed", _("Wednesday")), ("thu", _("Thursday")), ("fri", _("Friday")), ("sat", _("Saturday")), ("sun", _("Sunday"))])
+	self.timerentry_weekday = ConfigSelection(default=weekday_table[weekday], choices=[("mon", _("Monday")), ("tue", _("Tuesday")), ("wed", _("Wednesday")), ("thu", _("Thursday")), ("fri", _("Friday")), ("sat", _("Saturday")), ("sun", _("Sunday"))])
 	self.timerentry_day = ConfigSubList()
 	for x in (0, 1, 2, 3, 4, 5, 6):
 		self.timerentry_day.append(ConfigYesNo(default=day[x]))

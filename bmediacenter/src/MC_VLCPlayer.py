@@ -58,19 +58,18 @@ class MC_VLCServerlist(Screen):
 		self["key_yellow"] = Button("Edit Server")
 		self["key_blue"] = Button("Play DVD")
 
-		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions", "MoviePlayerActions"],
-			{
-			 "back": self.Exit,
-			 "red": self.keyDelete,
-			 "green": self.keyAddServer,
-			 "yellow": self.keyEditServer,
-			 "blue": self.keyDVD,
-			 "up": self.up,
-			 "down": self.down,
-			 "left": self.left,
-			 "right": self.right,
-			 "ok": self.ok
-			 }, -1)
+		self["actions"] = ActionMap(["WizardActions", "MenuActions", "ShortcutActions", "MoviePlayerActions"], {
+			"back": self.Exit,
+			"red": self.keyDelete,
+			"green": self.keyAddServer,
+			"yellow": self.keyEditServer,
+			"blue": self.keyDVD,
+			"up": self.up,
+			"down": self.down,
+			"left": self.left,
+			"right": self.right,
+			"ok": self.ok
+		}, -1)
 
 		self.onLayoutFinish.append(self.updateServerlist)
 
@@ -187,24 +186,23 @@ class MC_VLCMedialist(Screen):
 				iPlayableService.evStopped: self.StopPlayback
 			})
 
-		self["actions"] = ActionMap(["WizardActions", "InfobarActions", "MenuActions", "ShortcutActions", "MoviePlayerActions", "EPGSelectActions"],
-			{
-			 "back": self.Exit,
-			 "red": self.JumpToFavs,
-			 "green": self.showPreview,
-			 "yellow": self.update,
-			 "blue": self.keyFilter,
-			 "up": self.up,
-			 "down": self.down,
-			 "left": self.left,
-			 "right": self.right,
-			 "ok": self.ok,
-			 "menu": self.KeyMenu,
-			 "nextBouquet": self.NextFavFolder,
-			 "prevBouquet": self.PrevFavFolder,
-			 "showMovies": self.visibility,
-			 "leavePlayer": self.StopPlayback
-			 }, -1)
+		self["actions"] = ActionMap(["WizardActions", "InfobarActions", "MenuActions", "ShortcutActions", "MoviePlayerActions", "EPGSelectActions"], {
+			"back": self.Exit,
+			"red": self.JumpToFavs,
+			"green": self.showPreview,
+			"yellow": self.update,
+			"blue": self.keyFilter,
+			"up": self.up,
+			"down": self.down,
+			"left": self.left,
+			"right": self.right,
+			"ok": self.ok,
+			"menu": self.KeyMenu,
+			"nextBouquet": self.NextFavFolder,
+			"prevBouquet": self.PrevFavFolder,
+			"showMovies": self.visibility,
+			"leavePlayer": self.StopPlayback
+		}, -1)
 
 		self.currentList = None
 		self.playlistIds = []

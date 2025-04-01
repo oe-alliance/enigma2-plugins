@@ -174,15 +174,15 @@ class WidgetDesktop(Screen):
 					print("position is empty", wname)
 
 		self["actions"] = ActionMap(["WidgetDesktopActions"], {
-															  "ok": self.close,
-															  "cancel": self.close,
-															  "up": self.key_up,
-															  "down": self.key_down,
-															  "left": self.key_left,
-															  "right": self.key_right,
-															  "menu": self.key_menu,
-															  "info": self.key_info,
-															  }, -1)
+			"ok": self.close,
+			"cancel": self.close,
+			"up": self.key_up,
+			"down": self.key_down,
+			"left": self.key_left,
+			"right": self.key_right,
+			"menu": self.key_menu,
+			"info": self.key_info,
+		}, -1)
 		self.onLayoutFinish.append(self.restoreSkin)
 		self.onLayoutFinish.append(self._onLoadFinished)
 		self.onClose.append(self._onClose)
@@ -339,13 +339,13 @@ class WidgetPositionConfigScreen(Screen):
 		self["key_red"] = Label(_("cancel"))
 
 		self["actions"] = ActionMap(["WidgetPositionConfigScreenActions"], {
-															  "ok": self.ok,
-															  "cancel": self.close,
-															  "down": self.down,
-				                                              "up": self.up,
-				             				                  "left": self.left,
-				             				             	  "right": self.right,
-				             				             	  }, -1)
+			"ok": self.ok,
+			"cancel": self.close,
+			"down": self.down,
+			"up": self.up,
+			"left": self.left,
+			"right": self.right,
+		}, -1)
 
 	def ok(self):
 		if self["list"].getCurrent() is not None:
@@ -396,14 +396,14 @@ import os
 
 
 def loadSkinReal(skinPath):
-    if os.path.exists(skinPath):
-        print("[Widgets] Loading skin ", skinPath)
-        for skin in dom_skins:
-        	print("skin", skin)
+	if os.path.exists(skinPath):
+		print("[Widgets] Loading skin ", skinPath)
+		for skin in dom_skins:
+			print("skin", skin)
 
-        	if skin[0] == skinPath.replace("skin.xml", ""):
-        		dom_skins.remove(skin)
-        loadSkin(skinPath)
+			if skin[0] == skinPath.replace("skin.xml", ""):
+				dom_skins.remove(skin)
+		loadSkin(skinPath)
 
 
 def loadPluginSkin(pluginPath):

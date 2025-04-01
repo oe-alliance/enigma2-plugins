@@ -8,9 +8,10 @@ class SimpleResult(Converter):
 
 	def __init__(self, type):
 		Converter.__init__(self, type)
-		self.type = {"Result": self.RESULT,
-					  "ResultText": self.RESULTTEXT
-					}[type]
+		self.type = {
+			"Result": self.RESULT,
+			"ResultText": self.RESULTTEXT
+		}[type]
 
 	@cached
 	def getText(self):

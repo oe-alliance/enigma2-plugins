@@ -119,7 +119,7 @@ class PictureScreen(Screen):
 		size_h = getDesktop(0).size().height()
 		self.skin = """
 		<screen position="0,0" size="%i,%i" title="%s" flags=\"wfNoBorder\">
-			 <widget name="pixmap" position="0,0" size="%i,%i" backgroundColor=\"black\"/>
+			<widget name="pixmap" position="0,0" size="%i,%i" backgroundColor=\"black\"/>
 		</screen>""" % (size_w, size_h, filename, size_w, size_h)
 		Screen.__init__(self, session)
 
@@ -130,15 +130,14 @@ class PictureScreen(Screen):
 
 		self.paused = False
 
-		self["actions"] = ActionMap(["WizardActions", "DirectionActions", "ChannelSelectBaseActions", "ShortcutActions"],
-			{
-			 "ok": self.do,
-			 "back": self.exit,
-			 "green": self.AutoReloaderSwitch,
-			 "yellow": self.pause,
-			 "red": self.prev,
-			 "blue": self.next,
-			 }, -1)
+		self["actions"] = ActionMap(["WizardActions", "DirectionActions", "ChannelSelectBaseActions", "ShortcutActions"], {
+			"ok": self.do,
+			"back": self.exit,
+			"green": self.AutoReloaderSwitch,
+			"yellow": self.pause,
+			"red": self.prev,
+			"blue": self.next,
+		}, -1)
 
 		self.onLayoutFinish.append(self.do)
 

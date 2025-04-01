@@ -86,11 +86,11 @@ class EmailScreen(Screen):
 			<widget name="messagelist" position="%d,%d" size="%d,%d" scrollbarMode="showOnDemand" />
 			<widget name="infolabel" position="%d,%d" size="%d,%d"   foregroundColor=\"white\" font=\"Regular;%d\" />
 		</screen>""" % (
-					   (DESKTOP_WIDTH - width) / 2, (DESKTOP_HEIGHT - height) / 2, width, height,
-					   boxlistWidth, height - infolabelHeight,
-					   boxlistWidth, 0, messagelistWidth, height - infolabelHeight,
-					   0, height - infolabelHeight, width, infolabelHeight, scaleV(20, 18)
-					   )
+			(DESKTOP_WIDTH - width) / 2, (DESKTOP_HEIGHT - height) / 2, width, height,
+			boxlistWidth, height - infolabelHeight,
+			boxlistWidth, 0, messagelistWidth, height - infolabelHeight,
+			0, height - infolabelHeight, width, infolabelHeight, scaleV(20, 18)
+		)
 
 	def __init__(self, session, account):
 		'''
@@ -108,19 +108,18 @@ class EmailScreen(Screen):
 		self.skin = EmailScreen.skin
 		Screen.__init__(self, session)
 
-		self["actions"] = ActionMap(["InfobarChannelSelection", "WizardActions", "DirectionActions", "MenuActions", "ShortcutActions", "GlobalActions", "HelpActions", "NumberActions", "ChannelSelectBaseActions"],
-			{
-			 "ok": self._ok,
-			 "back": self._exit,
-			 "historyNext": self._selectMessagelist,
-			 "historyBack": self._selectBoxlist,
-			 "nextBouquet": self._selectMessagelist,
-			 "prevBouquet": self._selectBoxlist,
-			 "down": self._down,
-			 "up": self._up,
-			 "left": self._left,
-			 "right": self._right,
-			 }, -1)
+		self["actions"] = ActionMap(["InfobarChannelSelection", "WizardActions", "DirectionActions", "MenuActions", "ShortcutActions", "GlobalActions", "HelpActions", "NumberActions", "ChannelSelectBaseActions"], {
+			"ok": self._ok,
+			"back": self._exit,
+			"historyNext": self._selectMessagelist,
+			"historyBack": self._selectBoxlist,
+			"nextBouquet": self._selectMessagelist,
+			"prevBouquet": self._selectBoxlist,
+			"down": self._down,
+			"up": self._up,
+			"left": self._left,
+			"right": self._right,
+		}, -1)
 		self["messagelist"] = MenuList([], content=eListboxPythonMultiContent)
 		self["messagelist"].l.setItemHeight(scaleV(70, 60))
 		self["messagelist"].l.setFont(0, gFont("Regular", scaleV(20, 18)))  # new
@@ -334,21 +333,21 @@ class ScreenMailView(Screen):
 			<widget name="buttonyellow" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 			<widget name="buttonblue" position="%d,%d" zPosition="5" size="140,40" valign="center" halign="center" font="Regular;%d" transparent="1" foregroundColor="white" shadowColor="black" shadowOffset="-1,-1" />
 		</screen>""" % (
-					   (DESKTOP_WIDTH - width) / 2, (DESKTOP_HEIGHT - height) / 2, width, height,
-					   0, 0, width, lineHeight, fontSize - 1,  # from
-					   0, lineHeight, width, lineHeight, fontSize - 1,  # date
-					   0, 2 * lineHeight, width, lineHeight, fontSize - 1,  # subject
-					   0, 3 * lineHeight + 1, width,  # line
-					   0, 3 * lineHeight + 5, width, height - 3 * lineHeight - 5 - 5 - 30 - 5, fontSize,  # body
-					   buttonsGap, height - 30 - 5,
-					   2 * buttonsGap + 140, height - 30 - 5,
-					   3 * buttonsGap + 2 * 140, height - 30 - 5,
-					   4 * buttonsGap + 3 * 140, height - 30 - 5,
-					   buttonsGap, height - 30 - 5, scaleV(18, 16),
-					   2 * buttonsGap + 140, height - 30 - 5, scaleV(18, 16),
-					   3 * buttonsGap + 2 * 140, height - 30 - 5, scaleV(18, 16),
-					   4 * buttonsGap + 3 * 140, height - 30 - 5, scaleV(18, 16),
-					   )
+			(DESKTOP_WIDTH - width) / 2, (DESKTOP_HEIGHT - height) / 2, width, height,
+			0, 0, width, lineHeight, fontSize - 1,  # from
+			0, lineHeight, width, lineHeight, fontSize - 1,  # date
+			0, 2 * lineHeight, width, lineHeight, fontSize - 1,  # subject
+			0, 3 * lineHeight + 1, width,  # line
+			0, 3 * lineHeight + 5, width, height - 3 * lineHeight - 5 - 5 - 30 - 5, fontSize,  # body
+			buttonsGap, height - 30 - 5,
+			2 * buttonsGap + 140, height - 30 - 5,
+			3 * buttonsGap + 2 * 140, height - 30 - 5,
+			4 * buttonsGap + 3 * 140, height - 30 - 5,
+			buttonsGap, height - 30 - 5, scaleV(18, 16),
+			2 * buttonsGap + 140, height - 30 - 5, scaleV(18, 16),
+			3 * buttonsGap + 2 * 140, height - 30 - 5, scaleV(18, 16),
+			4 * buttonsGap + 3 * 140, height - 30 - 5, scaleV(18, 16),
+		)
 		Screen.__init__(self, session)
 		self["from"] = Label(decodeHeader(_("From") + ": %s" % self._email.get('from', _('no from'))))
 		msgdate = email.utils.parsedate_tz(self._email.get("date", ""))
@@ -362,20 +361,18 @@ class ScreenMailView(Screen):
 			self["buttonblue"] = Button(_("undelete"))
 		else:
 			self["buttonblue"] = Button(_("delete"))
-		self["actions"] = ActionMap(["WizardActions", "DirectionActions", "MenuActions", "ShortcutActions"],
-			{
-			 "back": self.close,
-			 "up": self["body"].pageUp,
-			 "down": self["body"].pageDown,
-			 # TODO: perhaps better use left/right for previous/next message
-			 "left": self["body"].pageUp,
-			 "right": self["body"].pageDown,
-			 "red": self._selectBody,
-			 "green": self._selectAttachment,
-			 "yellow": self._markUnread,
-			 "blue": self._delete,
-
-			 }, -1)
+		self["actions"] = ActionMap(["WizardActions", "DirectionActions", "MenuActions", "ShortcutActions"], {
+			"back": self.close,
+			"up": self["body"].pageUp,
+			"down": self["body"].pageDown,
+			# TODO: perhaps better use left/right for previous/next message
+			"left": self["body"].pageUp,
+			"right": self["body"].pageDown,
+			"red": self._selectBody,
+			"green": self._selectAttachment,
+			"yellow": self._markUnread,
+			"blue": self._delete,
+		}, -1)
 		self._uid = uid
 		self._flags = flags
 		self.onLayoutFinish.append(self._updateButtons)
@@ -772,8 +769,7 @@ class EmailAccount():
 			else:
 				rangeToFetch = [1, numMessagesinFolder]
 			try:
-				self._proto.fetchFlags('%i:%i' % (rangeToFetch[0], rangeToFetch[1])  # '1:*'
-						   ).addCallback(self._onFlagsList, callback, rangeToFetch)
+				self._proto.fetchFlags('%i:%i' % (rangeToFetch[0], rangeToFetch[1])).addCallback(self._onFlagsList, callback, rangeToFetch)
 
 			except imap4.IllegalServerResponse as e:
 				debug("[EmailAccount] _onExamine exception: " + str(e))
@@ -784,8 +780,7 @@ class EmailAccount():
 		callback([], [])
 
 	def _onFlagsList(self, flagsList, callback, rangeToFetch):
-		self._proto.fetchHeaders('%i:%i' % (rangeToFetch[0], rangeToFetch[1])  # '1:*'
-				   ).addCallback(callback, flagsList)
+		self._proto.fetchHeaders('%i:%i' % (rangeToFetch[0], rangeToFetch[1])).addCallback(callback, flagsList)
 
 	def getMessage(self, message, callback, errCallback):
 		debug("[EmailAccount] %s: getMessage: %s" % (self._name, str(message)))
@@ -1153,10 +1148,9 @@ initLog()
 
 def Plugins(path, **kwargs):  # @UnusedVariable kwargs # pylint: disable-msg=W0613,C0103
 	return [
-			 PluginDescriptor(name=_("Email Client"), description=_("view Emails via IMAP4"),
-			 where=PluginDescriptor.WHERE_PLUGINMENU,
-			 fnc=main,
-			 icon="plugin.png"
-			 ),
-			 PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=autostart)
-		]
+		PluginDescriptor(name=_("Email Client"), description=_("view Emails via IMAP4"),
+		where=PluginDescriptor.WHERE_PLUGINMENU,
+		fnc=main,
+		icon="plugin.png"),
+		PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=autostart)
+	]

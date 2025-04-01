@@ -46,10 +46,7 @@ class PkgList(Source):
 				if package[PKG_NAME] in map:
 					if map[package[PKG_NAME]][0] > package[PKG_REL]:
 						continue
-				map.update({package[PKG_NAME]: [(package[PKG_REL][:-1] if len(package) < 3 else package[PKG_REL]),
-					("" if len(package) < 3 else package[PKG_INFO][:-1]),
-					 "0",
-					 "0"]})
+				map.update({package[PKG_NAME]: [(package[PKG_REL][:-1] if len(package) < 3 else package[PKG_REL]), ("" if len(package) < 3 else package[PKG_INFO][:-1]), "0", "0"]})
 			out = os_popen("opkg list-installed")
 			for line in out:
 				package = line.split(' - ')

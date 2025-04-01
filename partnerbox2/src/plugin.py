@@ -283,8 +283,7 @@ class PartnerboxGlobals:
 			eventend = end - marginAfter
 		hasEndTime = timerdict.get("hasEndTime", False)
 		renamerepeat = timerdict.get("rename_repeat", True)
-		timer = RecordTimerEntry(serviceref, begin, end, name, description, eit, disabled, justplay, afterevent, dirname=dirname, tags=tags, descramble=descramble,
-								 record_ecm=recordecm, isAutoTimer=isAutotimer, ice_timer_id=ice_timer_id, always_zap=always_zap, rename_repeat=renamerepeat)
+		timer = RecordTimerEntry(serviceref, begin, end, name, description, eit, disabled, justplay, afterevent, dirname=dirname, tags=tags, descramble=descramble, record_ecm=recordecm, isAutoTimer=isAutotimer, ice_timer_id=ice_timer_id, always_zap=always_zap, rename_repeat=renamerepeat)
 		timer.marginBefore = marginBefore
 		timer.eventbegin = eventbegin
 		timer.eventend = eventend
@@ -1070,10 +1069,10 @@ class RemoteChannelList(Screen, PartnerboxGlobals):
 		<screen name="RemoteChannelList" position="center,center" flags="wfNoBorder" backgroundColor="#200a1232" size="1280,720" resolution="1280,720" title="Partnerbox: Channel List">
 			<widget source="Title" render="Label" position="23,8" size="776,40" font="Regular; 27" foregroundColor="white" backgroundColor="#50a1232" valign="center" zPosition="1" transparent="1" />
 			<widget source="global.CurrentTime" render="Label" position="820,8" size="440,40" font="Regular; 27" foregroundColor="white" backgroundColor="#50a1232" halign="right" transparent="1" valign="center">
-  				<convert type="ClockToText">Format %a.%e %b. %Y %H:%M</convert>
+				<convert type="ClockToText">Format %a.%e %b. %Y %H:%M</convert>
 			</widget>
 			<widget source="menulist" render="Listbox" position="23,60" size="780,600" scrollbarMode="showOnDemand" foregroundColor="white" backgroundColor="#50a1232" zPosition="1" transparent="1">
-  				<convert type="TemplatedMultiContent">
+				<convert type="TemplatedMultiContent">
 					{"template":
 						[  # indexlist:rawdata, sname, title, progress, timeline, btimestr, etimestr, dtimestr, rest
 						MultiContentEntryText(pos=(5,2), size=(160,24), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=1), # servicename
@@ -1087,22 +1086,22 @@ class RemoteChannelList(Screen, PartnerboxGlobals):
 				</convert>
 			</widget>
 			<widget source="ServiceEvent" render="Label" position="823,60" size="433,80" font="Regular;22" halign="center" valign="center" foregroundColor="white" backgroundColor="#50a1232" zPosition="1" transparent="1">
-			  <convert type="EventName">Name</convert>
+				<convert type="EventName">Name</convert>
 			</widget>
 			<widget source="ServiceEvent" render="RunningText" options="movetype=none,startdelay=600,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="823,190" size="433,466" font="Regular;20" halign="left" valign="top" foregroundColor="white" backgroundColor="#50a1232" zPosition="1" transparent="1">
-			  <convert type="EventName">FullDescription</convert>
+				<convert type="EventName">FullDescription</convert>
 			</widget>
 			<widget source="footnote" render="Label" position="center,677" size="780,30" font="Regular;24" halign="center" valign="center" foregroundColor="white" backgroundColor="#50a1232" zPosition="1" transparent="1" />
 			<widget source="ServiceEvent" render="Label" position="850,153" size="67,20" font="Regular;18" foregroundColor="white" backgroundColor="#50a1232" transparent="1" halign="right" valign="center">
-	  			<convert type="EventTime">StartTime</convert>
-	  			<convert type="ClockToText">Format:%H:%M</convert>
+				<convert type="EventTime">StartTime</convert>
+				<convert type="ClockToText">Format:%H:%M</convert>
 			</widget>
 			<widget source="ServiceEvent" render="Label" position="1163,153" size="67,20" font="Regular;18" foregroundColor="white" backgroundColor="#50a1232" transparent="1" valign="center">
-	  			<convert type="EventTime">EndTime</convert>
+				<convert type="EventTime">EndTime</convert>
 				<convert type="ClockToText">Format:%H:%M</convert>
 			</widget>
 			<widget source="ServiceEvent" render="Progress" position="923,160" size="233,8" backgroundColor="#50a1232" foregroundColor="white" zPosition="1" borderWidth="1" borderColor="white">
-	  			<convert type="EventTime">Progress</convert>
+				<convert type="EventTime">Progress</convert>
 			</widget>
 			<eLabel name="background" position="0,663" size="1280,56" backgroundColor="#1502050e" zPosition="-1" />
 			<eLabel name="background" position="15,56" size="1250,605" backgroundColor="#1502050e" zPosition="-2" transparent="1" />

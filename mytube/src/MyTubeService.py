@@ -380,7 +380,7 @@ class MyTubeFeedEntry():
 		return myTubeService.addToFavorites(video_id)
 
 	def PrintEntryDetails(self):
-		EntryDetails = {'Title': None, 'TubeID': None, 'Published': None, 'Published': None, 'Description': None, 'Category': None, 'Tags': None, 'Duration': None, 'Views': None, 'Rating': None, 'Thumbnails': None}
+		EntryDetails = {'Title': None, 'TubeID': None, 'Published': None, 'Description': None, 'Category': None, 'Tags': None, 'Duration': None, 'Views': None, 'Rating': None, 'Thumbnails': None}
 		EntryDetails['Title'] = self.entry.media.title.text
 		EntryDetails['TubeID'] = self.getTubeId()
 		EntryDetails['Description'] = self.getDescription()
@@ -587,11 +587,11 @@ class MyTubePlayerService():
 	def getLoginTokenOnCurl(self, email, pw):
 
 		opts = {
-		  'service': 'youtube',
-		  'accountType': 'HOSTED_OR_GOOGLE',
-		  'Email': email,
-		  'Passwd': pw,
-		  'source': self.yt_service.client_id,
+			'service': 'youtube',
+			'accountType': 'HOSTED_OR_GOOGLE',
+			'Email': email,
+			'Passwd': pw,
+			'source': self.yt_service.client_id,
 		}
 
 		print("[MyTube] MyTubePlayerService - Starting external curl auth request")

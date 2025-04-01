@@ -291,8 +291,7 @@ class EPGRefresh:
 			message = _("There is still a refresh running. The Operation isn't allowed at this moment.")
 			try:
 				if self.session is not None:
-					self.session.open(MessageBox, message,
-						 MessageBox.TYPE_INFO, timeout=10)
+					self.session.open(MessageBox, message, MessageBox.TYPE_INFO, timeout=10)
 			except:
 				print("[EPGRefresh] Error while opening Messagebox!")
 				print_exc(file=stdout)

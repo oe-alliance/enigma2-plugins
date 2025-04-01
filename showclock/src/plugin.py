@@ -219,7 +219,7 @@ class ShowClockSetup(ConfigListScreen, Screen):  # config
 		)
 
 	def startPositioner(self, answer):
- 		self.session.open(ShowClockPositioner)
+		self.session.open(ShowClockPositioner)
 
 ##############################################################################
 
@@ -228,8 +228,7 @@ class ShowClockPositioner(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.skin = clockSkin()
-		self["actions"] = ActionMap(["PiPSetupActions"],
-		{
+		self["actions"] = ActionMap(["PiPSetupActions"], {
 			"left": self.left,
 			"up": self.up,
 			"right": self.right,
@@ -382,7 +381,7 @@ def sessionstart(reason, **kwargs):
 
 def setup(session, **kwargs):
 	try:
-	 	session.open(ShowClockSetup)
+		session.open(ShowClockSetup)
 	except:
 		print(pluginPrintname, "Pluginexecution failed")
 

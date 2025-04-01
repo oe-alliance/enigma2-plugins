@@ -218,12 +218,11 @@ class MountManagerMenu(ConfigListScreen, Screen):
 		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
 		self.createSetup()
 
-		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
-		{
-		    "green": self.keySave,
-		    "red": self.keyCancel,
-		    "cancel": self.keyCancel,
-		    "ok": self.keySave,
+		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"], {
+			"green": self.keySave,
+			"red": self.keyCancel,
+			"cancel": self.keyCancel,
+			"ok": self.keySave,
 		}, -2)
 
 	def createSetup(self):

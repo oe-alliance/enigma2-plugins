@@ -336,11 +336,15 @@ def FillE2TimerList(xmlstring, sreference=None):
 			e2name = timer.findtext('e2name', '')
 			e2location = timer.findtext('e2location', '')
 			e2description = timer.findtext('e2description', '')
-			E2TimerList.append(E2Timer(servicereference=servicereference, servicename=unquote(servicename), name=e2name,
-									   disabled=disabled, timebegin=timebegin, timeend=timeend, duration=duration,
-									   startprepare=startprepare, state=state, repeated=repeated, justplay=justplay,
-									   eventId=eventId, afterevent=afterevent, dirname=e2location,
-									   description=unquote(e2description), type=0))
+			E2TimerList.append(
+				E2Timer(
+					servicereference=servicereference, servicename=unquote(servicename), name=e2name,
+					disabled=disabled, timebegin=timebegin, timeend=timeend, duration=duration,
+					startprepare=startprepare, state=state, repeated=repeated, justplay=justplay,
+					eventId=eventId, afterevent=afterevent, dirname=e2location,
+					description=unquote(e2description), type=0
+				)
+			)
 	return E2TimerList
 
 
@@ -373,8 +377,7 @@ def FillE1TimerList(xmlstring, sreference=None):
 			if sreference.upper() == servicereference.upper() and ((typedata & PlaylistEntry.stateWaiting) or (typedata & PlaylistEntry.stateRunning)):
 				go = True
 		if go:
-			E1TimerList.append(E2Timer(servicereference=servicereference, servicename=servicename, name="", disabled=0, timebegin=timebegin, timeend=0, duration=duration,
-							   startprepare=0, state=0, repeated=0, justplay=0, eventId=-1, afterevent=0, dirname="", description=description, type=typedata))
+			E1TimerList.append(E2Timer(servicereference=servicereference, servicename=servicename, name="", disabled=0, timebegin=timebegin, timeend=0, duration=duration, startprepare=0, state=0, repeated=0, justplay=0, eventId=-1, afterevent=0, dirname="", description=description, type=typedata))
 	return E1TimerList
 
 

@@ -378,10 +378,12 @@ class Sudoku(Screen):
 		for j in range(9):
 			tmp = []
 			for i in range(9):
-				cell = SudokuCell(self["Canvas"],
-								  j * (CELL_SIZE + CELL_OFFSET) + (j // 3) * (GROUP_SIZE - 3 * CELL_SIZE),
-								  i * (CELL_SIZE + CELL_OFFSET) + (i // 3) * (GROUP_SIZE - 3 * CELL_SIZE),
-								  CELL_SIZE, CELL_SIZE)
+				cell = SudokuCell(
+					self["Canvas"],
+					j * (CELL_SIZE + CELL_OFFSET) + (j // 3) * (GROUP_SIZE - 3 * CELL_SIZE),
+					i * (CELL_SIZE + CELL_OFFSET) + (i // 3) * (GROUP_SIZE - 3 * CELL_SIZE),
+					CELL_SIZE, CELL_SIZE
+				)
 				tmp.append(cell)
 			self.board_cells.append(tmp)
 

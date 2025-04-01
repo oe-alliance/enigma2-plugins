@@ -99,7 +99,7 @@ class AspectRatioSwitchSetup(ConfigListScreen, Screen):
 			<widget render="Label" source="key_red" position="10,460" size="140,40" transparent="1" halign="center" valign="center" zPosition="2" foregroundColor="white" font="Regular;18" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="180,460" size="140,40" transparent="1" alphatest="on" />
 			<widget render="Label" source="key_green" position="180,460" size="140,40" transparent="1" halign="center" valign="center" zPosition="2" foregroundColor="white" font="Regular;18" />
- 		</screen>"""
+		</screen>"""
 
 	def __init__(self, session, args=None):
 		Screen.__init__(self, session)

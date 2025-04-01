@@ -1433,7 +1433,8 @@ class UniversalFeed(BaseFeed):  # Feed which can handle rdf, rss and atom feeds 
 
 
 def Plugins(**kwargs):
-	return [PluginDescriptor(name="RSS Reader", description=_("A simple to use RSS reader"), icon="plugin.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main, needsRestart=False,),
-			PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=autostart, needsRestart=False,),
- 			PluginDescriptor(name=_("View RSS..."), description="Let's you view current RSS entries", where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main, needsRestart=False,)
-			]
+	return [
+		PluginDescriptor(name="RSS Reader", description=_("A simple to use RSS reader"), icon="plugin.png", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main, needsRestart=False,),
+		PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=autostart, needsRestart=False,),
+		PluginDescriptor(name=_("View RSS..."), description="Let's you view current RSS entries", where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main, needsRestart=False,)
+	]

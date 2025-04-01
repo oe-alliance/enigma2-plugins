@@ -53,10 +53,7 @@ class UploadPkgResource(resource.Resource):
 
 		if not data:
 			req.setResponseCode(http.OK)
-			return self.res % (_("filesize was 0, not uploaded"),
-					_("Close"),
-					 _("Add")
-					)
+			return self.res % (_("filesize was 0, not uploaded"), _("Close"), _("Add"))
 
 		fd, fn = mkstemp(dir="/tmp/")
 		cnt = os_write(fd, data)
@@ -83,10 +80,7 @@ class UploadPkgResource(resource.Resource):
 				return self.res % (_("error writing to disk, not uploaded"), _("Close"), _("Add"))
 
 			req.setResponseCode(http.OK)
-			return self.res % ((debug),
-					_("Close"),
-					 _("Add")
-					)
+			return self.res % ((debug), _("Close"), _("Add"))
 
 	def render_GET(self, req):
 		req.setResponseCode(http.OK)

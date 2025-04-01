@@ -49,7 +49,7 @@ class IRCPerson(e2support.AbstractPerson):
         if self.account.client is None:
             print("not connected")
         else:
-        	  self.account.client.quit("user logged off")
+            self.account.client.quit("user logged off")
 
 
 @implementer(interfaces.IGroup)
@@ -93,7 +93,7 @@ class IRCGroup(e2support.AbstractGroup):
         if self.account.client is None:
             print("not connected")
         else:
-        	self.account.client.quit("user logged off")
+            self.account.client.quit("user logged off")
 
 
 class IRCProto(e2support.AbstractClientMixin, irc.IRCClient):

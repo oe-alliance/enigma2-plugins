@@ -334,7 +334,7 @@ class EIBoxZoneScreen(ConfigListScreen, Screen):
 					pixmaps_sources = list(EIB_object.custom_img)
 
 				for idx, filename in enumerate(pixmaps_sources):
-					  pixmaps_sources[idx] = img_prefix + filename
+					pixmaps_sources[idx] = img_prefix + filename
 				pixmaps_string = ','.join(pixmaps_sources)
 				skin += '\t\t\t<widget name="%s" pixmaps="%s" position="%s" size="32,32" transparent="1" alphatest="on" borderColor="#004679" zPosition="1" />\n' % (EIB_object.object_id, pixmaps_string, EIB_object.getPos(offset))
 				self[EIB_object.object_id] = MultiPixmap()

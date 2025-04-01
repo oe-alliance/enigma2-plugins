@@ -25,7 +25,7 @@ class SubServices(Source):
 			if currentServiceRef is not None:
 				list.append((
 					currentServiceRef.toString(),
-					 ServiceReference(currentServiceRef).getServiceName()
+					ServiceReference(currentServiceRef).getServiceName()
 				))
 
 				currentService = self.session.nav.getCurrentService()

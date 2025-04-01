@@ -107,21 +107,20 @@ class VlcServerListScreen(Screen):
 		self["key_yellow"] = Button(_("edit server"))
 		self["key_blue"] = Button(_("set default"))
 
-		self["actions"] = ActionMap(["WizardActions", "ColorActions", "ChannelSelectEPGActions"],
-			{
-			 "back": self.close,
-			 "red": self.keyDelete,
-			 "green": self.keyAddServer,
-			 "yellow": self.keyEditServer,
-			 "blue": self.keyGetDefault,
-			 "up": self.up,
-			 "down": self.down,
-			 "left": self.left,
-			 "right": self.right,
-			 "ok": self.ok,
-			 "info": self.showHelp,
-			 "epg": self.showHelp
-            }, -1)
+		self["actions"] = ActionMap(["WizardActions", "ColorActions", "ChannelSelectEPGActions"], {
+			"back": self.close,
+			"red": self.keyDelete,
+			"green": self.keyAddServer,
+			"yellow": self.keyEditServer,
+			"blue": self.keyGetDefault,
+			"up": self.up,
+			"down": self.down,
+			"left": self.left,
+			"right": self.right,
+			"ok": self.ok,
+			"info": self.showHelp,
+			"epg": self.showHelp
+        }, -1)
 
 		self.onLayoutFinish.append(self.initialServerlistUpdate)
 

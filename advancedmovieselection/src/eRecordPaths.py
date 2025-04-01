@@ -29,12 +29,11 @@ class RecordPathsSettings(ConfigListScreen, Screen):
 		ConfigListScreen.__init__(self, [])
 		self.initConfigList()
 
-		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
-		{
-		    "green": self.save,
-		    "red": self.cancel,
-		    "cancel": self.cancel,
-		    "ok": self.ok,
+		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"], {
+			"green": self.save,
+			"red": self.cancel,
+			"cancel": self.cancel,
+			"ok": self.ok,
 		}, -2)
 
 	def checkReadWriteDir(self, configele):

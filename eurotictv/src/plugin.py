@@ -207,4 +207,4 @@ def main(session, **kwargs):
 
 
 def Plugins(**kwargs):
- 	return PluginDescriptor(name="eUroticTV", description=_("Watch eUroticTV via HTTP Live Streaming"), where=PluginDescriptor.WHERE_PLUGINMENU, icon="plugin.png", needsRestart=True, fnc=main)
+	return PluginDescriptor(name="eUroticTV", description=_("Watch eUroticTV via HTTP Live Streaming"), where=PluginDescriptor.WHERE_PLUGINMENU, icon="plugin.png", needsRestart=True, fnc=main)
