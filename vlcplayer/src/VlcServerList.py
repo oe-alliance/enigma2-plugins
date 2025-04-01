@@ -147,7 +147,7 @@ class VlcServerListScreen(Screen):
 	def showHelp(self):
 		#os.system("cat /usr/lib/enigma/python/Plugins/Extensions/VlcPlayer/help.txt")
 		self.session.open(MessageBox,
-			_("Latest compatible version VLC 2.0.7\nSetup VLC for PC:\nTools -> Preferences -> All -> Interface -> Main Interface -> Select Web\nFind file c:/Program Files/VideoLAN/VLC/Lua/http/.hosts and insert your box ip (without #).\nAdd shortcut to the startup of the background start VLC 'C:\Program Files\VideoLAN\VLC\vlc.exe --intf telnet --extraintf http'"),
+			_(r"Latest compatible version VLC 2.0.7\nSetup VLC for PC:\nTools -> Preferences -> All -> Interface -> Main Interface -> Select Web\nFind file c:/Program Files/VideoLAN/VLC/Lua/http/.hosts and insert your box ip (without #).\nAdd shortcut to the startup of the background start VLC 'C:\Program Files\VideoLAN\VLC\vlc.exe --intf telnet --extraintf http'"),
 			MessageBox.TYPE_INFO
 		)
 

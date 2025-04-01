@@ -110,7 +110,7 @@ def getInstance():
 				CompiledRegexpReplaceChars = re.compile('[' + config.plugins.seriesplugin.replace_chars.value.replace("\\", "\\\\\\\\") + ']')
 		except:
 			log.exception(" Config option 'Replace Chars' is no valid regular expression")
-			CompiledRegexpReplaceChars = re.compile("[:\!/\\,\(\)'\?]")
+			CompiledRegexpReplaceChars = re.compile(r"[:\!/\\,\(\)'\?]")
 
 		# Check autotimer
 		try:

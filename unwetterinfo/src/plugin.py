@@ -332,7 +332,7 @@ class UnwetterMain(Screen):
 		bereich = sub('<[^>]*>', "", bereich)
 		bereich = sub('Fronten- und Isobarenkarte.*', "", bereich)
 		bereich = bereich.strip()
-		bereich = sub("\n[\s\n]+", "\n\n", bereich)
+		bereich = sub(r"\n[\s\n]+", "\n\n", bereich)
 
 		f = open(self.reportfile, "w")
 		f.write("%s" % bereich)

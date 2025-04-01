@@ -590,7 +590,7 @@ else:
                 self.parser = self.feed = None  # nuke circular reference
 
         def handle_proc(self, tag, attr):
-            m = re.search("encoding\s*=\s*['\"]([^\"']+)[\"']", attr)
+            m = re.search(r"encoding\s*=\s*['\"]([^\"']+)[\"']", attr)
             if m:
                 self.handle_xml(m.group(1), 1)
 

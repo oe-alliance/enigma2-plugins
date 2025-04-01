@@ -158,11 +158,11 @@ class OFDB(Screen):
 			self.OFDBlanguage = "german."  # it's a subdomain, so add a '.' at the end
 		self.htmltags = compile('<.*?>')
 		self.generalinfomask = compile(
-		'<title>OFDb - (?P<title>.*?)</title>.*?'
-		'(?P<g_original>Originaltitel):[\s\S]*?class=\"Daten\">(?P<original>.*?)</td>'
-		'(?:.*?(?P<g_country>Herstellungsland):[\s\S]*?class="Daten">(?P<country>.*?)(?:\.\.\.|</td>))*'
-		'(?:.*?(?P<g_year>Erscheinungsjahr):[\s\S]*?class="Daten">(?P<year>.*?)</td>)*'
-		'(?:.*?(?P<g_director>Regie):[\s\S]*?class="Daten">(?P<director>.*?)(?:\.\.\.|</td>))*', DOTALL)
+		r'<title>OFDb - (?P<title>.*?)</title>.*?'
+		r'(?P<g_original>Originaltitel):[\s\S]*?class=\"Daten\">(?P<original>.*?)</td>'
+		r'(?:.*?(?P<g_country>Herstellungsland):[\s\S]*?class="Daten">(?P<country>.*?)(?:\.\.\.|</td>))*'
+		r'(?:.*?(?P<g_year>Erscheinungsjahr):[\s\S]*?class="Daten">(?P<year>.*?)</td>)*'
+		r'(?:.*?(?P<g_director>Regie):[\s\S]*?class="Daten">(?P<director>.*?)(?:\.\.\.|</td>))*', DOTALL)
 
 	def resetLabels(self):
 		self["detailslabel"].setText("")
@@ -304,7 +304,7 @@ class OFDB(Screen):
 			self.OFDBparse()
 		else:
 			if search("<title>OFDb - Suchergebnis</title>", self.inhtml):
-				searchresultmask = compile("<br>(\d{1,3}\.) <a href=\"film/(.*?)\"(?:.*?)\)\">(.*?)</a>", DOTALL)
+				searchresultmask = compile(r"<br>(\d{1,3}\.) <a href=\"film/(.*?)\"(?:.*?)\)\">(.*?)</a>", DOTALL)
 				searchresults = searchresultmask.finditer(self.inhtml)
 				self.resultlist = [(self.htmltags.sub('', x.group(3)), x.group(2)) for x in searchresults]
 				self["menu"].l.setList(self.resultlist)
@@ -339,7 +339,7 @@ class OFDB(Screen):
 				Titeltext = "%s%s" % (Titeltext[0:54], "…")
 			self["titellabel"].setText(Titeltext)
 			Detailstext = ""
-			genreblockmask = compile('Genre\(s\):(?:[\s\S]*?)class=\"Daten\">(.*?)</tr>', DOTALL)
+			genreblockmask = compile(r'Genre\(s\):(?:[\s\S]*?)class=\"Daten\">(.*?)</tr>', DOTALL)
 			genreblock = genreblockmask.findall(self.inhtml)
 			genremask = compile('\">(.*?)</a')
 			if genreblock:
@@ -362,7 +362,7 @@ class OFDB(Screen):
 				self["stars"].setValue(self.ratingstars)
 				self["starsbg"].show()
 			self["ratinglabel"].setText(Ratingtext)
-			castblockmask = compile('Darsteller:[\s\S]*?class=\"Daten\">(.*?)(?:\.\.\.|\xbb)', DOTALL)
+			castblockmask = compile(r'Darsteller:[\s\S]*?class=\"Daten\">(.*?)(?:\.\.\.|\xbb)', DOTALL)
 			castblock = castblockmask.findall(self.inhtml)
 			castmask = compile('\">(.*?)</a')
 			Casttext = ""

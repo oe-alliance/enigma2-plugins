@@ -21,7 +21,7 @@ from Screens.MessageBox import MessageBox
 main_url = "http://napisy.me/search.php?str="
 down_url = "http://napisy.me/download/sr/"
 
-subtitle_pattern = 'alt="(.+?)" border="0" />[\r\n\t ]+?</div>[\r\n\t ]+?<div class="title">[\r\n\t ]+?<a href="javascript:void\(0\);" onclick="javascript:pobierzNapis\(\'(.+?)\'\);" title="Wydanie: (.+?)" class="vtip">[ \r\n]*?                                (.+?)[ \r\n]*?</a>'
+subtitle_pattern = r'alt="(.+?)" border="0" />[\r\n\t ]+?</div>[\r\n\t ]+?<div class="title">[\r\n\t ]+?<a href="javascript:void\(0\);" onclick="javascript:pobierzNapis\(\'(.+?)\'\);" title="Wydanie: (.+?)" class="vtip">[ \r\n]*?                                (.+?)[ \r\n]*?</a>'
 
 
 def getallsubs(content, title, subtitles_list, file_original_path):
