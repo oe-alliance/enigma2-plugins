@@ -183,7 +183,7 @@ class DreamExplorerII(Screen):
 		self.commando = ["ls"]
 		self.selectedDir = "/tmp/"
 		self.booklines = []
-		self.MediaPattern = "^.*\.(ts|m2ts|mp3|wav|ogg|jpg|jpeg|jpe|png|bmp|mpg|mpeg|mkv|mp4|mov|divx|wmv|avi|mp2|m4a|flac|ifo|vob|iso|sh|flv|3gp|mod)"
+		self.MediaPattern = r"^.*\.(ts|m2ts|mp3|wav|ogg|jpg|jpeg|jpe|png|bmp|mpg|mpeg|mkv|mp4|mov|divx|wmv|avi|mp2|m4a|flac|ifo|vob|iso|sh|flv|3gp|mod)"
 		if pathExists(config.plugins.DreamExplorer.startDir.value):
 			StartMeOn = config.plugins.DreamExplorer.startDir.value
 		else:
@@ -194,7 +194,7 @@ class DreamExplorerII(Screen):
 		else:
 			self.MediaFilter = True
 			self["filelist"] = myFileList(StartMeOn, showDirectories=True, showFiles=True, matchingPattern=self.MediaPattern, useServiceRef=False)
-		self["TEMPfl"] = FileList("/", matchingPattern="(?i)^.*\.(jpeg|jpg|jpe|png|bmp)")
+		self["TEMPfl"] = FileList("/", matchingPattern=r"(?i)^.*\.(jpeg|jpg|jpe|png|bmp)")
 		self["actions"] = ActionMap(["WizardActions", "DirectionActions", "ColorActions", "MenuActions", "EPGSelectActions", "InfobarActions"],
 		{
 			"ok": self.ok,
@@ -1105,7 +1105,7 @@ class CPmaniger(Screen):
 		self["key_red"] = StaticText(_("Move"))
 		self["key_yellow"] = StaticText(_("Copy"))
 		self["File"] = Label(_("WARNING! they doing now COPY or MOVE\n" + source + "\nto:"))
-		self["CPto"] = myFileList(config.plugins.DreamExplorer.CopyDest.value, showDirectories=True, showFiles=False, matchingPattern="^.*\.*", useServiceRef=False)
+		self["CPto"] = myFileList(config.plugins.DreamExplorer.CopyDest.value, showDirectories=True, showFiles=False, matchingPattern=r"^.*\.*", useServiceRef=False)
 		self["actions"] = ActionMap(["WizardActions", "ColorActions"],
 		{
 			"ok": self.ok,

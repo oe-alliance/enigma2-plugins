@@ -44,7 +44,7 @@ from .Logger import log
 import six
 
 
-CompiledRegexpGlobEscape = re.compile('([\[\]\?*])')  # "[\\1]"
+CompiledRegexpGlobEscape = re.compile(r'([\[\]\?*])')  # "[\\1]"
 
 
 # By Bin4ry

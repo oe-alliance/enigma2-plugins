@@ -46,7 +46,7 @@ config.plugins.pictureviewer.slideshowtime = ConfigSelection(default="5000", cho
 config.plugins.pictureviewer.slideshowmode = ConfigSelection(default="0", choices=[("0", _("normal")), ("1", _("endless"))])
 #not editable configs
 config.plugins.pictureviewer.slideshowext = ConfigText(default=".3ssl")
-config.plugins.pictureviewer.matchingPattern = ConfigText(default="(?i)^.*\.(jpeg|jpg|jpe|png|bmp|gif)")
+config.plugins.pictureviewer.matchingPattern = ConfigText(default=r"(?i)^.*\.(jpeg|jpg|jpe|png|bmp|gif)")
 config.plugins.pictureviewer.slideshowdir = ConfigText(default="/media/hdd/slideshows/")
 config.plugins.pictureviewer.rootdir = ConfigText(default="/media/")
 config.plugins.pictureviewer.stopserviceonstart = ConfigYesNo(default=False)

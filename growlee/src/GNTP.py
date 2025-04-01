@@ -214,7 +214,7 @@ class GNTP(Protocol):
 
 		# TODO: proper implementation
 		our_print(data.replace('\r\n', '<CRLF>\n'))
-		match = re.match('GNTP/(?P<version>\d+\.\d+) (?P<messagetype>REGISTER|NOTIFY|SUBSCRIBE|\-OK|\-ERROR)', data, re.IGNORECASE)
+		match = re.match(r'GNTP/(?P<version>\d+\.\d+) (?P<messagetype>REGISTER|NOTIFY|SUBSCRIBE|\-OK|\-ERROR)', data, re.IGNORECASE)
 		if not match:
 			our_print('invalid/partial return')
 			try:

@@ -328,7 +328,7 @@ class UnwetterMain(Screen):
 			endpos = output.find('</div>', startpos)
 			bereich = output[startpos:endpos]
 
-		bereich = sub('<br\s*/?>', "\n", bereich)
+		bereich = sub(r'<br\s*/?>', "\n", bereich)
 		bereich = sub('<[^>]*>', "", bereich)
 		bereich = sub('Fronten- und Isobarenkarte.*', "", bereich)
 		bereich = bereich.strip()

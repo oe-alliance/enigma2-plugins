@@ -46,7 +46,7 @@ class FileBrowser(Screen):
             currDir = None
 
         #inhibitDirs = ["/bin", "/boot", "/dev", "/etc", "/home", "/lib", "/proc", "/sbin", "/share", "/sys", "/tmp", "/usr", "/var"]
-        self.filelist = FileList(currDir, matchingPattern="(?i)^.*\.(backup)", useServiceRef=False)
+        self.filelist = FileList(currDir, matchingPattern=r"(?i)^.*\.(backup)", useServiceRef=False)
         self["filelist"] = self.filelist
 
         self["FilelistActions"] = ActionMap(["SetupActions"],

@@ -811,7 +811,7 @@ class ReconnectScriptSelector(ChangedScreen):
 
 	def __init__(self, session):
 		ChangedScreen.__init__(self, session)
-		self["list"] = FileList("/", matchingPattern="(?i)^.*\.(sh)")
+		self["list"] = FileList("/", matchingPattern=r"(?i)^.*\.(sh)")
 		self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.okClicked, "cancel": self.close}, -1)
 
 	def okClicked(self):

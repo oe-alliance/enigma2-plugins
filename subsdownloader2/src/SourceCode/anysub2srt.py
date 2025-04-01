@@ -26,11 +26,11 @@ class SubConv():
 
     def detect_format(self, list):
         """Detects format of readed subtittes and return information about format if unknown returns: "" """
-        re_mdvd = re.compile("^\{(\d+)\}\{(\d*)\}\s*(.*)")
-        re_srt = re.compile("^(\d+):(\d+):(\d+),\d+\s*-->.*")
-        re_tmp = re.compile("^(\d+):(\d+):(\d+):(.*)")
-        re_sub2 = re.compile("^(\d+):(\d+):(\d+)\.\d+\s*\,.*")
-        re_mpl2 = re.compile("\[(?P<start>\d+)\]\[(?P<stop>\d+)\](?P<line>.*)", re.S)
+        re_mdvd = re.compile(r"^\{(\d+)\}\{(\d*)\}\s*(.*)")
+        re_srt = re.compile(r"^(\d+):(\d+):(\d+),\d+\s*-->.*")
+        re_tmp = re.compile(r"^(\d+):(\d+):(\d+):(.*)")
+        re_sub2 = re.compile(r"^(\d+):(\d+):(\d+)\.\d+\s*\,.*")
+        re_mpl2 = re.compile(r"\[(?P<start>\d+)\]\[(?P<stop>\d+)\](?P<line>.*)", re.S)
         # for line in list:
         while len(list) > 0:
             line = list.pop(0)
@@ -57,7 +57,7 @@ class SubConv():
     input: contents of a file as list
     returns: list of subtitles in form: [[time_start in secs, time_end in secs, line1, ...],....]
     """
-        re1 = re.compile("^\{(\d+)\}\{(\d*)\}\s*(.*)")
+        re1 = re.compile(r"^\{(\d+)\}\{(\d*)\}\s*(.*)")
         subtitles = []
         while len(list) > 0:
             try:
@@ -82,7 +82,7 @@ You shall not pass!
 input: contents of a file as list
 returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep, time_end, line1, ...],....]
 """
-        re1 = re.compile("^(\d+):(\d+):(\d+)\.(\d+)\s*\,\s*(\d+):(\d+):(\d+)\.(\d+).*$")
+        re1 = re.compile(r"^(\d+):(\d+):(\d+)\.(\d+)\s*\,\s*(\d+):(\d+):(\d+)\.(\d+).*$")
         subtitles = []
         while len(list) > 0:
             try:
@@ -120,9 +120,9 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
         input: contents of a file as list
         returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep, time_end, line1, ...],....]
         """
-        re1 = re.compile("^(\d+)\s*$")
-        re2 = re.compile("^(\d+):(\d+):(\d+),(\d+)\s*-->\s*(\d+):(\d+):(\d+),(\d+).*$")
-        re3 = re.compile("^\s*$")
+        re1 = re.compile(r"^(\d+)\s*$")
+        re2 = re.compile(r"^(\d+):(\d+):(\d+),(\d+)\s*-->\s*(\d+):(\d+):(\d+),(\d+).*$")
+        re3 = re.compile(r"^\s*$")
         subtitles = []
         while len(list) > 0:
             try:
@@ -147,7 +147,7 @@ Reads tmplayer (tmp) subtitles.
 input: contents of a file as list
 returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep, time_end, line1, ...],....]
 """
-        re1 = re.compile("^(\d+):(\d+):(\d+):(.*)")
+        re1 = re.compile(r"^(\d+):(\d+):(\d+):(.*)")
         subtitles = []
         subs = {}
         while len(list) > 0:
@@ -173,7 +173,7 @@ returns: list of subtitles in form: [[time_dep, time_end, line1, ...],[time_dep,
         return subtitles
 
     def read_mpl2(self, list):
-        MPL2LINE = re.compile("\[(?P<start>\d+)\]\[(?P<stop>\d+)\](?P<line>.*)", re.S)
+        MPL2LINE = re.compile(r"\[(?P<start>\d+)\]\[(?P<stop>\d+)\](?P<line>.*)", re.S)
         #FRAMERATE = float(fps)
         subtitles = []
         #for line in list:

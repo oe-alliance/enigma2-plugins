@@ -47,7 +47,7 @@ def decodeHeader(text, default=''):
 	if text is None:
 		return _(default)
 	text = text.replace('\r', ' ').replace('\n', ' ').replace('\t', ' ')
-	text = re.sub('\s\s+', ' ', text)
+	text = re.sub(r'\s\s+', ' ', text)
 	textNew = ""
 	for part in decode_header(text):
 		(content, charset) = part

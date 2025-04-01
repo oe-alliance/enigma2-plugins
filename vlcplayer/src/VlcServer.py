@@ -264,7 +264,7 @@ class VlcServer:
 		parameters = ""
 		oldVLC = self.getVLCType()
 
-		doDirect = isDvdUrl(filename) or re.match("(?i).*\.(mpg|mpeg|ts)$", filename.lower())
+		doDirect = isDvdUrl(filename) or re.match(r"(?i).*\.(mpg|mpeg|ts)$", filename.lower())
 
 		if not doDirect or self.getTranscodeVideo():
 			videoNormList = self.getVideoNorm().split(",")

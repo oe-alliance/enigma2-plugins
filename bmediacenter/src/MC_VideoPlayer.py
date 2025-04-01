@@ -65,7 +65,7 @@ class TMDB():
 		#text = text.replace('.wmv', '').replace('.flv', '').replace('.ts', '').replace('.m2ts', '').replace('.mkv', '').replace('.avi', '').replace('.mpeg', '').replace('.mpg', '').replace('.iso', '')
 
 		for word in cutlist:
-			text = sub('(\_|\-|\.|\+)' + word + '(\_|\-|\.|\+)', '+', text, flags=I)
+			text = sub(r'(\_|\-|\.|\+)' + word + r'(\_|\-|\.|\+)', '+', text, flags=I)
 		text = text.replace('.', ' ').replace('-', ' ').replace('_', ' ').replace('+', '')
 		return text
 
@@ -230,7 +230,7 @@ class MC_VideoPlayer(Screen, HelpableScreen, TMDB):
 			currDir = "/"
 		self["currentfolder"].setText(str(currDir))
 		inhibitDirs = ["/bin", "/boot", "/dev", "/dev.static", "/etc", "/lib", "/proc", "/ram", "/root", "/sbin", "/sys", "/tmp", "/usr", "/var"]
-		self.filelist = FileList(currDir, useServiceRef=True, showDirectories=True, showFiles=True, matchingPattern="(?i)^.*\.(ts|vob|mpg|mpeg|avi|mkv|dat|iso|img|mp4|wmv|flv|divx|mov|ogm|m2ts)", additionalExtensions=None, sortDirs="0.0", sortFiles=config.plugins.mc_vp_sortmode.value, inhibitDirs=inhibitDirs)
+		self.filelist = FileList(currDir, useServiceRef=True, showDirectories=True, showFiles=True, matchingPattern=r"(?i)^.*\.(ts|vob|mpg|mpeg|avi|mkv|dat|iso|img|mp4|wmv|flv|divx|mov|ogm|m2ts)", additionalExtensions=None, sortDirs="0.0", sortFiles=config.plugins.mc_vp_sortmode.value, inhibitDirs=inhibitDirs)
 		self["filelist"] = self.filelist
 		self["filelist"].show()
 		self["Service"] = ServiceEvent()

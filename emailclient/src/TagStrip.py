@@ -44,16 +44,16 @@ def strip_readable(html):
 	html = html.replace('\n', ' ')
 
 	# Multiple whitespaces are rendered as a single one
-	html = sub('\s\s+', ' ', html)
+	html = sub(r'\s\s+', ' ', html)
 
 	# Replace <br> by newlines
-	html = sub('<br(\s+/)?>', '\n', html)
+	html = sub(r'<br(\s+/)?>', '\n', html)
 
 	# Replace <p>, <ul>, <ol> and end of these tags by newline
-	html = sub('</?(p|ul|ol)(\s+.*?)?>', '\n', html)
+	html = sub(r'</?(p|ul|ol)(\s+.*?)?>', '\n', html)
 
 	# Replace <li> by - and </li> by newline
-	html = sub('<li(\s+.*?)?>', '-', html)
+	html = sub(r'<li(\s+.*?)?>', '-', html)
 	html = html.replace('</li>', '\n')
 
 	# And 'normal' stripping

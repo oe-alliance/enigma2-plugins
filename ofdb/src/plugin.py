@@ -352,7 +352,7 @@ class OFDB(Screen):
 				if self.generalinfos.group('g_%s' % category):
 					Detailstext += "\n%s: %s" % (self.generalinfos.group('g_' + category).encode('latin-1').decode('utf-8'), self.htmltags.sub('', self.generalinfos.group(category).replace("<br>", ' ')))
 				self["detailslabel"].setText(Detailstext)
-			ratingmask = compile('<td>[\s\S]*notenskala.*(?P<g_rating>Note: )(?P<rating>\d.\d{2,2})[\s\S]*</td>', DOTALL)
+			ratingmask = compile(r'<td>[\s\S]*notenskala.*(?P<g_rating>Note: )(?P<rating>\d.\d{2,2})[\s\S]*</td>', DOTALL)
 			rating = ratingmask.search(self.inhtml)
 			Ratingtext = _("no user rating yet")
 			if rating:

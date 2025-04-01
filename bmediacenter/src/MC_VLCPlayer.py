@@ -158,7 +158,7 @@ class MC_VLCMedialist(Screen):
 		self.filelistlabel = "Filelist:" + self.server.getBasedir()
 		self.playlistlabel = "Playlist"
 
-		self.defaultFilter = "(?i)\.(avi|mpeg|mpg|divx|flac|ogg|xvid|mp3|mp4|mov|ts|vob|wmv|mkv|iso|bin|m3u|pls|dat|xspf)$"
+		self.defaultFilter = r"(?i)\.(avi|mpeg|mpg|divx|flac|ogg|xvid|mp3|mp4|mov|ts|vob|wmv|mkv|iso|bin|m3u|pls|dat|xspf)$"
 
 		#self.filelist = VlcFileList(server, self.defaultFilter)
 		self.filelist = VlcFileList(self.getFilesAndDirsCB, server.getBasedir(), self.defaultFilter)

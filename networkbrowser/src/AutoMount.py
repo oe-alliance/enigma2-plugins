@@ -488,8 +488,8 @@ class AutoMount():
 					if mounttype == 'nfs':
 						line = sharedata['sharename'] + ' -fstype=' + mounttype + ',' + self.sanitizeOptions(sharedata['options'], autofs=True) + ' ' + sharedata['ip'] + ':/' + sharedata['sharedir'] + '\n'
 					elif sharedata['mounttype'] == 'cifs':
-						tmpusername = sharedata['username'].replace(" ", "\ ")
-						tmppassword = sharedata['password'].replace(" ", "\ ")
+						tmpusername = sharedata['username'].replace(" ", r"\ ")
+						tmppassword = sharedata['password'].replace(" ", r"\ ")
 						tmpaddress = sharedata['ip']
 						line = sharedata['sharename'] + ' -fstype=' + mounttype + ',user=' + tmpusername + ',pass=' + tmppassword + ',' + self.sanitizeOptions(sharedata['options'], cifs=True, autofs=True) + ' ://' + tmpaddress + '/' + sharedata['sharedir'] + '\n'
 					out.write(line)

@@ -88,14 +88,14 @@ class MP(Source):
 		try:
 			matchingPattern = mp.filelist.matchingPattern
 		except Exception:
-			matchingPattern = "(?i)^.*\.(mp2|mp3|ogg|ts|wav|wave|m3u|pls|e2pls|mpg|vob|avi|divx|m4v|mkv|mp4|m4a|dat|flac|mov|m2ts)"  # MediaPlayer-Match
+			matchingPattern = r"(?i)^.*\.(mp2|mp3|ogg|ts|wav|wave|m3u|pls|e2pls|mpg|vob|avi|divx|m4v|mkv|mp4|m4a|dat|flac|mov|m2ts)"  # MediaPlayer-Match
 
 		useServiceRef = False
 		if param["types"] == "audio":
-			matchingPattern = "(?i)^.*\.(mp3|ogg|wav|wave|m3u|pls|e2pls)"
+			matchingPattern = r"(?i)^.*\.(mp3|ogg|wav|wave|m3u|pls|e2pls)"
 			useServiceRef = True
 		elif param["types"] == "video":
-			matchingPattern = "(?i)^.*\.(ts|avi|mpeg|m3u|pls|e2pls|mpg|vob)"
+			matchingPattern = r"(?i)^.*\.(ts|avi|mpeg|m3u|pls|e2pls|mpg|vob)"
 			useServiceRef = True
 		elif param["types"] == "any":
 			matchingPattern = ".*"

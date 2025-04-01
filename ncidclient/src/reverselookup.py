@@ -28,7 +28,7 @@ def html2unicode(in_html, charset):
 	for x in entities:
 		in_html = in_html.replace(x.group(1), '&#' + str(int(x.group(2), 16)) + ';')
 
-	htmlentitynamemask = re.compile('(&(\D{1,5}?);)')
+	htmlentitynamemask = re.compile(r'(&(\D{1,5}?);)')
 	entitydict = {}
 	entities = htmlentitynamemask.finditer(in_html)
 	for x in entities:
@@ -40,7 +40,7 @@ def html2unicode(in_html, charset):
 		except KeyError:
 			debug("[Callhtml2utf8] KeyError " + key + "/" + name)
 
-	htmlentitynumbermask = re.compile('(&#(\d{1,5}?);)')
+	htmlentitynumbermask = re.compile(r'(&#(\d{1,5}?);)')
 	entities = htmlentitynumbermask.finditer(in_html)
 	for x in entities:
 		# debug("[Callhtml2utf8] number: found %s" %x.group(1))
@@ -56,7 +56,7 @@ def html2unicode(in_html, charset):
 
 
 def normalizePhoneNumber(intNo):
-	found = re.match('^\+(.*)', intNo)
+	found = re.match(r'^\+(.*)', intNo)
 	if found:
 		intNo = '00' + found.group(1)
 	intNo = intNo.replace('(', '').replace(')', '').replace(' ', '').replace('/', '').replace('-', '')
@@ -142,7 +142,7 @@ class ReverseLookupAndNotify:
 
 		self.countrycode = countrycode
 
-		if re.match('^\+', self.number):
+		if re.match(r'^\+', self.number):
 			self.number = '00' + self.number[1:]
 
 		if self.number[:len(countrycode)] == countrycode:
@@ -240,7 +240,7 @@ class ReverseLookupAndNotify:
 			return newitem.strip()
 
 		debug("[ReverseLookupAndNotify] _gotPage")
-		found = re.match('.*<meta http-equiv="Content-Type" content="(?:application/xhtml\+xml|text/html); charset=([^"]+)" />', page, re.S)
+		found = re.match(r'.*<meta http-equiv="Content-Type" content="(?:application/xhtml\+xml|text/html); charset=([^"]+)" />', page, re.S)
 		if found:
 			debug("[ReverseLookupAndNotify] Charset: " + found.group(1))
 			page = page.replace("\xa0", " ").decode(found.group(1), "replace")
@@ -303,7 +303,7 @@ class ReverseLookupAndNotify:
 					firstNameFirst = entry.getElementsByTagName('name')[0].getAttribute('swapFirstAndLastName')
 					# debug("[ReverseLookupAndNotify] _gotPage: swapFirstAndLastName: " + firstNameFirst)
 					if firstNameFirst == 'true':  # that means, the name is of the form "firstname lastname"
-						found = re.match('(.*?)\s+(.*)', name)
+						found = re.match(r'(.*?)\s+(.*)', name)
 						if found:
 							firstname = found.group(1)
 							name = found.group(2)
@@ -344,7 +344,7 @@ class ReverseLookupAndNotify:
 				debug("[ReverseLookupAndNotify] _gotPage: street: " + item)
 				street = item.strip()
 				streetno = ''
-				found = re.match("^(.+) ([-\d]+)$", street, re.S)
+				found = re.match(r"^(.+) ([-\d]+)$", street, re.S)
 				if found:
 					street = found.group(1)
 					streetno = found.group(2)

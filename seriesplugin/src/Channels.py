@@ -42,7 +42,7 @@ from collections import OrderedDict
 
 
 ChannelReplaceDict = OrderedDict([
-	('\(S\)', ''),
+	(r'\(S\)', ''),
 	(' HD', ''),
 	(' TV', ''),
 	(' Television', ''),
@@ -51,7 +51,7 @@ ChannelReplaceDict = OrderedDict([
 	('II', 'zwei'),
 	#('I',   'eins'),
 	('ARD', 'daserste'),
-	('\+', 'plus'),
+	(r'\+', 'plus'),
 	('0', 'null'),
 	('1', 'eins'),
 	('2', 'zwei'),

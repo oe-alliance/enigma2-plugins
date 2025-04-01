@@ -68,7 +68,7 @@ import math
 
 
 class GlobalMercator(object):
-    """
+    r"""
     TMS Global Mercator Profile
     ---------------------------
 
@@ -281,7 +281,7 @@ class GlobalMercator(object):
 
 
 class GlobalGeodetic(object):
-    """
+    r"""
     TMS Global Geodetic Profile
     ---------------------------
 

@@ -90,33 +90,33 @@ class CVevoSignAlgoExtractor:
         lines = pythonFunBody.split('\n')
         for i in range(len(lines)):
             # a.split("") -> list(a)
-            match = re.search('(\w+?)\.split\(""\)', lines[i])
+            match = re.search(r'(\w+?)\.split\(""\)', lines[i])
             if match:
                 lines[i] = lines[i].replace(match.group(0), 'list(' + match.group(1) + ')')
             # a.length -> len(a)
-            match = re.search('(\w+?)\.length', lines[i])
+            match = re.search(r'(\w+?)\.length', lines[i])
             if match:
                 lines[i] = lines[i].replace(match.group(0), 'len(' + match.group(1) + ')')
             # a.slice(3) -> a[3:]
-            match = re.search('(\w+?)\.slice\(([0-9]+?)\)', lines[i])
+            match = re.search(r'(\w+?)\.slice\(([0-9]+?)\)', lines[i])
             if match:
                 lines[i] = lines[i].replace(match.group(0), match.group(1) + ('[%s:]' % match.group(2)))
             # a.join("") -> "".join(a)
-            match = re.search('(\w+?)\.join\(("[^"]*?")\)', lines[i])
+            match = re.search(r'(\w+?)\.join\(("[^"]*?")\)', lines[i])
             if match:
                 lines[i] = lines[i].replace(match.group(0), match.group(2) + '.join(' + match.group(1) + ')')
         return "\n".join(lines)
 
     def _getLocalFunBody(self, funName):
         # get function body
-        match = re.search('(function %s\([^)]+?\){[^}]+?})' % funName, self.playerData)
+        match = re.search(r'(function %s\([^)]+?\){[^}]+?})' % funName, self.playerData)
         if match:
             # return jsFunBody
             return match.group(1)
         return ''
 
     def _getAllLocalSubFunNames(self, mainFunBody):
-        match = re.compile('[ =(,](\w+?)\([^)]*?\)').findall(mainFunBody)
+        match = re.compile(r'[ =(,](\w+?)\([^)]*?\)').findall(mainFunBody)
         if len(match):
             # first item is name of main function, so omit it
             funNameTab = set(match[1:])
@@ -142,7 +142,7 @@ class CVevoSignAlgoExtractor:
                 return ''
 
             # get main function name
-            match = re.search("signature=(\w+?)\([^)]\)", self.playerData)
+            match = re.search(r"signature=(\w+?)\([^)]\)", self.playerData)
             if match:
                 mainFunName = match.group(1)
                 printDBG('Main signature function name = "%s"' % mainFunName)

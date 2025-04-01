@@ -176,7 +176,7 @@ class AutoMountEdit(ConfigListScreen, Screen):
 		else:
 			defaultOptions = "rw,utf8,vers=2.0"
 		if self.mountinfo['sharename'] and 'sharename' in self.mountinfo:
-			sharename = re_sub("\W", "", self.mountinfo['sharename'])
+			sharename = re_sub(r"\W", "", self.mountinfo['sharename'])
 			self.old_sharename = sharename
 		else:
 			sharename = ""
@@ -329,7 +329,7 @@ class AutoMountEdit(ConfigListScreen, Screen):
 			if current[1].help_window.instance is not None:
 				current[1].help_window.instance.hide()
 
-		sharename = re_sub("\W", "", self.sharenameConfigEntry.value)
+		sharename = re_sub(r"\W", "", self.sharenameConfigEntry.value)
 		if self.sharedirConfigEntry.value.startswith("/"):
 			sharedir = self.sharedirConfigEntry.value[1:]
 		else:
@@ -398,7 +398,7 @@ class AutoMountEdit(ConfigListScreen, Screen):
 			data['mountusing'] = self.mountusingConfigEntry.value
 			data['active'] = self.activeConfigEntry.value
 			data['ip'] = self.ipConfigEntry.getText()
-			data['sharename'] = re_sub("\W", "", self.sharenameConfigEntry.value)
+			data['sharename'] = re_sub(r"\W", "", self.sharenameConfigEntry.value)
 			# "\W" matches everything that is "not numbers, letters, or underscores",where the alphabet defaults to ASCII.
 			if self.sharedirConfigEntry.value.startswith("/"):
 				data['sharedir'] = self.sharedirConfigEntry.value[1:]

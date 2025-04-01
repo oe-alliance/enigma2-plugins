@@ -2877,7 +2877,7 @@ class MerlinMusicPlayerFileList(Screen):
         skin = os_path.join(skin_path, 'MerlinMusicPlayerFileList.xml')
         with open(skin, 'r') as f:
             self.skin = f.read()
-        self["list"] = FileList(config.plugins.merlinmusicplayer.defaultfilebrowserpath.value, showDirectories=True, showFiles=True, matchingPattern="(?i)^.*\.(mp3|m4a|flac|ogg|m3u|pls|cue)", useServiceRef=False)
+        self["list"] = FileList(config.plugins.merlinmusicplayer.defaultfilebrowserpath.value, showDirectories=True, showFiles=True, matchingPattern=r"(?i)^.*\.(mp3|m4a|flac|ogg|m3u|pls|cue)", useServiceRef=False)
         self["actions"] = ActionMap(["WizardActions", "DirectionActions", "ColorActions", "EPGSelectActions"],
                                     {
                                         "ok": self.ok,

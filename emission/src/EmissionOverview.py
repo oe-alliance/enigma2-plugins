@@ -46,7 +46,7 @@ class TorrentLocationBox(LocationBox):
 		self.skinName = ["TorrentLocationBox", "LocationBox"]
 
 		# non-standard filelist which shows .tor(rent) files
-		self["filelist"] = FileList(None, showDirectories=True, showFiles=True, matchingPattern="^.*\.tor(rent)?")
+		self["filelist"] = FileList(None, showDirectories=True, showFiles=True, matchingPattern=r"^.*\.tor(rent)?")
 
 	def ok(self):
 		# changeDir in booklist and only select path

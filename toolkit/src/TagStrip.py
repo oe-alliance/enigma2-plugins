@@ -19,13 +19,13 @@ def strip_readable(html):
 	html = html.replace('\n', ' ')
 
 	# Replace <br> by newlines
-	html = sub('<br(\s*/)?>', '\n', html)
+	html = sub(r'<br(\s*/)?>', '\n', html)
 
 	# Replace <p>, <ul>, <ol> and end of these tags by newline
-	html = sub('</?(p|ul|ol)(\s+.*?)?>', '\n', html)
+	html = sub(r'</?(p|ul|ol)(\s+.*?)?>', '\n', html)
 
 	# Replace <li> by - and </li> by newline
-	html = sub('<li(\s+.*?)?>', '-', html)
+	html = sub(r'<li(\s+.*?)?>', '-', html)
 	html = html.replace('</li>', '\n')
 
 	# Replace </div> by newline
@@ -45,7 +45,7 @@ def strip(html):
 
 	entitydict = {}
 
-	entities = finditer('&([^#]\D{1,5}?);', html)
+	entities = finditer(r'&([^#]\D{1,5}?);', html)
 	for x in entities:
 		key = x.group(0)
 		if key not in entitydict:
@@ -57,7 +57,7 @@ def strip(html):
 		if key not in entitydict:
 			entitydict[key] = "%d" % int(key[3:5], 16)
 
-	entities = finditer('&#(\d{1,5}?);', html)
+	entities = finditer(r'&#(\d{1,5}?);', html)
 	for x in entities:
 		key = x.group(0)
 		if key not in entitydict:

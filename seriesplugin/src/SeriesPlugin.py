@@ -57,7 +57,7 @@ instance = None
 
 CompiledRegexpNonDecimal = re.compile(r'[^\d]')
 CompiledRegexpReplaceChars = None
-CompiledRegexpReplaceDirChars = re.compile('[^/\wäöüß\-_\. ]')
+CompiledRegexpReplaceDirChars = re.compile(r'[^/\wäöüß\-_\. ]')
 
 
 def dump(obj):

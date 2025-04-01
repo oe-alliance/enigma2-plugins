@@ -57,7 +57,7 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
     subtitles_list = []
     msg = ""
     if len(tvshow) > 0:
-      for rok in re.finditer(' \(\d\d\d\d\)', tvshow):
+      for rok in re.finditer(r' \(\d\d\d\d\)', tvshow):
           rok = rok.group()
           if len(rok) > 0:
               tvshow = tvshow.replace(rok, "")

@@ -254,7 +254,7 @@ class MC_AudioPlayer(Screen, HelpableScreen, InfoBarSeek):
 		self.filelist = []
 		self["filelist"] = []
 		inhibitDirs = ["/bin", "/boot", "/dev", "/dev.static", "/etc", "/lib", "/proc", "/ram", "/root", "/sbin", "/sys", "/tmp", "/usr", "/var"]
-		self.filelist = FileList(currDir, useServiceRef=True, showDirectories=True, showFiles=True, matchingPattern="(?i)^.*\.(mp2|mp3|wav|wave|wma|m4a|ogg|ra|flac|m3u|pls|e2pls)", additionalExtensions=None, sortDirs="0.0", sortFiles=config.plugins.mc_ap_sortmode.value, inhibitDirs=inhibitDirs)
+		self.filelist = FileList(currDir, useServiceRef=True, showDirectories=True, showFiles=True, matchingPattern=r"(?i)^.*\.(mp2|mp3|wav|wave|wma|m4a|ogg|ra|flac|m3u|pls|e2pls)", additionalExtensions=None, sortDirs="0.0", sortFiles=config.plugins.mc_ap_sortmode.value, inhibitDirs=inhibitDirs)
 		self["filelist"] = self.filelist
 		self["filelist"].show()
 		self.JpgTimer = eTimer()
@@ -723,7 +723,7 @@ class MC_WebRadio(Screen, HelpableScreen):
 		self.filelist = []
 		self["filelist"] = []
 		inhibitDirs = ["/bin", "/boot", "/dev", "/dev.static", "/etc", "/lib", "/proc", "/ram", "/root", "/sbin", "/sys", "/tmp", "/usr", "/var"]
-		self.filelist = FileList(currDir, useServiceRef=True, showDirectories=False, showFiles=True, matchingPattern="(?i)^.*\.(m3u|pls|e2pls)", additionalExtensions="4098:m3u 4098:e2pls 4098:pls")
+		self.filelist = FileList(currDir, useServiceRef=True, showDirectories=False, showFiles=True, matchingPattern=r"(?i)^.*\.(m3u|pls|e2pls)", additionalExtensions="4098:m3u 4098:e2pls 4098:pls")
 
 		self["filelist"] = self.filelist
 		self["filelist"].show()
@@ -1077,7 +1077,7 @@ class MC_WebDown(Screen):
 	def okbuttonClick(self):
 		selection = self["menu"].getCurrent()
 		if selection is not None:
-			fn = sub("[^a-zA-Z0-9\n\.]", "_", selection[0])
+			fn = sub("[^a-zA-Z0-9\n\\.]", "_", selection[0])
 			with open(mcpath + "radio/" + fn + ".m3u", "w") as f:
 				f.write(selection[1])
 			if fileExists("/tmp/pl.m3u"):
