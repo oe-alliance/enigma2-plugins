@@ -351,10 +351,8 @@ def finishedCustomEPGExternal():
 
 
 def Plugins(**kwargs):
-	return [
-		PluginDescriptor(name="EPG Export", description=_("Export EPG as XML"), where=PluginDescriptor.WHERE_PLUGINMENU, icon="epgexport.png", fnc=startEPGExport),
-		PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=sessionstart, needsRestart=False)
-	]
+	return [PluginDescriptor(name="EPG Export", description=_("Export EPG as XML"), where=PluginDescriptor.WHERE_PLUGINMENU, icon="epgexport.png", fnc=startEPGExport),
+			 PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=sessionstart, needsRestart=False)]
 
 
 class EPGExportConfiguration(ConfigListScreen, Screen):
@@ -374,16 +372,17 @@ class EPGExportConfiguration(ConfigListScreen, Screen):
 		ftype = ftypes.get(config.plugins.epgexport.compression.value, "{Error}")
 		self["buttonyellow"] = StaticText("%s (%s)" % (_("Downloading"), ftype))
 		self["buttonblue"] = StaticText("%s %s" % (_("Select"), _("Bouquets")))
-		self["actions"] = ActionMap(["ChannelSelectEPGActions", "InfobarTeletextActions", "SetupActions", "ColorActions"], {
-			"exit": self.cancel,
-			"cancel": self.cancel,
-			"red": self.cancel,
-			"green": self.save,
-			"yellow": self.yellow_key,
-			"blue": self.blue_key,
-			"showEPGList": self.about,
-			"startTeletext": self.getText
-		})
+		self["actions"] = ActionMap(["ChannelSelectEPGActions",
+									"InfobarTeletextActions",
+									"SetupActions",
+									"ColorActions"], {"exit": self.cancel,
+														"cancel": self.cancel,
+														"red": self.cancel,
+														"green": self.save,
+														"yellow": self.yellow_key,
+														"blue": self.blue_key,
+														"showEPGList": self.about,
+														"startTeletext": self.getText})
 		self.refreshLayout()
 		self.onLayoutFinish.append(self.onLayoutFinished)
 
@@ -617,21 +616,22 @@ class EPGExport(Screen):
 		self.language = sp[0].lower()
 		if SERVICELIST:  # use current bouquet if none is found...
 			bouquet = SERVICELIST.getRoot()
-			serviceHandler = eServiceCenter.getInstance()
-			info = serviceHandler.info(bouquet)
-			bouquet_name = info.getName(bouquet)
-			cprint("DEFAULT bouquet %s" % bouquet_name)
-			all_bouquets = SERVICELIST.getBouquetList()
-			self.services = []
-			for bouquets in all_bouquets:
-				bt = tuple(bouquets)
-				bouquet_name = bt[0].replace(" (TV)", "").replace(" (Radio)", "").lower()
-				cprint("CHECKS bouquet %s" % bouquet_name)
-				for x in range(bouquet_length):
-					if bouquet_name == config.plugins.epgexport.bouquets[x].name.value and config.plugins.epgexport.bouquets[x].export.value:
-						bouquet = bouquets[1]
-						cprint("FOUND bouquet %s" % bouquet_name)
-						self.services += self.getBouquetServices(bouquet)
+			if bouquet:
+				serviceHandler = eServiceCenter.getInstance()
+				info = serviceHandler.info(bouquet)
+				bouquet_name = info.getName(bouquet)
+				cprint("DEFAULT bouquet %s" % bouquet_name)
+				all_bouquets = SERVICELIST.getBouquetList()
+				self.services = []
+				for bouquets in all_bouquets:
+					bt = tuple(bouquets)
+					bouquet_name = bt[0].replace(" (TV)", "").replace(" (Radio)", "").lower()
+					cprint("CHECKS bouquet %s" % bouquet_name)
+					for x in range(bouquet_length):
+						if bouquet_name == config.plugins.epgexport.bouquets[x].name.value and config.plugins.epgexport.bouquets[x].export.value:
+							bouquet = bouquets[1]
+							cprint("FOUND bouquet %s" % bouquet_name)
+							self.services += self.getBouquetServices(bouquet)
 			if self.channels:
 				self.exportChannels()
 			if self.programs:
