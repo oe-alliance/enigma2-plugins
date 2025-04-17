@@ -7,19 +7,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
-"PO-Revision-Date: 2016-09-14 19:41+0200\n"
-"Last-Translator: Samzam <http://www.world-of-satellite.com>\n"
-"Language-Team: TimoJ\n"
+"POT-Creation-Date: 2025-04-17 08:20+0430\n"
+"PO-Revision-Date: 2025-04-17 08:40+0300\n"
+"Last-Translator: Orlandox\n"
+"Language-Team: Samzam, TimoJ\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.5.7\n"
+"X-Generator: Poedit 3.6\n"
 
 msgid "%e/%m, %H:%M"
-msgstr ""
+msgstr "%e/%m, %H:%M"
 
 #. TRANSLATORS: EPGSearch title in EventInfo dialog (does not require further user interaction)
 #. TRANSLATORS: %s inserts a non-printing character and is only used to control the sort order of these WHERE_EVENTINFO entries in Screens.ButtonSetup. Please leave it at the start of the translation string.
@@ -275,10 +275,10 @@ msgid "ask user"
 msgstr "Kysy käyttäjältä"
 
 msgid "case-insensitive search"
-msgstr "Yleishaku"
+msgstr "Kirjainkoolla ei väliä haku"
 
 msgid "case-sensitive search"
-msgstr "Tapauskohtainen haku"
+msgstr "Kirjainkoolla väliä haku"
 
 msgid "current bouquet"
 msgstr "Nykyinen suosikkilista"
@@ -297,6 +297,9 @@ msgstr "Rajoita"
 
 msgid "include"
 msgstr "Sisällytä"
+
+msgid "partial description"
+msgstr "Osittainen ohjelmatieto"
 
 msgid "partial match"
 msgstr "Osittainen vastaavuus"
