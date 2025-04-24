@@ -36,8 +36,8 @@ from Components.ScrollLabel import ScrollLabel
 from Components.Pixmap import Pixmap
 from Components.config import config, ConfigSubsection, ConfigText
 from Components.Sources.StaticText import StaticText
+from Components.SystemInfo import BoxInfo
 from Tools.Directories import fileExists, pathExists
-from Tools.HardwareInfo import HardwareInfo
 from ServiceReference import ServiceReference
 from .myFileList import FileList as myFileList
 #from vInputBox import vInputBox
@@ -179,7 +179,7 @@ class DreamExplorerII(Screen):
 
 		self.sesion = session
 		self.altservice = self.session.nav.getCurrentlyPlayingServiceReference()
-		self.MyBox = HardwareInfo().get_device_name()
+		self.MyBox = BoxInfo.getItem("model")
 		self.commando = ["ls"]
 		self.selectedDir = "/tmp/"
 		self.booklines = []
