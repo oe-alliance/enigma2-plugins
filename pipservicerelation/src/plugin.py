@@ -267,7 +267,7 @@ def PictureInPicture__init__(self, session):
 
 def playService(self, service):
 	current_service = service
-	n_service = self.pipServiceRelation.get(service.toString(), None)
+	n_service = self.pipServiceRelation.get(service.toString(), None) if service is not None else None
 	if n_service is not None:
 		service = eServiceReference(n_service)
 	if service and (service.flags & eServiceReference.isGroup):
