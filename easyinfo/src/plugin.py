@@ -38,7 +38,6 @@ from Components.config import config, getConfigListEntry, ConfigSubsection, Conf
 from Components.Sources.StaticText import StaticText
 from Tools.Directories import fileExists, pathExists
 from Tools.LoadPixmap import LoadPixmap
-from Tools.HardwareInfo import HardwareInfo
 from ServiceReference import ServiceReference
 from enigma import eListboxPythonMultiContent, gFont, getDesktop, eTimer, eServiceReference, RT_HALIGN_LEFT, RT_HALIGN_CENTER, RT_VALIGN_CENTER, RT_WRAP, RT_HALIGN_RIGHT, RT_VALIGN_TOP
 from time import localtime, time, mktime

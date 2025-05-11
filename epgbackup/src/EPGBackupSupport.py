@@ -9,7 +9,7 @@ from enigma import eEPGCache
 from enigma import eTimer
 from Tools import Notifications
 from Screens.TextBox import TextBox
-from Tools.HardwareInfo import HardwareInfo
+from Components.SystemInfo import BoxInfo
 
 from . import _
 
@@ -310,8 +310,8 @@ class EPGBackupSupport:
 			debugOut("EPGBackup.sh execute with params %s %s" % (param1, param2))
 		else:
 			debugOut("OS-execute %s with params %s %s" % (sh_cmd, param1, param2))
-		debugOut("Device-Info: %s" % (HardwareInfo().get_device_name().upper()))
-		if HardwareInfo().get_device_name().upper() == "DM800":
+		debugOut("Device-Info: %s" % (BoxInfo.getItem("model").upper()))
+		if BoxInfo.getItem("model").upper() == "DM800":
 			return self._executeShOld(sh_cmd=sh_cmd, param1=param1, param2=param2)
 		else:
 			return self._executeSh(sh_cmd=sh_cmd, param1=param1, param2=param2)

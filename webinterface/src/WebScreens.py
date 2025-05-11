@@ -74,9 +74,9 @@ class AboutWebScreen(WebScreen):
 			from Tools.StbHardware import getFPVersion
 		except:
 			from Tools.DreamboxHardware import getFPVersion
-		from Tools.HardwareInfo import HardwareInfo
+		from Components.SystemInfo import BoxInfo
+		hw = BoxInfo.getItem("model")
 
-		hw = HardwareInfo()
 
 		self["About"] = About(session)
 
@@ -419,9 +419,8 @@ class DeviceInfoWebScreen(WebScreen):
 			from Tools.StbHardware import getFPVersion
 		except:
 			from Tools.DreamboxHardware import getFPVersion
-		from Tools.HardwareInfo import HardwareInfo
-
-		hw = HardwareInfo()
+		from Components.SystemInfo import BoxInfo
+		hw = BoxInfo.getItem("model")
 
 		self["Network"] = Network()
 		self["Hdd"] = Hdd()

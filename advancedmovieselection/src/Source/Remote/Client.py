@@ -40,8 +40,8 @@ class MessageQueue:
             else:
                 request = "False"
         elif data == "getDeviceName":
-            from Tools.HardwareInfo import HardwareInfo
-            request = HardwareInfo().get_device_name()
+            from Components.SystemInfo import BoxInfo
+            request = BoxInfo.getItem("model")
         elif data == "inStandby":
             import Screens
             request = str(Screens.Standby.inStandby is not None)

@@ -1,7 +1,6 @@
 from __future__ import print_function
 from enigma import eActionMap
 from Components.Sources.Source import Source
-from Tools.HardwareInfo import HardwareInfo
 from Components.config import config
 
 

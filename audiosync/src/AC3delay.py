@@ -6,7 +6,7 @@ from .AC3utils import AC3, PCM, AC3GLOB, PCMGLOB, AC3PCM
 from Components.config import config
 from enigma import eTimer
 from Tools.ISO639 import LanguageCodes
-from Tools.HardwareInfo import HardwareInfo
+from Components.SystemInfo import BoxInfo
 import os
 import NavigationInstance
 
@@ -33,8 +33,7 @@ class AC3delay:
         self.movieStart = config.usage.on_movie_start.getValue()
 
         # find out box type
-        self.oHWInfo = HardwareInfo()
-        self.bHasToRestartService = self.oHWInfo.get_device_name() == "dm7025"
+        self.bHasToRestartService = BoxInfo.getItem("model") == "dm7025"
 
     def initAudio(self):
         self.iService = NavigationInstance.instance.getCurrentService()

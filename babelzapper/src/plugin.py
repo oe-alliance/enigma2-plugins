@@ -19,8 +19,8 @@ from Components.config import config, ConfigSubsection, ConfigEnableDisable, Con
 from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import ActionMap
 from Components.Label import Label, MultiColorLabel
+from Components.SystemInfo import BoxInfo
 from Tools.Directories import *
-from Tools.HardwareInfo import HardwareInfo
 from GlobalActions import globalActionMap
 from Components.config import config, ConfigSubsection, ConfigInteger
 import os
@@ -455,7 +455,7 @@ class BabelZapper(Screen):
 		else:
 			print("[BABELZAPPER] found unknown key %s" % keyname)
 			return
-		if HardwareInfo.device_name == "dm8000":
+		if BoxInfo.getItem("model") == "dm8000":
 			fp = open("/dev/input/event2", 'wb')
 		else:
 			fp = open("/dev/input/event1", 'wb')

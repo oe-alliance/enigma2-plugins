@@ -7,7 +7,7 @@ from Components.ActionMap import ActionMap
 from Components.config import *
 from Components.ConfigList import *
 from Components.Sources.StaticText import StaticText
-from Tools.HardwareInfo import *
+from Components.SystemInfo import BoxInfo
 
 import xml.dom.minidom
 from xml.dom.minidom import Node
@@ -50,7 +50,7 @@ class dreamIRCSetupScreen(ConfigListScreen, Screen):
 
 	def __init__(self, session, args=0):
 		Screen.__init__(self, session)
-		self.hardware_info = HardwareInfo()
+		self.hardware_info = BoxInfo.getItem("model")
 		self.device = self.hardware_info.get_device_name()
 		self.mac = getMacAddress()
 		self.mac_end = self.mac[6:]
@@ -177,7 +177,7 @@ class dreamIRCConfig:
 		self.status1 = False
 		self.status2 = False
 		self.status3 = False
-		self.hardware_info = HardwareInfo()
+		self.hardware_info = BoxInfo.getItem("model")
 		self.device = self.hardware_info.get_device_name()
 		self.mac = getMacAddress()
 		self.mac_end = self.mac[6:]

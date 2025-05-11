@@ -16,6 +16,7 @@ from Components.MenuList import MenuList
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
 from Components.Network import iNetwork
 from Components.ServiceEventTracker import ServiceEventTracker
+from Components.SystemInfo import BoxInfo
 from Components.Sources.StaticText import StaticText
 from Components.UsageConfig import preferredTimerPath
 from RecordTimer import RecordTimerEntry, parseEvent
@@ -27,7 +28,6 @@ from Screens.Setup import SetupSummary
 from Screens.TimerEntry import TimerEntry
 from Screens.TimerEdit import TimerSanityConflict
 from Tools.Directories import fileExists, SCOPE_ACTIVE_SKIN, resolveFilename
-from Tools.HardwareInfo import HardwareInfo
 from Plugins.Plugin import PluginDescriptor
 
 from enigma import eTimer, eEPGCache, loadPNG, eListboxPythonMultiContent, gFont, eServiceReference, eServiceCenter, iPlayableService, BT_SCALE
@@ -535,7 +535,7 @@ class DBUpdateStatus(Screen):
 
 		# Get Box Info
 		self.BoxID = iNetwork.getAdapterAttribute("eth0", "mac")
-		self.DeviceName = HardwareInfo().get_device_name()
+		self.DeviceName = BoxInfo.getItem("model")
 		try:
 			from enigma import getEnigmaVersionString
 			from boxbranding import getImageVersion, getImageBuild

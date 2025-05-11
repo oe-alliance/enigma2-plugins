@@ -78,8 +78,8 @@ def getInstance():
 		log.debug(" ", strftime("%a, %d %b %Y %H:%M:%S", localtime()))
 
 		try:
-			from Tools.HardwareInfo import HardwareInfo
-			log.debug(" DeviceName " + HardwareInfo().get_device_name().strip())
+			from Components.SystemInfo import BoxInfo
+			log.debug(" DeviceName " + BoxInfo.getItem("model"))
 		except:
 			sys.exc_clear()
 

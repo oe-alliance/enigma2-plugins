@@ -19,7 +19,7 @@
 
 from Components.VariableText import VariableText
 from Components.Sensors import sensors
-from Tools.HardwareInfo import HardwareInfo
+from Components.SystemInfo import BoxInfo
 from enigma import eLabel
 from Renderer import Renderer
 import six
@@ -30,7 +30,7 @@ class vhdRendMaxTemp(Renderer, VariableText):
 	def __init__(self):
 		Renderer.__init__(self)
 		VariableText.__init__(self)
-		if "8000" in HardwareInfo().get_device_name() or "500" in HardwareInfo().get_device_name() or "800se" in HardwareInfo().get_device_name():
+		if BoxInfo.getItem("model") in ("dm500", "dm800se", "dm8000"):
 			self.ZeigeTemp = True
 		else:
 			self.ZeigeTemp = False

@@ -50,8 +50,8 @@ ABOUT = "\n  " + NAME + " " + VERSION + "\n\n" \
 USER_AGENT = "Enigma2-" + NAME
 
 try:
-	from Tools.HardwareInfo import HardwareInfo
-	DEVICE = HardwareInfo().get_device_name().strip()
+	from Components.SystemInfo import BoxInfo
+	DEVICE = BoxInfo.getItem("model")
 except:
 	DEVICE = ''
 
