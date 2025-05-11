@@ -31,7 +31,7 @@ class vRendMaxTemp(Renderer, VariableText):
 		Renderer.__init__(self)
 		VariableText.__init__(self)
 
-		if BoxInfo.getItem("model") in ["dm500", "dm800", "dm8000"):
+		if BoxInfo.getItem("model") in ("dm500", "dm800", "dm8000"):
 			self.ZeigeTemp = True
 		else:
 			self.ZeigeTemp = False
