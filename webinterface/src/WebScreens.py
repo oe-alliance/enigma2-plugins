@@ -77,7 +77,6 @@ class AboutWebScreen(WebScreen):
 		from Components.SystemInfo import BoxInfo
 		hw = BoxInfo.getItem("model")
 
-
 		self["About"] = About(session)
 
 		self["Network"] = Network()
