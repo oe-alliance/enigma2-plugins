@@ -640,7 +640,7 @@ class IMDB(Screen, HelpableScreen):
 	def showReviews(self):
 		self.hideBigPoster()
 
-		if self.Page != 0 and self.extrainfos["commenttitle"]:
+		if self.Page != 0 and self.extrainfos["reviews"]:
 			if not self.reviews:
 				self.downloadReviews()
 			else:
@@ -1042,6 +1042,8 @@ class IMDB(Screen, HelpableScreen):
 					fmt = "%Y"
 				return strftime(fmt, (date['year'], date['month'] or 0, date['day'] or 0, 0, 0, 0, 0, 0, 0))
 
+			countries = get(main, ('countriesDetails', 'countries'))
+
 			categories_i18n = {
 				'director': get(main, ('directors', 'category', 'text')),
 				'writer': get(main, ('writers', 'category', 'text')),
@@ -1049,7 +1051,7 @@ class IMDB(Screen, HelpableScreen):
 				'episodes': get(i18n, 'title_main_episodes_title'),
 				'seasons': get(i18n, 'common_seasons'),
 				'premiere': get(i18n, 'title_main_details_releaseDate'),
-				'country': LingUI(get(i18n, 'title_main_details_countriesOfOrigin'), countryCount=len(get(main, ('countriesOfOrigin', 'countries')))),
+				'country': LingUI(get(i18n, 'title_main_details_countriesOfOrigin'), countryCount=len(countries)),
 				'alternativ': get(i18n, 'title_main_details_aka'),
 
 				'outline': get(i18n, 'title_main_hero_allTopics_plotLink'),      # no translation for "outline", just use "Plot"
@@ -1078,7 +1080,7 @@ class IMDB(Screen, HelpableScreen):
 				'episodes': get(main, ('episodes', 'totalEpisodes', 'total')),
 				'seasons': len(get(main, ('episodes', 'seasons'))),
 				'writer': ", ".join(get(name, ('name', 'nameText', 'text')) + (name.get('attributes') and " (" + name['attributes'][0]['text'] + ")" or "") for name in get(main, ('writers', 'credits'))),
-				'country': ', '.join(get(country, 'text') for country in get(main, ('countriesOfOrigin', 'countries'))),
+				'country': ', '.join(get(country, 'text') for country in countries),
 				'premiere': main['releaseDate'] and "%s (%s)" % (makedate(main['releaseDate']), get(main, ('releaseDate', 'country', 'text'))),
 				# there's also main['releaseYear']['year']
 				'alternativ': get(main, ('akas', 'edges', 'node', 'text')),
@@ -1194,11 +1196,13 @@ class IMDB(Screen, HelpableScreen):
 					awards += LingUI(get(i18n, 'feature_awards_%s_nominated' % award), count=noms)
 				awards += " | "
 			wins = get(main, ('wins', 'total'))
-			noms = get(main, ('nominations', 'total'))
+			noms = get(main, ('nominationsExcludeWins', 'total'))
 			if wins and noms:
-				awards += LingUI(get(i18n, prest and 'feature_awards_winsAndNominationsTotal' or 'feature_awards_winsAndNominations'), numOfWins=wins, numOfNoms=noms)
+				awards += LingUI(get(i18n, 'feature_awards_winsAndNominationsTotal'), numOfWins=wins, numOfNoms=noms)
+			elif wins:
+				awards += LingUI(get(i18n, 'feature_awards_onlyWinsTotal'), numOfWins=wins)
 			elif noms:
-				awards += LingUI(get(i18n, prest and 'feature_awards_onlyNominationsTotal' or 'feature_awards_onlyNominations'), numOfNoms=noms)
+				awards += LingUI(get(i18n, 'feature_awards_onlyNominationsTotal'), numOfNoms=noms)
 			if awards:
 				Extralist = ["", awards]
 			else:
@@ -1285,9 +1289,7 @@ class IMDB(Screen, HelpableScreen):
 				'goofs': html2text(get(main, ('goofs', 'edges', 'node', 'text', 'plaidHtml'))),
 				'quotes': quote(get(main, ('quotes', 'edges', 'node', 'lines'))),
 				'connections': connections(get(main, ('connections', 'edges', 'node'))),
-				'commenttitle': get(main, ('featuredReviews', 'edges', 'node', 'summary', 'originalText')),
-				'comment': html2text(get(main, ('featuredReviews', 'edges', 'node', 'text', 'originalText', 'plaidHtml'))),
-				'commenter': get(main, ('featuredReviews', 'edges', 'node', 'author', 'nickName')),
+				'reviews': get(main, ('reviews', 'total'), 0),
 				'language': ", ".join(get(lang, 'text') for lang in get(main, ('spokenLanguages', 'spokenLanguages'))),
 				'locations': get(main, ('filmingLocations', 'edges', 'node', 'text')),
 				'company': ", ".join(get(node, ('node', 'company', 'companyText', 'text')) for node in get(main, ('production', 'edges'))),
@@ -1319,10 +1321,24 @@ class IMDB(Screen, HelpableScreen):
 								Extralist.pop()
 							continue
 					Extralist.append(categories_i18n[category] + sep + self.extrainfos[category])
-			if self.extrainfos["commenttitle"]:
+
+			if self.extrainfos["reviews"]:
 				Extralist.append("")
-				Extralist.append(categories_i18n['commenttitle'] + ": " + self.extrainfos['commenttitle'] + " [" + self.extrainfos['commenter'] + "]")
-				Extralist.append(self.extrainfos['comment'])
+				featured = main['featuredReviews']['edges']
+				# "common_pagination_count": "{current} of {total}"
+				Extralist.append(categories_i18n['commenttitle'] + ": " + get(i18n, 'common_pagination_count').format(current=len(featured), total=self.extrainfos['reviews']))
+				if len(featured):
+					Extralist.append("")
+					for review in featured:
+						review = review['node']
+						Extralist.append((review['authorRating'] and str(review['authorRating']) + "/10 | " or "") + get(review, ('author', 'username', 'text')))
+						Extralist.append(get(review, ('summary', 'originalText')))
+						Extralist.append("")
+						Extralist.append(html2text(get(review, ('text', 'originalText', 'plaidHtml'))))
+						Extralist.append("")
+						Extralist.append("-" * 72)
+						Extralist.append("")
+					del Extralist[-3:]
 
 			if Extralist:
 				self.extraTxt = _("Extra Info") + "\n" + "\n".join(Extralist)
@@ -1336,6 +1352,7 @@ class IMDB(Screen, HelpableScreen):
 			self.synopsisTxt = html2text(get(tmd, ('synopses', 'edges', 'node', 'plotText', 'plaidHtml')))
 			self.synopsis = text2label(self.synopsisTxt)
 
+			self.videos = []
 			for video in get(fold, ('primaryVideos', 'edges')):
 				video = video['node']
 				typ = get(video, ('contentType', 'displayName', 'value'))
