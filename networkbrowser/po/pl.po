@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-16 19:06+0430\n"
-"PO-Revision-Date: 2014-04-23 18:25+0100\n"
+"PO-Revision-Date: 2025-05-23 11:18+0100\n"
 "Last-Translator: Mariusz1970 <Mariusz1970@onet.eu>\n"
 "Language-Team: none <Mariusz1970@onet.eu>\n"
 "Language: pl\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 1.6.4\n"
+"X-Generator: Poedit 3.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 msgid ""
@@ -22,7 +22,7 @@ msgstr ""
 "Zaktualizować istniejący wpis i kontynuować?\n"
 
 msgid "AUTOFS (mount as needed)"
-msgstr ""
+msgstr "AUTOFS (montuj w razie potrzeby)"
 
 msgid "Active"
 msgstr "Aktywny"
@@ -72,7 +72,7 @@ msgid "Change hostname"
 msgstr "Zmień nazwę hosta"
 
 msgid "Change the hostname of your Receiver."
-msgstr "Zmień nazwę hosta"
+msgstr "Zmień nazwę hosta swojego odbiornika."
 
 msgid "Close"
 msgstr "Zamknij"
@@ -123,7 +123,7 @@ msgid "Expert"
 msgstr "Ekspert"
 
 msgid "FSTAB (mount at boot)"
-msgstr ""
+msgstr "FSTAB (montowanie przy bootowaniu)"
 
 msgid "Finished restarting your network"
 msgstr "Zakończono restartowanie sieci"
@@ -147,10 +147,10 @@ msgid "Mount Again"
 msgstr "Ponów montowanie"
 
 msgid "Mount Manager"
-msgstr "Menadzer Montowania"
+msgstr "Menadżer montowania"
 
 msgid "Mount Viewer"
-msgstr "Odbiorca Montowania"
+msgstr "Odbiorca montowania"
 
 msgid "Mount again"
 msgstr "Ponów montowanie"
@@ -174,6 +174,8 @@ msgid ""
 "Mounted/\n"
 "Unmounted"
 msgstr ""
+"Zmontowany/\n"
+"Odmontowany"
 
 msgid "Mounting network shares..."
 msgstr "Montowanie udziałów sieciowych ..."
@@ -188,7 +190,7 @@ msgid "NFS share"
 msgstr "Udział NFS"
 
 msgid "Network Browser"
-msgstr "Przeglądarka Sieci"
+msgstr "Przeglądarka sieci"
 
 msgid "No network devices found!"
 msgstr "Nie znaleziono urządzeń sieciowych!"
@@ -209,7 +211,7 @@ msgid "Please wait while your network is restarting..."
 msgstr "Poczekaj sieć jest ponowne uruchamiana ..."
 
 msgid "Press OK to activate the settings."
-msgstr "Wciśnij OK, aby aktywować ustawienia"
+msgstr "Wciśnij OK, aby aktywować ustawienia."
 
 msgid "Press OK to collapse this host"
 msgstr "Wciśnij OK, aby zwinąć ten host"
@@ -275,7 +277,7 @@ msgid "Server share"
 msgstr "Udział serwera"
 
 msgid "Setup Mount Again"
-msgstr "Ustawienie Ponownego Montowania"
+msgstr "Ustawienie ponownego montowania"
 
 msgid "Use as HDD replacement"
 msgstr "Użyj jako wymiany HDD"
@@ -287,7 +289,7 @@ msgid "Usermanager"
 msgstr "Menadżer użytkownika"
 
 msgid "Username"
-msgstr "nazwa użytkownika"
+msgstr "Nazwa użytkownika"
 
 msgid "View, edit or delete mountpoints on your Receiver."
 msgstr "Pokaż, edytuj lub usuń punkty montowania Dreambox`a."
@@ -295,12 +297,11 @@ msgstr "Pokaż, edytuj lub usuń punkty montowania Dreambox`a."
 msgid "View, edit or delete usernames and passwords for your network."
 msgstr "Pokaż, edytuj lub usuń nazwy użytkowników i hasła twojej sieci."
 
-#, fuzzy
 msgid ""
 "You have changed the share name!\n"
 "Update existing entry and continue?\n"
 msgstr ""
-"Wpis montowania o tej nazwie już istnieje!\n"
+"Zmieniłeś nazwę udziału!\n"
 "Zaktualizować istniejący wpis i kontynuować?\n"
 
 #, python-format
