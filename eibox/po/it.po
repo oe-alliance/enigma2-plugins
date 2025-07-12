@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - eibox\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2025-04-01 20:07+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -31,15 +31,6 @@ msgstr "(Set point)"
 
 msgid "Visualization for European Installation Bus"
 msgstr "Visualizzazione per European Installation Bus"
-
-msgid "beleuchtung:helligkeitswerte:esstisch"
-msgstr ""
-
-msgid "beleuchtung:helligkeitswerte:schlafen_decke"
-msgstr ""
-
-msgid "beleuchtung:helligkeitswerte:wohnzimmer_decke_1"
-msgstr ""
 
 msgid "down"
 msgstr "Giù"

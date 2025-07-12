@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 - Plugin epgsearch\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2024-07-04 12:56+0200\n"
 "PO-Revision-Date: 2009-09-27 17:51+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -137,6 +137,9 @@ msgstr ""
 msgid "IMDb Search"
 msgstr ""
 
+msgid "INFO"
+msgstr ""
+
 msgid "Import from AutoTimer"
 msgstr "Uvezi iz autotajmera"
 
@@ -164,6 +167,9 @@ msgstr ""
 #, fuzzy
 msgid "Length of history"
 msgstr "Bez istorije"
+
+msgid "MENU"
+msgstr ""
 
 msgid "Maximum number of entries in the search history. Set this to 0 to disable search history."
 msgstr ""
@@ -305,6 +311,9 @@ msgid "exclude"
 msgstr ""
 
 msgid "include"
+msgstr ""
+
+msgid "partial description"
 msgstr ""
 
 msgid "partial match"

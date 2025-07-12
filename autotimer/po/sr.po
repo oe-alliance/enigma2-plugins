@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 - Plugin autotimer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2025-04-01 20:07+0200\n"
 "PO-Revision-Date: 2009-09-27 17:46+0100\n"
 "Last-Translator: maja <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -49,11 +49,15 @@ msgid "%d.%B %Y"
 msgstr ""
 
 #, python-format
+msgid "%s is not valid."
+msgstr ""
+
+#, python-format
 msgid "%s: %s at %s"
 msgstr ""
 
 msgid "Abort this Wizard."
-msgstr "Prekini ovog čarobnjaka."
+msgstr ""
 
 msgid "Activate VPS"
 msgstr ""
@@ -97,6 +101,9 @@ msgstr ""
 msgid "Amount of recordings left"
 msgstr ""
 
+msgid "Any Day filter refers to the day of the timespan start, even if the timespan crosses midnight."
+msgstr ""
+
 msgid "Any service/recording"
 msgstr ""
 
@@ -117,14 +124,16 @@ msgstr "Otvori dopunski meni"
 msgid "AutoTimer Editor"
 msgstr "Urednik autotajmera"
 
+#, fuzzy
 msgid "AutoTimer FAQ"
-msgstr ""
+msgstr "Dodaj autotajmer"
 
 msgid "AutoTimer Filters"
 msgstr "Filteri autotajmera"
 
+#, fuzzy
 msgid "AutoTimer Help"
-msgstr ""
+msgstr "Dodaj autotajmer"
 
 msgid "AutoTimer Services"
 msgstr "Kanali autotajmera"
@@ -218,8 +227,9 @@ msgstr ""
 msgid "Couldn't load config file!"
 msgstr ""
 
+#, fuzzy
 msgid "Create a new AutoTimer."
-msgstr "Kreiraj novi autotajmer."
+msgstr "Dodaj novi autotajmer"
 
 msgid "Create a new timer using the classic editor"
 msgstr "Kreiraj novi tajmer koristeći klasični urednik"
@@ -338,8 +348,6 @@ msgid ""
 "Filters are another powerful tool when matching events. An AutoTimer can be restricted to certain Weekdays or only match an event with a text inside eg it's Description.\n"
 "Press BLUE to add a new restriction and YELLOW to remove the selected one."
 msgstr ""
-"Filteri su još jedan moćan alat kod slaganja događaja. Autotajmer može biti ograničen na određene dane u nedelji ili samo ako se slaže sa tekstom unutra,npr. njegov opis.\n"
-"Pritisni PLAVO da dodaš novo ograničenje i ŽUTO da ukloniš izabrano."
 
 msgid "First day to match events. No event that begins before this date will be matched."
 msgstr ""
@@ -447,9 +455,6 @@ msgid ""
 "An Event will only match this AutoTimer if it's on a specific and not denied Service (inside a Bouquet).\n"
 "Press BLUE to add a new restriction and YELLOW to remove the selected one."
 msgstr ""
-"Moguće je ograničiti autotajmer na određene kanale ili bukete ili zabraniti specifične.\n"
-"Događaj će se složiti sa ovim autotajmerom ako je u određenom i nezabranjenom kanalu (u buketu).\n"
-"Pritisni PLAVO da dodaš novo ograničenje i ŽUTO da ukloniš izabrano."
 
 msgid "Label Timers with season, episode and title, according to the SeriesPlugin settings."
 msgstr ""
@@ -518,7 +523,7 @@ msgid "No"
 msgstr "Ne"
 
 msgid "No, remove them."
-msgstr "Ne,ukloni ih."
+msgstr ""
 
 msgid "None"
 msgstr "Nijedan"
@@ -676,6 +681,9 @@ msgstr "Striktnost traženja"
 msgid "Search type"
 msgstr "Tip traženja"
 
+msgid "See: "
+msgstr ""
+
 msgid "Select \"exact match\" to enforce \"Match title\" to match exactly, \"partial match\" if you only want to search for a part of the event title or \"description match\" if you only want to search for a part of the event description."
 msgstr ""
 
@@ -777,11 +785,10 @@ msgid ""
 "Thank you for using the wizard. Your new AutoTimer has been added to the List.\n"
 "Please press OK to continue."
 msgstr ""
-"Hvala za korišćenje čarobnjaka.Vaš novi autotajmer je dodat u listu.\n"
-"Pritisnite OK da nastavite."
 
+#, fuzzy
 msgid "The 'Overview'"
-msgstr ""
+msgstr "Pregled autotajmera"
 
 msgid "The AutoTimer overview is the standard entry point to this plugin./n/nIf AutoTimers are configured you can choose them from a list to change them (OK button on your remote) or remove them (YELLOW button on your remote)./nNew Timers can be added by pressing the BLUE button and the control menu can be opened using the MENU button./n/nWhen leaving the plugin using the GREEN button it will search the EPG for matching events ONCE. To configure a regular search interval of the plugin to search for events open the control menu and enter the plugin setup."
 msgstr ""
@@ -790,11 +797,9 @@ msgid ""
 "The Timer will not be added to the List.\n"
 "Please press OK to close this Wizard."
 msgstr ""
-"Tajmer neće biti dodat u listu.\n"
-"Molim pritisnite OK da zatvorite čarobnjaka."
 
 msgid "The Timespan of an AutoTimer is the first 'advanced' attribute. If a timespan is specified an event will only match this AutoTimer if it lies inside of this timespan."
-msgstr "Vremenski razmak auto tajmera je prva \"napredna\" osobina.Ako je vrem. razmak naznačen,događaj će se poklopiti sa ovim auto tajmerom samo ako leži u tom vrem. razmaku."
+msgstr ""
 
 msgid "The autotimer file (/etc/enigma2/autotimer.xml) is corrupt. A new and empty config was created. A backup of the config can be found here (/etc/enigma2/autotimer.xml_old) "
 msgstr ""
@@ -806,6 +811,9 @@ msgid "The counter can automatically be reset to the limit at certain intervals.
 msgstr ""
 
 msgid "The editor to be used for new AutoTimers. This can either be the Wizard or the classic editor."
+msgstr ""
+
+msgid "The filter must be a valid regular expression.\n"
 msgstr ""
 
 msgid "The match attribute is mandatory."
@@ -928,9 +936,6 @@ msgid ""
 "\n"
 "This Wizard will help you to create a new AutoTimer by providing descriptions for common settings."
 msgstr ""
-"Dobrodošli.\n"
-"\n"
-"Ovaj čarobnjak će vam pomoći da napravite novi auto tajmer obezbeđujući opise za opšte postavke."
 
 msgid "What is this 'control menu' you keep talking about?"
 msgstr ""
@@ -963,7 +968,7 @@ msgid "Write the config file after every change which the user quits by saving."
 msgstr ""
 
 msgid "Yes"
-msgstr "Da"
+msgstr ""
 
 msgid "Yes, and delete all timers generated by this autotimer"
 msgstr ""
@@ -972,7 +977,7 @@ msgid "Yes, but keep timers generated by this autotimer"
 msgstr ""
 
 msgid "Yes, keep them."
-msgstr "Da, zadrži ih."
+msgstr ""
 
 msgid "You can control for how many days in the future timers are added. Set this to 0 to disable this feature."
 msgstr ""
@@ -981,15 +986,11 @@ msgid ""
 "You can set the basic properties of an AutoTimer here.\n"
 "While 'Name' is just a human-readable name displayed in the Overview, 'Match in title' is what is looked for in the EPG."
 msgstr ""
-"Ovde možete podesiti osnovno jednog auto tajmera.\n"
-"Dok je  'Ime' samo za ljude čitljivo ime prikazano u pregledu, 'Slaganje u naslovu' je ono šta tražimo u EPG."
 
 msgid ""
 "You did not provide a valid 'Match in title' Attribute for your new AutoTimer.\n"
 "As this is a mandatory Attribute you cannot continue without doing so."
 msgstr ""
-"Niste obezbedili validnu \"slaganje u naslovu\" osobinu za vaš novi auto tajmer.\n"
-"Kako je ovo obavezna osobina,ne možete nastaviti pre nego to učinite."
 
 #, python-format
 msgid ""
@@ -1007,16 +1008,11 @@ msgid ""
 "\n"
 "You can go back a step by pressing EXIT on your remote."
 msgstr ""
-"Vi ste uspešno konfigurisali novi auto tajmer.Da li želite da ga dodate na listu?\n"
-"\n"
-"Možete se vratiti korak nazad stiskajući IZLAZ na daljinskom."
 
 msgid ""
 "Your 'Match in title' Attribute ends with a Whitespace.\n"
 "Please confirm if this was intentional, if not they will be removed."
 msgstr ""
-"Vaša \"Slaganje u naslovu\" osobina završava praznim prostorom.\n"
-"Molim potvrdite da li je ovo bilo namerno,ako ne on će biti uklonjen."
 
 #, python-format
 msgid ""

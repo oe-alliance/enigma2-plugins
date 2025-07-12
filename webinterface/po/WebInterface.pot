@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-14 08:00+0100\n"
+"POT-Creation-Date: 2025-05-11 11:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,21 +49,6 @@ msgstr ""
 msgid "'%s' removed from playlist"
 msgstr ""
 
-msgid "0"
-msgstr ""
-
-msgid "1"
-msgstr ""
-
-msgid "15"
-msgstr ""
-
-msgid "2"
-msgstr ""
-
-msgid "3"
-msgstr ""
-
 msgid "AC3 Downmix disabled"
 msgstr ""
 
@@ -91,9 +76,6 @@ msgid "Add Timer"
 msgstr ""
 
 msgid "Add Zap Timer"
-msgstr ""
-
-msgid "Add/Save"
 msgstr ""
 
 msgid "After event"
@@ -957,9 +939,6 @@ msgid "reloaded lamedb"
 msgstr ""
 
 msgid "sec"
-msgstr ""
-
-msgid "submit-message"
 msgstr ""
 
 msgid "the command was not > 0"

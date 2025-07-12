@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-14 08:00+0100\n"
+"POT-Creation-Date: 2025-07-03 08:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#, python-format
+msgid "%d out of %d found this helpful."
+msgstr ""
 
 msgid "Ambiguous results"
 msgstr ""
@@ -27,6 +31,9 @@ msgid "Details"
 msgstr ""
 
 msgid "Downloading Movie Poster..."
+msgstr ""
+
+msgid "Downloading reviews..."
 msgstr ""
 
 msgid "E"
@@ -77,6 +84,12 @@ msgstr ""
 msgid "IMDb Re-Download completed"
 msgstr ""
 
+msgid "IMDb Reviews failed"
+msgstr ""
+
+msgid "IMDb Reviews parsed"
+msgstr ""
+
 msgid "IMDb Setup"
 msgstr ""
 
@@ -125,6 +138,9 @@ msgid "Page down"
 msgstr ""
 
 msgid "Page up"
+msgstr ""
+
+msgid "Parsing reviews..."
 msgstr ""
 
 msgid "Play Trailer"
@@ -180,10 +196,13 @@ msgstr ""
 msgid "Show extra information in title menu"
 msgstr ""
 
+msgid "Show first page of user reviews"
+msgstr ""
+
 msgid "Show in movie list"
 msgstr ""
 
-msgid "Show list of matched movies an series"
+msgid "Show list of matched movies and series"
 msgstr ""
 
 msgid "Show movie and series basic details"
@@ -204,6 +223,15 @@ msgstr ""
 msgid "Show the type of the title and top cast. Takes effect after the next search of IMDb for a show name."
 msgstr ""
 
+msgid "Spoiler"
+msgstr ""
+
+msgid "SubsSupport import failed"
+msgstr ""
+
+msgid "SubsSupport search"
+msgstr ""
+
 msgid "Synopsis"
 msgstr ""
 
@@ -214,6 +242,9 @@ msgid "This option allows you add words/phrases for IMDb to ignore when searchin
 msgstr ""
 
 msgid "Title Menu"
+msgstr ""
+
+msgid "User reviews"
 msgstr ""
 
 msgid "Words / phrases to ignore "

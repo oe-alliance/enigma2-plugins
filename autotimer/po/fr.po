@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2025-04-01 20:07+0200\n"
 "PO-Revision-Date: 2015-02-02 22:44+0100\n"
 "Last-Translator: mimi74\n"
 "Language-Team: french-EGAMI\n"
@@ -48,11 +48,15 @@ msgid "%d.%B %Y"
 msgstr "%d.%B %Y"
 
 #, python-format
+msgid "%s is not valid."
+msgstr ""
+
+#, python-format
 msgid "%s: %s at %s"
 msgstr "%s: %s à %s"
 
 msgid "Abort this Wizard."
-msgstr "Abandonner cet Assistant."
+msgstr ""
 
 msgid "Activate VPS"
 msgstr "Activater VPS"
@@ -92,6 +96,9 @@ msgstr ""
 
 msgid "Amount of recordings left"
 msgstr "Nombre d'enregistrement restant"
+
+msgid "Any Day filter refers to the day of the timespan start, even if the timespan crosses midnight."
+msgstr ""
 
 msgid "Any service/recording"
 msgstr "N'importe quel service/enregistrement"
@@ -218,8 +225,9 @@ msgstr "Contrôler complètement les enregistrements par service"
 msgid "Couldn't load config file!"
 msgstr "Ne peux charger le fichier config!"
 
+#, fuzzy
 msgid "Create a new AutoTimer."
-msgstr "Créer une nouvelle ProgAuto."
+msgstr "Ajouter nouvelle ProgAuto"
 
 msgid "Create a new timer using the classic editor"
 msgstr "Créer nouvelle programmation avec l'éditeur classique"
@@ -675,6 +683,9 @@ msgstr "Recherche stricte"
 msgid "Search type"
 msgstr "Type de recherche"
 
+msgid "See: "
+msgstr ""
+
 msgid "Select \"exact match\" to enforce \"Match title\" to match exactly, \"partial match\" if you only want to search for a part of the event title or \"description match\" if you only want to search for a part of the event description."
 msgstr "Choisir \"correspondance parfaite\" pour forcer \"correspondre à titre\" pour une correspondance exacte, \"correspondance partielle\" pour chercher une partie du titre \"correspondre description\" si vous voulez chercher une partie de la description de l'événement"
 
@@ -804,6 +815,9 @@ msgstr "Le compteur peut automatiquement être remis à la limite à certains in
 
 msgid "The editor to be used for new AutoTimers. This can either be the Wizard or the classic editor."
 msgstr "L'éditeur peut être utilisé pour des nouvelles ProgAutos. Ceci peut être soit l'Assistant soit l'éditeur classique."
+
+msgid "The filter must be a valid regular expression.\n"
+msgstr ""
 
 msgid "The match attribute is mandatory."
 msgstr "L'attribut de correspondance est obligatoire."
@@ -973,8 +987,6 @@ msgid ""
 "You can set the basic properties of an AutoTimer here.\n"
 "While 'Name' is just a human-readable name displayed in the Overview, 'Match in title' is what is looked for in the EPG."
 msgstr ""
-"Vous pouvez définir ici les propriétés de base d'un AutoTimer. \n"
-" Alors que 'Nom' est juste un nom lisible affiché dans la vue d'ensemble, Chercher en titre' est ce qui est recherché dans l'EPG."
 
 msgid ""
 "You did not provide a valid 'Match in title' Attribute for your new AutoTimer.\n"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-21 10:08+0100\n"
+"POT-Creation-Date: 2022-08-17 19:58+0200\n"
 "PO-Revision-Date: 2016-01-23 20:24+0400\n"
 "Last-Translator: ser6 <ser6@bk.ru>\n"
 "Language-Team: Ru locale by Sowa\n"
@@ -14,70 +14,64 @@ msgstr ""
 "X-Generator: Poedit 1.5.7\n"
 
 msgid "AutoTimer FAQ"
-msgstr "Вопросы и ответы"
+msgstr ""
 
 msgid "AutoTimer Help"
-msgstr "Помощь по автотаймеру"
+msgstr ""
 
 msgid "Close"
 msgstr "Закрыть"
 
 msgid "Congratulations"
-msgstr "Конфигурация"
+msgstr ""
 
 msgid "FAQ"
-msgstr "Вопросы и ответы"
+msgstr ""
 
 msgid "Frequently asked questions about the AutoTimer"
-msgstr "Часто задаваемые вопросы о автотаймере"
+msgstr ""
 
 msgid "Generic setup"
-msgstr "Общие установки"
+msgstr ""
 
 msgid "Question: I found a problem with the AutoTimer, can you fix it?/nAnswer: First try the AutoTimer version in a recent (experimental) Image to see if the problem was fixed. Then read the Help again and the upcoming FAQs to make sure that this is actually a problem and not expected behavior./nIf you still think there is something wrong with the AutoTimer, please visit http://www.dream-multimedia-tv.de/board and post your problem there./n/nQ: The plugin only adds timers when leaving the configuration, not automatically. What can I do?/nA: From the Overview press MENU and enter the 'Setup'. In this screen enable 'Poll automatically' and you should be good to go."
 msgstr ""
-"Вопрос: Я нашёл проблему с автотаймером, Вы можете это исправить?\n"
-"Ответ: Сначала попробуйте автотаймер последней (Экспериментальной) версии имиджа, чтобы убедится, что они не исправлены. Затем снова прочитайте справку и часто задаваемые вопросы, чтобы убедиться, что это на самом деле проблема, а не ожидаемое поведение\n"
-"Если Вы все ещё думаете, что что-то не так с автотаймером, пожалуйста, посетите http://www.dream-multimedia-tv.de/board и опишите свою проблему там\n"
-"\n"
-"Вопрос: Плагин добавляет таймеры только при выходе из конфигурации, а не автоматически. Что я могу сделать?\n"
-"Ответ: В обзоре нажмите Меnu (На пульте) выберете «Настройки». В этом окне включите 'Опрос автоматически', должно сработать"
 
 msgid "Question: My AutoTimer for 'News' does not record the 'Late News'./nAnswer: Check 'Search type' and 'Search strictness' for the given AutoTimer./n/nQ: The show I'm trying to record contains umlauts in its title. AutoTimer does not find it./nA: Check the 'EPG encoding' for the given AutoTimer. For german stations 'UTF-8' should be selected./n/nQ: I seem to be unable to record two subsequent events. There is only a single timer created that spans (part of) both events./nA: From the Overview press MENU and enter the 'Setup'. In this screen disable 'Guess existing timer based on begin/end'."
-msgstr "Вопрос: Мой автотаймер не записывает окончание передачи/nОтвет: Проверьте тип и ограничения поиска, которые учитывает автотаймер/n/nВопрос: Передача, которую я пытаюсь записать содержит умлауты в его названии. Автотаймер их не находит/nОтвет: Проверьте кодировку EPG для данного автотаймера. Для немецких станций должна быть выбрана UTF-8/n/nВопрос: У меня не записываются два последующих события/nОтвет: Войдите в меню установок и отключите опцию 'Определять таймеры на основе начало/конец'"
+msgstr ""
 
 msgid "Question: You keep talking about help being provided for each parameter. I'm unable to read it (in part or in full)./nAnswer: Try using the default skin and if it works ask the creator of your regular skin. If it still does not work your image might not provide the actual default skin so contact the creator of your image."
-msgstr "Вопрос: Вы все время говорите о помощи, предоставляемой для каждого параметра. Я не могу прочесть её (Частично или полностью)/nОтвет: Попробуйте использовать дефолтный скин имиджа, если в нём всё в порядке, спросите у автора Вашего скина. Если это не помогает  значит Ваш имидж не поддерживет этот плагин, поэтому обратитесь к создателю Вашего имиджа"
+msgstr ""
 
 msgid "The 'Overview'"
-msgstr "'Обзор'"
+msgstr ""
 
 msgid "The AutoTimer overview is the standard entry point to this plugin./n/nIf AutoTimers are configured you can choose them from a list to change them (OK button on your remote) or remove them (YELLOW button on your remote)./nNew Timers can be added by pressing the BLUE button and the control menu can be opened using the MENU button./n/nWhen leaving the plugin using the GREEN button it will search the EPG for matching events ONCE. To configure a regular search interval of the plugin to search for events open the control menu and enter the plugin setup."
-msgstr "Обзор автотаймеров - это стандартная точка входа в этот плагин/n/nЕсли автотаймеры настроены, Вы можете изменить выбранный (OK на пульте ДУ) или удалить его (Жёлтая кнопка на пульте ДУ)/nНовые таймеры могут быть добавлены простым нажатием синей кнопки, а меню управления может быть открыто с помощью кнопки меню/n/nПри выходе из плагина с помощью Зелёной кнопки он будет искать в EPG, для сравнения события однократно. Чтобы настроить регулярные промежутки времени для поиска событий, откройте меню управления и войдите в настройки плагина"
+msgstr ""
 
 msgid "The control menu hides less frequently used options of the plugin, including the configuration and default settings for new AutoTimers./n/nWhile you can just open the menu and take a look for yourself, let's go through the available options:/n - Help:/n   What you are looking at right now/n - Preview:/n   Simulate EPG search, helps finding errors in your setup./n - Import existing Timer:/n   Create a new AutoTimer based on an existing regular timer./n - Import from EPG:/n   Create an AutoTimer based on an EPG event./n - Setup:/n   Generic configuration of the plugin./n - Edit new timer defaults:/n   Configure default values for new AutoTimers./n - Create a new timer using the wizard/classic editor:/n   Use the non-default editor to create a new AutoTimer."
-msgstr "Меню управления скрывает редко используемые опции плагина, в том числе конфигурации и настройки по умолчанию для новых автотаймеров/n/nХотя Вы можете просто открыть меню и посмотреть для себя, давайте пройдёмся по доступным опциям:/n - Помощь:/n То, что Вы смотрите прямо сейчас/n - Предпросмотр:/n Имитация поиска в EPG, помогает найти ошибки в настройках/n - Импорт существующего таймера:/n Создайте новый автотаймер на основе существующего регулярного таймера/n - Импорт из EPG:/n Создать автотаймер на основе события EPG/n - Настройки:/n Общие настройки плагина/n - Редактировать значения по умолчанию для нового таймера:/n Настройка значений по умолчанию для новых автотаймеров/n - Создать новый таймер с помощью мастера/классического редактора:/n Использование альтернативного редактора для создания новых автотаймеров"
+msgstr ""
 
 msgid "This FAQ is supposed to help everyone unwilling to help themselves by reading all the provided help available, and those who did not find a solution to their problems within the provided documentation./n/nTo make these hints a little easier to read, they are split up on multiple pages. You can go to the next page using the BLUE button on your remote control and back using the YELLOW one. Pressing the RED button or EXIT will close the FAQ."
-msgstr "Этот FAQ должен помочь тем, кто не желает читать всю доступную помощь, и тем, кто не нашёл решение своих проблем в имеющейся информации/n/nЧтобы сделать эти подсказки читабельнее, они разделены на несколько страниц. Вы можете перейти к следующей странице, используя синюю кнопку на пульте ДУ и обратно, используя жёлтую. Нажатие на красную кнопку, или Exit, закроет FAQ"
+msgstr ""
 
 msgid "This help screen is supposed to give you a quick look at everything the AutoTimer has to offer./nYou can abort it at any time by pressing the RED or EXIT button on your remote control or bring it up at a later point by selecting it from the control menu using the MENU button from the regular entry point of the plugin (more on that later)./n/n/nBut you really should consider to take the few minutes it takes to read these help pages."
-msgstr "Этот экран помощи должн дать Вам быстрый обзор на всё, что может предложить автотаймер/nВы можете закрыть его в любое время, нажав на красную кнопку или Exit на пульте ДУ и вызвать его на более позднем этапе, выбрав в меню управления с помощью кнопки меню из регулярной точки входа в плагин (Подробнее об этом позже)/n/n/nНо Вы действительно должны затратить несколько минут на чтение этих страниц помощи"
+msgstr ""
 
 msgid "This is mostly a matter of taste./nThe Wizard provides you with a reduced set of options and presents them in smaller sets at a time. It is mostly aimed at users not very experienced with this plugin or the 'expert' level features of enigma2./n/nYou can check out the 'classic' editor by opening an existing timer from the overview and if you prefer this view over the wizard you can change the default editor in the setup dialog."
-msgstr "Это в основном дело вкуса/nМастер предоставляет Вам сокращённый набор вариантов и представляет их в небольших наборах за раз. Он в основном ориентирован на пользователей, не очень опытных в этом плагине или уровене «Эксперт» настроек Enigma2/n/nВы можете выбрать «классический» редактор, открыв существующий таймер из обзора, если Вы предпочитаете его, или изменить на мастер, как редактор по умолчанию в диалоговом окне установки"
+msgstr ""
 
 msgid "This screen should be pretty straight-forward. If the option name does not give its meaning away there should be an explanation for each of them when you select them. If there is no visible explanation this is most likely a skin issue and please try if the default skin fixes the issue./n/nA lot of effort has been put in making the parameters as easy to understand as possible, so give reading them a try ;-)."
-msgstr "Этот экран должен быть довольно простым. Если имя опции не объясняет её значение, далее должно быть какое-то объяснение для каждой из них, при их выборе. Если нет никаких видимых пояснений, скорее всего это проблема скина, попробуйте дефолтный скин, возможно он устранит проблему/n/nМного труда было вложено именно в создание параметров, как легко понять, многое возможно, поэтому давайте попробуем почитаем о них"
+msgstr ""
 
 msgid "Welcome to the AutoTimer-Plugin"
-msgstr "Добро Пожаловать в плагин автотаймер"
+msgstr ""
 
 msgid "What is this 'control menu' you keep talking about?"
-msgstr "Что это за 'Меню управления' о котором говориться?"
+msgstr ""
 
 msgid "Wizard or Classic Editor?"
-msgstr "Мастер или классический редактор?"
+msgstr ""
 
 msgid "You now know almost everything there is to know about the AutoTimer-Plugin./n/nAs a final hint I can't stress how important it is to take a look at the help texts that are shown in the setup dialogs as they cover the most frequently asked questions. Surprisingly even after the hints were added ;-)."
-msgstr "Теперь Вы знаете почти всё, что нужно знать о плагине автотаймер/n/nВ качестве последнего намёка я не могу не подчеркнуть, насколько важно взглянуть на справочные сообщения, которые показаны в диалогах настроек, поскольку они охватывают наиболее часто задаваемые вопросы. Они всё равно возникают, даже после подсказки"
+msgstr ""

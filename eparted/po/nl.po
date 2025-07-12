@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eParted 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2025-04-01 18:45+0200\n"
 "PO-Revision-Date: 2012-11-07 08:08+0100\n"
 "Last-Translator: bschaar\n"
 "Language-Team: mechatron\n"
@@ -60,6 +60,10 @@ msgstr "Verwijderen"
 #, python-format
 msgid "delete partition %s"
 msgstr "Partitie %s verwijderen"
+
+#, python-format
+msgid "disable hotplug for %s%s"
+msgstr ""
 
 msgid "eParted"
 msgstr ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-14 08:00+0100\n"
+"POT-Creation-Date: 2025-04-01 20:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,15 +30,6 @@ msgid "(set point)"
 msgstr ""
 
 msgid "Visualization for European Installation Bus"
-msgstr ""
-
-msgid "beleuchtung:helligkeitswerte:esstisch"
-msgstr ""
-
-msgid "beleuchtung:helligkeitswerte:schlafen_decke"
-msgstr ""
-
-msgid "beleuchtung:helligkeitswerte:wohnzimmer_decke_1"
 msgstr ""
 
 msgid "down"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-14 08:00+0100\n"
+"POT-Creation-Date: 2025-04-01 20:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -43,6 +43,10 @@ msgid ""
 msgstr ""
 
 msgid "%d.%B %Y"
+msgstr ""
+
+#, python-format
+msgid "%s is not valid."
 msgstr ""
 
 #, python-format
@@ -657,6 +661,9 @@ msgstr ""
 msgid "Search type"
 msgstr ""
 
+msgid "See: "
+msgstr ""
+
 msgid "Select \"exact match\" to enforce \"Match title\" to match exactly, \"partial match\" if you only want to search for a part of the event title or \"description match\" if you only want to search for a part of the event description."
 msgstr ""
 
@@ -782,6 +789,9 @@ msgid "The counter can automatically be reset to the limit at certain intervals.
 msgstr ""
 
 msgid "The editor to be used for new AutoTimers. This can either be the Wizard or the classic editor."
+msgstr ""
+
+msgid "The filter must be a valid regular expression.\n"
 msgstr ""
 
 msgid "The match attribute is mandatory."

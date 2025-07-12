@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2025-04-01 20:21+0200\n"
 "PO-Revision-Date: 2012-12-03 15:01+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -224,13 +224,7 @@ msgstr ""
 msgid "PushService Exception in writeXML: "
 msgstr ""
 
-msgid "PushService Find module exception: "
-msgstr ""
-
 msgid "PushService Instantiate exception: "
-msgstr ""
-
-msgid "PushService Load exception: "
 msgstr ""
 
 #, python-format
@@ -244,9 +238,6 @@ msgid "PushService No configuration file present"
 msgstr ""
 
 msgid "PushService No module available: "
-msgstr ""
-
-msgid "PushService No module found: "
 msgstr ""
 
 #, python-format

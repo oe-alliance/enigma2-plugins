@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2024-07-04 12:56+0200\n"
 "PO-Revision-Date: 2012-12-03 15:01+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -137,6 +137,9 @@ msgstr ""
 msgid "IMDb Search"
 msgstr "IMDb Search"
 
+msgid "INFO"
+msgstr ""
+
 msgid "Import from AutoTimer"
 msgstr "Import from AutoTimer"
 
@@ -164,6 +167,9 @@ msgstr ""
 #, fuzzy
 msgid "Length of history"
 msgstr "Length of History"
+
+msgid "MENU"
+msgstr ""
 
 #, fuzzy
 msgid "Maximum number of entries in the search history. Set this to 0 to disable search history."
@@ -309,6 +315,9 @@ msgid "exclude"
 msgstr ""
 
 msgid "include"
+msgstr ""
+
+msgid "partial description"
 msgstr ""
 
 msgid "partial match"

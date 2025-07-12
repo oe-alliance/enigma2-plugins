@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2025-04-01 18:45+0200\n"
 "PO-Revision-Date: 2023-03-30 11:45+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: none\n"
@@ -30,9 +30,6 @@ msgstr "1 week"
 
 msgid "3 days"
 msgstr "3 days"
-
-msgid "Accept changes"
-msgstr "Accept changes"
 
 msgid "Add"
 msgstr "Add"
@@ -72,22 +69,9 @@ msgstr "CSV import successful!"
 msgid "Can't find CSV file %s!"
 msgstr "Can't find CSV file %s!"
 
-#, python-format
-msgid "Can't import CSV data from file %s."
-msgstr "Can't import CSV data from file %s."
-
-#, python-format
-msgid "Can't write CSV file %s."
+#, fuzzy, python-format
+msgid "Can't write CSV file '%s'. Error: %s"
 msgstr "Can't write CSV file %s."
-
-msgid "Cancel"
-msgstr "Cancel"
-
-msgid "Change path"
-msgstr "Change path"
-
-msgid "Choose the filename:"
-msgstr "Choose the filename:"
 
 msgid "Date format:"
 msgstr "Date format:"
@@ -108,6 +92,10 @@ msgstr "Do you really want to delete the entry for %s?"
 msgid "Edit"
 msgstr "Edit"
 
+#, fuzzy
+msgid "Edit Birthday Settings"
+msgstr "Edit birthdays"
+
 msgid "Edit birthday"
 msgstr "Edit birthday"
 
@@ -116,9 +104,6 @@ msgstr "Edit birthdays"
 
 msgid "Edit the selected entry"
 msgstr "Edit the selected entry"
-
-msgid "Enter the name of the person:"
-msgstr "Enter the name of the person:"
 
 #, python-format
 msgid ""
@@ -155,9 +140,6 @@ msgstr "Helps to remind of birthdays"
 msgid "Import CSV file"
 msgstr "Import CSV file"
 
-msgid "Invalid Location"
-msgstr "Invalid Location"
-
 msgid "Invalid date!"
 msgstr "Invalid date!"
 
@@ -179,9 +161,6 @@ msgstr "Next birthday"
 msgid "Notification time:"
 msgstr "Notification time:"
 
-msgid "OK"
-msgstr "OK"
-
 msgid "Open the extras menu"
 msgstr "Open the extras menu"
 
@@ -197,8 +176,9 @@ msgstr "Remove"
 msgid "Remove the selected entry"
 msgstr "Remove the selected entry"
 
-msgid "Save"
-msgstr "Save"
+#, fuzzy
+msgid "Select a path for the birthday file"
+msgstr "Path to birthday file:"
 
 msgid "Show plugin in extensions menu:"
 msgstr "Show plugin in extensions menu:"
@@ -221,9 +201,6 @@ msgstr ""
 "Today is %s's birthday!\n"
 "\n"
 "She/he was born on %s and is now %s year(s) old."
-
-msgid "VirtualKeyBoard"
-msgstr "VirtualKeyBoard"
 
 msgid "What do you want to do?"
 msgstr "What do you want to do?"

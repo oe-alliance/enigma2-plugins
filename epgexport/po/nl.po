@@ -5,7 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-11-25 14:31+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-04-07 13:52+0200\n"
 "PO-Revision-Date: 2024-01-06 17:57+0100\n"
 "Last-Translator: Snoete <snoete via GitHub.com>\n"
 "Language-Team: \n"
@@ -16,197 +17,11 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: ..\plugin.py:69 ..\plugin.py:112
-msgid "none"
-msgstr "geen"
-
-#: ..\plugin.py:70
-msgid "xz"
-msgstr "xz"
-
-#: ..\plugin.py:71
-msgid "gz"
-msgstr "gz"
-
-#: ..\plugin.py:85 ..\plugin.py:86 ..\plugin.py:87 ..\plugin.py:91
-msgid "Channel"
-msgstr "Zender"
-
-#: ..\plugin.py:85 ..\plugin.py:86 ..\plugin.py:87 ..\plugin.py:95
-msgid "Name"
-msgstr "Naam"
-
-#: ..\plugin.py:89 ..\plugin.py:90
-msgid "Language"
-msgstr "Taal"
-
-#: ..\plugin.py:91
-msgid "Number"
-msgstr "Nummer"
-
-#: ..\plugin.py:92 ..\plugin.py:592
-msgid "Custom (%s)"
-msgstr "Aangepast (%s)"
-
-#: ..\plugin.py:95
-msgid "IP Address"
-msgstr "IP Adres"
-
-#: ..\plugin.py:95 ..\plugin.py:109
-msgid "disabled"
-msgstr "gedeactiveerd"
-
-#: ..\plugin.py:95 ..\plugin.py:473
-msgid "Server IP"
-msgstr "Server IP"
-
-#: ..\plugin.py:105
-msgid "always"
-msgstr "altijd"
-
-#: ..\plugin.py:109
-msgid "daily"
-msgstr "dagelijks"
-
-#: ..\plugin.py:109
-msgid "every 12 hours"
-msgstr "elke 12 uur"
-
-#: ..\plugin.py:109
-msgid "every 2 hours"
-msgstr "elke 2 uur"
-
-#: ..\plugin.py:109
-msgid "every 6 hours"
-msgstr "elke 6 uur"
-
-#: ..\plugin.py:109
-msgid "every hour"
-msgstr "elk uur"
-
-#: ..\plugin.py:130
-msgid "Favorites"
-msgstr "Favorieten"
-
-#: ..\plugin.py:345
-msgid "Export EPG as XML"
-msgstr "Exporteer EPG als XML"
-
-#: ..\plugin.py:360 ..\plugin.py:971
-msgid "Exit"
-msgstr "Afsluiten"
-
-#: ..\plugin.py:361 ..\plugin.py:972
-msgid "Save"
-msgstr "Opslaan"
-
-#: ..\plugin.py:364 ..\plugin.py:479 ..\plugin.py:518 ..\plugin.py:523
-#: ..\plugin.py:533 ..\plugin.py:586
-msgid "Downloading"
-msgstr "Downloaden"
-
-#: ..\plugin.py:365
-msgid "Bouquets"
-msgstr "Bouquets"
-
-#: ..\plugin.py:365
-msgid "Select"
-msgstr "Selecteer"
-
-#: ..\plugin.py:381
+#, python-format
 msgid "%s - ver. %s"
 msgstr "%s - ver. %s"
 
-#: ..\plugin.py:387
-msgid "Destination directory"
-msgstr "Naar welke map exporteren"
-
-#: ..\plugin.py:388
-msgid "EPG Download (Days)"
-msgstr "EPG download (dagen)"
-
-#: ..\plugin.py:389
-msgid "EPG Update (Hours)"
-msgstr "EPG update (uren)"
-
-#: ..\plugin.py:390
-msgid "Keep outdated EPG (Days)"
-msgstr "Verouderde EPG bewaren (dagen)"
-
-#: ..\plugin.py:391
-msgid "Recurring EPG Download"
-msgstr "Herhaalde EPG download"
-
-#: ..\plugin.py:393
-msgid "StartTime"
-msgstr "Starttijd"
-
-#: ..\plugin.py:394
-msgid "Compression"
-msgstr "Compressie"
-
-#: ..\plugin.py:395
-msgid "Channel ID"
-msgstr "Zender-ID"
-
-#: ..\plugin.py:396
-msgid "OpenWebIf Picon Location (XML-Source)"
-msgstr "OpenWebIf picon locatie (XML-bron)"
-
-#: ..\plugin.py:398
-msgid "Server IP Address"
-msgstr "Server IP-adres"
-
-#: ..\plugin.py:400
-msgid "Server Name"
-msgstr "Servernaam"
-
-#: ..\plugin.py:401
-msgid "Enable Plugin's own WebInterface (GUI restart required)"
-msgstr "Eigen webinterface voor deze plugin toestaan (GUI herstart noodzakelijk)"
-
-#: ..\plugin.py:403
-msgid "Server Port (4000-4999)"
-msgstr "Server poort (4000-4999)"
-
-#: ..\plugin.py:404
-msgid "Enable 'twisted'-mode for WebInterface (recommended)"
-msgstr "De 'twisted-mode' voor de webinterface activeren (aanbevolen)"
-
-#: ..\plugin.py:406
-msgid "HINT: >>> Test Plugin's own WebInterface with 'BoxIP:Port/LastUpdate.txt' <<<"
-msgstr "TIP: >>> Test de eigen webinterface van deze plugin via 'BoxIP:Poort/LastUpdate.txt' <<<"
-
-#: ..\plugin.py:423
-msgid "Saving"
-msgstr "Opslaan"
-
-#: ..\plugin.py:423 ..\plugin.py:461
-msgid "..."
-msgstr "..."
-
-#: ..\plugin.py:423 ..\plugin.py:461
-msgid "Configuration"
-msgstr "Configuratie"
-
-#: ..\plugin.py:461
-msgid "Leaving"
-msgstr "Verlaten"
-
-#: ..\plugin.py:475
-msgid "Hostname"
-msgstr "Hostname"
-
-#: ..\plugin.py:518 ..\plugin.py:523 ..\plugin.py:533 ..\plugin.py:541
-#: ..\plugin.py:599 ..\plugin.py:868
-msgid "EPG"
-msgstr "EPG"
-
-#: ..\plugin.py:533
-msgid "Execution finished!!"
-msgstr "Export gereed!!"
-
-#: ..\plugin.py:536 ..\plugin.py:1038
+#, python-format
 msgid ""
 "%s plugin ver. %s\n"
 "\n"
@@ -220,54 +35,181 @@ msgstr ""
 "\n"
 "Dank aan Rytec voor het  XMLTV Format !"
 
-#: ..\plugin.py:541
-msgid "Cache"
-msgstr "Cache"
+msgid "..."
+msgstr "..."
 
-#: ..\plugin.py:541 ..\plugin.py:599 ..\plugin.py:868
-msgid "Download"
-msgstr "Download"
-
-#: ..\plugin.py:541 ..\plugin.py:973
-msgid "Reset"
-msgstr "Reset"
-
-#: ..\plugin.py:586
-msgid "Custom (xml %s %s...)"
-msgstr "Aangepast (xml %s %s...)"
-
-#: ..\plugin.py:586 ..\plugin.py:868
-msgid "Channels"
-msgstr "Zenders"
-
-#: ..\plugin.py:592
-msgid "not found"
-msgstr "niet gevonden"
-
-#: ..\plugin.py:599
-msgid "Finished"
-msgstr "Gereed"
-
-#: ..\plugin.py:599
-msgid "Reload"
-msgstr "Herladen"
-
-#: ..\plugin.py:868
-msgid "Details"
-msgstr "Details"
-
-#: ..\plugin.py:868
-msgid "Info"
-msgstr "Info"
-
-#: ..\plugin.py:974
 msgid "About"
 msgstr "Over"
 
-#: ..\plugin.py:994
 msgid "Bouquet"
 msgstr "Bouquet"
 
-#: ..\plugin.py:994
+msgid "Bouquets"
+msgstr "Bouquets"
+
+msgid "Cache"
+msgstr "Cache"
+
+msgid "Channel"
+msgstr "Zender"
+
+msgid "Channel ID"
+msgstr "Zender-ID"
+
+msgid "Channels"
+msgstr "Zenders"
+
+msgid "Compression"
+msgstr "Compressie"
+
+msgid "Configuration"
+msgstr "Configuratie"
+
+#, python-format
+msgid "Custom (%s)"
+msgstr "Aangepast (%s)"
+
+#, python-format
+msgid "Custom (xml %s %s...)"
+msgstr "Aangepast (xml %s %s...)"
+
+msgid "Destination directory"
+msgstr "Naar welke map exporteren"
+
+msgid "Details"
+msgstr "Details"
+
+msgid "Download"
+msgstr "Download"
+
+msgid "Downloading"
+msgstr "Downloaden"
+
+msgid "EPG"
+msgstr "EPG"
+
+msgid "EPG Download (Days)"
+msgstr "EPG download (dagen)"
+
 msgid "EPG Selection"
 msgstr "EPG Selectie"
+
+msgid "EPG Update (Hours)"
+msgstr "EPG update (uren)"
+
+msgid "Enable 'twisted'-mode for WebInterface (recommended)"
+msgstr "De 'twisted-mode' voor de webinterface activeren (aanbevolen)"
+
+msgid "Enable Plugin's own WebInterface (GUI restart required)"
+msgstr "Eigen webinterface voor deze plugin toestaan (GUI herstart noodzakelijk)"
+
+msgid "Execution finished!!"
+msgstr "Export gereed!!"
+
+msgid "Exit"
+msgstr "Afsluiten"
+
+msgid "Export EPG as XML"
+msgstr "Exporteer EPG als XML"
+
+msgid "Favorites"
+msgstr "Favorieten"
+
+msgid "Finished"
+msgstr "Gereed"
+
+msgid "HINT: >>> Test Plugin's own WebInterface with 'BoxIP:Port/LastUpdate.txt' <<<"
+msgstr "TIP: >>> Test de eigen webinterface van deze plugin via 'BoxIP:Poort/LastUpdate.txt' <<<"
+
+msgid "Hostname"
+msgstr "Hostname"
+
+msgid "IP Address"
+msgstr "IP Adres"
+
+msgid "Info"
+msgstr "Info"
+
+msgid "Keep outdated EPG (Days)"
+msgstr "Verouderde EPG bewaren (dagen)"
+
+msgid "Language"
+msgstr "Taal"
+
+msgid "Leaving"
+msgstr "Verlaten"
+
+msgid "Name"
+msgstr "Naam"
+
+msgid "Number"
+msgstr "Nummer"
+
+msgid "OpenWebIf Picon Location (XML-Source)"
+msgstr "OpenWebIf picon locatie (XML-bron)"
+
+msgid "Recurring EPG Download"
+msgstr "Herhaalde EPG download"
+
+msgid "Reload"
+msgstr "Herladen"
+
+msgid "Reset"
+msgstr "Reset"
+
+msgid "Save"
+msgstr "Opslaan"
+
+msgid "Saving"
+msgstr "Opslaan"
+
+msgid "Select"
+msgstr "Selecteer"
+
+msgid "Server IP"
+msgstr "Server IP"
+
+msgid "Server IP Address"
+msgstr "Server IP-adres"
+
+msgid "Server Name"
+msgstr "Servernaam"
+
+msgid "Server Port (4000-4999)"
+msgstr "Server poort (4000-4999)"
+
+msgid "StartTime"
+msgstr "Starttijd"
+
+msgid "always"
+msgstr "altijd"
+
+msgid "daily"
+msgstr "dagelijks"
+
+msgid "disabled"
+msgstr "gedeactiveerd"
+
+msgid "every 12 hours"
+msgstr "elke 12 uur"
+
+msgid "every 2 hours"
+msgstr "elke 2 uur"
+
+msgid "every 6 hours"
+msgstr "elke 6 uur"
+
+msgid "every hour"
+msgstr "elk uur"
+
+msgid "gz"
+msgstr "gz"
+
+msgid "none"
+msgstr "geen"
+
+msgid "not found"
+msgstr "niet gevonden"
+
+msgid "xz"
+msgstr "xz"

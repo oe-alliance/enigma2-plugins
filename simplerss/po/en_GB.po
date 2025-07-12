@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-30 17:35+0200\n"
+"POT-Creation-Date: 2025-04-01 20:07+0200\n"
 "PO-Revision-Date: 2024-09-30 17:41+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: none\n"
@@ -18,263 +18,212 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.5\n"
 
-#: ..\plugin.py:72
-msgid "Notification"
-msgstr "Notification"
-
-#: ..\plugin.py:72
-msgid "Preview"
-msgstr "Preview"
-
-#: ..\plugin.py:72
-msgid "Ticker"
-msgstr "Ticker"
-
-#: ..\plugin.py:72
-msgid "none"
-msgstr "none"
-
-#: ..\plugin.py:214 ..\plugin.py:731 ..\plugin.py:737 ..\plugin.py:782
-#: ..\plugin.py:878 ..\plugin.py:999 ..\plugin.py:1013 ..\plugin.py:1069
-msgid "New Items"
-msgstr "New Items"
-
-#: ..\plugin.py:229
-msgid "Autoupdate"
-msgstr "Autoupdate"
-
-#: ..\plugin.py:229
-msgid "Feed URI"
-msgstr "Feed URI"
-
-#: ..\plugin.py:231 ..\plugin.py:284
-msgid "Cancel"
-msgstr "Cancel"
-
-#: ..\plugin.py:232
-msgid "OK"
-msgstr "OK"
-
-#: ..\plugin.py:237 ..\plugin.py:283 ..\plugin.py:304
-msgid "Simple RSS Reader Setup"
-msgstr "Simple RSS Reader Setup"
-
-#: ..\plugin.py:285
-msgid "Save"
-msgstr "Save"
-
-#: ..\plugin.py:286
-msgid "New"
-msgstr "New"
-
-#: ..\plugin.py:287
-msgid "Delete"
-msgstr "Delete"
-
-#: ..\plugin.py:308
-msgid "Feed"
-msgstr "Feed"
-
-#: ..\plugin.py:309
-msgid "Start automatically with Enigma2"
-msgstr "Start automatically with Enigma2"
-
-#: ..\plugin.py:310
-msgid "Keep running in background"
-msgstr "Keep running in background"
-
-#: ..\plugin.py:313
-msgid "Update Interval [min]"
-msgstr "Update Interval [min]"
-
-#: ..\plugin.py:314
-msgid "Show new Messages as"
-msgstr "Show new Messages as"
-
-#: ..\plugin.py:316
-msgid " *Vertical position of ticker [%] (0% = top / 100% = bottom)"
-msgstr " *Vertical position of ticker [%] (0% = top / 100% = bottom)"
-
-#: ..\plugin.py:317
-msgid " *Frequency of scrollsteps [ms] (low values slow down the box)"
-msgstr " *Frequency of scrollsteps [ms] (low values slow down the box)"
-
-#: ..\plugin.py:318
-msgid " *Scrollspeed [pixels per step] (high values lead to jerking)"
-msgstr " *Scrollspeed [pixels per step] (high values lead to jerking)"
-
-#: ..\plugin.py:320
 msgid " *=please perform a GUI-restart for these changes to take effect"
 msgstr " *=please perform a GUI-restart for these changes to take effect"
 
-#: ..\plugin.py:322
-msgid ""
-"Note: If box becomes extremely slow, please reduce the quantity of feeds."
-msgstr ""
-"Note: If box becomes extremely slow, please reduce the quantity of feeds."
+msgid " *Frequency of scrollsteps [ms] (low values slow down the box)"
+msgstr " *Frequency of scrollsteps [ms] (low values slow down the box)"
 
-#: ..\plugin.py:341
-msgid ""
-"Really delete this entry?\n"
-"It cannot be recovered!"
-msgstr ""
-"Really delete this entry?\n"
-"It cannot be recovered!"
+msgid " *Scrollspeed [pixels per step] (high values lead to jerking)"
+msgstr " *Scrollspeed [pixels per step] (high values lead to jerking)"
 
-#: ..\plugin.py:358
-msgid "Import feeds from:"
-msgstr "Import feeds from:"
+msgid " *Vertical position of ticker [%] (0% = top / 100% = bottom)"
+msgstr " *Vertical position of ticker [%] (0% = top / 100% = bottom)"
 
-#: ..\plugin.py:392
-msgid ""
-"Importing '%s'\n"
-"%s feeds were imported successfully\n"
-"%s feeds were double and not imported"
-msgstr ""
-"Importing '%s'\n"
-"%s feeds were imported successfully\n"
-"%s feeds were double and not imported"
-
-#: ..\plugin.py:396
-msgid "File '%s' was not found, import was aborted!"
-msgstr "File '%s' was not found, import was aborted!"
-
-#: ..\plugin.py:429 ..\plugin.py:479
-msgid ""
-"Error while parsing Feed, this usually means there is something wrong with "
-"it."
-msgstr ""
-"Error while parsing Feed, this usually means there is something wrong with "
-"it."
-
-#: ..\plugin.py:488
-msgid ""
-"Update is being done in Background.\n"
-"Contents will automatically be updated when it's done."
-msgstr ""
-"Update is being done in Background.\n"
-"Contents will automatically be updated when it's done."
-
-#: ..\plugin.py:539
-msgid "Simple RSS Reader EntryView"
-msgstr "Simple RSS Reader EntryView"
-
-#: ..\plugin.py:540 ..\plugin.py:568
-msgid "Entry %s/%s"
-msgstr "Entry %s/%s"
-
-#: ..\plugin.py:543 ..\plugin.py:545
-msgid "Enclosures"
-msgstr "Enclosures"
-
-#: ..\plugin.py:567 ..\plugin.py:749
-msgid "Simple RSS Reader: %s"
-msgstr "Simple RSS Reader: %s"
-
-#: ..\plugin.py:570 ..\plugin.py:584
-msgid "No such Item."
-msgstr "No such Item."
-
-#: ..\plugin.py:578
-msgid "{no attachments found}"
-msgstr "{no attachments found}"
-
-#: ..\plugin.py:609
-msgid "Sorry, this attachment cannot be opened: unsupported MIME type"
-msgstr "Sorry, this attachment cannot be opened: unsupported MIME type"
-
-#: ..\plugin.py:620
-msgid ""
-"Plugin 'PicturePlayer' not found!\n"
-"\n"
-"In order to view pictures, please install it from plugin feed"
-msgstr ""
-"Plugin 'PicturePlayer' not found!\n"
-"\n"
-"In order to view pictures, please install it from plugin feed"
-
-#: ..\plugin.py:698
-msgid "Simple RSS Reader Feedview"
-msgstr "Simple RSS Reader Feedview"
-
-#: ..\plugin.py:702
-msgid "change feed"
-msgstr "change feed"
-
-#: ..\plugin.py:819
-msgid "Entry %s/%s - %s"
-msgstr "Entry %s/%s - %s"
-
-#: ..\plugin.py:822 ..\plugin.py:824
-msgid "Feed is empty."
-msgstr "Feed is empty."
-
-#: ..\plugin.py:931
-msgid "Simple RSS Reader Overview"
-msgstr "Simple RSS Reader Overview"
-
-#: ..\plugin.py:933 ..\plugin.py:982
-msgid "Entries"
-msgstr "Entries"
-
-#: ..\plugin.py:934
-msgid "Feed 1/%s"
-msgstr "Feed 1/%s"
-
-#: ..\plugin.py:956
-msgid "Simple RSS Reader"
-msgstr "Simple RSS Reader"
-
-#: ..\plugin.py:981
-msgid "Feed %s/%s"
-msgstr "Feed %s/%s"
-
-#: ..\plugin.py:1020
-msgid "Close"
-msgstr "Close"
-
-#: ..\plugin.py:1020
-msgid "Settings"
-msgstr "Settings"
-
-#: ..\plugin.py:1020
-msgid "Update Feed"
-msgstr "Update Feed"
-
-#: ..\plugin.py:1021
-msgid "What to do?"
-msgstr "What to do?"
-
-#: ..\plugin.py:1069
-msgid "New Items since last Auto-Update"
-msgstr "New Items since last Auto-Update"
-
-#: ..\plugin.py:1098
-msgid ""
-"Sorry, this type of feed is unsupported:\n"
-"%s"
-msgstr ""
-"Sorry, this type of feed is unsupported:\n"
-"%s"
-
-#: ..\plugin.py:1160
-msgid "Received %d new news item(s)."
-msgstr "Received %d new news item(s)."
-
-#: ..\plugin.py:1240
-msgid ""
-"Error when reading the feed. Does your address really refer to an RSS feed?"
-msgstr ""
-"Error when reading the feed. Does your address really refer to an RSS feed?"
-
-#: ..\plugin.py:1367
-msgid "trying to download the feed..."
-msgstr "trying to download the feed..."
-
-#: ..\plugin.py:1436
 msgid "A simple to use RSS reader"
 msgstr "A simple to use RSS reader"
 
-#: ..\plugin.py:1438
+msgid "Autoupdate"
+msgstr "Autoupdate"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Close"
+msgstr "Close"
+
+msgid "Delete"
+msgstr "Delete"
+
+msgid "Enclosures"
+msgstr "Enclosures"
+
+msgid "Entries"
+msgstr "Entries"
+
+#, python-format
+msgid "Entry %s/%s"
+msgstr "Entry %s/%s"
+
+#, python-format
+msgid "Entry %s/%s - %s"
+msgstr "Entry %s/%s - %s"
+
+msgid "Error when reading the feed. Does your address really refer to an RSS feed?"
+msgstr "Error when reading the feed. Does your address really refer to an RSS feed?"
+
+msgid "Error while parsing Feed, this usually means there is something wrong with it."
+msgstr "Error while parsing Feed, this usually means there is something wrong with it."
+
+msgid "Feed"
+msgstr "Feed"
+
+#, python-format
+msgid "Feed %s/%s"
+msgstr "Feed %s/%s"
+
+#, python-format
+msgid "Feed 1/%s"
+msgstr "Feed 1/%s"
+
+msgid "Feed URI"
+msgstr "Feed URI"
+
+msgid "Feed is empty."
+msgstr "Feed is empty."
+
+#, python-format
+msgid "File '%s' was not found, import was aborted!"
+msgstr "File '%s' was not found, import was aborted!"
+
+msgid "Import feeds from:"
+msgstr "Import feeds from:"
+
+#, python-format
+msgid ""
+"Importing '%s'\n"
+"%s feeds were imported successfully\n"
+"%s feeds were double and not imported"
+msgstr ""
+"Importing '%s'\n"
+"%s feeds were imported successfully\n"
+"%s feeds were double and not imported"
+
+msgid "Keep running in background"
+msgstr "Keep running in background"
+
+msgid "New"
+msgstr "New"
+
+msgid "New Items"
+msgstr "New Items"
+
+msgid "New Items since last Auto-Update"
+msgstr "New Items since last Auto-Update"
+
+msgid "No such Item."
+msgstr "No such Item."
+
+msgid "Note: If box becomes extremely slow, please reduce the quantity of feeds."
+msgstr "Note: If box becomes extremely slow, please reduce the quantity of feeds."
+
+msgid "Notification"
+msgstr "Notification"
+
+msgid "OK"
+msgstr "OK"
+
+msgid ""
+"Plugin 'PicturePlayer' not found!\n"
+"\n"
+"In order to view pictures, please install it from plugin feed"
+msgstr ""
+"Plugin 'PicturePlayer' not found!\n"
+"\n"
+"In order to view pictures, please install it from plugin feed"
+
+msgid "Preview"
+msgstr "Preview"
+
+msgid ""
+"Really delete this entry?\n"
+"It cannot be recovered!"
+msgstr ""
+"Really delete this entry?\n"
+"It cannot be recovered!"
+
+#, python-format
+msgid "Received %d new news item(s)."
+msgstr "Received %d new news item(s)."
+
+msgid "Save"
+msgstr "Save"
+
+msgid "Settings"
+msgstr "Settings"
+
+msgid "Show new Messages as"
+msgstr "Show new Messages as"
+
+msgid "Simple RSS Reader"
+msgstr "Simple RSS Reader"
+
+msgid "Simple RSS Reader EntryView"
+msgstr "Simple RSS Reader EntryView"
+
+msgid "Simple RSS Reader Feedview"
+msgstr "Simple RSS Reader Feedview"
+
+msgid "Simple RSS Reader Overview"
+msgstr "Simple RSS Reader Overview"
+
+msgid "Simple RSS Reader Setup"
+msgstr "Simple RSS Reader Setup"
+
+#, python-format
+msgid "Simple RSS Reader: %s"
+msgstr "Simple RSS Reader: %s"
+
+msgid "Sorry, this attachment cannot be opened: unsupported MIME type"
+msgstr "Sorry, this attachment cannot be opened: unsupported MIME type"
+
+#, python-format
+msgid ""
+"Sorry, this type of feed is unsupported:\n"
+"%s"
+msgstr ""
+"Sorry, this type of feed is unsupported:\n"
+"%s"
+
+msgid "Start automatically with Enigma2"
+msgstr "Start automatically with Enigma2"
+
+msgid "Ticker"
+msgstr "Ticker"
+
+msgid "Update Feed"
+msgstr "Update Feed"
+
+msgid "Update Interval [min]"
+msgstr "Update Interval [min]"
+
+msgid ""
+"Update is being done in Background.\n"
+"Contents will automatically be updated when it's done."
+msgstr ""
+"Update is being done in Background.\n"
+"Contents will automatically be updated when it's done."
+
 msgid "View RSS..."
 msgstr "View RSS..."
+
+msgid "What to do?"
+msgstr "What to do?"
+
+#, python-format
+msgid ""
+"Xml-file '%s' was corrupt:\n"
+"%s"
+msgstr ""
+
+msgid "change feed"
+msgstr "change feed"
+
+msgid "none"
+msgstr "none"
+
+msgid "trying to download the feed..."
+msgstr "trying to download the feed..."
+
+msgid "{no attachments found}"
+msgstr "{no attachments found}"

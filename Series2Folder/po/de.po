@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-22 10:30+1000\n"
+"POT-Creation-Date: 2023-12-01 23:10+0100\n"
 "PO-Revision-Date: 2022-09-12 14:20+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -22,7 +22,6 @@ msgstr ""
 "X-Poedit-SearchPath-1: FileScreens.py\n"
 "X-Poedit-SearchPath-2: plugin.py\n"
 
-#: plugin.py:622
 msgid ""
 "\n"
 "To allow Series to Folder to run automatically in the background, configure it to enable \"Allow Series to Folder to run in the background\""
@@ -30,260 +29,200 @@ msgstr ""
 "\n"
 "Damit Series to Folder automatisch im Hintergrund ausgeführt werden kann, konfigurieren Sie es so, dass \"Series to Folder im Hintergrund ausgeführt wird\" aktiviert ist."
 
-#: plugin.py:253 plugin.py:256
 msgid " - Error"
 msgid_plural " - Errors"
 msgstr[0] " - Fehler"
 msgstr[1] " - Fehler"
 
-#: plugin.py:291
 msgid " - with an error"
 msgid_plural " - with errors"
 msgstr[0] " - mit einem Fehler"
 msgstr[1] " - mit Fehlern"
 
-#: plugin.py:797
 #, python-format
 msgid "%s v%s"
 msgstr "%s v%s"
 
-#: __init__.py:37
 msgid "1 recording"
 msgstr "1 Aufnahme"
 
-#: __init__.py:46
 msgid "10 recordings"
 msgstr "10 Aufnahmen"
 
-#: __init__.py:38
 msgid "2 recordings"
 msgstr "2 Aufnahmen"
 
-#: __init__.py:39
 msgid "3 recordings"
 msgstr "3 Aufnahmen"
 
-#: __init__.py:40
 msgid "4 recordings"
 msgstr "4 Aufnahmen"
 
-#: __init__.py:41
 msgid "5 recordings"
 msgstr "5 Aufnahmen"
 
-#: __init__.py:42
 msgid "6 recordings"
 msgstr "6 Aufnahmen"
 
-#: __init__.py:43
 msgid "7 recordings"
 msgstr "7 Aufnahmen"
 
-#: __init__.py:44
 msgid "8 recordings"
 msgstr "8 Aufnahmen"
 
-#: __init__.py:45
 msgid "9 recordings"
 msgstr "9 Aufnahmen"
 
-#: plugin.py:717
 msgid "Allow Series to Folder to run in the background"
 msgstr "Zulassen, dass Series to Folder im Hintergrund ausgeführt wird"
 
-#: plugin.py:112
 msgid "Auto Series to Folder"
 msgstr "Auto Series in Ordner"
 
-#: plugin.py:676
 msgid "Automatically create folders"
 msgstr "Ordner automatisch erstellen"
 
-#: plugin.py:401
 #, python-format
 msgid "Can not extract show name for: %s"
 msgstr "Showname kann nicht extrahiert werden für: %s"
 
-#: plugin.py:665
 msgid "Cancel"
 msgstr "Beenden"
 
-#: plugin.py:614
 msgid "Configure move series recordings to folders"
 msgstr "Konfigurieren von Serienaufzeichnungen in Ordner verschieben"
 
-#: plugin.py:725
 msgid "Configure which notification popups will be shown by Series to Folder when run in the background"
 msgstr "Konfigurieren Sie, welche Benachrichtigungs-Popups von Series to Folder angezeigt werden, wenn sie im Hintergrund ausgeführt werden"
 
-#: plugin.py:678
 msgid "Create a folder for a series automatically if there are this number of recordings or more. If set to \"no autocreate\", only move recordings if a folder already exists for them."
 msgstr "Erstellen Sie automatisch einen Ordner für eine Serie, wenn es diese oder mehr Aufnahmen gibt. Wenn auf \"keine automatische Erstellung\" gesetzt, verschieben Sie Aufnahmen nur, wenn bereits ein Ordner für sie vorhanden ist."
 
-#: plugin.py:701
 msgid "Folder for movies"
 msgstr "Ordner für Filme"
 
-#: plugin.py:719
 msgid "If enabled, Series to Folder will run automatically in the background shortly after startup and after each recording finishes."
 msgstr "Wenn diese Option aktiviert ist, wird Series to Folder kurz nach dem Start und nach Abschluss jeder Aufzeichnung automatisch im Hintergrund ausgeführt."
 
-#: plugin.py:659
 msgid "Keyboard"
 msgstr "Externe Tastatur"
 
-#: plugin.py:698
 msgid "Move recordings whose names start with \"Movie: \" (case insensitive) to a folder for movies."
 msgstr "Verschieben Sie Aufnahmen, deren Namen mit \"Film: \" beginnen (Groß-/Kleinschreibung wird nicht beachtet), in einen Ordner für Filme."
 
-#: plugin.py:612
 msgid "Move selected series recording to folder"
 msgid_plural "Move selected series recordings to folder"
 msgstr[0] "Ausgewählte Serienaufzeichnung in Ordner verschieben"
 msgstr[1] "Ausgewählte Serienaufzeichnungen in Ordner verschieben"
 
-#: plugin.py:613
 msgid "Move series recordings to folders"
 msgstr "Verschieben von Serienaufzeichnungen in Ordner"
 
-#: plugin.py:696
 msgid "Put movies into folder"
 msgstr "Legen Sie Filme in Ordner"
 
-#: plugin.py:693
 msgid "Repeat tag to be stripped from from series titles when creating directory names."
 msgstr "Wiederholen Sie das Tag, das beim Erstellen von Verzeichnisnamen aus Serientiteln entfernt werden soll."
 
-#: plugin.py:691
 msgid "Repeat tag to strip"
 msgstr "Wiederholen des zu entfernenden Tags"
 
-#: plugin.py:666
 msgid "Save"
 msgstr "Speichern"
 
-#: plugin.py:99
 msgid "Sel Series to Folder"
 msgstr "Sel Series in Ordner"
 
-#: plugin.py:98
 msgid "SelSeries2Folder"
 msgstr "SelSeries2Ordner"
 
-#: plugin.py:90 plugin.py:624
 msgid "Series to Folder"
 msgstr "Serie in Ordner"
 
-#: plugin.py:626
 #, python-format
 msgid "Series to Folder actions%s"
 msgstr "Serien-zu-Ordner-Aktionen%s"
 
-#: plugin.py:624
 #, python-format
 msgid "Series to Folder actions:%s"
 msgstr "Serien-zu-Ordner-Aktionen:%s"
 
-#: plugin.py:293
 #, python-format
 msgid "Series to Folder did not find anything to move in %s"
 msgstr "Serie in Ordner hat nichts gefunden, um in %s zu verschieben"
 
-#: plugin.py:437
 msgid "Series to Folder is already running in the background."
 msgstr "Series to Folder wird bereits im Hintergrund ausgeführt."
 
-#: plugin.py:289
 msgid "Series to Folder moved the following recording"
 msgid_plural "Series to Folder moved the following recordings"
 msgstr[0] "Serie in Ordner verschoben die folgende Aufzeichnung"
 msgstr[1] "Serie in Ordner verschoben die folgende Aufzeichnungen"
 
-#: plugin.py:723
 msgid "Series to Folder notifications"
 msgstr "Benachrichtigungen über Serien in Ordner"
 
-#: plugin.py:118
 msgid "Series to Folder..."
 msgstr "Serie in Ordner..."
 
-#: plugin.py:89
 msgid "Series2Folder"
 msgstr "Series2Ordner"
 
-#: plugin.py:117
 msgid "Series2Folder..."
 msgstr "Series2Ordner..."
 
-#: plugin.py:711
 msgid "Show move selected series option"
 msgstr "Option \"Ausgewählte Reihen verschieben\" anzeigen"
 
-#: plugin.py:706
 msgid "Show move series option"
 msgstr "Option \"Serien verschieben\" anzeigen"
 
-#: plugin.py:713
 #, python-format
 msgid "Single-action move selected series to folder shown in menu and as button option. Displays in menu and buttons as \"%s\". Requires restart if changed."
 msgstr "Ausgewählte Serien mit einer Aktion in einen Ordner verschieben, der im Menü und als Schaltflächenoption angezeigt wird. Wird im Menü und in den Schaltflächen als \"%s\" angezeigt. Erfordert einen Neustart, falls geändert."
 
-#: plugin.py:708
 #, python-format
 msgid "Single-action move series to folder shown in menu and as button option. Displays in menu and buttons as \"%s\". Requires restart if changed."
 msgstr "Einzelaktions-Verschieben von Serien in Ordner, die im Menü und als Schaltflächenoption angezeigt werden. Wird im Menü und in den Schaltflächen als \"%s\" angezeigt. Erfordert einen Neustart, falls geändert."
 
-#: plugin.py:688
 msgid "Strip repeat tagging from series titles when creating directory names."
 msgstr "Entfernen Sie beim Erstellen von Verzeichnisnamen wiederholte Tags aus Serientiteln."
 
-#: plugin.py:686
 msgid "Strip repeat tags from series names"
 msgstr "Entfernen von Wiederholungstags aus Seriennamen"
 
-#: plugin.py:703
 msgid "The name of the folder for movies."
 msgstr "Der Name des Ordners für Filme."
 
-#: plugin.py:255
 #, python-format
 msgid "Too many recordings with similar filenames: %s"
 msgstr "Zu viele Aufnahmen mit ähnlichen Dateinamen: %s"
 
-#: plugin.py:683
 msgid "Use more portable (Windows-friendly) names for folders."
 msgstr "Verwenden Sie portablere (Windows-freundliche) Namen für Ordner."
 
-#: plugin.py:681
 msgid "Use portable folder names"
 msgstr "Portable Ordnernamen verwenden"
 
-#: plugin.py:433
 #, python-format
 msgid "Your %s %s is running tasks that may be accessing the recordings. No recordings moved."
 msgstr "Ihr %s %s führt Aufgaben aus, die möglicherweise auf die Aufzeichnungen zugreifen. Es wurden keine Aufnahmen verschoben."
 
-#: plugin.py:429
 #, python-format
 msgid "Your %s %s is trying to shut down. No recordings moved."
 msgstr "Ihr %s %s versucht herunterzufahren. Es wurden keine Aufnahmen verschoben."
 
-#: __init__.py:66
 msgid "all"
 msgstr "alle"
 
-#: __init__.py:68
 msgid "error"
 msgstr "Fehler"
 
-#: __init__.py:67
 msgid "error and \"moved\""
 msgstr "Fehler und \"verschoben\""
 
-#: __init__.py:36
 msgid "no autocreate"
 msgstr "keine automatische Erstellung"
 
-#: __init__.py:69
 msgid "none"
 msgstr "Keine"

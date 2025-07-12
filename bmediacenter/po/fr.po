@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BMediaCenter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2025-04-01 20:21+0200\n"
 "PO-Revision-Date: 2014-10-29 13:01+0100\n"
 "Last-Translator: OEA\n"
 "Language-Team: french\n"
@@ -52,13 +52,25 @@ msgstr ""
 msgid "%s"
 msgstr ""
 
-msgid "70-80er"
+msgid "60s"
+msgstr ""
+
+msgid "70s"
+msgstr ""
+
+msgid "80s"
+msgstr ""
+
+msgid "90s"
 msgstr ""
 
 msgid "A background update check is is progress, please wait a few minutes and try again."
 msgstr ""
 
-msgid "Add"
+msgid "Acid_jazz"
+msgstr ""
+
+msgid "African"
 msgstr ""
 
 msgid "Alternative"
@@ -67,22 +79,19 @@ msgstr ""
 msgid "Ambient"
 msgstr ""
 
-#, fuzzy
-msgid "Artist"
-msgstr ""
-"\n"
-"Artiste: "
-
-msgid "Audio Player"
+msgid "Americana"
 msgstr ""
 
-msgid "Audioplayer Settings"
+msgid "Anime"
 msgstr ""
 
-msgid "Back"
+msgid "Arabic"
 msgstr ""
 
-msgid "Big Band"
+msgid "Asian"
+msgstr ""
+
+msgid "Bigband"
 msgstr ""
 
 msgid "Bluegrass"
@@ -91,11 +100,11 @@ msgstr ""
 msgid "Blues"
 msgstr ""
 
+msgid "Breakbeat"
+msgstr ""
+
 msgid "Cache Thumbnails"
 msgstr "Cache des miniatures"
-
-msgid "Cancel"
-msgstr ""
 
 msgid "Checking Feeds"
 msgstr ""
@@ -103,33 +112,63 @@ msgstr ""
 msgid "Chillout"
 msgstr ""
 
-msgid "City"
-msgstr "Ville"
-
-msgid "Classic"
+msgid "Christian"
 msgstr ""
 
-msgid "Classic Rock"
+msgid "Classical"
 msgstr ""
 
-msgid "Countrymusic"
+msgid "Close"
 msgstr ""
 
-msgid "DVD Player"
+msgid "Club"
+msgstr ""
+
+msgid "College"
+msgstr ""
+
+msgid "Comedy"
+msgstr ""
+
+msgid "Country"
+msgstr ""
+
+msgid "Dance"
+msgstr ""
+
+msgid "Date ascending"
+msgstr ""
+
+msgid "Date descending"
 msgstr ""
 
 #, fuzzy
-msgid "Delete"
-msgstr "Effacement a échoué!"
+msgid "Delete Movie"
+msgstr "effacer fichier"
 
 msgid "Delete failed!"
 msgstr "Effacement a échoué!"
+
+msgid "Deutsch"
+msgstr ""
 
 msgid "Directory"
 msgstr "Répertoire"
 
 msgid "Directory:"
 msgstr "Répertoire:"
+
+msgid "Disco"
+msgstr ""
+
+msgid "Discofox"
+msgstr ""
+
+#, fuzzy, python-format
+msgid ""
+"Do you really want to delete\n"
+"%s ?"
+msgstr "Voulez-vous vraiment effacer %s?"
 
 #, python-format
 msgid "Do you really want to delete %s?"
@@ -141,7 +180,19 @@ msgstr "Voulez-vous vraiment effacer ce répertoire et son contenu?"
 msgid "Do you really want to delete this file ?"
 msgstr "Voulez-vous vraiment effacer ce ficher?"
 
-msgid "Edit"
+msgid "Downtempo"
+msgstr ""
+
+msgid "Drum'n'bass"
+msgstr ""
+
+msgid "Easylistening"
+msgstr ""
+
+msgid "Ebm"
+msgstr ""
+
+msgid "Electronic"
 msgstr ""
 
 #, python-format
@@ -200,15 +251,7 @@ msgstr ""
 "Erreur avec le serveur VLC:\n"
 "%s"
 
-#, fuzzy
-msgid "Favorite Folders"
-msgstr "Favoris"
-
-msgid "Favorites"
-msgstr "Favoris"
-
-#, python-format
-msgid "Feels like %s"
+msgid "Eurodance"
 msgstr ""
 
 msgid "File Browser"
@@ -217,57 +260,94 @@ msgstr ""
 msgid "Filelist Sorting:"
 msgstr ""
 
+msgid "Film"
+msgstr ""
+
+msgid "Folk"
+msgstr ""
+
 msgid "Frame size in full view"
 msgstr ""
 
-msgid "Hip Hop"
+msgid "France"
 msgstr ""
 
-msgid "Hits"
+msgid "Funk"
 msgstr ""
 
-msgid "Home"
+msgid "Gay"
 msgstr ""
 
-#, python-format
-msgid "Humidity: %s %%"
+msgid "Genres"
 msgstr ""
 
-msgid "InfoBar"
+msgid "Goa"
+msgstr ""
+
+msgid "Gospel"
+msgstr ""
+
+msgid "Gothic"
+msgstr ""
+
+msgid "Greek"
+msgstr ""
+
+msgid "Hardcore"
+msgstr ""
+
+msgid "Hardrock"
+msgstr ""
+
+msgid "Hiphop"
+msgstr ""
+
+msgid "House"
+msgstr ""
+
+msgid "India"
+msgstr ""
+
+msgid "Indie"
+msgstr ""
+
+msgid "Industrial"
 msgstr ""
 
 msgid "Installing Service"
 msgstr ""
 
-msgid "List of Storage Devices"
-msgstr "Liste des périphériques de stockages"
-
-#, fuzzy
-msgid "List of storage Devices"
-msgstr "Liste des périphériques de stockages"
-
-msgid "Loading information..."
+msgid "Instrumental"
 msgstr ""
 
-msgid "Location code"
+msgid "Italian"
+msgstr ""
+
+msgid "Jazz"
+msgstr ""
+
+msgid "Jpop"
+msgstr ""
+
+msgid "Jungle"
+msgstr ""
+
+msgid "Latin"
+msgstr ""
+
+msgid "Lounge"
 msgstr ""
 
 msgid "Lyrics"
 msgstr "Paroles"
 
-msgid "MSN location search result"
+msgid "Metal"
 msgstr ""
 
-msgid "Media Center"
+msgid "Mixed"
 msgstr ""
 
-msgid "Media Center - VLC Favorites"
-msgstr ""
-
-msgid "Media Center - VLC Player - Serverlist"
-msgstr ""
-
-msgid "Moviemusic"
+msgid "Movie"
 msgstr ""
 
 #, fuzzy
@@ -275,8 +355,8 @@ msgid "Music"
 msgstr "Ma Musique"
 
 #, fuzzy
-msgid "Music Playlist"
-msgstr "Sauvegarder la liste de lecture"
+msgid "Musical"
+msgstr "Ma Musique"
 
 msgid "My Music"
 msgstr "Ma Musique"
@@ -290,56 +370,43 @@ msgstr "Mes Vidéos"
 msgid "Name"
 msgstr ""
 
-msgid "Name:"
+msgid "Name ascending"
 msgstr ""
 
-msgid ""
-"No locations defined...\n"
-"Press 'Blue' to do that."
+msgid "Name descending"
+msgstr ""
+
+msgid "Name:"
 msgstr ""
 
 msgid "No lyrics found"
 msgstr "Aucune parole trouvée"
 
-msgid "OK"
-msgstr ""
-
-#, python-format
-msgid "Observation point: %s"
-msgstr ""
-
-#, python-format
-msgid "Observation time: %s"
-msgstr ""
-
 msgid "Oldies"
 msgstr ""
 
-#, fuzzy
-msgid "Parent Directory"
-msgstr "Répertoire"
-
-#, fuzzy
-msgid "Parent directory"
-msgstr "effacer répertoire"
-
-msgid "Party"
+msgid "Opera"
 msgstr ""
 
-msgid "Pic Viewer"
+msgid "Overview"
 msgstr ""
+
+msgid "Overwrite TXT"
+msgstr ""
+
+#, fuzzy
+msgid "Picture Settings"
+msgstr "Paramètres"
 
 msgid "Play DVD as:"
 msgstr ""
 
-msgid "Please enter a valid city name."
-msgstr ""
-
-msgid "Please enter a valid location code for the city."
-msgstr ""
-
 msgid "Please enter filename (empty = use current date)"
 msgstr "Merci d'entrer un nom de fichier (vide = utiliser les données courantes)"
+
+#, fuzzy
+msgid "Please select"
+msgstr "Merci de choisir une liste de lecture..."
 
 msgid "Please select a playlist to delete..."
 msgstr "Merci de sélectionner une liste de lecture a effacer..."
@@ -350,16 +417,32 @@ msgstr "Merci de choisir une liste de lecture..."
 msgid "Please wait whilst feeds state is checked."
 msgstr ""
 
-#, fuzzy
-msgid "Really delete this Entry?"
-msgstr "Voulez-vous vraiment effacer ce serveur?"
+msgid "Polish"
+msgstr ""
+
+msgid "Polka"
+msgstr ""
+
+msgid "Pop"
+msgstr ""
+
+msgid "Portugal"
+msgstr ""
+
+msgid "Progressive"
+msgstr ""
+
+msgid "Punk"
+msgstr ""
+
+msgid "Quran"
+msgstr ""
+
+msgid "Rap"
+msgstr ""
 
 msgid "Really delete this Server?"
 msgstr "Voulez-vous vraiment effacer ce serveur?"
-
-#, fuzzy
-msgid "Really delete this WeatherPlugin Entry?"
-msgstr "Voulez-vous vraiment effacer ce favori?"
 
 msgid "Really delete this favorite?"
 msgstr "Voulez-vous vraiment effacer ce favori?"
@@ -371,16 +454,37 @@ msgstr ""
 msgid "Response -> lyrics for: %s (%s)"
 msgstr "Réponse -> Parole pour %s (%s)"
 
+msgid "Retro"
+msgstr ""
+
+msgid "Rnb"
+msgstr ""
+
 msgid "Rock"
 msgstr ""
 
-msgid "Rundfunk"
+msgid "Romanian"
+msgstr ""
+
+msgid "Salsa"
+msgstr ""
+
+msgid "Save Movie Info"
 msgstr ""
 
 msgid "Save Playlist"
 msgstr "Sauvegarder la liste de lecture"
 
+msgid "Save as EIT"
+msgstr ""
+
+msgid "Save as TXT"
+msgstr ""
+
 msgid "Scaling Mode"
+msgstr ""
+
+msgid "Schlager"
 msgstr ""
 
 #, fuzzy
@@ -394,10 +498,10 @@ msgstr "Interval de l'économiseur d'écran"
 msgid "Screensaver Style:"
 msgstr "Interval de l'économiseur d'écran"
 
-msgid "Search Code"
+msgid "Select music"
 msgstr ""
 
-msgid "Select music"
+msgid "Series"
 msgstr ""
 
 msgid "Settings"
@@ -409,10 +513,22 @@ msgstr ""
 msgid "Show MC in Main-Menu"
 msgstr ""
 
+msgid "Show Movie Info"
+msgstr ""
+
+msgid "Size ascending"
+msgstr ""
+
+msgid "Size descending"
+msgstr ""
+
+msgid "Ska"
+msgstr ""
+
 msgid "Slideshow Interval (sec.)"
 msgstr "Interval du diaporama (sec.)"
 
-msgid "Smooth"
+msgid "Smooth_jazz"
 msgstr ""
 
 msgid "Sorry feeds are down for maintenance, please try again later."
@@ -421,10 +537,28 @@ msgstr ""
 msgid "Soul"
 msgstr ""
 
-msgid "System"
+msgid "Soundtrack"
 msgstr ""
 
-msgid "Techno/House"
+msgid "Spain"
+msgstr ""
+
+msgid "Spiritual"
+msgstr ""
+
+msgid "Sport"
+msgstr ""
+
+msgid "Swing"
+msgstr ""
+
+msgid "Symphonic"
+msgstr ""
+
+msgid "Talk"
+msgstr ""
+
+msgid "Techno"
 msgstr ""
 
 #, python-format
@@ -440,25 +574,28 @@ msgstr "Largeur des vignettes"
 msgid "Title: "
 msgstr "Titre:"
 
+msgid "Top_40"
+msgstr ""
+
+msgid "Trance"
+msgstr ""
+
+msgid "Turk"
+msgstr ""
+
 msgid "UPNP Enabled"
 msgstr ""
 
-msgid "VLC Player"
+msgid "Urban"
 msgstr ""
 
-msgid "VLC Player - Medialist"
+msgid "Usa"
 msgstr ""
 
-msgid "Video Player"
+msgid "Various"
 msgstr ""
 
-msgid "Weather Info"
-msgstr "Infos Méteo"
-
-msgid "WeatherPlugin: Edit Entry"
-msgstr ""
-
-msgid "WeatherPlugin: List of Entries"
+msgid "Wave"
 msgstr ""
 
 msgid "Web Radio"
@@ -472,9 +609,6 @@ msgstr "Vous devez fermer la liste de lecture avant d'aller à la chanson suivan
 
 msgid "You have to close playlist before you can go to the previous song while playing from file browser."
 msgstr "Vous devez fermer la liste de lecture avant d'aller à la chanson précédente lorsque vous la lisez depuis le gestionnaire de fichier."
-
-msgid "You need to enter a valid city name before you can search for the location code."
-msgstr ""
 
 #, python-format
 msgid "Your %s %s is not connected to the internet, please check your network settings and try again."
@@ -498,12 +632,6 @@ msgstr "ajouter un fichier à la liste de lecture"
 msgid "add file to playlist and play"
 msgstr "ajouter un fichier à la liste de lecture et le lire"
 
-msgid "alphabet"
-msgstr ""
-
-msgid "alphabet backward"
-msgstr ""
-
 msgid "backgroundcolor"
 msgstr "Couleur de fond"
 
@@ -521,12 +649,6 @@ msgstr ""
 
 msgid "clear playlist"
 msgstr "Vider la liste de lecture"
-
-msgid "date"
-msgstr ""
-
-msgid "date backward"
-msgstr ""
 
 msgid "default"
 msgstr ""
@@ -549,23 +671,14 @@ msgstr "nom du fichier"
 msgid "green"
 msgstr "vert"
 
-msgid "imperial system"
-msgstr ""
-
 msgid "load playlist"
 msgstr "Charge une liste de lecture"
 
 msgid "manual"
 msgstr "manuel"
 
-msgid "metric system"
-msgstr ""
-
 msgid "none"
 msgstr ""
-
-msgid "nothing connected"
-msgstr "rien de connecté"
 
 msgid "please wait, loading picture..."
 msgstr "Merci de patienter, chargement des images..."
@@ -583,17 +696,8 @@ msgstr "Sauvegarder la liste de lecture"
 msgid "show Infoline"
 msgstr "afficher la ligne info"
 
-msgid "shuffle"
-msgstr ""
-
 msgid "simple"
 msgstr "simple"
-
-msgid "size"
-msgstr ""
-
-msgid "size backward"
-msgstr ""
 
 msgid "slide picture in loop"
 msgstr ""

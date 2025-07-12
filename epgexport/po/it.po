@@ -2,212 +2,24 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-11-25 14:31+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-04-07 13:52+0200\n"
 "PO-Revision-Date: 2023-12-15 06:27+0100\n"
 "Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
 "Language-Team: Italian <>\n"
+"Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
-"Language: it_IT\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 23.08.3\n"
 
-#: ..\plugin.py:69 ..\plugin.py:112
-msgid "none"
-msgstr "nessuno"
-
-#: ..\plugin.py:70
-msgid "xz"
-msgstr "xz"
-
-#: ..\plugin.py:71
-msgid "gz"
-msgstr "gz"
-
-#: ..\plugin.py:85 ..\plugin.py:86 ..\plugin.py:87 ..\plugin.py:91
-msgid "Channel"
-msgstr "Canale"
-
-#: ..\plugin.py:85 ..\plugin.py:86 ..\plugin.py:87 ..\plugin.py:95
-msgid "Name"
-msgstr "Nome"
-
-#: ..\plugin.py:89 ..\plugin.py:90
-msgid "Language"
-msgstr "Lingua"
-
-#: ..\plugin.py:91
-msgid "Number"
-msgstr "Numero"
-
-#: ..\plugin.py:92 ..\plugin.py:592
-msgid "Custom (%s)"
-msgstr "Personalizzato (%s)"
-
-#: ..\plugin.py:95
-msgid "IP Address"
-msgstr "Indirizzo IP"
-
-#: ..\plugin.py:95 ..\plugin.py:109
-msgid "disabled"
-msgstr "disabilitato"
-
-#: ..\plugin.py:95 ..\plugin.py:473
-msgid "Server IP"
-msgstr "IP server"
-
-#: ..\plugin.py:105
-msgid "always"
-msgstr "sempre"
-
-#: ..\plugin.py:109
-msgid "daily"
-msgstr "ogni giorno"
-
-#: ..\plugin.py:109
-msgid "every 12 hours"
-msgstr "ogni 12 ore"
-
-#: ..\plugin.py:109
-msgid "every 2 hours"
-msgstr "ogni 2 ore"
-
-#: ..\plugin.py:109
-msgid "every 6 hours"
-msgstr "ogni 6 ore"
-
-#: ..\plugin.py:109
-msgid "every hour"
-msgstr "ogni ora"
-
-#: ..\plugin.py:130
-msgid "Favorites"
-msgstr "Preferiti"
-
-#: ..\plugin.py:345
-msgid "Export EPG as XML"
-msgstr "Esporta EPG come XML"
-
-#: ..\plugin.py:360 ..\plugin.py:971
-msgid "Exit"
-msgstr "Esci"
-
-#: ..\plugin.py:361 ..\plugin.py:972
-msgid "Save"
-msgstr "Salva"
-
-#: ..\plugin.py:364 ..\plugin.py:479 ..\plugin.py:518 ..\plugin.py:523
-#: ..\plugin.py:533 ..\plugin.py:586
-msgid "Downloading"
-msgstr "Scaricamento"
-
-#: ..\plugin.py:365
-msgid "Bouquets"
-msgstr "Bouquet"
-
-#: ..\plugin.py:365
-msgid "Select"
-msgstr "Seleziona"
-
-#: ..\plugin.py:381
+#, python-format
 msgid "%s - ver. %s"
 msgstr "%s - ver. %s"
 
-#: ..\plugin.py:387
-msgid "Destination directory"
-msgstr "Cartella di destinazione"
-
-#: ..\plugin.py:388
-msgid "EPG Download (Days)"
-msgstr "Scaricamento EPG (giorni)"
-
-#: ..\plugin.py:389
-msgid "EPG Update (Hours)"
-msgstr "Aggiornamento EPG (ore)"
-
-#: ..\plugin.py:390
-msgid "Keep outdated EPG (Days)"
-msgstr "Mantieni EPG scaduto (giorni)"
-
-#: ..\plugin.py:391
-msgid "Recurring EPG Download"
-msgstr "Scaricamento ricorrente EPG"
-
-#: ..\plugin.py:393
-msgid "StartTime"
-msgstr "Ora di inizio"
-
-#: ..\plugin.py:394
-msgid "Compression"
-msgstr "Compressione"
-
-#: ..\plugin.py:395
-msgid "Channel ID"
-msgstr "ID canale"
-
-#: ..\plugin.py:396
-msgid "OpenWebIf Picon Location (XML-Source)"
-msgstr "Posizione picon OpenWebIf (fonte XML)"
-
-#: ..\plugin.py:398
-msgid "Server IP Address"
-msgstr "Indirizzo IP server"
-
-#: ..\plugin.py:400
-msgid "Server Name"
-msgstr "Nome server"
-
-#: ..\plugin.py:401
-msgid "Enable Plugin's own WebInterface (GUI restart required)"
-msgstr "Abilita interfaccia web del plugin (richiesto riavvio GUI)"
-
-#: ..\plugin.py:403
-msgid "Server Port (4000-4999)"
-msgstr "Porta del server (4000-4999)"
-
-#: ..\plugin.py:404
-msgid "Enable 'twisted'-mode for WebInterface (recommended)"
-msgstr "Abilita  modalit� 'twisted' per interfaccia web (consigliato)"
-
-#: ..\plugin.py:406
-msgid ""
-"HINT: >>> Test Plugin's own WebInterface with 'BoxIP:Port/LastUpdate.txt' <<<"
-msgstr ""
-"SUGGERIMENTO: >>> Prova l'interfaccia Web del plugin con"
-" 'IP_ricevitore:porta/LastUpdate.txt' <<<"
-
-#: ..\plugin.py:423
-msgid "Saving"
-msgstr "Salvataggio"
-
-#: ..\plugin.py:423 ..\plugin.py:461
-msgid "..."
-msgstr "..."
-
-#: ..\plugin.py:423 ..\plugin.py:461
-msgid "Configuration"
-msgstr "Configurazione"
-
-#: ..\plugin.py:461
-msgid "Leaving"
-msgstr "Lascia"
-
-#: ..\plugin.py:475
-msgid "Hostname"
-msgstr "Nome host"
-
-#: ..\plugin.py:518 ..\plugin.py:523 ..\plugin.py:533 ..\plugin.py:541
-#: ..\plugin.py:599 ..\plugin.py:868
-msgid "EPG"
-msgstr "EPG"
-
-#: ..\plugin.py:533
-msgid "Execution finished!!"
-msgstr "Esecuzione terminata!!"
-
-#: ..\plugin.py:536 ..\plugin.py:1038
+#, python-format
 msgid ""
 "%s plugin ver. %s\n"
 "\n"
@@ -215,59 +27,187 @@ msgid ""
 "\n"
 "Special Thanks to Rytec for the XMLTV Format !"
 msgstr ""
-"Plugin %s versione %s\n\n(c)gutemine 2019\n\nUn ringraziamento speciale a"
-" Rytec per il formato XMLTV!"
+"Plugin %s versione %s\n"
+"\n"
+"(c)gutemine 2019\n"
+"\n"
+"Un ringraziamento speciale a Rytec per il formato XMLTV!"
 
-#: ..\plugin.py:541
-msgid "Cache"
-msgstr "Cache"
+msgid "..."
+msgstr "..."
 
-#: ..\plugin.py:541 ..\plugin.py:599 ..\plugin.py:868
-msgid "Download"
-msgstr "Scarica"
-
-#: ..\plugin.py:541 ..\plugin.py:973
-msgid "Reset"
-msgstr "Ripristina"
-
-#: ..\plugin.py:586
-msgid "Custom (xml %s %s...)"
-msgstr "Personalizzato (xml %s %s...)"
-
-#: ..\plugin.py:586 ..\plugin.py:868
-msgid "Channels"
-msgstr "Canali"
-
-#: ..\plugin.py:592
-msgid "not found"
-msgstr "non trovato"
-
-#: ..\plugin.py:599
-msgid "Finished"
-msgstr "Terminato"
-
-#: ..\plugin.py:599
-msgid "Reload"
-msgstr "Ricarica"
-
-#: ..\plugin.py:868
-msgid "Details"
-msgstr "Dettagli"
-
-#: ..\plugin.py:868
-msgid "Info"
-msgstr "Informazioni"
-
-#: ..\plugin.py:974
 msgid "About"
 msgstr "Informazioni su"
 
-#: ..\plugin.py:994
 msgid "Bouquet"
 msgstr "Bouquet"
 
-#: ..\plugin.py:994
+msgid "Bouquets"
+msgstr "Bouquet"
+
+msgid "Cache"
+msgstr "Cache"
+
+msgid "Channel"
+msgstr "Canale"
+
+msgid "Channel ID"
+msgstr "ID canale"
+
+msgid "Channels"
+msgstr "Canali"
+
+msgid "Compression"
+msgstr "Compressione"
+
+msgid "Configuration"
+msgstr "Configurazione"
+
+#, python-format
+msgid "Custom (%s)"
+msgstr "Personalizzato (%s)"
+
+#, python-format
+msgid "Custom (xml %s %s...)"
+msgstr "Personalizzato (xml %s %s...)"
+
+msgid "Destination directory"
+msgstr "Cartella di destinazione"
+
+msgid "Details"
+msgstr "Dettagli"
+
+msgid "Download"
+msgstr "Scarica"
+
+msgid "Downloading"
+msgstr "Scaricamento"
+
+msgid "EPG"
+msgstr "EPG"
+
+msgid "EPG Download (Days)"
+msgstr "Scaricamento EPG (giorni)"
+
 msgid "EPG Selection"
 msgstr "Selezione EPG"
 
+msgid "EPG Update (Hours)"
+msgstr "Aggiornamento EPG (ore)"
 
+msgid "Enable 'twisted'-mode for WebInterface (recommended)"
+msgstr "Abilita  modalit� 'twisted' per interfaccia web (consigliato)"
+
+msgid "Enable Plugin's own WebInterface (GUI restart required)"
+msgstr "Abilita interfaccia web del plugin (richiesto riavvio GUI)"
+
+msgid "Execution finished!!"
+msgstr "Esecuzione terminata!!"
+
+msgid "Exit"
+msgstr "Esci"
+
+msgid "Export EPG as XML"
+msgstr "Esporta EPG come XML"
+
+msgid "Favorites"
+msgstr "Preferiti"
+
+msgid "Finished"
+msgstr "Terminato"
+
+msgid "HINT: >>> Test Plugin's own WebInterface with 'BoxIP:Port/LastUpdate.txt' <<<"
+msgstr "SUGGERIMENTO: >>> Prova l'interfaccia Web del plugin con 'IP_ricevitore:porta/LastUpdate.txt' <<<"
+
+msgid "Hostname"
+msgstr "Nome host"
+
+msgid "IP Address"
+msgstr "Indirizzo IP"
+
+msgid "Info"
+msgstr "Informazioni"
+
+msgid "Keep outdated EPG (Days)"
+msgstr "Mantieni EPG scaduto (giorni)"
+
+msgid "Language"
+msgstr "Lingua"
+
+msgid "Leaving"
+msgstr "Lascia"
+
+msgid "Name"
+msgstr "Nome"
+
+msgid "Number"
+msgstr "Numero"
+
+msgid "OpenWebIf Picon Location (XML-Source)"
+msgstr "Posizione picon OpenWebIf (fonte XML)"
+
+msgid "Recurring EPG Download"
+msgstr "Scaricamento ricorrente EPG"
+
+msgid "Reload"
+msgstr "Ricarica"
+
+msgid "Reset"
+msgstr "Ripristina"
+
+msgid "Save"
+msgstr "Salva"
+
+msgid "Saving"
+msgstr "Salvataggio"
+
+msgid "Select"
+msgstr "Seleziona"
+
+msgid "Server IP"
+msgstr "IP server"
+
+msgid "Server IP Address"
+msgstr "Indirizzo IP server"
+
+msgid "Server Name"
+msgstr "Nome server"
+
+msgid "Server Port (4000-4999)"
+msgstr "Porta del server (4000-4999)"
+
+msgid "StartTime"
+msgstr "Ora di inizio"
+
+msgid "always"
+msgstr "sempre"
+
+msgid "daily"
+msgstr "ogni giorno"
+
+msgid "disabled"
+msgstr "disabilitato"
+
+msgid "every 12 hours"
+msgstr "ogni 12 ore"
+
+msgid "every 2 hours"
+msgstr "ogni 2 ore"
+
+msgid "every 6 hours"
+msgstr "ogni 6 ore"
+
+msgid "every hour"
+msgstr "ogni ora"
+
+msgid "gz"
+msgstr "gz"
+
+msgid "none"
+msgstr "nessuno"
+
+msgid "not found"
+msgstr "non trovato"
+
+msgid "xz"
+msgstr "xz"

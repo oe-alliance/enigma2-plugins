@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 EPGSearch Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2024-07-04 12:56+0200\n"
 "PO-Revision-Date: 2013-11-30 07:36+0100\n"
 "Last-Translator: koivo <koivo@hdfreaks.cc>\n"
 "Language-Team: none\n"
@@ -132,6 +132,9 @@ msgstr "IMDb Suche für ausgewählte Sendung"
 msgid "IMDb Search"
 msgstr "IMDb Suche"
 
+msgid "INFO"
+msgstr ""
+
 msgid "Import from AutoTimer"
 msgstr "Importiere aus AutoTimer"
 
@@ -158,6 +161,9 @@ msgstr "In der Suche Groß- und Kleinschreibung beachten?"
 
 msgid "Length of history"
 msgstr "Limit des Suchverlaufs"
+
+msgid "MENU"
+msgstr ""
 
 msgid "Maximum number of entries in the search history. Set this to 0 to disable search history."
 msgstr "Maximale Anzahl von Einträgen im Suchverlauf. Diesen Wert auf \"0\" setzen, um den Verlauf zu deaktivieren."
@@ -295,6 +301,9 @@ msgid "exclude"
 msgstr ""
 
 msgid "include"
+msgstr ""
+
+msgid "partial description"
 msgstr ""
 
 msgid "partial match"

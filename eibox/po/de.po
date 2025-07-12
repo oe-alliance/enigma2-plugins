@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-08 13:42+0100\n"
+"POT-Creation-Date: 2025-04-01 20:07+0200\n"
 "PO-Revision-Date: 2010-10-05 18:11+0200\n"
 "Last-Translator: Fraxinas\n"
 "Language-Team: none\n"
@@ -31,15 +31,6 @@ msgstr "(soll)"
 
 msgid "Visualization for European Installation Bus"
 msgstr "Visualisierung für den Europäischen Installations-Bus"
-
-msgid "beleuchtung:helligkeitswerte:esstisch"
-msgstr ""
-
-msgid "beleuchtung:helligkeitswerte:schlafen_decke"
-msgstr ""
-
-msgid "beleuchtung:helligkeitswerte:wohnzimmer_decke_1"
-msgstr ""
 
 msgid "down"
 msgstr "runter"

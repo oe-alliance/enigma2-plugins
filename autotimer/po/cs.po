@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 AutoTimer Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2025-04-01 20:07+0200\n"
 "PO-Revision-Date: 2012-05-16 10:42+0100\n"
 "Last-Translator: jerry <jerry00@quick.cz>\n"
 "Language-Team: jerry\n"
@@ -44,12 +44,15 @@ msgid "%d.%B %Y"
 msgstr "%d.%B %Y"
 
 #, python-format
+msgid "%s is not valid."
+msgstr ""
+
+#, python-format
 msgid "%s: %s at %s"
 msgstr "%s: %s v %s"
 
-#
 msgid "Abort this Wizard."
-msgstr "Ukončit průvodce."
+msgstr ""
 
 msgid "Activate VPS"
 msgstr ""
@@ -94,6 +97,9 @@ msgstr ""
 msgid "Amount of recordings left"
 msgstr ""
 
+msgid "Any Day filter refers to the day of the timespan start, even if the timespan crosses midnight."
+msgstr ""
+
 msgid "Any service/recording"
 msgstr "Veškeré stanice/záznam"
 
@@ -114,14 +120,16 @@ msgstr "Otevřít pod nabídku"
 msgid "AutoTimer Editor"
 msgstr "Editor Auto Časovače"
 
+#, fuzzy
 msgid "AutoTimer FAQ"
-msgstr ""
+msgstr "Přidat AutoČasovač"
 
 msgid "AutoTimer Filters"
 msgstr "Filtr AutoČasovače"
 
+#, fuzzy
 msgid "AutoTimer Help"
-msgstr ""
+msgstr "Přidat AutoČasovač"
 
 msgid "AutoTimer Services"
 msgstr "AutoČasovač stanice"
@@ -218,9 +226,9 @@ msgstr ""
 msgid "Couldn't load config file!"
 msgstr ""
 
-#
+#, fuzzy
 msgid "Create a new AutoTimer."
-msgstr "Vytvořit nový AutoČasovač."
+msgstr "Přidat vybraný AutoČasovač"
 
 msgid "Create a new timer using the classic editor"
 msgstr "Vytvořit nový časovač pomocí klasického editoru"
@@ -336,13 +344,10 @@ msgstr ""
 msgid "Filter"
 msgstr "Filtr"
 
-#
 msgid ""
 "Filters are another powerful tool when matching events. An AutoTimer can be restricted to certain Weekdays or only match an event with a text inside eg it's Description.\n"
 "Press BLUE to add a new restriction and YELLOW to remove the selected one."
 msgstr ""
-"Filtry jsou další silné nástroje na zjišťování odpovídajících událostí.AutoČasovač lze omezit na určité dny v týdnu nebo na události, kterémají určitý text v Popisu.\n"
-"MODRÉ tlačítko přidá nové omezení,ŽLUTÉ odstraní zvolené."
 
 msgid "First day to match events. No event that begins before this date will be matched."
 msgstr "První den odpovídající události. Událost začínající před tímto datem nevyhoví."
@@ -361,8 +366,10 @@ msgstr ""
 msgid "Frequently asked questions"
 msgstr "Často kladené otázky"
 
+#
+#, fuzzy
 msgid "Frequently asked questions about the AutoTimer"
-msgstr ""
+msgstr "Často kladené otázky"
 
 #, fuzzy
 msgid "Fri"
@@ -448,15 +455,11 @@ msgstr "AutoČasovač Nastavení"
 msgid "Include AutoTimer name in tags"
 msgstr ""
 
-#
 msgid ""
 "It's possible to restrict an AutoTimer to certain Services or Bouquets or to deny specific ones.\n"
 "An Event will only match this AutoTimer if it's on a specific and not denied Service (inside a Bouquet).\n"
 "Press BLUE to add a new restriction and YELLOW to remove the selected one."
 msgstr ""
-"AutoTimer je možné omezit na určité programy, přehledy, nebo některé zakázat.\n"
-"Událost bude odpovídat AutoČasovači jen tehdy,jde-li o konkrétní program a není-li zakázán (v rámci přehledu).\n"
-"MODRÉ tlačítko přidá nové omezení, ŽLUTÉ tlačítko odstraní zvolené."
 
 msgid "Label Timers with season, episode and title, according to the SeriesPlugin settings."
 msgstr ""
@@ -524,9 +527,8 @@ msgstr "Nový"
 msgid "No"
 msgstr "Ne"
 
-#
 msgid "No, remove them."
-msgstr "Ne, smazat."
+msgstr ""
 
 msgid "None"
 msgstr "Žádná"
@@ -686,6 +688,9 @@ msgstr "Přesnost hledání"
 msgid "Search type"
 msgstr "Typ hledání"
 
+msgid "See: "
+msgstr ""
+
 msgid "Select \"exact match\" to enforce \"Match title\" to match exactly, \"partial match\" if you only want to search for a part of the event title or \"description match\" if you only want to search for a part of the event description."
 msgstr ""
 
@@ -786,29 +791,25 @@ msgstr "Tagy"
 msgid "Tags the Timer/Recording will have."
 msgstr "Tagy, které bude mít časovač/záznam."
 
-#
 msgid ""
 "Thank you for using the wizard. Your new AutoTimer has been added to the List.\n"
 "Please press OK to continue."
-msgstr "Děkujeme Vám za použití průvodce. Nový AutoČasovač byl přidán do seznamu. Stiskněte OK pro pokračování."
-
-msgid "The 'Overview'"
 msgstr ""
+
+#, fuzzy
+msgid "The 'Overview'"
+msgstr "Přehled AutoČasovačů"
 
 msgid "The AutoTimer overview is the standard entry point to this plugin./n/nIf AutoTimers are configured you can choose them from a list to change them (OK button on your remote) or remove them (YELLOW button on your remote)./nNew Timers can be added by pressing the BLUE button and the control menu can be opened using the MENU button./n/nWhen leaving the plugin using the GREEN button it will search the EPG for matching events ONCE. To configure a regular search interval of the plugin to search for events open the control menu and enter the plugin setup."
 msgstr ""
 
-#
 msgid ""
 "The Timer will not be added to the List.\n"
 "Please press OK to close this Wizard."
 msgstr ""
-"Časovač nebude přidán do seznamu.\n"
-"Stiskněte OK pro ukončení tohoto průvodce."
 
-#
 msgid "The Timespan of an AutoTimer is the first 'advanced' attribute. If a timespan is specified an event will only match this AutoTimer if it lies inside of this timespan."
-msgstr "Časový úsek Autotimeru je první 'pokročilý' parametr.Jestliže je časový úsek specifikován, pak událost vyhoví AutoČasovače pouze tehdy,leží-li v tomto úseku."
+msgstr ""
 
 msgid "The autotimer file (/etc/enigma2/autotimer.xml) is corrupt. A new and empty config was created. A backup of the config can be found here (/etc/enigma2/autotimer.xml_old) "
 msgstr ""
@@ -821,6 +822,9 @@ msgstr "Počítadlo může být automaticky resetováno na limit po určitých i
 
 msgid "The editor to be used for new AutoTimers. This can either be the Wizard or the classic editor."
 msgstr "Editor použitý pro nové AutoČasovače. Může to být Průvodce nebo klasický editor."
+
+msgid "The filter must be a valid regular expression.\n"
+msgstr ""
 
 msgid "The match attribute is mandatory."
 msgstr "Parametr 'Hledat v názvu' je povinný."
@@ -940,15 +944,11 @@ msgstr "Týdně (Neděle)"
 msgid "Welcome to the AutoTimer-Plugin"
 msgstr ""
 
-#
 msgid ""
 "Welcome.\n"
 "\n"
 "This Wizard will help you to create a new AutoTimer by providing descriptions for common settings."
 msgstr ""
-"Vítáme Vás.\n"
-"\n"
-"Tento průvodce pomůže založit nový AutoČasovač poskytnutím popisu pro společné nastavení."
 
 msgid "What is this 'control menu' you keep talking about?"
 msgstr ""
@@ -984,9 +984,8 @@ msgstr ""
 msgid "Write the config file after every change which the user quits by saving."
 msgstr ""
 
-#
 msgid "Yes"
-msgstr "Ano"
+msgstr ""
 
 msgid "Yes, and delete all timers generated by this autotimer"
 msgstr ""
@@ -994,26 +993,21 @@ msgstr ""
 msgid "Yes, but keep timers generated by this autotimer"
 msgstr ""
 
-#
 msgid "Yes, keep them."
-msgstr "Ano,zachovat ho."
+msgstr ""
 
 msgid "You can control for how many days in the future timers are added. Set this to 0 to disable this feature."
 msgstr "Můžete nastavit, po kolik dnů v budoucnu jsou časovače přidávány. Nastavení 0 zakáže tuto vlastnost."
 
-#
 msgid ""
 "You can set the basic properties of an AutoTimer here.\n"
 "While 'Name' is just a human-readable name displayed in the Overview, 'Match in title' is what is looked for in the EPG."
 msgstr ""
-"Zde můžete nastavit základní vlastnosti pro AutoČasovač.\n"
-" Zatímco 'Popis' představuje jméno zobrazované v Přehledu, 'Hledat v názvu' je výraz, který se vyhledává v EPG."
 
-#
 msgid ""
 "You did not provide a valid 'Match in title' Attribute for your new AutoTimer.\n"
 "As this is a mandatory Attribute you cannot continue without doing so."
-msgstr "Nezadali jste platný výraz 'Hledat v názvu' pro nový AutoČasovač. Bez zadání tohoto parametru nemůžete dál pokračovat."
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1026,23 +1020,16 @@ msgstr ""
 msgid "You now know almost everything there is to know about the AutoTimer-Plugin./n/nAs a final hint I can't stress how important it is to take a look at the help texts that are shown in the setup dialogs as they cover the most frequently asked questions. Surprisingly even after the hints were added ;-)."
 msgstr ""
 
-#
 msgid ""
 "You successfully configured a new AutoTimer. Do you want to add it to the list?\n"
 "\n"
 "You can go back a step by pressing EXIT on your remote."
 msgstr ""
-"Úspěšně jste nakonfigurovali nový AutoČasovač. Chcete ho přidat do seznamu?\n"
-" \n"
-"Stisknutím EXIT na DO se můžete vrátit o krok zpět."
 
-#
 msgid ""
 "Your 'Match in title' Attribute ends with a Whitespace.\n"
 "Please confirm if this was intentional, if not they will be removed."
 msgstr ""
-"Váš výraz 'Hledat v názvu' končí mezerou.\n"
-"Podvrďte, zda to byl záměr, jinak bude mezera odstraněna."
 
 #, python-format
 msgid ""

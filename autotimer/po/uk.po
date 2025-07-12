@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AutoTimer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2025-04-01 20:07+0200\n"
 "PO-Revision-Date: 2019-07-02 15:34+0200\n"
 "Last-Translator: kvinto <badsystem@ukr.net>\n"
 "Language-Team: <sat-ukraine.info>\n"
@@ -50,6 +50,10 @@ msgid "%d.%B %Y"
 msgstr "%d.%B %Y"
 
 #, python-format
+msgid "%s is not valid."
+msgstr ""
+
+#, python-format
 msgid "%s: %s at %s"
 msgstr "%s: %s в %s"
 
@@ -94,6 +98,9 @@ msgstr "Завжди записувати конфігурацію"
 
 msgid "Amount of recordings left"
 msgstr "Залишилося записів"
+
+msgid "Any Day filter refers to the day of the timespan start, even if the timespan crosses midnight."
+msgstr ""
 
 msgid "Any service/recording"
 msgstr "Любі канали/записи"
@@ -684,6 +691,9 @@ msgstr "Точність пошуку"
 msgid "Search type"
 msgstr "Тип пошуку"
 
+msgid "See: "
+msgstr ""
+
 #, fuzzy
 msgid "Select \"exact match\" to enforce \"Match title\" to match exactly, \"partial match\" if you only want to search for a part of the event title or \"description match\" if you only want to search for a part of the event description."
 msgstr "Виберіть «точну відповідність» для забезпечення точної відповідності «В назві»; «частковий збіг», якщо ви хочете знайти частину назви події; «в описі», якщо ви хочете шукати частини опису подій"
@@ -813,6 +823,9 @@ msgstr "Лічильник можна автоматично скидаюти ч
 
 msgid "The editor to be used for new AutoTimers. This can either be the Wizard or the classic editor."
 msgstr "Редактор буде використовуватися для нових АвтоТаймерів. Це може бути майстр або класичний редактор."
+
+msgid "The filter must be a valid regular expression.\n"
+msgstr ""
 
 msgid "The match attribute is mandatory."
 msgstr "Атрибут співпадіння обов’язковий."

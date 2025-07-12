@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SeriesPlugin 5.9.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-26 14:10+0100\n"
+"POT-Creation-Date: 2025-05-11 11:00+0200\n"
 "PO-Revision-Date: 2021-12-18 13:35+0100\n"
 "Last-Translator: Dario Croci <spaeleus@croci.org>\n"
 "Language-Team: Dario Croci <spaeleus@croci.org>\n"
@@ -18,189 +18,165 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: .\n"
 
-msgid "Channel Editor"
-msgstr "Editor canali"
-
-msgid "Cancel"
-msgstr "Annullare"
-
-msgid "OK"
-msgstr "OK"
-
-msgid "Remove"
-msgstr "Rimuovere"
-
-msgid "Auto match"
-msgstr "Corrispondenza automatica"
-
-msgid "Show popup to add Stb Channel"
-msgstr "Mostrare un popup per aggiungere un canale Stb"
-
-msgid "Cancel and close"
-msgstr "Annullare e chiudere"
-
-msgid "Reset channels"
-msgstr "Reset canali"
-
-msgid "Previeous page"
-msgstr "Pagina precedente"
-
-msgid "Next page"
-msgstr "Pagina successiva"
-
-msgid "One row up"
-msgstr "Una riga sopra"
-
-msgid "One row down"
-msgstr "Una riga sotto"
-
-msgid "Next bouquet"
-msgstr "Bouquet successivo"
-
-msgid "Previous bouquet"
-msgstr "Bouquet precedente"
-
-msgid "Save and close"
-msgstr "Salvare e chiudere"
-
-msgid "Remove channel"
-msgstr "Rimuovere il canale"
+msgid ""
+"\n"
+"Cancel?"
+msgstr ""
+"\n"
+"Annullare?"
 
 msgid ""
-"If You are using SD and HD channels in parallel, You have to match both "
-"channels separately!"
+"  (C) 2012 by betonme @ IHAD \n"
+"\n"
 msgstr ""
-"Se sono in uso canali SD e HD in parallelo, occorre abbinarli "
-"separatamente."
+"  (C) 2012 von betonme @ IHAD \n"
+"\n"
 
-msgid "Load STB channels for bouquet"
-msgstr "Caricare i canali STB per il bouquet"
+msgid "  Feel free to donate. \n"
+msgstr "  Sentitevi liberi di donare. \n"
 
-msgid "Load Web channels for bouquet"
-msgstr "Caricare i canali web per il bouquet"
+msgid ""
+"  How much time have You saved?\n"
+"\n"
+msgstr ""
+"  Quanto tempo è stato risparmiato?\n"
+"\n"
 
-msgid "Problem during loading Webchannels"
-msgstr "Riscontrati problemi nel caricamento dei canali web"
+msgid "  PayPal: "
+msgstr "  PayPal: "
 
-msgid "STB- / Web-Channel for bouquet:"
-msgstr "Canali STB/ Web per il Bouquet:"
+msgid "  Support: "
+msgstr "  Supporto: "
 
-msgid "Error check log file"
-msgstr "File di registro di controllo degli errori"
+msgid "  Terms: "
+msgstr "  Termini: "
 
-msgid "Channel matching..."
-msgstr "Corrispondenza dei canali..."
+#, python-brace-format
+msgid "  {lookups:d} successful lookups.\n"
+msgstr ""
+"  {lookups:d} ricerche effettuate con successo.\n"
+"\n"
+
+#, python-format
+msgid "%d min"
+msgstr "%d minuti"
+
+#, python-format
+msgid "%d records renamed successfully"
+msgstr "%d registrazioni rinominate correttamente"
+
+#, python-format
+msgid "%d timer renamed successfully"
+msgstr "%d Timer rinominati correttamente"
 
 msgid "Add Web Channel"
 msgstr "Aggiungere canale web"
 
-msgid "Channel '- %(servicename)s - %(remote)s -' added."
-msgstr "Il canale '- %(servicename)s - %(remote)s -' è stato aggiunto."
-
 msgid "Add channel (Yes) or replace it (No)"
 msgstr "Aggiungere il canale (Sì) o sostituirlo (No)"
 
-msgid "Channel '- %(servicename)s - %(remote)s -' replaced."
-msgstr "Il canale '- %(servicename)s - %(remote)s -' è stato sostituito."
+msgid "Add tag 'SeriesPlugin' to timer"
+msgstr "Aggiungere il TAG 'SeriesPlugin' ai Timer"
 
-msgid "Remove '%s'?"
-msgstr "Rimuovere '%s'?"
+msgid "Append '_' if file exist"
+msgstr "Aggiungere '_' se il file è già presente"
 
-msgid "Channel '- %s -' removed."
-msgstr "Il canale '- %s -' è stato rimosso."
+msgid "Auto match"
+msgstr "Corrispondenza automatica"
 
-msgid "Reset channel list?"
-msgstr "Azzerare l'elenco canali?"
-
-msgid "Skipping old channels file"
-msgstr "Saltare il file dei vecchi canali"
-
-msgid "Don't edit this manually unless you really know what you are doing"
-msgstr ""
-"Non modificare manualmente se non si è certi di quello che si sta facendo"
-
-msgid "Your pattern file is corrupt"
-msgstr "Il file dei modelli è corrotto"
-
-msgid "Skipping lookup because no show name is specified"
-msgstr ""
-"Saltare la ricerca perché non è stato specificato alcun nome di spettacolo"
-
-msgid "Skipping lookup because no begin timestamp is specified"
-msgstr ""
-"Saltare la ricerca perché non è stato specificato un timestamp iniziale"
-
-msgid "Skipping lookup because no channel is specified"
-msgstr "Saltare la ricerca perché non è stato specificato alcun canale"
-
-msgid "No matching channel found."
-msgstr "Non trovato alcun canale corrispondente."
-
-msgid "Please open the Channel Editor and add the channel manually."
-msgstr "Utilizzare l'editor canali e aggiungere il canale manualmente."
-
-msgid "No match found"
-msgstr "Non trovata alcuna corrispondenza"
-
-msgid "Your autotimer is deprecated"
-msgstr "La versione di Autotimer presente è obsoleta"
-
-msgid "Please update it"
-msgstr "Aggiornarla"
-
-msgid "Error missing dependency"
-msgstr "Errore di dipendenza mancante"
-
-msgid "Please install missing python paket manually"
-msgstr "Installare manualmente i pacchetti python mancanti"
-
-msgid "Skip check during running records"
-msgstr "Disattivare le verifiche con registrazioni in corso"
+msgid "AutoTimer independent mode"
+msgstr "Ricercare informazioni sulla serie senza AutoTimer (modalità indipendente)"
 
 msgid "Can be configured within the setup"
 msgstr "Può essere configurato all'interno del setup"
 
-msgid "Skip check because of pattern match"
-msgstr "Saltare le verifiche se il modello corrisponde"
+msgid "Cancel"
+msgstr "Annullare"
 
-msgid "No identifier available"
-msgstr "Nessun identificatore disponibile"
+msgid "Cancel and close"
+msgstr "Annullare e chiudere"
 
-msgid "Please check Your installation"
-msgstr "Verificare la propria installazione"
+#, python-format
+msgid "Channel '- %(servicename)s - %(remote)s -' added."
+msgstr "Il canale '- %(servicename)s - %(remote)s -' è stato aggiunto."
 
-msgid "Channels are not matched"
-msgstr "Nessuna corrispondenza canale"
+#, python-format
+msgid "Channel '- %(servicename)s - %(remote)s -' replaced."
+msgstr "Il canale '- %(servicename)s - %(remote)s -' è stato sostituito."
 
-msgid "Please open the channel editor (setup) and match them"
-msgstr "Aprire l'editor canali (Impostazioni) e abbinarli"
-
-msgid "SeriesPlugin is deactivated"
-msgstr "SeriesPlugin è disabilitato"
-
-msgid "Failed: %s."
-msgstr "Fallito: %s."
-
-msgid "No data available"
-msgstr "Nessun dato disponibile"
-
-msgid "Finished with errors:\n"
-msgstr "Terminato con errori:\n"
-
-msgid "Lookup of %d episodes was successful"
-msgstr "La ricerca di %d episodi ha avuto successo"
-
-msgid "Configuration"
-msgstr "Impostazioni"
-
-msgid "Show Log"
-msgstr "Mostrare il log"
+#, python-format
+msgid "Channel '- %s -' removed."
+msgstr "Il canale '- %s -' è stato rimosso."
 
 msgid "Channel Edit"
 msgstr "Modificare il canale"
 
+msgid "Channel Editor"
+msgstr "Editor canali"
+
+msgid "Channel matching file"
+msgstr "File del canale corrispondente"
+
+msgid "Channel matching..."
+msgstr "Corrispondenza dei canali..."
+
+msgid "Channels are not matched"
+msgstr "Nessuna corrispondenza canale"
+
+msgid "Check Timer for corresponding EPG events"
+msgstr "Controllare il timer su eventi EPG corrispondenti"
+
+msgid "Check timer every x minutes"
+msgstr "Verificare i timer ogni x minuti"
+
+msgid "Check timer list for series (SP)"
+msgstr "Controllare l'elenco dei timer per le serie (SP)"
+
+msgid "Check timer list from extension menu"
+msgstr "Controllare l'elenco dei timer dal menu estensioni"
+
+msgid "Composition of the recording filenames"
+msgstr "Composizione del nome dei file delle registrazioni"
+
+msgid "Configuration"
+msgstr "Impostazioni"
+
+msgid "Cut series title on dash"
+msgstr "Tagliare i titoli delle serie sul trattino"
+
+msgid "Debug: Log file path"
+msgstr "Debug: percorso del file di log"
+
+msgid "Debug: Print debug messages (Shell)"
+msgstr "Debug: scrivere i messaggi di debug (shell)"
+
+msgid "Debug: Write Log"
+msgstr "Debug: creare file di log (Log)"
+
+msgid "Default episode"
+msgstr "Episodio predefinito"
+
+msgid "Default season"
+msgstr "Stagione predefinita"
+
+msgid "Directory pattern file"
+msgstr "Elenco dei modelli degli episodi"
+
+msgid "Do You want to start renaming?"
+msgstr "Iniziare a rinominare?"
+
+#, python-format
+msgid "Do you really want to delete %s?"
+msgstr "Rimuovere %s?"
+
+msgid "Don't edit this manually unless you really know what you are doing"
+msgstr "Non modificare manualmente se non si è certi di quello che si sta facendo"
+
 msgid "Enable SeriesPlugin"
 msgstr "Abilitare SeriesPlugin"
+
+msgid "Enable recording debug (Timer log)"
+msgstr "Abilitare il debug delle registrazioni (log timer)"
 
 msgid "Enable support for EPGImport"
 msgstr "Abilitare il supporto per EPGImport"
@@ -211,159 +187,8 @@ msgstr "Abilitare il supporto per XMLTVImport"
 msgid "Enable support for crossepg"
 msgstr "Abilitare il supporto per CrossEPG"
 
-msgid "Show in event info menu"
-msgstr "Mostrare nel menu Info dell'evento"
-
-msgid "Show in extensions menu"
-msgstr "Mostrare le informazioni sulla serie nel menu estensioni"
-
-msgid "Show in epg menu"
-msgstr "Mostrare nel menu EPG"
-
-msgid "Show in channel menu"
-msgstr "Mostrare nel menu canali"
-
-msgid "Show Info in movie list menu"
-msgstr "Mostrare nel menu elenco canali"
-
-msgid "Show Rename in movie list menu"
-msgstr "Mostrare 'Rinominare' nel menu Elenco filmati"
-
-msgid "Check timer list from extension menu"
-msgstr "Controllare l'elenco dei timer dal menu estensioni"
-
-msgid "Record title episode pattern"
-msgstr "Modello del titolo degli episodi per le registrazioni"
-
-msgid "Record description episode pattern"
-msgstr "Modello della descrizione degli episodi per le registrazioni"
-
-msgid "Composition of the recording filenames"
-msgstr "Composizione del nome dei file delle registrazioni"
-
-msgid "Record directory pattern"
-msgstr "Modello di registrazione episodi"
-
-msgid "Default season"
-msgstr "Stagione predefinita"
-
-msgid "Default episode"
-msgstr "Episodio predefinito"
-
-msgid "Replace special characters in title"
-msgstr "Sostituire i caratteri speciali nel titolo"
-
-msgid "Cut series title on dash"
-msgstr "Tagliare i titoli delle serie sul trattino"
-
-msgid "Main bouquet for channel editor"
-msgstr "Menu principale dell'editor canali"
-
-msgid "Rename files"
-msgstr "Rinominare file"
-
-msgid "Use legacy filenames"
-msgstr "Utilizzare nomi file legacy"
-
-msgid "Append '_' if file exist"
-msgstr "Aggiungere '_' se il file è già presente"
-
-msgid "Max time drift to match episode"
-msgstr "Massima deriva temporale per rilevare le sequenze"
-
-msgid "Title search depths"
-msgstr "Profondità di ricerca del titolo"
-
-msgid "Skip search if pattern matches"
-msgstr "Saltare la ricerca se il modello corrisponde"
-
-msgid "Skip search during records"
-msgstr "Disattivare le ricerche durante le registrazioni"
-
-msgid "AutoTimer independent mode"
-msgstr ""
-"Ricercare informazioni sulla serie senza AutoTimer (modalità indipendente)"
-
-msgid "Check timer every x minutes"
-msgstr "Verificare i timer ogni x minuti"
-
-msgid "Check Timer for corresponding EPG events"
-msgstr "Controllare il timer su eventi EPG corrispondenti"
-
-msgid "Add tag 'SeriesPlugin' to timer"
-msgstr "Aggiungere il TAG 'SeriesPlugin' ai Timer"
-
-msgid "Socket timeout"
-msgstr "Timeout socket (secondi)"
-
-msgid "Stop on ProtocolError"
-msgstr "Arrestare SeriesPlugin su errore di connessione"
-
-msgid "Timeout for Success Popups"
-msgstr "Durata dei popup di conferma"
-
-msgid "Timeout for Warnings Popups"
-msgstr "Durata dei popup di warning"
-
-msgid "Timeout for Error Popups"
-msgstr "Durata dei popup di errore"
-
-msgid "Channel matching file"
-msgstr "File del canale corrispondente"
-
 msgid "Episode pattern file"
 msgstr "File modello degli episodi"
-
-msgid "Directory pattern file"
-msgstr "Elenco dei modelli degli episodi"
-
-msgid "Poll automatically"
-msgstr "Polling automatico"
-
-msgid "Startup delay (in min)"
-msgstr "Ritardo di avvio (in min)"
-
-msgid "Poll Interval (in h)"
-msgstr "Intervallo di polling (in h)"
-
-msgid "Timeout (in min)"
-msgstr "Timeout (in min)"
-
-msgid "Debug: Print debug messages (Shell)"
-msgstr "Debug: scrivere i messaggi di debug (shell)"
-
-msgid "Debug: Write Log"
-msgstr "Debug: creare file di log (Log)"
-
-msgid "Debug: Log file path"
-msgstr "Debug: percorso del file di log"
-
-msgid "Send debug messages to shell"
-msgstr "Inviare messaggi di debug alla shell"
-
-msgid "Write debug messages into file"
-msgstr "Scrivere il registro degli errori su file (Log)"
-
-msgid "Location and name of log file"
-msgstr "Percorso e nome del file di log"
-
-msgid "Enable recording debug (Timer log)"
-msgstr "Abilitare il debug delle registrazioni (log timer)"
-
-msgid "Really close without saving settings?"
-msgstr "Chiudere senza salvare le modifiche?"
-
-msgid "Independent mode exception"
-msgstr "Eccezione modalità indipendente"
-
-msgid "SeriesPlugin Info"
-msgstr "Informazioni su SeriesPlugin"
-
-msgid "Retrieving Season, Episode and Title..."
-msgstr "Caricamento informazioni su stagione, episodio e titolo in corso..."
-
-msgid "{title:s}"
-msgstr "{title:s}"
 
 msgid ""
 "Episode: {rawepisode:s}\n"
@@ -371,6 +196,168 @@ msgid ""
 msgstr ""
 "Episodio:  {rawepisode:s}\n"
 "{title:s}"
+
+msgid "Error check log file"
+msgstr "File di registro di controllo degli errori"
+
+#, python-format
+msgid "Failed: %s."
+msgstr "Fallito: %s."
+
+msgid "Finished with errors:\n"
+msgstr "Terminato con errori:\n"
+
+msgid "If You are using SD and HD channels in parallel, You have to match both channels separately!"
+msgstr "Se sono in uso canali SD e HD in parallelo, occorre abbinarli separatamente."
+
+msgid "Independent mode exception"
+msgstr "Eccezione modalità indipendente"
+
+msgid "Load STB channels for bouquet"
+msgstr "Caricare i canali STB per il bouquet"
+
+msgid "Load Web channels for bouquet"
+msgstr "Caricare i canali web per il bouquet"
+
+msgid "Location and name of log file"
+msgstr "Percorso e nome del file di log"
+
+#, python-format
+msgid "Lookup of %d episodes was successful"
+msgstr "La ricerca di %d episodi ha avuto successo"
+
+msgid "Main bouquet for channel editor"
+msgstr "Menu principale dell'editor canali"
+
+msgid "Max time drift to match episode"
+msgstr "Massima deriva temporale per rilevare le sequenze"
+
+msgid "Next bouquet"
+msgstr "Bouquet successivo"
+
+msgid "Next page"
+msgstr "Pagina successiva"
+
+msgid "No data available"
+msgstr "Nessun dato disponibile"
+
+msgid "No identifier available"
+msgstr "Nessun identificatore disponibile"
+
+msgid "No log file found"
+msgstr "File di log non trovato"
+
+msgid "No match found"
+msgstr "Non trovata alcuna corrispondenza"
+
+msgid "No matching channel found."
+msgstr "Non trovato alcun canale corrispondente."
+
+msgid "No matching episode found"
+msgstr "Non trovato alcun episodio corrispondente"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "One row down"
+msgstr "Una riga sotto"
+
+msgid "One row up"
+msgstr "Una riga sopra"
+
+msgid "Please check Your installation"
+msgstr "Verificare la propria installazione"
+
+msgid "Please open the Channel Editor and add the channel manually."
+msgstr "Utilizzare l'editor canali e aggiungere il canale manualmente."
+
+msgid "Please open the channel editor (setup) and match them"
+msgstr "Aprire l'editor canali (Impostazioni) e abbinarli"
+
+msgid "Please update it"
+msgstr "Aggiornarla"
+
+msgid "Poll Interval (in h)"
+msgstr "Intervallo di polling (in h)"
+
+msgid "Poll automatically"
+msgstr "Polling automatico"
+
+msgid "Previeous page"
+msgstr "Pagina precedente"
+
+msgid "Previous bouquet"
+msgstr "Bouquet precedente"
+
+msgid "Problem during loading Webchannels"
+msgstr "Riscontrati problemi nel caricamento dei canali web"
+
+msgid "ProtocolError:"
+msgstr "Errore di connessione:"
+
+msgid "Reading log file...\n"
+msgstr "Lettura file di log in corso... \n"
+
+msgid "Really close without saving settings?"
+msgstr "Chiudere senza salvare le modifiche?"
+
+msgid "Record"
+msgstr "Registrazione"
+
+msgid "Record description episode pattern"
+msgstr "Modello della descrizione degli episodi per le registrazioni"
+
+msgid "Record directory pattern"
+msgstr "Modello di registrazione episodi"
+
+#, python-format
+msgid "Record rename has been finished with %d errors:\n"
+msgstr ""
+"La rinomina delle registrazioni è terminata con %d errori:\n"
+"\n"
+
+msgid "Record title episode pattern"
+msgstr "Modello del titolo degli episodi per le registrazioni"
+
+msgid "Remove"
+msgstr "Rimuovere"
+
+#, python-format
+msgid "Remove '%s'?"
+msgstr "Rimuovere '%s'?"
+
+msgid "Remove channel"
+msgstr "Rimuovere il canale"
+
+msgid "Rename"
+msgstr "Rinominare"
+
+msgid "Rename files"
+msgstr "Rinominare file"
+
+msgid "Rename serie(s) (SP)"
+msgstr "Rinominare le serie (SP)"
+
+msgid "Renaming failed"
+msgstr "Rinomina fallita"
+
+msgid "Replace special characters in title"
+msgstr "Sostituire i caratteri speciali nel titolo"
+
+msgid "Reset channel list?"
+msgstr "Azzerare l'elenco canali?"
+
+msgid "Reset channels"
+msgstr "Reset canali"
+
+msgid "Retrieving Season, Episode and Title..."
+msgstr "Caricamento informazioni su stagione, episodio e titolo in corso..."
+
+msgid "STB- / Web-Channel for bouquet:"
+msgstr "Canali STB/ Web per il Bouquet:"
+
+msgid "Save and close"
+msgstr "Salvare e chiudere"
 
 msgid ""
 "Season: {rawseason:s}\n"
@@ -386,157 +373,179 @@ msgstr ""
 "Stagione: {rawseason:s}  Episodio: {rawepisode:s}\n"
 "{title:s}"
 
-msgid "No matching episode found"
-msgstr "Non trovato alcun episodio corrispondente"
+msgid "Send debug messages to shell"
+msgstr "Inviare messaggi di debug alla shell"
 
-msgid "%d min"
-msgstr "%d minuti"
-
-msgid "Rename"
-msgstr "Rinominare"
-
-msgid "Record"
-msgstr "Registrazione"
-
-msgid "Successfully renamed"
-msgstr "Rinominato con successo"
-
-msgid "Renaming failed"
-msgstr "Rinomina fallita"
-
-msgid "Do you really want to delete %s?"
-msgstr "Rimuovere %s?"
-
-msgid "Skipping rename because file already exists"
-msgstr "Rinomina annullata: il file è già presente"
-
-msgid "Do You want to start renaming?"
-msgstr "Iniziare a rinominare?"
-
-msgid "Record rename has been finished with %d errors:\n"
+msgid "SerienServer API"
 msgstr ""
-"La rinomina delle registrazioni è terminata con %d errori:\n"
-"\n"
-
-msgid "%d records renamed successfully"
-msgstr "%d registrazioni rinominate correttamente"
-
-msgid "Skipping timer because it is already in queue"
-msgstr "Timer saltato: già presente nella coda"
-
-msgid "Skipping timer because it is already handled"
-msgstr "Timer saltato: il timer è già gestito"
-
-msgid "Skipping timer because it starts in less than 60 seconds"
-msgstr "Timer saltato: previsto il suo avvio tra meno di 60 secondi"
-
-msgid "Skipping timer because it is already running"
-msgstr "Timer saltato: il timer è già in esecuzione"
-
-msgid "Skipping timer because it is a just play timer"
-msgstr "Timer saltato: si tratta di un timer di riproduzione"
-
-msgid "Skipping timer because it is already modified %s"
-msgstr "Timer saltato: il timer è già modificato %s"
-
-msgid "Skipping timer because no event was found"
-msgstr "Timer saltato: non trovato alcun evento"
-
-msgid "Try to find infos for %s"
-msgstr "Tentare di recuperare informazioni su %s"
-
-msgid "Success: %s"
-msgstr "Successo: %s"
-
-msgid "Timer rename has been finished with %d errors:\n"
-msgstr "Rinomina timer terminata con %d errori:\n"
-
-msgid "%d timer renamed successfully"
-msgstr "%d Timer rinominati correttamente"
-
-msgid "Show Log file"
-msgstr "Visualizzare il file di log"
-
-msgid "Reading log file...\n"
-msgstr "Lettura file di log in corso... \n"
-
-msgid ""
-"\n"
-"Cancel?"
-msgstr ""
-"\n"
-"Annullare?"
-
-msgid "No log file found"
-msgstr "File di log non trovato"
-
-msgid "ProtocolError:"
-msgstr "Errore di connessione:"
-
-msgid "Stop is enabled. To reactivate SeriesPlugin, just open the setup"
-msgstr ""
-"SeriesPlugin è stato disabilitato. Per riattivarlo aprire le impostazioni"
 
 msgid "SeriesPlugin"
 msgstr "SeriesPlugin"
 
-msgid "Show series info (SP)"
-msgstr "Mostrare informazioni sulla serie (SP)"
+msgid "SeriesPlugin Info"
+msgstr "Informazioni su SeriesPlugin"
 
-msgid "Rename serie(s) (SP)"
-msgstr "Rinominare le serie (SP)"
-
-msgid "Check timer list for series (SP)"
-msgstr "Controllare l'elenco dei timer per le serie (SP)"
-
-msgid ""
-"  (C) 2012 by betonme @ IHAD \n"
-"\n"
-msgstr ""
-"  (C) 2012 von betonme @ IHAD \n"
-"\n"
-
-msgid "  Terms: "
-msgstr "  Termini: "
-
-msgid "  {lookups:d} successful lookups.\n"
-msgstr ""
-"  {lookups:d} ricerche effettuate con successo.\n"
-"\n"
-
-msgid ""
-"  How much time have You saved?\n"
-"\n"
-msgstr ""
-"  Quanto tempo è stato risparmiato?\n"
-"\n"
-
-msgid "  Support: "
-msgstr "  Supporto: "
-
-msgid "  Feel free to donate. \n"
-msgstr "  Sentitevi liberi di donare. \n"
-
-msgid "  PayPal: "
-msgstr "  PayPal: "
-
-msgid "SeriesPlugin test exception "
-msgstr "SeriesPlugin: eccezione test "
-
-msgid "SeriesPlugin setup exception "
-msgstr "SeriePlugin: eccezione impostazioni "
-
-msgid "SeriesPlugin info exception "
-msgstr "SeriesPlugin: eccezione informazioni "
+#, fuzzy
+msgid "SeriesPlugin Setup"
+msgstr "SeriesPlugin"
 
 msgid "SeriesPlugin extension exception "
 msgstr "SeriesPlugin: eccezione estensione "
 
-msgid "SeriesPlugin renamer exception "
-msgstr "SeriesPlugin: eccezione rinomina "
+msgid "SeriesPlugin info exception "
+msgstr "SeriesPlugin: eccezione informazioni "
+
+msgid "SeriesPlugin is deactivated"
+msgstr "SeriesPlugin è disabilitato"
 
 msgid "SeriesPlugin label exception "
 msgstr "SeriesPlugin: eccezione di scrittura "
 
+msgid "SeriesPlugin renamer exception "
+msgstr "SeriesPlugin: eccezione rinomina "
+
+msgid "SeriesPlugin setup exception "
+msgstr "SeriePlugin: eccezione impostazioni "
+
+msgid "SeriesPlugin test exception "
+msgstr "SeriesPlugin: eccezione test "
+
 msgid "Setup"
 msgstr "Impostazioni"
+
+msgid "Show Info in movie list menu"
+msgstr "Mostrare nel menu elenco canali"
+
+msgid "Show Log"
+msgstr "Mostrare il log"
+
+msgid "Show Log file"
+msgstr "Visualizzare il file di log"
+
+msgid "Show Rename in movie list menu"
+msgstr "Mostrare 'Rinominare' nel menu Elenco filmati"
+
+msgid "Show in channel menu"
+msgstr "Mostrare nel menu canali"
+
+msgid "Show in epg menu"
+msgstr "Mostrare nel menu EPG"
+
+msgid "Show in extensions menu"
+msgstr "Mostrare le informazioni sulla serie nel menu estensioni"
+
+#, fuzzy
+msgid "Show in info menu"
+msgstr "Mostrare nel menu Info dell'evento"
+
+msgid "Show popup to add Stb Channel"
+msgstr "Mostrare un popup per aggiungere un canale Stb"
+
+msgid "Show series info (SP)"
+msgstr "Mostrare informazioni sulla serie (SP)"
+
+msgid "Skip check because of pattern match"
+msgstr "Saltare le verifiche se il modello corrisponde"
+
+msgid "Skip check during running records"
+msgstr "Disattivare le verifiche con registrazioni in corso"
+
+msgid "Skip search during records"
+msgstr "Disattivare le ricerche durante le registrazioni"
+
+msgid "Skip search if pattern matches"
+msgstr "Saltare la ricerca se il modello corrisponde"
+
+msgid "Skipping lookup because no begin timestamp is specified"
+msgstr "Saltare la ricerca perché non è stato specificato un timestamp iniziale"
+
+msgid "Skipping lookup because no channel is specified"
+msgstr "Saltare la ricerca perché non è stato specificato alcun canale"
+
+msgid "Skipping lookup because no show name is specified"
+msgstr "Saltare la ricerca perché non è stato specificato alcun nome di spettacolo"
+
+msgid "Skipping old channels file"
+msgstr "Saltare il file dei vecchi canali"
+
+msgid "Skipping rename because file already exists"
+msgstr "Rinomina annullata: il file è già presente"
+
+msgid "Skipping timer because it is a just play timer"
+msgstr "Timer saltato: si tratta di un timer di riproduzione"
+
+msgid "Skipping timer because it is already handled"
+msgstr "Timer saltato: il timer è già gestito"
+
+msgid "Skipping timer because it is already in queue"
+msgstr "Timer saltato: già presente nella coda"
+
+#, python-format
+msgid "Skipping timer because it is already modified %s"
+msgstr "Timer saltato: il timer è già modificato %s"
+
+msgid "Skipping timer because it is already running"
+msgstr "Timer saltato: il timer è già in esecuzione"
+
+msgid "Skipping timer because it starts in less than 60 seconds"
+msgstr "Timer saltato: previsto il suo avvio tra meno di 60 secondi"
+
+msgid "Skipping timer because no event was found"
+msgstr "Timer saltato: non trovato alcun evento"
+
+msgid "Socket timeout"
+msgstr "Timeout socket (secondi)"
+
+msgid "Startup delay (in min)"
+msgstr "Ritardo di avvio (in min)"
+
+msgid "Stop is enabled. To reactivate SeriesPlugin, just open the setup"
+msgstr "SeriesPlugin è stato disabilitato. Per riattivarlo aprire le impostazioni"
+
+msgid "Stop on ProtocolError"
+msgstr "Arrestare SeriesPlugin su errore di connessione"
+
+#, python-format
+msgid "Success: %s"
+msgstr "Successo: %s"
+
+msgid "Successfully renamed"
+msgstr "Rinominato con successo"
+
+msgid "Timeout (in min)"
+msgstr "Timeout (in min)"
+
+msgid "Timeout for Error Popups"
+msgstr "Durata dei popup di errore"
+
+msgid "Timeout for Success Popups"
+msgstr "Durata dei popup di conferma"
+
+msgid "Timeout for Warnings Popups"
+msgstr "Durata dei popup di warning"
+
+#, python-format
+msgid "Timer rename has been finished with %d errors:\n"
+msgstr "Rinomina timer terminata con %d errori:\n"
+
+msgid "Title search depths"
+msgstr "Profondità di ricerca del titolo"
+
+#, python-format
+msgid "Try to find infos for %s"
+msgstr "Tentare di recuperare informazioni su %s"
+
+msgid "Use legacy filenames"
+msgstr "Utilizzare nomi file legacy"
+
+msgid "Write debug messages into file"
+msgstr "Scrivere il registro degli errori su file (Log)"
+
+msgid "Your autotimer is deprecated"
+msgstr "La versione di Autotimer presente è obsoleta"
+
+msgid "Your pattern file is corrupt"
+msgstr "Il file dei modelli è corrotto"
+
+msgid "{title:s}"
+msgstr "{title:s}"

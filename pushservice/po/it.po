@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 plugin - pushservice\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2025-04-01 20:21+0200\n"
 "PO-Revision-Date: 2014-02-23 20:44+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -238,14 +238,8 @@ msgstr "Eccezione in lettura XML: "
 msgid "PushService Exception in writeXML: "
 msgstr "Eccezione in scrittura XML: "
 
-msgid "PushService Find module exception: "
-msgstr "Rilevata eccezione modulo: "
-
 msgid "PushService Instantiate exception: "
 msgstr "Eccezione inizializzazione: "
-
-msgid "PushService Load exception: "
-msgstr "Eccezione caricamento: "
 
 #, python-format
 msgid "PushService Module %s:\n"
@@ -259,9 +253,6 @@ msgstr "File di configurazione assente"
 
 msgid "PushService No module available: "
 msgstr "Nessun modulo disponibile: "
-
-msgid "PushService No module found: "
-msgstr "Nessun modulo trovato: "
 
 #, python-format
 msgid "PushService PushMail: Sending message: %s"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: autotimer_fy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2025-04-01 20:07+0200\n"
 "PO-Revision-Date: 2009-01-09 20:55+0100\n"
 "Last-Translator: gerrit <gerrit@nedlinux.nl>\n"
 "Language-Team: gerrit <fy@li.org>\n"
@@ -46,11 +46,15 @@ msgid "%d.%B %Y"
 msgstr ""
 
 #, python-format
+msgid "%s is not valid."
+msgstr ""
+
+#, python-format
 msgid "%s: %s at %s"
 msgstr ""
 
 msgid "Abort this Wizard."
-msgstr "Dizze gûcheler ôfbrekke"
+msgstr ""
 
 msgid "Activate VPS"
 msgstr ""
@@ -94,6 +98,9 @@ msgstr ""
 msgid "Amount of recordings left"
 msgstr ""
 
+msgid "Any Day filter refers to the day of the timespan start, even if the timespan crosses midnight."
+msgstr ""
+
 msgid "Any service/recording"
 msgstr ""
 
@@ -114,14 +121,16 @@ msgstr "Iepenje context menu"
 msgid "AutoTimer Editor"
 msgstr "AutoTimer bewurker"
 
+#, fuzzy
 msgid "AutoTimer FAQ"
-msgstr ""
+msgstr "AutoTimer Tafoegje"
 
 msgid "AutoTimer Filters"
 msgstr "AutoTimer Filters"
 
+#, fuzzy
 msgid "AutoTimer Help"
-msgstr ""
+msgstr "AutoTimer Tafoegje"
 
 msgid "AutoTimer Services"
 msgstr "AutoTimer Services"
@@ -215,8 +224,9 @@ msgstr ""
 msgid "Couldn't load config file!"
 msgstr ""
 
+#, fuzzy
 msgid "Create a new AutoTimer."
-msgstr "Nije AutoTimer oanmeitsje"
+msgstr "Nije AutoTimer tafoegje"
 
 msgid "Create a new timer using the classic editor"
 msgstr "Nei Tiidsbarren ynstelle mei de klassyke bewurker"
@@ -335,8 +345,6 @@ msgid ""
 "Filters are another powerful tool when matching events. An AutoTimer can be restricted to certain Weekdays or only match an event with a text inside eg it's Description.\n"
 "Press BLUE to add a new restriction and YELLOW to remove the selected one."
 msgstr ""
-"In Filter is in kreftig ark foar it fergelykjen fan tiidsbarren. In AutoTimer kin beperkt wurde ta bepaalde wiekdagen of allinne barren mei in bepaalde tekst bijv yn in beskriuwing.\n"
-"Druk BLAU foar in nije filter rigele en GIEL om in selektearre te ferwiderjen."
 
 msgid "First day to match events. No event that begins before this date will be matched."
 msgstr ""
@@ -444,9 +452,6 @@ msgid ""
 "An Event will only match this AutoTimer if it's on a specific and not denied Service (inside a Bouquet).\n"
 "Press BLUE to add a new restriction and YELLOW to remove the selected one."
 msgstr ""
-"It is mooglik om in AutoTimer te beperken ta bepaalde Services of Boeketten of ta wiigerje fan bepaalde items.\n"
-"In barren komt allinne oerien mei in AutoTimer wanneer it in bepaalde en net wiigere Service (yn in boeket).\n"
-"Druk BLAU om in nije foarwaarde en GIEL om in selektearre te ferwiderjen."
 
 msgid "Label Timers with season, episode and title, according to the SeriesPlugin settings."
 msgstr ""
@@ -515,7 +520,7 @@ msgid "No"
 msgstr "Nee"
 
 msgid "No, remove them."
-msgstr "Nee, gewoan ferwiderje"
+msgstr ""
 
 msgid "None"
 msgstr "Gjin"
@@ -673,6 +678,9 @@ msgstr ""
 msgid "Search type"
 msgstr ""
 
+msgid "See: "
+msgstr ""
+
 msgid "Select \"exact match\" to enforce \"Match title\" to match exactly, \"partial match\" if you only want to search for a part of the event title or \"description match\" if you only want to search for a part of the event description."
 msgstr ""
 
@@ -774,11 +782,10 @@ msgid ""
 "Thank you for using the wizard. Your new AutoTimer has been added to the List.\n"
 "Please press OK to continue."
 msgstr ""
-"Bedankt foar it brûken fan de gûcheler. De nije AutoTimer is tafoege oan de lyst.\n"
-"Druk OK om troch te gean."
 
+#, fuzzy
 msgid "The 'Overview'"
-msgstr ""
+msgstr "AutoTimer Oersjoch"
 
 msgid "The AutoTimer overview is the standard entry point to this plugin./n/nIf AutoTimers are configured you can choose them from a list to change them (OK button on your remote) or remove them (YELLOW button on your remote)./nNew Timers can be added by pressing the BLUE button and the control menu can be opened using the MENU button./n/nWhen leaving the plugin using the GREEN button it will search the EPG for matching events ONCE. To configure a regular search interval of the plugin to search for events open the control menu and enter the plugin setup."
 msgstr ""
@@ -787,11 +794,9 @@ msgid ""
 "The Timer will not be added to the List.\n"
 "Please press OK to close this Wizard."
 msgstr ""
-"It Tiidsbarren wurd net tafoegt oan de lyst.\n"
-"Druk OK om de gûcheler ôf te slúten."
 
 msgid "The Timespan of an AutoTimer is the first 'advanced' attribute. If a timespan is specified an event will only match this AutoTimer if it lies inside of this timespan."
-msgstr "It Tiidsspan fan in AutoTimer is de eerst afansjearre attributen. Ot in tiidsspan opjûn is, sil in tiidbarren allinne oerien komme ot it binnen dit tiidsspan falt."
+msgstr ""
 
 msgid "The autotimer file (/etc/enigma2/autotimer.xml) is corrupt. A new and empty config was created. A backup of the config can be found here (/etc/enigma2/autotimer.xml_old) "
 msgstr ""
@@ -803,6 +808,9 @@ msgid "The counter can automatically be reset to the limit at certain intervals.
 msgstr ""
 
 msgid "The editor to be used for new AutoTimers. This can either be the Wizard or the classic editor."
+msgstr ""
+
+msgid "The filter must be a valid regular expression.\n"
 msgstr ""
 
 msgid "The match attribute is mandatory."
@@ -925,9 +933,6 @@ msgid ""
 "\n"
 "This Wizard will help you to create a new AutoTimer by providing descriptions for common settings."
 msgstr ""
-"Wolkom\n"
-"\n"
-"Dizze gûcheler helpt jo by it meitsjen fan in AutoTimer troch in beskriuwing te jaan foar algemiene ynstellingen."
 
 msgid "What is this 'control menu' you keep talking about?"
 msgstr ""
@@ -960,7 +965,7 @@ msgid "Write the config file after every change which the user quits by saving."
 msgstr ""
 
 msgid "Yes"
-msgstr "Ja"
+msgstr ""
 
 msgid "Yes, and delete all timers generated by this autotimer"
 msgstr ""
@@ -969,7 +974,7 @@ msgid "Yes, but keep timers generated by this autotimer"
 msgstr ""
 
 msgid "Yes, keep them."
-msgstr "Ja, anhâlde."
+msgstr ""
 
 msgid "You can control for how many days in the future timers are added. Set this to 0 to disable this feature."
 msgstr ""
@@ -978,15 +983,11 @@ msgid ""
 "You can set the basic properties of an AutoTimer here.\n"
 "While 'Name' is just a human-readable name displayed in the Overview, 'Match in title' is what is looked for in the EPG."
 msgstr ""
-"Hjir kinne standaard ynstellingen foar in AutoTimer dien wurde.\n"
-"'Namme' is in namme dy't yn de lyst toant wurd, 'Match' is een titel wêr nei  sjoen wurd yn de EPG."
 
 msgid ""
 "You did not provide a valid 'Match in title' Attribute for your new AutoTimer.\n"
 "As this is a mandatory Attribute you cannot continue without doing so."
 msgstr ""
-"Der is gjin jildige opjefte dien foar 'Match in titel', foar de nije AutoTimer.\n"
-"Whylst dizze ferplicht is, kinne jo net fjierder sunder ien te jaan."
 
 #, python-format
 msgid ""
@@ -1004,16 +1005,11 @@ msgid ""
 "\n"
 "You can go back a step by pressing EXIT on your remote."
 msgstr ""
-"Der is mei sukses in nije AutoTimer ynstelt. Wolle jo it tafoegje oan de lyst ?\n"
-"\n"
-"Jo kinne ien stap wêrom troch de EXIT knop te brûken."
 
 msgid ""
 "Your 'Match in title' Attribute ends with a Whitespace.\n"
 "Please confirm if this was intentional, if not they will be removed."
 msgstr ""
-"Jo 'Match in titel' opjefte hat in spatie op it ein.\n"
-"Klopt dit of net ? Sa net, dan wurd dizze ferwidere."
 
 #, python-format
 msgid ""

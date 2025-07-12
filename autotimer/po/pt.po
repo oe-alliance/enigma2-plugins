@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Portuguese translation for AutoTimer enigma2 package\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2025-04-01 20:07+0200\n"
 "PO-Revision-Date: 2017-01-11 21:36+0000\n"
 "Last-Translator: nunigaia\n"
 "Language-Team: Bh Team\n"
@@ -52,11 +52,15 @@ msgid "%d.%B %Y"
 msgstr "%d.%B %Y"
 
 #, python-format
+msgid "%s is not valid."
+msgstr ""
+
+#, python-format
 msgid "%s: %s at %s"
 msgstr "%s: %s em %s"
 
 msgid "Abort this Wizard."
-msgstr "Cancelar este Assistente."
+msgstr ""
 
 msgid "Activate VPS"
 msgstr "Ativar Vps"
@@ -100,6 +104,9 @@ msgstr ""
 msgid "Amount of recordings left"
 msgstr "Espaço para gravações possível"
 
+msgid "Any Day filter refers to the day of the timespan start, even if the timespan crosses midnight."
+msgstr ""
+
 msgid "Any service/recording"
 msgstr "Qualquer serviço/gravação"
 
@@ -124,14 +131,14 @@ msgstr "Editor AutoTimer"
 
 #, fuzzy
 msgid "AutoTimer FAQ"
-msgstr "Filtros AutoTimer"
+msgstr "Adicionar AutoTimer"
 
 msgid "AutoTimer Filters"
 msgstr "Filtros AutoTimer"
 
 #, fuzzy
 msgid "AutoTimer Help"
-msgstr "Filtros AutoTimer"
+msgstr "Adicionar AutoTimer"
 
 msgid "AutoTimer Services"
 msgstr "Serviços AutoTimer"
@@ -227,8 +234,9 @@ msgstr "Controlar Totalmente a gravação pelo serviço"
 msgid "Couldn't load config file!"
 msgstr ""
 
+#, fuzzy
 msgid "Create a new AutoTimer."
-msgstr "Criar um novo AutoTimer."
+msgstr "Adicionar um novo AutoTimer"
 
 msgid "Create a new timer using the classic editor"
 msgstr "Criar um novo timer com o editor clássico"
@@ -348,8 +356,6 @@ msgid ""
 "Filters are another powerful tool when matching events. An AutoTimer can be restricted to certain Weekdays or only match an event with a text inside eg it's Description.\n"
 "Press BLUE to add a new restriction and YELLOW to remove the selected one."
 msgstr ""
-"Os filtros são outra ferramenta poderosa quando da correspondência de eventos. Um AutoTimer pode ser restrito a determinados dias da semana, ou apenas coincidir com um evento com um texto interno, por exemplo, a sua Descrição.\n"
-"Prima a tecla AZUL para adicionar uma nova restrição e AMARELA para remover o selecionada."
 
 msgid "First day to match events. No event that begins before this date will be matched."
 msgstr "Primeiro dia para corresponder eventos. Os eventos que começam antes desta data serão correspondidos."
@@ -466,9 +472,6 @@ msgid ""
 "An Event will only match this AutoTimer if it's on a specific and not denied Service (inside a Bouquet).\n"
 "Press BLUE to add a new restriction and YELLOW to remove the selected one."
 msgstr ""
-"É possível restringir um AutoTimer a determinados serviços ou bouquets ou para negar os específicos.\n"
-"Um evento corresponderá sómente para este AutoTimer, se for em um serviço específico e não negado (dentro de um Bouquet).\n"
-"Pressione a tecla AZUL para adicionar uma nova restrição e AMARELA para remover aquele selecionado."
 
 msgid "Label Timers with season, episode and title, according to the SeriesPlugin settings."
 msgstr ""
@@ -540,7 +543,7 @@ msgid "No"
 msgstr "Não"
 
 msgid "No, remove them."
-msgstr "Não, remova-os"
+msgstr ""
 
 msgid "None"
 msgstr "Nenhum"
@@ -699,6 +702,9 @@ msgstr "Procura rigorosa"
 msgid "Search type"
 msgstr "Tipo de procura"
 
+msgid "See: "
+msgstr ""
+
 msgid "Select \"exact match\" to enforce \"Match title\" to match exactly, \"partial match\" if you only want to search for a part of the event title or \"description match\" if you only want to search for a part of the event description."
 msgstr "Selecionar \"correspondência exata\" para forçar \"título correspondente\" a corresponder exatamente, \"parcialmente correspondente\" se pretende procurar por uma parte do evento ou \"descrição correspondente\" se pretende procurar por uma parte da descrição do evento"
 
@@ -801,8 +807,6 @@ msgid ""
 "Thank you for using the wizard. Your new AutoTimer has been added to the List.\n"
 "Please press OK to continue."
 msgstr ""
-"Obrigado por usar o assistente. O seu novo AutoTimer foi adicionado à Lista.\n"
-"Por favor pressione OK para continuar."
 
 #, fuzzy
 msgid "The 'Overview'"
@@ -815,11 +819,9 @@ msgid ""
 "The Timer will not be added to the List.\n"
 "Please press OK to close this Wizard."
 msgstr ""
-"O Timer não será adicionado à lista.\n"
-"Por favor, pressione OK para fechar este assistente."
 
 msgid "The Timespan of an AutoTimer is the first 'advanced' attribute. If a timespan is specified an event will only match this AutoTimer if it lies inside of this timespan."
-msgstr "O Timespan de um AutoTimer é o primeiro atributo \"avançado\". Se um período de tempo é especificado um evento só irá corresponder a esse AutoTimer se ele está dentro deste período de tempo."
+msgstr ""
 
 msgid "The autotimer file (/etc/enigma2/autotimer.xml) is corrupt. A new and empty config was created. A backup of the config can be found here (/etc/enigma2/autotimer.xml_old) "
 msgstr ""
@@ -832,6 +834,9 @@ msgstr "O contador pode ser automaticamente redefinido para o limite em determin
 
 msgid "The editor to be used for new AutoTimers. This can either be the Wizard or the classic editor."
 msgstr "O editor para ser usado para novos AutoTimers. Este pode ser o assistente ou o editor clássico."
+
+msgid "The filter must be a valid regular expression.\n"
+msgstr ""
 
 msgid "The match attribute is mandatory."
 msgstr "O atributo correspondente é obrigatório."
@@ -955,9 +960,6 @@ msgid ""
 "\n"
 "This Wizard will help you to create a new AutoTimer by providing descriptions for common settings."
 msgstr ""
-"Bem vindo.\n"
-"\n"
-"Este assistente irá ajudá-lo a criar um novo AutoTimer, fornecendo descrições de configurações comuns."
 
 msgid "What is this 'control menu' you keep talking about?"
 msgstr ""
@@ -992,7 +994,7 @@ msgid "Write the config file after every change which the user quits by saving."
 msgstr ""
 
 msgid "Yes"
-msgstr "Sim"
+msgstr ""
 
 msgid "Yes, and delete all timers generated by this autotimer"
 msgstr "Sim, e apagar todos os timeres gerados por este autotimer"
@@ -1001,7 +1003,7 @@ msgid "Yes, but keep timers generated by this autotimer"
 msgstr "Sim, mas manter os timers gerados por este autotimer"
 
 msgid "Yes, keep them."
-msgstr "Sim, mantenha-os."
+msgstr ""
 
 msgid "You can control for how many days in the future timers are added. Set this to 0 to disable this feature."
 msgstr "Pode controlar por quantos dias no futuro os Timers são adicionados. Ajustar para 0 para desativar esse recurso."
@@ -1010,15 +1012,11 @@ msgid ""
 "You can set the basic properties of an AutoTimer here.\n"
 "While 'Name' is just a human-readable name displayed in the Overview, 'Match in title' is what is looked for in the EPG."
 msgstr ""
-"Pode definir as propriedades básicas de um AutoTimer aqui.\n"
-"Enquanto 'Nome' é apenas um nome legível exibido na visão geral, \"correspondente em título\" é o que é procurado no EPG."
 
 msgid ""
 "You did not provide a valid 'Match in title' Attribute for your new AutoTimer.\n"
 "As this is a mandatory Attribute you cannot continue without doing so."
 msgstr ""
-"Não forneceu uma válida \"correnspondência em título\" Atributo para o seu novo AutoTimer.\n"
-"Como este é um atributo obrigatório não poderá continuar sem fazê-lo."
 
 #, python-format
 msgid ""
@@ -1036,16 +1034,11 @@ msgid ""
 "\n"
 "You can go back a step by pressing EXIT on your remote."
 msgstr ""
-"Configurou com sucesso um novo AutoTimer. Deseja adicioná-lo à lista?\n"
-"\n"
-"Pode ir um passo para trás com a tecla EXIT no telecomando."
 
 msgid ""
 "Your 'Match in title' Attribute ends with a Whitespace.\n"
 "Please confirm if this was intentional, if not they will be removed."
 msgstr ""
-"O seu Atributo 'correspondência em título' termina com um espaço em branco.\n"
-"Por favor, confirme se este foi intencional, se não eles serão removidos."
 
 #, python-format
 msgid ""

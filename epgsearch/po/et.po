@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 - epgsearch\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2024-07-04 12:56+0200\n"
 "PO-Revision-Date: 2016-10-05 14:50+0300\n"
 "Last-Translator: rimas\n"
 "Language-Team: \n"
@@ -133,6 +133,9 @@ msgstr "IMDB otsing valitud saatele"
 msgid "IMDb Search"
 msgstr "IMDb otsing"
 
+msgid "INFO"
+msgstr ""
+
 msgid "Import from AutoTimer"
 msgstr "Impordi autotaimerist"
 
@@ -159,6 +162,9 @@ msgstr "Tõusutundlik või tõusutundetu otsing"
 
 msgid "Length of history"
 msgstr "Ajaloo pikkus"
+
+msgid "MENU"
+msgstr ""
 
 msgid "Maximum number of entries in the search history. Set this to 0 to disable search history."
 msgstr "Otsiajaloo kirjete suurim arv. Määrates '0' otsiajalugu keelatakse"
@@ -297,6 +303,9 @@ msgstr "Eira"
 
 msgid "include"
 msgstr "Hõlma"
+
+msgid "partial description"
+msgstr ""
 
 msgid "partial match"
 msgstr "Osaline vaste"

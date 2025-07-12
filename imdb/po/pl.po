@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: imdb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-14 08:00+0100\n"
+"POT-Creation-Date: 2025-07-03 08:55+0200\n"
 "PO-Revision-Date: 2024-10-31 06:45+0000\n"
 "Last-Translator: pololoko111 <www.sat-4-all.com>\n"
 "Language-Team: JĘZYK\n"
@@ -11,6 +11,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.5\n"
+
+#, python-format
+msgid "%d out of %d found this helpful."
+msgstr ""
 
 msgid "Ambiguous results"
 msgstr "Niejasne wyniki"
@@ -22,6 +26,10 @@ msgid "Details"
 msgstr "Szczegóły"
 
 msgid "Downloading Movie Poster..."
+msgstr "Pobieranie plakatu filmu..."
+
+#, fuzzy
+msgid "Downloading reviews..."
 msgstr "Pobieranie plakatu filmu..."
 
 msgid "E"
@@ -72,6 +80,14 @@ msgstr "Wtyczka IMDb"
 msgid "IMDb Re-Download completed"
 msgstr "Ponowne pobieranie IMDb zakończone"
 
+#, fuzzy
+msgid "IMDb Reviews failed"
+msgstr "Zapytanie IMDb nie powiodło się!"
+
+#, fuzzy
+msgid "IMDb Reviews parsed"
+msgstr "Szczegóły IMDb przeanalizowane"
+
 msgid "IMDb Setup"
 msgstr "Konfiguracja IMDb"
 
@@ -121,6 +137,9 @@ msgstr "Strona w dół"
 
 msgid "Page up"
 msgstr "Strona w górę"
+
+msgid "Parsing reviews..."
+msgstr ""
 
 msgid "Play Trailer"
 msgstr "Odtwórz zwiastun"
@@ -175,10 +194,14 @@ msgstr "Pokaż odcinki w menu tytułu"
 msgid "Show extra information in title menu"
 msgstr "Pokaż dodatkowe informacje w menu tytułu"
 
+msgid "Show first page of user reviews"
+msgstr ""
+
 msgid "Show in movie list"
 msgstr "Pokaż na liście filmów"
 
-msgid "Show list of matched movies an series"
+#, fuzzy
+msgid "Show list of matched movies and series"
 msgstr "Pokaż listę dopasowanych filmów i seriali"
 
 msgid "Show movie and series basic details"
@@ -199,6 +222,15 @@ msgstr "Pokaż konfigurację w przeglądarce wtyczek"
 msgid "Show the type of the title and top cast. Takes effect after the next search of IMDb for a show name."
 msgstr "Pokaż rodzaj tytułu i główną obsadę. Wejdzie w życie po następnym wyszukaniu nazwy programu w IMDb."
 
+msgid "Spoiler"
+msgstr ""
+
+msgid "SubsSupport import failed"
+msgstr ""
+
+msgid "SubsSupport search"
+msgstr ""
+
 msgid "Synopsis"
 msgstr "Streszczenie"
 
@@ -210,6 +242,9 @@ msgstr "Ta opcja pozwala dodać słowa/frazy, które IMDb ma ignorować podczas 
 
 msgid "Title Menu"
 msgstr "Menu tytułu"
+
+msgid "User reviews"
+msgstr ""
 
 msgid "Words / phrases to ignore "
 msgstr "Słowa / frazy do ignorowania "

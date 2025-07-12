@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-14 08:00+0100\n"
+"POT-Creation-Date: 2025-05-11 11:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1104,9 +1104,6 @@ msgid "Infos for: %s"
 msgstr ""
 
 msgid "Initial location in new timers"
-msgstr ""
-
-msgid "Input"
 msgstr ""
 
 msgid "Instant record location"
@@ -2392,9 +2389,6 @@ msgid "Video-button"
 msgstr ""
 
 msgid "Virtual"
-msgstr ""
-
-msgid "Virtual KeyBoard"
 msgstr ""
 
 msgid "Virtual and Numerical"

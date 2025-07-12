@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simple rss Persian Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-30 17:35+0200\n"
+"POT-Creation-Date: 2025-04-01 20:07+0200\n"
 "PO-Revision-Date: 2024-09-30 17:43+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
@@ -17,168 +17,108 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.5\n"
 
-#: ..\plugin.py:72
-msgid "Notification"
-msgstr "اخطار"
-
-#: ..\plugin.py:72
-msgid "Preview"
-msgstr "پیش نمایش"
-
-#: ..\plugin.py:72
-msgid "Ticker"
-msgstr "تیک تیک"
-
-#: ..\plugin.py:72
-msgid "none"
-msgstr "هیچ چی"
-
-#: ..\plugin.py:214 ..\plugin.py:731 ..\plugin.py:737 ..\plugin.py:782
-#: ..\plugin.py:878 ..\plugin.py:999 ..\plugin.py:1013 ..\plugin.py:1069
-msgid "New Items"
-msgstr "گزینه جدید"
-
-#: ..\plugin.py:229
-msgid "Autoupdate"
-msgstr "بروزرسانی خودکار"
-
-#: ..\plugin.py:229
-msgid "Feed URI"
-msgstr "خوراندن نشانی اینترنتی"
-
-#: ..\plugin.py:231 ..\plugin.py:284
-msgid "Cancel"
-msgstr "لغور کردن"
-
-#: ..\plugin.py:232
-msgid "OK"
-msgstr "مورد تایید است"
-
-#: ..\plugin.py:237 ..\plugin.py:283 ..\plugin.py:304
-msgid "Simple RSS Reader Setup"
-msgstr "راه اندازی یک آر اس اس ساده"
-
-#: ..\plugin.py:285
-msgid "Save"
-msgstr "ذخیره"
-
-#: ..\plugin.py:286
-msgid "New"
-msgstr "جدید"
-
-#: ..\plugin.py:287
-msgid "Delete"
-msgstr "حذف کردن"
-
-#: ..\plugin.py:308
-msgid "Feed"
-msgstr "خوراک"
-
-#: ..\plugin.py:309
-msgid "Start automatically with Enigma2"
-msgstr "راه اندازی خودکار همزمان با انیگما 2"
-
-#: ..\plugin.py:310
-msgid "Keep running in background"
-msgstr "در حال اجرا پس زمینه"
-
-#: ..\plugin.py:313
-msgid "Update Interval [min]"
-msgstr "فاصله بهروزرسانی [دقیقه]"
-
-#: ..\plugin.py:314
-msgid "Show new Messages as"
-msgstr "نمایش پیام جدید به عنوان"
-
-#: ..\plugin.py:316
-msgid " *Vertical position of ticker [%] (0% = top / 100% = bottom)"
-msgstr "*موقعیت عمودی نشانگر [%] (0% = بالا / 100% = پایین)"
-
-#: ..\plugin.py:317
-msgid " *Frequency of scrollsteps [ms] (low values slow down the box)"
-msgstr " * Frequency of scrollsteps [ms] (مقادیر پایین جعبه را کند می کند)"
-
-#: ..\plugin.py:318
-msgid " *Scrollspeed [pixels per step] (high values lead to jerking)"
-msgstr ""
-" * Scrollspeed [پیکسل در هر مرحله] (مقادیر بالا منجر به حرکات تند و سریع)"
-
-#: ..\plugin.py:320
 msgid " *=please perform a GUI-restart for these changes to take effect"
 msgstr " *=لطفا برای اعمال این تغییرات یک بازراه اندازی مجدد GUI انجام دهید"
 
-#: ..\plugin.py:322
-msgid ""
-"Note: If box becomes extremely slow, please reduce the quantity of feeds."
-msgstr "توجه: اگر جعبه بسیار اهسته می شود، لطفا مقدار خوراک را کاهش دهید."
+msgid " *Frequency of scrollsteps [ms] (low values slow down the box)"
+msgstr " * Frequency of scrollsteps [ms] (مقادیر پایین جعبه را کند می کند)"
 
-#: ..\plugin.py:341
-msgid ""
-"Really delete this entry?\n"
-"It cannot be recovered!"
-msgstr "واقعا این ورودی حذف می شود؟ نمی توان ان را بازیابی کرد!"
+msgid " *Scrollspeed [pixels per step] (high values lead to jerking)"
+msgstr " * Scrollspeed [پیکسل در هر مرحله] (مقادیر بالا منجر به حرکات تند و سریع)"
 
-#: ..\plugin.py:358
+msgid " *Vertical position of ticker [%] (0% = top / 100% = bottom)"
+msgstr "*موقعیت عمودی نشانگر [%] (0% = بالا / 100% = پایین)"
+
+msgid "A simple to use RSS reader"
+msgstr "ساده برای استفاده از RSS خوان"
+
+msgid "Autoupdate"
+msgstr "بروزرسانی خودکار"
+
+msgid "Cancel"
+msgstr "لغور کردن"
+
+msgid "Close"
+msgstr "بستن"
+
+msgid "Delete"
+msgstr "حذف کردن"
+
+msgid "Enclosures"
+msgstr "ضمائم"
+
+msgid "Entries"
+msgstr "نوشته ها"
+
+#, fuzzy, python-format
+msgid "Entry %s/%s"
+msgstr "ورودی ٪s/٪s"
+
+#, fuzzy, python-format
+msgid "Entry %s/%s - %s"
+msgstr "ورودی ٪s/٪s - ٪s"
+
+msgid "Error when reading the feed. Does your address really refer to an RSS feed?"
+msgstr "خطا هنگام خواندن فید. آیا آدرس شما واقعاً به فید RSS اشاره دارد؟"
+
+msgid "Error while parsing Feed, this usually means there is something wrong with it."
+msgstr "اشکال تجزیه و تحلیل خبر ، که معمولا به معنی این است که خطایی همراه آن اس."
+
+msgid "Feed"
+msgstr "خوراک"
+
+#, fuzzy, python-format
+msgid "Feed %s/%s"
+msgstr "در حال تغذیه ٪s/٪s"
+
+#, python-format
+msgid "Feed 1/%s"
+msgstr "Feed 1/%s"
+
+msgid "Feed URI"
+msgstr "خوراندن نشانی اینترنتی"
+
+msgid "Feed is empty."
+msgstr "خوراک خالی است."
+
+#, fuzzy, python-format
+msgid "File '%s' was not found, import was aborted!"
+msgstr "پرونده ٪s» پیدا نشد، وارد کردن ساقط شد!"
+
 msgid "Import feeds from:"
 msgstr "واردات خوراندنها از:"
 
-#: ..\plugin.py:392
+#, fuzzy, python-format
 msgid ""
 "Importing '%s'\n"
 "%s feeds were imported successfully\n"
 "%s feeds were double and not imported"
-msgstr ""
-"در حال وارد کردن ٪s» ٪s فیدها با موفقیت وارد شدند ٪s خوراندنها دو برابر شده "
-"و وارد نشده است"
+msgstr "در حال وارد کردن ٪s» ٪s فیدها با موفقیت وارد شدند ٪s خوراندنها دو برابر شده و وارد نشده است"
 
-#: ..\plugin.py:396
-msgid "File '%s' was not found, import was aborted!"
-msgstr "پرونده ٪s» پیدا نشد، وارد کردن ساقط شد!"
+msgid "Keep running in background"
+msgstr "در حال اجرا پس زمینه"
 
-#: ..\plugin.py:429 ..\plugin.py:479
-msgid ""
-"Error while parsing Feed, this usually means there is something wrong with "
-"it."
-msgstr ""
-"اشکال تجزیه و تحلیل خبر ، که معمولا به معنی این است که خطایی همراه آن اس."
+msgid "New"
+msgstr "جدید"
 
-#: ..\plugin.py:488
-msgid ""
-"Update is being done in Background.\n"
-"Contents will automatically be updated when it's done."
-msgstr ""
-"Update در Background در حال انجام است. محتویات به طور خودکار به روز می شود "
-"زمانی که ان را انجام می شود."
+msgid "New Items"
+msgstr "گزینه جدید"
 
-#: ..\plugin.py:539
-msgid "Simple RSS Reader EntryView"
-msgstr "Simple RSS Reader EntryView"
+msgid "New Items since last Auto-Update"
+msgstr "گزینه جدید از زمان آخرین بروزرسانی"
 
-#: ..\plugin.py:540 ..\plugin.py:568
-msgid "Entry %s/%s"
-msgstr "ورودی ٪s/٪s"
-
-#: ..\plugin.py:543 ..\plugin.py:545
-msgid "Enclosures"
-msgstr "ضمائم"
-
-#: ..\plugin.py:567 ..\plugin.py:749
-msgid "Simple RSS Reader: %s"
-msgstr "خواننده RSS ساده: ٪s"
-
-#: ..\plugin.py:570 ..\plugin.py:584
 msgid "No such Item."
 msgstr "نبود گزینه های زیا."
 
-#: ..\plugin.py:578
-msgid "{no attachments found}"
-msgstr "{پیوستی یافت نشد}"
+msgid "Note: If box becomes extremely slow, please reduce the quantity of feeds."
+msgstr "توجه: اگر جعبه بسیار اهسته می شود، لطفا مقدار خوراک را کاهش دهید."
 
-#: ..\plugin.py:609
-msgid "Sorry, this attachment cannot be opened: unsupported MIME type"
-msgstr "متأسفیم، این پیوست باز نمی شود: نوع MIME پشتیبانی نمی شود"
+msgid "Notification"
+msgstr "اخطار"
 
-#: ..\plugin.py:620
+msgid "OK"
+msgstr "مورد تایید است"
+
 msgid ""
 "Plugin 'PicturePlayer' not found!\n"
 "\n"
@@ -188,85 +128,92 @@ msgstr ""
 "\n"
 "برای مشاهده تصاویر، لطفا آن را از فید افزونه نصب کنید"
 
-#: ..\plugin.py:698
-msgid "Simple RSS Reader Feedview"
-msgstr "Simple RSS Reader Feedview"
+msgid "Preview"
+msgstr "پیش نمایش"
 
-#: ..\plugin.py:702
-msgid "change feed"
-msgstr "تغییر خوراندن"
+msgid ""
+"Really delete this entry?\n"
+"It cannot be recovered!"
+msgstr "واقعا این ورودی حذف می شود؟ نمی توان ان را بازیابی کرد!"
 
-#: ..\plugin.py:819
-msgid "Entry %s/%s - %s"
-msgstr "ورودی ٪s/٪s - ٪s"
+#, fuzzy, python-format
+msgid "Received %d new news item(s)."
+msgstr "٪d مورد خبری جدید دریافت شد."
 
-#: ..\plugin.py:822 ..\plugin.py:824
-msgid "Feed is empty."
-msgstr "خوراک خالی است."
+msgid "Save"
+msgstr "ذخیره"
 
-#: ..\plugin.py:931
-msgid "Simple RSS Reader Overview"
-msgstr "Simple RSS Reader Overview"
-
-#: ..\plugin.py:933 ..\plugin.py:982
-msgid "Entries"
-msgstr "نوشته ها"
-
-#: ..\plugin.py:934
-msgid "Feed 1/%s"
-msgstr "Feed 1/%s"
-
-#: ..\plugin.py:956
-msgid "Simple RSS Reader"
-msgstr "یک آر اس اس ساده"
-
-#: ..\plugin.py:981
-msgid "Feed %s/%s"
-msgstr "در حال تغذیه ٪s/٪s"
-
-#: ..\plugin.py:1020
-msgid "Close"
-msgstr "بستن"
-
-#: ..\plugin.py:1020
 msgid "Settings"
 msgstr "تنظیمات"
 
-#: ..\plugin.py:1020
-msgid "Update Feed"
-msgstr "بروزرسانی اخبار سایت"
+msgid "Show new Messages as"
+msgstr "نمایش پیام جدید به عنوان"
 
-#: ..\plugin.py:1021
-msgid "What to do?"
-msgstr "چه کاری انجام دهید؟"
+msgid "Simple RSS Reader"
+msgstr "یک آر اس اس ساده"
 
-#: ..\plugin.py:1069
-msgid "New Items since last Auto-Update"
-msgstr "گزینه جدید از زمان آخرین بروزرسانی"
+msgid "Simple RSS Reader EntryView"
+msgstr "Simple RSS Reader EntryView"
 
-#: ..\plugin.py:1098
+msgid "Simple RSS Reader Feedview"
+msgstr "Simple RSS Reader Feedview"
+
+msgid "Simple RSS Reader Overview"
+msgstr "Simple RSS Reader Overview"
+
+msgid "Simple RSS Reader Setup"
+msgstr "راه اندازی یک آر اس اس ساده"
+
+#, fuzzy, python-format
+msgid "Simple RSS Reader: %s"
+msgstr "خواننده RSS ساده: ٪s"
+
+msgid "Sorry, this attachment cannot be opened: unsupported MIME type"
+msgstr "متأسفیم، این پیوست باز نمی شود: نوع MIME پشتیبانی نمی شود"
+
+#, python-format
 msgid ""
 "Sorry, this type of feed is unsupported:\n"
 "%s"
 msgstr "با عرض پوزش، این نوع خوراک پشتیبانی نمی شود: % s"
 
-#: ..\plugin.py:1160
-msgid "Received %d new news item(s)."
-msgstr "٪d مورد خبری جدید دریافت شد."
+msgid "Start automatically with Enigma2"
+msgstr "راه اندازی خودکار همزمان با انیگما 2"
 
-#: ..\plugin.py:1240
+msgid "Ticker"
+msgstr "تیک تیک"
+
+msgid "Update Feed"
+msgstr "بروزرسانی اخبار سایت"
+
+msgid "Update Interval [min]"
+msgstr "فاصله بهروزرسانی [دقیقه]"
+
 msgid ""
-"Error when reading the feed. Does your address really refer to an RSS feed?"
-msgstr "خطا هنگام خواندن فید. آیا آدرس شما واقعاً به فید RSS اشاره دارد؟"
+"Update is being done in Background.\n"
+"Contents will automatically be updated when it's done."
+msgstr "Update در Background در حال انجام است. محتویات به طور خودکار به روز می شود زمانی که ان را انجام می شود."
 
-#: ..\plugin.py:1367
+msgid "View RSS..."
+msgstr "نمایش آر اس اس."
+
+msgid "What to do?"
+msgstr "چه کاری انجام دهید؟"
+
+#, python-format
+msgid ""
+"Xml-file '%s' was corrupt:\n"
+"%s"
+msgstr ""
+
+msgid "change feed"
+msgstr "تغییر خوراندن"
+
+msgid "none"
+msgstr "هیچ چی"
+
 msgid "trying to download the feed..."
 msgstr "در تلاش برای دانلود خوراک..."
 
-#: ..\plugin.py:1436
-msgid "A simple to use RSS reader"
-msgstr "ساده برای استفاده از RSS خوان"
-
-#: ..\plugin.py:1438
-msgid "View RSS..."
-msgstr "نمایش آر اس اس."
+msgid "{no attachments found}"
+msgstr "{پیوستی یافت نشد}"

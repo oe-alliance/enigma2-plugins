@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EPGSearch enigma2 plugin portuguese trasnlation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2024-07-04 12:56+0200\n"
 "PO-Revision-Date: 2020-04-22 14:21+0100\n"
 "Last-Translator: BH Team <nunigaia@gmail.com>\n"
 "Language-Team: BH team\n"
@@ -138,6 +138,9 @@ msgstr "IMDB busca evento em destaque"
 msgid "IMDb Search"
 msgstr "IMDb Procura"
 
+msgid "INFO"
+msgstr ""
+
 msgid "Import from AutoTimer"
 msgstr "Importar de AutoTimer"
 
@@ -164,6 +167,9 @@ msgstr "A busca é sensível ao caso ou insensível ao caso?"
 
 msgid "Length of history"
 msgstr "Duração da história"
+
+msgid "MENU"
+msgstr ""
 
 msgid "Maximum number of entries in the search history. Set this to 0 to disable search history."
 msgstr "Número máximo de entradas no histórico de pesquisa. Defina isso como 0 para desativar o histórico de pesquisa."
@@ -302,6 +308,9 @@ msgstr "excluir"
 
 msgid "include"
 msgstr "incluir"
+
+msgid "partial description"
+msgstr ""
 
 msgid "partial match"
 msgstr "correspondência parcial"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2025-04-01 18:45+0200\n"
 "PO-Revision-Date: 2023-03-30 11:41+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: Andy Blackburn/Rob van der Does\n"
@@ -30,9 +30,6 @@ msgstr "1 week"
 
 msgid "3 days"
 msgstr "3 dagen"
-
-msgid "Accept changes"
-msgstr "Accepteer veranderingen"
 
 msgid "Add"
 msgstr "Voeg toe"
@@ -72,22 +69,9 @@ msgstr "CSV import geslaagd!"
 msgid "Can't find CSV file %s!"
 msgstr "Kan CSV bestand %s niet vinden!"
 
-#, python-format
-msgid "Can't import CSV data from file %s."
-msgstr "Kan CSV data van bestand %s niet importeren."
-
-#, python-format
-msgid "Can't write CSV file %s."
+#, fuzzy, python-format
+msgid "Can't write CSV file '%s'. Error: %s"
 msgstr "Kan CSV bestand %s niet schrijven."
-
-msgid "Cancel"
-msgstr "Annuleer"
-
-msgid "Change path"
-msgstr "Verander pad"
-
-msgid "Choose the filename:"
-msgstr "Kies de bestandsnaam:"
 
 msgid "Date format:"
 msgstr "Datum formaat:"
@@ -108,6 +92,10 @@ msgstr "Wilt u echt het bestand voor %s verwijderen?"
 msgid "Edit"
 msgstr "Bewerk"
 
+#, fuzzy
+msgid "Edit Birthday Settings"
+msgstr "Bewerk verjaardagen"
+
 msgid "Edit birthday"
 msgstr "Bewerk verjaardag"
 
@@ -116,9 +104,6 @@ msgstr "Bewerk verjaardagen"
 
 msgid "Edit the selected entry"
 msgstr "Bewerk de geselecteerde waarde"
-
-msgid "Enter the name of the person:"
-msgstr "Geef de naam van de persoon:"
 
 #, python-format
 msgid ""
@@ -155,9 +140,6 @@ msgstr "Helpt te herinneren aan verjaardagen"
 msgid "Import CSV file"
 msgstr "Importeer CSV bestand"
 
-msgid "Invalid Location"
-msgstr "Ongeldige lokatie"
-
 msgid "Invalid date!"
 msgstr "Ongeldige datum!"
 
@@ -179,9 +161,6 @@ msgstr "Volgende verjaardag"
 msgid "Notification time:"
 msgstr "Waarschuwingstijd:"
 
-msgid "OK"
-msgstr "OK"
-
 msgid "Open the extras menu"
 msgstr "Open het extras menu"
 
@@ -197,8 +176,9 @@ msgstr "Verwijder"
 msgid "Remove the selected entry"
 msgstr "Verwijder de geselecteerde waarde"
 
-msgid "Save"
-msgstr "Sla op"
+#, fuzzy
+msgid "Select a path for the birthday file"
+msgstr "Pad naar verjaardagen bestand:"
 
 msgid "Show plugin in extensions menu:"
 msgstr "Toon plugin in extensies:"
@@ -221,9 +201,6 @@ msgstr ""
 "Vandaag is %s's verjaardag!\n"
 "\n"
 "Hij/Zij is geboren op %s en is nu %s jaar oud."
-
-msgid "VirtualKeyBoard"
-msgstr "VirtualKeyBoard"
 
 msgid "What do you want to do?"
 msgstr "Wat wilt u doen?"

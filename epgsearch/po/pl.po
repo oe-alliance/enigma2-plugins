@@ -2,6 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 EPGSearch Plugin\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-04 12:56+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: HIUMAN\n"
 "Language-Team: HIUMAN\n"
@@ -13,15 +14,20 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Generator: Poedit 2.2\n"
-"POT-Creation-Date: \n"
 "X-Poedit-SearchPath-0: ../src\n"
 
 msgid "%e/%m, %H:%M"
 msgstr "%e/%m, %H:%M"
 
+#. TRANSLATORS: EPGSearch title in EventInfo dialog (does not require further user interaction)
+#. TRANSLATORS: %s inserts a non-printing character and is only used to control the sort order of these WHERE_EVENTINFO entries in Screens.ButtonSetup. Please leave it at the start of the translation string.
+#, python-format
 msgid "%ssearch EPG"
 msgstr "%swyszukaj EPG"
 
+#. TRANSLATORS: EPGSearch search from search history in EventInfo dialog (requires the user to select a history item to search for)
+#. TRANSLATORS: %s inserts a non-printing character and is only used to control the sort order of these WHERE_EVENTINFO entries in Screens.ButtonSetup. Please leave it at the start of the translation string.
+#, python-format
 msgid "%ssearch EPG from history..."
 msgstr "%swyszukaj EPG z historii..."
 
@@ -61,13 +67,10 @@ msgstr "Wybierz typ kodowania wyszukiwania, przydatne w przypadku języków obcy
 msgid "Close dialog"
 msgstr "Zamknij okno dialogowe"
 
-msgid ""
-"Control where to search in the EPG. When 'all bouquets' is set, all bouquets are searched, "
-"even if 'Enable multiple bouquets' is disabled."
-msgstr ""
-"Kontroluj, gdzie szukać w EPG. Gdy ustawione jest 'wszystkie bukiety', wszystkie bukietysą "
-"przeszukiwane, nawet jeśli 'Włącz wiele bukietów' jest wyłączone."
+msgid "Control where to search in the EPG. When 'all bouquets' is set, all bouquets are searched, even if 'Enable multiple bouquets' is disabled."
+msgstr "Kontroluj, gdzie szukać w EPG. Gdy ustawione jest 'wszystkie bukiety', wszystkie bukietysą przeszukiwane, nawet jeśli 'Włącz wiele bukietów' jest wyłączone."
 
+#, python-format
 msgid "Could not read AutoTimer timer list: %s"
 msgstr "Nie można odczytać listy timerów AutoTimer: %s"
 
@@ -76,6 +79,19 @@ msgstr "Aktualny bukiet"
 
 msgid "Current service"
 msgstr "Aktualna usługa"
+
+msgid "DVB-C"
+msgstr ""
+
+#, fuzzy
+msgid "DVB-C Cable services"
+msgstr "wszystkie usługi"
+
+msgid "DVB-T"
+msgstr ""
+
+msgid "DVB-T Terrestrial services"
+msgstr ""
 
 msgid "Default scope when asked"
 msgstr "Domyślny zakres, gdy zostaniesz o to poproszony"
@@ -93,8 +109,7 @@ msgid "EPGSearch Setup"
 msgstr "Konfiguracja wyszukiwania EPG"
 
 msgid "Enable this to allow access to EPG Search from within the plugin browser."
-msgstr ""
-"Włącz tę opcję, aby umożliwić dostęp do wyszukiwania EPG z poziomu przeglądarki wtyczek."
+msgstr "Włącz tę opcję, aby umożliwić dostęp do wyszukiwania EPG z poziomu przeglądarki wtyczek."
 
 msgid "Enter new search"
 msgstr "Wprowadź nowe wyszukiwanie"
@@ -102,14 +117,23 @@ msgstr "Wprowadź nowe wyszukiwanie"
 msgid "Enter text to search for"
 msgstr "Wprowadź tekst do wyszukania"
 
+msgid "Exclude results from"
+msgstr ""
+
 msgid "Exit EPG Search"
 msgstr "Zakończ wyszukiwanie EPG"
+
+msgid "Filter results by source"
+msgstr ""
 
 msgid "IMDB search for highlighted event"
 msgstr "Wyszukaj IMDB dla podświetlonego zdarzenia"
 
 msgid "IMDb Search"
 msgstr "Wyszukiwanie IMDb"
+
+msgid "INFO"
+msgstr ""
 
 msgid "Import from AutoTimer"
 msgstr "Importuj z AutoTimera"
@@ -120,16 +144,29 @@ msgstr "Importuj z EPG"
 msgid "Import from Timer"
 msgstr "Importuj z timera"
 
+msgid "Include or exclude results depending on their source (e.g. by satellite)"
+msgstr ""
+
+msgid "Include results from"
+msgstr ""
+
+msgid "Include/exclude search results from this type of source"
+msgstr ""
+
+msgid "Include/exclude sources"
+msgstr ""
+
 msgid "Is the search case-sensitive or case-insensitive?"
 msgstr "Czy w wyszukiwaniu rozróżniana jest wielkość liter?"
 
 msgid "Length of history"
 msgstr "Długość historii"
 
-msgid ""
-"Maximum number of entries in the search history. Set this to 0 to disable search history."
+msgid "MENU"
 msgstr ""
-"Maksymalna liczba wpisów w historii wyszukiwania. Ustaw 0, aby wyłączyćhistorie wyszukiwania."
+
+msgid "Maximum number of entries in the search history. Set this to 0 to disable search history."
+msgstr "Maksymalna liczba wpisów w historii wyszukiwania. Ustaw 0, aby wyłączyćhistorie wyszukiwania."
 
 msgid "Move down"
 msgstr "Przesuń w dół"
@@ -148,6 +185,12 @@ msgstr "Nowe wyszukiwanie"
 
 msgid "No history"
 msgstr "Brak historii"
+
+msgid "Number of filters for inclusion/exclusion of results"
+msgstr ""
+
+msgid "Number of inclusions/exclusions"
+msgstr ""
 
 msgid "OK"
 msgstr "OK"
@@ -218,6 +261,12 @@ msgstr "Pokaż pozycje orbitalne satelitów w wynikach wyszukiwania."
 msgid "Show search history"
 msgstr "Pokaż historię wyszukiwania"
 
+msgid "Stream"
+msgstr ""
+
+msgid "Use source restrictions below to only include results from the sources, or exclude them."
+msgstr ""
+
 msgid "Zap to channel"
 msgstr "Przejdź do kanału"
 
@@ -242,15 +291,29 @@ msgstr "aktualny bukiet"
 msgid "current service"
 msgstr "bieżąca usługa"
 
+msgid "disabled"
+msgstr ""
+
 msgid "exact match"
 msgstr "dokładne dopasowanie"
+
+msgid "exclude"
+msgstr ""
+
+msgid "include"
+msgstr ""
+
+msgid "partial description"
+msgstr ""
 
 msgid "partial match"
 msgstr "dopasowanie częściowe"
 
+#. TRANSLATORS: EPGSearch title in MovieList (does not require further user interaction)
 msgid "search EPG"
 msgstr "szukaj EPG"
 
+#. TRANSLATORS: EPGSearch search from search history in MovieList (requires the user to select a history item to search for)
 msgid "search EPG from history..."
 msgstr "wyszukaj EPG w historii..."
 

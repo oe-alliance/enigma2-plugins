@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2025-04-01 20:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -224,13 +224,7 @@ msgstr ""
 msgid "PushService Exception in writeXML: "
 msgstr ""
 
-msgid "PushService Find module exception: "
-msgstr ""
-
 msgid "PushService Instantiate exception: "
-msgstr ""
-
-msgid "PushService Load exception: "
 msgstr ""
 
 #, python-format
@@ -244,9 +238,6 @@ msgid "PushService No configuration file present"
 msgstr ""
 
 msgid "PushService No module available: "
-msgstr ""
-
-msgid "PushService No module found: "
 msgstr ""
 
 #, python-format
