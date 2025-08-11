@@ -59,6 +59,8 @@ error = logger.error
 exception = logger.exception
 
 USERAGENT = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
+
+
 def getPage(url, agent=USERAGENT, method="GET", postdata=None, headers={}):  # pylint disable=invalid-name,dangerous-default-value
 	# debug(repr(method))
 	headers["user-agent"] = agent
