@@ -34,7 +34,7 @@ import os
 import re
 import logging
 from logging import NOTSET
-import requests # @UnresolvedImport # pylint: disable=unused-import,import-error
+import requests  # @UnresolvedImport # pylint: disable=unused-import,import-error
 
 from Components.config import config  # @UnresolvedImport
 from Components.Language import language
@@ -59,7 +59,7 @@ error = logger.error
 exception = logger.exception
 
 USERAGENT = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
-def getPage(url, agent=USERAGENT, method="GET", postdata=None, headers={}): # pylint disable=invalid-name,dangerous-default-value
+def getPage(url, agent=USERAGENT, method="GET", postdata=None, headers={}):  # pylint disable=invalid-name,dangerous-default-value
 	# debug(repr(method))
 	headers["user-agent"] = agent
 	# debug("params: " + repr(postdata))
@@ -78,7 +78,7 @@ def _(txt):
 # scramble text
 
 
-def __(text, front=True): # pylint disable=unused-argument
+def __(text, front=True):  # pylint disable=unused-argument
 	#===========================================================================
 	# if len(text) > 5:
 	#	if front:
@@ -99,7 +99,7 @@ def __(text, front=True): # pylint disable=unused-argument
 	return out
 
 
-def normalizePhoneNumber(intNo): # pylint disable=invalid-name
+def normalizePhoneNumber(intNo):  # pylint disable=invalid-name
 
 	found = re.match(r'^\+' + config.plugins.FritzCall.country.value.replace('00', '') + '(.*)', intNo)
 	if found:

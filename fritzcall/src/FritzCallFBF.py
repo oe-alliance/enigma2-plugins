@@ -104,7 +104,7 @@ def resolveNumber(number, default=None, phonebook=None, debug=logging.debug):
 			if name:
 				number = number + ' ' + name
 	elif number == "":
-		number = _("UNKNOWN") # pylint: disable=used-before-assignment
+		number = _("UNKNOWN")  # pylint: disable=used-before-assignment
 	# if len(number) > 20: number = number[:20]
 	return number
 

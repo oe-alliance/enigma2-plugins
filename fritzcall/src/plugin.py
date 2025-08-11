@@ -139,7 +139,7 @@ def scale(y2, y1, x2, x1, x):
 my_global_session = None
 
 config.plugins.FritzCall = ConfigSubsection()
-config.plugins.FritzCall.fwVersion = ConfigSelection(choices=[(None, _("not configured")), ("old", _("before 05.27")), ("05.27", "05.27, 05.28"), ("05.50", _("05.29 until below 6.35")), ("06.35", _("06.35 and newer"))], default=None) # pylint: disable=used-before-assignment
+config.plugins.FritzCall.fwVersion = ConfigSelection(choices=[(None, _("not configured")), ("old", _("before 05.27")), ("05.27", "05.27, 05.28"), ("05.50", _("05.29 until below 6.35")), ("06.35", _("06.35 and newer"))], default=None)  # pylint: disable=used-before-assignment
 # config.plugins.FritzCall.fwVersion = ConfigSelection(choices = [(None, _("not configured")), ("old", _("before 05.27")), ("05.27", "05.27, 05.28"), ("05.50", _("05.29 until below 6.35")), ("06.35", _("06.35 and newer")), ("upnp", "Experimental")], default = None)
 # config.plugins.FritzCall.fwVersion = ConfigSelection(choices=[(None, _("not configured")), ("old", _("before 05.27")), ("05.27", "05.27, 05.28"), ("05.50", _("05.29 and newer"))], default=None)
 config.plugins.FritzCall.debug = ConfigSelection(choices=[
