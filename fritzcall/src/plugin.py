@@ -2,24 +2,33 @@
 '''
 Update rev
 $Author: michael $
-$Revision: 1639 $
-$Date: 2023-01-11 12:21:40 +0100 (Wed, 11 Jan 2023) $
-$Id: plugin.py 1639 2023-01-11 11:21:40Z michael $
+$Revision: 1657 $
+$Date: 2025-08-10 15:43:32 +0200 (So., 10 Aug. 2025) $
+$Id: plugin.py 1657 2025-08-10 13:43:32Z michael $
 '''
 
-
-# C0111 (Missing docstring)
-# C0103 (Invalid name)
-# C0301 (line too long)
-# W0603 (global statement)
-# W0141 (map, filter, etc.)
-# W0110 lambda with map,filter
-# W0403 Relative import
-# W1401 Anomalous backslash in string
-# C0302 too-many-lines
-# E401 multiple imports on one line
-# E501 line too long (85 > 79 characters)
-# pylint: disable=C0111,C0103,C0301,W0603,C0302
+# missing-docstring / C0111
+# invalid-name / C0103
+# consider-iterating-dictionary / C0201
+# consider-using-f-string / C0209
+# line-too-long / C0301
+# too-many-lines / C0302
+# multiple-imports / C0410
+# ungrouped-imports / C0412
+# bad-builtin / W0141
+# deprecated-lambda / W0110
+# Relative import / W0403
+# unspecified-encoding / W1514
+# anomalous-backslash-in-string / W1401
+# global-statement / W0603
+# unused-import / W0611
+# unused-argument / W0613
+# logging-not-lazy / W1201
+# logging-format-interpolation / W1202
+# unspecified-encoding / W1514
+# import-error / E0401
+# no-name-in-module / E0611
+# pylint: disable=C0103,C0111,C0209,c0301,W0603,W1514,E0401
 
 from __future__ import division, absolute_import
 import re
@@ -28,28 +37,21 @@ import os
 import traceback
 import json
 import base64
-import six
 import logging
 import binascii
 import locale
 from itertools import cycle
 from logging import NOTSET, DEBUG, INFO, WARNING, ERROR, CRITICAL
 from xml.dom.minidom import parse
-from six.moves import zip, range
 
-from enigma import getDesktop
+from enigma import getDesktop, eTimer, eSize, eDVBVolumecontrol, eConsoleAppContainer  # @UnresolvedImport
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 # from Screens.InputBox import InputBox
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Screens import Standby
-from Screens.HelpMenu import HelpableScreen
-from Screens.LocationBox import LocationBox
-
-from enigma import eTimer, eSize  # @UnresolvedImport # pylint: disable=E0611
-from enigma import eDVBVolumecontrol, eConsoleAppContainer  # @UnresolvedImport # pylint: disable=E0611
-# BgFileEraser = eBackgroundFileEraser.getInstance()
-# BgFileEraser.erase("blabla.txt")
+from Screens.HelpMenu import HelpableScreen  # @UnresolvedImport
+from Screens.LocationBox import LocationBox  # @UnresolvedImport
 
 from Components.ActionMap import ActionMap
 from Components.Label import Label
@@ -63,42 +65,44 @@ from Components.config import config, ConfigSubsection, ConfigSelection, ConfigD
 from Plugins.Plugin import PluginDescriptor
 from Tools import Notifications
 from Tools.NumericalTextInput import NumericalTextInput
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_CONFIG, SCOPE_CURRENT_SKIN, \
-	SCOPE_CURRENT_PLUGIN
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_CONFIG, SCOPE_CURRENT_PLUGIN
 from Tools.LoadPixmap import LoadPixmap
-from GlobalActions import globalActionMap  # for muting
+from GlobalActions import globalActionMap
 
-from twisted.internet import reactor  # @UnresolvedImport
-from twisted.internet.protocol import ReconnectingClientFactory  # @UnresolvedImport
-from twisted.protocols.basic import LineReceiver  # @UnresolvedImport
+from twisted.internet import reactor
+from twisted.internet.protocol import ReconnectingClientFactory
+from twisted.protocols.basic import LineReceiver
+
+import six
+from six.moves import zip, range
 
 from .nrzuname import ReverseLookupAndNotifier  # @UnresolvedImport
-from . import __  # @UnresolvedImport # pylint: disable=W0611,F0401
+from . import __  # @UnresolvedImport # pylint: disable=unused-import,import-error
 try:
-	from enigma import eMediaDatabase  # @UnresolvedImport @UnusedImport
+	from enigma import eMediaDatabase  # @UnresolvedImport @UnusedImport # pylint disable=ungrouped-imports
 except ImportError as ie:
 	from . import _  # @UnresolvedImport
 
 if six.PY3:
 	import codecs
 
-	def encode(x):
-		if x is not None:
-			return codecs.encode(x, "rot13")
+	def encode(text):
+		if text is not None:
+			return codecs.encode(text, "rot13")
 		else:
 			return ""
 
-	def decode(x):
-		if x is not None:
-			return codecs.decode(x, "rot13")
+	def decode(text):
+		if text is not None:
+			return codecs.decode(text, "rot13")
 		else:
 			return ""
 else:
-	def encode(x):
-		return base64.b64encode(''.join(chr(ord(c) ^ ord(k)) for c, k in zip(x, cycle('secret key')))).strip()
+	def encode(text):
+		return base64.b64encode(''.join(chr(ord(c) ^ ord(k)) for c, k in zip(text, cycle('secret key')))).strip()
 
-	def decode(x):
-		return ''.join(chr(ord(c) ^ ord(k)) for c, k in zip(base64.b64decode(x), cycle('secret key')))
+	def decode(text):
+		return ''.join(chr(ord(c) ^ ord(k)) for c, k in zip(base64.b64decode(text), cycle('secret key')))
 
 DESKTOP_WIDTH = getDesktop(0).size().width()
 DESKTOP_HEIGHT = getDesktop(0).size().height()
@@ -135,7 +139,7 @@ def scale(y2, y1, x2, x1, x):
 my_global_session = None
 
 config.plugins.FritzCall = ConfigSubsection()
-config.plugins.FritzCall.fwVersion = ConfigSelection(choices=[(None, _("not configured")), ("old", _("before 05.27")), ("05.27", "05.27, 05.28"), ("05.50", _("05.29 until below 6.35")), ("06.35", _("06.35 and newer"))], default=None)
+config.plugins.FritzCall.fwVersion = ConfigSelection(choices=[(None, _("not configured")), ("old", _("before 05.27")), ("05.27", "05.27, 05.28"), ("05.50", _("05.29 until below 6.35")), ("06.35", _("06.35 and newer"))], default=None) # pylint: disable=used-before-assignment
 # config.plugins.FritzCall.fwVersion = ConfigSelection(choices = [(None, _("not configured")), ("old", _("before 05.27")), ("05.27", "05.27, 05.28"), ("05.50", _("05.29 until below 6.35")), ("06.35", _("06.35 and newer")), ("upnp", "Experimental")], default = None)
 # config.plugins.FritzCall.fwVersion = ConfigSelection(choices=[(None, _("not configured")), ("old", _("before 05.27")), ("05.27", "05.27, 05.28"), ("05.50", _("05.29 and newer"))], default=None)
 config.plugins.FritzCall.debug = ConfigSelection(choices=[
@@ -176,7 +180,7 @@ config.plugins.FritzCall.showShortcut = ConfigYesNo(default=False)
 config.plugins.FritzCall.showVanity = ConfigYesNo(default=False)
 config.plugins.FritzCall.prefix = ConfigText(default="", fixed_size=False)
 config.plugins.FritzCall.prefix.setUseableChars('0123456789')
-config.plugins.FritzCall.connectionVerbose = ConfigSelection(default="failed", choices=[("on", _("on")), ("failed", _("only failed")), ("off", _("off"))])
+config.plugins.FritzCall.connectionVerbose = ConfigSelection(choices=[("on", _("on")), ("failed", _("only failed")), ("off", _("off"))])
 config.plugins.FritzCall.ignoreUnknown = ConfigYesNo(default=False)
 config.plugins.FritzCall.reloadPhonebookTime = ConfigInteger(default=8, limits=(0, 99))
 config.plugins.FritzCall.FritzExtendedSearchFaces = ConfigYesNo(default=False)
@@ -334,7 +338,7 @@ def stripCbCPrefix(number, countrycode):
 	return number
 
 
-from . import FritzCallFBF  # @UnresolvedImport  # wrong-import-position # pylint: disable=
+from . import FritzCallFBF  # @UnresolvedImport  #  pylint: disable=wrong-import-position
 
 
 class FritzAbout(Screen):
@@ -387,8 +391,8 @@ class FritzAbout(Screen):
 		self["text"] = Label(
 							"FritzCall Plugin" + "\n\n" +
 							"$Author: michael $"[1:-2] + "\n" +
-							"$Revision: 1639 $"[1:-2] + "\n" +
-							"$Date: 2023-01-11 12:21:40 +0100 (Wed, 11 Jan 2023) $"[1:23] + "\n"
+							"$Revision: 1657 $"[1:-2] + "\n" +
+							"$Date: 2025-08-10 15:43:32 +0200 (So., 10 Aug. 2025) $"[1:23] + "\n"
 							)
 		self["url"] = Label("http://wiki.blue-panel.com/index.php/FritzCall")
 		self.onLayoutFinish.append(self.setWindowTitle)
@@ -401,7 +405,7 @@ class FritzAbout(Screen):
 		self.close()
 
 
-from .FritzCallFBF import FBF_dectActive, FBF_faxActive, FBF_rufumlActive, FBF_tamActive, FBF_wlanState  # @UnresolvedImport  # wrong-import-position # pylint: disable=
+from .FritzCallFBF import FBF_dectActive, FBF_faxActive, FBF_rufumlActive, FBF_tamActive, FBF_wlanState  # @UnresolvedImport # pylint: disable=unused-import,wrong-import-position
 
 
 class FritzMenu(Screen, HelpableScreen):
@@ -886,7 +890,7 @@ class FritzMenu(Screen, HelpableScreen):
 	def _fillMenu(self, status, refreshing=False):
 		(boxInfo, upTime, ipAddress, wlanState, dslState, tamActive, dectActive, faxActive, rufumlActive, guestAccess) = status
 		if wlanState:
-			self._wlanActive = (wlanState[0] == '1')
+			self._wlanActive = wlanState[0] == '1'
 		self._guestActive = guestAccess
 		self._mailboxActive = False
 		try:
@@ -1033,7 +1037,7 @@ class FritzMenu(Screen, HelpableScreen):
 
 			if guestAccess is not None:
 				guestAccess = six.ensure_str(guestAccess)
-				if (guestAccess.find('WLAN') != -1 or guestAccess.find('WIFI') != -1):
+				if (guestAccess.find('WLAN') != -1 or guestAccess.find('WIFI') != -1 or guestAccess.find('Funknetz') != -1):
 					# TRANSLATORS: keep it short, this is a button
 					self["key_yellow"].setText(_("Deactivate WLAN guest access"))
 				else:
@@ -1082,7 +1086,7 @@ class FritzMenu(Screen, HelpableScreen):
 
 class FritzDisplayCalls(Screen, HelpableScreen):
 
-	def __init__(self, session, text=""):  # @UnusedVariable # pylint: disable=W0613
+	def __init__(self, session, text=""):  # @UnusedVariable # pylint: disable=unused-argument
 		if DESKTOP_WIDTH <= 720:
 			self.skin = """
 				<!-- SD screen -->
@@ -2169,7 +2173,7 @@ class FritzCallSetup(ConfigListScreen, Screen, HelpableScreen):
 
 	def setWindowTitle(self):
 		# TRANSLATORS: this is a window title.
-		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 1639 $"[1:-1] + "$Date: 2023-01-11 12:21:40 +0100 (Wed, 11 Jan 2023) $"[7:23] + ")")
+		self.setTitle(_("FritzCall Setup") + " (" + "$Revision: 1657 $"[1:-1] + "$Date: 2025-08-10 15:43:32 +0200 (So., 10 Aug. 2025) $"[7:23] + ")")
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -2646,7 +2650,7 @@ def registerUserAction(fun):
 mutedOnConnID = None
 
 
-def notifyCall(event, date, number, caller, phone, connID):  # @UnusedVariable # pylint: disable=W0613
+def notifyCall(event, date, number, caller, phone, connID):
 	event = six.ensure_str(event)
 	date = six.ensure_str(date)
 	number = six.ensure_str(number)
@@ -2667,7 +2671,7 @@ def notifyCall(event, date, number, caller, phone, connID):  # @UnusedVariable #
 		global standbyMode
 		if not standbyMode:
 			standbyMode = True
-			Standby.inStandby.onHide.append(callList.display)  # @UndefinedVariable
+			Standby.inStandby.onHide.append(callList.display)
 		# add text/timeout to call list
 		callList.add(event, date, number, caller, phone)
 		info("[FritzCall] added to callList")
@@ -2741,9 +2745,9 @@ class FritzReverseLookupAndNotifier(object):
 		# kill that object...
 
 
-class FritzProtocol(LineReceiver):  # pylint: disable=W0223
+class FritzProtocol(LineReceiver):  # pylint: disable=abstract-method
 	def __init__(self):
-		info("[FritzProtocol] %s%s starting", "$Revision: 1639 $"[1:-1], "$Date: 2023-01-11 12:21:40 +0100 (Wed, 11 Jan 2023) $"[7:23])
+		info("[FritzProtocol] %s%s starting", "$Revision: 1657 $"[1:-1], "$Date: 2025-08-10 15:43:32 +0200 (So., 10 Aug. 2025) $"[7:23])
 		global mutedOnConnID
 		mutedOnConnID = None
 		self.number = '0'
@@ -2903,7 +2907,7 @@ class FritzClientFactory(ReconnectingClientFactory):
 		# self.maxDelay = 30
 		self.maxRetries = 5
 
-	def startedConnecting(self, connector):  # @UnusedVariable # pylint: disable=W0613
+	def startedConnecting(self, connector):  # @UnusedVariable # pylint: disable=unused-argument
 		#=======================================================================
 		# if not config.plugins.FritzCall.fwVersion.value:
 		# 	Notifications.AddNotification(MessageBox, _("FRITZ!Box firmware version not configured! Please set it in the configuration."), type=MessageBox.TYPE_INFO, timeout=0)
@@ -2913,7 +2917,7 @@ class FritzClientFactory(ReconnectingClientFactory):
 			info("[FRITZ!FritzClientFactory]")
 			Notifications.AddNotification(MessageBox, _("Connecting to FRITZ!Box..."), type=MessageBox.TYPE_INFO, timeout=2)
 
-	def buildProtocol(self, addr):  # @UnusedVariable # pylint: disable=W0613
+	def buildProtocol(self, addr):  # @UnusedVariable # pylint: disable=unused-argument
 		global fritzbox
 		if config.plugins.FritzCall.connectionVerbose.value == "on":
 			info("[FRITZ!FritzClientFactory]")
@@ -2983,7 +2987,7 @@ class FritzCall(object):
 		self.abort()
 		if config.plugins.FritzCall.enable.value:
 			fact = FritzClientFactory()
-			self.desc = (fact, reactor.connectTCP(config.plugins.FritzCall.hostname.value, 1012, fact))  # @UndefinedVariable # pylint: disable=E1101
+			self.desc = (fact, reactor.connectTCP(config.plugins.FritzCall.hostname.value, 1012, fact))  # @UndefinedVariable # pylint disable=no-member
 
 	def shutdown(self):
 		self.abort()
@@ -2996,7 +3000,7 @@ class FritzCall(object):
 			self.desc = None
 
 
-def displayCalls(session, servicelist=None):  # @UnusedVariable # pylint: disable=W0613
+def displayCalls(session, servicelist=None):  # @UnusedVariable # pylint: disable=unused-argument
 	if config.plugins.FritzCall.enable.value:
 		if fritzbox and config.plugins.FritzCall.fwVersion.value:
 			session.open(FritzDisplayCalls)
@@ -3006,7 +3010,7 @@ def displayCalls(session, servicelist=None):  # @UnusedVariable # pylint: disabl
 		Notifications.AddNotification(MessageBox, _("Plugin not enabled"), type=MessageBox.TYPE_INFO)
 
 
-def displayPhonebook(session, servicelist=None):  # @UnusedVariable # pylint: disable=W0613
+def displayPhonebook(session, servicelist=None):  # @UnusedVariable # pylint: disable=unused-argument
 	if phonebook:
 		if config.plugins.FritzCall.enable.value:
 			session.open(phonebook.FritzDisplayPhonebook)
@@ -3016,7 +3020,7 @@ def displayPhonebook(session, servicelist=None):  # @UnusedVariable # pylint: di
 		Notifications.AddNotification(MessageBox, _("No phonebook"), type=MessageBox.TYPE_INFO)
 
 
-def displayFBFStatus(session, servicelist=None):  # @UnusedVariable # pylint: disable=W0613
+def displayFBFStatus(session, servicelist=None):  # @UnusedVariable # pylint: disable=unused-argument
 	if config.plugins.FritzCall.enable.value:
 		if fritzbox and fritzbox.information:
 			session.open(FritzMenu)
@@ -3026,7 +3030,7 @@ def displayFBFStatus(session, servicelist=None):  # @UnusedVariable # pylint: di
 		Notifications.AddNotification(MessageBox, _("Plugin not enabled"), type=MessageBox.TYPE_INFO)
 
 
-def main(session, **kwargs):  # @UnusedVariable  pylint: disable=W0613
+def main(session, **kwargs):  # @UnusedVariable  pylint: disable=unused-argument
 	session.open(FritzCallSetup)
 
 
@@ -3051,7 +3055,7 @@ def autostart(reason, **kwargs):
 		fritz_call = None
 
 
-def Plugins(**kwargs):  # @UnusedVariable # pylint: disable=W0613,C0103
+def Plugins(**kwargs):  # @UnusedVariable # pylint: disable=unused-argument,invalid-name
 	what = _("Display FRITZ!box-Fon calls on screen")
 	what_calls = _("Phone calls")
 	what_phonebook = _("Phonebook")

@@ -771,30 +771,12 @@ $Date: 2021-04-23 12:19:26 +0200 (Fri, 23 Apr 2021) $
 		</website>
 	</country>
 	<country code="+41">
-		<website name ="tel.local.ch" url="https://tel.local.ch/de/q/?ext=1&amp;phone=$NUMBER" prefix="0">
+		<website name ="local.ch" url="https://www.local.ch/de/s/Switzerland/$NUMBER" prefix="0">
 			<entry>
-				<name>"DetailEntryName":"([^"]+)"</name>
-				<city>&lt;span itemprop="addressLocality"&gt;([^&lt;]+)&lt;/span&gt;</city>
-				<street>&lt;span itemprop="streetAddress"&gt;([^&lt;]+)&lt;/span&gt;</street>
-				<zipcode>&lt;span itemprop="postalCode"&gt;([^&lt;]+)&lt;/span&gt;</zipcode>
-			</entry>
-			<entry>
-				<name>"name": "([^"]+)"</name>
-				<city>"addressLocality": "([^"]+)"</city>
-				<street>"streetAddress": "([^"]+)"</street>
-				<zipcode>"postalCode": "([^"]+)"</zipcode>
-			</entry>
-			<entry>
-				<name>"DetailEntryName":"([^"]+)"</name>
-				<city>&lt;div class=&#39;card-info-address&#39;&gt;\s+&lt;span&gt;[^,]+, \d+ ([^&lt;]+)&lt;/span&gt;</city>
-				<street>&lt;div class=&#39;card-info-address&#39;&gt;\s+&lt;span&gt;([^,]+), \d+ [^&lt;]+&lt;/span&gt;</street>
-				<zipcode>&lt;div class=&#39;card-info-address&#39;&gt;\s+&lt;span&gt;[^,]+, (\d+) [^&lt;]+&lt;/span&gt;</zipcode>
-			</entry>
-			<entry>
-				<name>&lt;h4 class='name fn'&gt;([^&lt;]+)&lt;/h4&gt;</name>
-				<city>&lt;p class='address'&gt;\s*[^&lt;]+&lt;br/&gt;\n\d+ ([^\n]+)\s*&lt;/p&gt;</city>
-				<street>&lt;p class='address'&gt;\s*([^&lt;]+)&lt;br/&gt;\n\d+ [^\n]+\s*&lt;/p&gt;</street>
-				<zipcode>&lt;p class='address'&gt;\s*[^&lt;]+&lt;br/&gt;\n(\d+) [^\n]+\s*&lt;/p&gt;</zipcode>
+				<name>,"title":"([^"]+)"</name>
+				<city>"city":"([^"]+)"</city>
+				<street>"streetLine":"([^"]+)"</street>
+				<zipcode>"zipCode":([^,]+),</zipcode>
 			</entry>
 		</website>
 		<website name="tel.search.ch" url="https://tel.search.ch/result.html?tel=$NUMBER" prefix="0">
@@ -823,7 +805,7 @@ $Date: 2021-04-23 12:19:26 +0200 (Fri, 23 Apr 2021) $
 		</website>
 	</country>
 	<country code="+43">
-		<website name="herold.at" url="https://www.herold.at/telefonbuch/suche/?term=$NUMBER" prefix="0">
+		<website name="herold.at" url="https://www.herold.at/telefonbuch/suche/?userTerm=$NUMBER" prefix="0">
 			<entry>
 				<name>"name":"([^"]+)"</name>
 				<street>"street":"([^"]+)"</street>
@@ -910,22 +892,28 @@ $Date: 2021-04-23 12:19:26 +0200 (Fri, 23 Apr 2021) $
 		</website>
 	</country>
 	<country code="+49">
-	    <website name="www.dasoertliche.de" url="https://www.dasoertliche.de/Controller?form_name=search_inv&amp;ph=$NUMBER" prefix="0" numLines="1">
-	        <entry>
-	        	<name>&quot;name&quot;:&quot;([^&quot;]+)&quot;</name>
-	        	<street>&quot;streetAddress&quot;:&quot;([^&quot;]+)&quot;</street>
-	        	<city>&quot;addressLocality&quot;:&quot;([^&quot;]+)&quot;</city>
-	        	<zipcode>&quot;postalCode&quot;:&quot;([^&quot;]+)&quot;</zipcode>
-	        </entry>
-	    </website>
    		<website name="www.dastelefonbuch.de" url="https://www.dastelefonbuch.de/Suche/$NUMBER" prefix="0">
 			<entry>	
 				<name>&lt;div class=&quot;name&quot; title=&quot;([^&quot;]+)&quot;&gt;</name>
-				<street>&lt;span itemprop=&quot;streetAddress&quot;&gt;\s*([^&lt;]+)&lt;/span&gt;</street>
-				<city>&lt;span itemprop=&quot;addressLocality&quot;&gt;([^&lt;]+)&lt;/span&gt;</city>
-				<zipcode>&lt;span itemprop=&quot;postalCode&quot;&gt;\s*([^&lt;]+)\s*&lt;/span&gt;</zipcode>
+				<street>class=&quot;addr&quot; .+ title=&quot;([^,]+), \d+ [^&quot;]+&quot;</street>
+				<city>class=&quot;addr&quot; .+ title=&quot;[^,]+, \d+ ([^&quot;]+)&quot;</city>
+				<zipcode>class=&quot;addr&quot; .+ title=&quot;[^,]+, (\d+) [^&quot;]+&quot;</zipcode>
+			</entry>
+			<entry>	
+				<name>&lt;div class=&quot;name&quot; title=&quot;([^&quot;]+)&quot;&gt;</name>
+				<street>itemprop=&quot;streetAddress&quot;&gt;\s*([^&lt;]+)&lt;/span&gt;</street>
+				<city>itemprop=&quot;addressLocality&quot;&gt;([^&lt;]+)&lt;/span&gt;</city>
+				<zipcode>itemprop=&quot;postalCode&quot;&gt;\s*([^&lt;]+)\s*&lt;/span&gt;</zipcode>
 			</entry>
 		</website>
+	    <website name="www.dasoertliche.de" url="https://www.dasoertliche.de/Controller?form_name=search_inv&amp;ph=$NUMBER" prefix="0" numLines="1">
+	        <entry>
+	        	<name>var handlerData =\[\[&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;,&quot;([^&quot;]+)&quot;</name>
+	        	<street>&lt;address&gt;\s+([^\n]+)\s+&lt;br&gt;</street>
+	        	<city>var handlerData =\[\[&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;,&quot;([^&quot;]+)&quot;,&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;</city>
+	        	<zipcode>var handlerData =\[\[&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;,&quot;([^&quot;]+)&quot;,&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;,&quot;[^&quot;]*&quot;</zipcode>
+	        </entry>
+	    </website>
 		<website name="www.goyellow.de" url="https://www.goyellow.de/suche/$NUMBER/-" prefix="0">
 	        <entry>
 	        	<name>na: "([^"]+)",</name>

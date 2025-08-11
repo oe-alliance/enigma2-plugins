@@ -28,20 +28,40 @@ Also you have to send the password to get the complete api.
 License: MIT https://opensource.org/licenses/MIT
 Source: https://bitbucket.org/kbr/fritzconnection
 Author: Klaus Bremer
-Modified to use async communication, content level authentication and plain xml.etree.ElementTree: DrMichael
+Modified to use async communication, content level authentication
+and plain xml.etree.ElementTree: DrMichael
 """
-# pylint: disable=C0111,C0103,C0301,W0603,C0302
+
+# missing-docstring / C0111
+# invalid-name / C0103
+# consider-iterating-dictionary / C0201
+# consider-using-f-string / C0209
+# line-too-long / C0301
+# too-many-lines / C0302
+# multiple-imports / C0410
+# ungrouped-imports / C0412
+# bad-builtin / W0141
+# deprecated-lambda / W0110
+# Relative import / W0403
+# anomalous-backslash-in-string / W1401
+# global-statement / W0603
+# unused-argument / W0613
+# logging-not-lazy / W1201
+# logging-format-interpolation / W1202
+# unspecified-encoding / W1514
+# no-name-in-module / E0611
+# pylint: disable=C0103,C0111,C0209,C0301,C0302,W0603,W1514
 
 __version__ = '0.6'
 
 import logging
 import re
-import six
 from hashlib import md5
-from . import getPage
 import xml.etree.ElementTree as ET
-
 from Components.config import config
+
+import six
+from . import getPage  # @UnresolvedImport
 
 USERAGENT = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
 

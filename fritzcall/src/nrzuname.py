@@ -1,31 +1,41 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 '''
-$Id: nrzuname.py 1633 2023-01-07 14:58:24Z michael $
+$Id: nrzuname.py 1656 2025-08-10 13:02:41Z michael $
 $Author: michael $
-$Revision: 1633 $
-$Date: 2023-01-07 15:58:24 +0100 (Sat, 07 Jan 2023) $
+$Revision: 1656 $
+$Date: 2025-08-10 15:02:41 +0200 (So., 10 Aug. 2025) $
 '''
 
-# C0111 (Missing docstring)
-# C0103 (Invalid name)
-# C0301 (line too long)
-# W0603 (global statement)
-# W0141 (map, filter, etc.)
-# W0110 lambda with map,filter
-# W0403 Relative import
-# W1401 Anomalous backslash in string
-# W0110 deprecated-lambda
-# C0302 too-many-lines
-# C0410 multiple-imports
-# pylint: disable=C0111,C0103,C0301,W0603,C0302
+# missing-docstring / C0111
+# invalid-name / C0103
+# consider-iterating-dictionary / C0201
+# consider-using-f-string / C0209
+# line-too-long / C0301
+# too-many-lines / C0302
+# multiple-imports / C0410
+# ungrouped-imports / C0412
+# bad-builtin / W0141
+# deprecated-lambda / W0110
+# Relative import / W0403
+# anomalous-backslash-in-string / W1401
+# global-statement / W0603
+# unused-argument / W0613
+# logging-not-lazy / W1201
+# logging-format-interpolation / W1202
+# unspecified-encoding / W1514
+# no-name-in-module / E0611
+# pylint: disable=C0111,C0103,C0209,C0301,W0603,C0302
 
 from __future__ import print_function
 import re
 import sys
 import os
-import six
 from xml.dom.minidom import parse
+from twisted.internet import reactor  # @UnresolvedImport
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS
+
+import six
 from six import unichr
 from six.moves import html_entities
 
@@ -52,8 +62,6 @@ except ValueError:
 			print(message)
 
 from . import getPage  # @UnresolvedImport
-from twisted.internet import reactor  # @UnresolvedImport
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
 
 def html2unicode(in_html):
