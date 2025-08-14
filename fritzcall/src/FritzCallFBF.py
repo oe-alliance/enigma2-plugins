@@ -2,9 +2,9 @@
 '''
 Created on 30.09.2012
 $Author: michael $
-$Revision: 1657 $
-$Date: 2025-08-10 15:43:32 +0200 (So., 10 Aug. 2025) $
-$Id: FritzCallFBF.py 1657 2025-08-10 13:43:32Z michael $
+$Revision: 1660 $
+$Date: 2025-08-13 09:51:21 +0200 (Mi., 13 Aug. 2025) $
+$Id: FritzCallFBF.py 1660 2025-08-13 07:51:21Z michael $
 '''
 
 # missing-docstring / C0111
@@ -3749,9 +3749,9 @@ class FritzCallFBF_upnp():
 					self.debug("3: provider " + provider)
 					if "downstream" in connData and "upstream" in connData:
 						if internetSpeed:
-							internetSpeed = internetSpeed + ", " + str(connData["downstream"] / 1000) + " Mbit/s / " + str(connData["upstream"] / 1000) + " Mbit/s"
+							internetSpeed = internetSpeed + ", " + str(connData["downstream"] / 1000) + " / " + str(connData["upstream"] / 1000) + " Mbit/s"
 						else:
-							internetSpeed = str(connData["downstream"] / 1000) + " Mbit/s / " + str(connData["upstream"] / 1000) + " Mbit/s"
+							internetSpeed = str(connData["downstream"] / 1000) + " " + str(connData["upstream"] / 1000) + " Mbit/s"
 					self.debug("4: internetSpeed " + internetSpeed)
 					if "ipv4" in connData and connData["ipv4"]["connected"]:
 						if upTime:
@@ -3869,13 +3869,16 @@ class FritzCallFBF_upnp():
 		self.info("provider final: " + repr(provider))
 		self.info("ipAddress final: " + repr(ipAddress))
 
-		if "dsl" in boxData or "docsis" in boxData or "cable" in boxData:
-			if "dsl" in boxData:
+		if "dsl" in boxData or "docsis" in boxData or "cable" in boxData or "fiber" in boxData:
+			if "fiber" in boxData:
+				connData = boxData["fiber"]
+			elif "dsl" in boxData:
 				connData = boxData["dsl"]
 			elif "cable" in boxData:
 				connData = boxData["cable"]
 			else:
 				connData = boxData["docsis"]
+			connData = connData + ":"
 			if connData["led"] == "led_green":
 				dslState = ['5', None, None]
 				dslState[1] = connData["down"] + " / " + connData["up"]
@@ -3886,7 +3889,7 @@ class FritzCallFBF_upnp():
 			elif connData["led"] == "led green":  # form 07.39
 				dslState = ['5', None, None]
 				# dslState[1] = "{:.}".format(connData["down"]) + " / " + "{:.}".format(connData["up"])
-				dslState[1] = str(connData["down"] / 1000) + " Mbit/s / " + str(connData["up"] / 1000) + " Mbit/s"
+				dslState[1] = str(connData["down"] / 1000) + " / " + str(connData["up"] / 1000) + " Mbit/s"
 				dslState[2] = connData["title"]
 				if internetSpeed and internetSpeed != dslState[1]:
 					dslState[1] = dslState[1] + "; Internet: " + internetSpeed
