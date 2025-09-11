@@ -147,7 +147,7 @@ msgid "Mount Again"
 msgstr "Ponów montowanie"
 
 msgid "Mount Manager"
-msgstr "Menadżer montowania"
+msgstr "Menedżer montowania"
 
 msgid "Mount Viewer"
 msgstr "Odbiorca montowania"
@@ -159,7 +159,7 @@ msgid "Mount informations"
 msgstr "Informacje montowania"
 
 msgid "Mount manager"
-msgstr "Menadżer montowania"
+msgstr "Menedżer montowania"
 
 msgid "Mount options"
 msgstr "Opcje montowania"
@@ -256,7 +256,7 @@ msgid "Scan range"
 msgstr "Skanuj zakres"
 
 msgid "Schedule MountAgain"
-msgstr "Harmonogram Ponownego Montowania"
+msgstr "Harmonogram ponownego montowania"
 
 msgid "Schedule a auto remount of your network shares."
 msgstr "Zaplanuj automatyczne ponowne podłączenia swoich udziałów sieciowych."
@@ -268,7 +268,7 @@ msgid "Search for network shares..."
 msgstr "Szukaj udziałów sieciowych..."
 
 msgid "Searching your network. Please wait..."
-msgstr "Wyszukiwanie sieci. Proszę czekać..."
+msgstr "Przeszukuję Twoją sieć. Proszę czekać..."
 
 msgid "Server IP"
 msgstr "IP serwera"
@@ -286,7 +286,7 @@ msgid "User management"
 msgstr "Zarządzaj użytkownikiem"
 
 msgid "Usermanager"
-msgstr "Menadżer użytkownika"
+msgstr "Menedżer użytkownika"
 
 msgid "Username"
 msgstr "Nazwa użytkownika"
