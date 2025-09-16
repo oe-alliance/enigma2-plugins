@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-25 08:17+0100\n"
-"PO-Revision-Date: 2024-04-01 09:44+0300\n"
+"POT-Creation-Date: 2025-07-03 09:55+0300\n"
+"PO-Revision-Date: 2025-09-16 18:24+0300\n"
 "Last-Translator: Orlandox\n"
 "Language-Team: Samzan/Kojo/Orlandox\n"
 "Language: fi\n"
@@ -16,265 +16,269 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.7\n"
 
-msgid " as "
-msgstr " roolissa "
+#: plugin.py:550
+#, python-format
+msgid "%d out of %d found this helpful."
+msgstr "%d/%d piti tätä hyödyllisenä."
 
-msgid "* = Restart Required"
-msgstr "* = Uudelleen käynnistys vaaditaan"
-
+#: plugin.py:368
 msgid "Ambiguous results"
-msgstr "Useita tuloksia:"
+msgstr "Epäselvät tulokset"
 
-msgid "Cancel"
-msgstr "Peruuta"
+#: plugin.py:884
+msgid "Couldn't get event name"
+msgstr "Ohjelman nimeä ei saatu"
 
-msgid "Cast: "
-msgstr "Pääosissa: "
-
-msgid "Channel Selection"
-msgstr "Kanavavalinta"
-
-msgid "Content:"
-msgstr "Sisältö:"
-
-msgid "Could't get event name"
-msgstr "Ei löytynyt tuloksia"
-
+#: plugin.py:373 plugin.py:1025
 msgid "Details"
 msgstr "Tiedot"
 
-#, python-format
+#: plugin.py:1168 plugin.py:1420
 msgid "Downloading Movie Poster..."
 msgstr "Ladataan elokuvan julistetta..."
 
-msgid "Enable this to be able to access IMDb search setup from within the plugin browser."
-msgstr "Näytä IMDb-hakuasetukset Plugin-lisäosat -valikossa."
+#: plugin.py:568
+msgid "Downloading reviews..."
+msgstr "Ladataan arvosteluja..."
 
-msgid "Enable this to be able to access IMDb searches from within the movie list."
-msgstr "Näytä IMDb-haku tallennettujen ohjelmien hakemistossa painamalla Menu-näppäintä."
+#: plugin.py:960
+msgid "E"
+msgstr "J"
 
-msgid "Enable this to be able to access IMDb searches from within the plugin browser."
-msgstr "Näytä IMDb-hakutulokset Plugin-lisäosat -valikossa."
-
+#: plugin.py:664
 msgid "Enter search"
 msgstr "Haku"
 
+#: plugin.py:811
 msgid "Enter text to search for"
 msgstr "Tekstihaku"
 
+#: plugin.py:261
 msgid "Exit"
 msgstr "Poistu"
 
+#: plugin.py:284 plugin.py:288
 msgid "Exit IMDb search"
 msgstr "Poistu IMDb-hausta"
 
+#: plugin.py:1355 plugin.py:1359
 msgid "Extra Info"
 msgstr "Lisätiedot"
 
-msgid "Genre:"
-msgstr "Tyylilaji:"
+#: plugin.py:989
+msgid "IMDB Exception"
+msgstr "IMDb poikkeus"
 
+#: plugin.py:1026 plugin.py:1396 plugin.py:1429
 msgid "IMDb Details parsed"
-msgstr "IMDb tiedot jäsennettynä"
+msgstr "IMDb-tiedot jäsennettynä"
 
+#: plugin.py:887
 msgid "IMDb Download completed"
-msgstr "IMDb lataus valmis"
+msgstr "IMDb-lataus valmis"
 
+#: plugin.py:982
 msgid "IMDb Download failed"
-msgstr "IMDb lataus epäonnistui"
+msgstr "IMDb-lataus epäonnistui"
 
+#: plugin.py:691
 msgid "IMDb Menu"
-msgstr "IMDb Valikko"
+msgstr "IMDb-valikko"
 
+#: plugin.py:1478
 msgid "IMDb Plugin"
-msgstr "IMDb Plugin"
+msgstr "IMDb-lisäosa"
 
+#: plugin.py:997
 msgid "IMDb Re-Download completed"
-msgstr "IMDb lataus valmis"
+msgstr "IMDb-uudelleenlataus valmis"
 
-msgid "IMDb Save - Download completed"
-msgstr "IMDb Tallennus - Lataus valmis"
+#: plugin.py:534
+msgid "IMDb Reviews failed"
+msgstr "IMDb-arvostelut epäonnistuivat"
 
+#: plugin.py:564
+msgid "IMDb Reviews parsed"
+msgstr "IMDb-arvostelut jäsennetty"
+
+#: plugin.py:1484
 msgid "IMDb Setup"
-msgstr "IMDb asetukset"
+msgstr "IMDb-asetukset"
 
-msgid "IMDb can not get Movie Information to write to .jpg and .txt files!"
-msgstr "IMDb ei löydä elokuvan tietoja kuva,-ja tekstitiedostoihin!"
-
+#: plugin.py:729
 msgid "IMDb can not get Movie Information to write to .txt file!"
 msgstr "IMDb ei saa kirjoitettua elokuvan tietoja tekstitiedostoon!"
 
+#: plugin.py:979
 msgid "IMDb query failed!"
-msgstr "IMDb haku epäonnistui!"
+msgstr "IMDb-haku epäonnistui!"
 
+#: plugin.py:717
+msgid "IMDb save completed"
+msgstr "IMDb-tallennus valmis"
+
+#: plugin.py:1536 plugin.py:1558 plugin.py:1559 plugin.py:1569
 msgid "IMDb search"
 msgstr "IMDb-haku"
 
+#: plugin.py:1547
 msgid "IMDb setup"
 msgstr "IMDb-asetukset"
 
-msgid "Lookup"
-msgstr "Tiedot"
+#: plugin.py:873
+#, python-format
+msgid "Ignoring invalid imdbId: %s"
+msgstr "Ohitetaan virheellinen imdbId: %s"
 
+#: plugin.py:866
+#, python-format
+msgid "Local file does not exist: %s"
+msgstr "Paikallista tiedostoa ei ole olemassa: %s"
+
+#: plugin.py:295
 msgid "Menu"
 msgstr "Valikko"
 
+#: plugin.py:976
 msgid "No IMDb match."
-msgstr "Ei IMDb -osumia."
+msgstr "Ei IMDb-osumia."
 
+#: plugin.py:977
 msgid "No IMDb match:"
-msgstr "Ei IMDb hakuosumaa!"
+msgstr "Ei IMDb-osumia:"
 
+#: plugin.py:1159
 msgid "No cast list found in the database."
 msgstr "Ei löytynyt näyttelijätietoja."
 
+#: plugin.py:1008
 msgid "No details found."
 msgstr "Ei löytynyt tietoja."
 
-msgid "OK"
-msgstr "OK"
-
+#: plugin.py:305
 msgid "Page down"
 msgstr "Sivu alas"
 
+#: plugin.py:306
 msgid "Page up"
 msgstr "Sivu ylös"
 
+#: plugin.py:527
+msgid "Parsing reviews..."
+msgstr "Jäsentää arvosteluja..."
+
+#: plugin.py:678
 msgid "Play Trailer"
 msgstr "Näytä traileri"
 
+#: plugin.py:369
 msgid "Please select the matching entry"
 msgstr "Valitse sopivin hakutulos"
 
-msgid "Plot Outline"
-msgstr "Juoni lyhyesti"
-
-msgid "Production Countries:"
-msgstr "Tuotantomaat:"
-
+#: plugin.py:877
 #, python-format
 msgid "Query IMDb: %s"
 msgstr "IMDb haku: %s"
 
+#: plugin.py:511
 #, python-format
 msgid "Re-Query IMDb: %s..."
-msgstr "IMDb haku: %s..."
+msgstr "IMDb uudelleen haku: %s..."
 
-msgid "Release Date:"
-msgstr "Julkaisupäivä:"
+#: plugin.py:953
+msgid "S"
+msgstr "K"
 
-msgid "Runtime:"
-msgstr "Kesto:"
-
+#: plugin.py:671
 msgid "Save current Details as .html for offline use"
 msgstr "Tallenna nykyiset Lisätiedot HTML-tiedostona"
 
+#: plugin.py:672
 msgid "Save current Details as .txt"
 msgstr "Tallenna nykyiset Lisätiedot tekstitiedostoon"
 
+#: plugin.py:673
 msgid "Save current Poster and Details as .txt"
 msgstr "Tallenna nykyinen Juliste ja Lisätiedot tekstitiedostoon"
 
+#: plugin.py:679
 msgid "Search Trailer"
 msgstr "Etsi traileria"
 
+#: plugin.py:1537 plugin.py:1570
 msgid "Search for details from the Internet Movie Database"
 msgstr "Etsi IMDb:stä lisätietoja"
 
-msgid "Select from EPG"
-msgstr "Valitse ohjelmaoppaasta"
-
+#: plugin.py:1548
 msgid "Settings for Internet Movie Database searches"
 msgstr "IMDb-haun asetukset"
 
+#: plugin.py:665
 msgid "Setup"
 msgstr "Asetukset"
 
-msgid "Show episode and year information for cast when available. Takes effect after the next fetch of show details."
-msgstr "Näytä näytteliöiden jakso,- ja vuositiedot, jos ne ovat saatavilla. Tämä astuu voimaan seuraavassa haussa."
-
-msgid "Show episode and year information in cast list"
-msgstr "Näytä jakso ja vuosi pääosalistassa"
-
-msgid "Show full movie or series name in title menu"
-msgstr "Näytä elokuvan tai sarjan koko nimi otsikkovalikossa"
-
-msgid "Show in movie list"
-msgstr "Näytä tallenne-hakemistossa"
-
-msgid "Show list of matched movies and series"
-msgstr "Näytä osuvimmat elokuvat ja sarjat"
-
-msgid "Show movie and series basic details"
-msgstr "Näytä elokuvien ja sarjojen perustiedot"
-
-msgid "Show movie and series extra details"
-msgstr "Näytä elokuvien ja sarjojen lisätiedot"
-
-msgid "Show search in plugin browser"
-msgstr "Näytä hakutoiminnot Plugin-lisäosat -valikossa"
-
-msgid "Show setup in plugin browser"
-msgstr "Näytä asetukset Plugin-lisäosat-valikossa"
-
-msgid "Show the whole IMDb title information for a movie or series, including, for example, alternative names and whether it's a series. Takes effect after the next search of IMDb for a show name."
-msgstr "Näytä nimikkeen kaikki tiedot, esimerkiksi vaihtoehtoinen nimi, tai onko kyseessa sarja. Astuu voimaan, kun seuraavan kerran haetaan IMDb:sta ohjelman nimeä."
-
-msgid "The Internet Movie Database"
-msgstr "The Internet Movie Database"
-
-msgid "This option allows you add words/phrases for IMDb to ignore when searching. Please separate the words/phrases with commas."
-msgstr "Syötä sanoja tai lauseita joita ei oteta huomioon hauissa. Erottele ehdot pilkulla."
-
-msgid "Title Menu"
-msgstr "Nimivalikko"
-
-msgid "Unknown category"
-msgstr "Tuntematon kategoria"
-
-msgid "User Rating"
-msgstr "Arvostelut"
-
-msgid "Words / phrases to ignore "
-msgstr "Hylättävät sanat / lauseet "
-
-msgid "no user rating yet"
-msgstr "Ei arvostelua vielä"
-
-msgid "Show extra information in title menu"
-msgstr "Näytä lisätiedot nimivalikossa"
-
-msgid "Show the type of the title and top cast. Takes effect after the next search of IMDb for a show name."
-msgstr "Näytä otsikon tyyppi ja huippunäyttelijät. Astuu voimaan, kun seuraavan kerran haetaan IMDb:sta ohjelman nimeä."
-
-msgid "Show episodes in title menu"
-msgstr "Näytä jaksot nimivalikossa"
-
-msgid "Include episodes in the results. Takes effect after the next search of IMDb for a show name."
-msgstr "Sisällytä jaksot tuloksiin. Astuu voimaan, kun seuraavan kerran haetaan IMDb:sta ohjelman nimeä."
-
+#: plugin.py:299
 msgid "Show a bigger poster"
 msgstr "Näytä isompi juliste"
 
-msgid "Show movie and series synopsis"
-msgstr "Näytä elokuvan ja sarjan tiivistelmä"
-
+#: plugin.py:300
 msgid "Show first page of user reviews"
 msgstr "Näytä käyttäjien arvostelujen ensimmäinen sivu"
 
-msgid "Parsing reviews..."
-msgstr "Jäsentää arvosteluja..."
+#: plugin.py:289
+msgid "Show list of matched movies and series"
+msgstr "Näytä osuvimmat elokuvat ja sarjat"
 
-msgid "IMDb Reviews parsed"
-msgstr "IMDb-arvostelut jäsennetty"
+#: plugin.py:283 plugin.py:290
+msgid "Show movie and series basic details"
+msgstr "Näytä elokuvien ja sarjojen perustiedot"
 
-msgid "Downloading reviews..."
-msgstr "Ladataan arvosteluja..."
+#: plugin.py:291
+msgid "Show movie and series extra details"
+msgstr "Näytä elokuvien ja sarjojen lisätiedot"
 
+#: plugin.py:301
+msgid "Show movie and series synopsis"
+msgstr "Näytä elokuvan ja sarjojen tiivistelmä"
+
+#: plugin.py:1086
+msgid "Spoiler"
+msgstr "Spoileri"
+
+#: plugin.py:798
+msgid "SubsSupport import failed"
+msgstr "SubsSupport-tuonti epäonnistui"
+
+#: plugin.py:683
+msgid "SubsSupport search"
+msgstr "SubsSupport-haku"
+
+#: plugin.py:769
 msgid "Synopsis"
 msgstr "Tiivistelmä"
 
+#: plugin.py:245
+msgid "The Internet Movie Database"
+msgstr "The Internet Movie Database"
+
+#: plugin.py:372
+msgid "Title Menu"
+msgstr "Nimivalikko"
+
+#: plugin.py:770
 msgid "User reviews"
 msgstr "Käyttäjäarvostelut"
+
+#: plugin.py:984
+msgid "connection error"
+msgstr "yhteysvirhe"
+
+#: plugin.py:1131
+msgid "no user rating yet"
+msgstr "ei vielä käyttäjäarvioita"
+
+#: plugin.py:986
+msgid "timeout"
+msgstr "aikakatkaisu"
