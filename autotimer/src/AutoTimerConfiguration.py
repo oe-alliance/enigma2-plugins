@@ -171,7 +171,7 @@ def parseEntry(element, baseTimer, defaults=False):
 		baseTimer.lastBegin = int(element.get("lastBegin", 0))
 
 	# Read out justplay
-	baseTimer.justplay = int(element.get("justplay", 0))
+	baseTimer.justplay = 0 if baseTimer.always_zap else int(element.get("justplay", 0))
 	baseTimer.setEndtime = int(element.get("setEndtime", 1))
 
 	# Read out avoidDuplicateDescription

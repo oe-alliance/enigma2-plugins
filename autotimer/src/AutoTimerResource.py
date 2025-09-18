@@ -491,6 +491,8 @@ class AutoTimerAddOrEditAutoTimerResource(AutoTimerBaseResource):
 		# Always zap
 		if hasattr(timer, 'always_zap'):
 			timer.always_zap = int(get("always_zap", "0"))
+			if timer.always_zap:
+				timer.justplay = False  # force justplay to false
 
 		if newTimer:
 			autotimer.add(timer)
