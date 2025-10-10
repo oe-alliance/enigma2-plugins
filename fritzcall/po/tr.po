@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma2 FritzCall Plugin Turkish Locale\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"POT-Creation-Date: 2025-10-10 12:34+0200\n"
 "PO-Revision-Date: 2009-07-29 20:37+0200\n"
 "Last-Translator: Zülfikar VEYİSOĞLU <z.veyisoglu@hobiagaci.com>\n"
 "Language-Team: http://hobiagaci.com <z.veyisoglu@hobiagaci.com>\n"
@@ -123,6 +123,17 @@ msgstr ""
 "yeniden deneniyor..."
 
 msgid "Could not get call list; wrong version?"
+msgstr ""
+
+#, fuzzy
+msgid "Could not load barring list: "
+msgstr "FRITZ!Box - Aramalar yüklenemedi: %s"
+
+#, fuzzy, python-format
+msgid "Could not load barring list: %s"
+msgstr "FRITZ!Box - Aramalar yüklenemedi: %s"
+
+msgid "Could not load deflections list: "
 msgstr ""
 
 msgid "Could not load phonebook: "
@@ -380,9 +391,6 @@ msgstr "MSN göster (virgülle ayrılmış)"
 msgid "Mailbox"
 msgstr "Posta kutusu"
 
-msgid "Make it more skin friendly"
-msgstr ""
-
 #. TRANSLATORS: keep it short, this is a button
 msgid "Missed"
 msgstr "Cevapsız"
@@ -420,12 +428,6 @@ msgstr "Etkin posta kutusu yok"
 
 msgid "No phonebook"
 msgstr ""
-
-msgid "No result from LDIF"
-msgstr "LDIF içeriğinde sonuç bulunamadı"
-
-msgid "No result from Outlook export"
-msgstr "Outlook adres defterinde sonuç bulunamadı"
 
 msgid "No result from reverse lookup"
 msgstr "Hizmet sağlayıcı rehberinde kayıt bulunamadı"
@@ -531,12 +533,6 @@ msgstr "Ara (büyük-küçük harf duyarlı)"
 
 msgid "Search phonebook"
 msgstr "Rehberde ara"
-
-msgid "Searching in LDIF..."
-msgstr "LDIF dosyası içinde aranıyor..."
-
-msgid "Searching in Outlook export..."
-msgstr "Outlook adres defteri içinde aranıyor..."
 
 msgid "Setting..."
 msgstr ""
@@ -670,9 +666,6 @@ msgstr ""
 "Bağlantı sorunu yaşarsanız, tekrar deneyin."
 
 msgid "before 05.27"
-msgstr ""
-
-msgid "business"
 msgstr ""
 
 msgid "call diversions active"
