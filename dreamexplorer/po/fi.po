@@ -1,0 +1,271 @@
+# DreamExplorer
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the DreamExplorer package.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: DreamExplorer 1.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-04-24 08:16+0200\n"
+"PO-Revision-Date: 2025-10-12 10:55+0300\n"
+"Last-Translator: Orlandox\n"
+"Language-Team: Orlandox\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.7\n"
+
+msgid " Media-filter"
+msgstr " Media-suodatin"
+
+#, python-format
+msgid ""
+"%s \n"
+"FAILED!"
+msgstr ""
+"%s \n"
+"EPÄONNISTUI!"
+
+msgid "About"
+msgstr "Tietoja"
+
+msgid "BZ2-package:\\n"
+msgstr "BZ2-paketti:\\n"
+
+msgid "Bookmarks"
+msgstr "Kirjanmerkit"
+
+msgid "Bootlogo-package:\\n"
+msgstr "Bootlogo-paketti:\\n"
+
+msgid "Cancel"
+msgstr "Peruuta"
+
+msgid "Copy"
+msgstr "Kopioi"
+
+msgid "Create new directory"
+msgstr "Luo uusi hakemisto"
+
+msgid "Create new directory in..."
+msgstr "Luo uusi hakemisto tänne..."
+
+msgid "Create new file"
+msgstr "Luo uusi tiedosto"
+
+msgid "Create new file in..."
+msgstr "Luo uusi tiedosto tänne..."
+
+msgid "Create softlink..."
+msgstr "Luo softlink..."
+
+msgid "Delete"
+msgstr "Poista"
+
+msgid "Directory name error !"
+msgstr "Virhe hakemiston nimessä !"
+
+msgid "Disassemble to bytecode..."
+msgstr "Pura tavukoodiksi..."
+
+msgid "Do you really want to DELETE:\n"
+msgstr "Haluatko todella POISTAA:\n"
+
+msgid "Do you want to execute?\\n"
+msgstr "Haluatko suorittaa?\\n"
+
+msgid "Do you want to set\n"
+msgstr "Haluatko asettaa\n"
+
+msgid "Dream Explorer..."
+msgstr "Dream Explorer..."
+
+msgid "Dream-Explorer"
+msgstr "Dream-Explorer"
+
+msgid "Dream-Explorer - DELETE DIRECTORY..."
+msgstr "Dream-Explorer - POISTA HEKEMISTO..."
+
+msgid "Dream-Explorer - DELETE file..."
+msgstr "Dream-Explorer - POISTA TIEDOSTO..."
+
+msgid "Dream-Explorer : Disassemble..."
+msgstr "Dream-Explorer : Pura..."
+
+msgid "Dream-Explorer : Install..."
+msgstr "Dream-Explorer : Asenna..."
+
+msgid "Dream-Explorer..."
+msgstr "Dream-Explorer..."
+
+msgid "Dreambox: "
+msgstr "Laite: "
+
+msgid "Edit line "
+msgstr "Muokkaa riviä "
+
+msgid "Error by reading bookmarks !!!"
+msgstr "Virhe kirjanmerkkien lukemisessa !!!"
+
+msgid "Error by writing bookmarks !!!"
+msgstr "Virhe kirjanmerkkien kirjoittamisessa !!!"
+
+msgid "Error..."
+msgstr "Virhe..."
+
+msgid "Explore your Dreambox."
+msgstr "Tutki laitettasi."
+
+msgid "File name error !"
+msgstr "Tiedoston nimivirhe !"
+
+msgid "GZ-package:\\n"
+msgstr "GZ-paketti:\\n"
+
+msgid "INFO"
+msgstr "INFO"
+
+msgid "IPKG-package:\\n"
+msgstr "IPKG-paketti:\\n"
+
+msgid "Incompatible MerlinMusicPlayer version!"
+msgstr "Yhteensopimaton MerlinMusicPlayer-versio!"
+
+msgid "Info..."
+msgstr "Info..."
+
+msgid "Input"
+msgstr "Tulo"
+
+msgid "Install new bootlogo..."
+msgstr "Asenna uusi bootlogo..."
+
+msgid "Install this package"
+msgstr "Asenna tämä paketti"
+
+msgid "List of Storage Devices"
+msgstr "Luettelo tallennuslaitteista"
+
+msgid "MENU"
+msgstr "MENU"
+
+msgid "Make a softlink"
+msgstr "Luo softlink"
+
+msgid "Move"
+msgstr "Siirrä"
+
+msgid "Move/Copy"
+msgstr "Siirrä/Kopioi"
+
+msgid "My Bookmarks"
+msgstr "Kirjanmerkkini"
+
+msgid "No more picture-files."
+msgstr "Ei enää kuvatiedostoja."
+
+msgid "No more playable files."
+msgstr "Ei enää toistettavia tiedostoja."
+
+msgid "Options:\n"
+msgstr "Vaihtoehdot:\n"
+
+msgid "Pack my bootlogo"
+msgstr "Pakkaa bootlogoni"
+
+msgid "Parent Directory"
+msgstr "Päähakemisto"
+
+msgid "Picture-Player not aviable."
+msgstr "Kuvasoitin ei ole käytettävissä."
+
+msgid "Preview all pictures"
+msgstr "Esikatsele kaikki kuvat"
+
+msgid "Pyc-Script:\\n"
+msgstr "Pyc-skripti:\\n"
+
+msgid "Rename"
+msgstr "Nimeä uudelleen"
+
+msgid "Rename directory..."
+msgstr "Nimeä hakemisto uudelleen..."
+
+msgid "Rename file..."
+msgstr "Nimeä tiedosto uudelleen..."
+
+#, python-format
+msgid ""
+"Rename: %s \n"
+"FAILED!"
+msgstr ""
+"Nimeä uudelleen: %s \n"
+"EPÄONNISTUI!"
+
+msgid "Set archive mode (644)"
+msgstr "Aseta arkistointitila (644)"
+
+msgid "Set executable mode (755)"
+msgstr "Aseta suoritustila (755)"
+
+msgid "Set name"
+msgstr "Aseta nimi"
+
+msgid "Set start directory"
+msgstr "Aseta aloitushakemisto"
+
+msgid "Softlink name error !"
+msgstr "Softlinkin nimivirhe !"
+
+msgid "Sort by date (bouquet-)"
+msgstr "Lajittele päivämäärän mukaan (suosikkilista-)"
+
+msgid "Sort by name (bouquet+)"
+msgstr "Lajittele nimen mukaan (suosikkilista+)"
+
+msgid "Start execution"
+msgstr "Aloita suoritus"
+
+msgid "This line is not editable!"
+msgstr "Tätä riviä ei voi muokata!"
+
+msgid "Turn off the media-filter first."
+msgstr "Ota ensin mediasuodatin pois päältä."
+
+msgid "View this shell-script"
+msgstr "Näytä tämä komentotulkki-skripti"
+
+msgid "WARNING! they doing now COPY or MOVE\n"
+msgstr "VAROITUS! Nyt tehdään KOPIOINTI tai SIIRTO\n"
+
+msgid "WARNING! they make now a softlink from\n"
+msgstr "WARNING! Nyt tehdään tästä softlink\n"
+
+msgid "Write the new softlink name here:"
+msgstr "Kirjoita uuden softlinkin nimi tähän:"
+
+msgid "[All files] "
+msgstr "[Kaikki tiedostot] "
+
+msgid "[Media files] "
+msgstr "[Mediatiedostot] "
+
+msgid "[sort by Date] "
+msgstr "[Lajittele päivämäärän mukaan] "
+
+msgid "[sort by Name] "
+msgstr "[Lajittele nimen mukaan] "
+
+msgid "loading... "
+msgstr "lataan... "
+
+msgid "old:  "
+msgstr "vanha:  "
+
+msgid "ready..."
+msgstr "valmis..."
+
+msgid "wait..."
+msgstr "odota..."
