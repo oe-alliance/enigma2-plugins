@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-24 08:16+0200\n"
+"POT-Creation-Date: 2025-10-12 11:49+0200\n"
 "PO-Revision-Date: 2015-10-07 18:57+0300\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: openpli.org\n"
@@ -17,6 +17,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 1.8.4\n"
+
+msgid ""
+"\n"
+"\n"
+"You do it at your own risk!"
+msgstr ""
+
+msgid ""
+"\n"
+"have been CHANGED! Do you want to save it?\n"
+"\n"
+"WARNING!\n"
+"\n"
+"The Editor-Funktions are beta (not full tested) !!!\n"
+"The author are NOT RESPONSIBLE\n"
+"for DATA LOST OR DISORDERS !!!"
+msgstr ""
 
 msgid " Media-filter"
 msgstr " Медиа-фильтр"
@@ -31,6 +48,9 @@ msgstr ""
 
 msgid "About"
 msgstr "Информация"
+
+msgid "Add directory to Bookmarks"
+msgstr ""
 
 msgid "BZ2-package:\\n"
 msgstr "BZ2-пакет:\\n"
@@ -69,6 +89,9 @@ msgstr ""
 
 msgid "Directory name error !"
 msgstr "Ошибка имени директории !"
+
+msgid "Disable"
+msgstr ""
 
 msgid "Disassemble to bytecode..."
 msgstr "Разобрать в байт-код ..."
@@ -110,6 +133,9 @@ msgstr ""
 
 msgid "Edit line "
 msgstr "Редактирование строки "
+
+msgid "Enable"
+msgstr ""
 
 msgid "Error by reading bookmarks !!!"
 msgstr "Ошибка чтения закладок !!!"
@@ -163,6 +189,10 @@ msgid "Make a softlink"
 msgstr "Создать символьную ссылку..."
 
 #, fuzzy
+msgid "Make a softlink..."
+msgstr "Создать символьную ссылку..."
+
+#, fuzzy
 msgid "Move"
 msgstr "Перем./Копир."
 
@@ -197,6 +227,9 @@ msgstr "Превью всех фотографий"
 msgid "Pyc-Script:\\n"
 msgstr "Pyc-скрипт:\\n"
 
+msgid "Remove directory from Bookmarks"
+msgstr ""
+
 #, fuzzy
 msgid "Rename"
 msgstr "Переименование файла..."
@@ -215,11 +248,21 @@ msgstr ""
 "Переименование: %s \n"
 "ОШИБКА!"
 
+msgid "Running processes: "
+msgstr ""
+
+msgid "Select Copy/Move location..."
+msgstr ""
+
 msgid "Set archive mode (644)"
 msgstr "Установить права чтения (644)"
 
 msgid "Set executable mode (755)"
 msgstr "Установить права выполнения (755)"
+
+#, fuzzy
+msgid "Set first the Softlink name ..."
+msgstr "Впишите имя новой символьной ссылки здесь:"
 
 msgid "Set name"
 msgstr ""
@@ -248,10 +291,18 @@ msgstr "Выключите медиа-фильтр в первую очеред�
 msgid "View this shell-script"
 msgstr "Просмотр этого shell-скрипта"
 
-msgid "WARNING! they doing now COPY or MOVE\n"
+#, fuzzy, python-format
+msgid ""
+"WARNING! they doing now COPY or MOVE\n"
+"%s\n"
+"to:"
 msgstr "ВНИМАНИЕ! сейчас происходит КОПИРОВАНИЕ или ПЕРЕМЕЩЕНИЕ\n"
 
-msgid "WARNING! they make now a softlink from\n"
+#, fuzzy, python-format
+msgid ""
+"WARNING! they make now a softlink from\n"
+"%s\n"
+"to:"
 msgstr "ВНИМАНИЕ! сейчас будет создана новая символьная ссылка из\n"
 
 msgid "Write the new softlink name here:"

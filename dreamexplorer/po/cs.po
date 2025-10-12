@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ims\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-24 08:16+0200\n"
+"POT-Creation-Date: 2025-10-12 11:49+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi <ims21@users.sourceforge.net>\n"
@@ -12,6 +12,23 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+msgid ""
+"\n"
+"\n"
+"You do it at your own risk!"
+msgstr ""
+
+msgid ""
+"\n"
+"have been CHANGED! Do you want to save it?\n"
+"\n"
+"WARNING!\n"
+"\n"
+"The Editor-Funktions are beta (not full tested) !!!\n"
+"The author are NOT RESPONSIBLE\n"
+"for DATA LOST OR DISORDERS !!!"
+msgstr ""
 
 #
 msgid " Media-filter"
@@ -28,6 +45,9 @@ msgstr ""
 #
 msgid "About"
 msgstr "O přijímači"
+
+msgid "Add directory to Bookmarks"
+msgstr ""
 
 msgid "BZ2-package:\\n"
 msgstr "BZ2-balíček:\\n"
@@ -71,6 +91,9 @@ msgstr ""
 msgid "Directory name error !"
 msgstr "Chyba v názvu adresáře!"
 
+msgid "Disable"
+msgstr ""
+
 msgid "Disassemble to bytecode..."
 msgstr "Disassemble na bytecode..."
 
@@ -113,6 +136,9 @@ msgstr ""
 #
 msgid "Edit line "
 msgstr "Upravit řádek "
+
+msgid "Enable"
+msgstr ""
 
 msgid "Error by reading bookmarks !!!"
 msgstr "Chyba při čtení záložek !!!"
@@ -171,6 +197,10 @@ msgstr ""
 msgid "Make a softlink"
 msgstr "Vytvořit softlink..."
 
+#, fuzzy
+msgid "Make a softlink..."
+msgstr "Vytvořit softlink..."
+
 msgid "Move"
 msgstr ""
 
@@ -209,6 +239,9 @@ msgstr "Prohlédnout všechny obrázky"
 msgid "Pyc-Script:\\n"
 msgstr ""
 
+msgid "Remove directory from Bookmarks"
+msgstr ""
+
 #
 #, fuzzy
 msgid "Rename"
@@ -230,11 +263,21 @@ msgstr ""
 "Přejmenovat: %s \n"
 "SELHALO!"
 
+msgid "Running processes: "
+msgstr ""
+
+msgid "Select Copy/Move location..."
+msgstr ""
+
 msgid "Set archive mode (644)"
 msgstr "Nastavit archivní mód (644)"
 
 msgid "Set executable mode (755)"
 msgstr "Nastavit spouštěcí mód (755)"
+
+#, fuzzy
+msgid "Set first the Softlink name ..."
+msgstr "Zapište název nového softlinku:"
 
 msgid "Set name"
 msgstr ""
@@ -267,10 +310,18 @@ msgstr "Nejdříve vypněte multimediální filtr."
 msgid "View this shell-script"
 msgstr "Prohlédnout tento shell-script"
 
-msgid "WARNING! they doing now COPY or MOVE\n"
+#, fuzzy, python-format
+msgid ""
+"WARNING! they doing now COPY or MOVE\n"
+"%s\n"
+"to:"
 msgstr "POZOR! Právě se Kopíruje/Přemísťuje\n"
 
-msgid "WARNING! they make now a softlink from\n"
+#, fuzzy, python-format
+msgid ""
+"WARNING! they make now a softlink from\n"
+"%s\n"
+"to:"
 msgstr "POZOR! Vytváří se softlink z\n"
 
 msgid "Write the new softlink name here:"

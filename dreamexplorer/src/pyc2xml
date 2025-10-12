@@ -312,17 +312,17 @@ def main():
             filein = arg
     else:
         filein = "noFile"
-        print 'Command line incorrect !\nUsage: pyc2xml /tmp/YOURFILE.PYC'
+        print('Command line incorrect !\nUsage: pyc2xml /tmp/YOURFILE.PYC')
         exit()
 
     if not ((filein.endswith('.pyc')) or (filein.endswith('.pyo'))):
         filein = "noFile"
-        print 'File-extension incorrect !\nUsage: pyc2xml /tmp/YOURFILE.PYC'
+        print('File-extension incorrect !\nUsage: pyc2xml /tmp/YOURFILE.PYC')
         exit()
     else:
         xml = xml_pyc(filein)
         fileout = '/tmp/disassembled.xml'
-        print 'Disassembling:', filein, ' --> ', fileout
+        print('Disassembling:', filein, ' --> ', fileout)
         fo = open(fileout, 'w')
         fo.write(xml)
         fo.close()

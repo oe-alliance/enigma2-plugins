@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-24 08:16+0200\n"
+"POT-Creation-Date: 2025-10-12 11:49+0200\n"
 "PO-Revision-Date: 2017-06-02 20:32+0200\n"
 "Last-Translator: hawkeye116477 <hawkeye116477@gmail.com>\n"
 "Language-Team: \n"
@@ -12,6 +12,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.1\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid ""
+"\n"
+"\n"
+"You do it at your own risk!"
+msgstr ""
+
+msgid ""
+"\n"
+"have been CHANGED! Do you want to save it?\n"
+"\n"
+"WARNING!\n"
+"\n"
+"The Editor-Funktions are beta (not full tested) !!!\n"
+"The author are NOT RESPONSIBLE\n"
+"for DATA LOST OR DISORDERS !!!"
+msgstr ""
 
 msgid " Media-filter"
 msgstr " Filtr multimedialny"
@@ -26,6 +43,9 @@ msgstr ""
 
 msgid "About"
 msgstr "O wtyczce"
+
+msgid "Add directory to Bookmarks"
+msgstr ""
 
 msgid "BZ2-package:\\n"
 msgstr "Paczka bz2:\\n"
@@ -63,6 +83,9 @@ msgstr ""
 
 msgid "Directory name error !"
 msgstr "Błąd w nazwie katalogu!"
+
+msgid "Disable"
+msgstr ""
 
 msgid "Disassemble to bytecode..."
 msgstr "Rozbierz na kod bajtowy..."
@@ -103,6 +126,9 @@ msgstr ""
 
 msgid "Edit line "
 msgstr "Edycja wiersza"
+
+msgid "Enable"
+msgstr ""
 
 msgid "Error by reading bookmarks !!!"
 msgstr "Błąd w odczycie zakładek !!!"
@@ -155,6 +181,10 @@ msgstr ""
 msgid "Make a softlink"
 msgstr "Zrób dowiązanie symboliczne..."
 
+#, fuzzy
+msgid "Make a softlink..."
+msgstr "Zrób dowiązanie symboliczne..."
+
 msgid "Move"
 msgstr ""
 
@@ -189,6 +219,9 @@ msgstr "Podgląd wszystkich zdjęć"
 msgid "Pyc-Script:\\n"
 msgstr "Skrypt pyc:\\n"
 
+msgid "Remove directory from Bookmarks"
+msgstr ""
+
 #, fuzzy
 msgid "Rename"
 msgstr "Zmień nazwę pliku..."
@@ -207,11 +240,21 @@ msgstr ""
 "Zmiana nazwy: %s \n"
 "NIE POWIODŁA SIĘ!"
 
+msgid "Running processes: "
+msgstr ""
+
+msgid "Select Copy/Move location..."
+msgstr ""
+
 msgid "Set archive mode (644)"
 msgstr "Ustaw tryb archiwum (644)"
 
 msgid "Set executable mode (755)"
 msgstr "Ustaw tryb wykonywalny (755)"
+
+#, fuzzy
+msgid "Set first the Softlink name ..."
+msgstr "Napisz tutaj nową nazwę dowiązania symbolicznego:"
 
 msgid "Set name"
 msgstr ""
@@ -240,10 +283,18 @@ msgstr "Najpierw wyłącz filtr multimedialny."
 msgid "View this shell-script"
 msgstr "Wyświetl ten skrypt powłoki"
 
-msgid "WARNING! they doing now COPY or MOVE\n"
+#, fuzzy, python-format
+msgid ""
+"WARNING! they doing now COPY or MOVE\n"
+"%s\n"
+"to:"
 msgstr "UWAGA! oni teraz KOPIUJĄ lub PRZENOSZĄ\n"
 
-msgid "WARNING! they make now a softlink from\n"
+#, fuzzy, python-format
+msgid ""
+"WARNING! they make now a softlink from\n"
+"%s\n"
+"to:"
 msgstr "UWAGA! oni teraz robią dowiązanie symboliczne z\n"
 
 msgid "Write the new softlink name here:"

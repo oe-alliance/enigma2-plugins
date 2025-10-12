@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DreamExplorer 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-24 08:16+0200\n"
+"POT-Creation-Date: 2025-10-12 11:49+0200\n"
 "PO-Revision-Date: 2025-10-12 11:53+0300\n"
 "Last-Translator: Orlandox\n"
 "Language-Team: Orlandox\n"
@@ -16,6 +16,23 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.7\n"
+
+msgid ""
+"\n"
+"\n"
+"You do it at your own risk!"
+msgstr ""
+
+msgid ""
+"\n"
+"have been CHANGED! Do you want to save it?\n"
+"\n"
+"WARNING!\n"
+"\n"
+"The Editor-Funktions are beta (not full tested) !!!\n"
+"The author are NOT RESPONSIBLE\n"
+"for DATA LOST OR DISORDERS !!!"
+msgstr ""
 
 msgid " Media-filter"
 msgstr " Media-suodatin"
@@ -163,6 +180,10 @@ msgstr "MENU"
 msgid "Make a softlink"
 msgstr "Luo softlink"
 
+#, fuzzy
+msgid "Make a softlink..."
+msgstr "Luo softlink"
+
 msgid "Move"
 msgstr "Siirrä"
 
@@ -196,6 +217,10 @@ msgstr "Esikatsele kaikki kuvat"
 msgid "Pyc-Script:\\n"
 msgstr "Pyc-skripti:\\n"
 
+#, fuzzy
+msgid "Remove directory from Bookmarks"
+msgstr "Lisää hakemisto kirjanmerkkeihin"
+
 msgid "Rename"
 msgstr "Nimeä uudelleen"
 
@@ -213,11 +238,21 @@ msgstr ""
 "Nimeä uudelleen: %s \n"
 "EPÄONNISTUI!"
 
+msgid "Running processes: "
+msgstr ""
+
+msgid "Select Copy/Move location..."
+msgstr ""
+
 msgid "Set archive mode (644)"
 msgstr "Aseta arkistointitila (644)"
 
 msgid "Set executable mode (755)"
 msgstr "Aseta suoritustila (755)"
+
+#, fuzzy
+msgid "Set first the Softlink name ..."
+msgstr "Kirjoita uuden softlinkin nimi tähän:"
 
 msgid "Set name"
 msgstr "Aseta nimi"
@@ -246,10 +281,18 @@ msgstr "Ota ensin mediasuodatin pois päältä."
 msgid "View this shell-script"
 msgstr "Näytä tämä komentotulkki-skripti"
 
-msgid "WARNING! they doing now COPY or MOVE\n"
+#, fuzzy, python-format
+msgid ""
+"WARNING! they doing now COPY or MOVE\n"
+"%s\n"
+"to:"
 msgstr "VAROITUS! Nyt tehdään KOPIOINTI tai SIIRTO\n"
 
-msgid "WARNING! they make now a softlink from\n"
+#, fuzzy, python-format
+msgid ""
+"WARNING! they make now a softlink from\n"
+"%s\n"
+"to:"
 msgstr "WARNING! Nyt tehdään tästä softlink\n"
 
 msgid "Write the new softlink name here:"

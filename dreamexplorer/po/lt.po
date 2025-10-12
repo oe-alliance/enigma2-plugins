@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dreamexplorer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-24 08:16+0200\n"
+"POT-Creation-Date: 2025-10-12 11:49+0200\n"
 "PO-Revision-Date: 2021-09-13 14:21+0300\n"
 "Last-Translator: \n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
@@ -18,6 +18,23 @@ msgstr ""
 "X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+
+msgid ""
+"\n"
+"\n"
+"You do it at your own risk!"
+msgstr ""
+
+msgid ""
+"\n"
+"have been CHANGED! Do you want to save it?\n"
+"\n"
+"WARNING!\n"
+"\n"
+"The Editor-Funktions are beta (not full tested) !!!\n"
+"The author are NOT RESPONSIBLE\n"
+"for DATA LOST OR DISORDERS !!!"
+msgstr ""
 
 msgid " Media-filter"
 msgstr "Mediafiltras"
@@ -32,6 +49,9 @@ msgstr ""
 
 msgid "About"
 msgstr "Apie"
+
+msgid "Add directory to Bookmarks"
+msgstr ""
 
 msgid "BZ2-package:\\n"
 msgstr "BZ2-paketas: \\n"
@@ -69,6 +89,9 @@ msgstr "Šalinti"
 
 msgid "Directory name error !"
 msgstr "Katalogo pavadinimo klaida!"
+
+msgid "Disable"
+msgstr ""
 
 msgid "Disassemble to bytecode..."
 msgstr "Išrinkti į baitinį kodą..."
@@ -109,6 +132,9 @@ msgstr ""
 
 msgid "Edit line "
 msgstr "Redaguoti laukelį "
+
+msgid "Enable"
+msgstr ""
 
 msgid "Error by reading bookmarks !!!"
 msgstr "Klaida, skaitant atžymas!"
@@ -161,6 +187,10 @@ msgid "Make a softlink"
 msgstr "Sukurti nuorodą"
 
 #, fuzzy
+msgid "Make a softlink..."
+msgstr "Sukurti nuorodą"
+
+#, fuzzy
 msgid "Move"
 msgstr "Perkelti/kopijuoti"
 
@@ -195,6 +225,9 @@ msgstr "Peržvelgti paveikslėlius"
 msgid "Pyc-Script:\\n"
 msgstr "Pyc scenarijus:\\n"
 
+msgid "Remove directory from Bookmarks"
+msgstr ""
+
 msgid "Rename"
 msgstr "Pervadinti"
 
@@ -212,11 +245,21 @@ msgstr ""
 "Pervadinti: %s \n"
 "NEPAVYKO!"
 
+msgid "Running processes: "
+msgstr ""
+
+msgid "Select Copy/Move location..."
+msgstr ""
+
 msgid "Set archive mode (644)"
 msgstr "Nustatyti archyvo režimą (644)"
 
 msgid "Set executable mode (755)"
 msgstr "Nustatyti vykdomą režimą (755)"
+
+#, fuzzy
+msgid "Set first the Softlink name ..."
+msgstr "Įrašykite naujos nuorodos pavadinimą:"
 
 msgid "Set name"
 msgstr "Nustatyti pavadinimą"
@@ -245,10 +288,18 @@ msgstr "Pirmiausiai išjunkite mediafiltrą."
 msgid "View this shell-script"
 msgstr "Rodyti šį aplinkos scenarijų"
 
-msgid "WARNING! they doing now COPY or MOVE\n"
+#, fuzzy, python-format
+msgid ""
+"WARNING! they doing now COPY or MOVE\n"
+"%s\n"
+"to:"
 msgstr "DĖMESIO! dabar vykdoma KOPIJUOTI arba PERKELTI\n"
 
-msgid "WARNING! they make now a softlink from\n"
+#, fuzzy, python-format
+msgid ""
+"WARNING! they make now a softlink from\n"
+"%s\n"
+"to:"
 msgstr "DĖMESIO! dabar kuriama nuoroda į\n"
 
 msgid "Write the new softlink name here:"

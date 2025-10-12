@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dreamexplorer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-24 08:16+0200\n"
+"POT-Creation-Date: 2025-10-12 11:49+0200\n"
 "PO-Revision-Date: 2020-10-01 20:23+0300\n"
 "Last-Translator: mosad - مساعد الجعيد <abo-mishal@hotmail.com>\n"
 "Language-Team: mosad - مساعد الجعيد\n"
@@ -17,6 +17,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.4.1\n"
 "Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+
+msgid ""
+"\n"
+"\n"
+"You do it at your own risk!"
+msgstr ""
+
+msgid ""
+"\n"
+"have been CHANGED! Do you want to save it?\n"
+"\n"
+"WARNING!\n"
+"\n"
+"The Editor-Funktions are beta (not full tested) !!!\n"
+"The author are NOT RESPONSIBLE\n"
+"for DATA LOST OR DISORDERS !!!"
+msgstr ""
 
 msgid " Media-filter"
 msgstr " تصفية الوسائط"
@@ -31,6 +48,9 @@ msgstr ""
 
 msgid "About"
 msgstr "حول"
+
+msgid "Add directory to Bookmarks"
+msgstr ""
 
 msgid "BZ2-package:\\n"
 msgstr "BZ2-الحزمة:\\n"
@@ -68,6 +88,9 @@ msgstr "حذف"
 
 msgid "Directory name error !"
 msgstr "خطأ اسم المسار !"
+
+msgid "Disable"
+msgstr ""
 
 msgid "Disassemble to bytecode..."
 msgstr "تفكيك إلى بايت كود ..."
@@ -108,6 +131,9 @@ msgstr ""
 
 msgid "Edit line "
 msgstr "تعديل السطر "
+
+msgid "Enable"
+msgstr ""
 
 msgid "Error by reading bookmarks !!!"
 msgstr "خطأ بقراءة الإشارات المرجعية !!!"
@@ -160,6 +186,10 @@ msgid "Make a softlink"
 msgstr "إنشاء رابط"
 
 #, fuzzy
+msgid "Make a softlink..."
+msgstr "إنشاء رابط"
+
+#, fuzzy
 msgid "Move"
 msgstr "تحريك/نسخ"
 
@@ -194,6 +224,9 @@ msgstr "معاينة جميع الصور"
 msgid "Pyc-Script:\\n"
 msgstr "مزامنة السكريبت:\\n"
 
+msgid "Remove directory from Bookmarks"
+msgstr ""
+
 msgid "Rename"
 msgstr "إعادة التسميه"
 
@@ -211,11 +244,21 @@ msgstr ""
 "إعادة التسمية: %s \n"
 "فشل!"
 
+msgid "Running processes: "
+msgstr ""
+
+msgid "Select Copy/Move location..."
+msgstr ""
+
 msgid "Set archive mode (644)"
 msgstr "تعيين وضع التصريح (644)"
 
 msgid "Set executable mode (755)"
 msgstr "تعيين وضع التصريح (755)"
+
+#, fuzzy
+msgid "Set first the Softlink name ..."
+msgstr "اكتب اسم الرابط الجديد هنا:"
 
 msgid "Set name"
 msgstr "تعيين الاسم"
@@ -244,10 +287,18 @@ msgstr "قم بإيقاف تشغيل عامل تصفية الوسائط أولا
 msgid "View this shell-script"
 msgstr "عرض هذا البرنامج النصي"
 
-msgid "WARNING! they doing now COPY or MOVE\n"
+#, fuzzy, python-format
+msgid ""
+"WARNING! they doing now COPY or MOVE\n"
+"%s\n"
+"to:"
 msgstr "تحذير! يفعلون الآن نسخ أو نقل\n"
 
-msgid "WARNING! they make now a softlink from\n"
+#, fuzzy, python-format
+msgid ""
+"WARNING! they make now a softlink from\n"
+"%s\n"
+"to:"
 msgstr "تحذير! أنها تجعل الآن الرابط من\n"
 
 msgid "Write the new softlink name here:"

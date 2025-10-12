@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-24 08:16+0200\n"
+"POT-Creation-Date: 2025-10-12 11:49+0200\n"
 "PO-Revision-Date: 2018-05-11 21:48+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,6 +17,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.7\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid ""
+"\n"
+"\n"
+"You do it at your own risk!"
+msgstr ""
+
+msgid ""
+"\n"
+"have been CHANGED! Do you want to save it?\n"
+"\n"
+"WARNING!\n"
+"\n"
+"The Editor-Funktions are beta (not full tested) !!!\n"
+"The author are NOT RESPONSIBLE\n"
+"for DATA LOST OR DISORDERS !!!"
+msgstr ""
 
 msgid " Media-filter"
 msgstr " Filtre de média"
@@ -31,6 +48,9 @@ msgstr ""
 
 msgid "About"
 msgstr "À propos"
+
+msgid "Add directory to Bookmarks"
+msgstr ""
 
 msgid "BZ2-package:\\n"
 msgstr "paquet BZ2:\\n"
@@ -68,6 +88,9 @@ msgstr "Supprimer"
 
 msgid "Directory name error !"
 msgstr "Erreur de nom de répertoire !"
+
+msgid "Disable"
+msgstr ""
 
 msgid "Disassemble to bytecode..."
 msgstr "Dé-assembler vers byte code…"
@@ -108,6 +131,9 @@ msgstr ""
 
 msgid "Edit line "
 msgstr "Editer la ligne "
+
+msgid "Enable"
+msgstr ""
 
 msgid "Error by reading bookmarks !!!"
 msgstr "Erreur en lisant les marque pages !!!"
@@ -160,6 +186,10 @@ msgid "Make a softlink"
 msgstr "Créer un lien symbolique"
 
 #, fuzzy
+msgid "Make a softlink..."
+msgstr "Créer un lien symbolique"
+
+#, fuzzy
 msgid "Move"
 msgstr "Déplacer/Copier"
 
@@ -194,6 +224,9 @@ msgstr "Prévisualiser toutes les images"
 msgid "Pyc-Script:\\n"
 msgstr "Scripte Pyc:\\n"
 
+msgid "Remove directory from Bookmarks"
+msgstr ""
+
 msgid "Rename"
 msgstr "Renommer"
 
@@ -211,11 +244,21 @@ msgstr ""
 "Renommage: %s \n"
 "ECHOUE!"
 
+msgid "Running processes: "
+msgstr ""
+
+msgid "Select Copy/Move location..."
+msgstr ""
+
 msgid "Set archive mode (644)"
 msgstr "Définir le mode archive (644)"
 
 msgid "Set executable mode (755)"
 msgstr "Définir le mode exécutable (755)"
+
+#, fuzzy
+msgid "Set first the Softlink name ..."
+msgstr "Ecrire le nouveau nom du lien symbolique ici:"
 
 msgid "Set name"
 msgstr "Définir le nom"
@@ -244,10 +287,18 @@ msgstr "Désactiver d’abord le filtre de média."
 msgid "View this shell-script"
 msgstr "Voir ce scripte shell"
 
-msgid "WARNING! they doing now COPY or MOVE\n"
+#, fuzzy, python-format
+msgid ""
+"WARNING! they doing now COPY or MOVE\n"
+"%s\n"
+"to:"
 msgstr "ATTENTION! ils font maintenant un COPIER ou DÉPLACER\n"
 
-msgid "WARNING! they make now a softlink from\n"
+#, fuzzy, python-format
+msgid ""
+"WARNING! they make now a softlink from\n"
+"%s\n"
+"to:"
 msgstr "ATTENTION! ils créent maintenant un lien symbolique depuis\n"
 
 msgid "Write the new softlink name here:"

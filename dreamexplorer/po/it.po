@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-24 08:16+0200\n"
+"POT-Creation-Date: 2025-10-12 11:49+0200\n"
 "PO-Revision-Date: 2018-05-29 21:54+0200\n"
 "Last-Translator: Massimo Bambi <maxbambi@libero.it>\n"
 "Language-Team: \n"
@@ -17,6 +17,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid ""
+"\n"
+"\n"
+"You do it at your own risk!"
+msgstr ""
+
+msgid ""
+"\n"
+"have been CHANGED! Do you want to save it?\n"
+"\n"
+"WARNING!\n"
+"\n"
+"The Editor-Funktions are beta (not full tested) !!!\n"
+"The author are NOT RESPONSIBLE\n"
+"for DATA LOST OR DISORDERS !!!"
+msgstr ""
 
 msgid " Media-filter"
 msgstr "Filtro media"
@@ -31,6 +48,9 @@ msgstr ""
 
 msgid "About"
 msgstr "Informazioni"
+
+msgid "Add directory to Bookmarks"
+msgstr ""
 
 msgid "BZ2-package:\\n"
 msgstr "Pacchetto BZ2:\\n"
@@ -68,6 +88,9 @@ msgstr "Rimuovere"
 
 msgid "Directory name error !"
 msgstr "Errore di nome della cartella!"
+
+msgid "Disable"
+msgstr ""
 
 msgid "Disassemble to bytecode..."
 msgstr "Disassembla al bytecode..."
@@ -108,6 +131,9 @@ msgstr ""
 
 msgid "Edit line "
 msgstr "Modifica la linea"
+
+msgid "Enable"
+msgstr ""
 
 msgid "Error by reading bookmarks !!!"
 msgstr "Errore nella lettura dei segnalibri!!!"
@@ -160,6 +186,10 @@ msgid "Make a softlink"
 msgstr "Crea un collegamento"
 
 #, fuzzy
+msgid "Make a softlink..."
+msgstr "Crea un collegamento"
+
+#, fuzzy
 msgid "Move"
 msgstr "Sposta/Copia"
 
@@ -194,6 +224,9 @@ msgstr "Mostra anteprima di tutte le immagini"
 msgid "Pyc-Script:\\n"
 msgstr "Pyc-Script:\\n"
 
+msgid "Remove directory from Bookmarks"
+msgstr ""
+
 msgid "Rename"
 msgstr "Rinomina"
 
@@ -211,11 +244,21 @@ msgstr ""
 "Rinomina: %s \n"
 "FALLITA!"
 
+msgid "Running processes: "
+msgstr ""
+
+msgid "Select Copy/Move location..."
+msgstr ""
+
 msgid "Set archive mode (644)"
 msgstr "Imposta modo per file archivio (644)"
 
 msgid "Set executable mode (755)"
 msgstr "Imposta modo per file eseguibile (755)"
+
+#, fuzzy
+msgid "Set first the Softlink name ..."
+msgstr "Scrivi il nuovo nome per il collegamento:"
 
 msgid "Set name"
 msgstr "Imposta il nome"
@@ -244,12 +287,20 @@ msgstr "Disattiva prima il filtro media."
 msgid "View this shell-script"
 msgstr "Vedi questo script di shell"
 
-msgid "WARNING! they doing now COPY or MOVE\n"
+#, fuzzy, python-format
+msgid ""
+"WARNING! they doing now COPY or MOVE\n"
+"%s\n"
+"to:"
 msgstr ""
 "ATTENZIONE! adesso si effettua una COPIA O SPOSTAMENTO\n"
 " \n"
 
-msgid "WARNING! they make now a softlink from\n"
+#, fuzzy, python-format
+msgid ""
+"WARNING! they make now a softlink from\n"
+"%s\n"
+"to:"
 msgstr "ATTENZIONE! adesso si effettua un collegamento da\n"
 
 msgid "Write the new softlink name here:"
