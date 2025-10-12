@@ -1,0 +1,261 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-04-24 08:16+0200\n"
+"PO-Revision-Date: 2017-05-28 22:30+0200\n"
+"Last-Translator: \n"
+"Language-Team: none\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid " Media-filter"
+msgstr ""
+
+#, python-format
+msgid ""
+"%s \n"
+"FAILED!"
+msgstr ""
+
+msgid "About"
+msgstr ""
+
+msgid "BZ2-package:\\n"
+msgstr ""
+
+msgid "Bookmarks"
+msgstr ""
+
+msgid "Bootlogo-package:\\n"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Copy"
+msgstr ""
+
+msgid "Create new directory"
+msgstr ""
+
+msgid "Create new directory in..."
+msgstr ""
+
+msgid "Create new file"
+msgstr ""
+
+msgid "Create new file in..."
+msgstr ""
+
+msgid "Create softlink..."
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Directory name error !"
+msgstr ""
+
+msgid "Disassemble to bytecode..."
+msgstr ""
+
+msgid "Do you really want to DELETE:\n"
+msgstr ""
+
+msgid "Do you want to execute?\\n"
+msgstr ""
+
+msgid "Do you want to set\n"
+msgstr ""
+
+msgid "Dream Explorer..."
+msgstr ""
+
+msgid "Dream-Explorer"
+msgstr ""
+
+msgid "Dream-Explorer - DELETE DIRECTORY..."
+msgstr ""
+
+msgid "Dream-Explorer - DELETE file..."
+msgstr ""
+
+msgid "Dream-Explorer : Disassemble..."
+msgstr ""
+
+msgid "Dream-Explorer : Install..."
+msgstr ""
+
+msgid "Dream-Explorer..."
+msgstr ""
+
+msgid "Dreambox: "
+msgstr ""
+
+msgid "Edit line "
+msgstr ""
+
+msgid "Error by reading bookmarks !!!"
+msgstr ""
+
+msgid "Error by writing bookmarks !!!"
+msgstr ""
+
+msgid "Error..."
+msgstr ""
+
+msgid "Explore your Dreambox."
+msgstr ""
+
+msgid "File name error !"
+msgstr ""
+
+msgid "GZ-package:\\n"
+msgstr ""
+
+msgid "INFO"
+msgstr ""
+
+msgid "IPKG-package:\\n"
+msgstr ""
+
+msgid "Incompatible MerlinMusicPlayer version!"
+msgstr ""
+
+msgid "Info..."
+msgstr ""
+
+msgid "Input"
+msgstr ""
+
+msgid "Install new bootlogo..."
+msgstr ""
+
+msgid "Install this package"
+msgstr ""
+
+msgid "List of Storage Devices"
+msgstr ""
+
+msgid "MENU"
+msgstr ""
+
+msgid "Make a softlink"
+msgstr ""
+
+msgid "Move"
+msgstr ""
+
+msgid "Move/Copy"
+msgstr ""
+
+msgid "My Bookmarks"
+msgstr ""
+
+msgid "No more picture-files."
+msgstr ""
+
+msgid "No more playable files."
+msgstr ""
+
+msgid "Options:\n"
+msgstr ""
+
+msgid "Pack my bootlogo"
+msgstr ""
+
+msgid "Parent Directory"
+msgstr ""
+
+msgid "Picture-Player not aviable."
+msgstr ""
+
+msgid "Preview all pictures"
+msgstr ""
+
+msgid "Pyc-Script:\\n"
+msgstr ""
+
+msgid "Rename"
+msgstr ""
+
+msgid "Rename directory..."
+msgstr ""
+
+msgid "Rename file..."
+msgstr ""
+
+#, python-format
+msgid ""
+"Rename: %s \n"
+"FAILED!"
+msgstr ""
+
+msgid "Set archive mode (644)"
+msgstr ""
+
+msgid "Set executable mode (755)"
+msgstr ""
+
+msgid "Set name"
+msgstr ""
+
+msgid "Set start directory"
+msgstr ""
+
+msgid "Softlink name error !"
+msgstr ""
+
+msgid "Sort by date (bouquet-)"
+msgstr ""
+
+msgid "Sort by name (bouquet+)"
+msgstr ""
+
+msgid "Start execution"
+msgstr ""
+
+msgid "This line is not editable!"
+msgstr ""
+
+msgid "Turn off the media-filter first."
+msgstr ""
+
+msgid "View this shell-script"
+msgstr ""
+
+msgid "WARNING! they doing now COPY or MOVE\n"
+msgstr ""
+
+msgid "WARNING! they make now a softlink from\n"
+msgstr ""
+
+msgid "Write the new softlink name here:"
+msgstr ""
+
+msgid "[All files] "
+msgstr ""
+
+msgid "[Media files] "
+msgstr ""
+
+msgid "[sort by Date] "
+msgstr ""
+
+msgid "[sort by Name] "
+msgstr ""
+
+msgid "loading... "
+msgstr ""
+
+msgid "old:  "
+msgstr ""
+
+msgid "ready..."
+msgstr ""
+
+msgid "wait..."
+msgstr ""

@@ -1,0 +1,278 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: dreamexplorer\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-04-24 08:16+0200\n"
+"PO-Revision-Date: 2020-10-01 20:23+0300\n"
+"Last-Translator: mosad - مساعد الجعيد <abo-mishal@hotmail.com>\n"
+"Language-Team: mosad - مساعد الجعيد\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.1\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+
+msgid " Media-filter"
+msgstr " تصفية الوسائط"
+
+#, python-format
+msgid ""
+"%s \n"
+"FAILED!"
+msgstr ""
+"%s \n"
+"فشل!"
+
+msgid "About"
+msgstr "حول"
+
+msgid "BZ2-package:\\n"
+msgstr "BZ2-الحزمة:\\n"
+
+msgid "Bookmarks"
+msgstr "الاشارات المرجعية"
+
+msgid "Bootlogo-package:\\n"
+msgstr "حزمة -صورة بداية التشغيل:\\n"
+
+msgid "Cancel"
+msgstr "إلغاء"
+
+#, fuzzy
+msgid "Copy"
+msgstr "تحريك/نسخ"
+
+msgid "Create new directory"
+msgstr "إنشاء مجلد جديد"
+
+msgid "Create new directory in..."
+msgstr "إنشاء مجلد جديد في..."
+
+msgid "Create new file"
+msgstr "إنشاء ملف جديد"
+
+msgid "Create new file in..."
+msgstr "إنشاء ملف جديد في..."
+
+msgid "Create softlink..."
+msgstr "إنشاء رابط..."
+
+msgid "Delete"
+msgstr "حذف"
+
+msgid "Directory name error !"
+msgstr "خطأ اسم المسار !"
+
+msgid "Disassemble to bytecode..."
+msgstr "تفكيك إلى بايت كود ..."
+
+#, fuzzy
+msgid "Do you really want to DELETE:\n"
+msgstr "هل تريد حقا حذف:\n"
+
+msgid "Do you want to execute?\\n"
+msgstr "هل تريد التنفيذ؟\\n"
+
+msgid "Do you want to set\n"
+msgstr "هل تريد تعيين\n"
+
+msgid "Dream Explorer..."
+msgstr "متصفح ملفات الرسيفر..."
+
+msgid "Dream-Explorer"
+msgstr "تصفح ملفات الرسيفر"
+
+msgid "Dream-Explorer - DELETE DIRECTORY..."
+msgstr "متصفح ملفات الرسيفر - حذف المسار..."
+
+msgid "Dream-Explorer - DELETE file..."
+msgstr "متصفح ملفات الرسيفر - حذف الملف..."
+
+msgid "Dream-Explorer : Disassemble..."
+msgstr "متصفح ملفات الرسيفر - تفكيك..."
+
+msgid "Dream-Explorer : Install..."
+msgstr "متصفح ملفات الرسيفر - تثبيت..."
+
+msgid "Dream-Explorer..."
+msgstr "متصفح ملفات الرسيفر..."
+
+msgid "Dreambox: "
+msgstr ""
+
+msgid "Edit line "
+msgstr "تعديل السطر "
+
+msgid "Error by reading bookmarks !!!"
+msgstr "خطأ بقراءة الإشارات المرجعية !!!"
+
+msgid "Error by writing bookmarks !!!"
+msgstr "خطأ بكتابة الإشارات المرجعية !!!"
+
+msgid "Error..."
+msgstr "خطا..."
+
+#, fuzzy
+msgid "Explore your Dreambox."
+msgstr "تصفح جهاز الاستقبال الخاص بك"
+
+msgid "File name error !"
+msgstr "خطأ اسم الملف !"
+
+msgid "GZ-package:\\n"
+msgstr "GZ-الحزمة:\\n"
+
+msgid "INFO"
+msgstr ""
+
+#, fuzzy
+msgid "IPKG-package:\\n"
+msgstr "حزمة - مضغوطة:\\n"
+
+msgid "Incompatible MerlinMusicPlayer version!"
+msgstr "إصدار مشغل مارلين للموسيقى غير متوافق!"
+
+msgid "Info..."
+msgstr "معلومات..."
+
+msgid "Input"
+msgstr "الإدخال"
+
+msgid "Install new bootlogo..."
+msgstr "تثبيت صورة بداية التشغيل جديدة..."
+
+msgid "Install this package"
+msgstr "تثبيت هذه الحزمة"
+
+msgid "List of Storage Devices"
+msgstr "قائمة أجهزة التخزين"
+
+msgid "MENU"
+msgstr ""
+
+msgid "Make a softlink"
+msgstr "إنشاء رابط"
+
+#, fuzzy
+msgid "Move"
+msgstr "تحريك/نسخ"
+
+msgid "Move/Copy"
+msgstr "تحريك/نسخ"
+
+msgid "My Bookmarks"
+msgstr "إشاراتي المرجعية"
+
+msgid "No more picture-files."
+msgstr "لا مزيد من ملفات الصور."
+
+msgid "No more playable files."
+msgstr "لا مزيد من الملفات القابلة للتشغيل."
+
+msgid "Options:\n"
+msgstr "الخيارات:\n"
+
+msgid "Pack my bootlogo"
+msgstr "الرجوع إلى صورة بداية التشغيل"
+
+msgid "Parent Directory"
+msgstr "الدليل الرئيسي"
+
+#, fuzzy
+msgid "Picture-Player not aviable."
+msgstr "متصفح الصور غير متوفر!"
+
+msgid "Preview all pictures"
+msgstr "معاينة جميع الصور"
+
+msgid "Pyc-Script:\\n"
+msgstr "مزامنة السكريبت:\\n"
+
+msgid "Rename"
+msgstr "إعادة التسميه"
+
+msgid "Rename directory..."
+msgstr "إعادة تسمية الدليل..."
+
+msgid "Rename file..."
+msgstr "إعادة تسمية الملف..."
+
+#, python-format
+msgid ""
+"Rename: %s \n"
+"FAILED!"
+msgstr ""
+"إعادة التسمية: %s \n"
+"فشل!"
+
+msgid "Set archive mode (644)"
+msgstr "تعيين وضع التصريح (644)"
+
+msgid "Set executable mode (755)"
+msgstr "تعيين وضع التصريح (755)"
+
+msgid "Set name"
+msgstr "تعيين الاسم"
+
+msgid "Set start directory"
+msgstr "تعيين دليل البدء"
+
+msgid "Softlink name error !"
+msgstr "خطأ اسم الرابط !"
+
+msgid "Sort by date (bouquet-)"
+msgstr "فرز حسب التاريخ (باقة-)"
+
+msgid "Sort by name (bouquet+)"
+msgstr "فرز حسب الاسم (باقة+)"
+
+msgid "Start execution"
+msgstr "بدء التنفيذ"
+
+msgid "This line is not editable!"
+msgstr "هذا السطر غير قابل للتحرير!"
+
+msgid "Turn off the media-filter first."
+msgstr "قم بإيقاف تشغيل عامل تصفية الوسائط أولاً."
+
+msgid "View this shell-script"
+msgstr "عرض هذا البرنامج النصي"
+
+msgid "WARNING! they doing now COPY or MOVE\n"
+msgstr "تحذير! يفعلون الآن نسخ أو نقل\n"
+
+msgid "WARNING! they make now a softlink from\n"
+msgstr "تحذير! أنها تجعل الآن الرابط من\n"
+
+msgid "Write the new softlink name here:"
+msgstr "اكتب اسم الرابط الجديد هنا:"
+
+msgid "[All files] "
+msgstr "[كل الملفات] "
+
+msgid "[Media files] "
+msgstr "[ملفات الوسائط] "
+
+msgid "[sort by Date] "
+msgstr "[فرز حسب التاريخ] "
+
+msgid "[sort by Name] "
+msgstr "[فرز حسب الاسم] "
+
+msgid "loading... "
+msgstr "جار التحميل... "
+
+msgid "old:  "
+msgstr "القديمه:  "
+
+msgid "ready..."
+msgstr "جاهز..."
+
+msgid "wait..."
+msgstr "انتظر..."

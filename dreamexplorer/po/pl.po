@@ -1,0 +1,274 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-04-24 08:16+0200\n"
+"PO-Revision-Date: 2017-06-02 20:32+0200\n"
+"Last-Translator: hawkeye116477 <hawkeye116477@gmail.com>\n"
+"Language-Team: \n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.1\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid " Media-filter"
+msgstr " Filtr multimedialny"
+
+#, python-format
+msgid ""
+"%s \n"
+"FAILED!"
+msgstr ""
+"%s \n"
+"NIE POWIODŁO SIĘ!"
+
+msgid "About"
+msgstr "O wtyczce"
+
+msgid "BZ2-package:\\n"
+msgstr "Paczka bz2:\\n"
+
+#, fuzzy
+msgid "Bookmarks"
+msgstr "Moje zakładki"
+
+msgid "Bootlogo-package:\\n"
+msgstr "Paczka bootlogo:\\n"
+
+msgid "Cancel"
+msgstr "Anuluj"
+
+msgid "Copy"
+msgstr ""
+
+msgid "Create new directory"
+msgstr "Utwórz nowy katalog"
+
+msgid "Create new directory in..."
+msgstr "Utwórz nowy katalog w..."
+
+msgid "Create new file"
+msgstr "Utwórz nowy plik"
+
+msgid "Create new file in..."
+msgstr "Utwórz nowy plik w..."
+
+msgid "Create softlink..."
+msgstr "Utwórz dowiązanie miękkie (symboliczne)..."
+
+msgid "Delete"
+msgstr ""
+
+msgid "Directory name error !"
+msgstr "Błąd w nazwie katalogu!"
+
+msgid "Disassemble to bytecode..."
+msgstr "Rozbierz na kod bajtowy..."
+
+#, fuzzy
+msgid "Do you really want to DELETE:\n"
+msgstr "Czy na pewno chcesz USUNĄĆ:\n"
+
+msgid "Do you want to execute?\\n"
+msgstr "Czy chcesz wykonać?"
+
+msgid "Do you want to set\n"
+msgstr "Czy chcesz ustawić\n"
+
+msgid "Dream Explorer..."
+msgstr "Dream Explorer..."
+
+msgid "Dream-Explorer"
+msgstr "Dream-Explorer"
+
+msgid "Dream-Explorer - DELETE DIRECTORY..."
+msgstr "Dream-Explorer - usuń katalog..."
+
+msgid "Dream-Explorer - DELETE file..."
+msgstr "Dream-Explorer - usuń plik..."
+
+msgid "Dream-Explorer : Disassemble..."
+msgstr "Dream-Explorer : rozbierz..."
+
+msgid "Dream-Explorer : Install..."
+msgstr "Dream-Explorer : zainstaluj..."
+
+msgid "Dream-Explorer..."
+msgstr "Dream-Explorer..."
+
+msgid "Dreambox: "
+msgstr ""
+
+msgid "Edit line "
+msgstr "Edycja wiersza"
+
+msgid "Error by reading bookmarks !!!"
+msgstr "Błąd w odczycie zakładek !!!"
+
+msgid "Error by writing bookmarks !!!"
+msgstr "Błąd w zapisie zakładek !!!"
+
+msgid "Error..."
+msgstr "Błąd..."
+
+#, fuzzy
+msgid "Explore your Dreambox."
+msgstr "Przeglądaj pliki na swoim tunerze"
+
+msgid "File name error !"
+msgstr "Błąd w nazwie pliku !"
+
+msgid "GZ-package:\\n"
+msgstr "Paczka gz:\\n"
+
+msgid "INFO"
+msgstr ""
+
+#, fuzzy
+msgid "IPKG-package:\\n"
+msgstr "Pakiet OPKG:\\n"
+
+msgid "Incompatible MerlinMusicPlayer version!"
+msgstr "Niekompatybilna wersja wtyczki MerlinMusicPlayer"
+
+msgid "Info..."
+msgstr "Informacje..."
+
+msgid "Input"
+msgstr "Wpisz"
+
+msgid "Install new bootlogo..."
+msgstr "Instalowanie nowego loga startowego..."
+
+msgid "Install this package"
+msgstr "Zainstaluj ten pakiet"
+
+msgid "List of Storage Devices"
+msgstr "Lista nośników danych"
+
+msgid "MENU"
+msgstr ""
+
+#, fuzzy
+msgid "Make a softlink"
+msgstr "Zrób dowiązanie symboliczne..."
+
+msgid "Move"
+msgstr ""
+
+msgid "Move/Copy"
+msgstr ""
+
+msgid "My Bookmarks"
+msgstr "Moje zakładki"
+
+msgid "No more picture-files."
+msgstr "Brak zdjęć."
+
+msgid "No more playable files."
+msgstr "Brak odtwarzalnych plików."
+
+msgid "Options:\n"
+msgstr "Opcje:\n"
+
+msgid "Pack my bootlogo"
+msgstr "Spakuj moje bootlogo"
+
+msgid "Parent Directory"
+msgstr "Katalog nadrzędny"
+
+#, fuzzy
+msgid "Picture-Player not aviable."
+msgstr "Odtwarzacz zdjęć jest niedostępny!"
+
+msgid "Preview all pictures"
+msgstr "Podgląd wszystkich zdjęć"
+
+msgid "Pyc-Script:\\n"
+msgstr "Skrypt pyc:\\n"
+
+#, fuzzy
+msgid "Rename"
+msgstr "Zmień nazwę pliku..."
+
+msgid "Rename directory..."
+msgstr "Zmień nazwę katalogu..."
+
+msgid "Rename file..."
+msgstr "Zmień nazwę pliku..."
+
+#, python-format
+msgid ""
+"Rename: %s \n"
+"FAILED!"
+msgstr ""
+"Zmiana nazwy: %s \n"
+"NIE POWIODŁA SIĘ!"
+
+msgid "Set archive mode (644)"
+msgstr "Ustaw tryb archiwum (644)"
+
+msgid "Set executable mode (755)"
+msgstr "Ustaw tryb wykonywalny (755)"
+
+msgid "Set name"
+msgstr ""
+
+msgid "Set start directory"
+msgstr "Ustaw katalog startowy"
+
+msgid "Softlink name error !"
+msgstr "Błąd w nazwie dowiązania symbolicznego !"
+
+msgid "Sort by date (bouquet-)"
+msgstr "Sortuj według daty (bukiet-)"
+
+msgid "Sort by name (bouquet+)"
+msgstr "Sortuj według nazwy (bukiet+)"
+
+msgid "Start execution"
+msgstr "Rozpocznij wykonywanie"
+
+msgid "This line is not editable!"
+msgstr "Ten wiersz nie jest edytowalny!"
+
+msgid "Turn off the media-filter first."
+msgstr "Najpierw wyłącz filtr multimedialny."
+
+msgid "View this shell-script"
+msgstr "Wyświetl ten skrypt powłoki"
+
+msgid "WARNING! they doing now COPY or MOVE\n"
+msgstr "UWAGA! oni teraz KOPIUJĄ lub PRZENOSZĄ\n"
+
+msgid "WARNING! they make now a softlink from\n"
+msgstr "UWAGA! oni teraz robią dowiązanie symboliczne z\n"
+
+msgid "Write the new softlink name here:"
+msgstr "Napisz tutaj nową nazwę dowiązania symbolicznego:"
+
+msgid "[All files] "
+msgstr "[Wszystkie pliki] "
+
+msgid "[Media files] "
+msgstr "[Pliki multimedialna] "
+
+msgid "[sort by Date] "
+msgstr "[Sortowanie według daty] "
+
+msgid "[sort by Name] "
+msgstr "[Sortowanie według nazwy] "
+
+msgid "loading... "
+msgstr "ładowanie..."
+
+msgid "old:  "
+msgstr "stary: "
+
+msgid "ready..."
+msgstr "gotowe..."
+
+msgid "wait..."
+msgstr "czekaj..."

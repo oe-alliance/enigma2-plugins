@@ -1,0 +1,279 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: dreamexplorer\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-04-24 08:16+0200\n"
+"PO-Revision-Date: 2021-09-13 14:21+0300\n"
+"Last-Translator: \n"
+"Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+msgid " Media-filter"
+msgstr "Mediafiltras"
+
+#, python-format
+msgid ""
+"%s \n"
+"FAILED!"
+msgstr ""
+"%s \n"
+"NEPAVYKO!"
+
+msgid "About"
+msgstr "Apie"
+
+msgid "BZ2-package:\\n"
+msgstr "BZ2-paketas: \\n"
+
+msgid "Bookmarks"
+msgstr "Atžymos"
+
+msgid "Bootlogo-package:\\n"
+msgstr "Įkrovos logo paketas:\\n"
+
+msgid "Cancel"
+msgstr "Atšaukti"
+
+#, fuzzy
+msgid "Copy"
+msgstr "Perkelti/kopijuoti"
+
+msgid "Create new directory"
+msgstr "Sukurti katalogą"
+
+msgid "Create new directory in..."
+msgstr "Sukurti naują katalogą..."
+
+msgid "Create new file"
+msgstr "Sukurti naują failą"
+
+msgid "Create new file in..."
+msgstr "Sukurti naują failą..."
+
+msgid "Create softlink..."
+msgstr "Sukurti nuorodą..."
+
+msgid "Delete"
+msgstr "Šalinti"
+
+msgid "Directory name error !"
+msgstr "Katalogo pavadinimo klaida!"
+
+msgid "Disassemble to bytecode..."
+msgstr "Išrinkti į baitinį kodą..."
+
+#, fuzzy
+msgid "Do you really want to DELETE:\n"
+msgstr "Ar tikrai norite ŠALINTI:\n"
+
+msgid "Do you want to execute?\\n"
+msgstr "Ar norite vykdyti?\\n"
+
+msgid "Do you want to set\n"
+msgstr "Ar norite nustatyti\n"
+
+msgid "Dream Explorer..."
+msgstr "Dream naršyklė..."
+
+msgid "Dream-Explorer"
+msgstr "Dream naršyklė"
+
+msgid "Dream-Explorer - DELETE DIRECTORY..."
+msgstr "Dream naršyklė - ŠALINTI KATALOGĄ..."
+
+msgid "Dream-Explorer - DELETE file..."
+msgstr "Dream naršyklė - ŠALINTI failą..."
+
+msgid "Dream-Explorer : Disassemble..."
+msgstr "Dream naršyklė - išrinkti..."
+
+msgid "Dream-Explorer : Install..."
+msgstr "Dream naršyklė: įdiegti..."
+
+msgid "Dream-Explorer..."
+msgstr "Dream naršyklė..."
+
+msgid "Dreambox: "
+msgstr ""
+
+msgid "Edit line "
+msgstr "Redaguoti laukelį "
+
+msgid "Error by reading bookmarks !!!"
+msgstr "Klaida, skaitant atžymas!"
+
+msgid "Error by writing bookmarks !!!"
+msgstr "Klaida, įrašant atžymas!"
+
+msgid "Error..."
+msgstr "Klaida..."
+
+#, fuzzy
+msgid "Explore your Dreambox."
+msgstr "Naršykite savo aparatą"
+
+msgid "File name error !"
+msgstr "Failo pavadinimo klaida!"
+
+msgid "GZ-package:\\n"
+msgstr "GZ-paketas: \\n"
+
+msgid "INFO"
+msgstr ""
+
+#, fuzzy
+msgid "IPKG-package:\\n"
+msgstr "OPKG paketas: \\n"
+
+msgid "Incompatible MerlinMusicPlayer version!"
+msgstr "Nesuderinama  Merlin grotuvo versija!"
+
+msgid "Info..."
+msgstr "Informacija..."
+
+msgid "Input"
+msgstr "Įvestis"
+
+msgid "Install new bootlogo..."
+msgstr "Įdiegti naują įkrovos logotipą..."
+
+msgid "Install this package"
+msgstr "Įdiegti šį paketą"
+
+msgid "List of Storage Devices"
+msgstr "Laikmenos įrenginių sąrašas"
+
+msgid "MENU"
+msgstr ""
+
+msgid "Make a softlink"
+msgstr "Sukurti nuorodą"
+
+#, fuzzy
+msgid "Move"
+msgstr "Perkelti/kopijuoti"
+
+msgid "Move/Copy"
+msgstr "Perkelti/kopijuoti"
+
+msgid "My Bookmarks"
+msgstr "Mano atžymos"
+
+msgid "No more picture-files."
+msgstr "Daugiau paveikslėlių failų nėra."
+
+msgid "No more playable files."
+msgstr "Daugiau atkuriamų failų nėra."
+
+msgid "Options:\n"
+msgstr "Parinktys:\n"
+
+msgid "Pack my bootlogo"
+msgstr "Supakuoti mano įkrovos logo"
+
+msgid "Parent Directory"
+msgstr "Aukštesnysis katalogas"
+
+#, fuzzy
+msgid "Picture-Player not aviable."
+msgstr "Paveikslėlių grotuvas negalimas!"
+
+msgid "Preview all pictures"
+msgstr "Peržvelgti paveikslėlius"
+
+msgid "Pyc-Script:\\n"
+msgstr "Pyc scenarijus:\\n"
+
+msgid "Rename"
+msgstr "Pervadinti"
+
+msgid "Rename directory..."
+msgstr "Pervadinti katalogą..."
+
+msgid "Rename file..."
+msgstr "Pervadinti failą..."
+
+#, python-format
+msgid ""
+"Rename: %s \n"
+"FAILED!"
+msgstr ""
+"Pervadinti: %s \n"
+"NEPAVYKO!"
+
+msgid "Set archive mode (644)"
+msgstr "Nustatyti archyvo režimą (644)"
+
+msgid "Set executable mode (755)"
+msgstr "Nustatyti vykdomą režimą (755)"
+
+msgid "Set name"
+msgstr "Nustatyti pavadinimą"
+
+msgid "Set start directory"
+msgstr "Nustatyti pradžios katalogą"
+
+msgid "Softlink name error !"
+msgstr "Nuorodos pavadinimo klaida!"
+
+msgid "Sort by date (bouquet-)"
+msgstr "Rūšiuoti pagal datą (bukietas -)"
+
+msgid "Sort by name (bouquet+)"
+msgstr "Rūšiuoti pagal pavadinimą (bukietas +)"
+
+msgid "Start execution"
+msgstr "Pradėti vykdyti"
+
+msgid "This line is not editable!"
+msgstr "Šis laukelis neredaguojamas!"
+
+msgid "Turn off the media-filter first."
+msgstr "Pirmiausiai išjunkite mediafiltrą."
+
+msgid "View this shell-script"
+msgstr "Rodyti šį aplinkos scenarijų"
+
+msgid "WARNING! they doing now COPY or MOVE\n"
+msgstr "DĖMESIO! dabar vykdoma KOPIJUOTI arba PERKELTI\n"
+
+msgid "WARNING! they make now a softlink from\n"
+msgstr "DĖMESIO! dabar kuriama nuoroda į\n"
+
+msgid "Write the new softlink name here:"
+msgstr "Įrašykite naujos nuorodos pavadinimą:"
+
+msgid "[All files] "
+msgstr "[Visi failai] "
+
+msgid "[Media files] "
+msgstr "[Mediafailai] "
+
+msgid "[sort by Date] "
+msgstr "[rūšiuoti pagal datą] "
+
+msgid "[sort by Name] "
+msgstr "[rūšiuoti pagal pavadinimą] "
+
+msgid "loading... "
+msgstr "įkeliama... "
+
+msgid "old:  "
+msgstr "senas:  "
+
+msgid "ready..."
+msgstr "paruoštas..."
+
+msgid "wait..."
+msgstr "palaukite..."

@@ -1,0 +1,282 @@
+# Russian translations for PACKAGE package.
+# Copyright (C) 2012 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Automatically generated, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-04-24 08:16+0200\n"
+"PO-Revision-Date: 2015-10-07 18:57+0300\n"
+"Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
+"Language-Team: openpli.org\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 1.8.4\n"
+
+msgid " Media-filter"
+msgstr " Медиа-фильтр"
+
+#, python-format
+msgid ""
+"%s \n"
+"FAILED!"
+msgstr ""
+"%s \n"
+"ОШИБКА!"
+
+msgid "About"
+msgstr "Информация"
+
+msgid "BZ2-package:\\n"
+msgstr "BZ2-пакет:\\n"
+
+#, fuzzy
+msgid "Bookmarks"
+msgstr "Мои закладки"
+
+msgid "Bootlogo-package:\\n"
+msgstr "Bootlogo-пакет:\\n"
+
+msgid "Cancel"
+msgstr "Отмена"
+
+#, fuzzy
+msgid "Copy"
+msgstr "Перем./Копир."
+
+msgid "Create new directory"
+msgstr "Создать новую директорию"
+
+msgid "Create new directory in..."
+msgstr "Создать новую  директорию в ..."
+
+msgid "Create new file"
+msgstr "Создать новый файл"
+
+msgid "Create new file in..."
+msgstr "Создать новый файл в..."
+
+msgid "Create softlink..."
+msgstr "Создать символьную ссылку..."
+
+msgid "Delete"
+msgstr ""
+
+msgid "Directory name error !"
+msgstr "Ошибка имени директории !"
+
+msgid "Disassemble to bytecode..."
+msgstr "Разобрать в байт-код ..."
+
+#, fuzzy
+msgid "Do you really want to DELETE:\n"
+msgstr "Вы действительно хотите УДАЛИТЬ:\n"
+
+msgid "Do you want to execute?\\n"
+msgstr "Вы действительно хотите выполнить?\\n"
+
+msgid "Do you want to set\n"
+msgstr "Вы действительно хотите установить\n"
+
+msgid "Dream Explorer..."
+msgstr "Dream-обозреватель..."
+
+msgid "Dream-Explorer"
+msgstr "Dream-обозреватель"
+
+msgid "Dream-Explorer - DELETE DIRECTORY..."
+msgstr "Dream-обозреватель - УДАЛИТЬ ДИРЕКТОРИЮ..."
+
+msgid "Dream-Explorer - DELETE file..."
+msgstr "Dream-обозреватель - УДАЛИТЬ файл..."
+
+msgid "Dream-Explorer : Disassemble..."
+msgstr "Dream-обозреватель : разборка..."
+
+msgid "Dream-Explorer : Install..."
+msgstr "Dream-обозреватель : инсталлировать..."
+
+#, fuzzy
+msgid "Dream-Explorer..."
+msgstr "Dream-обозреватель..."
+
+msgid "Dreambox: "
+msgstr ""
+
+msgid "Edit line "
+msgstr "Редактирование строки "
+
+msgid "Error by reading bookmarks !!!"
+msgstr "Ошибка чтения закладок !!!"
+
+msgid "Error by writing bookmarks !!!"
+msgstr "Ошибка записи закладок !!!"
+
+msgid "Error..."
+msgstr "Ошибка..."
+
+#, fuzzy
+msgid "Explore your Dreambox."
+msgstr "Обозреватель Вашего ресивера"
+
+msgid "File name error !"
+msgstr "Ошибка имени файла !"
+
+msgid "GZ-package:\\n"
+msgstr "GZ-пакет:\\n"
+
+msgid "INFO"
+msgstr ""
+
+#, fuzzy
+msgid "IPKG-package:\\n"
+msgstr "OPKG-пакет:\\n"
+
+msgid "Incompatible MerlinMusicPlayer version!"
+msgstr "Несовместимая версия MerlinMusicPlayer!"
+
+msgid "Info..."
+msgstr "Инфо..."
+
+msgid "Input"
+msgstr "Вход"
+
+msgid "Install new bootlogo..."
+msgstr "Инсталлировать новое bootlogo..."
+
+msgid "Install this package"
+msgstr "Инсталлировать этот пакет"
+
+msgid "List of Storage Devices"
+msgstr "Список устройств хранения"
+
+msgid "MENU"
+msgstr ""
+
+#, fuzzy
+msgid "Make a softlink"
+msgstr "Создать символьную ссылку..."
+
+#, fuzzy
+msgid "Move"
+msgstr "Перем./Копир."
+
+msgid "Move/Copy"
+msgstr "Перем./Копир."
+
+msgid "My Bookmarks"
+msgstr "Мои закладки"
+
+msgid "No more picture-files."
+msgstr "Нет больше фото-файлов"
+
+msgid "No more playable files."
+msgstr "Нет больше файлов для воспроизведения."
+
+msgid "Options:\n"
+msgstr "Опции:\n"
+
+msgid "Pack my bootlogo"
+msgstr "Упаковать мое bootlogo"
+
+msgid "Parent Directory"
+msgstr "Родительская директория"
+
+#, fuzzy
+msgid "Picture-Player not aviable."
+msgstr "Просмотр-фото не доступен!"
+
+msgid "Preview all pictures"
+msgstr "Превью всех фотографий"
+
+msgid "Pyc-Script:\\n"
+msgstr "Pyc-скрипт:\\n"
+
+#, fuzzy
+msgid "Rename"
+msgstr "Переименование файла..."
+
+msgid "Rename directory..."
+msgstr "Переименование директории..."
+
+msgid "Rename file..."
+msgstr "Переименование файла..."
+
+#, python-format
+msgid ""
+"Rename: %s \n"
+"FAILED!"
+msgstr ""
+"Переименование: %s \n"
+"ОШИБКА!"
+
+msgid "Set archive mode (644)"
+msgstr "Установить права чтения (644)"
+
+msgid "Set executable mode (755)"
+msgstr "Установить права выполнения (755)"
+
+msgid "Set name"
+msgstr ""
+
+msgid "Set start directory"
+msgstr "Установить как стартовую директорию"
+
+msgid "Softlink name error !"
+msgstr "Ошибка имени символьной ссылки !"
+
+msgid "Sort by date (bouquet-)"
+msgstr "Сортировка по дате (букет-)"
+
+msgid "Sort by name (bouquet+)"
+msgstr "Сортировка по имени (букет+)"
+
+msgid "Start execution"
+msgstr "Начать выполнение"
+
+msgid "This line is not editable!"
+msgstr "Эта строка не редактируется!"
+
+msgid "Turn off the media-filter first."
+msgstr "Выключите медиа-фильтр в первую очередь."
+
+msgid "View this shell-script"
+msgstr "Просмотр этого shell-скрипта"
+
+msgid "WARNING! they doing now COPY or MOVE\n"
+msgstr "ВНИМАНИЕ! сейчас происходит КОПИРОВАНИЕ или ПЕРЕМЕЩЕНИЕ\n"
+
+msgid "WARNING! they make now a softlink from\n"
+msgstr "ВНИМАНИЕ! сейчас будет создана новая символьная ссылка из\n"
+
+msgid "Write the new softlink name here:"
+msgstr "Впишите имя новой символьной ссылки здесь:"
+
+msgid "[All files] "
+msgstr "[Все файлы] "
+
+msgid "[Media files] "
+msgstr "[Медиа файлы] "
+
+msgid "[sort by Date] "
+msgstr "[сортировка по дате] "
+
+msgid "[sort by Name] "
+msgstr "[сортировка по имени] "
+
+msgid "loading... "
+msgstr "загружаем..."
+
+msgid "old:  "
+msgstr "старый:  "
+
+msgid "ready..."
+msgstr "готово..."
+
+msgid "wait..."
+msgstr "подождите..."
