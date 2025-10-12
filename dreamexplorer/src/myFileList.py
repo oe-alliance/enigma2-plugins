@@ -19,6 +19,8 @@
 #
 #######################################################################
 
+# for localized messages
+from . import _
 
 from re import compile as re_compile
 from os import path as os_path, listdir, stat as os_stat
