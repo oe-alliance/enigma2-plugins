@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: DreamExplorer 1.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-24 08:16+0200\n"
-"PO-Revision-Date: 2025-10-12 10:55+0300\n"
+"PO-Revision-Date: 2025-10-12 11:53+0300\n"
 "Last-Translator: Orlandox\n"
 "Language-Team: Orlandox\n"
 "Language: fi\n"
@@ -30,6 +30,9 @@ msgstr ""
 
 msgid "About"
 msgstr "Tietoja"
+
+msgid "Add directory to Bookmarks"
+msgstr "Lisää hakemisto kirjanmerkkeihin"
 
 msgid "BZ2-package:\\n"
 msgstr "BZ2-paketti:\\n"
@@ -66,6 +69,9 @@ msgstr "Poista"
 
 msgid "Directory name error !"
 msgstr "Virhe hakemiston nimessä !"
+
+msgid "Disable"
+msgstr "Poista käytöstä"
 
 msgid "Disassemble to bytecode..."
 msgstr "Pura tavukoodiksi..."
@@ -105,6 +111,9 @@ msgstr "Laite: "
 
 msgid "Edit line "
 msgstr "Muokkaa riviä "
+
+msgid "Enable"
+msgstr "Ota käyttöön"
 
 msgid "Error by reading bookmarks !!!"
 msgstr "Virhe kirjanmerkkien lukemisessa !!!"
