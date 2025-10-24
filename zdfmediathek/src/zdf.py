@@ -89,7 +89,7 @@ class ZDFMediathek(Screen):
         self.session.open(ZDFConfigScreen)
 
     def HauptMenu(self, index="0"):
-        menu = [("LISTE", "ZDF Mediathek - Start", API_URL + "start-page", "", PLUGINPATH + "/img/" + "home.png", ""), ("LISTE", "ZDF Info", API_URL + "document/zdf-info-100", "", PLUGINPATH + "/img/" + "home.png", ""), ("LISTE", "ZDF tivi", API_URL + "document/zdftivi-fuer-kinder-100", "", PLUGINPATH + "/img/" + "home.png", ""), ("LISTE", "Rubriken", API_URL + "categories-overview", "", PLUGINPATH + "/img/" + "endecken.png", ""), ("LISTE", "Sendung  A - Z", API_URL + "brands-alphabetical", "", PLUGINPATH + "/img/" + "az.png", ""), ("BROADCAST", "Sendung  Verpasst", "", "", PLUGINPATH + "/img/" + "programm.png", ""), ("SUCHE", "Suche", "", "", PLUGINPATH + "/img/" + "suche.png", "")]
+        menu = [("LISTE", "ZDF Mediathek - Start", API_URL + "start-page", "", PLUGINPATH + "/img/" + "home.png", ""), ("LISTE", "ZDF Info", API_URL + "document/zdf-info-100", "", PLUGINPATH + "/img/" + "home.png", ""), ("LISTE", "ZDF tivi", API_URL + "document/zdftivi-fuer-kinder-100", "", PLUGINPATH + "/img/" + "home.png", ""), ("LISTE", "Rubriken", API_URL + "categories-overview", "", PLUGINPATH + "/img/" + "endecken.png", ""), ("LISTE", "Sendung  A - Z", API_URL + "document/sendungen-100", "", PLUGINPATH + "/img/" + "az.png", ""), ("BROADCAST", "Sendung  Verpasst", "", "", PLUGINPATH + "/img/" + "programm.png", ""), ("SUCHE", "Suche", "", "", PLUGINPATH + "/img/" + "suche.png", "")]
         self["movielist"].setList(menu)
         self["movielist"].setIndex(int(index))
         self.infos()
