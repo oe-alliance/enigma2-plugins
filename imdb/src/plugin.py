@@ -258,6 +258,7 @@ class IMDB(Screen, HelpableScreen):
 		self.resultlist = []
 		self["menu"] = MenuList(self.resultlist)
 		self["menu"].hide()
+		self["menu"].onSelectionChanged.append(self.searchPlot)
 		self["key_red"] = Button(_("Exit"))
 		self["key_green"] = Button("")
 		self["key_yellow"] = Button("")
@@ -563,7 +564,7 @@ class IMDB(Screen, HelpableScreen):
 		params = {
 			"operationName": 'TitleReviewsRefine',
 			"variables": '{"const":"%s","first":25}' % self.titleId,
-			"extensions": '{"persistedQuery":{"sha256Hash":"89aff4cd7503e060ff1dd5aba91885d8bac0f7a21aa1e1f781848a786a5bdc19","version":1}}'
+			"extensions": '{"persistedQuery":{"sha256Hash":"d389bc70c27f09c00b663705f0112254e8a7c75cde1cfd30e63a2d98c1080c87","version":1}}'
 		}
 		download = getPage("https://caching.graphql.imdb.com/", params=params, headers={"content-type": "application/json"}, cookies=self.cookie)
 		download.addCallback(self.gotReviews).addErrback(self.http_failed)
@@ -577,7 +578,7 @@ class IMDB(Screen, HelpableScreen):
 		self["detailslabel"].show()
 
 		if self.resultlist and self.Page == 0:
-			title, titleId = self["menu"].getCurrent()
+			title, titleId, plot = self["menu"].getCurrent()
 			self.downloadTitle(title, titleId)
 			self["menu"].hide()
 			self.resetLabels()
@@ -869,7 +870,7 @@ class IMDB(Screen, HelpableScreen):
 
 		if self.eventName:
 			self["statusbar"].setText(_("Query IMDb: %s") % self.eventName)
-			fetchurl = "https://www.imdb.com/find?s=tt&q=" + quoteEventName(self.eventName)
+			fetchurl = "https://www.imdb.com/find/?s=tt&q=" + quoteEventName(self.eventName)
 #			print("[IMDB] getIMDB() Downloading Query", fetchurl)
 			download = getPage(fetchurl, cookies=self.cookie)
 			download.addCallback(self.IMDBquery).addErrback(self.http_failed)
@@ -888,7 +889,8 @@ class IMDB(Screen, HelpableScreen):
 			self.resultlist = []
 			titles = {}
 			for x in searchresults:
-				series = get(x, 'seriesId')
+				x = x['listItem']
+				series = get(x, ('series', 'id'))
 				if series:
 					if not config.plugins.imdb.showepisoderesults.value:
 						continue
@@ -898,67 +900,49 @@ class IMDB(Screen, HelpableScreen):
 							if titles[t] >= i:
 								titles[t] += 1
 					else:
-						title = get(x, 'seriesNameText')
-						year = get(x, 'seriesReleaseText')
-						typ = config.plugins.imdb.showlongmenuinfo.value and get(x, 'seriesTypeText') or ""
-						if year or typ:
-							title += " ("
-							if year:
-								title += year
-							if typ:
-								if year:
-									title += "; "
-								title += typ
-							title += ")"
+						title = get(x, ('series', 'titleText'))
+						year = get(x, ('series', 'releaseYear', 'year'))
+						if year:
+							title += " (%s)" % year
 						self.resultlist.append((title, series))
 						i = titles[series] = len(self.resultlist)
 					title = "- "
-					s = get(x, 'seriesSeasonText')
-					if s == "Unknown":  # not translated
-						s = ""
-					e = get(x, 'seriesEpisodeText')
-					if e == "Unknown":
-						e = ""
 				else:
-					title = s = e = ""
+					title = ""
 					i = len(self.resultlist)
-				title += get(x, 'titleNameText')
-				year = get(x, 'titleReleaseText')
+				title += get(x, 'titleText')
+				year = get(x, 'releaseYear')
 				if config.plugins.imdb.showlongmenuinfo.value:
-					typ = not series and get(x, 'titleTypeText') or ""
-					cast = get(x, 'topCredits')
+					typ = get(x, ('titleType', 'text')) or ""
+					# This always seems to be empty, instead using another
+					# query (when you click the "i") to get director & stars.
+					# I thought about doing that, but don't think it's necessary.
+					# cast = get(x, 'principalCredits')
+					genres = "/".join(get(x, 'genres', []))
+					runtime = get(x, 'runtime', 0) // 60
+					hours = runtime // 60
+					minutes = runtime % 60
+					runtime = ""
+					if hours:
+						runtime += str(hours) + _("h")
+					if minutes:
+						if hours:
+							runtime += " "
+						runtime += str(minutes) + _("m")
 				else:
-					typ = cast = ""
-				if year or typ or cast or s or e:
-					title += " ("
-					semicolon = False
-					if year:
-						title += year
-						semicolon = True
-					if typ:
-						if semicolon:
-							title += "; "
-						semicolon = True
-						title += typ
-					if s:
-						if semicolon:
-							title += "; "
-						semicolon = True
-						title += _("S") + s
-					if e:
-						if s:
-							title += " "
-						elif semicolon:
-							title += "; "
-						semicolon = True
-						title += _("E") + e
-					if cast:
-						if semicolon:
-							title += "; "
-						semicolon = True
-						title += six.ensure_str(", ".join(cast))
-					title += ")"
-				self.resultlist.insert(i, (title, get(x, 'id')))
+					typ = genres = runtime = ""
+				extras = []
+				if year:
+					extras.append(str(year))
+				if runtime:
+					extras.append(runtime)
+				if typ:
+					extras.append(typ)
+				if genres:
+					extras.append(six.ensure_str(genres))
+				if extras:
+					title += " (%s)" % "; ".join(extras)
+				self.resultlist.insert(i, (title, get(x, 'titleId'), get(x, 'plot')))
 			Len = len(self.resultlist)
 			self["menu"].l.setList(self.resultlist)
 			if Len == 1:
@@ -971,6 +955,9 @@ class IMDB(Screen, HelpableScreen):
 				self["statusbar"].setText(_("No IMDb match:") + ' ' + self.eventName)
 		else:
 			self["detailslabel"].setText(_("IMDb query failed!"))
+
+	def searchPlot(self):
+		self["statusbar"].setText(self["menu"].getCurrent()[2])
 
 	def http_failed(self, failure):
 		text = _("IMDb Download failed")
