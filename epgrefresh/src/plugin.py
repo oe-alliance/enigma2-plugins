@@ -18,6 +18,7 @@ except:
 
 from Components.SystemInfo import SystemInfo
 from Components.NimManager import nimmanager
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, fileExists
 
 # Error-print()
 from traceback import print_exc
@@ -35,7 +36,7 @@ end = int(mktime((
 	0, now.tm_wday, now.tm_yday, now.tm_isdst)
 ))
 
-#Configuration
+# Configuration
 config.plugins.epgrefresh = ConfigSubsection()
 config.plugins.epgrefresh.enabled = ConfigYesNo(default=False)
 config.plugins.epgrefresh.begin = ConfigClock(default=begin)
@@ -93,25 +94,37 @@ if config.plugins.epgrefresh.interval.value != 2:
 	config.plugins.epgrefresh.interval.value = 2
 	config.plugins.epgrefresh.save()
 
-#pragma mark - Help
-try:
-	from Components.Language import language
-	from Plugins.SystemPlugins.MPHelp import XMLHelpReader
-	from Plugins.SystemPlugins.MPHelp.plugin import registerHelp
-	from Tools.Directories import resolveFilename, SCOPE_PLUGINS, fileExists
-	lang = language.getLanguage()[:2]
+# pragma mark - Help
 
-	HELPPATH = resolveFilename(SCOPE_PLUGINS, "Extensions/EPGRefresh")
-	if fileExists(HELPPATH + "/locale/" + str(lang) + "/mphelp.xml"):
-		helpfile = HELPPATH + "/locale/" + str(lang) + "/mphelp.xml"
-	else:
-		helpfile = HELPPATH + "/mphelp.xml"
-	reader = XMLHelpReader(helpfile)
-	epgrefreshHelp = registerHelp(*reader)
-except Exception as e:
-	print("[EPGRefresh] Unable to initialize MPHelp:", e, "- Help not available!")
-	epgrefreshHelp = None
-#pragma mark -
+try:
+	from Screens.HelpMenu import showDocumentation
+
+	def showHelp(session):
+		fileName = resolveFilename(SCOPE_PLUGINS, "Extensions/EPGRefresh/mphelp.xml")
+		showDocumentation(session, fileName, _)
+except ImportError:
+
+	try:
+		from Components.Language import language
+		from Plugins.SystemPlugins.MPHelp import XMLHelpReader
+		from Plugins.SystemPlugins.MPHelp.plugin import registerHelp
+		lang = language.getLanguage()[:2]
+
+		HELPPATH = resolveFilename(SCOPE_PLUGINS, "Extensions/EPGRefresh")
+		if fileExists(HELPPATH + "/locale/" + str(lang) + "/mphelp.xml"):
+			helpfile = HELPPATH + "/locale/" + str(lang) + "/mphelp.xml"
+		else:
+			helpfile = HELPPATH + "/mphelp.xml"
+		reader = XMLHelpReader(helpfile)
+		epgrefreshHelp = registerHelp(*reader)
+
+		def showHelp(session):
+			epgrefreshHelp.open(session)
+
+	except Exception as e:
+		print("[EPGRefresh] Unable to initialize MPHelp:", e, "- Help not available!")
+		showHelp = None
+# pragma mark -
 
 # Notification-Domain
 # Q: Do we really need this or can we do this better?
@@ -120,7 +133,7 @@ try:
 	Notifications.notificationQueue.registerDomain(NOTIFICATIONDOMAIN, _("EPGREFRESH_NOTIFICATION_DOMAIN"), deferred_callable=True)
 except Exception as e:
 	EPGRefreshNotificationKey = ""
-	#print("[EPGRefresh] Error registering Notification-Domain:", e)
+	# print("[EPGRefresh] Error registering Notification-Domain:", e)
 
 # Plugin
 from .EPGRefresh import epgrefresh
@@ -130,7 +143,7 @@ from .EPGRefreshService import EPGRefreshService
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
 
-#pragma mark - Workaround for unset clock
+# pragma mark - Workaround for unset clock
 from enigma import eDVBLocalTimeHandler
 
 
@@ -297,7 +310,7 @@ def housekeepingExtensionsmenu(configentry, force=False):
 			PlugDescriptor = extSetupDescriptor
 		elif configentry == config.plugins.epgrefresh.show_run_in_extensionsmenu:
 			PlugDescriptor = extRunDescriptor
-		#if PlugDescriptor != None:
+		# if PlugDescriptor != None:
 		if PlugDescriptor is not None:
 			AdjustExtensionsmenu(configentry.value, PlugDescriptor)
 

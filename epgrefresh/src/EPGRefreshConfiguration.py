@@ -191,11 +191,11 @@ class EPGRefreshConfiguration(ConfigListScreen, Screen, HelpableScreen):
 		self["config"].setList(self.list)
 
 	def firstExec(self):
-		from .plugin import epgrefreshHelp
-		if config.plugins.epgrefresh.show_help.value and epgrefreshHelp:
+		from .plugin import showHelp
+		if config.plugins.epgrefresh.show_help.value and showHelp:
 			config.plugins.epgrefresh.show_help.value = False
 			config.plugins.epgrefresh.show_help.save()
-			epgrefreshHelp.open(self.session)
+			showHelp(self.session)
 
 	def setCustomTitle(self):
 		self.setTitle(' '.join((_("EPGRefresh Configuration"), _("Version"), VERSION)))
@@ -239,9 +239,9 @@ class EPGRefreshConfiguration(ConfigListScreen, Screen, HelpableScreen):
 			self._showKeyhelp()
 
 	def _showMainHelp(self):
-		from .plugin import epgrefreshHelp
-		if epgrefreshHelp:
-			epgrefreshHelp.open(self.session)
+		from .plugin import showHelp
+		if showHelp:
+			showHelp(self.session)
 
 	def _showKeyhelp(self):
 		self.session.openWithCallback(self.callHelpAction, HelpMenu, self.helpList)
