@@ -4,11 +4,12 @@ from . import _, config
 
 # GUI (Screens)
 from Screens.MessageBox import MessageBox
-#from Tools.Notifications import AddPopup
+# from Tools.Notifications import AddPopup
 
 # Plugin
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 try:
 	from Components.SystemInfo import BoxInfo
 	IMAGEDISTRO = BoxInfo.getItem("distro")
@@ -22,19 +23,36 @@ autopoller = None
 
 AUTOTIMER_VERSION = "4.3.2"
 
-#pragma mark - Help
+# pragma mark - Help
+
 try:
-	from Plugins.SystemPlugins.MPHelp import XMLHelpReader
-	from Plugins.SystemPlugins.MPHelp.plugin import registerHelp
-	from Tools.Directories import resolveFilename, SCOPE_PLUGINS
-	file = open(resolveFilename(SCOPE_PLUGINS, "Extensions/AutoTimer/mphelp.xml"), 'r')
-	reader = XMLHelpReader(file)
-	file.close()
-	autotimerHelp = registerHelp(*reader)
-except Exception as e:
-	print("[AutoTimer] Unable to initialize MPHelp:", e, "- Help not available!")
-	autotimerHelp = None
-#pragma mark -
+	from Screens.HelpMenu import showDocumentation
+
+	def showHelp(session, faq=False):
+		fileName = resolveFilename(SCOPE_PLUGINS, "Extensions/AutoTimer/faq.xml" if faq else "Extensions/AutoTimer/mphelp.xml")
+		showDocumentation(session, fileName, _)
+except ImportError:
+	try:
+		from Plugins.SystemPlugins.MPHelp import XMLHelpReader
+		from Plugins.SystemPlugins.MPHelp.plugin import registerHelp, PluginHelp
+		file = open(resolveFilename(SCOPE_PLUGINS, "Extensions/AutoTimer/mphelp.xml"), 'r')
+		reader = XMLHelpReader(file)
+		file.close()
+		autotimerHelp = registerHelp(*reader)
+
+		def showHelp(session, faq=False):
+			if faq:
+				reader = XMLHelpReader(resolveFilename(SCOPE_PLUGINS, "Extensions/AutoTimer/faq.xml"))
+				autotimerFaq = PluginHelp(*reader)
+				autotimerFaq.open(session)
+			else:
+				autotimerHelp.open(session)
+	except Exception as e:
+		print("[AutoTimer] Unable to initialize MPHelp:", e, "- Help not available!")
+		showHelp = None
+
+
+# pragma mark -
 
 # Autostart
 
