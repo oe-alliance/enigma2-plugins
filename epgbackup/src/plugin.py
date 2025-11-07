@@ -9,6 +9,7 @@ from Components.config import config, ConfigYesNo, ConfigNumber, ConfigSelection
 from Screens.MessageBox import MessageBox
 from Screens.Standby import TryQuitMainloop
 from Tools.BoundFunction import boundFunction
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, fileExists
 
 # Error-print()
 
@@ -57,21 +58,30 @@ config.plugins.epgbackup.backup_log_dir = ConfigDirectory(default="/tmp")
 config.plugins.epgbackup.max_boot_count = ConfigNumber(default=3)
 
 try:
-	from Components.Language import language
-	from Plugins.SystemPlugins.MPHelp import registerHelp, XMLHelpReader
-	from Tools.Directories import resolveFilename, SCOPE_PLUGINS, fileExists
-	lang = language.getLanguage()[:2]
+	from Screens.HelpMenu import showDocumentation
 
-	HELPPATH = resolveFilename(SCOPE_PLUGINS, "Extensions/EPGBackup")
-	if fileExists(HELPPATH + "/locale/" + str(lang) + "/mphelp.xml"):
-		helpfile = HELPPATH + "/locale/" + str(lang) + "/mphelp.xml"
-	else:
-		helpfile = HELPPATH + "/mphelp.xml"
-	reader = XMLHelpReader(helpfile)
-	epgBackuphHelp = registerHelp(*reader)
-except:
-	debugOut("Help-Error:\n" + str(format_exc()), forced=True)
-	epgBackuphHelp = None
+	def showHelp(session):
+		fileName = resolveFilename(SCOPE_PLUGINS, "Extensions/EPGBackup/mphelp.xml")
+		showDocumentation(session, fileName, _)
+except ImportError:
+	try:
+		from Components.Language import language
+		from Plugins.SystemPlugins.MPHelp import registerHelp, XMLHelpReader
+		lang = language.getLanguage()[:2]
+
+		HELPPATH = resolveFilename(SCOPE_PLUGINS, "Extensions/EPGBackup")
+		if fileExists(HELPPATH + "/locale/" + str(lang) + "/mphelp.xml"):
+			helpfile = HELPPATH + "/locale/" + str(lang) + "/mphelp.xml"
+		else:
+			helpfile = HELPPATH + "/mphelp.xml"
+		reader = XMLHelpReader(helpfile)
+		epgBackuphHelp = registerHelp(*reader)
+
+		def showHelp(session):
+			epgBackuphHelp.open(session)
+	except:
+		debugOut("Help-Error:\n" + str(format_exc()), forced=True)
+		showHelp = None
 
 # Plugin
 epgbackup = None

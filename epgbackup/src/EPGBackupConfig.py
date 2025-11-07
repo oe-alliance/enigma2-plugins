@@ -112,9 +112,9 @@ class EPGBackupConfig(ConfigListScreen, Screen, HelpableScreen):
 			debugOut("removeNotifiers-Error:\n" + str(format_exc()), forced=True)
 
 	def showMainHelp(self):
-		from .plugin import epgBackuphHelp
-		if epgBackuphHelp:
-			epgBackuphHelp.open(self.session)
+		from .plugin import showHelp
+		if showHelp:
+			showHelp(self.session)
 
 	def showKeyHelp(self):
 		self.session.openWithCallback(self.callHelpAction, HelpMenu, self.helpList)
