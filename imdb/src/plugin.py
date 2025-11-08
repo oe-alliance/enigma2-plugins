@@ -904,7 +904,7 @@ class IMDB(Screen, HelpableScreen):
 						year = get(x, ('series', 'releaseYear', 'year'))
 						if year:
 							title += " (%s)" % year
-						self.resultlist.append((title, series))
+						self.resultlist.append((title, series, ""))
 						i = titles[series] = len(self.resultlist)
 					title = "- "
 				else:
