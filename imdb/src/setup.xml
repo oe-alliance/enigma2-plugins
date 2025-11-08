@@ -3,8 +3,8 @@
 		<item level="0" text="Show search in plugin browser" description="Enable this to be able to access IMDb searches from within the plugin browser.">config.plugins.imdb.showinplugins</item>
 		<item level="0" text="Show setup in plugin browser" description="Enable this to be able to access IMDb search setup from within the plugin browser.">config.plugins.imdb.showsetupinplugins</item>
 		<item level="0" text="Show in movie list" description="Enable this to be able to access IMDb searches from within the movie list.">config.plugins.imdb.showinmovielist</item>
-		<item level="0" text="Words / phrases to ignore " description="This option allows you add words/phrases for IMDb to ignore when searching. Please separate the words/phrases with commas.">config.plugins.imdb.ignore_tags</item>
-		<item level="0" text="Show extra information in title menu" description="Show the type of the title and top cast. Takes effect after the next search of IMDb for a show name.">config.plugins.imdb.showlongmenuinfo</item>
+		<item level="0" text="Words / phrases to ignore" description="This option allows you to add words/phrases for IMDb to ignore when searching. Please separate the words/phrases with commas.">config.plugins.imdb.ignore_tags</item>
+		<item level="0" text="Show extra information in title menu" description="Show the runtime, type and genres. Takes effect after the next search of IMDb for a show name.">config.plugins.imdb.showlongmenuinfo</item>
 		<item level="0" text="Show episodes in title menu" description="Include episodes in the results. Takes effect after the next search of IMDb for a show name.">config.plugins.imdb.showepisoderesults</item>
 		<item level="0" text="Show episode and year information in cast list" description="Show episode and year information for cast when available. Takes effect after the next fetch of show details.">config.plugins.imdb.showepisodeinfo</item>
 	</setup>
