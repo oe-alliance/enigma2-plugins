@@ -1,4 +1,4 @@
-# Finnish translations for enigma2-plugins package IMDb.
+# Finnish translations for enigma2-plugins package.
 # Copyright (C) 2014 THE enigma2-plugins'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the enigma2-plugins package.
 # Automatically generated, 2014.
@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-plugins 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-09 19:23+0300\n"
-"PO-Revision-Date: 2025-11-09 19:30+0200\n"
+"POT-Creation-Date: 2025-11-08 08:27+0200\n"
+"PO-Revision-Date: 2025-11-09 19:51+0200\n"
 "Last-Translator: Orlandox\n"
 "Language-Team: Samzan/Kojo/Orlandox\n"
 "Language: fi\n"
@@ -36,9 +36,6 @@ msgstr "Ladataan elokuvan julistetta..."
 
 msgid "Downloading reviews..."
 msgstr "Ladataan arvosteluja..."
-
-msgid "E"
-msgstr "J"
 
 msgid "Enable this to be able to access IMDb search setup from within the plugin browser."
 msgstr "Näytä IMDb-asetukset lisäosien valinnassa."
@@ -158,9 +155,6 @@ msgstr "IMDb haku: %s"
 msgid "Re-Query IMDb: %s..."
 msgstr "IMDb uudelleen haku: %s..."
 
-msgid "S"
-msgstr "K"
-
 msgid "Save current Details as .html for offline use"
 msgstr "Tallenna nykyiset Lisätiedot HTML-tiedostona"
 
@@ -253,6 +247,12 @@ msgstr "Huomiotta jätettävät sanat / lauseet"
 
 msgid "connection error"
 msgstr "yhteysvirhe"
+
+msgid "h"
+msgstr "t"
+
+msgid "m"
+msgstr "min"
 
 msgid "no user rating yet"
 msgstr "ei vielä käyttäjäarvioita"
