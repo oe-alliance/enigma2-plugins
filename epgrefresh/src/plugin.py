@@ -175,6 +175,9 @@ def autostart(reason, **kwargs):
 				if not inStandby:
 					from Tools import Notifications
 					Notifications.AddNotificationWithID("Standby", Standby)
+				# Force start EPGRefresh immediately when woken up by its timer
+				epgrefresh.forceRefresh(session, isWakeup=True)
+				return
 			timeCallback(isCallback=False)
 
 	elif reason == 1:

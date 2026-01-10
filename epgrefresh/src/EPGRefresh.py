@@ -65,6 +65,8 @@ class EPGRefresh:
 		self.refreshAdapter = None
 		# to call additional tasks (from other plugins)
 		self.finishNotifiers = {}
+		# flag to indicate if started by timer wakeup (allows shutdown after)
+		self.isWakeupRefresh = False
 
 		# Mtime of configuration files
 		self.configMtime = -1
@@ -176,7 +178,7 @@ class EPGRefresh:
 			self.refreshAdapter.stop()
 			self.refreshAdapter = None
 
-	def forceRefresh(self, session=None):
+	def forceRefresh(self, session=None, isWakeup=False):
 		print("[EPGRefresh] Forcing start of EPGRefresh")
 		if self.session is None:
 			if session is not None:
@@ -185,6 +187,7 @@ class EPGRefresh:
 				return False
 
 		self.forcedScan = True
+		self.isWakeupRefresh = isWakeup
 		self.prepareRefresh()
 		return True
 
@@ -449,7 +452,8 @@ class EPGRefresh:
 		self.maybeStopAdapter()
 
 		# shutdown if we're supposed to go to deepstandby and not recording
-		if not self.forcedScan and config.plugins.epgrefresh.afterevent.value \
+		# allow shutdown for timer wakeup even if forcedScan is true
+		if (not self.forcedScan or self.isWakeupRefresh) and config.plugins.epgrefresh.afterevent.value \
 			and not Screens.Standby.inTryQuitMainloop:
 			self.forcedScan = False
 
@@ -458,6 +462,7 @@ class EPGRefresh:
 			else:
 				Notifications.AddNotificationWithID("Shutdown", Screens.Standby.TryQuitMainloop, 1)
 		self.forcedScan = False
+		self.isWakeupRefresh = False
 		self.isrunning = False
 		self._nextTodo()
 
