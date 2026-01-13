@@ -418,6 +418,7 @@ class EPGRefresh:
 				from traceback import format_exc
 				#print("[EPGRefresh] Could not start AutoTimer:", e)
 				print("[EPGRefresh] Could not start AutoTimer:" + str(format_exc()))
+				self._nextTodo()
 		else:
 			self._nextTodo()
 
@@ -436,7 +437,14 @@ class EPGRefresh:
 #				Notifications.AddPopup(_("Found a total of %d matching Events.\n%d Timer were added and\n%d modified,\n%d conflicts encountered,\n%d similars added.") \
 #					% (ret[0], ret[1], ret[2], len(ret[4]), len(ret[5])),
 #					MessageBox.TYPE_INFO, 10)
-		self._nextTodo()
+		# Add a delay to ensure AutoTimer has time to complete processing
+		# especially important when waking from deep standby
+		print("[EPGRefresh] Debug: Waiting for AutoTimer to complete...")
+		epgrefreshtimer.add(EPGRefreshTimerEntry(
+			int(time()) + 5,
+			self._nextTodo,
+			nocheck=True)
+		)
 
 	def _callFinishNotifiers(self, *args, **kwargs):
 		for notifier in list(self.finishNotifiers.keys()):
@@ -451,20 +459,23 @@ class EPGRefresh:
 		epgrefreshtimer.cleanup()
 		self.maybeStopAdapter()
 
+		self.forcedScan = False
+		self.isrunning = False
+		self._nextTodo()
+
 		# shutdown if we're supposed to go to deepstandby and not recording
 		# allow shutdown for timer wakeup even if forcedScan is true
-		if (not self.forcedScan or self.isWakeupRefresh) and config.plugins.epgrefresh.afterevent.value \
+		# moved after _nextTodo() to ensure all async operations (like AutoTimer) complete first
+		if self.isWakeupRefresh and config.plugins.epgrefresh.afterevent.value \
 			and not Screens.Standby.inTryQuitMainloop:
-			self.forcedScan = False
+			self.isWakeupRefresh = False
 
 			if Screens.Standby.inStandby:
 				self.session.open(Screens.Standby.TryQuitMainloop, 1)
 			else:
 				Notifications.AddNotificationWithID("Shutdown", Screens.Standby.TryQuitMainloop, 1)
-		self.forcedScan = False
-		self.isWakeupRefresh = False
-		self.isrunning = False
-		self._nextTodo()
+		else:
+			self.isWakeupRefresh = False
 
 	def refresh(self):
 		if self.doStopRunningRefresh:
