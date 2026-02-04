@@ -58,7 +58,7 @@ config.plugins.imdb.showepisodeinfo = ConfigYesNo(default=False)
 
 def getPage(url, params=None, data=None, headers=None, cookies=None):
 	headers = headers or {}
-	headers["user-agent"] = "Mozilla/5.0 Gecko/20100101 Firefox/100.0"
+	headers["user-agent"] = "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
 	return deferToThread(requests.post if data else requests.get, url, params=params, data=data, headers=headers, cookies=cookies, timeout=30.05)
 
 
@@ -550,7 +550,7 @@ class IMDB(Screen, HelpableScreen):
 			self.reviews.append({
 				'rating': str(get(review, 'authorRating')),
 				'title': html2text(get(review, ('summary', 'originalText'))),
-				'author': html2text(get(review, ('author', 'nickName'))),
+				'author': html2text(get(review, ('author', 'username', 'text'))),
 				'date': makedate(get(review, 'submissionDate')),
 				'spoiler': get(review, 'spoiler') and self.spoiler_i18n,
 				'review': html2text(get(review, ('text', 'originalText', 'plaidHtml'))),
