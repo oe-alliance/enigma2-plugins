@@ -3,7 +3,7 @@ from __future__ import absolute_import
 from . import _, config
 
 # GUI (Screens)
-from Screens.Screen import Screen
+from Screens.Screen import Screen, ScreenSummary
 from Screens.HelpMenu import HelpableScreen
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
@@ -20,7 +20,7 @@ from Components.Sources.StaticText import StaticText
 from enigma import getDesktop
 
 
-class AutoTimerOverviewSummary(Screen):
+class AutoTimerOverviewSummary(ScreenSummary):
 	skin = """
 	<screen position="0,0" size="132,64">
 		<widget source="parent.Title" render="Label" position="6,4" size="120,21" font="Regular;18" />
@@ -31,7 +31,7 @@ class AutoTimerOverviewSummary(Screen):
 	</screen>"""
 
 	def __init__(self, session, parent):
-		Screen.__init__(self, session, parent=parent)
+		ScreenSummary.__init__(self, session, parent=parent)
 		self["entry"] = StaticText("")
 		self.onShow.append(self.addWatcher)
 		self.onHide.append(self.removeWatcher)
