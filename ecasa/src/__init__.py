@@ -18,3 +18,5 @@ config.plugins.ecasa.cachesize = ConfigNumber(default=15)
 config.plugins.ecasa.slideshow_interval = ConfigNumber(default=30)
 config.plugins.ecasa.flickr_api_key = ConfigText(default="", fixed_size=False)
 config.plugins.ecasa.last_backend = ConfigSelection(default='picasa', choices=['picasa', 'flickr'])
+
+__version__ = "1.0"

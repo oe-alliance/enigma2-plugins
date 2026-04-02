@@ -25,3 +25,5 @@ language.addCallback(localeInit)
 from Plugins.Plugin import *
 from .MPHelp import HelpPage
 from .XMLHelp import *
+
+__version__ = "1.0"

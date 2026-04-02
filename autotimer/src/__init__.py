@@ -108,3 +108,5 @@ except NameError:
 	itervalues = lambda d: d.values()
 
 __all__ = ['_', 'config', 'iteritems', 'itervalues', 'xrange']
+
+__version__ = "1.0"

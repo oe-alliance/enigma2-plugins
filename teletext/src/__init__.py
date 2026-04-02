@@ -30,3 +30,6 @@ def _debug(message):
   d = open("/tmp/dbttcp.log", "a")
   d.write("[TeleText] %s\n" % message)
   d.close()
+
+
+__version__ = "1.0"

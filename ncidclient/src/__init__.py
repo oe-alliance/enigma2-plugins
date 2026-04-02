@@ -24,3 +24,5 @@ language.addCallback(localeInit)
 
 def debug(message):
 	print(message)
+
+__version__ = "1.0"

@@ -88,3 +88,5 @@ def addVlcServerConfig():
 
 for i in range(0, config.plugins.mc_vlc.servercount.value):
 	addVlcServerConfig()
+
+__version__ = "1.0"
