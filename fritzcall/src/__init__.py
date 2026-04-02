@@ -119,4 +119,5 @@ def normalizePhoneNumber(intNo):  # pylint disable=invalid-name
 	else:
 		return '0'
 
+
 __version__ = "1.0"

@@ -69,4 +69,5 @@ def read_random():
 	fd.close()
 	return buf
 
+
 __version__ = "1.0"
