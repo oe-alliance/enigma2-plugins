@@ -47,9 +47,11 @@ THREE_D_OFF = 0
 THREE_D_SIDE_BY_SIDE = 1
 THREE_D_TOP_BOTTOM = 2
 
-modes = {THREE_D_OFF: "off",
-		 THREE_D_SIDE_BY_SIDE: "sbs",
-		 THREE_D_TOP_BOTTOM: "tab"}
+modes = {
+	THREE_D_OFF: "off",
+	THREE_D_SIDE_BY_SIDE: "sbs",
+	THREE_D_TOP_BOTTOM: "tab"
+}
 
 # mod lululla
 # reversemodes = dict((value, key) for key, value in six.iteritems(modes))
@@ -108,18 +110,6 @@ else:
 config.plugins.threed.autothreed = ConfigSelection(default="0", choices=[("0", _("off")), ("1", _("on with side by side")), ("2", _("on with top/bottom"))])
 
 
-"""
-def switchmode(mode):
-	if mode in list(modes.keys()):
-		print("[3D Settings] switching to mode ", mode)
-		open("/proc/stb/fb/primary/3d", "w").write(modes[mode])
-		AutoThreeD.instance.setLastMode(mode)
-		if eDBoxLCD.getInstance().detected():  # display found, update it
-			config.plugins.threed.toggleState.setValue(getmode() != THREE_D_OFF)
-			toggleDisplay(config.plugins.threed.toggleState)
-"""
-
-
 # fix lululla
 def switchmode(mode):
 	if mode in list(modes.keys()):
@@ -163,7 +153,7 @@ class AutoThreeD(Screen):
 		self.lastmode = getmode()
 		if self.lastmode is None:
 			self.lastmode = THREE_D_OFF  # default not supported
-		
+
 		assert not AutoThreeD.instance, "only one AutoThreeD instance is allowed!"
 		AutoThreeD.instance = self  # set instance
 
