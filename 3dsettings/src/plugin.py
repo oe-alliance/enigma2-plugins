@@ -21,7 +21,7 @@ from __future__ import print_function
 
 from Components.ActionMap import ActionMap
 from Components.config import config, ConfigSubsection, ConfigYesNo, getConfigListEntry, \
-	ConfigSlider, ConfigSelection
+	ConfigSlider, ConfigSelection, NoSave
 from Components.ConfigList import ConfigListScreen
 from Components.Sources.StaticText import StaticText
 from Components.PluginComponent import plugins
@@ -31,14 +31,14 @@ from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from enigma import iPlayableService, iServiceInformation, eServiceCenter, eServiceReference, eDBoxLCD
 from ServiceReference import ServiceReference
-from os.path import basename as os_basename
+from os.path import exists, basename as os_basename
 try:
 	from Components.SystemInfo import BoxInfo
 	IMAGEDISTRO = BoxInfo.getItem("distro")
 except:
 	from boxbranding import getImageDistro
 	IMAGEDISTRO = getImageDistro()
-import six
+# import six  #paused  lululla
 
 # for localized messages
 from . import _
@@ -48,18 +48,32 @@ THREE_D_SIDE_BY_SIDE = 1
 THREE_D_TOP_BOTTOM = 2
 
 modes = {THREE_D_OFF: "off",
-			THREE_D_SIDE_BY_SIDE: "sbs",
-			THREE_D_TOP_BOTTOM: "tab"}
-reversemodes = dict((value, key) for key, value in six.iteritems(modes))
+		 THREE_D_SIDE_BY_SIDE: "sbs",
+		 THREE_D_TOP_BOTTOM: "tab"}
+
+# mod lululla
+# reversemodes = dict((value, key) for key, value in six.iteritems(modes))
+reversemodes = {value: key for key, value in modes.items()}
 
 
+# fix lululla
 def setZOffset(configElement):
-	open("/proc/stb/fb/primary/zoffset", "w").write(str(configElement.value))
+	# open("/proc/stb/fb/primary/zoffset", "w").write(str(configElement.value))
+	try:
+		with open("/proc/stb/fb/primary/zoffset", "w") as f:
+			f.write(str(configElement.value))
+	except (IOError, OSError) as e:
+		print("[3D Settings] Failed to write zoffset: %s" % e)
 
 
+# fix lululla
 def getmode():
-	mode = reversemodes.get(open("/proc/stb/fb/primary/3d", "r").read().strip(), None)
-	return mode
+	try:
+		with open("/proc/stb/fb/primary/3d", "r") as f:
+			content = f.read().strip()
+		return reversemodes.get(content, None)
+	except Exception:
+		return None  # o THREE_D_OFF if prefeth
 
 
 def toggleDisplay(configElement):
@@ -86,16 +100,38 @@ config.plugins.threed = ConfigSubsection()
 config.plugins.threed.showSBSmenu = ConfigYesNo(default=False)
 config.plugins.threed.showTBmenu = ConfigYesNo(default=False)
 config.plugins.threed.zoffset = ConfigSlider(default=0, increment=1, limits=[0, 10])
-config.plugins.threed.zoffset.addNotifier(setZOffset)
+# config.plugins.threed.zoffset.addNotifier(setZOffset)
+if exists("/proc/stb/fb/primary/zoffset"):
+	config.plugins.threed.zoffset.addNotifier(setZOffset)
+else:
+	print("[3D Settings] zoffset file not found, skipping notifier")
 config.plugins.threed.autothreed = ConfigSelection(default="0", choices=[("0", _("off")), ("1", _("on with side by side")), ("2", _("on with top/bottom"))])
 
 
+"""
 def switchmode(mode):
 	if mode in list(modes.keys()):
 		print("[3D Settings] switching to mode ", mode)
 		open("/proc/stb/fb/primary/3d", "w").write(modes[mode])
 		AutoThreeD.instance.setLastMode(mode)
 		if eDBoxLCD.getInstance().detected():  # display found, update it
+			config.plugins.threed.toggleState.setValue(getmode() != THREE_D_OFF)
+			toggleDisplay(config.plugins.threed.toggleState)
+"""
+
+
+# fix lululla
+def switchmode(mode):
+	if mode in list(modes.keys()):
+		print("[3D Settings] switching to mode ", mode)
+		try:
+			with open("/proc/stb/fb/primary/3d", "w") as f:
+				f.write(modes[mode])
+		except Exception as e:
+			print("[3D Settings] Failed to write 3d mode: %s" % e)
+			return
+		AutoThreeD.instance.setLastMode(mode)
+		if eDBoxLCD.getInstance().detected():
 			config.plugins.threed.toggleState.setValue(getmode() != THREE_D_OFF)
 			toggleDisplay(config.plugins.threed.toggleState)
 
@@ -119,19 +155,23 @@ class AutoThreeD(Screen):
 		self.session = session
 		Screen.__init__(self, session)
 		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
-				iPlayableService.evUpdatedInfo: self.__evUpdatedInfo,
-				iPlayableService.evStart: self.__evStart
-			})
+			iPlayableService.evUpdatedInfo: self.__evUpdatedInfo,
+			iPlayableService.evStart: self.__evStart}
+		)
 		self.newService = False
+		# fix lululla
 		self.lastmode = getmode()
+		if self.lastmode is None:
+			self.lastmode = THREE_D_OFF  # default not supported
+		
 		assert not AutoThreeD.instance, "only one AutoThreeD instance is allowed!"
 		AutoThreeD.instance = self  # set instance
 
 		if eDBoxLCD.getInstance().detected():  # display found
-			from Components.config import NoSave
+			# from Components.config import NoSave
 			config.plugins.threed.disableDisplay = ConfigYesNo(default=False)
 			config.plugins.threed.disableDisplay.addNotifier(toggleDisplay, initial_call=False)
-			from Components.config import NoSave
+			# from Components.config import NoSave  # double import -> lululla
 			config.plugins.threed.toggleState = NoSave(ConfigYesNo(default=True))  # True = display on, False = display off
 			config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call=False)
 
@@ -141,9 +181,17 @@ class AutoThreeD(Screen):
 	def __evUpdatedInfo(self):
 		if self.newService and config.plugins.threed.autothreed.value != "0" and self.session.nav.getCurrentlyPlayingServiceReference():
 			self.newService = False
+			# fixed lululla
 			ref = self.session.nav.getCurrentService()
+			if ref is None:
+				return
 			serviceRef = self.session.nav.getCurrentlyPlayingServiceReference()
+			if serviceRef is None:
+				return
 			spath = serviceRef.getPath()
+			if spath is None:
+				spath = ""
+			# end fix
 			if spath:
 				if spath[0] == '/':
 					serviceHandler = eServiceCenter.getInstance()
@@ -156,7 +204,15 @@ class AutoThreeD(Screen):
 				else:
 					name = serviceRef.getName()  # partnerbox servicename
 			else:
-				name = ServiceReference(ref.info().getInfoString(iServiceInformation.sServiceref)).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')
+				# name = ServiceReference(ref.info().getInfoString(iServiceInformation.sServiceref)).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')
+				# fix Lululla
+				info = ref.info()
+				if info is None:
+					name = ""  # or some fallback
+				else:
+					serviceref_str = info.getInfoString(iServiceInformation.sServiceref)
+					name = ServiceReference(serviceref_str).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')
+				# end fix
 			if "3d" in name.lower():
 				if config.plugins.threed.autothreed.value == "1":
 					mode = THREE_D_SIDE_BY_SIDE
@@ -199,16 +255,21 @@ class ThreeDSettings(ConfigListScreen, Screen):
 		ConfigListScreen.__init__(self, self.list, session=self.session)
 		self.createSetup()
 
-		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
-		{
-			"ok": self.save,
-			"cancel": self.cancel,
-			"red": self.cancel,
-			"green": self.save,
-			"yellow": self.sideBySide,
-			"blue": self.topBottom,
+		self["actions"] = ActionMap(
+			[
+				"OkCancelActions",
+				"ColorActions"
+			],
+			{
+				"ok": self.save,
+				"cancel": self.cancel,
+				"red": self.cancel,
+				"green": self.save,
+				"yellow": self.sideBySide,
+				"blue": self.topBottom,
 
-		}, -1)
+			}, -1
+		)
 
 	def updateButtons(self):
 		currentmode = getmode()
@@ -241,7 +302,7 @@ class ThreeDSettings(ConfigListScreen, Screen):
 
 	def save(self):
 		self.saveAll()
-		config.plugins.threed.zoffset.save()
+		# config.plugins.threed.zoffset.save() # use saveAll?
 		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 		self.close()
 
@@ -269,16 +330,20 @@ def opensettings(session, **kwargs):
 
 
 def settings(menuid, **kwargs):
-	if IMAGEDISTRO in ('openhdf'):
-		if menuid != "video_menu":
-			return []
+	# if IMAGEDISTRO in ('openhdf'):
+	if menuid != "video_menu":
+		return []
 	else:
 		if menuid != "system":
 			return []
 	return [(_("3D settings"), opensettings, "3d_settings", 10)]
 
 
+# fix lululla
 def autostart(session, **kwargs):
+	if not exists("/proc/stb/fb/primary/3d"):
+		print("[3D Settings] 3D not supported, skipping autostart")
+		return
 	AutoThreeD(session)
 
 
