@@ -206,3 +206,5 @@ purgeOrbposConfig()
 
 config.plugins.epgsearch.enableorbpos = ConfigYesNo(default=False)
 config.plugins.epgsearch.invertorbpos = ConfigSelection(choices=[_("include"), _("exclude")], default=_("include"))
+
+__version__ = "1.0"

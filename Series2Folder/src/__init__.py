@@ -79,3 +79,5 @@ def onAutoChange(conf):
 
 
 config.plugins.seriestofolder.auto.addNotifier(onAutoChange, immediate_feedback=False)
+
+__version__ = "1.0"

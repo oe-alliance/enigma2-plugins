@@ -24,3 +24,5 @@ def _(txt):
 
 
 localeInit()
+
+__version__ = "1.0"

@@ -2,3 +2,5 @@
 from __future__ import absolute_import
 # -*- coding: utf-8 -*-
 from . import locale
+
+__version__ = "1.0"

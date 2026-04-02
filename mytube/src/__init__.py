@@ -50,3 +50,6 @@ def decrypt_block(src, mod):
 	if result == dest[107:127]:
 		return dest
 	return None
+
+
+__version__ = "1.0"
