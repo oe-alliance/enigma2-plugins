@@ -294,10 +294,10 @@ class YTTrailer:
 				fmt_infomap[int(fmtid)] = unquote_plus(fmturl)
 		print("[YTTrailer] got", sorted(six.iterkeys(fmt_infomap)))
 		if video_fmt_map and len(video_fmt_map):
-			print "[YTTrailer] found best available video format:",video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmtid']
+			print "[YTTrailer] found best available video format:", video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]['fmtid']
 			best_video = video_fmt_map[sorted(video_fmt_map.iterkeys())[0]]
 			video_url = "%s" % (best_video['fmturl'].split(';')[0])
-			print "[YTTrailer] found best available video url:",video_url
+			print "[YTTrailer] found best available video url:", video_url
 
 		return video_url
 
