@@ -99,7 +99,7 @@ def FClog(wert):
 					f.write(strftime("%H:%M:%S ") + wert + "\r\n")
 				finally:
 					f.close()
-			except IOError:
+			except OSError:
 				FC2Log.append(strftime("%H:%M:%S ") + "Event-Log-Error")
 
 
@@ -126,7 +126,7 @@ def FCdata():
 					f.write("\r\n")
 				finally:
 					f.close()
-			except IOError:
+			except OSError:
 				FC2Log.append(strftime("%H:%M:%S ") + "Event-Log-Error")
 
 
@@ -656,7 +656,7 @@ class FanControl2SpezialSetup(ConfigListScreen, Screen):
 					f.write(HeadLine)
 				except:
 					f.close()
-			except IOError:
+			except OSError:
 				FClog("Data-Log-Error")
 
 	def restartGUI(self, answer):

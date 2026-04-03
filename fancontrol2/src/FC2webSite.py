@@ -352,7 +352,7 @@ def CreateDataHead():
 				f.write(HeadLine)
 			except:
 				f.close()
-		except IOError:
+		except OSError:
 			pass
 
 ##########################################################

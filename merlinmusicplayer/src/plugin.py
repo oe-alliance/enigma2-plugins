@@ -2943,7 +2943,7 @@ class MerlinMusicPlayerFileList(Screen):
         displayname = None
         try:
             cuefile = open(filename, "r")
-        except IOError:
+        except OSError:
             return None
         import re
         performer_re = compile(r"""PERFORMER "(?P<performer>.*?)"(?:=\r\n|\r|\n|$)""")
@@ -2993,7 +2993,7 @@ class MerlinMusicPlayerFileList(Screen):
         displayname = None
         try:
             m3ufile = open(filename, "r")
-        except IOError:
+        except OSError:
             return None
         for line in m3ufile.readlines():
             entry = line.strip()
@@ -3021,7 +3021,7 @@ class MerlinMusicPlayerFileList(Screen):
         displayname = None
         try:
             plsfile = open(filename, "r")
-        except IOError:
+        except OSError:
             return None
         entry = plsfile.readline().strip()
         if entry == "[playlist]":

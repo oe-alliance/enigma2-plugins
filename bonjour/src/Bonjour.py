@@ -68,7 +68,7 @@ class Bonjour:
 				fsync(file.fileno())
 				file.close()
 				return True
-			except IOError:
+			except OSError:
 				pass
 
 		print("[Bonjour.__writeService] Cannot create service file '%s'" % (service['file']))

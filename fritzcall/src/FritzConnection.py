@@ -550,7 +550,7 @@ class FritzConnection(object):
 			# self.debug("descfile: %s", descfile)
 			try:
 				FritzDescParser(self.address, self.port, descfile, callback=self._read_descriptions_cb)
-			except IOError:
+			except OSError:
 				# failed to load a resource. Can happen on customized models
 				# missing the igddesc.xml file.
 				# It's save to ignore this error.

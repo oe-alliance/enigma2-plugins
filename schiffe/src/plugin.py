@@ -429,7 +429,7 @@ class Schiffe(Screen):
                 # # gameover no savefile needed...
                 # if fileExists(SAVEFILE):
                     # remove(SAVEFILE)
-        except IOError:
+        except OSError:
             pass
 
     # load game from file...

@@ -104,7 +104,7 @@ class dreamIRCSetupScreen(ConfigListScreen, Screen):
 			if ((self.nick.lower() == "dreamircuser") or (self.nick == "") or (self.nick[0] == " ") or (self.nick.lower() == "dm8000-vip")):
 				print("[dreamIRC] nickname error... restoring default...")
 				self.nick = self.device + "_" + self.mac_end
-		except IOError:
+		except OSError:
 			self.type = "IRC"
 			self.login = "1"
 			self.nick = self.device + "_" + self.mac_end
@@ -198,7 +198,7 @@ class dreamIRCConfig:
 				self.port = node.getAttribute("port")
 				self.channel = node.getAttribute("channel")
 				self.debug = node.getAttribute("debug")  # not used yet.. later will enable/disable console debug out..
-		except IOError:
+		except OSError:
 			self.type = "IRC"
 			self.login = "1"
 			self.nick = self.device + "_" + self.mac_end

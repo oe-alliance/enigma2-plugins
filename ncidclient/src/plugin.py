@@ -364,7 +364,7 @@ class NcidClientPhonebook:
 					debug("[NcidClientPhonebook] added %s with %s to Phonebook.txt" % (number, name.strip()))
 					return True
 
-				except IOError:
+				except OSError:
 					return False
 
 	def remove(self, number):

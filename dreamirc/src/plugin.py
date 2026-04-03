@@ -219,7 +219,7 @@ class dreamIRCMainMenu(Screen):
 				fp = open("/var/log/dreamIRC.log", 'r')
 				fp.close()
 				os.rename("/var/log/dreamIRC.log", "/var/log/dreamIRC_%s.log" % timestamp)
-			except IOError:
+			except OSError:
 				print("--- nothing to remove---")
 			self.pipe.clear()
 			self.pipe.add(" -- not connected.. pls press green to connect!!\n")

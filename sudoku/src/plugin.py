@@ -642,7 +642,7 @@ class Sudoku(Screen):
 				for i in range(0, 9):
 					sav.write("%d %d %d\n" % (self.board_values[i][j], self.board_cells[i][j].value(), self.board_cells[i][j].readonly()))
 			sav.close()
-		except IOError:
+		except OSError:
 			pass
 
 	# load game from file...

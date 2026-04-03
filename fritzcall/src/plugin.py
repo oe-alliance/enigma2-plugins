@@ -1609,7 +1609,7 @@ class FritzCallPhonebook(object):
 					json.dump(phonebookTmp, open(phonebookFilename, "w"), ensure_ascii=False, indent=0, separators=(',', ': '), sort_keys=True)
 					info("[FritzCallPhonebook] added %s with %s to Phonebook.json", number, name.strip())
 					return True
-				except IOError:
+				except OSError:
 					return False
 
 	def remove(self, number):

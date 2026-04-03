@@ -29,7 +29,7 @@ from subprocess import Popen, PIPE
 def getMountP():
 	try:
 		mounts = open("/proc/mounts")
-	except IOError:
+	except OSError:
 		return []
 
 	lines = mounts.readlines()

@@ -208,7 +208,7 @@ def readLogFile(args):
 		output = ""
 		for x in lines:
 			output += x
-	except IOError:
+	except OSError:
 		output = args[1]
 	return output
 
@@ -232,5 +232,5 @@ def debug():
 			return False
 		else:
 			return True
-	except IOError:
+	except OSError:
 		return False

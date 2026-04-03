@@ -726,7 +726,7 @@ class AutoFrameRate(Screen):
 					self.changeFramerateCallback(True)
 			if not self.init:
 				self.init = True
-		except IOError:
+		except OSError:
 			print("[AutoFrameRate] error at reading/writing /proc/stb/video.. files")
 
 	def changeFramerateCallback(self, ret=True):

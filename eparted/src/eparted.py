@@ -111,7 +111,7 @@ def myExecute(cmd, session, test=False):
 def getMountP():
 	try:
 		mounts = open("/proc/mounts")
-	except IOError:
+	except OSError:
 		return []
 
 	lines = mounts.readlines()
