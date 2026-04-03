@@ -27,7 +27,7 @@ class MainPictureAdapter:
 		print("[EPGRefresh.MainPictureAdapter.play]")
 		try:
 			res = self.navcore.playService(service, ignoreStreamRelay=True)
-		except:
+		except Exception:
 			res = self.navcore.playService(service)
 		return res
 

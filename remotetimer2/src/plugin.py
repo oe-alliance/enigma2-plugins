@@ -143,7 +143,7 @@ class RemoteTimerScreen(Screen):
 		# this call is not optimized so it is easier to extend this functionality to support other kinds of receiver
 		try:  # openatv
 			self["timerlist"].timerListWidget.setList(self.generateTimerE2(data))
-		except:  # all other distros
+		except Exception:  # all other distros
 			self["timerlist"].l.setList(self.generateTimerE2(data))
 		# info = _("finish fetching remote data...")
 		self["text"].setText("")

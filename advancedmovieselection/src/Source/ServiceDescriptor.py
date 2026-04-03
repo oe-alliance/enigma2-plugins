@@ -99,7 +99,7 @@ class DirectoryInfo():
             entry = metafile.readline().rstrip()
             if entry is not None:
                 return int(entry)
-        except:
+        except Exception:
             pass
         return -1
 
@@ -115,7 +115,7 @@ class DirectoryInfo():
                 self.mov_count = self.__parse_int(metafile)
                 #self.rest = metafile.read()
                 metafile.close()
-        except:
+        except Exception:
             printStackTrace()
 
     def write(self):
@@ -133,7 +133,7 @@ class DirectoryInfo():
             #metafile.write(str(self.dir_count) + '\n')
             #metafile.write(str(self.mov_count) + '\n')
             metafile.close()
-        except:
+        except Exception:
             printStackTrace()
             if metafile is not None:
                 metafile.close()
@@ -179,7 +179,7 @@ class DirectoryInfo():
                 if movie_count is not None:
                     self.mov_count = movie_count
                 #self.write()
-        except:
+        except Exception:
             printStackTrace()
         # update disk usage on mount directory
         #di = DirectoryInfo(mount)

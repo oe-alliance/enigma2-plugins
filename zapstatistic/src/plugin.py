@@ -50,7 +50,7 @@ language.addCallback(localeInit)
 def decode_charset(str, charset):
 	try:
 		uni = six.text_type(str, charset, 'strict')
-	except:
+	except Exception:
 		uni = str
 	return uni
 
@@ -139,7 +139,7 @@ class ZapStatistic:
 					end = item.get("end") or None
 					if ref and begin and end:
 						self.zapEntries.append(ZapEntry(ref, float(begin), float(end)))
-			except:
+			except Exception:
 				print("[ZapStatistic] Error while reading xml file")
 
 	def saveZapEntries(self):
@@ -153,7 +153,7 @@ class ZapStatistic:
 			f = open(self.xmlFile, "w")
 			f.write(xml.encode("UTF-8"))
 			f.close()
-		except:
+		except Exception:
 			print("[ZapStatistic] Error while writing xml file")
 
 	def handlePlayServiceCommand(self, ref):
@@ -280,14 +280,14 @@ class ZapStatisticDurationScreen(Screen):
 	def buildSortNameKey(self, x):
 		try:
 			name = x.name
-		except:
+		except Exception:
 			name = ""
 		return (name and name.lower() or "")
 
 	def buildSortDurationKey(self, x):
 		try:
 			name = str(x.duration)
-		except:
+		except Exception:
 			name = ""
 		return (name and name.lower() or "")
 
@@ -383,14 +383,14 @@ class ZapStatisticCombinedScreen(Screen):
 	def buildSortNameKey(self, x):
 		try:
 			name = x.name
-		except:
+		except Exception:
 			name = ""
 		return (name and name.lower() or "")
 
 	def buildSortDurationKey(self, x):
 		try:
 			name = x.getDurationText()
-		except:
+		except Exception:
 			name = ""
 		return (name and name.lower() or "")
 
@@ -504,14 +504,14 @@ class ZapStatisticScreen(Screen, ProtectedScreen):
 	def buildSortNameKey(self, x):
 		try:
 			name = x.name
-		except:
+		except Exception:
 			name = ""
 		return (name and name.lower() or "")
 
 	def buildSortDateKey(self, x):
 		try:
 			name = str(x.begin)
-		except:
+		except Exception:
 			name = ""
 		return (name and name.lower() or "")
 

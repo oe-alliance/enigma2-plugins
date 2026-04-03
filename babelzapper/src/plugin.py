@@ -209,14 +209,14 @@ class BabelZapperStartup(Screen):
 					try:
 						babelkey = int(cmdname.replace("GOTO", ""))
 						print("[BABELZAPPER] GOTO %i \n" % babelkey)
-					except:
+					except Exception:
 						babelkey = 0
 					# skip rest of commandline
 					i = cmdlen
 				elif cmdname.startswith("STOP"):
 					try:
 						babelstop = int(cmdname.replace("STOP", ""))
-					except:
+					except Exception:
 						babelstop = 1000
 					if babelstop < 1000:
 						babelstop = 1000
@@ -303,7 +303,7 @@ class BabelZapperStartup(Screen):
 		if cmdname.startswith("RETURN"):
 			try:
 				babelkey = int(cmdname.replace("RETURN", "")) - 1
-			except:
+			except Exception:
 				babelkey = -1
 			print("[BABELZAPPER] RETURN %i \n" % babelkey)
 			self.nextKeyTimer.start(0, True)
@@ -337,7 +337,7 @@ class BabelZapperStartup(Screen):
 		elif cmdname.startswith("STOP"):
 			try:
 				babelstop = int(cmdname.replace("STOP", ""))
-			except:
+			except Exception:
 				babelstop = 1000
 			if babelstop < 1000:
 				babelstop = 1000
@@ -449,7 +449,7 @@ class BabelZapper(Screen):
 			try:
 				keycode = KEYIDS[keyname]
 				print("[BABELZAPPER] found key %i" % keycode)
-			except:
+			except Exception:
 				print("[BABELZAPPER] found unknown key %s" % keyname)
 				return
 		else:

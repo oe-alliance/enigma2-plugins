@@ -84,7 +84,7 @@ class AutoMountView(Screen):
 			try:
 				name = str(self.sel[1])
 				desc = str(self.sel[2].replace('IP: ', '')) + '/' + str(self.sel[3].replace('Dir: ', ''))
-			except:
+			except Exception:
 				name = ""
 				desc = ""
 		else:

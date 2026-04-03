@@ -160,7 +160,7 @@ class ConfigTextWithSuggestions(ConfigText):
 			self.suggestionsThread = ConfigTextWithSuggestions.SuggestionsThread(self.suggestions)
 			try:
 				self.suggestionsThread.start()
-			except:
+			except Exception:
 				pass
 		else:
 			self.suggestionsThread = None

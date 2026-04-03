@@ -120,7 +120,7 @@ class BirthdayTimer(Timer, BirthdayStore):
 		try:
 			self.transferServerPort = reactor.listenTCP(port, self.transferServerProtocol)
 			self.broadcastPort = reactor.listenUDP(port, self.broadcastProtocol)
-		except:
+		except Exception:
 			print("[Birthday Reminder] can't listen on port %s" % port)
 
 	def stopNetworking(self):

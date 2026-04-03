@@ -1521,7 +1521,7 @@ class Lyrics(Screen):
 			self["coverly"].coverlyrics()
 			result = _("Response -> lyrics for: %s (%s)") % (title, artist)
 			self["resulttext"].setText(result)
-		except:
+		except Exception:
 			pass
 		if not lyrictext:
 			self["resulttext"].setText(_("No lyrics found"))

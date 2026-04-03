@@ -91,7 +91,7 @@ def main(session, **kwargs):
 			config.radio.save()
 	try:
 		startUpServiceInit()
-	except:
+	except Exception:
 		pass
 	config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call=False)
 

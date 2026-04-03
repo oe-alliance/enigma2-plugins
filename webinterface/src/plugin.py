@@ -503,14 +503,14 @@ def check_passwd(name, passwd):
 	cryptedpass = None
 	try:
 		cryptedpass = getpwnam(name)[1]
-	except:
+	except Exception:
 		return False
 
 	#shadowed or not, that's the questions here
 	if cryptedpass == 'x' or cryptedpass == '*':
 		try:
 			cryptedpass = getspnam(name)[1]
-		except:
+		except Exception:
 			return False
 
 	if cryptedpass == '':

@@ -108,7 +108,7 @@ class EPGBackupConfig(ConfigListScreen, Screen, HelpableScreen):
 	def removeNotifiers(self):
 		try:
 			config.plugins.epgbackup.backup_strategy.removeNotifier(self.updateVariableHelpText)
-		except:
+		except Exception:
 			debugOut("removeNotifiers-Error:\n" + str(format_exc()), forced=True)
 
 	def showMainHelp(self):
@@ -155,7 +155,7 @@ class EPGBackupConfig(ConfigListScreen, Screen, HelpableScreen):
 						epgbackup.setNextBootRestore()
 				elif menuinfo == "MENU_RETURN_MAINHELP":
 					self.showMainHelp()
-		except:
+		except Exception:
 			debugOut("menuCallback-Error:\n" + str(format_exc()), forced=True)
 
 	def _getConfig(self):
@@ -189,7 +189,7 @@ class EPGBackupConfig(ConfigListScreen, Screen, HelpableScreen):
 
 			self["config"].list = self.list
 			self["config"].setList(self.list)
-		except:
+		except Exception:
 			debugOut("_getConfig-Error:\n" + str(format_exc()), forced=True)
 
 	def _checkNeedsRestart(self):
@@ -243,7 +243,7 @@ class EPGBackupConfig(ConfigListScreen, Screen, HelpableScreen):
 		try:
 			if configelement == config.plugins.epgbackup.backup_strategy:
 				self["help"].text = configelement.getChoices()[configelement.getIndex()][2]
-		except:
+		except Exception:
 			debugOut("updateVariableHelpText-Error:\n" + str(format_exc()), forced=True)
 
 	def pageup(self):

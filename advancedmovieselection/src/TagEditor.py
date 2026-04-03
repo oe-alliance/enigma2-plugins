@@ -79,7 +79,7 @@ class TagEditor(Screen):
             try:
                 Title = ServiceCenter.getInstance().info(self.service).getName(self.service)
                 self.setTitle(_("Edit Tag(s) for: %s") % (Title))
-            except:
+            except Exception:
                 self.setTitle(_("Edit Tag(s)"))
 
     def defaulttaglist(self, tags):
@@ -342,7 +342,7 @@ class MovieTagEditor(TagEditor):
                     metafile = open(meta_file, "w")
                     metafile.write("%s\n%s\n%s\n%s\n%s\n%s" % (sid, title, descr, time, tags, rest))
                     metafile.close()
-        except:
+        except Exception:
             from .Source.Globals import printStackTrace
             printStackTrace()
 

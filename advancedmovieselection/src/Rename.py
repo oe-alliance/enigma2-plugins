@@ -168,7 +168,7 @@ class MovieRetitle(ConfigListScreen, Screen):
                 metafile = open(meta_file, "w")
                 metafile.write("%s%s\n%s\n%s" % (sid, title, descr, rest))
                 metafile.close()
-        except:
+        except Exception:
             printStackTrace()
 
     def renameDirectory(self, service, new_name):
@@ -176,7 +176,7 @@ class MovieRetitle(ConfigListScreen, Screen):
             dir_name = os.path.dirname(self.service.getPath()[0:-1])
             os.rename(self.service.getPath(), os.path.join(dir_name, self.input_file.getText() + "/"))
             self.original_file = self.input_file.getText()
-        except:
+        except Exception:
             printStackTrace()
 
     def renameFile(self, service, new_name):
@@ -188,7 +188,7 @@ class MovieRetitle(ConfigListScreen, Screen):
             import glob
             for f in glob.glob(os.path.join(path, src + "*")):
                 os.rename(f, f.replace(src, dst))
-        except:
+        except Exception:
             printStackTrace()
 
     def renameVDir(self, dir_name, name):
@@ -207,5 +207,5 @@ class MovieRetitle(ConfigListScreen, Screen):
                     if i[0] == dir_name:
                         self.movieConfig.rename[index] = dir_name + "\t" + name
             self.movieConfig.safe()
-        except:
+        except Exception:
             printStackTrace()

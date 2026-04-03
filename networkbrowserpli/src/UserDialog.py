@@ -37,7 +37,7 @@ def valid_cache(cache_file, cache_ttl):
 	#See if the cache file exists and is still living
 	try:
 		mtime = stat(cache_file)[ST_MTIME]
-	except:
+	except Exception:
 		return 0
 	curr_time = time()
 	if (curr_time - mtime) > cache_ttl:
@@ -123,7 +123,7 @@ class UserDialog(ConfigListScreen, Screen):
 				self.hostdata = load_cache(self.cache_file)
 				username = self.hostdata['username']
 				password = self.hostdata['password']
-			except:
+			except Exception:
 				username = "username"
 				password = "password"
 		else:

@@ -41,7 +41,7 @@ class RecordAdapter:
 		try:
 			#not all images support recording type indicators
 			self.__service = self.navcore.recordService(service, False, pNavigation.isPseudoRecording | pNavigation.isFromEPGrefresh)
-		except:
+		except Exception:
 			self.__service = self.navcore.recordService(service)
 		if self.__service is not None:
 			self.__service.prepareStreaming()

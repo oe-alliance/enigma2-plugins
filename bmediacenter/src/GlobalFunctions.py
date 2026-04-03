@@ -20,13 +20,13 @@ class Showiframe():
 	def showStillpicture(self, pic):
 		try:
 			call_function(self.showSinglePic, (pic, ))
-		except:
+		except Exception:
 			pass
 
 	def finishStillPicture(self):
 		try:
 			call_function(self.finishShowSinglePic, ())
-		except:
+		except Exception:
 			pass
 
 

@@ -71,7 +71,7 @@ class vConvSmartInfo(Poll, Converter, object):
 								polarisation_i = 0
 							fec_i = frontendData.get("fec_inner")
 							Ret_Text = Ret_Text + frequency + "  -  " + self.ar_pol[polarisation_i] + "  -  " + self.ar_fec[fec_i] + "  -  " + symbolrate + "     "
-						except:
+						except Exception:
 							Ret_Text = Ret_Text + frequency + "     " + symbolrate + "     "
 						orb_pos = ""
 						if (frontendData.get("tuner_type") == "DVB-S"):
@@ -100,7 +100,7 @@ class vConvSmartInfo(Poll, Converter, object):
 						if sensotN == "undefined":
 							sensotN = "sensor-" + str(id)
 				Ret_Text = "max. Box-Temp:  " + str(maxtemp) + SIGN + "C / " + sensotN + "\n" + Ret_Text
-			except:
+			except Exception:
 				pass
 			return Ret_Text
 		return "n/a"

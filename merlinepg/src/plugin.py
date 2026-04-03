@@ -679,7 +679,7 @@ class Merlin_PGII(Screen):
 class Merlin_PGd(Screen):
 	try:
 		sz_w = getDesktop(0).size().width()
-	except:
+	except Exception:
 		sz_w = 720
 	if sz_w == 1280:
 		skin = """

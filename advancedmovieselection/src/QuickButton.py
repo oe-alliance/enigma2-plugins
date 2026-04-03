@@ -404,7 +404,7 @@ class QuickButton:
                     if plugin is not None:
                         try:
                             plugin(self.session, service)
-                        except:
+                        except Exception:
                             errorText = _("Unknown error!")
                     else:
                         errorText = _("Plugin not found!")

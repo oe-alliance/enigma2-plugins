@@ -65,13 +65,13 @@ class DMC_MainMenu(Screen):
 		# Disable OSD Transparency
 		try:
 			self.can_osd_alpha = open("/proc/stb/video/alpha", "r") and True or False
-		except:
+		except Exception:
 			self.can_osd_alpha = False
 		if self.can_osd_alpha:
 			open("/proc/stb/video/alpha", "w").write(str("255"))
 		try:
 			open("/proc/sys/vm/drop_caches", "w").write(str("3"))
-		except:
+		except OSError:
 			pass
 		menulist = []
 		menulist.append((_("My Music"), "MC_AudioPlayer", "menu_music", "50"))
@@ -152,7 +152,7 @@ class DMC_MainMenu(Screen):
 		# Restore OSD Transparency Settings
 		try:
 			open("/proc/sys/vm/drop_caches", "w").write(str("3"))
-		except:
+		except OSError:
 			pass
 		if self.can_osd_alpha:
 			try:
@@ -161,7 +161,7 @@ class DMC_MainMenu(Screen):
 				else:
 					trans = config.osd.alpha.value
 				open("/proc/stb/video/alpha", "w").write(str(trans))
-			except:
+			except Exception:
 				print("Set OSD Transparacy failed")
 		system('umount /media/upnp')
 		self.session.nav.playService(self.oldbmcService)

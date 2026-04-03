@@ -44,7 +44,7 @@ def get_rnd():
 	try:
 		rnd = os.urandom(8)
 		return rnd
-	except:
+	except Exception:
 		return None
 
 
@@ -137,7 +137,7 @@ class CVevoSignAlgoExtractor:
             try:
                 self.playerData = urlopen(request).read()
                 self.playerData = self.playerData.decode('utf-8', 'ignore')
-            except:
+            except Exception:
                 printDBG('Unable to download playerUrl webpage')
                 return ''
 
@@ -171,7 +171,7 @@ class CVevoSignAlgoExtractor:
 
             try:
                 algoCodeObj = compile(self.fullAlgoCode, '', 'exec')
-            except:
+            except Exception:
                 printDBG('decryptSignature compile algo code EXCEPTION')
                 return ''
         else:
@@ -188,7 +188,7 @@ class CVevoSignAlgoExtractor:
         # execute prepared code
         try:
             exec(algoCodeObj, vGlobals, vLocals)
-        except:
+        except Exception:
             printDBG('decryptSignature exec code EXCEPTION')
             return ''
 
@@ -269,7 +269,7 @@ class GoogleSuggestions():
 						try:
 							charset = header.split(";")[1].split("=")[1]
 							print("[MyTube - GoogleSuggestions] Got charset %s" % charset)
-						except:
+						except Exception:
 							print("[MyTube - GoogleSuggestions] No charset in Header, falling back to %s" % charset)
 						data = data.decode(charset).encode("utf-8")
 						self.conn.close()
@@ -501,7 +501,7 @@ class MyTubeFeedEntry():
 						fmt_infomap[int(fmtid)] = "%s" % (unquote_plus(fmturl))
 					fmturl = fmtid = ""
 
-				except:
+				except Exception:
 					print("error parsing fmtstring:", fmtstring)
 
 			else:

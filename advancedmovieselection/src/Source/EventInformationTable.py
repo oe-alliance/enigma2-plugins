@@ -108,7 +108,7 @@ def toMJD(date):
             L = 0
         MJD = 14956 + D + int((Y - L) * 365.25) + int((M + 1 + L * 12) * 30.6001)
         return MJD & 65535
-    except:
+    except Exception:
         printStackTrace()
         return 51544
 
@@ -422,7 +422,7 @@ def writeEIT(file_name, eit_file, name, overview, genre, extended_info, released
         _file.write(data)
         _file.close()
         return True
-    except:
+    except Exception:
         if _file is not None:
             _file.close()
         printStackTrace()
@@ -504,7 +504,7 @@ def createEIT(file_name, title, overwrite_jpg=False, overwrite_eit=False, movie=
                     countries = [c.code for c in movie.countries]
                     country = ', '.join(countries) + ' '
                     country = country.replace('US', 'USA').replace('DE', 'GER')
-                except:
+                except Exception:
                     country = ''
 
                 year = str(released.year)
@@ -518,7 +518,7 @@ def createEIT(file_name, title, overwrite_jpg=False, overwrite_eit=False, movie=
                 country = ', '.join(countries) + ' '
                 country = country.replace('US', 'USA').replace('DE', 'GER')
                 ex_info.append(country)
-            except:
+            except Exception:
                 pass
 
         if runtime:
@@ -539,7 +539,7 @@ def createEIT(file_name, title, overwrite_jpg=False, overwrite_eit=False, movie=
         print('    %s' % extended_info)
         language_code = getLanguageCode(tmdb)
         return writeEIT(file_name, eit_file, name, overview, genre, extended_info, str(released), runtime, language_code)
-    except:
+    except Exception:
         printStackTrace()
         return False
 
@@ -627,7 +627,7 @@ def createEITtvdb(file_name, title, cover_type='poster', overwrite_jpg=False, ov
         print('    %s' % extended_info)
         language_code = getLanguageCode(tvdb)
         return writeEIT(file_name, eit_file, name, overview, genre, extended_info, released, runtime, language_code)
-    except:
+    except Exception:
         printStackTrace()
         return False
 
@@ -707,7 +707,7 @@ class EventInformationTable:
                     else:
                         self.components.append(descr.text.decode('cp1252').encode('utf-8'))
 
-        except:
+        except Exception:
             printStackTrace()
 
     def getEventName(self):

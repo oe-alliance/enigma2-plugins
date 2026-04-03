@@ -37,7 +37,7 @@ try:
 	from Components.SystemInfo import BoxInfo
 	DISPLAYMODEL = BoxInfo.getItem("displaymodel")
 	DISPLAYBRAND = BoxInfo.getItem("displaybrand")
-except:
+except ImportError:
 	from boxbranding import getMachineBrand, getMachineName
 	DISPLAYMODEL = getMachineName()
 	DISPLAYBRAND = getMachineBrand()
@@ -830,5 +830,5 @@ class Series2FolderConfig(ConfigListScreen, Screen):
         if isinstance(selection[1], ConfigText):
             try:
                 self.keyText()
-            except:
+            except Exception:
                 self.KeyText()

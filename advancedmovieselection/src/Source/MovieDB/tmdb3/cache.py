@@ -70,7 +70,7 @@ class Cache(object):
             self._import()
         try:
             return self._data[key].data
-        except:
+        except Exception:
             return None
 
     def cached(self, callback):

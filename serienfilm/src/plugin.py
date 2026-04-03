@@ -59,7 +59,7 @@ def doInstantiateDialogSF(self, screen, arguments, kwargs, desktop):
 
 	try:
 		dlg = self.create(screen, arguments, **kwargs)
-	except:
+	except Exception:
 		print('EXCEPTION IN DIALOG INIT CODE, ABORTING:')
 		print('-' * 60)
 		print_exc(file=stdout)

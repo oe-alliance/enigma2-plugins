@@ -46,7 +46,7 @@ class AutoPoller:
 				if epgrefresh.isrunning:
 					print("[AutoTimer] Skip check during running EPGRefresh")
 					doparse = False
-			except:
+			except Exception:
 				pass
 		if not inStandby and config.plugins.autotimer.onlyinstandby.value:
 			print("[AutoTimer] Skip check while not in Standby")

@@ -72,7 +72,7 @@ def getDirectories(l, root, hidden=False):
             if dir_path not in l:
                 l.append(dir_path)
             getDirectories(l, dir_path, hidden)
-        except:
+        except Exception:
             printStackTrace()
 
 
@@ -167,7 +167,7 @@ class MovieScanner():
             # from MovieLibrary import dict2xml
             # xml = dict2xml(self.movielibrary)
             # xml.write("/tmp/movie_list.xml")
-        except:
+        except Exception:
             printStackTrace()
         self.isWorking = False
         directories, movies = self.movielibrary.getFullCount()
@@ -293,7 +293,7 @@ class MovieScanner():
                 self.movielibrary.addMovie(movie_path, mi)
                 self.updateReloadTime()
                 print("add:", mi)
-        except:
+        except Exception:
             printStackTrace()
 
     def needFullUpdate(self):

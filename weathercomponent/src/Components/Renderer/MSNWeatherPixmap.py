@@ -54,7 +54,7 @@ class MSNWeatherPixmap(Renderer):
 				self.pix = LoadPixmap(self.iconFileName)
 				try:
 					self.instance.setPixmapScale(BT_SCALE | BT_KEEP_ASPECT_RATIO)
-				except:
+				except Exception:
 					self.instance.setScale(1)
 				self.instance.setPixmap(self.pix)
 			else:

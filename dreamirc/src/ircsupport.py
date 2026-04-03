@@ -131,7 +131,7 @@ class IRCProto(e2support.AbstractClientMixin, irc.IRCClient):
             if self._logonDeferred is not None:
                 self._logonDeferred.callback(self)
             self.chat.getContactsList()
-        except:
+        except Exception:
             import traceback
             traceback.print_exc()
 
@@ -197,7 +197,7 @@ class IRCProto(e2support.AbstractClientMixin, irc.IRCClient):
         for nickname in users:
                 try:
                     self._ingroups[nickname].append(group)
-                except:
+                except Exception:
                     self._ingroups[nickname] = [group]
 
     def irc_RPL_ENDOFNAMES(self, prefix, params):
@@ -225,7 +225,7 @@ class IRCProto(e2support.AbstractClientMixin, irc.IRCClient):
         if nickname != self.nickname:
             try:
                 self._ingroups[nickname].append(group)
-            except:
+            except Exception:
                 self._ingroups[nickname] = [group]
             self.getGroupConversation(group).memberJoined(nickname)
 

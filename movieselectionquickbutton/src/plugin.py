@@ -257,7 +257,7 @@ def setup(session, **kwargs):
 def main(session, **kwargs):
 	try:
 		MovieSelectionInit()
-	except:
+	except Exception:
 		pass
 
 

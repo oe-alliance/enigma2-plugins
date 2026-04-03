@@ -30,7 +30,7 @@ from skin import parseFont
 try:
 	from Components.Renderer.Picon import getPiconName
 	getPiconsName = True
-except:
+except ImportError:
 	getPiconsName = False
 from time import localtime, time
 from operator import itemgetter
@@ -443,7 +443,7 @@ class EPGSearchList(EPGList):
 		height = esize.height()
 		try:
 			self.iconSize = self.clocks[0].size().height()
-		except:
+		except Exception:
 			pass
 		self.space = self.iconSize + self.iconDistance
 		self.nextIcon = self.iconSize + 2 * self.iconDistance
@@ -552,7 +552,7 @@ class EPGSearchList(EPGList):
 			try:
 				locals().get(attrib)(value)
 				self.skinAttributes.remove((attrib, value))
-			except:
+			except Exception:
 				pass
 		self.l.setFont(0, self.eventItemFont)
 		self.l.setFont(1, self.eventTimeFont)
@@ -662,7 +662,7 @@ class EPGSearch(EPGSelection):
 			id = event.getEventId()
 			try:
 				self.session.open(CurrentSearchSingleSelection, ref, event_id=id)
-			except:
+			except Exception:
 				pass
 
 	def nextBouquet(self):
@@ -749,12 +749,12 @@ class EPGSearch(EPGSelection):
 			if ret == "runtmbd":
 				try:
 					self.runTMBD()
-				except:
+				except Exception:
 					pass
 			elif ret == "partnerbox":
 				try:
 					self.zapTo()
-				except:
+				except Exception:
 					pass
 			else:
 				pass
@@ -770,7 +770,7 @@ class EPGSearch(EPGSelection):
 				eventname = eventname.replace('0+', '').replace('(0+)', '').replace('6+', '').replace('(6+)', '').replace('7+', '').replace('(7+)', '').replace('12+', '').replace('(12+)', '').replace('16+', '').replace('(16+)', '').replace('18+', '').replace('(18+)', '')
 				try:
 					tmbdsearch = config.plugins.tmbd.profile.value
-				except:
+				except Exception:
 					tmbdsearch = None
 				if tmbdsearch is not None:
 					if config.plugins.tmbd.profile.value == "0":
@@ -779,7 +779,7 @@ class EPGSearch(EPGSelection):
 						try:
 							from Plugins.Extensions.TMBD.plugin import KinoRu
 							self.session.open(KinoRu, eventname, False)
-						except:
+						except ImportError:
 							pass
 				else:
 					self.session.open(TMBD, eventname, False)
@@ -804,7 +804,7 @@ class EPGSearch(EPGSelection):
 		try:
 			cur = self['list'].getCurrent()
 			event = cur[0]
-		except:
+		except Exception:
 			event = None
 		if event:
 			options.append((_("Zap to selected service"), self.zapToSelectedService))
@@ -843,7 +843,7 @@ class EPGSearch(EPGSelection):
 		try:
 			from Screens.TimerEdit import TimerEditList
 			self.session.open(TimerEditList)
-		except:
+		except Exception:
 			pass
 
 	def importFromEPG(self):
@@ -895,7 +895,7 @@ class EPGSearch(EPGSelection):
 		try:
 			cur = self['list'].getCurrent()
 			event = cur[0]
-		except:
+		except Exception:
 			event = None
 		if event is None:
 			return
@@ -905,7 +905,7 @@ class EPGSearch(EPGSelection):
 		try:
 			cur = self['list'].getCurrent()
 			event = cur[0]
-		except:
+		except Exception:
 			event = None
 		if event is None:
 			return
@@ -930,7 +930,7 @@ class EPGSearch(EPGSelection):
 						InfoBarInstance.servicelist.saveChannel(serviceref.ref)
 						InfoBarInstance.servicelist.addToHistory(serviceref.ref)
 				self.session.nav.playService(serviceref.ref)
-			except:
+			except Exception:
 				pass
 
 	def opentmdb(self):
@@ -1151,7 +1151,7 @@ class CurrentSearchSingleSelection(EPGSelection):
 			EPGSelection.onCreate(self)
 			if self.event_id is not None:
 				self["list"].moveToEventId(self.event_id)
-		except:
+		except Exception:
 			pass
 
 

@@ -43,7 +43,7 @@ def getIpAddress(iface):
         fp = open('/etc/network/interfaces', 'r')
         interfaces = fp.readlines()
         fp.close()
-    except:
+    except Exception:
         print("[AdvancedMovieSelection] interfaces - opening failed")
 
     currif = ""
@@ -140,7 +140,7 @@ class MessageServer():
                 client = Client(host, self.port)
                 if client.getDeviceName() != "Error":
                     self.active_clients.append(client)
-            except:
+            except Exception:
                 pass
             finally:
                 sock.close()

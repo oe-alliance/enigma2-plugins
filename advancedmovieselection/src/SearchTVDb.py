@@ -623,7 +623,7 @@ class TheTVDBMain(Screen, InfoLoadChoice):
             import socket
             print(socket.gethostbyname('www.google.com'))
             return True
-        except:
+        except Exception:
             self.session.openWithCallback(self.close, MessageBox, _('No internet connection available!'), MessageBox.TYPE_ERROR)
             return False
 

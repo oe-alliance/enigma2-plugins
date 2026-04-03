@@ -15,7 +15,7 @@ class mXVideosMovie(Movie):
 	def getVideoUrl(self):
 		try:
 			data = urlopen(self.url).read()
-		except:
+		except Exception:
 			data = ""
 		reonecat = re.compile(r'Watch Video: <a href="(.+?)">MP4</a>')
 		list = reonecat.findall(data)

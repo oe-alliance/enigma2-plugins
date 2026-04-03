@@ -615,7 +615,7 @@ class EIBox(ConfigListScreen, Screen):
 								config.eib.debug.setValue(debug)
 								if config.eib.debug.value:
 									print("[loadXML] parsed settings! host:", config.eib.host.value, "port:", config.eib.port.value, "refresh:", config.eib.refresh.value, "debug:", config.eib.debug.value)
-		except:
+		except Exception:
 			self.errorOut("[loadXML] " + str(filename) + ' ' + _("parser error"))
 
 	def xmlGetMultiNodes(self, node):

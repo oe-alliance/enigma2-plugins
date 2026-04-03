@@ -47,7 +47,7 @@ class StreamPlayer:
 		try:
 			self.session.nav.playService(esref)
 			self.is_playing = True
-		except:
+		except Exception:
 			print("[NETcaster.StreamPlayer] Could not play %s" % esref)
 
 	def stop(self, text=""):

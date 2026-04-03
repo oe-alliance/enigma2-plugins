@@ -49,7 +49,7 @@ class vRendMaxTemp(Renderer, VariableText):
 						tt = sensors.getSensorValue(id)
 						if tt > maxtemp:
 							maxtemp = tt
-				except:
+				except Exception:
 					pass
 				self.text = "%s%sC" % (str(maxtemp), SIGN)
 			else:
@@ -57,7 +57,7 @@ class vRendMaxTemp(Renderer, VariableText):
 				try:
 					out_line = open("/proc/loadavg").readline()
 					loada = out_line[:4]
-				except:
+				except Exception:
 					pass
 				self.text = loada
 

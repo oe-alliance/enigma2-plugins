@@ -541,7 +541,7 @@ class DBUpdateStatus(Screen):
 			from boxbranding import getImageVersion, getImageBuild
 			self.EnigmaVersion = getEnigmaVersionString()
 			self.ImageVersion = getImageVersion() + '.' + getImageBuild()
-		except:
+		except ImportError:
 			self.EnigmaVersion = about.getEnigmaVersionString()
 			self.ImageVersion = about.getVersionString()
 

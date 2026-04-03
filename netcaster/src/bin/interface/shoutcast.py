@@ -87,7 +87,7 @@ def cacheTime(cache_file):
     """
     try:
         mtime = stat(cache_file)[ST_MTIME]
-    except:
+    except Exception:
         return None
     return mtime
 
@@ -201,7 +201,7 @@ class GenreFeed:
             ct = cacheTime(self.cache_file)
             try:
                 self.genre_list = load_cache(self.cache_file)
-            except:
+            except Exception:
                 ct = None
         if not ct or (time.time() - ct) > self.cache_ttl:
             if DEBUG == 1:
@@ -212,7 +212,7 @@ class GenreFeed:
                 parseString(self.genres, parseXML)
                 self.genre_list = parseXML.genreList
                 write_cache(self.cache_file, self.genre_list)
-            except:
+            except Exception:
                 print("Failed to get genres from server, sorry.")
         return self.genre_list
 
@@ -250,7 +250,7 @@ class ShoutcastFeed:
         if ct:
             try:
                 self.station_list = load_cache(self.cache_file)
-            except:
+            except Exception:
                 print("Failed to load cache.")
         if not ct or (time.time() - ct) > self.cache_ttl:
             try:
@@ -259,6 +259,6 @@ class ShoutcastFeed:
                 parseString(self.stations, parseXML)
                 self.station_list = parseXML.station_list
                 write_cache(self.cache_file, self.station_list)
-            except:
+            except Exception:
                 print("Failed to get a new station list, sorry.")
         return self.station_list

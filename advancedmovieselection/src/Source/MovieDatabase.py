@@ -373,7 +373,7 @@ class dict2xml(object):
             f = open(file_name, 'w')
             f.write(xmlstr)
             f.close()
-        except:
+        except Exception:
             printStackTrace()
 
 

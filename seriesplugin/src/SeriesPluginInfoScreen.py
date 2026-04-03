@@ -202,7 +202,7 @@ class SeriesPluginInfoScreen(Screen):
 				if not channel:
 					try:
 						channel = ServiceReference(service.toString()).getServiceName() or ""
-					except:
+					except Exception:
 						pass
 				# Get information from event
 				log.debug("eServiceReference channel", str(ref))
@@ -227,7 +227,7 @@ class SeriesPluginInfoScreen(Screen):
 		if not isinstance(self.event, eServiceEvent):
 			try:
 				self.event = ref.valid() and self.epg.lookupEventTime(ref, -1)
-			except:
+			except Exception:
 				# Maybe it is an old reference
 				# Has the movie been renamed earlier?
 				# Refresh / reload the list?
@@ -364,7 +364,7 @@ class SeriesPluginInfoScreen(Screen):
 		self.picload_conn = None
 		try:
 			self.picload_conn = self.picload.PictureData.connect(boundFunction(self.loadPixmapCallback, widget))
-		except:
+		except Exception:
 			self.picload_conn = True
 			self.picload.PictureData.get().append(boundFunction(self.loadPixmapCallback, widget))
 		if self.picload and self.picload_conn:
@@ -414,10 +414,9 @@ class SeriesPluginInfoScreen(Screen):
 			else:
 				self["key_red"].setText("")
 				self.redButtonFunction = None
-		except:
+		except Exception:
 			# Screen already closed
 			log.debug("exception:", str(e))
-			pass
 
 	def redButton(self):
 		if callable(self.redButtonFunction):

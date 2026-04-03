@@ -60,7 +60,7 @@ class SatellitesList(Source):
 					try:
 						# why we need this cast?
 						service_name = str(nimmanager.getSatDescription(orbpos))
-					except:
+					except Exception:
 						if unsigned_orbpos == 0xFFFF:  # Cable
 							service_name = _("Cable")
 						elif unsigned_orbpos == 0xEEEE:  # Terrestrial

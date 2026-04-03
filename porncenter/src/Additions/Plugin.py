@@ -51,7 +51,7 @@ class Movie:
 				url_handle = urlopen(req)
 				headers = url_handle.info()
 				contentType = headers.getheader("content-type")
-			except:
+			except Exception:
 				contentType = None
 			if contentType:
 				if 'image/jpeg' in contentType:

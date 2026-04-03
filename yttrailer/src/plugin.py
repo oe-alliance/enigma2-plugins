@@ -291,7 +291,7 @@ class YTTrailer:
 						fmt_infomap[int(fmtid)] = "%s" % (unquote_plus(fmturl))
 					fmturl = fmtid = ""
 
-				except:
+				except Exception:
 					print("error parsing fmtstring:", fmtstring)
 
 			else:

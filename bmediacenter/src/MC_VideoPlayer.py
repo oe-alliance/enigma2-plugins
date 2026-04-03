@@ -114,34 +114,34 @@ class TMDB():
 			for IDs in json_data['results']:
 				try:
 					media = str(IDs['media_type'])
-				except:
+				except Exception:
 					media = ""
 				try:
 					id = str(IDs['id'])
-				except:
+				except Exception:
 					id = ""
 
 				title = ""
 				try:
 					title = str(IDs['title'])
-				except:
+				except Exception:
 					pass
 				try:
 					title = str(IDs['name'])
-				except:
+				except Exception:
 					pass
 
 				date = ""
 				try:
 					date = str(IDs['release_date'])[:4]
-				except:
+				except Exception:
 					pass
 
 				coverUrl = ""
 				try:
 					coverPath = str(IDs['poster_path'])
 					coverUrl = "http://image.tmdb.org/t/p/%s/%s" % (self.coverSize, coverPath)
-				except:
+				except Exception:
 					pass
 
 				if id and title and media:
@@ -376,7 +376,7 @@ class MC_VideoPlayer(Screen, HelpableScreen, TMDB):
 						f.write(overview)
 					movieInfoFile = "%stxt" % self.coverFilename[:-3]
 				move(INFOTMP, movieInfoFile)
-			except:
+			except Exception:
 				import traceback
 				traceback.print_exc()
 				print("Error write movie info file")
@@ -414,7 +414,7 @@ class MC_VideoPlayer(Screen, HelpableScreen, TMDB):
 		if exists(COVERTMP):  # and not exists(self.coverFilename):
 			try:
 				move(COVERTMP, self.coverFilename)
-			except:
+			except OSError:
 				print("Error move cover file")
 				pass
 			self.updateEventInfo()
@@ -478,7 +478,7 @@ class MC_VideoPlayer(Screen, HelpableScreen, TMDB):
 		configfile.save()
 		try:
 			remove("/tmp/bmcmovie")
-		except:
+		except OSError:
 			pass
 		self.showiframe.finishStillPicture()
 		self.close()

@@ -170,7 +170,7 @@ class TimeSpanEntryList(MenuList):
 		if entryselect is None:
 			try:
 				aktidx = self.l.getCurrentSelectionIndex()
-			except:
+			except Exception:
 				aktidx = 0
 		else:
 			aktidx = entryselect
@@ -252,7 +252,7 @@ class TimeSpanListScreen(Screen):
 	def keyEdit(self):
 		try:
 			sel = self["entrylist"].l.getCurrentSelection()[0]
-		except:
+		except Exception:
 			sel = None
 		if sel is None:
 			return
@@ -261,7 +261,7 @@ class TimeSpanListScreen(Screen):
 	def keyDelete(self):
 		try:
 			sel = self["entrylist"].l.getCurrentSelection()[0]
-		except:
+		except Exception:
 			sel = None
 		if sel is None:
 			return

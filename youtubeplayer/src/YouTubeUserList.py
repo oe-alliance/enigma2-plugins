@@ -177,5 +177,5 @@ class YouTubeUserListScreen(Screen):
 				self.close(YouTubeUserListScreen.LOGIN_SUCCESS)
 			else:
 				self.close(YouTubeUserListScreen.LOGIN_FAILED)
-		except:
+		except Exception:
 			self.close(YouTubeUserListScreen.LOGIN_FAILED)

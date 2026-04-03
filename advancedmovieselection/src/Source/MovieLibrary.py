@@ -299,7 +299,7 @@ class MovieLibrary(dict, SortProvider):
             for km in six.iteritems(self["db"]):
                 directories += 1
                 movies += len(km[1]["movies"])
-        except:
+        except Exception:
             pass
         return directories, movies
 
@@ -381,7 +381,7 @@ class dict2xml(object):
             f = open(file_name, 'w')
             f.write(xmlstr)
             f.close()
-        except:
+        except Exception:
             printStackTrace()
 
 

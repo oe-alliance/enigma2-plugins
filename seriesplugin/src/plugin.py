@@ -52,7 +52,7 @@ USER_AGENT = "Enigma2-" + NAME
 try:
 	from Components.SystemInfo import BoxInfo
 	DEVICE = BoxInfo.getItem("model")
-except:
+except ImportError:
 	DEVICE = ''
 
 REQUEST_PARAMETER = "?device=" + DEVICE + "&version=SP" + VERSION
@@ -376,7 +376,7 @@ def Plugins(**kwargs):
 													where=PluginDescriptor.WHERE_CHANNEL_CONTEXT_MENU,
 													fnc=channel,
 													needsRestart=False))
-			except:
+			except Exception:
 				addSeriesPlugin(WHERE_CHANNELMENU, SHOWINFO)
 
 		if config.plugins.seriesplugin.menu_epg.value:
@@ -395,7 +395,7 @@ def addSeriesPlugin(menu, title, fnc=None):
 	elif (menu == WHERE_CHANNELMENU):
 		try:
 			addSeriesPlugin(PluginDescriptor.WHERE_CHANNEL_CONTEXT_MENU, SHOWINFO, fnc)
-		except:
+		except Exception:
 			SPChannelContextMenuInit()
 	else:
 		from Components.PluginComponent import plugins
@@ -424,7 +424,7 @@ def removeSeriesPlugin(menu, title):
 	elif (menu == WHERE_CHANNELMENU):
 		try:
 			removeSeriesPlugin(PluginDescriptor.WHERE_CHANNEL_CONTEXT_MENU, SHOWINFO)
-		except:
+		except Exception:
 			SPChannelContextMenuUndo()
 	else:
 		from Components.PluginComponent import plugins

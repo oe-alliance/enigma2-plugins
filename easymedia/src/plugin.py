@@ -249,14 +249,14 @@ class AddPlug(Screen):
 				dump(plugin, outf)
 				outf.close()
 				self.session.open(MessageBox, text=(plugin.name + _(" added to EasyMedia")), type=MessageBox.TYPE_INFO)
-			except:
+			except Exception:
 				self.session.open(MessageBox, text="Write Error!", type=MessageBox.TYPE_WARNING)
 		else:
 			order = 'rm -f \"' + PluginsDir + 'EasyMedia/' + plugin.name + '.plug' + '\"'
 			try:
 				os_system(order)
 				self.session.open(MessageBox, text=(plugin.name + _(" removed from EasyMedia")), type=MessageBox.TYPE_INFO)
-			except:
+			except Exception:
 				self.session.open(MessageBox, text="Write Error!", type=MessageBox.TYPE_WARNING)
 
 
@@ -385,7 +385,7 @@ class EasyMedia(Screen):
 				inpf.close()
 				self.__keys.append(binPlug.name)
 				MPaskList.append((binPlug.name, ("++++" + binPlug.name)))
-			except:
+			except Exception:
 				pass
 		pos = 0
 		for x in MPaskList:
@@ -490,7 +490,7 @@ def MPcallbackFunc(answer):
 			try:
 				from Plugins.Extensions.PicturePlayer.plugin import picshow
 				EMsession.open(picshow)
-			except:
+			except Exception:
 				pass
 		else:
 			EMsession.open(MessageBox, text=_('Picture-player is not installed!'), type=MessageBox.TYPE_ERROR)
@@ -500,13 +500,13 @@ def MPcallbackFunc(answer):
 				from Plugins.Extensions.MerlinMusicPlayer.plugin import MerlinMusicPlayerFileList
 				servicelist = None
 				EMsession.open(MerlinMusicPlayerFileList, servicelist)
-			except:
+			except Exception:
 				pass
 		elif isPluginInstalled("MediaPlayer") and (config.plugins.easyMedia.music.value == "mediaplayer"):
 			try:
 				from Plugins.Extensions.MediaPlayer.plugin import MediaPlayer
 				EMsession.open(MediaPlayer)
-			except:
+			except ImportError:
 				pass
 		else:
 			EMsession.open(MessageBox, text=_('No Music-Player installed!'), type=MessageBox.TYPE_ERROR)
@@ -515,25 +515,25 @@ def MPcallbackFunc(answer):
 			try:
 				from Plugins.Extensions.FileCommander.plugin import start_from_pluginmenu
 				start_from_pluginmenu(EMsession)
-			except:
+			except ImportError:
 				pass
 		elif isPluginInstalled("Tuxcom") and (config.plugins.easyMedia.files.value == "tuxcom"):
 			try:
 				from Plugins.Extensions.Tuxcom.plugin import TuxComStarter
 				EMsession.open(TuxComStarter)
-			except:
+			except ImportError:
 				pass
 		elif isPluginInstalled("DreamExplorer") and (config.plugins.easyMedia.files.value == "dreamexplorer"):
 			try:
 				from Plugins.Extensions.DreamExplorer.plugin import DreamExplorerII
 				EMsession.open(DreamExplorerII)
-			except:
+			except ImportError:
 				pass
 		elif isPluginInstalled("Filebrowser") and (config.plugins.easyMedia.files.value == "filebrowser"):
 			try:
 				from Plugins.Extensions.Filebrowser.plugin import FilebrowserScreen
 				EMsession.open(FilebrowserScreen)
-			except:
+			except ImportError:
 				pass
 		else:
 			EMsession.open(MessageBox, text=_('No File-Manager installed!'), type=MessageBox.TYPE_ERROR)
@@ -542,7 +542,7 @@ def MPcallbackFunc(answer):
 			try:
 				from Plugins.Extensions.WeatherPlugin.plugin import MSNWeatherPlugin
 				EMsession.open(MSNWeatherPlugin)
-			except:
+			except ImportError:
 				pass
 		else:
 			EMsession.open(MessageBox, text=_('Weather Plugin is not installed!'), type=MessageBox.TYPE_ERROR)
@@ -551,7 +551,7 @@ def MPcallbackFunc(answer):
 			try:
 				from Plugins.Extensions.DVDPlayer.plugin import DVDPlayer
 				EMsession.open(DVDPlayer)
-			except:
+			except ImportError:
 				pass
 		else:
 			EMsession.open(MessageBox, text=_('DVDPlayer Plugin is not installed!'), type=MessageBox.TYPE_ERROR)
@@ -560,7 +560,7 @@ def MPcallbackFunc(answer):
 			try:
 				from Plugins.Extensions.MyTube.plugin import MyTubeMain
 				MyTubeMain(EMsession)
-			except:
+			except ImportError:
 				pass
 		else:
 				EMsession.open(MessageBox, text=_('MyTube Plugin is not installed!'), type=MessageBox.TYPE_ERROR)
@@ -569,13 +569,13 @@ def MPcallbackFunc(answer):
 			try:
 				from Plugins.Extensions.SHOUTcast.plugin import SHOUTcastWidget
 				EMsession.open(SHOUTcastWidget)
-			except:
+			except ImportError:
 				pass
 		elif isPluginInstalled("InternetRadio"):
 			try:
 				from Plugins.Extensions.InternetRadio.InternetRadioScreen import InternetRadioScreen
 				EMsession.open(InternetRadioScreen)
-			except:
+			except ImportError:
 				pass
 		else:
 			EMsession.open(MessageBox, text=_('InternetRadio Plugin is not installed!'), type=MessageBox.TYPE_ERROR)
@@ -584,13 +584,13 @@ def MPcallbackFunc(answer):
 			try:
 				from Plugins.Extensions.ZDFMediathek.plugin import ZDFMediathek
 				EMsession.open(ZDFMediathek)
-			except:
+			except ImportError:
 				pass
 		elif isPluginInstalled("QtHbbtv"):
 			try:
 				from Plugins.Extensions.QtHbbtv.plugin import HBBTVParser
 				EMsession.open(HBBTVParser)
-			except:
+			except ImportError:
 				pass
 		else:
 			EMsession.open(MessageBox, text=_('ZDFmediathek Plugin is not installed!'), type=MessageBox.TYPE_ERROR)
@@ -599,7 +599,7 @@ def MPcallbackFunc(answer):
 			try:
 				from Plugins.Extensions.VlcPlayer.plugin import main
 				main(EMsession)
-			except:
+			except ImportError:
 				pass
 		else:
 			EMsession.open(MessageBox, text=_('VLC Player is not installed!'), type=MessageBox.TYPE_ERROR)
@@ -609,7 +609,7 @@ def MPcallbackFunc(answer):
 				from Plugins.Extensions.MerlinMusicPlayer.plugin import iDreamMerlin
 				servicelist = None
 				EMsession.open(iDreamMerlin, servicelist)
-			except:
+			except ImportError:
 				pass
 		else:
 			EMsession.open(MessageBox, text=_('Merlin iDream is not installed!'), type=MessageBox.TYPE_ERROR)
@@ -618,7 +618,7 @@ def MPcallbackFunc(answer):
 			try:
 				from Plugins.Extensions.MyVideoPlayer.plugin import Vidtype
 				EMsession.open(Vidtype)
-			except:
+			except ImportError:
 				pass
 		else:
 			EMsession.open(MessageBox, text=_('MyVideo Player is not installed!'), type=MessageBox.TYPE_ERROR)
@@ -633,7 +633,7 @@ def MPcallbackFunc(answer):
 			try:
 				from Plugins.Extensions.VideoDB.plugin import main as vdbmain
 				vdbmain(EMsession)
-			except:
+			except ImportError:
 				pass
 		else:
 			EMsession.open(MessageBox, text=_('VideoDB is not installed!'), type=MessageBox.TYPE_ERROR)
@@ -647,5 +647,5 @@ def MPcallbackFunc(answer):
 			runPlug = load(inpf)
 			inpf.close()
 			runPlug(session=EMsession)
-		except:
+		except Exception:
 			EMsession.open(MessageBox, text=(plugToRun + " not found!"), type=MessageBox.TYPE_WARNING)

@@ -1157,7 +1157,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 				outdated = True
 				try:
 					progColor = parseColor("eventNotAvailable").argb()
-				except:
+				except Exception:
 					progColor = 0x777777
 			elif config.plugins.merlinEpgCenter.showColoredEpgTimes.value:
 				outdated = False
@@ -1178,7 +1178,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 			if outdated:
 				try:
 					textColor = parseColor("eventNotAvailable").argb()
-				except:
+				except Exception:
 					textColor = parseColor("#777777")
 
 				if config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_MULTI_PIXMAP or config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_MULTI_PIXMAP_LIST_OFF:
@@ -1190,7 +1190,7 @@ class MerlinEPGCenter(TimerEditList, MerlinEPGActions, EmbeddedVolumeControl):
 			else:
 				try:
 					textColor = parseColor("ListboxForeground").argb()
-				except:
+				except Exception:
 					textColor = parseColor("#ffffff")
 
 				if config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_MULTI_PIXMAP or config.plugins.merlinEpgCenter.listProgressStyle.value == STYLE_MULTI_PIXMAP_LIST_OFF:

@@ -293,7 +293,7 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection, InfoBarSubt
 	def choiceJumping(self):
 		try:
 			self.session.openWithCallback(self.choicesCallback, ChoiceBox, title=_("Choice of minutes to jump"), list=[(_("1 minute"), "1"), (_("3 minutes"), "3"), (_("5 minutes"), "5"), (_("10 minutes"), "10"), (_("15 minutes"), "15"), (_("20 minutes"), "20"), (_("30 minutes"), "30"), ])
-		except:
+		except Exception:
 			pass
 
 	def choicesCallback(self, answer):
@@ -320,7 +320,7 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection, InfoBarSubt
 		try:
 			from Plugins.Extensions.VCS.VCS import VcsChoiseList
 			VcsChoiseList(self.session)
-		except:
+		except Exception:
 			pass
 
 	def __evEOF(self):
@@ -434,7 +434,7 @@ class VlcPlayer(Screen, InfoBarNotifications, InfoBarAudioSelection, InfoBarSubt
 			from Screens.AudioSelection import SubtitleSelection
 			try:
 				self.session.open(SubtitleSelection, self)
-			except:
+			except Exception:
 				pass
 
 	def unpause(self):

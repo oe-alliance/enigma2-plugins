@@ -61,7 +61,7 @@ from .netstat import netstat
 # Extenal plugins: WebInterface
 try:
 	from Plugins.Extensions.WebInterface.WebScreens import StreamingWebScreen
-except:
+except ImportError:
 	StreamingWebScreen = None
 
 
@@ -264,7 +264,7 @@ class InfoBarTunerState(object):
 					from Plugins.Extensions.WebInterface.WebScreens import streamingEvents
 					if self.__onStreamingEvent not in streamingEvents:
 						streamingEvents.append(self.__onStreamingEvent)
-				except:
+				except ImportError:
 					pass
 
 	def removeEvents(self):
@@ -278,7 +278,7 @@ class InfoBarTunerState(object):
 				from Plugins.Extensions.WebInterface.WebScreens import streamingEvents
 				if self.__onStreamingEvent in streamingEvents:
 					streamingEvents.remove(self.__onStreamingEvent)
-			except:
+			except ImportError:
 				pass
 
 	def bindInfoBar(self):
@@ -342,10 +342,10 @@ class InfoBarTunerState(object):
 					# Is this really necessary?
 					try:
 						timer.Filename
-					except:
+					except Exception:
 						try:
 							timer.freespace()
-						except:
+						except Exception:
 							pass
 						timer.calculateFilename()
 					filename = timer.Filename
@@ -390,7 +390,7 @@ class InfoBarTunerState(object):
 
 				try:
 					from Plugins.Extensions.WebInterface.WebScreens import streamingScreens
-				except:
+				except ImportError:
 					streamingScreens = []
 
 				# Extract parameters
@@ -480,7 +480,7 @@ class InfoBarTunerState(object):
 		#TODO updateStreams but retrieving IP is not possible
 		try:
 			from Plugins.Extensions.WebInterface.WebScreens import streamingScreens
-		except:
+		except ImportError:
 			streamingScreens = []
 
 		#TODO file streaming actually not supported
@@ -510,10 +510,10 @@ class InfoBarTunerState(object):
 						# Is this really necessary?
 						try:
 							timer.Filename
-						except:
+						except Exception:
 							try:
 								timer.freespace()
-							except:
+							except Exception:
 								pass
 							timer.calculateFilename()
 						filename = timer.Filename
@@ -1325,7 +1325,7 @@ def getStreamID(stream):
 def getStream(id):
 	try:
 		from Plugins.Extensions.WebInterface.WebScreens import streamingScreens
-	except:
+	except ImportError:
 		streamingScreens = []
 
 	for stream in streamingScreens:

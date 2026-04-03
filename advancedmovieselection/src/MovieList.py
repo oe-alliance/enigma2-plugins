@@ -203,15 +203,15 @@ class MovieList(GUIComponent):
         self.mark_color = newcolor4
         try:
             self.watching_color = parseColor("movieWatching").argb()
-        except:
+        except Exception:
             self.watching_color = newcolor1
         try:
             self.finished_color = parseColor("movieFinished").argb()
-        except:
+        except Exception:
             self.finished_color = newcolor2
         try:
             self.recording_color = parseColor("movieRecording").argb()
-        except:
+        except Exception:
             self.recording_color = newcolor3
 
         if self.show_statusicon and self.show_folders:
@@ -483,7 +483,7 @@ class MovieList(GUIComponent):
                     if timer.state == TimerEntry.StateRunning:
                         try:
                             filename = "%s.ts" % timer.Filename
-                        except:
+                        except Exception:
                             filename = ""
                         if filename and os.path.realpath(filename) == os.path.realpath(serviceref.getPath()):
                             recording = True
@@ -731,7 +731,7 @@ class MovieList(GUIComponent):
                 res.append(MultiContentEntryText(pos=(0 + offset, 0), size=(width - w - offset, 25), font=0, flags=RT_HALIGN_LEFT, text=txt, color=color, color_sel=color))  # Topfi: added color_sel
 
             return res
-        except:
+        except Exception:
             printStackTrace()
             return [None]
 

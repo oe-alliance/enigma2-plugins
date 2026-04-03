@@ -179,7 +179,7 @@ class FileCacheObject(CacheObject):
         if self._key is None:
             try:
                 self._key, self._data = json.loads(self._buff.getvalue())
-            except:
+            except Exception:
                 pass
         return self._key
 
@@ -297,7 +297,7 @@ class FileEngine(CacheEngine):
                 # already opened in requested mode, nothing to do
                 self.cachefd.seek(0)
                 return
-        except:
+        except Exception:
             pass  # catch issue of no cachefile yet opened
         self.cachefd = io.open(self.cachefile, mode)
 
@@ -318,7 +318,7 @@ class FileEngine(CacheEngine):
                 cache.append(obj)
                 count -= 1
 
-        except:
+        except Exception:
             # failed to read information, so just discard it and return empty
             self.size = 0
             self.free = 0

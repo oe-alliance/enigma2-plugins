@@ -22,7 +22,7 @@ def hasLastPosition(service):
             if what == InfoBarCueSheetSupport.CUT_TYPE_LAST:
                 return True
 
-    except:
+    except Exception:
         pass
     finally:
         if cuts_file is not None:
@@ -65,7 +65,7 @@ def checkDVDCuts(fileName):
             if what == 4:
                 return True
 
-    except:
+    except Exception:
         printStackTrace()
     finally:
         if cuts_file is not None:
@@ -96,9 +96,9 @@ class CueSheet:
                     break
                 where = struct.unpack('>Q', data[0:8])[0]
                 what = struct.unpack('>I', data[8:12])[0]
-                cut_list.append((long(where), what))
+                cut_list.append((where, what))
 
-        except:
+        except Exception:
             print('ERROR reading cutlist %s' % file_name)
             printStackTrace()
         finally:

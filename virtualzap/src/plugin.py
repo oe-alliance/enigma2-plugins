@@ -55,7 +55,7 @@ from . import _
 try:
 	from Plugins.SystemPlugins.PiPServiceRelation.plugin import getRelationDict, CONFIG_FILE
 	plugin_PiPServiceRelation_installed = True
-except:
+except ImportError:
 	plugin_PiPServiceRelation_installed = False
 
 config.plugins.virtualzap = ConfigSubsection()

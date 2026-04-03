@@ -16,7 +16,7 @@ from .AutoMount import iAutoMount
 try:
 	from Components.SystemInfo import BoxInfo
 	IMAGEDISTRO = BoxInfo.getItem("distro")
-except:
+except ImportError:
 	from boxbranding import getImageDistro
 	IMAGEDISTRO = getImageDistro()
 
@@ -56,7 +56,7 @@ class MountAgainCheckPoller:
 				print('[Networkbrowser MountAgain] Skipping, as recording is in place.')
 			elif isPlaying.startswith('1:0:0:0:0:0:0:0:0:0:'):
 				print('[Networkbrowser MountAgain] Skipping, as watching a movie file is in place.')
-		except:
+		except Exception:
 			pass
 		task = Components.Task.PythonTask(job, _("Adding schedule..."))
 		task.work = self.JobSched

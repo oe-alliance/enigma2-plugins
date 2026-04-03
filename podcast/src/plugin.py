@@ -408,7 +408,7 @@ class PodcastXML(Screen):
 
 		try:
 			file = open(fileName)
-		except:
+		except OSError:
 			pass
 
 		if file:
@@ -420,7 +420,7 @@ class PodcastXML(Screen):
 				file.close
 				try:
 					source = urlopen(head)
-				except:
+				except Exception:
 					pass
 			else:
 				file.close
@@ -435,7 +435,7 @@ class PodcastXML(Screen):
 						if name:
 							list.append(name)
 							self.languages.append(language)
-				except:
+				except Exception:
 					pass
 				source.close()
 
@@ -474,7 +474,7 @@ class PodcastFeedly(Screen):
 				file = open(fileName)
 			else:
 				list.append(_("No Feedly configuration"))
-		except:
+		except Exception:
 			pass
 
 		if file:
@@ -488,7 +488,7 @@ class PodcastFeedly(Screen):
 				else:
 					file.close
 					source = open(fileName)
-			except:
+			except Exception:
 				pass
 
 			if source:
@@ -527,7 +527,7 @@ class LocationSelection(Screen):
 
 		try:
 			self["filelist"] = FileList(dir, showDirectories=True, showFiles=False)
-		except:
+		except Exception:
 			self["filelist"] = FileList("/", showDirectories, showFiles)
 
 		self["actions"] = ActionMap(["ColorActions", "OkCancelActions"],
@@ -559,7 +559,7 @@ class LocationSelection(Screen):
 		try:
 			dir = self["filelist"].getCurrentDirectory()
 			self.instance.setTitle(dir)
-		except:
+		except Exception:
 			self.instance.setTitle("?")
 
 ###################################################

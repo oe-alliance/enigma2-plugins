@@ -163,7 +163,7 @@ class AIHDsetup(ConfigListScreen, Screen):
 			for xx in skin_lines:
 				xFile.writelines(xx)
 			xFile.close()
-		except:
+		except Exception:
 			self.session.open(MessageBox, _("Error by processing the skin file !!!"), MessageBox.TYPE_ERROR)
 		restartbox = self.session.openWithCallback(self.restartGUI, MessageBox, _("GUI needs a restart to apply a new skin.\nDo you want to Restart the GUI now?"), MessageBox.TYPE_YESNO)
 		restartbox.setTitle(_("Restart GUI now?"))

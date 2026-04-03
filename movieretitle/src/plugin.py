@@ -168,7 +168,7 @@ class MovieRetitle(ConfigListScreen, Screen):
 			try:
 				# when started from MovieSelection Quickbutton Plugin, MovieSelection is parent, not MovieContextMenu --> try again
 				self.parent.reloadList()
-			except:
+			except Exception:
 				pass
 
 	def baseName(self, str):
@@ -233,7 +233,7 @@ class MovieRetitleBackgroundMover:
 			global_message_block = id
 			try:
 				session.openWithCallback(lambda x: self.tryLaunchMessageCallback(callback, closeprev), MessageBox, mess, MessageBox.TYPE_INFO)
-			except:
+			except Exception:
 				global_message_block = False
 				self.tryLaunchMessage()
 		else:

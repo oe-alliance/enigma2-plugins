@@ -57,7 +57,7 @@ class MovieConfig:
                 else:
                     self.hidelist.append(val)
             rfile.close()
-        except:
+        except Exception:
             pass
 
     def isHidden(self, name):
@@ -72,7 +72,7 @@ class MovieConfig:
                 i = item.split("\t")
                 if i[0] == name:
                     return i[1]
-        except:
+        except Exception:
             pass
         return name
 

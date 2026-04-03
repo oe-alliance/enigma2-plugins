@@ -90,7 +90,7 @@ def netstat(getstate=None, getuid=True, getpid=True, readable=True):
             pid = _get_pid_of_inode(inode)				  # Get pid prom inode.
             try:											# try read the process name.
                 exe = readlink('/proc/' + pid + '/exe')
-            except:
+            except Exception:
                 exe = None
         else:
             pid = None
@@ -111,8 +111,8 @@ def _get_pid_of_inode(inode):
     '''
     for item in glob('/proc/[0-9]*/fd/[0-9]*'):
         try:
-            if search(inode, os.readlink(item)):
+            if search(inode, readlink(item)):
                 return item.split('/')[2]
-        except:
+        except Exception:
             pass
     return None

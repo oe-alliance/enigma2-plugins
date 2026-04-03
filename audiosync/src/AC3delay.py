@@ -160,7 +160,7 @@ class AC3delay:
         # check if downmix is enabled
         try:
             bDownmixEnabled = config.av.downmix_ac3.value
-        except:
+        except Exception:
             bDownmixEnabled = False
 
         oAudioTracks = self.iService and self.iService.audioTracks()

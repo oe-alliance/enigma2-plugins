@@ -37,7 +37,7 @@ def set_key(key):
         raise TMDBKeyInvalid("Specified API key must be 128-bit hex")
     try:
         int(key, 16)
-    except:
+    except Exception:
         raise TMDBKeyInvalid("Specified API key must be 128-bit hex")
     Request._api_key = key
 
@@ -118,7 +118,7 @@ class Request(urllib.request.Request):
             try:
                 # try to load whatever was returned
                 data = json.loads(e.response)
-            except:
+            except Exception:
                 # cannot parse json, just raise existing error
                 raise e
             else:

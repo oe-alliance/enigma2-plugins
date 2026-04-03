@@ -80,14 +80,14 @@ def getInstance():
 		try:
 			from Components.SystemInfo import BoxInfo
 			log.debug(" DeviceName " + BoxInfo.getItem("model"))
-		except:
+		except ImportError:
 			sys.exc_clear()
 
 		try:
 			from Components.About import about
 			log.debug(" EnigmaVersion " + about.getEnigmaVersionString().strip())
 			log.debug(" ImageVersion " + about.getVersionString().strip())
-		except:
+		except ImportError:
 			sys.exc_clear()
 
 		try:
@@ -95,20 +95,20 @@ def getInstance():
 			log.debug(" dreamboxmodel " + open("/proc/stb/info/model").readline().strip())
 			log.debug(" imageversion " + open("/etc/image-version").readline().strip())
 			log.debug(" imageissue " + open("/etc/issue.net").readline().strip())
-		except:
+		except OSError:
 			sys.exc_clear()
 
 		try:
 			for key, value in six.iteritems(config.plugins.seriesplugin.dict()):
 				log.debug(" config..%s = %s" % (key, str(value.value)))
-		except Exception as e:
+		except Exception:
 			sys.exc_clear()
 
 		global CompiledRegexpReplaceChars
 		try:
 			if config.plugins.seriesplugin.replace_chars.value:
 				CompiledRegexpReplaceChars = re.compile('[' + config.plugins.seriesplugin.replace_chars.value.replace("\\", "\\\\\\\\") + ']')
-		except:
+		except Exception:
 			log.exception(" Config option 'Replace Chars' is no valid regular expression")
 			CompiledRegexpReplaceChars = re.compile(r"[:\!/\\,\(\)'\?]")
 
@@ -247,7 +247,7 @@ def refactorDirectory(org, data):
 		if dir and not os.path.exists(dir):
 			try:
 				os.makedirs(dir)
-			except:
+			except OSError:
 				log.exception("makedirs exception", dir)
 	return dir
 
@@ -311,7 +311,7 @@ class SeriesPluginWorker(Thread):
 		self.__pump = ePythonMessagePump()
 		try:
 			self.__pump_recv_msg_conn = self.__pump.recv_msg.connect(self.gotThreadMsg)
-		except:
+		except Exception:
 			self.__pump.recv_msg.get().append(self.gotThreadMsg)
 		self.__queue = ThreadQueue()
 
@@ -340,7 +340,7 @@ class SeriesPluginWorker(Thread):
 		self.__queue = ThreadQueue()
 		try:
 			self.__pump.recv_msg.get().remove(self.gotThreadMsg)
-		except:
+		except Exception:
 			pass
 		self.__pump_recv_msg_conn = None
 
@@ -436,7 +436,7 @@ class SeriesPlugin(Modules, ChannelsBase):
 					if callable(callback):
 						callback(msg)
 					return msg
-			except:
+			except Exception:
 				pass
 
 		# Check for episode information in title
@@ -485,7 +485,7 @@ class SeriesPlugin(Modules, ChannelsBase):
 
 			try:
 				serviceref = service.toString()
-			except:
+			except Exception:
 				sys.exc_clear()
 				serviceref = str(service)
 			serviceref = re.sub('::.*', ':', serviceref)

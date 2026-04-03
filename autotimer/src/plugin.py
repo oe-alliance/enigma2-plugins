@@ -13,7 +13,7 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 try:
 	from Components.SystemInfo import BoxInfo
 	IMAGEDISTRO = BoxInfo.getItem("distro")
-except:
+except ImportError:
 	from boxbranding import getImageDistro
 	IMAGEDISTRO = getImageDistro()
 

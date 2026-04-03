@@ -65,7 +65,7 @@ from Screens.Setup import SetupSummary
 try:
 	from Components.SystemInfo import BoxInfo
 	IMAGEDISTRO = BoxInfo.getItem("distro")
-except:
+except ImportError:
 	from boxbranding import getImageDistro
 	IMAGEDISTRO = getImageDistro()
 ###############################################################################
@@ -463,7 +463,7 @@ class AutomaticCleanup:
 			if path.isdir(scanPath + p):
 				try:
 					self.filterMovies(scanPath + p, exclude)
-				except:
+				except Exception:
 					pass
 			else:
 				for ext in extensions:

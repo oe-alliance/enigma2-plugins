@@ -22,7 +22,7 @@ def debugOut(outtxt, outfile=None, fmode="aw", forced=False, outPrefix="[EPGBack
 				deb = open(outfile, fmode)
 				deb.write("%s %s\n" % (outPrefix, outtxt))
 			print("%s %s" % (outPrefix, outtxt))
-	except:
+	except Exception:
 		pass
 
 
@@ -43,5 +43,5 @@ EPGBACKUP_NOTIFICATIONDOMAIN = "EPGBackup"
 from Tools import Notifications
 try:
 	Notifications.notificationQueue.registerDomain(EPGBACKUP_NOTIFICATIONDOMAIN, _("EPGBACKUP_NOTIFICATION_DOMAIN"), deferred_callable=True)
-except:
+except Exception:
 	debugOut("Register-Notification-Domain-Error:\n" + str(format_exc()), forced=True)

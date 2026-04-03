@@ -1024,7 +1024,7 @@ class NcidLineReceiver(LineReceiver):
 			date = None
 			try:
 				date = datetime.strptime("%s - %s" % (self.date, self.time), "%d%m%Y - %H%M")
-			except:
+			except Exception:
 				date = datetime.strptime("%s - %s" % (self.date, self.time), "%m%d%Y - %H%M")
 
 		self.date = date.strftime("%d.%m.%Y - %H:%M")

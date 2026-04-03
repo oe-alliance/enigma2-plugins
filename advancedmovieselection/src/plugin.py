@@ -60,7 +60,7 @@ def sessionstart(reason, **kwargs):
 
                 from .Source.MovieScanner import movieScanner
                 movieScanner.setEnabled(True)
-            except:
+            except Exception:
                 print('-' * 50)
                 import traceback
                 import sys

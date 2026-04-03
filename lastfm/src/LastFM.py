@@ -471,7 +471,7 @@ class LastFMPlaylist:
                 self.tracks.append(nodex)
             self.length = len(self.tracks)
             return True
-        except:
+        except Exception:
             return False
 
     def _getElementsByTagName(self, node, tagName, possibleNamespaces=DEFAULT_NAMESPACES):

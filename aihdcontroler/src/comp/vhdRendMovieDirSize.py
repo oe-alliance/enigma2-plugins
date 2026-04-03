@@ -25,5 +25,5 @@ class vhdRendMovieDirSize(Renderer, VariableText):
 						self.text = fdspace + _(config.movielist.last_videodir.value)
 				else:
 					self.text = '---'
-			except:
+			except Exception:
 				self.text = 'ERR'

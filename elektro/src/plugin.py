@@ -360,7 +360,7 @@ def Plugins(**kwargs):
 def main(session, **kwargs):
 	try:
 		session.open(Elektro)
-	except:
+	except Exception:
 		print(pluginPrintname, "Pluginexecution failed")
 
 
@@ -753,7 +753,7 @@ class DoElektro(Screen):
 		try:
 			self.session.openWithCallback(self.DoElektroStandby, MessageBox, _("Go to Standby now?"), type=MessageBox.TYPE_YESNO,
 					timeout=config.plugins.elektro.standbyOnBootTimeout.value)
-		except:
+		except Exception:
 			# Couldn't be shown. Restart timer.
 			print(pluginPrintname, "Failed Showing Standby Sceen")
 			self.TimerStandby.startLongTimer(elektrostarttime)
@@ -901,7 +901,7 @@ class DoElektro(Screen):
 		if trysleep:
 			try:
 				self.session.openWithCallback(self.DoElektroSleep, MessageBox, _("Go to sleep now?"), type=MessageBox.TYPE_YESNO, timeout=60)
-			except:
+			except Exception:
 				# reset the timer and try again
 				self.TimerSleep.startLongTimer(elektrostarttime)
 

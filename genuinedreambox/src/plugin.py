@@ -99,7 +99,7 @@ class genuineDreambox(Screen):
 			self.uds = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
 			self.uds.connect(("/var/run/tpmd_socket"))
 			self.uds.settimeout(5.0)
-		except:
+		except Exception:
 			self["resulttext"].setText("Security service not running.")
 			udsError = True
 		if not udsError:
@@ -107,7 +107,7 @@ class genuineDreambox(Screen):
 				try:
 					url = ("https://www.dream-multimedia-tv.de/verify/challenge?serial=%s&version=%s" % (self.serial, self.tpmdVersion))
 					getPage(ensure_binary(url)).addCallback(self._gotPageLoadRandom).addErrback(self.errorLoad)
-				except:
+				except Exception:
 					self["resulttext"].setText(_("Can't connect to server. Please check your network!"))
 
 	def needsTPMUpdate(self):
@@ -159,7 +159,7 @@ class genuineDreambox(Screen):
 				self.uds = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
 				self.uds.connect(("/var/run/tpmd_socket"))
 				self.uds.settimeout(5.0)
-			except:
+			except Exception:
 				self["resulttext"].setText(_("Security service not running."))
 				udsError = True
 			if not udsError:
@@ -312,7 +312,7 @@ class genuineDreambox(Screen):
 	def closeUds(self):
 		try:
 			self.uds.close()
-		except:
+		except Exception:
 			pass
 
 	def exit(self):

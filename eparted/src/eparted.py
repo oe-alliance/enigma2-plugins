@@ -54,7 +54,7 @@ PA_NAME = 7
 def getInt_epart(val):
 	try:
 		return int(float(val[0:-2]))  # Einheit abschneiden
-	except:
+	except Exception:
 		return 0
 
 
@@ -88,7 +88,7 @@ def parseCmd(result):
 						if l[0].find("/dev/mtd") < 0:
 							l.insert(0, LIST_TYPE_DEV)
 							entry.append(l)
-	except:
+	except Exception:
 		print("[eParted] <parse error>")
 		return []
 	return devlist
@@ -408,7 +408,7 @@ class Cpart(Screen):
 				#for x in self.__new_part_list:
 				#	if x[LIST_TYPE]==LIST_TYPE_PAR:
 				#		print(x)
-			except:
+			except Exception:
 				print("[eParted] <remove part>")
 			self.__Filllist()
 
@@ -558,7 +558,7 @@ class Cpartexe(Screen):
 						return ("/dev/disk/by-uuid/" + uuid, uuid)
 			else:
 				return (device, device[5:])
-		except:
+		except Exception:
 			print("[eParted] <error get UUID>")
 		return None
 

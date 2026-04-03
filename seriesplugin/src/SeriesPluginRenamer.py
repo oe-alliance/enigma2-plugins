@@ -64,7 +64,7 @@ def newLegacyEncode(string):
 		else:
 			try:
 				string2 += char.encode('ascii', 'strict')
-			except:
+			except Exception:
 				string2 += " "
 	return string2
 
@@ -181,12 +181,11 @@ def osrename(src, dst):
 		if not os.path.exists(to):
 			try:
 				os.rename(f, to)
-			except:
+			except OSError:
 				log.exception("rename error", f, to)
 		elif config.plugins.seriesplugin.rename_existing_files.value:
 			log.debug("Destination file already exists", to, " - Append '_'")
 			return osrename(src, dst + "_")
-			break
 		else:
 			log.warning(_("Skipping rename because file already exists") + "\n" + to + "\n\n" + _("Can be configured within the setup"))
 	return True

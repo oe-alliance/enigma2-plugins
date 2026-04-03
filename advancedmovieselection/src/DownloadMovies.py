@@ -163,7 +163,7 @@ class DownloadMovies(Screen):
         self.setTitle(_("Search result(s) for %s") % (movie_title))
         try:
             results = self.tmdb3.searchMovie(movie_title)
-        except:
+        except Exception:
             results = []
         if len(results) == 0:
             self.setTitle(_("Nothing found for: %s") % (movie_title))
@@ -180,7 +180,7 @@ class DownloadMovies(Screen):
                     self.l.append((movie.title.encode("utf-8") + " - " + released, movie))
                 else:
                     self.l.append((movie.title.encode("utf-8"), movie))
-            except:
+            except Exception:
                 pass
 
         self["list"].setList(self.l)
@@ -256,9 +256,9 @@ class FetchingMovies(Thread):
                     current = current + 1
                     movie_title = ServiceCenter.getInstance().info(service).getName(service).encode("utf-8").split(" - ")[0].strip()
                     createEIT(service.getPath(), movie_title)
-                except:
+                except Exception:
                     printStackTrace()
-        except:
+        except Exception:
             printStackTrace()
         finally:
             self.finish()

@@ -108,5 +108,5 @@ class StreamPlayer:
         try:
             track = self.playlist.getTrack(self.currentplaylistitemnumber)
             return track[key]
-        except:
+        except Exception:
             return "N/A"

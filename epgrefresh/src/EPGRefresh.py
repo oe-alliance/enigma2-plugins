@@ -221,7 +221,7 @@ class EPGRefresh:
 			try:
 				if not service.valid():
 					continue
-			except:
+			except Exception:
 				continue
 
 			if (service.flags & (eServiceReference.isMarker | eServiceReference.isDirectory)):
@@ -295,7 +295,7 @@ class EPGRefresh:
 			try:
 				if self.session is not None:
 					self.session.open(MessageBox, message, MessageBox.TYPE_INFO, timeout=10)
-			except:
+			except Exception:
 				print("[EPGRefresh] Error while opening Messagebox!")
 				print_exc(file=stdout)
 				Notifications.AddPopup(message, MessageBox.TYPE_INFO, 10)
@@ -341,7 +341,7 @@ class EPGRefresh:
 			AdjustExtensionsmenu(True, extPendingServDescriptor)
 			AdjustExtensionsmenu(True, extStopDescriptor)
 			AdjustExtensionsmenu(False, extRunDescriptor)
-		except:
+		except ImportError:
 			print("[EPGRefresh] Error while adding 'Stop Running EPG-Refresh' to Extensionmenu")
 			print_exc(file=stdout)
 		if config.plugins.epgrefresh.erase.value:
@@ -362,7 +362,7 @@ class EPGRefresh:
 			AdjustExtensionsmenu(False, extPendingServDescriptor)
 			AdjustExtensionsmenu(False, extStopDescriptor)
 			housekeepingExtensionsmenu(config.plugins.epgrefresh.show_run_in_extensionsmenu, force=True)
-		except:
+		except ImportError:
 			print("[EPGRefresh] Error while removing 'Stop Running EPG-Refresh' to Extensionmenu:")
 			print_exc(file=stdout)
 
@@ -414,7 +414,7 @@ class EPGRefresh:
 				deferred.addCallback(self._nextTodo)
 				deferred.addErrback(self._autotimerErrback)
 			#except Exception as e:
-			except:
+			except Exception:
 				from traceback import format_exc
 				#print("[EPGRefresh] Could not start AutoTimer:", e)
 				print("[EPGRefresh] Could not start AutoTimer:" + str(format_exc()))
@@ -583,7 +583,7 @@ class EPGRefresh:
 				servtxt = servtxt + _("%d more services") % (servcounter)
 			session.open(MessageBox, _("Following Services have to be scanned:")
 				+ "\n" + servtxt, MessageBox.TYPE_INFO)
-		except:
+		except Exception:
 			print("[EPGRefresh] showPendingServices Error!")
 			print_exc(file=stdout)
 

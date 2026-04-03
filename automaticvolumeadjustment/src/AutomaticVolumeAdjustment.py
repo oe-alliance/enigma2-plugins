@@ -154,7 +154,7 @@ class AutomaticVolumeAdjustment(Screen):
 				# only images >= 05.08.2010, must use try/except
 				try:
 					self.volumeControlInstance = VolumeControl.instance
-				except:
+				except Exception:
 					print("[AutomaticVolumeAdjustment] VolumeControl.instance is None")
 				self.pluginStarted = True  # plugin started...
 
@@ -172,7 +172,7 @@ class AutomaticVolumeAdjustment(Screen):
 				else:
 					if description and description.split()[0] in ("AC3", "AC-3", "A_AC3", "A_AC-3", "A-AC-3", "E-AC-3", "A_EAC3", "DTS", "DTS-HD", "AC4", "AAC-HE"):
 						return True
-			except:
+			except Exception:
 				pass
 		return False
 

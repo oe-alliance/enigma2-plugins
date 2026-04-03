@@ -5,7 +5,7 @@ try:
 	from Components.SystemInfo import BoxInfo
 	DISPLAYMODEL = BoxInfo.getItem("displaymodel")
 	DISPLAYBRAND = BoxInfo.getItem("displaybrand")
-except:
+except ImportError:
 	from boxbranding import getMachineBrand, getMachineName
 	DISPLAYMODEL = getMachineName()
 	DISPLAYBRAND = getMachineBrand()

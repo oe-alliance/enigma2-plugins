@@ -78,7 +78,7 @@ def safeRemove(*names):
 	for name in names:
 		try:
 			os.remove(name)
-		except:
+		except OSError:
 			pass
 
 
@@ -86,7 +86,7 @@ def quoteEventName(eventName):
 	# BBC uses '\x86' markers in program names, remove them
 	try:
 		text = eventName.decode('utf8').replace(u'\x86', u'').replace(u'\x87', u'').encode('utf8')
-	except:
+	except Exception:
 		text = eventName
 	return quote_plus(text)
 
@@ -142,7 +142,7 @@ def get(json, path, default=""):
 		# (e.g. the storyline of "As You Want Me" / "Come mi vuoi").
 		try:
 			json = json.encode("latin1").decode("utf8")
-		except:
+		except Exception:
 			pass
 		if six.PY2:
 			json = json.encode("utf8")
@@ -379,7 +379,7 @@ class IMDB(Screen, HelpableScreen):
 		self.html = open(self.localpath).read()
 		try:
 			self.json = open(os.path.splitext(self.localpath)[0] + ".json").read()
-		except:
+		except Exception:
 			pass
 		self.IMDBparse()
 
@@ -533,7 +533,7 @@ class IMDB(Screen, HelpableScreen):
 		def makedate(date):
 			try:
 				return strftime(config.usage.date.full.value, strptime(date, "%Y-%m-%d"))
-			except:
+			except Exception:
 				return date
 
 		for review in reviews:
@@ -545,7 +545,7 @@ class IMDB(Screen, HelpableScreen):
 					helpful = _("%d out of %d found this helpful.") % (helpful, total)
 				else:
 					helpful = ""
-			except:
+			except Exception:
 				helpful = ""
 			self.reviews.append({
 				'rating': str(get(review, 'authorRating')),
@@ -707,7 +707,7 @@ class IMDB(Screen, HelpableScreen):
 					open(isave + "-reviews.json", 'w').write(self.reviewsJSON)
 				try:
 					copy("/tmp/poster.jpg", isave + ".jpg")
-				except:
+				except OSError:
 					pass
 			self["statusbar"].setText(_("IMDb save completed"))
 		except Exception as e:

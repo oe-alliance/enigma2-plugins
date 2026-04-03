@@ -19,13 +19,13 @@ import os
 try:
 	from Components.SystemInfo import BoxInfo
 	IMAGEDISTRO = BoxInfo.getItem("distro")
-except:
+except ImportError:
 	from boxbranding import getImageDistro
 	IMAGEDISTRO = getImageDistro()
 
 try:
 	from Components.AVSwitch import iAVSwitch as video_hw
-except:
+except ImportError:
 	from Plugins.SystemPlugins.Videomode.VideoHardware import video_hw  # depends on Videomode Plugin
 
 # modes_available used to be a member variable, but that was removed and
@@ -110,7 +110,7 @@ def setDeinterlacer(mode):
 		f.write("%s\n" % mode)
 		f.close()
 		print("[AutoRes] switch deinterlacer mode to %s" % mode)
-	except:
+	except OSError:
 		print("[AutoRes] failed switch deinterlacer mode to %s" % mode)
 
 
@@ -119,7 +119,7 @@ def setHdmiHdrType(mode):
 		f = open("/proc/stb/video/hdmi_hdrtype", "r")
 		old_mode = f.read()
 		f.close()
-	except:
+	except OSError:
 		old_mode = ""
 	if old_mode and old_mode != mode:
 		try:
@@ -127,7 +127,7 @@ def setHdmiHdrType(mode):
 			f.write("%s" % mode)
 			f.close()
 			print("[AutoRes] switch hdmi_hdrtype mode to %s" % mode)
-		except:
+		except OSError:
 			print("[AutoRes] failed switch hdmi_hdrtype mode to %s" % mode)
 
 
@@ -136,7 +136,7 @@ def setColorimetry(mode):
 		f = open("/proc/stb/video/hdmi_colorimetry", "r")
 		old_mode = f.read()
 		f.close()
-	except:
+	except OSError:
 		old_mode = ""
 	if old_mode and old_mode != mode:
 		try:
@@ -144,7 +144,7 @@ def setColorimetry(mode):
 			f.write("%s" % mode)
 			f.close()
 			print("[AutoRes] switch hdmi_colorimetry mode to %s" % mode)
-		except:
+		except OSError:
 			print("[AutoRes] failed switch hdmi_colorimetry mode to %s" % mode)
 
 
@@ -365,7 +365,7 @@ class AutoRes(Screen):
 			if not framerate:
 				try:
 					framerate = int(open("/proc/stb/vmpeg/0/framerate", "r").read())
-				except:
+				except OSError:
 					pass
 			if info and height != -1 and width != -1 and framerate != -1:
 				videocodec = codec_data.get(info.getInfo(iServiceInformation.sVideoType), "N/A")
@@ -453,7 +453,7 @@ class AutoRes(Screen):
 					v.write("%s\n" % mode)
 					v.close()
 					print("[AutoRes] switching to", mode)
-				except:
+				except OSError:
 					print("[AutoRes] failed switching to", mode)
 				resolutionlabel["restxt"].setText(_("Videomode: %s") % mode)
 				if config.plugins.autoresolution.showinfo.value:
@@ -491,7 +491,7 @@ class AutoRes(Screen):
 				resolutionlabel.show()
 			try:
 				video_hw.setMode(port, mode, rate)
-			except:
+			except Exception:
 				print("[AutoRes] Videomode: failed switching to", mode)
 				return
 		self.lastmode = mode
@@ -672,7 +672,7 @@ class AutoFrameRate(Screen):
 					if not framerate:
 						try:
 							framerate = int(open("/proc/stb/vmpeg/0/framerate", "r").read())
-						except:
+						except Exception:
 							pass
 					if config.av.videorate[config.av.videomode[config.av.videoport.value].value].value in ("multi", "auto"):
 						replace_mode = '30'
@@ -774,7 +774,7 @@ class ManualResolution(Screen):
 					entry = x.replace('i50', 'i@50hz').replace('i60', 'i@60hz').replace('p23', 'p@23.976hz').replace('p24', 'p@24hz').replace('p25', 'p@25hz').replace('p29', 'p@29.970hz').replace('p30', 'p@30hz').replace('p50', 'p@50hz').replace('p60', 'p@60hz'), x
 					self.choices.append(entry)
 			f.close()
-		except:
+		except Exception:
 			print("[ManualResolution] Error open /proc/stb/video/videomode_choices")
 		else:
 			self.choices and self.choices.sort()
@@ -793,7 +793,7 @@ class ManualResolution(Screen):
 				f = open("/proc/stb/vmpeg/0/framerate", "r")
 				fpsString = f.read()
 				f.close()
-			except:
+			except OSError:
 				print("[ManualResolution] Error open /proc/stb/vmpeg/0/framerate")
 				fpsString = '50000'
 			xres = int(xresString, 16)
@@ -801,7 +801,7 @@ class ManualResolution(Screen):
 			fps = int(fpsString)
 			fpsFloat = float(fps)
 			fpsFloat = fpsFloat / 1000
-		except:
+		except Exception:
 			print("[ManualResolution] Error reading current mode!Stop!")
 			return
 		selection = 0
@@ -816,7 +816,7 @@ class ManualResolution(Screen):
 		if self.init:
 			try:
 				self.old_mode = open("/proc/stb/video/videomode").read()[:-1]
-			except:
+			except Exception:
 				print("[ManualResolution] Error open /proc/stb/video/videomode")
 		if self.old_mode:
 			for x in range(len(tlist)):
@@ -842,7 +842,7 @@ class ManualResolution(Screen):
 			f = open("/proc/stb/video/videomode", "w")
 			f.write(mode)
 			f.close()
-		except:
+		except OSError:
 			print("[ManualResolution] Error write /proc/stb/video/videomode")
 
 

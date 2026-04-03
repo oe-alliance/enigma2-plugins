@@ -15,7 +15,7 @@ class MP4PornMovie(Movie):
 	def getVideoUrl(self):
 		try:
 			data = urlopen(self.url).read()
-		except:
+		except Exception:
 			data = ""
 		reonecat = re.compile(r'\| <a href="(.+?).m4v"')
 		list = reonecat.findall(data)

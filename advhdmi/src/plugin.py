@@ -18,7 +18,7 @@ from Components.HdmiCec import hdmi_cec
 try:
 	from Components.SystemInfo import BoxInfo
 	IMAGEDISTRO = BoxInfo.getItem("distro")
-except:
+except ImportError:
 	from boxbranding import getImageDistro
 	IMAGEDISTRO = getImageDistro()
 
@@ -154,7 +154,7 @@ def callHook(advhdmi_event):
 						return False
 				else:
 					hook.after_event(advhdmi_event)
-			except:
+			except Exception:
 				_print("Error while calling Hook " + str(hookKey))
 				print_exc(file=stdout)
 	if advhdmi_event in (ADVHDMI_BEFORE_POWERON, ADVHDMI_BEFORE_POWEROFF, ADVHDMI_BEFORE_RECEIVED_STANDBY, ADVHDMI_BEFORE_RECEIVED_NOWACTIVE):

@@ -197,7 +197,7 @@ class FileList(MenuList):
 			if os_path.exists(directory):
 				try:
 					files = listdir(directory)
-				except:
+				except OSError:
 					files = []
 				files.sort()
 				tmpfiles = files[:]
@@ -347,7 +347,7 @@ class FileList(MenuList):
 		try:
 			stat1 = os_stat(self.current_directory + a[0][0])
 			stat2 = os_stat(self.current_directory + b[0][0])
-		except:
+		except OSError:
 			return 0
 		return cmp(b[0][1], a[0][1]) or cmp(stat2.st_ctime, stat1.st_ctime)
 

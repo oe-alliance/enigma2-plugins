@@ -282,7 +282,7 @@ class OFDB(Screen):
 			self["statusbar"].setText(_("Query OFDb: %s...") % (self.eventName))
 			try:
 				self.eventName = quote(self.eventName)
-			except:
+			except Exception:
 				self.eventName = quote(self.eventName.decode('utf8').encode('ascii', 'ignore'))
 			localfile = "/tmp/ofdbquery.html"
 			fetchurl = "http://www.ofdb.de/view.php?page=suchergebnis&Kat=DTitel&SText=" + self.eventName

@@ -73,7 +73,7 @@ from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS, SCOPE_
 try:
     from Plugins.SystemPlugins.PiPServiceRelation.plugin import getRelationDict
     plugin_PiPServiceRelation_installed = True
-except:
+except ImportError:
     plugin_PiPServiceRelation_installed = False
 
 START_MERLIN_PLAYER_SCREEN_TIMER_VALUE = 7000
@@ -395,7 +395,7 @@ def OpenDatabase():
             print("[MerlinMusicPlayer] Error: database file needs to be writable, can not open %s for writing..." % connectstring)
             connection.close()
             return None
-    except:
+    except Exception:
         print("[MerlinMusicPlayer] unable to open database file: %s" % connectstring)
         return None
     if not db_exists:
@@ -443,23 +443,23 @@ def getID3Tags(root, filename):
     if filename.lower().endswith(".mp3"):
         try:
             audio = MP3(os_path.join(root, filename), ID3=EasyID3)
-        except:
+        except Exception:
             audio = None
     elif filename.lower().endswith(".flac"):
         try:
             audio = FLAC(os_path.join(root, filename))
             isFlac = True
-        except:
+        except Exception:
             audio = None
     elif filename.lower().endswith(".m4a"):
         try:
             audio = EasyMP4(os_path.join(root, filename))
-        except:
+        except Exception:
             audio = None
     elif filename.lower().endswith(".ogg"):
         try:
             audio = OggVorbis(os_path.join(root, filename))
-        except:
+        except Exception:
             audio = None
     else:
         isAudio = False
@@ -468,20 +468,20 @@ def getID3Tags(root, filename):
         try:
             # list index out of range workaround
             genre = getEncodedString(audio.get('genre', ['n/a'])[0])
-        except:
+        except Exception:
             genre = "n/a"
         artist = getEncodedString(audio.get('artist', ['n/a'])[0])
         album = getEncodedString(audio.get('album', ['n/a'])[0])
         try:
             tracknr = int(audio.get('tracknumber', ['-1'])[0].split("/")[0])
-        except:
+        except Exception:
             tracknr = -1
         track = getEncodedString(audio.get('tracknumber', ['n/a'])[0])
         date = getEncodedString(audio.get('date', ['n/a'])[0])
         try:
             length = str(datetime_timedelta(seconds=int(audio.info.length))).encode("utf-8", 'ignore')
             length = repr(length)[2:-1]
-        except:
+        except Exception:
             length = -1
         if not isFlac:
             bitrate = audio.info.bitrate / 1000
@@ -633,7 +633,7 @@ class MerlinMusicPlayerTV(MerlinMusicPlayerScreenSaver):
             if self.currentService:
                 current = ServiceReference(self.currentService)
                 cur_service = current.ref
-        except:
+        except Exception:
             cur_service = None
         if cur_service is None:
             try:
@@ -641,7 +641,7 @@ class MerlinMusicPlayerTV(MerlinMusicPlayerScreenSaver):
                     current = ServiceReference(self.servicelist.getCurrentSelection())
                     service = current.ref
                     self.playService(service)
-            except:
+            except Exception:
                 pass
         else:
             self.playService(cur_service)
@@ -940,7 +940,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
         if not os_path.exists(self.googleDownloadDir):
             try:
                 os_mkdir(self.googleDownloadDir)
-            except:
+            except OSError:
                 self.googleDownloadDir = "/tmp/"
 
         self.init = 0
@@ -1031,7 +1031,7 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
             if not os_path.exists(self.googleDownloadDir):
                 try:
                     os_mkdir(self.googleDownloadDir)
-                except:
+                except OSError:
                     self.googleDownloadDir = "/tmp/"
         self.resetScreenSaverTimer()
 
@@ -1153,26 +1153,26 @@ class MerlinMusicPlayerScreen(Screen, InfoBarBase, InfoBarSeek, InfoBarNotificat
             try:
                 audio = ID3(self.currentFilename)
                 audiotype = 1
-            except:
+            except Exception:
                 audio = None
         elif self.currentFilename.lower().endswith(".flac"):
             try:
                 audio = FLAC(self.currentFilename)
                 audiotype = 2
-            except:
+            except Exception:
                 audio = None
         elif self.currentFilename.lower().endswith(".m4a"):
             try:
                 # audio = MP4(self.currentFilename)
                 audio = EasyMP4(self.currentFilename)
                 audiotype = 3
-            except:
+            except Exception:
                 audio = None
         elif self.currentFilename.lower().endswith(".ogg"):
             try:
                 audio = OggVorbis(self.currentFilename)
                 audiotype = 4
-            except:
+            except Exception:
                 audio = None
         if audio:
             if audiotype == 1:
@@ -1494,7 +1494,7 @@ class MerlinMusicPlayerLyrics(Screen):
         try:
             try:
                 audio = ID3(self.currentSong.filename)
-            except:
+            except Exception:
                 audio = None
             text = getEncodedString(self.getLyricsFromID3Tag(audio))  # .replace("\r\n", "\n")
             # text = text.replace("\r", "\n")
@@ -1527,7 +1527,7 @@ class MerlinMusicPlayerLyrics(Screen):
                     response = responseUrl(url)
                     print('url response = ', response)
                     self.gotLyrics(response)
-                except:
+                except Exception:
                     # return "No lyrics found in id3-tag, trying api.chartlyrics.com..."
                     print('self.urlError')
                     self.urlError()
@@ -1630,7 +1630,7 @@ class MerlinMusicPlayerSongList(Screen):
                 self.summaries.setText(songlist[index][0].title, 4)
             else:
                 self.summaries.setText(songlist[index][0].text, 4)
-        except:
+        except Exception:
             pass
 
     def createSummary(self):
@@ -1721,7 +1721,7 @@ class iDreamMerlin(Screen):
         sel = None
         try:
             sel = self["list"].l.getCurrentSelection()[0]
-        except:
+        except Exception:
             pass
         return sel
 
@@ -2108,7 +2108,7 @@ class iDreamMerlin(Screen):
     def green_pressed(self):
         try:
             sel = self["list"].l.getCurrentSelection()[0]
-        except:
+        except Exception:
             sel = None
         if sel is None:
             return
@@ -2130,7 +2130,7 @@ class iDreamMerlin(Screen):
     def yellow_pressed(self):
         try:
             sel = self["list"].l.getCurrentSelection()[0]
-        except:
+        except Exception:
             return
         if sel.artistID != 0:
             oldmode = self.mode
@@ -2142,7 +2142,7 @@ class iDreamMerlin(Screen):
     def blue_pressed(self):
         try:
             sel = self["list"].l.getCurrentSelection()[0]
-        except:
+        except Exception:
             return
         if sel.albumID != 0:
             self.setButtons(red=True, green=True, yellow=True)
@@ -2487,7 +2487,7 @@ class iDreamMerlin(Screen):
             if index > count:
                 index = 0
             self.summaries.setText(iDreamList[index][0].title or iDreamList[index][0].text, 4)
-        except:
+        except Exception:
             pass
 
     def createSummary(self):
@@ -3227,7 +3227,7 @@ class MerlinMusicPlayerFileList(Screen):
             try:
                 config.plugins.merlinmusicplayer.defaultfilebrowserpath.value = self["list"].getCurrentDirectory()
                 config.plugins.merlinmusicplayer.defaultfilebrowserpath.save()
-            except:
+            except Exception:
                 pass
 
     def createSummary(self):

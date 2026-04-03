@@ -370,7 +370,7 @@ class MovieContextMenu(Screen):
             import socket
             print(socket.gethostbyname('www.google.com'))
             return True
-        except:
+        except Exception:
             self.session.openWithCallback(self.close, MessageBox, _("No internet connection available!"), MessageBox.TYPE_ERROR)
             return False
 
@@ -585,7 +585,7 @@ class MovieContextMenu(Screen):
             self.csel.updateDescription()
             self.csel["freeDiskSpace"].update()
             self.close()
-        except:
+        except Exception:
             printStackTrace()
 
     def deleteCover(self):
@@ -613,7 +613,7 @@ class MovieContextMenu(Screen):
             self.csel.updateDescription()
             self.csel["freeDiskSpace"].update()
             self.close()
-        except:
+        except Exception:
             pass
 
     def deleteInfos(self):
@@ -641,7 +641,7 @@ class MovieContextMenu(Screen):
             self.csel.updateDescription()
             self.csel["freeDiskSpace"].update()
             self.close()
-        except:
+        except Exception:
             pass
 
     def selectScanLocations(self):
@@ -867,12 +867,11 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
                 if timer.state == TimerEntry.StateRunning:
                     try:
                         filename = "%s.ts" % timer.Filename
-                    except:
+                    except Exception:
                         filename = ""
                     for serviceref in self.to_delete:
                         if filename and os.path.realpath(filename) == os.path.realpath(serviceref.getPath()):
                             recording = True
-                            continue
 
         if not config.AdvancedMovieSelection.askdelete.value:
             self.deleteConfirmed(True)
@@ -886,7 +885,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, MoviePreview, Q
                 if timer.isRunning():
                     try:
                         filename = "%s.ts" % timer.Filename
-                    except:
+                    except Exception:
                         filename = ""
                     if filename and os.path.realpath(filename) == os.path.realpath(file_path):
                         timer.afterEvent = AFTEREVENT.NONE

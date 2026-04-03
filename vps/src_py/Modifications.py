@@ -203,7 +203,7 @@ def new_TimerEntry_createSetup(self, widget="config"):
 #
 		try:
 			currentItem = self[widget].getCurrent()
-		except:
+		except Exception:
 			currentItem = 0
 		self._createSetup_old_rn_vps()
 
@@ -340,12 +340,12 @@ try:
 #
 		try:
 			self.session = session
-		except:
+		except Exception:
 			pass
 # NOW we can safely pass on all we were given
 		self.__init__old_rn_vps(session, *args, **kwargs)
 
-except:
+except Exception:
 	pass
 
 # We cater for any parameters thrown at us and pass it all on.

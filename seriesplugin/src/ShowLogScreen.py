@@ -75,5 +75,5 @@ class ShowLogScreen(Screen):
 			try:
 				self.setText(text)
 				self["text"].lastPage()
-			except:
+			except Exception:
 				pass

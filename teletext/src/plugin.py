@@ -251,7 +251,7 @@ class TeleText(Screen):
     self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     try:
       unlink('/tmp/dbttcp.socket')
-    except:
+    except OSError:
       pass
     self.socket.bind('/tmp/dbttcp.socket')
     self.listen_sn = eSocketNotifier(self.socket.fileno(), POLLIN)

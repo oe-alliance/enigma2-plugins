@@ -111,7 +111,7 @@ class PipServiceRelationSetup(Screen):
 	def keyBlue(self):
 		try:
 			sel = self["entrylist"].l.getCurrentSelection()[0]
-		except:
+		except Exception:
 			sel = None
 		if sel is None:
 			return
@@ -123,7 +123,7 @@ class PipServiceRelationSetup(Screen):
 	def keyDelete(self):
 		try:
 			sel = self["entrylist"].l.getCurrentSelection()[0]
-		except:
+		except Exception:
 			sel = None
 		if sel is None:
 			return

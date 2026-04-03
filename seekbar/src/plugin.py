@@ -268,7 +268,7 @@ def parseKeys(context, filename, actionmap, device, keys):
 				else:
 					try:
 						keyid = KEYIDS[id]
-					except:
+					except Exception:
 						raise KeymapError("key id '" + str(id) + "' is illegal")
 				actionmap.bindKey(filename, device, keyid, flags, context, mapto)
 				addKeyBinding(filename, keyid, context, mapto, flags)

@@ -82,7 +82,7 @@ def unifyChannel(text):
 	text = CompiledRegexpChannelUnify.sub(translate, text)
 	try:
 		text = text.decode("utf-8").encode("latin1")
-	except:
+	except Exception:
 		pass
 	text = CompiledRegexpChannelRemoveSpecialChars.sub('', text)
 	return text.strip().lower()

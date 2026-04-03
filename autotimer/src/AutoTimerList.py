@@ -9,7 +9,7 @@ from skin import parameters, parseFont
 try:
 	from Tools.TextBoundary import getTextBoundarySize
 	TextBoundary = True
-except:
+except ImportError:
 	TextBoundary = False
 from . import _
 

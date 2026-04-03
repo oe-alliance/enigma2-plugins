@@ -49,7 +49,7 @@ import Screens.Standby
 try:
 	from Components.SystemInfo import BoxInfo
 	IMAGEDISTRO = BoxInfo.getItem("distro")
-except:
+except ImportError:
 	from boxbranding import getImageDistro
 	IMAGEDISTRO = getImageDistro()
 
@@ -514,7 +514,7 @@ class InfoBar(InfoBarOrg):
 		# Stop Timeshift now
 		try:
 			ts.stopTimeshift(switchToLive)
-		except:
+		except Exception:
 			ts.stopTimeshift()
 
 		self.timeshift_enabled = 0
@@ -814,7 +814,7 @@ class InfoBar(InfoBarOrg):
 						if filename.startswith("pts_livebuffer.") is True:
 							self.BgFileEraser.erase("%s/%s.meta" % (config.usage.timeshift_path.value, filename))
 							self.BgFileEraser.erase("%s/%s.eit" % (config.usage.timeshift_path.value, filename))
-		except:
+		except Exception:
 			print("PTS: IO-Error while cleaning Timeshift Folder ...")
 
 	def ptsGetEventInfo(self):
@@ -1248,7 +1248,7 @@ class InfoBar(InfoBarOrg):
 
 		try:
 			ts.setNextPlaybackFile("%s/%s" % (config.usage.timeshift_path.value, nexttsfile))
-		except:
+		except Exception:
 			print("PTS-Plugin: setNextPlaybackFile() not supported by OE. Enigma2 too old !?")
 
 	def ptsSeekBackHack(self):

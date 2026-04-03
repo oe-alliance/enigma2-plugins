@@ -171,7 +171,7 @@ class PictureScreen(Screen):
 		try:
 			if exists("/tmp/loadedfile"):
 				remove("/tmp/loadedfile")
-		except:  # OSerror??
+		except OSError:
 			pass
 
 	def fetchFile(self, url):

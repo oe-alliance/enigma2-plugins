@@ -63,7 +63,7 @@ class SkinTools():
     def getDesktopWidth():
         try:
             desktopWidth = getDesktop(0).size().width()
-        except:
+        except Exception:
             desktopWidth = SkinTools.DESKTOP_WIDTH_SD
         return desktopWidth
 

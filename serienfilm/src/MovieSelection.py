@@ -45,7 +45,7 @@ def setPreferredTagEditor(te):
 		else:
 			print("Preferred tag editor already set to ", preferredTagEditor)
 			print("ignoring ", te)
-	except:
+	except Exception:
 		preferredTagEditor = te
 		print("Preferred tag editor set to ", preferredTagEditor)
 

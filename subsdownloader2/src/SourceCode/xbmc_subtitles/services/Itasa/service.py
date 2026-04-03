@@ -46,7 +46,7 @@ def geturl(url):
     try:
         response = urlopen(url)
         content = response.read()
-    except:
+    except Exception:
         log(__name__, " Failed to get url:%s" % (url))
         content = None
     return (content)
@@ -183,7 +183,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
                     local_file_handle = open(local_tmp_file, "wb")
                     local_file_handle.write(content)
                     local_file_handle.close()
-                except:
+                except Exception:
                     log(__name__, " Failed to save subtitles to '%s'" % (local_tmp_file))
                 if packed:
                     if header == 'PK':

@@ -123,7 +123,7 @@ class AutoTimerEPGSelection(EPGSelection):
 	def __init__(self, *args):
 		try:
 			EPGSelection.__init__(self, *args, EPGtype='single')
-		except:
+		except Exception:
 			EPGSelection.__init__(self, *args)
 		self.skinName = "EPGSelection"
 

@@ -410,7 +410,7 @@ class MovielistPreviewAutoCreator(Screen):
 	def createPreviews(self):
 		try:
 			files = listdir(self.dir)
-		except:
+		except OSError:
 			files = []
 		for file in files:
 			ext = self.getExtension(file)

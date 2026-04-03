@@ -114,7 +114,7 @@ class Query:
 		data = string.decode("utf-8", "replace").replace('&', "&amp;").encode("ascii", 'xmlcharrefreplace')
 		try:
 			cdinfodom = xml.dom.minidom.parseString(data)
-		except:
+		except Exception:
 			print("[xml_parse_output] error, could not parse")
 			return False
 		xmldata = cdinfodom.childNodes[0]

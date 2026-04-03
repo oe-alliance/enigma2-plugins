@@ -96,9 +96,9 @@ class Hotplug():
             for callback in self.notifier:
                 try:
                     callback()
-                except:
+                except Exception:
                     printStackTrace()
-        except:
+        except Exception:
             printStackTrace()
 
     def getHotplugServices(self):

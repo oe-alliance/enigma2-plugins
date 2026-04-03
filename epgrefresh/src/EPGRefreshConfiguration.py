@@ -266,7 +266,7 @@ class EPGRefreshConfiguration(ConfigListScreen, Screen, HelpableScreen):
 				self.stopRunningRefresh()
 			if result == EPGFunctionMenu.FUNCTION_RETURN_SHOWPENDING:
 				self.showPendingServices()
-		except:
+		except Exception:
 			print("[EPGRefresh] Error in Function - Call")
 			print_exc(file=stdout)
 

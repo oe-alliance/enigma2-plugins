@@ -94,7 +94,7 @@ class Seekbar(ConfigListScreen, Screen):
         if self.length:
             try:
                 sz_w = getDesktop(0).size().width()
-            except:
+            except Exception:
                 sz_w = 720
             if sz_w == 1280:
                 x = 60 + int(11.5 * self.percent)
@@ -240,7 +240,7 @@ def parseKeys(context, filename, actionmap, device, keys):
                 else:
                     try:
                         keyid = KEYIDS[id]
-                    except:
+                    except Exception:
                         raise KeymapError("key id '" + str(id) + "' is illegal")
                 actionmap.bindKey(filename, device, keyid, flags, context, mapto)
                 addKeyBinding(filename, keyid, context, mapto, flags)

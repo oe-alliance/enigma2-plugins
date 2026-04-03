@@ -206,7 +206,7 @@ class VlcServer:
 		location = "%s:%d" % (self.getHost(), self.getHttpPort())
 		try:
 			resp = urlopen("http://" + location + uri)
-		except:
+		except Exception:
 			resp = None
 		if resp is None:
 			raise IOError("No response from Server")

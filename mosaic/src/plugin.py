@@ -318,7 +318,7 @@ class Mosaic(Screen):
 				f = open(grab_errorlog, "w")
 				f.write("retval: %d\nresult: %s" % (retval, result))
 				f.close()
-			except:
+			except OSError:
 				pass
 
 			self.session.openWithCallback(self.exit, MessageBox, _("Error while creating screenshot. You need grab version 0.8 or higher!"), MessageBox.TYPE_ERROR, timeout=5)

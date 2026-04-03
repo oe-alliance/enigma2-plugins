@@ -83,7 +83,7 @@ class SeriesPluginIndependent(object):
 		self.etimer_conn = None
 		try:
 			self.etimer_conn = self.etimer.timeout.connect(self.run)
-		except:
+		except Exception:
 			self.etimer.callback.append(self.run)
 		cycle = int(config.plugins.seriesplugin.independent_cycle.value)
 		if cycle > 0:
@@ -100,5 +100,5 @@ class SeriesPluginIndependent(object):
 		self.etimer_conn = None
 		try:
 			self.etimer.callback.remove(self.run)
-		except:
+		except Exception:
 			pass

@@ -72,7 +72,7 @@ class AboutWebScreen(WebScreen):
 		from Components.Sources.StaticText import StaticText
 		try:
 			from Tools.StbHardware import getFPVersion
-		except:
+		except ImportError:
 			from Tools.DreamboxHardware import getFPVersion
 		from Components.SystemInfo import BoxInfo
 		hw = BoxInfo.getItem("model")
@@ -87,14 +87,14 @@ class AboutWebScreen(WebScreen):
 			from boxbranding import getImageVersion, getImageBuild
 			self["EnigmaVersion"] = StaticText(getEnigmaVersionString())
 			self["ImageVersion"] = StaticText(getImageVersion() + '.' + getImageBuild())
-		except:
+		except ImportError:
 			self["EnigmaVersion"] = StaticText(about.getEnigmaVersionString())
 			self["ImageVersion"] = StaticText(about.getVersionString())
 		self["WebIfVersion"] = StaticText(config.plugins.Webinterface.version.value)
 		self["FpVersion"] = StaticText(str(getFPVersion()))
 		try:
 			model = hw.get_device_model()
-		except:
+		except Exception:
 			model = hw.get_device_name()
 		self["DeviceName"] = StaticText(model)
 
@@ -416,7 +416,7 @@ class DeviceInfoWebScreen(WebScreen):
 		from Components.Sources.StaticText import StaticText
 		try:
 			from Tools.StbHardware import getFPVersion
-		except:
+		except ImportError:
 			from Tools.DreamboxHardware import getFPVersion
 		from Components.SystemInfo import BoxInfo
 		hw = BoxInfo.getItem("model")

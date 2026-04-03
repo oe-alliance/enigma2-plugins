@@ -207,7 +207,7 @@ class PornCenterLocationSelection(Screen):
 		self["key_green"] = Label(_("Select"))
 		try:
 			self["filelist"] = FileList(dir, showDirectories=True, showFiles=False)
-		except:
+		except Exception:
 			self["filelist"] = FileList("/", showDirectories, showFiles)
 		self["actions"] = ActionMap(["ColorActions", "OkCancelActions"],
 			{
@@ -237,7 +237,7 @@ class PornCenterLocationSelection(Screen):
 		try:
 			dir = self["filelist"].getCurrentDirectory()
 			self.instance.setTitle(dir)
-		except:
+		except Exception:
 			self.instance.setTitle("?")
 
 ##################################################

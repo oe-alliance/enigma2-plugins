@@ -63,12 +63,12 @@ def CallbackChoiceAction(self, ret):
 				else:
 					name = ''
 				self.session.open(EPGSearch, name, False)
-			except:
+			except Exception:
 				pass
 		elif ret == "standard":
 			try:
 				self.blueButtonPressed()
-			except:
+			except Exception:
 				pass
 
 # Autostart

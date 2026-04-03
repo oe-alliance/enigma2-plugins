@@ -79,7 +79,7 @@ except ImportError:
 
 		def showHelp(session):
 			epgBackuphHelp.open(session)
-	except:
+	except Exception:
 		debugOut("Help-Error:\n" + str(format_exc()), forced=True)
 		showHelp = None
 
@@ -102,14 +102,14 @@ def autostart(reason, **kwargs):
 		from .EPGBackupSupport import EPGBackupSupport
 		try:
 			epgbackup = EPGBackupSupport(session)
-		except:
+		except Exception:
 			debugOut("Error while initializing EPGBackupSupport:\n" + str(format_exc()), forced=True)
 
 		try:
 			from Plugins.Extensions.UserScripts.plugin import UserScriptsConfiguration
 			gUserScriptExists = True
 			del UserScriptsConfiguration
-		except:
+		except Exception:
 			pass
 
 
@@ -117,7 +117,7 @@ def openconfig(session, **kwargs):
 	try:
 		from .EPGBackupConfig import EPGBackupConfig
 		session.openWithCallback(doneConfiguring, EPGBackupConfig)
-	except:
+	except Exception:
 		debugOut("Config-Import-Error:\n" + str(format_exc()), forced=True)
 
 
@@ -173,7 +173,7 @@ def AdjustPlugin(enable, PlugDescriptor):
 			plugins.removePlugin(PlugDescriptor)
 	except ValueError:
 		pass
-	except:
+	except Exception:
 		debugOut("AdjustPlugin-Error:\n" + str(format_exc()), forced=True)
 
 

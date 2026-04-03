@@ -75,7 +75,7 @@ class __VlcManager():
 					s.settimeout(self.testTime)
 					try:
 						testOK = not bool(s.connect_ex((self.testHost, self.testPort)))
-					except:
+					except Exception:
 						testOK = False
 					if testOK:
 						s.shutdown(SHUT_RDWR)

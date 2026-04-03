@@ -13,7 +13,7 @@ def downloadCover(url, filename, overwrite=False):
             urlretrieve(url, filename)
         else:
             print("Download skipped:", str(url), "->", str(filename))
-    except:
+    except Exception:
         import sys
         import traceback
         print('-' * 50)

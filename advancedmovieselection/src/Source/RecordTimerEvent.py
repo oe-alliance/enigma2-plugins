@@ -54,7 +54,7 @@ class RecordTimerEvent():
                 return
             for callback in self.on_state_changed:
                 callback(timer)
-        except:
+        except Exception:
             printStackTrace()
 
 
@@ -81,7 +81,7 @@ class CoverLoader():
             from EventInformationTable import createEIT
             print("[AdvancedMovieSelection] RecordTimerEvent, loading info from tmdb:", name)
             createEIT(filename, name)
-        except:
+        except Exception:
             printStackTrace()
 
 

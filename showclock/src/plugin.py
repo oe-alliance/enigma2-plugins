@@ -382,7 +382,7 @@ def sessionstart(reason, **kwargs):
 def setup(session, **kwargs):
 	try:
 		session.open(ShowClockSetup)
-	except:
+	except Exception:
 		print(pluginPrintname, "Pluginexecution failed")
 
 ##############################################################################

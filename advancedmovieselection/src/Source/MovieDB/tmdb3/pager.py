@@ -58,7 +58,7 @@ class PagedList(Sequence):
     def __len__(self):
         try:
             return self._len
-        except:
+        except Exception:
             return len(self._data)
 
     def __init__(self, iterable, pagesize=20):

@@ -239,7 +239,7 @@ class QuickButtons():
             self.setFunction('yellow', config.AdvancedMovieSelection.yellow.value)
             self.setFunction('blue', config.AdvancedMovieSelection.blue.value)
             print(self.qlist)
-        except:
+        except Exception:
             printStackTrace()
 
 
@@ -277,7 +277,7 @@ def createBackup(path="/media/hdd/"):
         backup = open(file_name, 'wb')
         backup.write("\n".join(changes))
         backup.close()
-    except:
+    except OSError:
         printStackTrace()
         return
     return file_name
@@ -296,6 +296,6 @@ def loadBackup(file_name):
             conf = entry.__getattr__(config_item)
             conf.saved_value = conf._value = value
             conf.load()
-        except:
+        except Exception:
             printStackTrace()
     backup.close()

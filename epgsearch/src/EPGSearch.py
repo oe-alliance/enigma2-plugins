@@ -312,7 +312,7 @@ class EPGSearch(EPGSelection):
 		# Hack to work around the design choice of not calling EPGSelection.__init__
 		try:
 			self.EPGSearch_init(self, session)
-		except:
+		except Exception:
 			pass
 
 		# Partnerbox
@@ -404,7 +404,7 @@ class EPGSearch(EPGSelection):
 			try:
 				# EPGSelection can do the zap for us
 				self.zapExit()
-			except:
+			except Exception:
 				self.zap()
 
 	def epgsearchOKLong(self):

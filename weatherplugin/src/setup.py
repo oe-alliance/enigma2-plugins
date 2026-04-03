@@ -112,14 +112,14 @@ class MSNWeatherPluginEntriesListConfigScreen(Screen):
 	def keyOK(self):
 		try:
 			sel = self["entrylist"].l.getCurrentSelection()[0]
-		except:
+		except Exception:
 			sel = None
 		self.close(self["entrylist"].getCurrentIndex(), sel)
 
 	def keyYellow(self):
 		try:
 			sel = self["entrylist"].l.getCurrentSelection()[0]
-		except:
+		except Exception:
 			sel = None
 		if sel is None:
 			return
@@ -128,7 +128,7 @@ class MSNWeatherPluginEntriesListConfigScreen(Screen):
 	def keyDelete(self):
 		try:
 			sel = self["entrylist"].l.getCurrentSelection()[0]
-		except:
+		except Exception:
 			sel = None
 		if sel is None:
 			return
@@ -280,9 +280,7 @@ class MSNWeatherPluginEntryConfigScreen(ConfigListScreen, Screen):
 		try:
 			if callback:
 				self["config"].getCurrent()[1].value = callback
-			else:
-				pass
-		except:
+		except Exception:
 			pass
 
 	def keyDelete(self):
@@ -359,11 +357,13 @@ class MSNWeatherPluginSearch(Screen):
 
 	def keyOK(self):
 		pass
+		"""
 		try:
 			sel = self["entrylist"].l.getCurrentSelection()[0]
-		except:
+		except Exception:
 			sel = None
 		self.close(sel)
+		"""
 
 
 class MSNWeatherPluginSearchResultList(MenuList):

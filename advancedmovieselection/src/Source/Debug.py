@@ -42,7 +42,7 @@ class writer:
                     f = open(w, "a")
                     f.write(text)
                     f.close()
-                except:
+                except OSError:
                     pass
                     #Debug.disable()
                 continue
@@ -61,7 +61,7 @@ class Debug():
             ltim = localtime()
             print()
             print("%04d.%02d.%02d %02d:%02d:%02d: Debug started: %s" % (ltim[0], ltim[1], ltim[2], ltim[3], ltim[4], ltim[5], file_name))
-        except:
+        except Exception:
             pass
 
     @staticmethod
@@ -70,7 +70,7 @@ class Debug():
             ltim = localtime()
             print()
             print("%04d.%02d.%02d %02d:%02d:%02d: Debug stopped!" % (ltim[0], ltim[1], ltim[2], ltim[3], ltim[4], ltim[5]))
-        except:
+        except Exception:
             pass
         global saved_stdout
         if saved_stdout:

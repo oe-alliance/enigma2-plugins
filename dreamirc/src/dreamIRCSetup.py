@@ -156,7 +156,7 @@ class dreamIRCSetupScreen(ConfigListScreen, Screen):
 	def checkServer(self, server):
 			try:
 				result = gethostbyname_ex(server)
-			except:
+			except Exception:
 				self.session.open(MessageBox, _("irc server %s not responding!\nplease check your network settings and/or irc servername..." % server), MessageBox.TYPE_ERROR)
 
 	def saveAndExit(self):
@@ -220,7 +220,7 @@ class dreamIRCConfig:
 						self.ip = ip_tmp3
 						self.server = self.server3
 						self.status3 = True
-			except:
+			except Exception:
 				print("unable to resolve hostname %s..." % self.server3)
 		if self.server2:
 			try:
@@ -230,7 +230,7 @@ class dreamIRCConfig:
 						self.ip = ip_tmp2
 						self.server = self.server2
 						self.status2 = True
-			except:
+			except Exception:
 				print("unable to resolve hostname %s..." % self.server2)
 		if self.server1:
 			try:
@@ -240,7 +240,7 @@ class dreamIRCConfig:
 						self.ip = ip_tmp1
 						self.server = self.server1
 						self.status1 = True
-			except:
+			except Exception:
 				print("unable to resolve hostname %s..." % self.server1)
 
 		if self.status1 is False and self.status2 is False and self.status3 is False:

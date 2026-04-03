@@ -287,7 +287,7 @@ def main(session, **kwargs):
         if activebar.show:
             activebar.hide()
         session.openWithCallback(mainCB, AntiScrollConfig)
-    except:
+    except Exception:
         session.openWithCallback(mainCB, AntiScrollConfig)
 
 

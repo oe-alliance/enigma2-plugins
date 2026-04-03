@@ -165,7 +165,7 @@ class TMDbList(GUIComponent, object):
              1,
              RT_WRAP,
              '%s' % overview))
-        except:
+        except Exception:
             from Source.Globals import printStackTrace
             printStackTrace()
 
@@ -479,7 +479,7 @@ class TMDbMain(Screen, HelpableScreen, InfoLoadChoice):
             import socket
             print(socket.gethostbyname('www.google.com'))
             return True
-        except:
+        except Exception:
             self.session.openWithCallback(self.close, MessageBox, _('No internet connection available!'), MessageBox.TYPE_ERROR)
             return False
 

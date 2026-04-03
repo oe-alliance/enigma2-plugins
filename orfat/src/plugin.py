@@ -149,7 +149,7 @@ class ORFMain(Screen):
 			f = urlopen(url)
 			txt = f.read()
 			f.close()
-		except:
+		except Exception:
 			txt = ""
 		ret = None
 		if 'flashVars="vidUrl=' in txt:
@@ -227,7 +227,7 @@ class ORFMain(Screen):
 		streamplayer.login()
 		try:
 			list = listdir("/tmp/mp")
-		except:
+		except OSError:
 			list = []
 		if len(list) < 2:
 			self.session.open(MessageBox, "Die Verbindung zu LT Stream2Dream konnte nicht hergestellt werden!", MessageBox.TYPE_ERROR)
@@ -245,7 +245,7 @@ class ORFMain(Screen):
 			if cacheMB > 5:  # Starte nach 5 MB Bufferung
 				self.cacheTimer.stop()
 				self.playCachedFile()
-		except:
+		except Exception:
 			pass
 
 	def deactivateCacheDialog(self):

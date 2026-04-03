@@ -86,7 +86,7 @@ class ModuleBase(object):
 					self.setValue(key, eval(value))
 				elif isinstance(default, int):
 					self.setValue(key, int(value))
-			except:
+			except Exception:
 				print(_("PushService Module %s:\n") % (self.getName()))
 				print(_("Skipping config option:") + str(key) + " " + str(value))
 				continue

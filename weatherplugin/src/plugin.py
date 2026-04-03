@@ -39,7 +39,7 @@ import time
 try:
 	from Components.WeatherMSN import weathermsn
 	WeatherMSNComp = weathermsn
-except:
+except ImportError:
 	WeatherMSNComp = None
 
 config.plugins.WeatherPlugin = ConfigSubsection()
@@ -252,7 +252,7 @@ class MSNWeatherPlugin(Screen):
 			from Plugins.Extensions.Browser.Browser import Browser
 			if self.webSite:
 				self.session.open(Browser, config.plugins.WebBrowser.fullscreen.value, self.webSite, False)
-		except:
+		except Exception:
 			pass  # I dont care if browser is installed or not...
 
 
@@ -272,6 +272,6 @@ class WeatherIcon(Pixmap):
 			self.pix = LoadPixmap(self.IconFileName)
 			try:
 				self.instance.setPixmapScale(BT_SCALE | BT_KEEP_ASPECT_RATIO)
-			except:
+			except Exception:
 				self.instance.setScale(1)
 			self.instance.setPixmap(self.pix)

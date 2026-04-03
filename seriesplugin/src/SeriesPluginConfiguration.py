@@ -254,7 +254,7 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 				self.list.append(getConfigListEntry("AT: " + _("Startup delay (in min)"), config.plugins.autotimer.delay))
 				self.list.append(getConfigListEntry("AT: " + _("Poll Interval (in h)"), config.plugins.autotimer.interval))
 				self.list.append(getConfigListEntry("AT: " + _("Timeout (in min)"), config.plugins.autotimer.timeout))
-			except:
+			except Exception:
 				pass
 
 			self.list.append(getConfigListEntry(_("Debug: Print debug messages (Shell)"), config.plugins.seriesplugin.debug_prints))
@@ -269,12 +269,12 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 				self.list.append(getConfigListEntry("AT: " + _("Write debug messages into file"), config.plugins.autotimer.log_write))
 				if config.plugins.autotimer.log_write.value:
 					self.list.append(getConfigListEntry("AT: " + _("Location and name of log file"), config.plugins.autotimer.log_file))
-			except:
+			except Exception:
 				pass
 
 			try:
 				self.list.append(getConfigListEntry("E2: " + _("Enable recording debug (Timer log)"), config.recording.debug))
-			except:
+			except Exception:
 				pass
 
 	def changeConfig(self):
@@ -296,7 +296,7 @@ class SeriesPluginConfiguration(ConfigListScreen, Screen):
 			if current == config.plugins.autotimer.log_write.value:
 				self.changeConfig()
 				return
-		except:
+		except Exception:
 			pass
 
 	# Overwrite ConfigListScreen keySave function

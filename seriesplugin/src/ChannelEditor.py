@@ -32,7 +32,7 @@ from six.moves.urllib.parse import urlencode
 
 try:
 	from skin import TemplatedListFonts
-except:
+except ImportError:
 	TemplatedListFonts = None
 
 from difflib import SequenceMatcher

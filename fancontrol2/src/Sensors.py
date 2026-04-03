@@ -44,7 +44,7 @@ class Sensors:
 			f = open("%s/value" % sensor[3], "r")
 			try:
 				value = int(f.readline().strip())
-			except:
+			except Exception:
 				pass
 			f.close()
 		return value

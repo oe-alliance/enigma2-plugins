@@ -89,7 +89,7 @@ class ISORead:
                         path_table.append(dr.directory)
 
             f.close()
-        except:
+        except Exception:
             printStackTrace()
 
         return path_table
@@ -147,7 +147,7 @@ class ISOInfo:
             if out:
                 print('error: %s' % out)
             return not out
-        except:
+        except Exception:
             printStackTrace()
             return False
 
@@ -160,7 +160,7 @@ class ISOInfo:
             if out:
                 print('error: %s' % out)
             return not out
-        except:
+        except Exception:
             printStackTrace()
             return False
 

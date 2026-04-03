@@ -66,7 +66,7 @@ class EPGBackupSupport:
 			from Plugins.Extensions.EPGRefresh.EPGRefresh import epgrefresh
 			self.epgrefresh_instance = epgrefresh
 			config.plugins.epgbackup.callAfterEPGRefresh.addNotifier(self.enableBackupAfterEPGRefresh, initial_call=True, immediate_feedback=True)
-		except:
+		except Exception:
 			debugOut("EPGRefresh not installed!", forced=True)
 			debugOut("Debug: EPGRefresh-Import-Error:\n" + str(format_exc()))
 
@@ -93,7 +93,7 @@ class EPGBackupSupport:
 						text=_("The EPG-Backup was not performed, because there were %d unsuccessfully boot-attempts!\nThe last restored backup-file was \"%s\".\nDo you want to delete the file?")
 						% (bootCount, backupedFile), type=MessageBox.TYPE_YESNO,
 						timeout=10, domain=EPGBACKUP_NOTIFICATIONDOMAIN)
-		except:
+		except Exception:
 			debugOut("checkBootCount-Error:\n" + str(format_exc()), forced=True)
 
 	def askDeleteBadBackupCB(self, deleteIt):
@@ -103,7 +103,7 @@ class EPGBackupSupport:
 				if backupedFile != "":
 					debugOut("Deleting file \"%s\"..." % (backupedFile))
 					os.system("rm -f %s" % (backupedFile))
-		except:
+		except Exception:
 				debugOut("askDeleteBadBackupCB-Error:\n" + str(format_exc()), forced=True)
 
 	def enableBackupAfterEPGRefresh(self, configentry):
@@ -114,7 +114,7 @@ class EPGBackupSupport:
 					self.epgrefresh_instance.addFinishNotifier(self.makeBackup)
 				else:
 					self.epgrefresh_instance.removeFinishNotifier(self.makeBackup)
-		except:
+		except Exception:
 			debugOut("enableBackupAfterEPGRefresh-Error, maybe wrong Versoin of epgrefresh?:\n" + str(format_exc()), forced=True)
 
 	def startStopBackupTimer(self, configentry=None):
@@ -128,7 +128,7 @@ class EPGBackupSupport:
 			else:
 				debugOut("backuptimer stopped!")
 				self.backuptimer.stop()
-		except:
+		except Exception:
 			debugOut("startStopBackupTimer-Error:\n" + str(format_exc()), forced=True)
 
 	def __getErrortext(self):
@@ -171,7 +171,7 @@ class EPGBackupSupport:
 						self.session.open(MessageBox,
 							_("There is no logfile named \"%s\"!") % (logFile),
 							type=MessageBox.TYPE_ERROR)
-		except:
+		except Exception:
 			debugOut("showLogFileCB-Error:\n" + str(format_exc()), forced=True)
 
 	def makeBackup(self, interactive=False):
@@ -194,7 +194,7 @@ class EPGBackupSupport:
 						text=_("Couldn't create a backup.\nReason: %s.\nPress OK to see the logfile!")
 						% (errorTxt), type=MessageBox.TYPE_ERROR,
 						timeout=30, domain=EPGBACKUP_NOTIFICATIONDOMAIN)
-		except:
+		except Exception:
 			debugOut("makeBackup-Error:\n" + str(format_exc()), forced=True)
 
 	def forceDefaultRestore(self):
@@ -253,7 +253,7 @@ class EPGBackupSupport:
 						text=_("Couldn't load backup-file.\nReason: %s.\nPress OK to see the logfile!")
 						% (errorTxt), type=MessageBox.TYPE_ERROR,
 						timeout=30, domain=EPGBACKUP_NOTIFICATIONDOMAIN)
-		except:
+		except Exception:
 			debugOut("__forceRestoreCB-Error:\n" + str(format_exc()), forced=True)
 
 	def __setNextBootRestoreCB(self, backupinfo):
@@ -281,7 +281,7 @@ class EPGBackupSupport:
 						backupfile = backupfile.replace(EPGBACKUP_SHELL_CONSTANTS["STRINGYOUNGEST"], _("FILELIST_YOUNGEST"))
 						backupfile = backupfile.replace(EPGBACKUP_SHELL_CONSTANTS["STRINGFORCED"], _("FILELIST_FORCED"))
 						backupList.append((backupfile, backupfile.split(" ")[0]))
-		except:
+		except Exception:
 			backupList.append((FORCERESTOREGENERALERROR, _("General Error!")))
 			debugOut("getBackupFiles-Error:\n" + str(format_exc()), forced=True)
 		return backupList
@@ -292,7 +292,7 @@ class EPGBackupSupport:
 				self.install()
 			else:
 				self.uninstall()
-		except:
+		except Exception:
 			debugOut("autoinstall-Error:\n" + str(format_exc()), forced=True)
 
 	def install(self):

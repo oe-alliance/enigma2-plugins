@@ -48,7 +48,7 @@ def valid_cache(cache_file, cache_ttl):
 	#See if the cache file exists and is still living
 	try:
 		mtime = stat(cache_file)[ST_MTIME]
-	except:
+	except Exception:
 		return 0
 	curr_time = time()
 	if (curr_time - mtime) > cache_ttl:
@@ -233,7 +233,7 @@ class NetworkBrowser(Screen):
 			print('[Networkbrowser] Loading network cache from ', self.cache_file)
 			try:
 				self.networklist = load_cache(self.cache_file)
-			except:
+			except Exception:
 				self.inv_cache = 1
 		if self.cache_ttl == 0 or self.inv_cache == 1 or self.vc == 0:
 			print('[Networkbrowser] Getting fresh network list')
@@ -297,7 +297,7 @@ class NetworkBrowser(Screen):
 				self.hostdata = load_cache(self.sharecache_file)
 				username = self.hostdata['username']
 				password = self.hostdata['password']
-			except:
+			except Exception:
 				username = "username"
 				password = "password"
 		else:
@@ -495,7 +495,7 @@ class NetworkBrowser(Screen):
 					try:
 						self.hostdata = load_cache(self.hostcache_file)
 						self.passwordQuestion(False)
-					except:
+					except Exception:
 						self.session.openWithCallback(self.passwordQuestion, MessageBox, (_("Do you want to enter a username and password for this host?\n")))
 				else:
 					self.session.openWithCallback(self.passwordQuestion, MessageBox, (_("Do you want to enter a username and password for this host?\n")))
@@ -571,7 +571,7 @@ class NetworkBrowser(Screen):
 						self.hostdata = load_cache(self.sharecache_file)
 						data['username'] = self.hostdata['username']
 						data['password'] = self.hostdata['password']
-					except:
+					except Exception:
 						data['username'] = "username"
 						data['password'] = "password"
 				else:

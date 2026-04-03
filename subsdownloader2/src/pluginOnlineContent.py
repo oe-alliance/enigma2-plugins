@@ -28,7 +28,7 @@ class CommertialBannerDownload(threading.Thread):
             URL_file = urlopen(URL_text_file)
             picture_links = URL_file.readlines()
             URL_file.close()
-        except:
+        except Exception:
             print("Failed to download picture URLS from online text file")
             picture_URLS_dict = []
             for x in picture_links:
@@ -50,7 +50,7 @@ class CommertialBannerDownload(threading.Thread):
                 flag.close()
                 picture_file.close()
                 picture_counter = picture_counter + 1
-            except:
+            except Exception:
                 print("Failed to download picture no %i", picture_counter)
         return True
 

@@ -51,7 +51,7 @@ def getFreeSize(mp):
 	try:
 		stat = statvfs(mp)
 		return stat.f_bfree / 1000 * stat.f_bsize / 1000
-	except:
+	except Exception:
 		return 0
 
 #-----------------------------------------------------------------------------
@@ -124,7 +124,7 @@ class FEconf(Screen):
 						fstype = self.__getPartitionType(devices.partitionPath(str(y + 1)))
 					try:
 						bustype = devices.bus_type()
-					except:
+					except Exception:
 						bustype = _("unknown")
 					if fstype in ("ext2", "ext3", "ext4", "xfs"):
 						_list.append(("%s (%s) - Partition %d (%s)" % (devices.model(), bustype, y + 1, fstype), (devices, y + 1, fstype)))
@@ -138,7 +138,7 @@ class FEconf(Screen):
 					if len(server) == 2:
 						print("[FlashExpander] server", server)
 						_list.append(("Server (%s) - Path (%s)" % (server[0], server[1]), server))
-		except:
+		except Exception:
 			print("[FlashExpander] <getMountPoints>")
 
 		if len(_list) == 0:
@@ -170,7 +170,7 @@ class FEconf(Screen):
 					fstobj = re.search(r' TYPE="((?:[^"\\]|\\.)*)"', line)
 					if fstobj:
 						fstype = fstobj.group(1)
-		except:
+		except Exception:
 			print("[FlashExpander] <error get fstype>")
 			return False
 		return fstype
@@ -196,7 +196,7 @@ class FEconf(Screen):
 					return b"UUID=" + txtUUID
 				#Topfi end
 				return device
-		except:
+		except Exception:
 			print("[FlashExpander] <error get UUID>")
 		return None
 
@@ -298,7 +298,7 @@ class FEconf(Screen):
 				fp.close()
 				print("[FlashExpander] write new /etc/fstab")
 				self.session.openWithCallback(self.Exit, MessageBox, _("Do you want to reboot your STB_BOX?"))
-			except:
+			except Exception:
 				self.session.open(MessageBox, _("error adding fstab entry for: %s") % (devPath), MessageBox.TYPE_ERROR, timeout=5)
 				return
 		else:

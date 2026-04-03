@@ -98,7 +98,7 @@ class Client:
             sock.send(data)
             # Receive data from the server and shut down
             request = sock.recv(1024)
-        except:
+        except Exception:
             pass
         finally:
             sock.close()
@@ -131,7 +131,7 @@ class Client:
         ev = 0
         try:
             ev = int(self.sendData("nextTrashEvent"))
-        except:
+        except Exception:
             pass
         return ev
 
@@ -139,7 +139,7 @@ class Client:
         ev = 0
         try:
             ev = int(self.sendData("lastTrashEvent"))
-        except:
+        except Exception:
             pass
         return ev
 

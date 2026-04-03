@@ -276,7 +276,7 @@ class EpgCenterList(GUIComponent):
 			outdated = True
 			try:
 				progColor = parseColor("eventNotAvailable").argb()
-			except:
+			except Exception:
 				progColor = 0x777777
 		elif config.plugins.merlinEpgCenter.showBeginRemainTime.value and config.plugins.merlinEpgCenter.showColoredEpgTimes.value:
 			outdated = False

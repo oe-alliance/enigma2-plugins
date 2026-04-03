@@ -203,7 +203,7 @@ class DVDBackup:
 			cmd = ("rm -R %s/%s" % (config.plugins.DVDBackup.directory.value, config.plugins.DVDBackup.name.value)).replace("//", "/")
 			try:
 				os.system(cmd)
-			except:
+			except OSError:
 				pass
 		self.finished()
 

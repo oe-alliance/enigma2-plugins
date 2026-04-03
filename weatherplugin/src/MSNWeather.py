@@ -87,12 +87,12 @@ class MSNWeather:
 		if os_path.exists(path):
 			try:
 				filename = os_listdir(path)[0]
-			except:
+			except Exception:
 				filename = None
 		if filename is not None:
 			try:
 				extension = os_path.splitext(filename)[1].lower()
-			except:
+			except Exception:
 				pass
 		return extension
 

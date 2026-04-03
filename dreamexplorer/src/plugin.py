@@ -239,7 +239,7 @@ class DreamExplorerII(Screen):
 						SongList, SongIndex = self.searchMusic()
 						try:
 							self.session.open(MerlinMusicPlayerScreen, SongList, SongIndex, False, self.altservice, None)
-						except:
+						except Exception:
 							self.session.open(MessageBox, _("Incompatible MerlinMusicPlayer version!"), MessageBox.TYPE_INFO)
 					else:
 						fileRef = eServiceReference("4097:0:0:0:0:0:0:0:0:0:" + filename)
@@ -315,7 +315,7 @@ class DreamExplorerII(Screen):
 				self.setTitle(_("[Media files] ") + self["filelist"].getCurrentDirectory())
 			else:
 				self.setTitle(_("[All files] ") + self["filelist"].getCurrentDirectory())
-		except:
+		except Exception:
 			self.setTitle(_("Dream-Explorer"))
 
 	def explContextMenu(self):
@@ -508,7 +508,7 @@ class DreamExplorerII(Screen):
 			if answer[0] == "/":
 				self["filelist"].changeDir(answer[:-1])
 				self.updateLocationInfo()
-		except:
+		except Exception:
 			pass
 
 	def goToBookmark(self):
@@ -539,7 +539,7 @@ class DreamExplorerII(Screen):
 			try:
 				os_system(order)
 				self["filelist"].refresh()
-			except:
+			except Exception:
 				dei = self.session.open(MessageBox, _("%s \nFAILED!") % order, MessageBox.TYPE_ERROR)
 				dei.setTitle(_("Dream-Explorer"))
 				self["filelist"].refresh()
@@ -551,7 +551,7 @@ class DreamExplorerII(Screen):
 			try:
 				os_system(order)
 				self["filelist"].refresh()
-			except:
+			except Exception:
 				dei = self.session.open(MessageBox, _("%s \nFAILED!") % order, MessageBox.TYPE_ERROR)
 				dei.setTitle(_("Dream-Explorer"))
 				self["filelist"].refresh()
@@ -575,7 +575,7 @@ class DreamExplorerII(Screen):
 			try:
 				os_rename(source, dest)
 				self["filelist"].refresh()
-			except:
+			except Exception:
 				dei = self.session.open(MessageBox, _("Rename: %s \nFAILED!") % answer, MessageBox.TYPE_ERROR)
 				dei.setTitle(_("Dream-Explorer"))
 				self["filelist"].refresh()
@@ -587,7 +587,7 @@ class DreamExplorerII(Screen):
 			try:
 				os_rename(source, dest)
 				self["filelist"].refresh()
-			except:
+			except Exception:
 				dei = self.session.open(MessageBox, _("Rename: %s \nFAILED!") % answer, MessageBox.TYPE_ERROR)
 				dei.setTitle(_("Dream-Explorer"))
 				self["filelist"].refresh()
@@ -599,14 +599,13 @@ class DreamExplorerII(Screen):
 		if (" " in answer) or (" " in dest) or (answer == ""):
 			dei = self.session.open(MessageBox, _("File name error !"), MessageBox.TYPE_ERROR)
 			dei.setTitle(_("Dream-Explorer"))
-			return
 		else:
 			order = 'touch ' + dest + answer
 			try:
 				if not fileExists(dest + answer):
 					os_system(order)
 				self["filelist"].refresh()
-			except:
+			except Exception:
 				dei = self.session.open(MessageBox, _("%s \nFAILED!") % order, MessageBox.TYPE_ERROR)
 				dei.setTitle(_("Dream-Explorer"))
 				self["filelist"].refresh()
@@ -618,14 +617,13 @@ class DreamExplorerII(Screen):
 		if (" " in answer) or (" " in dest) or (answer == ""):
 			dei = self.session.open(MessageBox, _("Directory name error !"), MessageBox.TYPE_ERROR)
 			dei.setTitle(_("Dream-Explorer"))
-			return
 		else:
 			order = dest + answer
 			try:
 				if not pathExists(dest + answer):
 					os_mkdir(order)
 				self["filelist"].refresh()
-			except:
+			except Exception:
 				dei = self.session.open(MessageBox, _("%s \nFAILED!") % order, MessageBox.TYPE_ERROR)
 				dei.setTitle(_("Dream-Explorer"))
 				self["filelist"].refresh()
@@ -657,7 +655,7 @@ class DreamExplorerII(Screen):
 				self.setTitle(_("[sort by Name] ") + self["filelist"].getCurrentDirectory())
 			else:
 				self.setTitle(_("[sort by Name] ") + self["filelist"].getCurrentDirectory())
-		except:
+		except Exception:
 			self.setTitle(_("Dream-Explorer"))
 
 	def sortDate(self):
@@ -667,7 +665,7 @@ class DreamExplorerII(Screen):
 				self.setTitle(_("[sort by Date] ") + self["filelist"].getCurrentDirectory())
 			else:
 				self.setTitle(_("[sort by Date] ") + self["filelist"].getCurrentDirectory())
-		except:
+		except Exception:
 			self.setTitle(_("Dream-Explorer"))
 
 	def searchMusic(self):
@@ -693,7 +691,7 @@ class DreamExplorerII(Screen):
 			else:
 				config.plugins.DreamExplorer.MediaFilter.value = "off"
 			config.plugins.DreamExplorer.MediaFilter.save()
-		except:
+		except Exception:
 			pass
 		self.close()
 
@@ -704,7 +702,7 @@ class DreamExplorerII(Screen):
 			else:
 				config.plugins.DreamExplorer.MediaFilter.value = "off"
 			config.plugins.DreamExplorer.MediaFilter.save()
-		except:
+		except Exception:
 			pass
 		self.close()
 
@@ -762,7 +760,7 @@ class vEditor(Screen):
 				self.list.append(line)
 			flines.close()
 			self.setTitle(fx)
-		except:
+		except Exception:
 			pass
 
 	def editLine(self):
@@ -771,7 +769,7 @@ class vEditor(Screen):
 			self.oldLine = self.list[self.selLine]
 			editableText = self.list[self.selLine][:-1]
 			self.session.openWithCallback(self.callbackEditLine, vInputBox, title=_("old:  ") + self.list[self.selLine], windowTitle=_("Edit line ") + str(self.selLine + 1), text=editableText)
-		except:
+		except Exception:
 			dei = self.session.open(MessageBox, _("This line is not editable!"), MessageBox.TYPE_ERROR)
 			dei.setTitle(_("Error..."))
 
@@ -792,7 +790,7 @@ class vEditor(Screen):
 				for x in self.list:
 					eFile.writelines(x)
 				eFile.close()
-			except:
+			except Exception:
 				pass
 			self.close()
 		else:
@@ -1037,7 +1035,7 @@ def ScanSysem_str():
 			if "procs_running" in tstLine:
 				ret = ret + _("Running processes: ") + tstLine[1]
 		return ret
-	except:
+	except Exception:
 		return "N/A"
 
 
@@ -1130,7 +1128,7 @@ class CPmaniger(Screen):
 				config.plugins.DreamExplorer.CopyDest.value = dest
 				config.plugins.DreamExplorer.CopyDest.save()
 				os_system(order)
-			except:
+			except Exception:
 				dei = self.session.open(MessageBox, _("%s \nFAILED!") % order, MessageBox.TYPE_ERROR)
 				dei.setTitle(_("Dream-Explorer"))
 			self.close(" ")
@@ -1148,12 +1146,12 @@ class CPmaniger(Screen):
 				config.plugins.DreamExplorer.CopyDest.value = dest
 				config.plugins.DreamExplorer.CopyDest.save()
 				os_system(order)
-			except:
+			except Exception:
 				dei = self.session.open(MessageBox, _("%s \nFAILED!") % order, MessageBox.TYPE_ERROR)
 				dei.setTitle(_("Dream-Explorer"))
 			try:
 				os_system(DELorder)
-			except:
+			except Exception:
 				dei = self.session.open(MessageBox, _("%s \nFAILED!") % DELorder, MessageBox.TYPE_ERROR)
 				dei.setTitle(_("Dream-Explorer"))
 			self.close(" ")

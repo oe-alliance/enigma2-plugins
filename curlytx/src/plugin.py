@@ -15,7 +15,7 @@ def main(session, **kwargs):
     """ Opens the main window """
     try:
         session.open(CurlyTx.CurlyTx)
-    except:
+    except Exception:
         import traceback
         traceback.print_exc()
 

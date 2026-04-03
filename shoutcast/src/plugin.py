@@ -289,7 +289,7 @@ class SHOUTcastWidget(Screen):
 		if slist:
 			try:
 				self.pipZapAvailable = slist.dopipzap
-			except:
+			except Exception:
 				self.pipZapAvailable = None
 
 	def openServiceList(self):
@@ -316,7 +316,7 @@ class SHOUTcastWidget(Screen):
 							else:
 								modeslist.append((_("Zap focus to Picture in Picture"), "pipzap"))
 							keyslist.append('red')
-						except:
+						except Exception:
 							pass
 					modeslist.append((_("Move Picture in Picture"), "move"))
 					keyslist.append('green')
@@ -340,7 +340,7 @@ class SHOUTcastWidget(Screen):
 				InfoBar.togglePipzap(InfoBar.instance)
 				if self.visible:
 					self.hideWindow()
-			except:
+			except Exception:
 				pass
 		elif answer == "move":
 			if InfoBar.instance is not None:
@@ -352,7 +352,7 @@ class SHOUTcastWidget(Screen):
 					try:
 						if slist and slist.dopipzap:
 							slist.togglePipzap()
-					except:
+					except Exception:
 						pass
 					if hasattr(self.session, 'pip'):
 						del self.session.pip
@@ -371,7 +371,7 @@ class SHOUTcastWidget(Screen):
 				try:
 					if not slist.dopipzap and hasattr(self.session, 'pip'):
 						InfoBar.togglePipzap(InfoBar.instance)
-				except:
+				except Exception:
 					pass
 
 	def nextPipService(self):
@@ -397,7 +397,7 @@ class SHOUTcastWidget(Screen):
 				else:
 					slist.moveDown()
 				slist.zap(enable_pipzap=True)
-		except:
+		except Exception:
 			pass
 
 	def prevPipService(self):
@@ -423,7 +423,7 @@ class SHOUTcastWidget(Screen):
 				else:
 					slist.moveUp()
 				slist.zap(enable_pipzap=True)
-		except:
+		except Exception:
 			pass
 
 	def streamripperClosed(self, retval):
@@ -452,7 +452,7 @@ class SHOUTcastWidget(Screen):
 			if not path.exists(config.plugins.shoutcast.dirname.value):
 				try:
 					mkdir(config.plugins.shoutcast.dirname.value)
-				except:
+				except OSError:
 					self.session.open(MessageBox, _("Error create directory %s!") % config.plugins.shoutcast.dirname.value, MessageBox.TYPE_ERROR, timeout=10)
 					return
 			args = []
@@ -576,7 +576,7 @@ class SHOUTcastWidget(Screen):
 			try:
 				self["list"].hide()
 				self["statustext"].setText(_("%s\nPress green-button to try again...") % str(error.getErrorMessage()))
-			except:
+			except Exception:
 				pass
 
 	def fillGenreList(self, xmlstring):
@@ -584,7 +584,7 @@ class SHOUTcastWidget(Screen):
 		# print "[SHOUTcast] fillGenreList\n%s" % xmlstring
 		try:
 			root = fromstring(xmlstring)
-		except:
+		except Exception:
 			return []
 		data = root.find("data")
 		if data is None:
@@ -631,7 +631,7 @@ class SHOUTcastWidget(Screen):
 			sel = None
 			try:
 				sel = self["list"].l.getCurrentSelection()[0]
-			except:
+			except Exception:
 				return
 			if sel is None:
 				return
@@ -732,7 +732,7 @@ class SHOUTcastWidget(Screen):
 		stationList = []
 		try:
 			root = fromstring(xmlstring)
-		except:
+		except Exception:
 			return []
 		config_bitrate = int(config.plugins.shoutcast.streamingrate.value)
 		data = root.find("data")
@@ -745,7 +745,7 @@ class SHOUTcastWidget(Screen):
 			for childs in slist.findall("station"):
 				try:
 					bitrate = int(childs.get("br"))
-				except:
+				except Exception:
 					bitrate = 0
 				if bitrate >= config_bitrate:
 					stationList.append(SHOUTcastStation(name=childs.get("name"),
@@ -873,7 +873,7 @@ class SHOUTcastWidget(Screen):
 			try:
 				self["list"].hide()
 				self["statustext"].setText(_("%s\nPress OK to try again...") % str(error.getErrorMessage()))
-			except:
+			except Exception:
 				pass
 
 	def Error(self, error=None):
@@ -882,7 +882,7 @@ class SHOUTcastWidget(Screen):
 			try:
 				self["list"].hide()
 				self["statustext"].setText(str(error.getErrorMessage()))
-			except:
+			except Exception:
 				pass
 		if self.nextGoogle:
 			self.currentGoogle = self.nextGoogle
@@ -896,7 +896,7 @@ class SHOUTcastWidget(Screen):
 		for f in coverfiles:
 			try:
 				unlink(f)
-			except:
+			except OSError:
 				pass
 		self.stopReloadStationListTimer()
 		self.session.nav.playService(self.CurrentService)
@@ -964,7 +964,7 @@ class SHOUTcastWidget(Screen):
 				self.currentcoverfile = (self.currentcoverfile + 1) % len(coverfiles)
 				try:
 					unlink(coverfiles[self.currentcoverfile - 1])
-				except:
+				except Exception:
 					pass
 				coverfile = coverfiles[self.currentcoverfile]
 				print("[SHOUTcast] downloading cover from %s to %s numer%s" % (url, coverfile, str(nr)))
@@ -1043,7 +1043,7 @@ class SHOUTcastWidget(Screen):
 		sref = eServiceReference("4097:0:0:0:0:0:0:0:0:0:%s" % url.replace(':', '%3a'))
 		try:
 			self.session.nav.playService(sref, adjust=False)
-		except:
+		except Exception:
 			print("[SHOUTcast] Could not play %s" % sref)
 		self.currPlay = self.session.nav.getCurrentService()
 		self.currentStreamingURL = url
@@ -1075,7 +1075,7 @@ class SHOUTcastWidget(Screen):
 		sel = None
 		try:
 			sel = self["list"].l.getCurrentSelection()[0]
-		except:
+		except Exception:
 			return None
 		return sel
 
