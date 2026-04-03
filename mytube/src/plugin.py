@@ -388,7 +388,7 @@ class MyTubePlayerMainScreen(ConfigListScreen, Screen):
 		self.statuslist = []
 		# we need to login here; startService() is fired too often for external curl
 		self.tryUserLogin()
-		self.statuslist.append(( _("Fetching feed entries"), _("Trying to download the Youtube feed entries. Please wait..." ) ))
+		self.statuslist.append((_("Fetching feed entries"), _("Trying to download the Youtube feed entries. Please wait...")))
 		self["feedlist"].style = "state"
 		self['feedlist'].setList(self.statuslist)
 		self.Timer.start(200)
@@ -441,16 +441,16 @@ class MyTubePlayerMainScreen(ConfigListScreen, Screen):
 				self.HistoryWindow.deactivate()
 				self.HistoryWindow.instance.hide()
 			if status == 'getFeed':
-				self.statuslist.append(( _("Fetching feed entries"), _("Trying to download the Youtube feed entries. Please wait..." ) ))
+				self.statuslist.append((_("Fetching feed entries"), _("Trying to download the Youtube feed entries. Please wait...")))
 			elif status == 'getSearchFeed':
-				self.statuslist.append(( _("Fetching search entries"), _("Trying to download the Youtube search results. Please wait..." ) ))
+				self.statuslist.append((_("Fetching search entries"), _("Trying to download the Youtube search results. Please wait...")))
 			elif status == 'Error':
-				self.statuslist.append(( _("An error occured."), _("There was an error getting the feed entries. Please try again." ) ))
+				self.statuslist.append((_("An error occured."), _("There was an error getting the feed entries. Please try again.")))
 			elif status == 'noVideos':
 				self["key_green"].show()
-				self.statuslist.append(( _("No videos to display"), _("Please select a standard feed or try searching for videos." ) ))
+				self.statuslist.append((_("No videos to display"), _("Please select a standard feed or try searching for videos.")))
 			elif status == 'byPass':
-				self.statuslist.append(( _("Not fetching feed entries"), _("Please enter your search term." ) ))
+				self.statuslist.append((_("Not fetching feed entries"), _("Please enter your search term.")))
 				self["feedlist"].style = "state"
 				self['feedlist'].setList(self.statuslist)
 				self.switchToConfigList()
