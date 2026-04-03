@@ -109,7 +109,7 @@ class ISOInfo:
         pass
 
     def getFormat(self, service):
-        print('checking iso:' % service.getPath())
+        print('checking iso:', service.getPath())
         if not self.mount(service.getPath()):
             return self.ERROR
         if os.path.exists(self.MOUNT_PATH + '/BDMV/'):

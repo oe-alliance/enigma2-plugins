@@ -119,7 +119,7 @@ class CueSheet:
                 cuts.write(data)
 
         except Exception as e:
-            print('ERROR writing cutlist' % file_name)
+            print('ERROR writing cutlist', file_name)
             printStackTrace()
             return e
         finally:

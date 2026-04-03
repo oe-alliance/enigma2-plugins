@@ -313,7 +313,6 @@ def housekeepingExtensionsmenu(configentry, force=False):
 			PlugDescriptor = extSetupDescriptor
 		elif configentry == config.plugins.epgrefresh.show_run_in_extensionsmenu:
 			PlugDescriptor = extRunDescriptor
-		# if PlugDescriptor != None:
 		if PlugDescriptor is not None:
 			AdjustExtensionsmenu(configentry.value, PlugDescriptor)
 

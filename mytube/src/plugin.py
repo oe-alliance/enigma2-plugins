@@ -434,7 +434,7 @@ class MyTubePlayerMainScreen(ConfigListScreen, Screen):
 			self.statuslist = []
 			self.hideSuggestions()
 			result = None
-			if self.FirstRun == True:
+			if self.FirstRun is True:
 				self.appendEntries = False
 				myTubeService.startService()
 			if self.HistoryWindow is not None:
@@ -456,7 +456,7 @@ class MyTubePlayerMainScreen(ConfigListScreen, Screen):
 				self.switchToConfigList()
 			self["feedlist"].style = "state"
 			self['feedlist'].setList(self.statuslist)
-			if self.FirstRun == True:
+			if self.FirstRun is True:
 				if config.plugins.mytube.general.loadFeedOnOpen.value:
 					self.getFeed(self.BASE_STD_FEEDURL, str(config.plugins.mytube.general.startFeed.value))
 
