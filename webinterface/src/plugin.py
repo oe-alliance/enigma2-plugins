@@ -27,8 +27,8 @@ from OpenSSL import SSL, crypto
 from time import gmtime
 from os.path import isfile as os_isfile, exists as os_exists
 
-from .__init__ import _, __version__, decrypt_block
-from .webif import get_random, validate_certificate
+from .__init__ import _, __version__
+from .webif import get_random
 
 import random
 import uuid
@@ -257,30 +257,6 @@ def stopWebserver(session):
 
 
 def startServerInstance(session, ipaddress, port, useauth=False, l2k=None, usessl=False):
-	if hw.get_device_name().lower() != "dm7025" and tpm is not None:
-		l3k = None
-		l3c = tpm.getData(eTPM.DT_LEVEL3_CERT)
-
-		if l3c is None:
-			return False
-
-		l3k = validate_certificate(l3c, l2k)
-		if l3k is None:
-			return False
-
-		random = get_random()
-		if random is None:
-			return False
-
-		value = tpm.computeSignature(random)
-		result = decrypt_block(value, l3k)
-
-		if result is None:
-			return False
-		else:
-			if result[80:88] != random:
-				return False
-
 	if useauth:
 # HTTPAuthResource handles the authentication for every Resource you want it to
 		root = HTTPAuthResource(toplevel, "Enigma2 WebInterface")
@@ -574,21 +550,9 @@ def checkBonjour():
 
 
 def networkstart(reason, session):
-	l2r = False
-	l2k = None
-	if hw.get_device_name().lower() != "dm7025" and tpm is not None:
-		l2c = tpm.getData(eTPM.DT_LEVEL2_CERT)
-
-		if l2c is None:
-			return
-
-		l2k = validate_certificate(l2c, rootkey)
-		if l2k is None:
-			return
-
-		l2r = True
-	else:
-		l2r = True
+	l2r = True
+	l2k = True
+	l2c = True
 
 	if l2r:
 		if reason is True:
@@ -605,21 +569,9 @@ def openconfig(session, **kwargs):
 
 
 def configCB(result, session):
-	l2r = False
-	l2k = None
-	if hw.get_device_name().lower() != "dm7025" and tpm is not None:
-		l2c = tpm.getData(eTPM.DT_LEVEL2_CERT)
-
-		if l2c is None:
-			return
-
-		l2k = validate_certificate(l2c, rootkey)
-		if l2k is None:
-			return
-
-		l2r = True
-	else:
-		l2r = True
+	l2r = True
+	l2k = True
+	l2c = True
 
 	if l2r:
 		if result:

@@ -27,7 +27,7 @@ from time import time
 from .WebScreens import *
 #DO NOT REMOVE THIS IMPORT
 
-from .__init__ import decrypt_block
+
 from os import urandom
 
 import six
@@ -634,13 +634,6 @@ def requestFinish(handler, request, requestAlreadyFinished=False):
 			pass
 
 	del handler
-
-
-def validate_certificate(cert, key):
-	buf = decrypt_block(cert[8:], key)
-	if buf is None:
-		return None
-	return buf[36:107] + cert[139:196]
 
 
 def get_random():
