@@ -6,8 +6,10 @@ from functools import reduce
 PluginLanguageDomain = "MyTube"
 PluginLanguagePath = "Extensions/MyTube/locale"
 
+
 def localeInit():
 	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
+
 
 def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
@@ -15,6 +17,7 @@ def _(txt):
 	else:
 		print("[%s] fallback to default translation for %s" % (PluginLanguageDomain, txt))
 		return gettext.gettext(txt)
+
 
 localeInit()
 language.addCallback(localeInit)

@@ -23,6 +23,7 @@ def _(txt):
 localeInit()
 language.addCallback(localeInit)
 
+
 def read_random():
 	fd = open("/dev/urandom", "r")
 	buf = fd.read(8)
