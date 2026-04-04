@@ -1,7 +1,6 @@
 # for localized messages
-from __future__ import print_function
 from __future__ import absolute_import
-from . import _
+from . import _, __version__
 
 # Config
 from Components.config import config, ConfigYesNo, ConfigNumber, ConfigSelection, \
@@ -10,10 +9,12 @@ from Screens.MessageBox import MessageBox
 from Screens.Standby import TryQuitMainloop
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, fileExists
+from Components.PluginComponent import plugins
+from Plugins.Plugin import PluginDescriptor
 
 # Error-print()
 
-from .EPGBackupTools import debugOut, PLUGIN_VERSION
+from .EPGBackupTools import debugOut
 from traceback import format_exc
 
 extPrefix = "EPGBackup"
@@ -85,8 +86,6 @@ except ImportError:
 
 # Plugin
 epgbackup = None
-from Components.PluginComponent import plugins
-from Plugins.Plugin import PluginDescriptor
 
 gUserScriptExists = False
 # Autostart
@@ -139,7 +138,7 @@ def doneConfiguring(session, needsRestart):
 	if needsRestart:
 		session.openWithCallback(boundFunction(restartGUICB, session), MessageBox,
 			_("To apply your Changes the GUI has to be restarted.\nDo you want to restart the GUI now?"),
-			MessageBox.TYPE_YESNO, title=_("EPGBackup Config V %s") % (PLUGIN_VERSION), timeout=30)
+			MessageBox.TYPE_YESNO, title=_("EPGBackup Config V %s") % (__version__), timeout=30)
 
 
 def restartGUICB(session, answer):
@@ -202,10 +201,10 @@ def PluginHousekeeping(configentry):
 		else:
 			PlugDescDeinstall.append(RestorePlugDescExt)
 
-	for PlugDescriptor in PlugDescDeinstall:
-		AdjustPlugin(False, PlugDescriptor)
-	for PlugDescriptor in PlugDescInstall:
-		AdjustPlugin(True, PlugDescriptor)
+	for plug in PlugDescDeinstall:
+		AdjustPlugin(False, plug)
+	for plug in PlugDescInstall:
+		AdjustPlugin(True, plug)
 
 
 config.plugins.epgbackup.show_setup_in.addNotifier(PluginHousekeeping, initial_call=False, immediate_feedback=True)
@@ -214,14 +213,14 @@ config.plugins.epgbackup.show_backuprestore_in_extmenu.addNotifier(PluginHouseke
 
 
 def Plugins(**kwargs):
-	pluginList = [
+	plugin_list = [
 		PluginDescriptor(
 			where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART],
 			fnc=autostart)
 	]
 
 	if config.plugins.epgbackup.show_setup_in.value == "system":
-		pluginList.append(PluginDescriptor(
+		plugin_list.append(PluginDescriptor(
 			name="EPGBackup Setup",
 			description="Keep EPG data over crashes",
 			where=PluginDescriptor.WHERE_MENU,
@@ -230,13 +229,13 @@ def Plugins(**kwargs):
 		)
 	else:
 		if config.plugins.epgbackup.show_setup_in.value in ("plugin", "both"):
-			pluginList.append(SetupPlugDescPlug)
+			plugin_list.append(SetupPlugDescPlug)
 		if config.plugins.epgbackup.show_setup_in.value in ("extension", "both"):
-			pluginList.append(SetupPlugDescExt)
+			plugin_list.append(SetupPlugDescExt)
 
 	if config.plugins.epgbackup.show_make_backup_in_extmenu.value:
-		pluginList.append(MakePlugDescExt)
+		plugin_list.append(MakePlugDescExt)
 	if config.plugins.epgbackup.show_backuprestore_in_extmenu.value:
-		pluginList.append(RestorePlugDescExt)
+		plugin_list.append(RestorePlugDescExt)
 
-	return pluginList
+	return plugin_list

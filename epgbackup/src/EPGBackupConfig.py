@@ -1,4 +1,3 @@
-from __future__ import print_function
 from __future__ import absolute_import
 # Screens
 from Screens.Screen import Screen
@@ -10,7 +9,7 @@ from Screens.MessageBox import MessageBox
 from Screens.LocationBox import LocationBox
 
 # for localized messages
-from . import _
+from . import _, __version__
 
 # GUI (Summary)
 from Screens.Setup import SetupSummary
@@ -22,7 +21,7 @@ from Components.config import KEY_OK
 
 # Error-print()
 
-from .EPGBackupTools import debugOut, PLUGIN_VERSION
+from .EPGBackupTools import debugOut
 from traceback import format_exc
 
 from .plugin import gUserScriptExists
@@ -103,7 +102,7 @@ class EPGBackupConfig(ConfigListScreen, Screen, HelpableScreen):
 		self["config"].isChanged = self._ConfigisChanged
 
 	def _layoutFinished(self):
-		self.setTitle(_("EPGBackup Setup") + " V%s" % (PLUGIN_VERSION))
+		self.setTitle(_("EPGBackup Setup") + " V%s" % (__version__))
 
 	def removeNotifiers(self):
 		try:

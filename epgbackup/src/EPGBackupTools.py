@@ -1,21 +1,18 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import print_function
 from Components.config import config
 from time import localtime
 from traceback import format_exc
 
 # for localized messages
-from . import _
-
-PLUGIN_VERSION = "1.1.2"
+from . import _, __version__
 
 
 def debugOut(outtxt, outfile=None, fmode="a", forced=False, outPrefix="[EPGBackup]"):
 	try:  # fails if called too early during Enigma startup
 		if config.plugins.epgbackup.enable_debug.value or forced:
 			ltim = localtime()
-			headerstr = "[%04d%02d%02d %02d:%02d:%02d V%s] " % (ltim[0], ltim[1], ltim[2], ltim[3], ltim[4], ltim[5], PLUGIN_VERSION)
+			headerstr = "[%04d%02d%02d %02d:%02d:%02d V%s] " % (ltim[0], ltim[1], ltim[2], ltim[3], ltim[4], ltim[5], __version__)
 			outtxt = headerstr + outtxt
 			outfile = _getLogFilename(outfile)
 			if outfile is not None:
