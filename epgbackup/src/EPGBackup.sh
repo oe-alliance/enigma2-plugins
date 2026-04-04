@@ -33,12 +33,8 @@ ENABLEDEUG=${ENABLEDEUG:-false}
 LOGPATH=${LOGPATH:-/media/hdd}
 MAXBOOTCOUNT=${MAXBOOTCOUNT:-3}
 
-# standard and/or Merlin?
 EPGPATH=`grep "config.misc.epgcache_filename" /etc/enigma2/settings | sed -e "s/^.*=\(.*\)\.*$/\1/" | sed -e "s/\/epg\.dat$//"`
-if [ -z "$EPGPATH" ]; then
-  EPGPATH=`cat /etc/enigma2/gemini_plugin.conf 2> /dev/null | grep epgCacheDir | sed -e "s/^.*=\(.*\)\.*$/\1/"`
-fi
-EPGPATH=${EPGPATH:-/media/hdd} # fallback
+EPGPATH=${EPGPATH:-/etc/enigma2} # fallback
 EPGFILE=$EPGPATH/epg.dat
 
 # Constants

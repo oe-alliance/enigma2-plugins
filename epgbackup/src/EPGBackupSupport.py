@@ -2,12 +2,11 @@
 from __future__ import print_function
 from __future__ import absolute_import
 from Screens.ChoiceBox import ChoiceBox
-from Screens.MessageBox import MessageBox
+from Screens.MessageBox import MessageBox, ModalMessageBox
 
 from Components.config import config
 from enigma import eEPGCache
 from enigma import eTimer
-from Tools import Notifications
 from Screens.TextBox import TextBox
 from Components.SystemInfo import BoxInfo
 
@@ -67,10 +66,37 @@ class EPGBackupSupport:
 			self.epgrefresh_instance = epgrefresh
 			config.plugins.epgbackup.callAfterEPGRefresh.addNotifier(self.enableBackupAfterEPGRefresh, initial_call=True, immediate_feedback=True)
 		except Exception:
-			debugOut("EPGRefresh not installed!", forced=True)
+			debugOut("EPGRefresh not installed - integration disabled.", forced=True)
 			debugOut("Debug: EPGRefresh-Import-Error:\n" + str(format_exc()))
 
 		self.notifyBootCount()
+
+
+	def _modalAck(self, *args, **kwargs):
+		return
+
+	def _showMessage(self, text, mtype=MessageBox.TYPE_INFO, timeout=-1, callback=None, title=None):
+		if title is None:
+			title = "EPGBackup"
+		try:
+			if getattr(ModalMessageBox, "instance", None) is not None:
+				kwargs = {
+					"text": text,
+					"list": [(_("OK"), True)],
+					"default": 0,
+					"windowTitle": title,
+					"callback": callback if callback is not None else self._modalAck,
+				}
+				if timeout is not None:
+					kwargs["timeout"] = timeout
+				ModalMessageBox.instance.showMessageBox(**kwargs)
+				return
+		except Exception:
+			debugOut("ModalMessageBox-Error:\n" + str(format_exc()))
+		if callback is not None:
+			self.session.openWithCallback(callback, MessageBox, text, type=mtype, title=title, timeout=timeout)
+		else:
+			self.session.open(MessageBox, text, type=mtype, title=title, timeout=timeout)
 
 	def notifyBootCount(self):
 		try:
@@ -81,7 +107,7 @@ class EPGBackupSupport:
 				while (line):
 					bootCount = line
 					line = fo.readline()
-				fo.close
+				fo.close()
 
 				# We have succesfully booted, so delete the counter-File
 				os.remove(BOOTCOUNTERFILE)
@@ -89,22 +115,10 @@ class EPGBackupSupport:
 				bootCount = int(bootCount)
 				if bootCount > int(config.plugins.epgbackup.max_boot_count.value):
 					backupedFile = self.executeShScript(EPGBACKUP_SHELL_CONSTANTS["GETLASTFILE"], EPGBACKUP_SHELL_CONSTANTS["GETLASTFILE_BACKUP"])
-					Notifications.AddNotificationWithCallback(self.askDeleteBadBackupCB, MessageBox,
-						text=_("The EPG-Backup was not performed, because there were %d unsuccessfully boot-attempts!\nThe last restored backup-file was \"%s\".\nDo you want to delete the file?")
-						% (bootCount, backupedFile), type=MessageBox.TYPE_YESNO,
-						timeout=10, domain=EPGBACKUP_NOTIFICATIONDOMAIN)
+					self._showMessage(_("The EPG-Backup was not performed, because there were %d unsuccessfully boot-attempts!\nThe last restored backup-file was \"%s\".") % (bootCount, backupedFile), mtype=MessageBox.TYPE_INFO, timeout=10)
 		except Exception:
 			debugOut("checkBootCount-Error:\n" + str(format_exc()), forced=True)
 
-	def askDeleteBadBackupCB(self, deleteIt):
-		try:
-			if deleteIt:
-				backupedFile = self.executeShScript(EPGBACKUP_SHELL_CONSTANTS["GETLASTFILE"], EPGBACKUP_SHELL_CONSTANTS["GETLASTFILE_BACKUP"])
-				if backupedFile != "":
-					debugOut("Deleting file \"%s\"..." % (backupedFile))
-					os.system("rm -f %s" % (backupedFile))
-		except Exception:
-				debugOut("askDeleteBadBackupCB-Error:\n" + str(format_exc()), forced=True)
 
 	def enableBackupAfterEPGRefresh(self, configentry):
 		try:
@@ -168,32 +182,23 @@ class EPGBackupSupport:
 						logTxt = self.executeShScript(sh_cmd="/bin/cat", param1=logFile)
 						self.session.open(TextBox, text=_("Logfile %s:\n%s") % (logFile, logTxt))
 					else:
-						self.session.open(MessageBox,
-							_("There is no logfile named \"%s\"!") % (logFile),
-							type=MessageBox.TYPE_ERROR)
+						self._showMessage(_("There is no logfile named \"%s\"!") % (logFile), mtype=MessageBox.TYPE_ERROR)
 		except Exception:
 			debugOut("showLogFileCB-Error:\n" + str(format_exc()), forced=True)
 
 	def makeBackup(self, interactive=False):
 		try:
 			debugOut("making a backup!")
-			eEPGCache.getInstance().Lock()
 			eEPGCache.getInstance().save()
-			eEPGCache.getInstance().Unlock()
 			self.executeShScript(EPGBACKUP_SHELL_CONSTANTS["MAKEBACKUP"])
 			self.startStopBackupTimer()
 			if interactive or config.plugins.epgbackup.show_messages_background.value:
 				backupedFile = self.executeShScript(EPGBACKUP_SHELL_CONSTANTS["GETLASTFILE"], EPGBACKUP_SHELL_CONSTANTS["GETLASTFILE_BACKUP"])
 				if backupedFile != "":
-					Notifications.AddPopup(
-						_("Backup \"%s\" successfully created!") % (backupedFile),
-						MessageBox.TYPE_INFO, 10, domain=EPGBACKUP_NOTIFICATIONDOMAIN)
+					self._showMessage(_("Backup \"%s\" successfully created!") % (backupedFile), mtype=MessageBox.TYPE_INFO, timeout=10)
 				else:
 					errorTxt = self.__getErrortext()
-					Notifications.AddNotificationWithCallback(self.showLogFileCB, MessageBox,
-						text=_("Couldn't create a backup.\nReason: %s.\nPress OK to see the logfile!")
-						% (errorTxt), type=MessageBox.TYPE_ERROR,
-						timeout=30, domain=EPGBACKUP_NOTIFICATIONDOMAIN)
+					self._showMessage(_("Couldn't create a backup.\nReason: %s.") % (errorTxt), mtype=MessageBox.TYPE_ERROR, timeout=30)
 		except Exception:
 			debugOut("makeBackup-Error:\n" + str(format_exc()), forced=True)
 
@@ -239,20 +244,13 @@ class EPGBackupSupport:
 					self.executeShScript(EPGBACKUP_SHELL_CONSTANTS["FORCERESTORE"], backupfile)
 					restoredFile = self.executeShScript(EPGBACKUP_SHELL_CONSTANTS["GETLASTFILE"], EPGBACKUP_SHELL_CONSTANTS["GETLASTFILE_RESTORE"])
 					if restoredFile != "":
-						eEPGCache.getInstance().Lock()
 						eEPGCache.getInstance().load()
-						eEPGCache.getInstance().Unlock()
-						self.session.open(MessageBox,
-							_("Backup-file \"%s\" successfully loaded!") % (restoredFile),
-							type=MessageBox.TYPE_INFO)
+						self._showMessage(_("Backup-file \"%s\" successfully loaded!") % (restoredFile), mtype=MessageBox.TYPE_INFO)
 					else:
 						showError = True
 				if showError:
 					errorTxt = self.__getErrortext()
-					Notifications.AddNotificationWithCallback(self.showLogFileCB, MessageBox,
-						text=_("Couldn't load backup-file.\nReason: %s.\nPress OK to see the logfile!")
-						% (errorTxt), type=MessageBox.TYPE_ERROR,
-						timeout=30, domain=EPGBACKUP_NOTIFICATIONDOMAIN)
+					self._showMessage(_("Couldn't load backup-file.\nReason: %s.") % (errorTxt), mtype=MessageBox.TYPE_ERROR, timeout=30)
 		except Exception:
 			debugOut("__forceRestoreCB-Error:\n" + str(format_exc()), forced=True)
 
@@ -263,9 +261,7 @@ class EPGBackupSupport:
 			backupfile = backupinfo[1].rstrip()
 			if FORCERESTORECANCEL != backupfile and FORCERESTORENOFILES != backupfile:
 				self.executeShScript(EPGBACKUP_SHELL_CONSTANTS["SETFORCERESTORE"], backupfile)
-				self.session.open(MessageBox,
-					_("Backup-file \"%s\" will be loaded on next boot!") % (backupfile),
-					type=MessageBox.TYPE_INFO)
+				self._showMessage(_("Backup-file \"%s\" will be loaded on next boot!") % (backupfile), mtype=MessageBox.TYPE_INFO)
 
 	def _getBackupFiles(self, sortMode):
 		try:
@@ -321,9 +317,12 @@ class EPGBackupSupport:
 		try:
 			outtext = subprocess.check_output("%s %s %s" % (sh_cmd, param1, param2),
 				stderr=subprocess.STDOUT,
-				shell=True)
+				shell=True,
+				text=True,
+				encoding="utf-8",
+				errors="replace")
 		except subprocess.CalledProcessError as cpe:
-			debugOut("sh-Execute-Error:\n%s: %s" % (str(cpe.returncode), cpe.output))
+			debugOut("sh-Execute-Error:\n%s: %s" % (str(cpe.returncode), cpe.output if isinstance(cpe.output, str) else cpe.output.decode("utf-8", "replace")))
 		return outtext
 
 	def _executeShOld(self, sh_cmd, param1="", param2=""):
@@ -334,5 +333,5 @@ class EPGBackupSupport:
 		while (line):
 			outtext += line
 			line = fo.readline()
-		fo.close
+		fo.close()
 		return outtext

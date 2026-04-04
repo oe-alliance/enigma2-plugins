@@ -11,7 +11,7 @@ from . import _
 PLUGIN_VERSION = "1.1.2"
 
 
-def debugOut(outtxt, outfile=None, fmode="aw", forced=False, outPrefix="[EPGBackup]"):
+def debugOut(outtxt, outfile=None, fmode="a", forced=False, outPrefix="[EPGBackup]"):
 	try:  # fails if called too early during Enigma startup
 		if config.plugins.epgbackup.enable_debug.value or forced:
 			ltim = localtime()
@@ -19,8 +19,8 @@ def debugOut(outtxt, outfile=None, fmode="aw", forced=False, outPrefix="[EPGBack
 			outtxt = headerstr + outtxt
 			outfile = _getLogFilename(outfile)
 			if outfile is not None:
-				deb = open(outfile, fmode)
-				deb.write("%s %s\n" % (outPrefix, outtxt))
+				with open(outfile, fmode, encoding="utf-8", errors="replace") as deb:
+					deb.write("%s %s\n" % (outPrefix, outtxt))
 			print("%s %s" % (outPrefix, outtxt))
 	except Exception:
 		pass

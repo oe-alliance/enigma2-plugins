@@ -16,7 +16,7 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS, fileExists
 from .EPGBackupTools import debugOut, PLUGIN_VERSION
 from traceback import format_exc
 
-extPrefix = _("EXTENSIONMENU_PREFIX")
+extPrefix = "EPGBackup"
 
 config.plugins.epgbackup = ConfigSubsection()
 # Do not change order of choices
@@ -30,7 +30,7 @@ config.plugins.epgbackup.show_make_backup_in_extmenu = ConfigYesNo(default=False
 config.plugins.epgbackup.show_backuprestore_in_extmenu = ConfigYesNo(default=False)
 config.plugins.epgbackup.backup_enabled = ConfigYesNo(default=True)
 config.plugins.epgbackup.make_backup_after_unsuccess_restore = ConfigYesNo(default=True)
-config.plugins.epgbackup.callAfterEPGRefresh = ConfigYesNo(default=True)
+config.plugins.epgbackup.callAfterEPGRefresh = ConfigYesNo(default=False)
 config.plugins.epgbackup.backupSaveInterval = ConfigSelection(choices=[
         ("-1", _("backup timer disabled")),
         ("30", _("30 minutes")),
@@ -123,7 +123,7 @@ def openconfig(session, **kwargs):
 
 def showinSetup(menuid):
 	if menuid == "system":
-		return [(extPrefix + " " + _("EXTENSIONNAME_SETUP"), openconfig, "EPGBackupConfig", None)]
+		return [("EPGBackup", openconfig, "EPGBackupConfig", None)]
 	return []
 
 
@@ -147,20 +147,20 @@ def restartGUICB(session, answer):
 		session.open(TryQuitMainloop, 3)
 
 
-SetupPlugDescExt = PluginDescriptor(name=extPrefix + " " + _("EXTENSIONNAME_SETUP"),
-	description=_("Backup and restore EPG Data, including integration of EPGRefresh-plugin"), where=PluginDescriptor.WHERE_EXTENSIONSMENU,
+SetupPlugDescExt = PluginDescriptor(name="EPGBackup Setup",
+	description="Backup and restore EPG data", where=PluginDescriptor.WHERE_EXTENSIONSMENU,
 	fnc=openconfig,
 	needsRestart=False)
-SetupPlugDescPlug = PluginDescriptor(name=extPrefix + " " + _("EXTENSIONNAME_SETUP"),
-	description=_("Backup and restore EPG Data, including integration of EPGRefresh-plugin"), where=PluginDescriptor.WHERE_PLUGINMENU,
+SetupPlugDescPlug = PluginDescriptor(name="EPGBackup Setup",
+	description="Backup and restore EPG data", where=PluginDescriptor.WHERE_PLUGINMENU,
 	fnc=openconfig,
 	needsRestart=False)
-MakePlugDescExt = PluginDescriptor(name=extPrefix + " " + _("Make Backup"),
-	description=_("Start making a Backup"), where=PluginDescriptor.WHERE_EXTENSIONSMENU,
+MakePlugDescExt = PluginDescriptor(name="EPGBackup: Make Backup",
+	description="Create an EPG backup", where=PluginDescriptor.WHERE_EXTENSIONSMENU,
 	fnc=makeBackup,
 	needsRestart=False)
-RestorePlugDescExt = PluginDescriptor(name=extPrefix + " " + _("Restore Backup"),
-	description=_("Start a Restore of a Backup"), where=PluginDescriptor.WHERE_EXTENSIONSMENU,
+RestorePlugDescExt = PluginDescriptor(name="EPGBackup: Restore Backup",
+	description="Restore an EPG backup", where=PluginDescriptor.WHERE_EXTENSIONSMENU,
 	fnc=restoreBackup,
 	needsRestart=False)
 
@@ -222,8 +222,8 @@ def Plugins(**kwargs):
 
 	if config.plugins.epgbackup.show_setup_in.value == "system":
 		pluginList.append(PluginDescriptor(
-			name=extPrefix + " " + _("EXTENSIONNAME_SETUP"),
-			description=_("Keep EPG-Data over Crashes"),
+			name="EPGBackup Setup",
+			description="Keep EPG data over crashes",
 			where=PluginDescriptor.WHERE_MENU,
 			fnc=showinSetup,
 			needsRestart=False)

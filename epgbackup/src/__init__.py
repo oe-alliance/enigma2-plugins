@@ -5,32 +5,27 @@ import gettext
 
 PluginLanguageDomain = "EPGBackup"
 PluginLanguagePath = "Extensions/EPGBackup/locale"
-# Fallback to EN for Code-Strings
-DefaultPluginLang = "EN"
-
+DefaultPluginLang = "en"
 
 def localeInit():
-	lang = language.getLanguage()[:2]  # getLanguage returns e.g. "fi_FI" for "language_country"
-	os_environ["LANGUAGE"] = lang  # Enigma doesn't set this (or LC_ALL, LC_MESSAGES, LANG). gettext needs it!
-	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
-
-
-def _(txt):
-	t = gettext.dgettext(PluginLanguageDomain, txt)
-	if t == txt:
-		t = getDefaultTxt(txt)
-		if t == txt:
-			t = gettext.gettext(txt)
-	return t
-
+    lang = language.getLanguage()[:2]
+    os_environ["LANGUAGE"] = lang
+    gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
 
 def getDefaultTxt(txt):
-	lang = language.getLanguage()[:2]
-	os_environ["LANGUAGE"] = DefaultPluginLang
-	t = gettext.dgettext(PluginLanguageDomain, txt)
-	os_environ["LANGUAGE"] = lang
-	return t
+    lang = language.getLanguage()[:2]
+    os_environ["LANGUAGE"] = DefaultPluginLang
+    t = gettext.dgettext(PluginLanguageDomain, txt)
+    os_environ["LANGUAGE"] = lang
+    return t
 
+def _(txt):
+    t = gettext.dgettext(PluginLanguageDomain, txt)
+    if t == txt:
+        t = getDefaultTxt(txt)
+        if t == txt:
+            t = gettext.gettext(txt)
+    return t
 
 localeInit()
 language.addCallback(localeInit)
