@@ -8,6 +8,7 @@ babelzapper_plugindir = "/usr/lib/enigma2/python/Plugins/Extensions/BabelZapper"
 babelzapper_readme = "%s/readme.txt" % babelzapper_plugindir
 babelzapper_menus = "/etc/babelzapper"
 #
+from . import _
 from RecordTimer import parseEvent
 from Plugins.Plugin import PluginDescriptor
 from enigma import eTimer, eServiceReference, eServiceCenter, iServiceInformation, eEPGCache, iTimeshiftServicePtr
@@ -327,10 +328,10 @@ class BabelZapperStartup(Screen):
 		elif cmdname.startswith("TOGGLE"):
 			if babelon == 0:
 				print("[BABELZAPPER] TOGGLE on\n")
-				babelon = 0
+				babelon = 1
 			else:
 				print("[BABELZAPPER] TOGGLE off\n")
-				babelon = 1
+				babelon = 0
 			# skip this commandline
 			self.nextKeyTimer.start(0, True)
 			return
@@ -367,7 +368,7 @@ class BabelZapperStartup(Screen):
 			if os.path.exists(babelfile):
 				f = open(babelfile, 'r')
 			else:
-				f = open("/%s/babelzapper.zbb" % babelzapper_menus, 'r')
+				f = open("%s/babelzapper.zbb" % babelzapper_menus, 'r')
 			line = f.readline().replace("\r", "").replace("\n", "")
 			while (line):
 				bz = line.split(";")
@@ -429,8 +430,8 @@ class BabelZapper(Screen):
 			f.close()
 		babelkey = -1
 		self["babelzapper"] = MultiColorLabel(babelmenu[babelkey][0])
-		elf["babelzapper"].setForegroundColorNum(0)
-	self["babelzapper"].setBackgroundColorNum(1)
+		self["babelzapper"].setForegroundColorNum(0)
+		self["babelzapper"].setBackgroundColorNum(1)
 
 	def updateKey(self, keyname, keybg=0, keyfg=1):
 		self["babelzapper"].setText(keyname)
