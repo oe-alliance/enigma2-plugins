@@ -40,10 +40,17 @@ def Plugins(**kwargs):
 
 class eSame(Screen):
 	def __init__(self, session, args=0):
-		# some default values - be careful if you change this...
+		# some default values - tuned for a cleaner layout
 		stone_width = 30
 		stone_height = 30
 		stone_space = 4
+		board_left = 20
+		board_top = 58
+		bottom_info_h = 44
+		button_h = 40
+		bottom_gap = 12
+		side_pad = 20
+		top_pad = 12
 
 		self.maxslices = 4
 
@@ -67,19 +74,21 @@ class eSame(Screen):
 
 		posX = -1
 		for x in range(self.maxstones):
-			posY = x / self.stonesX
+			posY = x // self.stonesX
 			posX += 1
 			if posX >= self.stonesX:
 				posX = 0
 
-			absX = stone_space + (posX * (stone_space + stone_width))
-			absY = stone_space + (posY * (stone_space + stone_height))
+			absX = board_left + (posX * (stone_space + stone_width))
+			absY = board_top + (posY * (stone_space + stone_height))
 			self.focuslist.append((absX + 5, absY + 5))
 			skincontent += "<widget name=\"stone" + str(x) + "\" position=\"" + str(absX + 5) + "," + str(absY + 5) + "\" size=\"" + str(stone_width) + "," + str(stone_height) + "\" zPosition=\"2\" transparent=\"1\" alphatest=\"on\" />"
 
 		# solve window size...
-		size_w = 5 + stone_width * self.stonesX + stone_space * (self.stonesX - 1) + 5
-		size_h = 5 + stone_height * self.stonesY + stone_space * (self.stonesY - 1) + 85
+		board_w = stone_width * self.stonesX + stone_space * (self.stonesX - 1)
+		board_h = stone_height * self.stonesY + stone_space * (self.stonesY - 1)
+		size_w = board_left + board_w + side_pad
+		size_h = board_top + board_h + bottom_gap + bottom_info_h + button_h + top_pad
 
 		# get framebuffer resolution...
 		desk = getDesktop(0)
@@ -87,20 +96,24 @@ class eSame(Screen):
 		h = int(desk.size().height())
 
 		# display window in center...
-		x0 = (w - size_w) / 2
-		y0 = (h - size_h) / 2
+		x0 = (w - size_w) // 2
+		y0 = (h - size_h) // 2
 
 		# solve skin...
-		self.skin = "<screen position=\"" + str(x0) + "," + str(y0) + "\" size=\"" + str(size_w) + "," + str(size_h) + "\" title=\"eSame  v0.1\" >" +\
-		"<widget name=\"frame\" position=\"" + str(5 + stone_space) + "," + str(5 + stone_space) + "\" size=\"" + str(stone_width) + "," + str(stone_height) + "\" pixmap=\"" + path + "focus.png\" zPosition=\"1\" alphatest=\"on\" />" +\
-		"<widget name=\"lbColors\" position=\"5," + str(size_h - 85) + "\" size=\"170,40\" valign=\"center\" font=\"Regular;17\" />" +\
-		"<widget name=\"lbBoard\" position=\"175," + str(size_h - 85) + "\" size=\"140,40\" valign=\"center\" font=\"Regular;17\" />" +\
-		"<widget name=\"lbMarked\" position=\"310," + str(size_h - 85) + "\" size=\"100,40\" valign=\"center\" font=\"Regular;17\" />" +\
-		"<widget name=\"lbScore\" position=\"410," + str(size_h - 85) + "\" size=\"110,40\" valign=\"center\" font=\"Regular;17\" />" +\
-		"<ePixmap name=\"green\" position=\"5," + str(size_h - 45) + "\" zPosition=\"3\" size=\"140,40\" pixmap=\"skin_default/buttons/green.png\" transparent=\"1\" alphatest=\"on\" /> \n" +\
-		"<ePixmap name=\"yellow\" position=\"" + str(size_w - 145) + "," + str(size_h - 45) + "\" zPosition=\"3\" size=\"140,40\" pixmap=\"skin_default/buttons/yellow.png\" transparent=\"1\" alphatest=\"on\" /> \n" +\
-		"<widget name=\"key_green\" position=\"5," + str(size_h - 45) + "\" zPosition=\"4\" size=\"140,40\" valign=\"center\" halign=\"center\" font=\"Regular;18\" transparent=\"1\" foregroundColor=\"white\" shadowColor=\"black\" shadowOffset=\"-1,-1\" /> \n" +\
-		"<widget name=\"key_yellow\" position=\"" + str(size_w - 145) + "," + str(size_h - 45) + "\" zPosition=\"4\" size=\"140,40\" valign=\"center\" halign=\"center\" font=\"Regular;18\" transparent=\"1\" foregroundColor=\"white\" shadowColor=\"black\" shadowOffset=\"-1,-1\" /> \n" +\
+		info_y = board_top + board_h + bottom_gap
+		button_y = info_y + bottom_info_h
+		left_button_w = 150
+		right_button_w = 150
+		self.skin = "<screen position=\"" + str(x0) + "," + str(y0) + "\" size=\"" + str(size_w) + "," + str(size_h) + "\" title=\"eSame v0.1\" >" +\
+		"<widget name=\"frame\" position=\"" + str(board_left + stone_space + 5) + "," + str(board_top + stone_space + 5) + "\" size=\"" + str(stone_width) + "," + str(stone_height) + "\" pixmap=\"" + path + "focus.png\" zPosition=\"1\" alphatest=\"on\" />" +\
+		"<widget name=\"lbColors\" position=\"" + str(side_pad) + "," + str(info_y) + "\" size=\"165,32\" valign=\"center\" font=\"Regular;17\" />" +\
+		"<widget name=\"lbBoard\" position=\"" + str(side_pad + 170) + "," + str(info_y) + "\" size=\"135,32\" valign=\"center\" font=\"Regular;17\" />" +\
+		"<widget name=\"lbMarked\" position=\"" + str(side_pad + 305) + "," + str(info_y) + "\" size=\"120,32\" valign=\"center\" font=\"Regular;17\" />" +\
+		"<widget name=\"lbScore\" position=\"" + str(side_pad + 425) + "," + str(info_y) + "\" size=\"90,32\" valign=\"center\" font=\"Regular;17\" />" +\
+		"<ePixmap name=\"green\" position=\"" + str(side_pad) + "," + str(button_y) + "\" zPosition=\"3\" size=\"" + str(left_button_w) + "," + str(button_h) + "\" pixmap=\"skin_default/buttons/green.png\" transparent=\"1\" alphatest=\"on\" /> \n" +\
+		"<ePixmap name=\"yellow\" position=\"" + str(size_w - side_pad - right_button_w) + "," + str(button_y) + "\" zPosition=\"3\" size=\"" + str(right_button_w) + "," + str(button_h) + "\" pixmap=\"skin_default/buttons/yellow.png\" transparent=\"1\" alphatest=\"on\" /> \n" +\
+		"<widget name=\"key_green\" position=\"" + str(side_pad) + "," + str(button_y) + "\" zPosition=\"4\" size=\"" + str(left_button_w) + "," + str(button_h) + "\" valign=\"center\" halign=\"center\" font=\"Regular;18\" transparent=\"1\" foregroundColor=\"white\" shadowColor=\"black\" shadowOffset=\"-1,-1\" /> \n" +\
+		"<widget name=\"key_yellow\" position=\"" + str(size_w - side_pad - right_button_w) + "," + str(button_y) + "\" zPosition=\"4\" size=\"" + str(right_button_w) + "," + str(button_h) + "\" valign=\"center\" halign=\"center\" font=\"Regular;18\" transparent=\"1\" foregroundColor=\"white\" shadowColor=\"black\" shadowOffset=\"-1,-1\" /> \n" +\
 		skincontent + "</screen>"
 
 		Screen.__init__(self, session)
@@ -175,7 +188,7 @@ class eSame(Screen):
 			self.stonefield.unmark()
 			self.printMarked(0)
 			return
-		sy = i / 15
+		sy = i // 15
 		sx = i - sy * 15
 		marked = self.stonefield.mark1(sx, sy)
 		if marked >= 0:
@@ -183,7 +196,7 @@ class eSame(Screen):
 			self.Slice = 0
 
 	def pressEvent(self, i):
-		sy = i / 15
+		sy = i // 15
 		sx = i - sy * 15
 		if self.stonefield.remove(sx, sy):
 			marked = self.stonefield.mark1(sx, sy)
