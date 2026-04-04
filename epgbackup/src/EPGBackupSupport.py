@@ -71,7 +71,6 @@ class EPGBackupSupport:
 
 		self.notifyBootCount()
 
-
 	def _modalAck(self, *args, **kwargs):
 		return
 
@@ -118,7 +117,6 @@ class EPGBackupSupport:
 					self._showMessage(_("The EPG-Backup was not performed, because there were %d unsuccessfully boot-attempts!\nThe last restored backup-file was \"%s\".") % (bootCount, backupedFile), mtype=MessageBox.TYPE_INFO, timeout=10)
 		except Exception:
 			debugOut("checkBootCount-Error:\n" + str(format_exc()), forced=True)
-
 
 	def enableBackupAfterEPGRefresh(self, configentry):
 		try:

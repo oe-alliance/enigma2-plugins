@@ -7,10 +7,12 @@ PluginLanguageDomain = "EPGBackup"
 PluginLanguagePath = "Extensions/EPGBackup/locale"
 DefaultPluginLang = "en"
 
+
 def localeInit():
     lang = language.getLanguage()[:2]
     os_environ["LANGUAGE"] = lang
     gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
+
 
 def getDefaultTxt(txt):
     lang = language.getLanguage()[:2]
@@ -19,6 +21,7 @@ def getDefaultTxt(txt):
     os_environ["LANGUAGE"] = lang
     return t
 
+
 def _(txt):
     t = gettext.dgettext(PluginLanguageDomain, txt)
     if t == txt:
@@ -26,6 +29,7 @@ def _(txt):
         if t == txt:
             t = gettext.gettext(txt)
     return t
+
 
 localeInit()
 language.addCallback(localeInit)
