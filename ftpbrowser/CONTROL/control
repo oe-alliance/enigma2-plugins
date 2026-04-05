@@ -1,2 +1,2 @@
-Description: FTP-Browser-Plugin for Enigma2
-Depends: enigma2, python-twisted-protocols, python-shell, enigma2-plugin-systemplugins-toolkit
+Description: FTP/SFTP-Browser-Plugin for Enigma2
+Depends: python3-paramiko, enigma2-plugin-systemplugins-toolkit
