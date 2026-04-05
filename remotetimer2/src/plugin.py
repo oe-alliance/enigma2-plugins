@@ -21,9 +21,10 @@
 from __future__ import print_function
 from base64 import b64encode
 from requests import get
-from six import PY2, PY3
-from six.moves.urllib.parse import quote
+from urllib.parse import quote
 from xml.etree.cElementTree import fromstring
+
+from . import _
 
 # ENIGMA IMPORTS
 from enigma import eEPGCache
@@ -54,30 +55,26 @@ config.plugins.remoteTimer.remotedir = ConfigYesNo(default=False)
 
 
 def getPage(url, callback, errback):
-	if PY3:
-		url = url.encode('utf-8')
 	username = config.plugins.remoteTimer.username.value
 	password = config.plugins.remoteTimer.password.value
-	print("[remotetimer] username=%s password=%s" % (username, password))
+	print("[remotetimer] username=%s password=%s" % (username, "***" if password else ""))
+	headers = {}
 	if username and password:
-		base64string = "%s:%s" % (username, password)
-		if PY3:
-			base64string = base64string.encode('utf-8')
-		base64string = b64encode(base64string)
-		authheader = {b"Authorization": b"Basic %s" % base64string}
-		print("[remotetimer] Headers=%s" % (authheader))
-		try:
-			r = get(url, headers=authheader)
-			print("[remotetimer] statuscode=%s" % (r.status_code))
-			if r.status_code == 200:
-				data = r.content.decode('utf-8') if PY3 else r.content
-				callback(data)
-			else:
-				errback("[remotetimer][getPage] incorrect response: %d" % r.status_code)
-		except Exception as err:
-			print("[remotetimer][getPage] %s: '%s'" % (type(err).__name__, err))
-			import traceback
-			traceback.print_exc()
+		base64string = ("%s:%s" % (username, password)).encode("utf-8")
+		authvalue = b64encode(base64string).decode("ascii")
+		headers["Authorization"] = "Basic %s" % authvalue
+		print("[remotetimer] Headers=%s" % headers)
+	try:
+		r = get(url, headers=headers)
+		print("[remotetimer] statuscode=%s" % r.status_code)
+		if r.status_code == 200:
+			callback(r.text)
+		else:
+			errback("[remotetimer][getPage] incorrect response: %d" % r.status_code)
+	except Exception as err:
+		print("[remotetimer][getPage] %s: '%s'" % (type(err).__name__, err))
+		import traceback
+		traceback.print_exc()
 
 
 class RemoteService:
@@ -184,9 +181,9 @@ class RemoteTimerScreen(Screen):
 			return [
 				(
 					E2Timer(
-						sref=str(timer.findtext("e2servicereference", '').encode("utf-8", 'ignore')) if PY2 else str(timer.findtext("e2servicereference", '')),
-						sname=str(timer.findtext("e2servicename", 'n/a').encode("utf-8", 'ignore')) if PY2 else str(timer.findtext("e2servicename", 'n/a')),
-						name=str(timer.findtext("e2name", '').encode("utf-8", 'ignore')) if PY2 else str(timer.findtext("e2name", '')),
+						sref=str(timer.findtext("e2servicereference", '')),
+						sname=str(timer.findtext("e2servicename", 'n/a')),
+						name=str(timer.findtext("e2name", '')),
 						disabled=int(timer.findtext("e2disabled", 0)),
 						failed=int(timer.findtext("e2failed", 0)),
 						timebegin=int(timer.findtext("e2timebegin", 0)),
@@ -198,8 +195,8 @@ class RemoteTimerScreen(Screen):
 						justplay=int(timer.findtext("e2justplay", 0)),
 						eventId=int(timer.findtext("e2eit", -1)) if timer.findtext("e2eit", -1) != '' else int(-1),
 						afterevent=int(timer.findtext("e2afterevent", 0)),
-						dirname=str(timer.findtext("e2dirname", '').encode("utf-8", 'ignore')) if PY2 else str(timer.findtext("e2dirname", '')),
-						description=str(timer.findtext("e2description", '').encode("utf-8", 'ignore')) if PY2 else str(timer.findtext("e2description", ''))
+						dirname=str(timer.findtext("e2dirname", '')),
+						description=str(timer.findtext("e2description", ''))
 					),
 					False
 				)
@@ -371,7 +368,7 @@ def newnigma2KeyGo(self):
 		rt_disabled = 0  # XXX: do we really want to hardcode this? why do we offer this option then?
 		rt_repeated = 0  # XXX: same here
 		if config.plugins.remoteTimer.remotedir.value:
-			rt_dirname = quote(self.timerentry_dirname.value.decode('utf8').encode('utf8', 'ignore')) if PY2 else quote(self.timerLocation.value.encode('utf8', 'ignore'))
+			rt_dirname = quote(str(self.timerLocation.value))
 		else:
 			rt_dirname = "None"
 		rt_justplay = 1 if self.timerType.value == "zap" else 0
@@ -423,7 +420,7 @@ def parseXml(string):
 		dom = fromstring(string)
 		entry = dom.findtext('e2statetext')
 		if entry:
-			return entry.encode("utf-8", 'ignore') if PY2 else entry
+			return entry
 		return "No entry in XML from the webserver"
 	except Exception:
 		return "ERROR XML PARSE"
