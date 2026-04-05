@@ -28,7 +28,6 @@ from Screens.Setup import Setup
 from .InfoBarTunerState import InfoBarTunerState, addExtension, removeExtension, overwriteInfoBar, recoverInfoBar
 
 
-
 #######################################################
 # Configuration screen
 class InfoBarTunerStateConfiguration(Setup):
