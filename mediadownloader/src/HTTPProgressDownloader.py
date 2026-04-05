@@ -16,9 +16,15 @@ class HTTPProgressDownloader(HTTPDownloader):
 		self.currentlength = 0
 		self.totallength = None
 
+	def _status_ok(self):
+		status = self.status
+		if isinstance(status, bytes):
+			status = status.decode('ascii', 'ignore')
+		return status == '200'
+
 	def gotHeaders(self, headers):
 		# If we have a callback and 'OK' from Server try to get length
-		if self.writeProgress and self.status == '200':
+		if self.writeProgress and self._status_ok():
 			if 'content-length' in headers:
 				self.totallength = int(headers['content-length'][0])
 				for cb in self.writeProgress:
@@ -28,7 +34,7 @@ class HTTPProgressDownloader(HTTPDownloader):
 
 	def pagePart(self, data):
 		# If we have a callback and 'OK' from server increment pos
-		if self.writeProgress and self.status == '200':
+		if self.writeProgress and self._status_ok():
 			self.currentlength += len(data)
 			for cb in self.writeProgress:
 				cb(self.currentlength, self.totallength)

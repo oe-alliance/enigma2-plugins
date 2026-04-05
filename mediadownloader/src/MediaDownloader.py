@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import print_function
-from __future__ import absolute_import
 
 # for localized messages
 from . import _
@@ -17,7 +15,7 @@ from Components.Sources.StaticText import StaticText
 from .VariableProgressSource import VariableProgressSource
 
 from Components.config import config
-from six.moves.urllib.parse import urlparse, urlunparse
+from urllib.parse import urlparse, urlunparse
 
 import time
 
@@ -220,7 +218,7 @@ class MediaDownloader(Screen):
 			lastApprox = round(((newLength - self.lastLength) / (newTime - lastTime) / 1024), 2)
 
 			secLen = int(round(((max - pos) / 1024) / lastApprox))
-			self["eta"].text = _("ETA %d:%02d min") % (secLen / 60, secLen % 60)
+			self["eta"].text = _("ETA %d:%02d min") % (secLen // 60, secLen % 60)
 			self["speed"].text = _("%d kb/s") % (lastApprox)
 
 			self.lastApprox = lastApprox

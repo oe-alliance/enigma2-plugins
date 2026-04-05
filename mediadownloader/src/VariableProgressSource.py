@@ -17,17 +17,17 @@ class VariableProgressSource(Source):
 		self.changed((self.CHANGED_CLEAR, ))
 
 	def writeValues(self, pos, max):
-		# Increase Factor as long as range is too big
-		if self.range > 5000000:
-			self.factor *= 500
-			self.range /= 500
-
 		# Only save range if not None
 		if max is not None:
-			self.range = max / self.factor
+			self.range = max // self.factor
+
+		# Increase factor as long as range is too big
+		while self.range is not None and self.range > 5000000:
+			self.factor *= 500
+			self.range //= 500
 
 		# Save pos
-		self.value = pos / self.factor
+		self.value = pos // self.factor
 
 		# Trigger change
 		self.changed((self.CHANGED_ALL, ))
