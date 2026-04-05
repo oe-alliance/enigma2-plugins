@@ -151,7 +151,7 @@ class MovieTagger(Screen):
 	def removeTag(self, tagname):
 		newtags = []
 		for i in self.tags:
-			if i is not tagname:
+			if i != tagname:
 				newtags.append(i)
 		self.setTags(" ".join(newtags))
 		self.updateCurrentTagList()
@@ -292,8 +292,10 @@ class MovieTagger(Screen):
 		self.currList.pageDown()
 
 	def newTagEntered(self, newTag):
-		if newTag >= 0:
-			self.addTag(newTag.strip().replace(" ", "_"))
+		if newTag is not None:
+			newTag = newTag.strip().replace(" ", "_")
+			if newTag:
+				self.addTag(newTag)
 
 
 class TagMenuList(MenuList):
@@ -308,10 +310,7 @@ class TagMenuList(MenuList):
 
 
 def main(session, service, **kwargs):
-	try:
-		session.open(MovieTagger, service)
-	except Exception as e:
-		raise e
+	session.open(MovieTagger, service)
 
 
 def Plugins(path, **kwargs):
@@ -319,4 +318,4 @@ def Plugins(path, **kwargs):
 		from Screens.TagEditor import TagEditor
 		return []
 	except ImportError:
-		return PluginDescriptor(name="Movie Tagger", description=_("Movie Tagger..."), where=PluginDescriptor.WHERE_MOVIELIST, fnc=main)
+		return [PluginDescriptor(name="Movie Tagger", description=_("Movie Tagger..."), where=PluginDescriptor.WHERE_MOVIELIST, fnc=main)]
