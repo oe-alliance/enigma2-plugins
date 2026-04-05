@@ -1,5 +1,3 @@
-from __future__ import print_function
-from __future__ import absolute_import
 from Components.Label import Label
 from Components.ProgressBar import ProgressBar
 from .KTMultiPixmap import KTmultiPixmap

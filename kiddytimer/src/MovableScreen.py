@@ -1,4 +1,3 @@
-from __future__ import absolute_import
 from .HelpableNumberActionMap import HelpableNumberActionMap
 from Components.config import config
 from .__init__ import _

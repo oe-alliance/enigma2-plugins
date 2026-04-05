@@ -1,4 +1,3 @@
-from __future__ import absolute_import
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.config import config, ConfigInteger, ConfigSubsection, ConfigSelection, \
     ConfigSubList, ConfigText, ConfigYesNo, ConfigDateTime, ConfigClock, ConfigPIN
