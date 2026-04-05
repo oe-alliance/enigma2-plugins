@@ -11,14 +11,14 @@ def localeInit():
 
 
 def _(txt):
-	if gettext.dgettext(PluginLanguageDomain, txt):
-		return gettext.dgettext(PluginLanguageDomain, txt)
-	else:
-		print("[%s] fallback to default translation for %s" % (PluginLanguageDomain, txt))
-		return gettext.gettext(txt)
+	translated = gettext.dgettext(PluginLanguageDomain, txt)
+	if translated != txt:
+		return translated
+	print("[%s] fallback to default translation for %s" % (PluginLanguageDomain, txt))
+	return gettext.gettext(txt)
 
 
 localeInit()
 language.addCallback(localeInit)
 
-__version__ = "1.0"
+__version__ = "1.1"

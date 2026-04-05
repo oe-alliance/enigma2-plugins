@@ -1,4 +1,3 @@
-from __future__ import absolute_import
 # for localized messages
 from . import _
 
@@ -12,6 +11,7 @@ from Screens.InfoBar import InfoBar
 from Components.config import config, ConfigSubsection, ConfigSelection
 
 from .NamezapSetup import NamezapSetup
+
 try:
 	from Components.SystemInfo import BoxInfo
 	IMAGEDISTRO = BoxInfo.getItem("distro")
@@ -20,11 +20,13 @@ except ImportError:
 	IMAGEDISTRO = getImageDistro()
 
 config.plugins.namezap = ConfigSubsection()
-config.plugins.namezap.style = ConfigSelection(choices=[
+config.plugins.namezap.style = ConfigSelection(
+	choices=[
 		("number", _("Only Number")),
 		("name", _("Service Name")),
 		("both", _("Number and Name"))
-	], default="both"
+	],
+	default="both"
 )
 
 NumberZap = InfoBarGenerics.NumberZap
@@ -44,7 +46,11 @@ class NameZap(NumberZap):
 		if InfoBar.instance is None:
 			self.style = self.STYLE_NUMBER
 		else:
-			self.style = {"number": self.STYLE_NUMBER, "name": self.STYLE_NAME, "both": self.STYLE_BOTH}[config.plugins.namezap.style.value]
+			self.style = {
+				"number": self.STYLE_NUMBER,
+				"name": self.STYLE_NAME,
+				"both": self.STYLE_BOTH
+			}[config.plugins.namezap.style.value]
 
 		if self.style == self.STYLE_NUMBER:
 			self.skinName = "NumberZap"
@@ -52,28 +58,45 @@ class NameZap(NumberZap):
 		self["name"] = Label("")
 		self.serviceHandler = eServiceCenter.getInstance()
 		if self.style != self.STYLE_NUMBER:
-			self.updateServiceName(int(self.field))
+			self._updateServiceNameFromField()
 
 	def keyNumberGlobal(self, number):
 		NumberZap.keyNumberGlobal(self, number)
 		if self.style != self.STYLE_NUMBER:
-			self.updateServiceName(int(self.field))
+			self._updateServiceNameFromField()
+
+	def _updateServiceNameFromField(self):
+		try:
+			number = int(self.field)
+		except (TypeError, ValueError):
+			return
+		self.updateServiceName(number)
 
 	def searchNumberHelper(self, serviceHandler, num, bouquet):
 		servicelist = self.serviceHandler.list(bouquet)
 		if servicelist is not None:
 			while num:
 				serviceIterator = servicelist.getNext()
-				if not serviceIterator.valid():  # check end of list
+				if not serviceIterator.valid():
 					break
 				playable = not (serviceIterator.flags & (eServiceReference.isMarker | eServiceReference.isDirectory))
 				if playable:
 					num -= 1
-			if not num:  # found service with searched number ?
+			if not num:
 				return serviceIterator, 0
 		return None, num
 
+	def _sanitizeServiceName(self, name):
+		if not name:
+			return ""
+		# Enigma2 service names may contain marker control chars 0x86/0x87.
+		# Under Python 3 we receive unicode strings, so strip the characters directly.
+		return name.replace('\x86', '').replace('\x87', '')
+
 	def updateServiceName(self, number):
+		if InfoBar.instance is None or not hasattr(InfoBar.instance, "servicelist"):
+			return
+
 		bouquet = InfoBar.instance.servicelist.bouquet_root
 		service = None
 		serviceHandler = self.serviceHandler
@@ -84,14 +107,16 @@ class NameZap(NumberZap):
 			if bouquetlist is not None:
 				while number:
 					bouquet = bouquetlist.getNext()
-					if not bouquet.valid():  # check end of list
+					if not bouquet.valid():
 						break
 					if bouquet.flags & eServiceReference.isDirectory:
 						service, number = self.searchNumberHelper(serviceHandler, number, bouquet)
 		if service is not None:
 			info = serviceHandler.info(service)
-
-			sname = info.getName(service).replace('\xc2\x86', '').replace('\xc2\x87', '')
+			if info is not None:
+				sname = self._sanitizeServiceName(info.getName(service))
+			else:
+				sname = _("Unknown Service")
 			if self.style == self.STYLE_BOTH:
 				self["name"].setText("%s. %s" % (self.field, sname))
 			else:
