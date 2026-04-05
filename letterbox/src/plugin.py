@@ -4,6 +4,7 @@ from Components.config import config
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from enigma import iPlayableService
+from . import _
 
 # list of mode choices to cycle through
 MODE_CHOICES = ["letterbox", "panscan"]
