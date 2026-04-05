@@ -20,7 +20,7 @@ mcut_path = eEnv.resolve("${libdir}/enigma2/python/Plugins/Extensions/MovieCut/b
 def main(session, service, **kwargs):
 	# Hack to make sure it is executable
 	if not access(mcut_path, X_OK):
-		chmod(mcut_path, 493)
+		chmod(mcut_path, 0o755)
 	session.open(MovieCut, service, **kwargs)
 
 
@@ -129,8 +129,8 @@ class MovieCut(ChoiceBox):
 					else:
 						cut_len = 0
 						break
-					if not in_t:
-						in_t = t
+					if in_t is None:
+						in_t = tt
 					else:
 						cut_len += tt - in_t
 						in_t = None
