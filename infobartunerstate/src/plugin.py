@@ -17,8 +17,6 @@
 #
 #######################################################################
 
-from __future__ import print_function
-
 # for localized messages
 from . import _
 

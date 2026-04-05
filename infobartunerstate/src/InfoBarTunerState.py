@@ -17,22 +17,15 @@
 #
 #######################################################################
 
-from __future__ import print_function
-
 # for localized messages
 from . import _
 from math import ceil
-from six.moves import range
-from six import itervalues, PY2
 from os import path, statvfs, stat
 from socket import gethostbyaddr, herror
 from collections import defaultdict
 from operator import attrgetter, itemgetter
 import NavigationInstance
-if PY2:
-	from itertools import izip_longest as zip_longest  # py2x
-else:
-	from itertools import zip_longest  # py3k
+from itertools import zip_longest
 
 # Plugin
 from Plugins.Plugin import PluginDescriptor
@@ -739,7 +732,7 @@ class InfoBarTunerState(object):
 			#	wins.reverse()
 
 			#TEST 3
-			wins = sorted(itervalues(self.entries), key=lambda x: (x.type, x.endless, x.begin), reverse=config.infobartunerstate.list_goesup.value)
+			wins = sorted(self.entries.values(), key=lambda x: (x.type, x.endless, x.begin), reverse=config.infobartunerstate.list_goesup.value)
 
 			# Resize, move and show windows
 			for win in wins:
@@ -761,7 +754,7 @@ class InfoBarTunerState(object):
 
 	def update(self):
 		print("IBTS updating")
-		#for win in itervalues(self.entries):
+		#for win in self.entries.values():
 		#	#TODO Update also names, width, order, type ...
 		#	win.update()
 		self.tunerShow()
@@ -776,7 +769,7 @@ class InfoBarTunerState(object):
 
 	def tunerHide(self):
 		print("IBTS tunerHide")
-		for win in itervalues(self.entries):
+		for win in self.entries.values():
 			win.hide()
 		if self.info:
 			self.info.hide()
@@ -1142,7 +1135,7 @@ class TunerState(TunerStateBase):
 		self["Type"].hide()
 		self["Progress"].hide()
 
-		for i, c in enumerate(itervalues(config.infobartunerstate.fields.dict())):
+		for i, c in enumerate(config.infobartunerstate.fields.dict().values()):
 			fieldid = "Field" + str(i)
 			field = c.value
 			text = ""

@@ -11,7 +11,6 @@ from pwd import getpwuid
 from os import readlink
 from re import search
 from glob import glob
-from six import iteritems
 
 
 PROC_TCP = "/proc/net/tcp"
@@ -62,7 +61,7 @@ def netstat(getstate=None, getuid=True, getpid=True, readable=True):
     To get pid of all network process running on system, you must run this script
     as superuser
     '''
-    getstate = [key for key, value in iteritems(STATE) if value == getstate]
+    getstate = [key for key, value in STATE.items() if value == getstate]
     if getstate:
         getstate = getstate[0]
 
