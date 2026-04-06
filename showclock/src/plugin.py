@@ -26,15 +26,12 @@
 #
 
 # for localized messages
-from __future__ import print_function
 from . import _
 
 from enigma import ePoint, eTimer, getDesktop
 
 # MessageBox
 from Screens.MessageBox import MessageBox
-from Tools import Notifications
-
 # ActionMap
 from Components.ActionMap import ActionMap
 from GlobalActions import globalActionMap
@@ -42,15 +39,15 @@ from GlobalActions import globalActionMap
 # GUI (Components)
 from Components.Sources.StaticText import StaticText
 
-# KeynMap
-from keymapparser import readKeymap, removeKeymap
+# KeyMap
+from keymapparser import readKeymap
 
 # Configuration
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigSelection, ConfigText, ConfigNumber
-from Components.Sources.StaticText import StaticText
 
 # Plugin definition
 from Plugins.Plugin import PluginDescriptor
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
 # GUI (Screens)
 from Screens.Screen import Screen
@@ -295,13 +292,16 @@ class ShowClockMain():
 	def __init__(self):
 		self.dialog = None
 		self.clockShown = False
+		self.timer = None
 
 	def gotSession(self, session):
-		self.timer = eTimer()  # check timer
-		self.timer.callback.append(self.ShowHide)
+		if self.timer is None:
+			self.timer = eTimer()
+			self.timer.callback.append(self.ShowHide)
+		if self.dialog is None:
+			self.dialog = session.instantiateDialog(ShowClock)
 		global globalActionMap
-		readKeymap("/usr/lib/enigma2/python/Plugins/Extensions/ShowClock/keymap.xml")
-		self.dialog = session.instantiateDialog(ShowClock)
+		readKeymap(resolveFilename(SCOPE_PLUGINS, "Extensions/ShowClock/keymap.xml"))
 		globalActionMap.actions['showClock'] = self.ShowHide
 
 	def ShowHide(self):
@@ -309,12 +309,12 @@ class ShowClockMain():
 			if self.timer.isActive():  # stop timer if running
 				self.timer.stop()
 			self.clockShown = False
-			showClock.dialog.hide()
+			self.dialog.hide()
 		else:
 			self.clockShown = True
 			if config.plugins.ShowClock.showTimeout.value > 0:
 				self.timer.startLongTimer(config.plugins.ShowClock.showTimeout.value)
-			showClock.dialog.show()
+			self.dialog.show()
 
 
 showClock = ShowClockMain()
@@ -376,7 +376,9 @@ def clockSkin():
 
 def sessionstart(reason, **kwargs):
 	if reason == 0:
-		showClock.gotSession(kwargs["session"])
+		session = kwargs.get("session")
+		if session is not None:
+			showClock.gotSession(session)
 
 
 def setup(session, **kwargs):
