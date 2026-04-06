@@ -458,8 +458,6 @@ class SleepTimerWebScreen(WebScreen):
 		self["SleepTimer"] = SleepTimer(session)
 
 
-
-
 class ExternalWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
