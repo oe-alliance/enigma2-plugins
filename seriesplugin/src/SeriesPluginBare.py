@@ -15,8 +15,6 @@ from .SeriesPluginTimer import SeriesPluginTimer
 from .Logger import log
 
 
-
-
 loop_data = []
 loop_counter = 0
 

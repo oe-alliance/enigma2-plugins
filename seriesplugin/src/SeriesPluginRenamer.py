@@ -42,7 +42,6 @@ from .SeriesPlugin import getInstance, refactorTitle, refactorDescription, refac
 from .Logger import log
 
 
-
 CompiledRegexpGlobEscape = re.compile(r'([\[\]\?*])')  # "[\\1]"
 
 

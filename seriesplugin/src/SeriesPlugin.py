@@ -35,7 +35,6 @@ from .ThreadQueue import ThreadQueue
 from threading import Thread
 
 
-
 #from enigma import ePythonMessagePump
 
 
