@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import absolute_import
 from twisted.web import resource, http
 from .globals import *
 from .plugin import *
@@ -12,8 +11,25 @@ import datetime
 
 ########################################################
 
-import six
-SIGN = '°' if six.PY3 else str('\xc2\xb0')
+SIGN = "°"
+
+
+def _get_arg(req, key):
+	value = req.args.get(key.encode("utf-8"))
+	if value is None:
+		value = req.args.get(key)
+	if not value:
+		return None
+	first = value[0] if isinstance(value, (list, tuple)) else value
+	if isinstance(first, bytes):
+		return first.decode("utf-8", "ignore")
+	return first
+
+
+def _html_response(req, html):
+	if isinstance(html, str):
+		return html.encode("utf-8")
+	return html
 
 
 class FC2web(resource.Resource):
@@ -22,16 +38,15 @@ class FC2web(resource.Resource):
 	isLeaf = False
 
 	def render(self, req):
-		req.setHeader('Content-type', 'text/html')
-		req.setHeader('charset', 'UTF-8')
+		req.setHeader('Content-type', 'text/html; charset=UTF-8')
 
 		""" rendering server response """
-		command = req.args.get("cmd", None)
+		command = _get_arg(req, "cmd")
 
 		html = "<html>"
 		html += "<head>\n"
 		html += "<meta http-equiv=\"Content-Language\" content=\"de\">\n"
-		html += "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1252\">\n"
+		html += "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n"
 		html += "<meta http-equiv=\"cache-control\" content=\"no-cache\" />\n"
 		html += "<meta http-equiv=\"pragma\" content=\"no-cache\" />\n"
 		html += "<meta http-equiv=\"expires\" content=\"0\">\n"
@@ -114,7 +129,7 @@ class FC2web(resource.Resource):
 
 		html += "</form>\n"
 
-		return html
+		return _html_response(req, html)
 
 ##########################################################
 
@@ -125,18 +140,17 @@ class FC2webLog(resource.Resource):
 	isLeaf = True
 
 	def render(self, req):
-		command = req.args.get("cmd", None)
+		command = _get_arg(req, "cmd")
 		html = ""
 		if command is None:
 			req.setHeader('Content-type', 'text/html')
-			req.setHeader('charset', 'UTF-8')
 
 			""" rendering server response """
 
 			html = "<html>"
 			html += "<head>"
 			html += "<meta http-equiv=\"Content-Language\" content=\"de\">"
-			html += "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1252\">"
+			html += "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">"
 			html += "<meta http-equiv=\"cache-control\" content=\"no-cache\" />"
 			html += "<meta http-equiv=\"pragma\" content=\"no-cache\" />"
 			html += "<meta http-equiv=\"expires\" content=\"0\">"
@@ -239,7 +253,6 @@ class FC2webLog(resource.Resource):
 			req.setHeader('Content-Disposition', 'attachment;filename=FC2data.csv')
 			req.setHeader('Content-Length', os.stat(config.plugins.FanControl.LogPath.value + "FC2data.csv").st_size)
 #			req.setHeader('Content-Disposition', 'inline;filename=FC2data.csv')
-			req.setHeader('charset', 'UTF-8')
 			f = open(config.plugins.FanControl.LogPath.value + "FC2data.csv", "r")
 			html = f.read()
 			f.close()
@@ -289,7 +302,6 @@ class FC2webLog(resource.Resource):
 			req.setHeader('Content-Disposition', 'attachment;filename=FC2events.txt')
 			req.setHeader('Content-Length', os.stat(config.plugins.FanControl.LogPath.value + "FC2events.txt").st_size)
 #			req.setHeader('Content-Disposition', 'inline;filename=FC2events.txt')
-			req.setHeader('charset', 'UTF-8')
 			f = open(config.plugins.FanControl.LogPath.value + "FC2events.txt", "r")
 			html = f.read()
 			f.close()
@@ -331,7 +343,7 @@ class FC2webLog(resource.Resource):
 			config.plugins.FanControl.EnableEventLog.save()
 			html = LogRefresh()
 
-		return html
+		return _html_response(req, html)
 
 
 def LogRefresh():
@@ -364,11 +376,10 @@ class FC2webChart(resource.Resource):
 	isLeaf = True
 
 	def render(self, req):
-		command = req.args.get("cmd", None)
+		command = _get_arg(req, "cmd")
 		html = ""
 		if os.path.exists(config.plugins.FanControl.LogPath.value + "FC2data.csv"):
 			req.setHeader('Content-type', 'text/html')
-			req.setHeader('charset', 'UTF-8')
 
 			""" rendering server response """
 
@@ -377,7 +388,7 @@ class FC2webChart(resource.Resource):
 			f.close()
 			if s < 150:
 				html = "<html><body><html>Not enough Data (wait 3min)!</body></html>"
-				return html
+				return _html_response(req, html)
 			f = open(config.plugins.FanControl.LogPath.value + "FC2data.csv", "r")
 			f.seek(s - 100)
 			line = f.readline()
@@ -398,7 +409,7 @@ class FC2webChart(resource.Resource):
 			html = "<html>"
 			html += "<head>"
 			html += "<meta http-equiv=\"Content-Language\" content=\"de\">"
-			html += "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1252\">"
+			html += "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">"
 			html += "<meta http-equiv=\"cache-control\" content=\"no-cache\" />"
 			html += "<meta http-equiv=\"pragma\" content=\"no-cache\" />"
 			html += "<meta http-equiv=\"expires\" content=\"0\">"
@@ -511,7 +522,7 @@ class FC2webChart(resource.Resource):
 		html += "</body>"
 		html += "</html>"
 
-		return html
+		return _html_response(req, html)
 
 
 def BoxStatus():

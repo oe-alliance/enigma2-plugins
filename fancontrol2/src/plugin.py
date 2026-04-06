@@ -1,5 +1,3 @@
-from __future__ import print_function
-from __future__ import absolute_import
 # FanControl2
 # joergm6 IHAD
 # PID-controller by Lukasz S.
@@ -52,7 +50,7 @@ except ImportError:
 	IMAGEDISTRO = getImageDistro()
 	MACHINE = getBoxType()
 
-from six.moves import queue, range
+import queue
 
 Briefkasten = queue.Queue()
 

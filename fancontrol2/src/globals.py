@@ -1,4 +1,3 @@
-from __future__ import absolute_import
 from .__init__ import _
 Version = "V2.9r2"
 # globale Variablen
