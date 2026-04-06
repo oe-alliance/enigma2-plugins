@@ -1,5 +1,3 @@
-from __future__ import print_function
-
 __doc__ = '''
 Enigma2 Plugin
 For any recorded series (configurable number of episodes with same name)
@@ -264,7 +262,7 @@ class Series2FolderActionsBase(object):
                     os.renames(fromPath, toPath)
                     print("[Series2Folder] rename", fromPath, "to", toPath)
                 except Exception as e:
-                    self.errMess.append(e.__str__())
+                    self.errMess.append(str(e))
                     nerrors += 1
                     errorText = ngettext(" - Error", " - Errors", nerrors)
         else:
@@ -372,7 +370,8 @@ class Series2FolderActionsBase(object):
         path = joinpath(rootdir, fullname) + self.META
         err_mess = None
         try:
-            lines = open(path).readlines()
+            with open(path, "r", encoding="utf-8", errors="ignore") as f:
+                lines = f.readlines()
             showname = lines[1].strip()
             t = int(lines[3].strip())
             pending_merge = len(lines) > 4 and "pts_merge" in lines[4].strip().split(' ')
@@ -384,7 +383,7 @@ class Series2FolderActionsBase(object):
             showname, date_time, pending_merge, err_mess = self.recSplit(fullname)
 
         if showname:
-            showname.replace('/', '_')
+            showname = showname.replace('/', '_')
             showname = showname[:255]
 
         return showname, pending_merge, date_time, err_mess
@@ -827,7 +826,7 @@ class Series2FolderConfig(ConfigListScreen, Screen):
 
     def keyboard(self):
         selection = self["config"].getCurrent()
-        if isinstance(selection[1], ConfigText):
+        if selection and isinstance(selection[1], ConfigText):
             try:
                 self.keyText()
             except Exception:

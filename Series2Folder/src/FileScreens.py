@@ -1,6 +1,5 @@
 from collections import defaultdict
 import importlib
-import six
 
 # fileScreens is a simple database controlling how Series2Folder interacts
 # with other classes that view or manipulate the filesystem.
@@ -56,6 +55,6 @@ def activeFileScreens(session, allScreens):
     current_dialog = session.current_dialog
     activeScreens = []
     if current_dialog:
-        for dialog in (current_dialog, ) + tuple(dse[0] for dse in reversed(session.dialog_stack)):
-            activeScreens += [(dialog, action) for action, screenClasses in six.iteritems(fileScreens) if (allScreens or action is not None) and isinstance(dialog, screenClasses)]
+        for dialog in (current_dialog,) + tuple(dse[0] for dse in reversed(session.dialog_stack)):
+            activeScreens += [(dialog, action) for action, screenClasses in fileScreens.items() if (allScreens or action is not None) and isinstance(dialog, screenClasses)]
     return activeScreens
