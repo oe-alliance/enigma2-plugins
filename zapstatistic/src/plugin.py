@@ -39,7 +39,6 @@ localeInit()
 language.addCallback(localeInit)
 
 
-
 def decode_charset(value, charset="UTF-8"):
     if isinstance(value, bytes):
         try:
@@ -49,7 +48,6 @@ def decode_charset(value, charset="UTF-8"):
     return value
 
 
-
 def deformXml(xml):
     xml = xml.replace("&", "&amp;")
     xml = xml.replace("'", "&apos;")
@@ -57,7 +55,6 @@ def deformXml(xml):
     xml = xml.replace(">", "&gt;")
     xml = xml.replace('"', "&quot;")
     return xml
-
 
 
 def reformXml(xml):
@@ -178,7 +175,6 @@ class ZapStatisticBrowserList(MenuList):
         self.l.setFont(0, gFont("Regular", 20))
 
 
-
 def ZapStatisticBrowserListEntry(entry):
     res = [entry]
     t_begin = localtime(entry.begin)
@@ -188,13 +184,11 @@ def ZapStatisticBrowserListEntry(entry):
     return res
 
 
-
 def ZapStatisticBrowserDurationListEntry(entry):
     res = [entry]
     res.append(MultiContentEntryText(pos=(0, 0), size=(240, 25), font=0, text="%s (%s)" % (entry.duration, entry.begin)))
     res.append(MultiContentEntryText(pos=(250, 0), size=(310, 25), font=0, text=entry.name))
     return res
-
 
 
 def ZapStatisticBrowserCombinedListEntry(entry):
@@ -582,10 +576,8 @@ class ZapStatisticScreen(Screen, ProtectedScreen):
             callback[1]()
 
 
-
 def main(session, **kwargs):
     session.open(ZapStatisticScreen)
-
 
 
 def sessionstart(reason, **kwargs):
@@ -602,11 +594,9 @@ def sessionstart(reason, **kwargs):
         session.nav.stopService = stopService
 
 
-
 def autostart(reason, **kwargs):
     if reason == 1:
         zapstatistic.saveZapEntries()
-
 
 
 def Plugins(**kwargs):
