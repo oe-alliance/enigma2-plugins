@@ -45,8 +45,6 @@ def _normalize_request_args(args):
 	return normalized
 
 
-
-
 # The classes and Function in File handle all ScreenPage-based requests
 # ScreenPages use enigma2 standard functionality to bring contents to a webfrontend
 #
