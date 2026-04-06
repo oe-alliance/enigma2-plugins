@@ -4,7 +4,6 @@ from twisted.python import util
 
 from Components.config import config
 
-from Plugins.Extensions.WebInterface import __file__
 from .Screenpage import ScreenPage
 from .FileStreamer import FileStreamer
 from .Screengrab import GrabResource
@@ -40,32 +39,32 @@ def addExternalChild(child):
 
 
 def getToplevel(session):
-	root = File(util.sibpath(__file__, "web-data/tpl/default"))
+	root = File(util.sibpath(__file__, "../web-data/tpl/default"))
 
-	root.putChild("web", ScreenPage(session, util.sibpath(__file__, "web"), True))  # "/web/*"
-	root.putChild("web-data", File(util.sibpath(__file__, "web-data")))
-	root.putChild("file", FileStreamer())
-	root.putChild("grab", GrabResource())
+	root.putChild(b"web", ScreenPage(session, util.sibpath(__file__, "../web"), True))  # "/web/*"
+	root.putChild(b"web-data", File(util.sibpath(__file__, "../web-data")))
+	root.putChild(b"file", FileStreamer())
+	root.putChild(b"grab", GrabResource())
 	res = IPKGResource()
-	root.putChild("opkg", res)
-	root.putChild("ipkg", res)
-	root.putChild("play", ServiceplayerResource(session))
-	root.putChild("wap", RedirectorResource("/mobile/"))
-	root.putChild("mobile", ScreenPage(session, util.sibpath(__file__, "mobile"), True))
-	root.putChild("m", ScreenPage(session, util.sibpath(__file__, "m"), True))
-	root.putChild("upload", UploadResource())
-	root.putChild("servicelist", ServiceList(session))
-	root.putChild("streamcurrent", RedirecToCurrentStreamResource(session))
+	root.putChild(b"opkg", res)
+	root.putChild(b"ipkg", res)
+	root.putChild(b"play", ServiceplayerResource(session))
+	root.putChild(b"wap", RedirectorResource("/mobile/"))
+	root.putChild(b"mobile", ScreenPage(session, util.sibpath(__file__, "../mobile"), True))
+	root.putChild(b"m", ScreenPage(session, util.sibpath(__file__, "../m"), True))
+	root.putChild(b"upload", UploadResource())
+	root.putChild(b"servicelist", ServiceList(session))
+	root.putChild(b"streamcurrent", RedirecToCurrentStreamResource(session))
 
 	if config.plugins.Webinterface.includemedia.value is True:
-		root.putChild("media", File(resolveFilename(SCOPE_MEDIA)))
-		root.putChild("hdd", File(resolveFilename(SCOPE_MEDIA, "hdd")))
+		root.putChild(b"media", File(resolveFilename(SCOPE_MEDIA)))
+		root.putChild(b"hdd", File(resolveFilename(SCOPE_MEDIA, "hdd")))
 
 	importExternalModules()
 
 	for child in externalChildren:
 		if len(child) > 1:
-			root.putChild(child[0], child[1])
+			root.putChild(child[0].encode() if isinstance(child[0], str) else child[0], child[1])
 
 	return root
 

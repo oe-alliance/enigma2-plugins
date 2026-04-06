@@ -4,6 +4,16 @@ from twisted.web import resource, http, server
 from os import path as os_path
 
 
+def _decode_if_bytes(value):
+	if isinstance(value, bytes):
+		return value.decode("utf-8", "ignore")
+	return value
+
+
+def _normalize_request_args(args):
+	return {_decode_if_bytes(k): [_decode_if_bytes(v) for v in values] for k, values in args.items()}
+
+
 class ServiceplayerResource(resource.Resource):
 	def __init__(self, session):
 		resource.Resource.__init__(self)
@@ -11,17 +21,18 @@ class ServiceplayerResource(resource.Resource):
 		self.oldservice = None
 
 	def render(self, request):
-		if 'file' in request.args:
-			output = self.playFile(request.args['file'][0])
-		elif 'url' in request.args:
-			output = self.playURL(request.args['url'][0])
-		elif 'stop' in request.args:
+		args = _normalize_request_args(request.args)
+		if 'file' in args:
+			output = self.playFile(args['file'][0])
+		elif 'url' in args:
+			output = self.playURL(args['url'][0])
+		elif 'stop' in args:
 			output = self.stopServicePlay()
 		else:
 			output = True, "unknown command"
 
 		request.setResponseCode(http.OK)
-		return output[1]
+		return output[1].encode("utf-8")
 
 	def playFile(self, path):
 		print("[ServiceplayerResource] playing file", path)

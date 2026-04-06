@@ -2,7 +2,16 @@ from __future__ import print_function
 from enigma import eConsoleAppContainer
 from Components.config import config
 from twisted.web import server, resource, http
-import six
+
+
+def _decode_if_bytes(value):
+	if isinstance(value, bytes):
+		return value.decode("utf-8", "ignore")
+	return value
+
+
+def _normalize_request_args(args):
+	return {_decode_if_bytes(k): [_decode_if_bytes(v) for v in values] for k, values in args.items()}
 
 
 class IPKGResource(resource.Resource):
@@ -13,10 +22,10 @@ class IPKGResource(resource.Resource):
 	FILECMDS = ("search", )
 
 	def render(self, request):
-		self.args = request.args
+		self.args = _normalize_request_args(request.args)
 		self.command = self.getArg("command")
 
-		if config.plugins.Webinterface.anti_hijack.value and len(request.args) > 0 and request.method == 'GET':
+		if config.plugins.Webinterface.anti_hijack.value and len(request.args) > 0 and _decode_if_bytes(request.method) == 'GET':
 			request.setHeader("Allow", "POST")
 			return resource.ErrorPage(http.NOT_ALLOWED, "Invalid method: GET!", "GET is not allowed here, please use POST").render(request)
 
@@ -80,11 +89,11 @@ class IPKGResource(resource.Resource):
 
 		request.setResponseCode(http.OK)
 
-		return html
+		return html.encode("utf-8")
 
 	def doErrorPage(self, request, errormsg):
 		request.setResponseCode(http.OK)
-		return errormsg
+		return errormsg.encode("utf-8")
 
 	def getArg(self, key):
 		if key in self.args:
@@ -96,7 +105,7 @@ class IPKGResource(resource.Resource):
 class IPKGConsoleStream:
 	def __init__(self, request, cmd):
 		self.request = request
-		self.request.write("<html><body>\n")
+		self.request.write(b"<html><body>\n")
 		self.container = eConsoleAppContainer()
 		self.lastdata = None
 		self.stillAlive = True
@@ -114,13 +123,13 @@ class IPKGConsoleStream:
 
 	def cmdFinished(self, data):
 		if self.stillAlive:
-			self.request.write("</body></html>\n")
+			self.request.write(b"</body></html>\n")
 			self.request.finish()
 
 	def dataAvail(self, data):
-		data = six.ensure_str(data)
+		data = data.decode("utf-8", "ignore") if isinstance(data, bytes) else str(data)
 		print("[IPKGConsoleStream].dataAvail: '%s'" % data)
 		#FIXME - filter strange reapeated outputs since we switched to opkg
 		if data != self.lastdata or self.lastdata is None and self.stillAlive:
 			self.lastdata = data
-			self.request.write(data.replace("\n", "<br>\n"))
+			self.request.write(data.replace("\n", "<br>\n").encode("utf-8"))

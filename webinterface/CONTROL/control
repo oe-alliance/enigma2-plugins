@@ -1,2 +1,2 @@
 Description: Control enigma2 with your Browser
-Depends: enigma2, python-twisted-web, python-pyopenssl, python-crypt, python-misc, aio-grab
+Depends: python3-twisted-web, python3-pyopenssl, python3-crypt, python3-misc, aio-grab

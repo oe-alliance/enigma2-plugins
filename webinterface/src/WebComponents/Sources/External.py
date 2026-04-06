@@ -1,5 +1,5 @@
 from Components.Sources.Source import Source
-from Plugins.Extensions.WebInterface.WebChilds import Toplevel
+from ...WebChilds import Toplevel
 
 
 class External(Source):

@@ -7,14 +7,11 @@ from enigma import eConsoleAppContainer
 from Plugins.Plugin import PluginDescriptor
 
 from Components.config import config, ConfigBoolean, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText, ConfigEnableDisable
-from Components.Network import iNetwork
 from Screens.MessageBox import MessageBox
 from Components.SystemInfo import BoxInfo
-from .WebIfConfig import WebIfConfigScreen
-from .WebChilds.Toplevel import getToplevel
 
 
-from Tools.Directories import copyfile, resolveFilename, SCOPE_PLUGINS, SCOPE_CONFIG, fileExists
+from Tools.Directories import resolveFilename, SCOPE_CONFIG, fileExists
 from Tools.IO import saveFile
 
 from twisted.internet import reactor, ssl
@@ -23,7 +20,6 @@ from twisted.web import server, http, util, static, resource
 from twisted import version
 
 from socket import gethostname as socket_gethostname, has_ipv6
-from OpenSSL import SSL, crypto
 from time import gmtime
 from os.path import isfile as os_isfile, exists as os_exists
 
@@ -34,13 +30,7 @@ import random
 import uuid
 import time
 import hashlib
-import six
 
-try:
-	from enigma import eTPM
-	tpm = eTPM()
-except ImportError:
-	tpm = None
 
 rootkey = ['\x9f', '|', '\xe4', 'G', '\xc9', '\xb4', '\xf4', '#', '&', '\xce', '\xb3', '\xfe', '\xda', '\xc9', 'U', '`', '\xd8', '\x8c', 's', 'o', '\x90', '\x9b', '\\', 'b', '\xc0', '\x89', '\xd1', '\x8c', '\x9e', 'J', 'T', '\xc5', 'X', '\xa1', '\xb8', '\x13', '5', 'E', '\x02', '\xc9', '\xb2', '\xe6', 't', '\x89', '\xde', '\xcd', '\x9d', '\x11', '\xdd', '\xc7', '\xf4', '\xe4', '\xe4', '\xbc', '\xdb', '\x9c', '\xea', '}', '\xad', '\xda', 't', 'r', '\x9b', '\xdc', '\xbc', '\x18', '3', '\xe7', '\xaf', '|', '\xae', '\x0c', '\xe3', '\xb5', '\x84', '\x8d', '\r', '\x8d', '\x9d', '2', '\xd0', '\xce', '\xd5', 'q', '\t', '\x84', 'c', '\xa8', ')', '\x99', '\xdc', '<', '"', 'x', '\xe8', '\x87', '\x8f', '\x02', ';', 'S', 'm', '\xd5', '\xf0', '\xa3', '_', '\xb7', 'T', '\t', '\xde', '\xa7', '\xf1', '\xc9', '\xae', '\x8a', '\xd7', '\xd2', '\xcf', '\xb2', '.', '\x13', '\xfb', '\xac', 'j', '\xdf', '\xb1', '\x1d', ':', '?']
 hw = BoxInfo.getItem("model")
@@ -127,6 +117,7 @@ def installCertificates(session):
 	if not os_exists(CERT_FILE) \
 			or not os_exists(KEY_FILE):
 		print("[Webinterface].installCertificates :: Generating SSL key pair and CACert")
+		from OpenSSL import crypto
 		# create a key pair
 		k = crypto.PKey()
 		k.generate_key(crypto.TYPE_RSA, 1024)
@@ -189,6 +180,7 @@ def startWebserver(session, l2k):
 	session.mediaplayer = None
 	session.messageboxanswer = None
 	if toplevel is None:
+		from .WebChilds.Toplevel import getToplevel
 		toplevel = getToplevel(session)
 
 	errors = ""
@@ -297,14 +289,16 @@ def startServerInstance(session, ipaddress, port, useauth=False, l2k=None, usess
 
 
 class ChainedOpenSSLContextFactory(ssl.DefaultOpenSSLContextFactory):
-	def __init__(self, privateKeyFileName, certificateChainFileName, sslmethod=SSL.TLSv1_2_METHOD):
+	def __init__(self, privateKeyFileName, certificateChainFileName, sslmethod=None):
 		self.privateKeyFileName = privateKeyFileName
 		self.certificateChainFileName = certificateChainFileName
 		self.sslmethod = sslmethod
 		self.cacheContext()
 
 	def cacheContext(self):
-		ctx = SSL.Context(self.sslmethod)
+		from OpenSSL import SSL
+		method = self.sslmethod if self.sslmethod is not None else SSL.TLSv1_2_METHOD
+		ctx = SSL.Context(method)
 		ctx.use_certificate_chain_file(self.certificateChainFileName)
 		ctx.use_privatekey_file(self.privateKeyFileName)
 		self._context = ctx
@@ -357,7 +351,7 @@ class HTTPRootResource(resource.Resource):
 	def getClientToken(self, request):
 		ip = request.getClientIP()
 		ua = request.getHeader("User-Agent") or "Default UA"
-		return hashlib.sha1(six.ensure_binary("%s/%s" % (ip, ua))).hexdigest()
+		return hashlib.sha1(("%s/%s" % (ip, ua)).encode("utf-8")).hexdigest()
 
 	def isSessionValid(self, request):
 		session = self._sessions.get(self.getClientToken(request), None)
@@ -470,20 +464,24 @@ class HTTPAuthResource(HTTPRootResource):
 
 
 # Password verfication stuff
-from crypt import crypt
-from pwd import getpwnam
-from spwd import getspnam
 
 
 def check_passwd(name, passwd):
-	cryptedpass = None
+	from crypt import crypt
+	from pwd import getpwnam
+	try:
+		from spwd import getspnam
+	except Exception:
+		getspnam = None
+
 	try:
 		cryptedpass = getpwnam(name)[1]
 	except Exception:
 		return False
 
-	#shadowed or not, that's the questions here
-	if cryptedpass == 'x' or cryptedpass == '*':
+	if cryptedpass in ('x', '*'):
+		if getspnam is None:
+			return False
 		try:
 			cryptedpass = getspnam(name)[1]
 		except Exception:
@@ -550,36 +548,26 @@ def checkBonjour():
 
 
 def networkstart(reason, session):
-	l2r = True
-	l2k = True
-	l2c = True
-
-	if l2r:
-		if reason is True:
-			startWebserver(session, l2k)
-			checkBonjour()
-
-		elif reason is False:
-			stopWebserver(session)
-			checkBonjour()
+	if reason is True:
+		startWebserver(session, True)
+		checkBonjour()
+	elif reason is False:
+		stopWebserver(session)
+		checkBonjour()
 
 
 def openconfig(session, **kwargs):
+	from .WebIfConfig import WebIfConfigScreen
 	session.openWithCallback(configCB, WebIfConfigScreen)
 
 
 def configCB(result, session):
-	l2r = True
-	l2k = True
-	l2c = True
-
-	if l2r:
-		if result:
-			print("[WebIf] config changed")
-			restartWebserver(session, l2k)
-			checkBonjour()
-		else:
-			print("[WebIf] config not changed")
+	if result:
+		print("[WebIf] config changed")
+		restartWebserver(session, True)
+		checkBonjour()
+	else:
+		print("[WebIf] config not changed")
 
 
 def Plugins(**kwargs):

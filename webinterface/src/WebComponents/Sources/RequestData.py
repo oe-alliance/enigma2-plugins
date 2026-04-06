@@ -1,6 +1,12 @@
 from Components.Sources.Source import Source
 
 
+def _decode_if_bytes(value):
+	if isinstance(value, bytes):
+		return value.decode("utf-8", "ignore")
+	return value
+
+
 class RequestData(Source):
 	"""
 		a source for requestinformations like the adress that the client requested to reache the box
@@ -29,14 +35,14 @@ class RequestData(Source):
 			if host:
 				if host[0] == '[':
 					return host.split(']', 1)[0] + "]"
-				return host.split(':', 1)[0].encode('ascii')
-			return self.request.getHost().host.encode('ascii')
+				return host.split(':', 1)[0]
+			return _decode_if_bytes(self.request.getHost().host)
 		elif self.what is self.PORT:
 			return str(self.request.host.port)
 		elif self.what is self.METHOD:
-			return self.request.method
+			return _decode_if_bytes(self.request.method)
 		elif self.what is self.PATH:
-			return self.request.path
+			return _decode_if_bytes(self.request.path)
 		elif self.what is self.PROTOCOL:
 			return "https" if self.request.isSecure() else "http"
 		elif self.what is self.REMOTEADRESS:
@@ -46,6 +52,6 @@ class RequestData(Source):
 		elif self.what is self.REMOTETYPE:
 			return self.request.client.type
 		elif self.what is self.URI:
-			return self.request.uri
+			return _decode_if_bytes(self.request.uri)
 		else:
 			return "N/A"

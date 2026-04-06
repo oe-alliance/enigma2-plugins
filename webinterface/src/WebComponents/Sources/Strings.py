@@ -1,5 +1,5 @@
 from Components.Sources.Source import Source
-from Plugins.Extensions.WebInterface import _
+from ... import _
 
 
 class Strings(Source):

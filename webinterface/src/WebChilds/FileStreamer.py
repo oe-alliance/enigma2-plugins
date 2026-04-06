@@ -1,23 +1,34 @@
 from __future__ import print_function
 from twisted.web import resource, http, server, static
-from urllib import unquote
+from urllib.parse import unquote
 from os import path as os_path
 from Tools.Directories import resolveFilename, SCOPE_HDD
+
+
+def _decode_if_bytes(value):
+	if isinstance(value, bytes):
+		return value.decode("utf-8", "ignore")
+	return value
+
+
+def _normalize_request_args(args):
+	return {_decode_if_bytes(k): [_decode_if_bytes(v) for v in values] for k, values in args.items()}
 
 
 class FileStreamer(resource.Resource):
 	addSlash = True
 
 	def render(self, request):
-		if 'dir' in request.args:
-			dir = unquote(request.args['dir'][0])
-		elif 'root' in request.args:
-			dir = unquote(request.args['root'][0])
+		args = _normalize_request_args(request.args)
+		if 'dir' in args:
+			dir = unquote(args['dir'][0])
+		elif 'root' in args:
+			dir = unquote(args['root'][0])
 		else:
 			dir = ''
 
-		if 'file' in request.args:
-			filename = unquote(request.args["file"][0])
+		if 'file' in args:
+			filename = unquote(args["file"][0])
 			path = dir + filename
 
 			#dirty backwards compatibility hack
@@ -27,7 +38,7 @@ class FileStreamer(resource.Resource):
 			print("[WebChilds.FileStreamer] path is %s" % path)
 
 			if os_path.exists(path):
-				basename = filename.decode('utf-8', 'ignore').encode('ascii', 'ignore')
+				basename = filename.encode('utf-8', 'ignore').decode('utf-8', 'ignore').encode('ascii', 'ignore').decode('ascii')
 
 				if '/' in basename:
 					basename = basename.split('/')[-1]

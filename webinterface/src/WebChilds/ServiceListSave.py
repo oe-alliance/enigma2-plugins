@@ -5,7 +5,17 @@ from Tools.Directories import resolveFilename, SCOPE_CONFIG
 import os
 from xml.dom.minidom import parseString as xml_dom_minidom_parseString
 import Components.ParentalControl
-from six.moves.urllib.parse import unquote as urllib_unquote
+from urllib.parse import unquote as urllib_unquote
+
+
+def _decode_if_bytes(value):
+	if isinstance(value, bytes):
+		return value.decode("utf-8", "ignore")
+	return value
+
+
+def _normalize_request_args(args):
+	return {_decode_if_bytes(k): [_decode_if_bytes(v) for v in values] for k, values in args.items()}
 
 ##########################
 
@@ -15,8 +25,8 @@ class ServiceList(resource.Resource):
 
 		self.session = session
 		resource.Resource.__init__(self)
-		self.putChild("reload", ServiceListReload())
-		self.putChild("save", ServiceListSave())
+		self.putChild(b"reload", ServiceListReload())
+		self.putChild(b"save", ServiceListSave())
 
 
 class ServiceListReload(resource.Resource):
@@ -102,7 +112,8 @@ class ServiceListSave(resource.Resource):
 		request.setHeader('charset', 'UTF-8')
 
 		try:
-			content = request.args['content'][0].replace("<n/a>", self.undefinded_tag).replace('&', self.undefinded_and)
+			args = _normalize_request_args(request.args)
+			content = args['content'][0].replace("<n/a>", self.undefinded_tag).replace('&', self.undefinded_and)
 			if content.find('undefined') != -1:
 				fp = open('/tmp/savedlist', 'w')
 				fp.write(content)
@@ -113,7 +124,7 @@ class ServiceListSave(resource.Resource):
 							<e2statetext>found string 'undefined' in XML DATA... a copy was saved to '/tmp/savedlist'.</e2statetext>
 						</e2simplexmlresult>\n"""
 				request.setResponseCode(http.OK)
-				request.write(result)
+				request.write(result.encode("utf-8"))
 
 			(bouquets_tv, bouquets_radio) = self.parseXML(content)
 			#print "having num %i TV Bouquets and num %i Radio Bouquets" %(len(bouquets_tv),len(bouquets_radio))
@@ -148,7 +159,7 @@ class ServiceListSave(resource.Resource):
 						</e2simplexmlresult>\n""" % (len(bouquets_tv), len(bouquets_radio))
 
 			request.setResponseCode(http.OK)
-			request.write(result)
+			request.write(result.encode("utf-8"))
 
 		except Exception as e:
 			print(e)
@@ -159,7 +170,7 @@ class ServiceListSave(resource.Resource):
 						</e2simplexmlresult>\n""" % e
 
 			request.setResponseCode(http.OK)
-			request.write(result)
+			request.write(result.encode("utf-8"))
 
 		request.finish()
 		return server.NOT_DONE_YET
@@ -203,10 +214,8 @@ class ServiceListSave(resource.Resource):
 		for service in list_services:
 			fcontent += "#SERVICE %s\n" % service['sref']
 			fcontent += "#DESCRIPTION %s\n" % service['sname']
-		fcontent = fcontent.encode('utf-8')
-		fp = open(self.DIR + filename, "w")
-		fp.write(fcontent)
-		fp.close()
+		with open(self.DIR + filename, "w", encoding="utf-8") as fp:
+			fp.write(fcontent)
 
 	def createIndexFile(self, type, bouquets):
 		print("creating Indexfile with", len(bouquets), "num bouquets for type", type)

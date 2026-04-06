@@ -7,6 +7,16 @@ from os import path as os_path, remove as os_remove
 from os.path import getsize as os_path_getsize
 
 
+def _decode_if_bytes(value):
+	if isinstance(value, bytes):
+		return value.decode("utf-8", "ignore")
+	return value
+
+
+def _normalize_request_args(args):
+	return {_decode_if_bytes(k): [_decode_if_bytes(v) for v in values] for k, values in args.items()}
+
+
 class GrabResource(resource.Resource):
 	'''
 		this is a interface to Seddis AiO Dreambox Screengrabber
@@ -25,7 +35,8 @@ class GrabResource(resource.Resource):
 		videoOnly = False
 		save = False
 
-		for key, value in list(request.args.items()):
+		request_args = _normalize_request_args(request.args)
+		for key, value in list(request_args.items()):
 			if key in GrabResource.SPECIAL_ARGS:
 				if key == 'format':
 					format = value[0]
@@ -40,9 +51,8 @@ class GrabResource(resource.Resource):
 						imageformat = format
 						append('-j')
 						#Quality Setting
-						if 'jpgquali' in request.args:
-							append("%s" % (request.args["jpgquali"][0]))
-							del request.args['jpgquali']
+						if 'jpgquali' in request_args:
+							append("%s" % (request_args["jpgquali"][0]))
 						else:
 							append('80')
 
@@ -65,7 +75,7 @@ class GrabResource(resource.Resource):
 
 		if not os_path.exists(self.GRAB_BIN):
 			request.setResponseCode(http.OK)
-			return 'Grab is not installed at %s. Please install package aio-grab.' % self.GRAB_BIN
+			return ('Grab is not installed at %s. Please install package aio-grab.' % self.GRAB_BIN).encode("utf-8")
 
 		else:
 			request.setHeader('Content-Disposition', 'inline; filename=screenshot.%s;' % imageformat)
@@ -116,19 +126,19 @@ class GrabStream:
 			if int(data) == 0 and self.target is not None:
 				try:
 					self.request.setHeader('Content-Length', '%i' % os_path_getsize(self.target))
-					with open(self.target) as fp:
+					with open(self.target, "rb") as fp:
 						self.request.write(fp.read())
 					if self.save is False:
 						os_remove(self.target)
 						print('[Screengrab.py] %s removed' % self.target)
 				except Exception as e:
-					self.request.write('Internal error while reading target file')
+					self.request.write(b'Internal error while reading target file')
 					self.request.setResponseCode(http.INTERNAL_SERVER_ERROR)
 
 			elif int(data) == 0 and self.target is None:
-				self.request.write(self.output)
+				self.request.write(self.output.encode("utf-8") if isinstance(self.output, str) else self.output)
 			elif int(data) == 1:
-				self.request.write(self.output)
+				self.request.write(self.output.encode("utf-8") if isinstance(self.output, str) else self.output)
 			else:
 				self.request.setResponseCode(http.INTERNAL_SERVER_ERROR)
 

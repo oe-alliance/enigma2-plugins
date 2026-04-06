@@ -1,7 +1,6 @@
 from twisted.web import resource, http, server, static
 
-from Plugins.Extensions.WebInterface import webif
-import six
+from .. import webif
 
 from os import path as os_path
 
@@ -13,7 +12,7 @@ AppTextHeaderFiles = frozenset(('stream.m3u.xml', 'ts.m3u.xml', 'streamcurrent.m
 
 """
 Actualy, the TextHtmlHeaderFiles should contain the updates.html.xml, but the IE then
-has problems with six.text_type-characters
+has problems with Unicode characters
 """
 TextHtmlHeaderFiles = frozenset(('wapremote.xml', 'stream.xml', ))
 
@@ -27,6 +26,12 @@ NoExplicitHeaderFiles = frozenset(('getpid.xml', 'tvbrowser.xml', ))
 	define all files in /web with a text/javascript header
 """
 TextJavascriptHeaderFiles = frozenset(('strings.js.xml', ))
+
+
+def _decode_path_component(value):
+	if isinstance(value, bytes):
+		return value.decode("utf-8", "ignore")
+	return value
 
 
 class ScreenPage(resource.Resource):
@@ -57,7 +62,7 @@ class ScreenPage(resource.Resource):
 			request.setResponseCode(http.OK)
 
 		elif os_path.isdir(path) and self.addSlash is True:
-			uri = "%s/" % (request.path)
+			uri = "%s/" % (_decode_path_component(request.path))
 			request.redirect(uri)
 			return ""
 
@@ -67,7 +72,7 @@ class ScreenPage(resource.Resource):
 		return server.NOT_DONE_YET
 
 	def getChild(self, path, request):
-		path = "%s/%s" % (self.path, path)
+		path = "%s/%s" % (self.path, _decode_path_component(path))
 
 		if path[-1] == "/":
 			path += "index.html"
