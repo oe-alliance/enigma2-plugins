@@ -7,6 +7,7 @@ from .WebChilds.UploadPkg import UploadPkgResource
 from .WebChilds.UploadText import UploadTextResource
 from .WebChilds.PKG import PKGResource
 from .WebChilds.Script import Script
+from .WebScreens.WebAdminScreen import WebAdminScreen
 from twisted.web import static
 from twisted.python import util
 from enigma import eEnv
@@ -23,13 +24,15 @@ def autostart(reason, **kwargs):
 	if reason == 0 and "session" in kwargs:
 		session = kwargs["session"]
 		root = File(eEnv.resolve("${libdir}/enigma2/python/Plugins/Extensions/WebAdmin/web-data"))
-		root.putChild("web", ScreenPage(session, util.sibpath(__file__, "web"), True))
-		root.putChild("mobile", ScreenPage(session, util.sibpath(__file__, "mobile"), True))
-		root.putChild('tmp', File('/tmp'))
-		root.putChild("uploadtext", UploadTextResource())
-		root.putChild("uploadpkg", UploadPkgResource())
-		root.putChild("pkg", PKGResource())
-		root.putChild("script", Script())
+		root.putChild(b"web", ScreenPage(session, util.sibpath(__file__, "web"), True))
+		root.putChild(b"mobile", ScreenPage(session, util.sibpath(__file__, "mobile"), True))
+		root.putChild(b"tmp", File('/tmp'))
+		root.putChild(b"uploadtext", UploadTextResource())
+		root.putChild(b"uploadpkg", UploadPkgResource())
+		root.putChild(b"pkg", PKGResource())
+		root.putChild(b"script", Script())
+		import Plugins.Extensions.WebInterface.webif as webif
+		setattr(webif, "WebAdminScreen", WebAdminScreen)
 		addExternalChild(("webadmin", root, "WebAdmin", 1, True, "_self"))
 
 

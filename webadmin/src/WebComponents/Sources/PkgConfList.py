@@ -19,11 +19,11 @@ class PkgConfList(Source):
 
 	def handleCommand(self, cmd):
 		if cmd is not None:
-			if self.func is self.SWITCH:
+			if self.func == self.SWITCH:
 				self.res = self.switch(cmd)
-			if self.func is self.MEM:
+			if self.func == self.MEM:
 				self.res = self.getMem()
-			elif self.func is self.LIST:
+			elif self.func == self.LIST:
 				pass
 
 	def switch(self, cmd):
@@ -63,7 +63,7 @@ class PkgConfList(Source):
 		return list
 
 	def getResult(self):
-		if self.func is not self.LIST:
+		if self.func != self.LIST:
 			return self.res
 		return (False, "illegal call")
 

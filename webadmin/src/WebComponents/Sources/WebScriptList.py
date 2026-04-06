@@ -17,9 +17,9 @@ class WebScriptList(Source):
 
 	def handleCommand(self, cmd):
 		if cmd is not None:
-			if self.func is self.EXEC:
+			if self.func == self.EXEC:
 				self.res = self.execScript(cmd)
-			elif self.func is self.LIST:
+			elif self.func == self.LIST:
 				pass
 
 	def execScript(self, cmd):
@@ -41,7 +41,7 @@ class WebScriptList(Source):
 		return list
 
 	def getResult(self):
-		if self.func is not self.LIST:
+		if self.func != self.LIST:
 			return self.res
 		return (False, "illegal call")
 

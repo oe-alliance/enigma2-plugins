@@ -1,15 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
-from os import rename as os_rename, \
-	chmod as os_chmod, \
-	write as os_write, \
-	close as os_close, \
-	unlink as os_unlink, \
-	popen as os_popen
+from os import rename as os_rename, chmod as os_chmod, write as os_write, close as os_close, unlink as os_unlink, popen as os_popen
 from tempfile import mkstemp
 from twisted.web import resource, http
-
-from Plugins.Extensions.WebInterface.WebChilds.Toplevel import addExternalChild
+from .. import _
 
 
 def mbasename(fname):
@@ -17,6 +11,13 @@ def mbasename(fname):
 	win = l[len(l) - 1]
 	l2 = win.split('\\')
 	return l2[len(l2) - 1]
+
+
+def _arg_str(req, key, default=""):
+	value = req.args.get(key, [default])[0]
+	if isinstance(value, bytes):
+		return value.decode("utf-8", "ignore")
+	return value
 
 
 class UploadPkgResource(resource.Resource):
@@ -44,48 +45,43 @@ class UploadPkgResource(resource.Resource):
 	"""
 
 	def render_POST(self, req):
-		data = req.args['file'][0]
-		print("[filename req.args]", req.args['filename'][0])
-		filename = mbasename(req.args['filename'][0])
+		data = req.args.get('file', [b''])[0]
+		filename_raw = _arg_str(req, 'filename')
+		print("[filename req.args]", filename_raw)
+		filename = mbasename(filename_raw)
 		print("[filename]", filename)
 		if not filename.endswith(".ipk"):
-			return self.res % (_("wrong filetype!"), _("Close"), _("Add"))
+			return (self.res % (_("wrong filetype!"), _("Close"), _("Add"))).encode("utf-8")
 
 		if not data:
 			req.setResponseCode(http.OK)
-			return self.res % (_("filesize was 0, not uploaded"), _("Close"), _("Add"))
+			return (self.res % (_("filesize was 0, not uploaded"), _("Close"), _("Add"))).encode("utf-8")
 
 		fd, fn = mkstemp(dir="/tmp/")
 		cnt = os_write(fd, data)
 		os_close(fd)
 		os_chmod(fn, 0o755)
 
-		if cnt <= 0:  # well, actually we should check against len(data) but lets assume we fail big time or not at all
+		if cnt <= 0:
 			try:
 				os_unlink(fn)
-			except OSError as oe:
+			except OSError:
 				pass
 			req.setResponseCode(http.OK)
-			return self.res % (_("error writing to disk, not uploaded"), _("Close"), _("Add"))
-
-		else:
-			file = "/tmp/" + filename
-			os_rename(fn, (file))
-			if file is not None:
-				out = os_popen("opkg install %s" % file)
-				debug = ""
-				for line in out:
-					debug += line
-			else:
-				return self.res % (_("error writing to disk, not uploaded"), _("Close"), _("Add"))
-
-			req.setResponseCode(http.OK)
-			return self.res % ((debug), _("Close"), _("Add"))
+			return (self.res % (_("error writing to disk, not uploaded"), _("Close"), _("Add"))).encode("utf-8")
+		file = "/tmp/" + filename
+		os_rename(fn, file)
+		out = os_popen("opkg install %s" % file)
+		debug = ""
+		for line in out:
+			debug += line
+		req.setResponseCode(http.OK)
+		return (self.res % (debug, _("Close"), _("Add"))).encode("utf-8")
 
 	def render_GET(self, req):
 		req.setResponseCode(http.OK)
-		req.setHeader('Content-type', 'text/html')
-		return """
+		req.setHeader(b'Content-type', b'text/html; charset=UTF-8')
+		return ("""
 				<?xml version="1.0" encoding="UTF-8"?>
 				<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 						"http://www.w3.org/TR/html4/loose.dtd">
@@ -111,4 +107,4 @@ class UploadPkgResource(resource.Resource):
 				</form>
 				</body>
 				</html>
-		""" % _("Add")
+		""" % _("Add")).encode("utf-8")

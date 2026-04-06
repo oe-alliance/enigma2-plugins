@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
 from enigma import eConsoleAppContainer
-from twisted.web import server, resource, http
+from twisted.web import server, http
 from Plugins.Extensions.WebInterface.WebChilds.IPKG import IPKGConsoleStream, IPKGResource
+from .. import _
 
 
 class PKGResource(IPKGResource):
@@ -32,7 +33,7 @@ class PKGConsoleStream(IPKGConsoleStream):
 					<hr>
 					<p align="left">"""
 
-		self.request.write(html)
+		self.request.write(html.encode("utf-8"))
 
 		if hasattr(self.request, 'notifyFinish'):
 			self.request.notifyFinish().addErrback(self.connectionLost)
@@ -64,5 +65,5 @@ class PKGConsoleStream(IPKGConsoleStream):
 						</form>
 					</body>
 					</html>""" % _("Close")
-			self.request.write(html)
+			self.request.write(html.encode("utf-8"))
 			self.request.finish()
