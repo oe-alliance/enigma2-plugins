@@ -108,4 +108,4 @@ _ = lambda txt: gettext.dgettext("SeriesPlugin", txt) if txt else ""
 localeInit()
 language.addCallback(localeInit)
 
-__version__ = "1.0"
+__version__ = "5.9.8"
