@@ -4,7 +4,7 @@ from Plugins.Extensions.WebInterface.WebScreens import WebScreen
 class BouquetEditorWebScreen(WebScreen):
 	def __init__(self, session, request):
 		WebScreen.__init__(self, session, request)
-		from Plugins.Extensions.WebBouquetEditor.WebComponents.Sources.BouquetEditor import BouquetEditor
+		from ..WebComponents.Sources.BouquetEditor import BouquetEditor
 		self["AddBouquet"] = BouquetEditor(session, func=BouquetEditor.ADD_BOUQUET)
 		self["RemoveBouquet"] = BouquetEditor(session, func=BouquetEditor.REMOVE_BOUQUET)
 		self["MoveBouquet"] = BouquetEditor(session, func=BouquetEditor.MOVE_BOUQUET)

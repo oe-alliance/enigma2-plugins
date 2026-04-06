@@ -1,8 +1,9 @@
-from __future__ import print_function
+from ... import _
 from Components.Sources.Source import Source
 from Screens.ChannelSelection import service_types_tv, service_types_radio, FLAG_SERVICE_NEW_FOUND, MODE_TV, MODE_RADIO
 from enigma import eServiceReference, eServiceCenter
 from Components.SystemInfo import BoxInfo
+from Components.NimManager import nimmanager
 service_types_tv_hd = '1:7:1:0:0:0:0:0:0:0:(type == 17) || (type == 25) || (type == 134) || (type == 195)'
 
 
@@ -26,6 +27,7 @@ class SatellitesList(Source):
 		return func(self.mode)
 
 	def buildList(self, mode):
+		self.xml = ""
 		print("[WebComponents.SatellitesList] buildList with param = %d" % mode)
 		if mode == MODE_TV:
 			s_type = service_types_tv
@@ -71,7 +73,7 @@ class SatellitesList(Source):
 								h = _("W")
 							else:
 								h = _("E")
-							service_name = ("%d.%d %s") % (orbpos / 10, orbpos % 10, h)
+							service_name = ("%d.%d %s") % (orbpos // 10, orbpos % 10, h)
 					if i:
 						service_type = "HD %s" % service_type
 					service.setName("%s - %s" % (service_name, service_type))

@@ -1,8 +1,13 @@
 from __future__ import print_function
 from Components.Sources.Source import Source
 from enigma import eServiceCenter, eServiceReference
-from Components.ParentalControl import parentalControl, IMG_WHITESERVICE, IMG_WHITEBOUQUET, IMG_BLACKSERVICE, IMG_BLACKBOUQUET
+from Components.ParentalControl import parentalControl
 from Components.config import config
+
+IMG_WHITESERVICE = globals().get("IMG_WHITESERVICE", "IMG_WHITESERVICE")
+IMG_WHITEBOUQUET = globals().get("IMG_WHITEBOUQUET", "IMG_WHITEBOUQUET")
+IMG_BLACKSERVICE = globals().get("IMG_BLACKSERVICE", "IMG_BLACKSERVICE")
+IMG_BLACKBOUQUET = globals().get("IMG_BLACKBOUQUET", "IMG_BLACKBOUQUET")
 
 
 class ServiceList(Source):

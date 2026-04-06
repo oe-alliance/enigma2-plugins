@@ -6,7 +6,13 @@ from Components.config import config
 from os import remove, path, popen
 from Screens.InfoBar import InfoBar
 from ServiceReference import ServiceReference
-from Components.ParentalControl import parentalControl, IMG_WHITESERVICE, IMG_WHITEBOUQUET, IMG_BLACKSERVICE, IMG_BLACKBOUQUET, LIST_BLACKLIST
+from Components.ParentalControl import parentalControl
+
+IMG_WHITESERVICE = globals().get("IMG_WHITESERVICE", "IMG_WHITESERVICE")
+IMG_WHITEBOUQUET = globals().get("IMG_WHITEBOUQUET", "IMG_WHITEBOUQUET")
+IMG_BLACKSERVICE = globals().get("IMG_BLACKSERVICE", "IMG_BLACKSERVICE")
+IMG_BLACKBOUQUET = globals().get("IMG_BLACKBOUQUET", "IMG_BLACKBOUQUET")
+LIST_BLACKLIST = globals().get("LIST_BLACKLIST", "blacklist")
 from re import compile as re_compile
 from Components.NimManager import nimmanager
 
@@ -41,33 +47,33 @@ class BouquetEditor(Source):
 
 	def handleCommand(self, cmd):
 		print("[WebComponents.BouquetEditor] handleCommand with cmd = ", cmd)
-		if self.func is self.ADD_BOUQUET:
+		if self.func == self.ADD_BOUQUET:
 			self.result = self.addToBouquet(cmd)
-		elif self.func is self.MOVE_BOUQUET:
+		elif self.func == self.MOVE_BOUQUET:
 			self.result = self.moveBouquet(cmd)
-		elif self.func is self.MOVE_SERVICE:
+		elif self.func == self.MOVE_SERVICE:
 			self.result = self.moveService(cmd)
-		elif self.func is self.REMOVE_BOUQUET:
+		elif self.func == self.REMOVE_BOUQUET:
 			self.result = self.removeBouquet(cmd)
-		elif self.func is self.REMOVE_SERVICE:
+		elif self.func == self.REMOVE_SERVICE:
 			self.result = self.removeService(cmd)
-		elif self.func is self.ADD_SERVICE_TO_BOUQUET:
+		elif self.func == self.ADD_SERVICE_TO_BOUQUET:
 			self.result = self.addServiceToBouquet(cmd)
-		elif self.func is self.ADD_PROVIDER_TO_BOUQUETLIST:
+		elif self.func == self.ADD_PROVIDER_TO_BOUQUETLIST:
 			self.result = self.addProviderToBouquetlist(cmd)
-		elif self.func is self.ADD_SERVICE_TO_ALTERNATIVE:
+		elif self.func == self.ADD_SERVICE_TO_ALTERNATIVE:
 			self.result = self.addServiceToAlternative(cmd)
-		elif self.func is self.REMOVE_ALTERNATIVE_SERVICES:
+		elif self.func == self.REMOVE_ALTERNATIVE_SERVICES:
 			self.result = self.removeAlternativeServices(cmd)
-		elif self.func is self.TOGGLE_LOCK:
+		elif self.func == self.TOGGLE_LOCK:
 			self.result = self.toggleLock(cmd)
-		elif self.func is self.BACKUP:
+		elif self.func == self.BACKUP:
 			self.result = self.backupFiles(cmd)
-		elif self.func is self.RESTORE:
+		elif self.func == self.RESTORE:
 			self.result = self.restoreFiles(cmd)
-		elif self.func is self.RENAME_SERVICE:
+		elif self.func == self.RENAME_SERVICE:
 			self.result = self.renameService(cmd)
-		elif self.func is self.ADD_MARKER_TO_BOUQUET:
+		elif self.func == self.ADD_MARKER_TO_BOUQUET:
 			self.result = self.addMarkerToBouquet(cmd)
 		else:
 			self.result = (False, "one two three four unknown command")

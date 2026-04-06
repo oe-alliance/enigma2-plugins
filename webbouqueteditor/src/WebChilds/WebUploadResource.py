@@ -11,23 +11,22 @@ class WebUploadResource(resource.Resource):
 
 	def render_POST(self, req):
 		req.setResponseCode(http.OK)
-		req.setHeader('Content-type', 'application/xhtml+xml;')
-		req.setHeader('charset', 'UTF-8')
-		data = req.args['file'][0]
+		req.setHeader(b'Content-type', b'application/xhtml+xml; charset=UTF-8')
+		data = req.args.get(b'file', [b''])[0]
 		if not data:
 			result = """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n
 				<e2simplexmlresult>\n
 					<e2state>False</e2state>
 					<e2statetext>Filesize was 0, not uploaded</e2statetext>
 				</e2simplexmlresult>\n"""
-			return result
+			return result.encode("utf-8")
 		fd = os_open(self.FILENAME, os_O_WRONLY | os_O_CREAT)
 		if fd:
 			cnt = os_write(fd, data)
 			os_close(fd)
 		if cnt <= 0:
 			try:
-				os_remove(FILENAME)
+				os_remove(self.FILENAME)
 			except OSError as oe:
 				pass
 			result = """<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n
@@ -41,4 +40,4 @@ class WebUploadResource(resource.Resource):
 					<e2state>True</e2state>
 					<e2statetext>%s</e2statetext>
 				</e2simplexmlresult>\n""" % self.FILENAME
-		return result
+		return result.encode("utf-8")
