@@ -1,9 +1,8 @@
-from __future__ import absolute_import
 # for localized messages
 from . import _
 
 # Config
-from Components.config import *
+from Components.config import ConfigNumber, ConfigSubsection, config
 
 # Plugin
 from Plugins.Plugin import PluginDescriptor
@@ -15,54 +14,51 @@ config.werbezapper = ConfigSubsection()
 config.werbezapper.duration = ConfigNumber(default=5)
 
 
-# Mainfunction
+def getWerbeZapper(session, servicelist):
+    global zapperInstance
+    if zapperInstance is None:
+        from .WerbeZapper import WerbeZapper
+
+        zapperInstance = session.instantiateDialog(WerbeZapper, servicelist, cleanup)
+    return zapperInstance
+
+
+# Main function
 def main(session, servicelist, **kwargs):
-	# Create Instance if none present
-	global zapperInstance
-	if zapperInstance is None:
-		from .WerbeZapper import WerbeZapper
-		zapperInstance = session.instantiateDialog(WerbeZapper, servicelist, cleanup)
-	# Show dialog
-	zapperInstance.showSelection()
+    getWerbeZapper(session, servicelist).showSelection()
+
 
 # Instant start / stop monitoring
-
-
 def startstop(session, servicelist, **kwargs):
-	# Create Instance if none present
-	global zapperInstance
-	if zapperInstance is None:
-		from .WerbeZapper import WerbeZapper
-		zapperInstance = session.instantiateDialog(WerbeZapper, servicelist, cleanup)
-	# Start or stop monitoring
-	if not zapperInstance.monitor_timer.isActive():
-		zapperInstance.startMonitoring()
-	else:
-		zapperInstance.stopMonitoring()
+    instance = getWerbeZapper(session, servicelist)
+    if not instance.monitor_timer.isActive():
+        instance.startMonitoring()
+    else:
+        instance.stopMonitoring()
 
 
 def cleanup():
-	global zapperInstance
-	if zapperInstance is not None:
-		zapperInstance.shutdown()
-		zapperInstance.doClose()
-		zapperInstance = None
+    global zapperInstance
+    if zapperInstance is not None:
+        zapperInstance.shutdown()
+        zapperInstance.doClose()
+        zapperInstance = None
 
 
 def Plugins(**kwargs):
-	return [
-		PluginDescriptor(
-			name="Werbezapper",
-			description=_("Automatically zaps back to current service after given Time"),
-			where=PluginDescriptor.WHERE_EXTENSIONSMENU,
-			fnc=main,
-			needsRestart=False,
-		),
-		PluginDescriptor(
-			name="Werbezapper Start / Stop monitoring",
-			description=_("Start / Stop monitoring instantly"),
-			where=PluginDescriptor.WHERE_EXTENSIONSMENU,
-			fnc=startstop,
-			needsRestart=False,
-		)
-	]
+    return [
+        PluginDescriptor(
+            name="WerbeZapper",
+            description=_("Automatically zaps back to current service after given Time"),
+            where=PluginDescriptor.WHERE_EXTENSIONSMENU,
+            fnc=main,
+            needsRestart=False,
+        ),
+        PluginDescriptor(
+            name="WerbeZapper Start / Stop monitoring",
+            description=_("Start / Stop monitoring instantly"),
+            where=PluginDescriptor.WHERE_EXTENSIONSMENU,
+            fnc=startstop,
+            needsRestart=False,
+        ),
+    ]
