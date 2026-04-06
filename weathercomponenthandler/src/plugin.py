@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from Plugins.Plugin import PluginDescriptor
 
+
 def sessionstart(reason, **kwargs):
     if reason != 0:
         return
@@ -17,5 +18,6 @@ def sessionstart(reason, **kwargs):
     if "MSNWeather" not in session.screen:
         session.screen["MSNWeather"] = MSNWeather()
 
+
 def Plugins(**kwargs):
-    return [PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART],fnc=sessionstart,)]
+    return [PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart,)]
