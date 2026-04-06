@@ -28,7 +28,7 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_PLUG
 from twisted.web import client, error as weberror
 from twisted.internet import reactor, defer
 from skin import parseColor, parseFont, parseSize
-from six.moves.urllib.parse import urlencode
+from urllib.parse import urlencode
 
 try:
 	from skin import TemplatedListFonts

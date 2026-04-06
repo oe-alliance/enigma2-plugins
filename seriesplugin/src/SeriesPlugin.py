@@ -34,7 +34,6 @@ from .XMLTVBase import XMLTVBase
 from .ThreadQueue import ThreadQueue
 from threading import Thread
 
-import six
 
 
 #from enigma import ePythonMessagePump
@@ -81,14 +80,14 @@ def getInstance():
 			from Components.SystemInfo import BoxInfo
 			log.debug(" DeviceName " + BoxInfo.getItem("model"))
 		except ImportError:
-			sys.exc_clear()
+			pass
 
 		try:
 			from Components.About import about
 			log.debug(" EnigmaVersion " + about.getEnigmaVersionString().strip())
 			log.debug(" ImageVersion " + about.getVersionString().strip())
 		except ImportError:
-			sys.exc_clear()
+			pass
 
 		try:
 			#http://stackoverflow.com/questions/1904394/python-selecting-to-read-the-first-line-only
@@ -96,13 +95,13 @@ def getInstance():
 			log.debug(" imageversion " + open("/etc/image-version").readline().strip())
 			log.debug(" imageissue " + open("/etc/issue.net").readline().strip())
 		except OSError:
-			sys.exc_clear()
+			pass
 
 		try:
-			for key, value in six.iteritems(config.plugins.seriesplugin.dict()):
+			for key, value in config.plugins.seriesplugin.dict().items():
 				log.debug(" config..%s = %s" % (key, str(value.value)))
 		except Exception:
-			sys.exc_clear()
+			pass
 
 		global CompiledRegexpReplaceChars
 		try:
@@ -198,9 +197,6 @@ def refactorTitle(org_, data):
 def checkIfTitleExistInDescription(org, data):
 	#check if use 'org' and 'title' in pattern and series-title already exist in org-description, then remove from org
 	if ("{org:s}" in config.plugins.seriesplugin.pattern_description.value) and ("{title:s}" in config.plugins.seriesplugin.pattern_description.value):
-		if isinstance(org, str) and isinstance(data["title"], unicode):
-			#convert org to unicode for compare with data["title"] if data["title"] has umlauts
-			org = unicode(org)
 		if data["title"].upper() in org.upper():
 			title_str = re.compile(data["title"], re.IGNORECASE)
 			org = title_str.sub("", org)
@@ -460,7 +456,7 @@ class SeriesPlugin(Modules, ChannelsBase):
 		elif future:
 			identifier = self.identifier_future
 		else:
-			identifier = self.modules and self.instantiateModule(next(six.itervalues(self.modules)))
+			identifier = self.modules and self.instantiateModule(next(iter(self.modules.values())))
 
 		if not identifier:
 			msg = _("No identifier available") + "\n\n" + _("Please check Your installation")
@@ -486,7 +482,7 @@ class SeriesPlugin(Modules, ChannelsBase):
 			try:
 				serviceref = service.toString()
 			except Exception:
-				sys.exc_clear()
+				pass
 				serviceref = str(service)
 			serviceref = re.sub('::.*', ':', serviceref)
 

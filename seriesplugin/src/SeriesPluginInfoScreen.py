@@ -309,16 +309,16 @@ class SeriesPluginInfoScreen(Screen):
 			self.data = data
 
 			if data['rawseason'] == "" and data['rawepisode'] == "":
-				custom = _("{title:s}").format(**data)
+				custom = _("{title}").format(**data)
 
 			elif data['rawseason'] == "":
-				custom = _("Episode: {rawepisode:s}\n{title:s}").format(**data)
+				custom = _("Episode: {rawepisode}\n{title}").format(**data)
 
 			elif data['rawepisode'] == "":
-				custom = _("Season: {rawseason:s}\n{title:s}").format(**data)
+				custom = _("Season: {rawseason}\n{title}").format(**data)
 
 			else:
-				custom = _("Season: {rawseason:s}  Episode: {rawepisode:s}\n{title:s}").format(**data)
+				custom = _("Season: {rawseason}  Episode: {rawepisode}\n{title}").format(**data)
 
 			try:
 				self.setColorButtons()
@@ -444,35 +444,39 @@ class SeriesPluginInfoScreen(Screen):
 				else:
 					self.session.open(MessageBox, _("Renaming failed"), MessageBox.TYPE_ERROR)
 
-	# Adapted from EventView
+	# Adapted from current openATV timer creation flow
 	def keyRecord(self):
 		log.debug("keyRecord")
-		if self.event and self.service:
-			event = self.event
-			ref = self.service
-			if event is None:
-				return
-			eventid = event.getEventId()
-			eref = eServiceReference(str(ref))
+		if not (self.event and self.service):
+			return
+
+		event = self.event
+		ref = self.service
+		eventid = event.getEventId()
+
+		if isinstance(ref, ServiceReference):
+			serviceref = ref
+			refstr = ref.ref.toString()
+		else:
+			eref = ref if isinstance(ref, eServiceReference) else eServiceReference(str(ref))
+			serviceref = ServiceReference(eref)
 			refstr = eref.toString()
-			for timer in self.session.nav.RecordTimer.timer_list:
-				if timer.eit == eventid and timer.service_ref.ref.toString() == refstr:
-					cb_func = lambda ret: not ret or self.removeTimer(timer)
-					self.session.openWithCallback(cb_func, MessageBox, _("Do you really want to delete %s?") % event.getEventName())
-					break
-			else:
-				#newEntry = RecordTimerEntry(ServiceReference(ref), checkOldTimers = True, dirname = preferredTimerPath(), *parseEvent(self.event))
-				begin, end, name, description, eit = parseEvent(self.event)
 
-				from .SeriesPlugin import refactorTitle, refactorDescription
-				if self.data:
-					name = refactorTitle(name, self.data)
-					description = refactorDescription(description, self.data)
+		for timer in self.session.nav.RecordTimer.timer_list:
+			if timer.eit == eventid and timer.service_ref.ref.toString() == refstr:
+				cb_func = lambda ret: not ret or self.removeTimer(timer)
+				self.session.openWithCallback(cb_func, MessageBox, _("Do you really want to delete %s?") % event.getEventName())
+				return
 
-				#newEntry = RecordTimerEntry(ServiceReference(refstr), begin, end, name, description, eit, dirname = preferredTimerPath())
-				newEntry = RecordTimerEntry(ServiceReference(str(ref)), begin, end, name, description, eit, dirname=preferredTimerPath())
-				#newEntry = RecordTimerEntry(refstr, begin, end, name, description, eit, dirname = preferredTimerPath())
-				self.session.openWithCallback(self.finishedAdd, TimerEntry, newEntry)
+		newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, dirname=preferredTimerPath(), *parseEvent(event, isZapTimer=False), justplay=False)
+
+		from .SeriesPlugin import refactorTitle, refactorDescription
+		if self.data:
+			newEntry.name = refactorTitle(newEntry.name, self.data)
+			newEntry.description = refactorDescription(newEntry.description, self.data)
+
+		self.timerAddEntry = newEntry
+		self.session.openWithCallback(self.finishedAdd, TimerEntry, newEntry)
 
 	def removeTimer(self, timer):
 		log.debug("remove Timer")
@@ -483,22 +487,27 @@ class SeriesPluginInfoScreen(Screen):
 
 	def finishedAdd(self, answer):
 		log.debug("finished add")
-		if answer[0]:
-			entry = answer[1]
+		entry = None
+
+		if isinstance(answer, bool):
+			if answer:
+				entry = getattr(self, "timerAddEntry", None)
+		else:
+			if answer and answer[0]:
+				entry = answer[1]
+
+		if entry is None:
+			log.debug("Timeredit aborted")
+			return
+
+		simulTimerList = self.session.nav.RecordTimer.record(entry)
+		if simulTimerList is not None:
+			for x in simulTimerList:
+				if x.setAutoincreaseEnd(entry):
+					self.session.nav.RecordTimer.timeChanged(x)
 			simulTimerList = self.session.nav.RecordTimer.record(entry)
 			if simulTimerList is not None:
-				for x in simulTimerList:
-					if x.setAutoincreaseEnd(entry):
-						self.session.nav.RecordTimer.timeChanged(x)
-				simulTimerList = self.session.nav.RecordTimer.record(entry)
-				if simulTimerList is not None:
-					self.session.openWithCallback(self.finishSanityCorrection, TimerSanityConflict, simulTimerList)
-			#self["key_green"].setText(_("Remove timer"))
-			#self.key_green_choice = self.REMOVE_TIMER
-		else:
-			#self["key_green"].setText(_("Add timer"))
-			#self.key_green_choice = self.ADD_TIMER
-			log.debug("Timeredit aborted")
+				self.session.openWithCallback(self.finishSanityCorrection, TimerSanityConflict, simulTimerList)
 
 	def finishSanityCorrection(self, answer):
 		self.finishedAdd(answer)

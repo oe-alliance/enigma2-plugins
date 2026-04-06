@@ -36,7 +36,6 @@ from . import _
 from .XMLFile import XMLFile, indent
 from .Logger import log
 
-import six
 
 from collections import OrderedDict
 
@@ -62,13 +61,13 @@ ChannelReplaceDict = OrderedDict([
 	('7', 'sieben'),
 	('8', 'acht'),
 	('9', 'neun'),
-	('\xc3\xa4', 'ae'),
-	('\xc3\xb6', 'oe'),
-	('\xc3\xbc', 'ue'),
-	('\xc3\x84', 'ae'),
-	('\xc3\x96', 'oe'),
-	('\xc3\x9c', 'ue'),
-	('\xc3\x9f', 'ss'),
+	('ä', 'ae'),
+	('ö', 'oe'),
+	('ü', 'ue'),
+	('Ä', 'ae'),
+	('Ö', 'oe'),
+	('Ü', 'ue'),
+	('ß', 'ss'),
 ])
 CompiledRegexpChannelUnify = re.compile('|'.join(ChannelReplaceDict))
 CompiledRegexpChannelRemoveSpecialChars = re.compile('[^a-zA-Z0-9]')
@@ -80,10 +79,6 @@ def unifyChannel(text):
 		return ChannelReplaceDict.get(m, m)
 
 	text = CompiledRegexpChannelUnify.sub(translate, text)
-	try:
-		text = text.decode("utf-8").encode("latin1")
-	except Exception:
-		pass
 	text = CompiledRegexpChannelRemoveSpecialChars.sub('', text)
 	return text.strip().lower()
 
@@ -300,7 +295,7 @@ class ChannelsBase(XMLFile):
 				# Build Body
 				def build(root, channels):
 					if channels:
-						for reference, namealternatives in six.iteritems(channels):
+						for reference, namealternatives in channels.items():
 							name, alternatives = namealternatives[:]
 							if alternatives:
 								# Add channel

@@ -12,7 +12,7 @@ from Components.config import config
 from .Logger import log
 
 
-from six.moves import xmlrpc_client
+from xmlrpc import client as xmlrpc_client
 
 
 skip_expiration = 5.0 * 60 	# in seconds

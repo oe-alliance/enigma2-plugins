@@ -3,4 +3,4 @@ Description: Find and rename series
 Maintainer: betonme
 Architecture: all
 Homepage: http://www.i-have-a-dreambox.com/wbb2/thread.php?threadid=168016
-Depends: enigma2, python-difflib, python-json, python-re, python-xml, python-xmlrpc
+Depends: python3-difflib, python3-json, python3-xml, python3-xmlrpc

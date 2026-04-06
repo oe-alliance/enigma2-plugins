@@ -132,7 +132,6 @@ class Logger(object):
 		if sys.exc_info()[0]:
 			self.instance.debug(str(sys.exc_info()[0]))
 			self.instance.debug(str(traceback.format_exc()))
-			sys.exc_clear()
 
 	def warning(self, *args):
 		strargs = " ".join([str(arg) for arg in args])
